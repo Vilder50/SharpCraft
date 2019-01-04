@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>SharpCraft</AssemblyName>
+    <RootNamespace>SharpCraft</RootNamespace>
+    <Description>A c# class library used for writing Minecraft functions, loottables and more.</Description>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_6</DefineConstants>
+    <Authors>Vilder50</Authors>
+    <Company />
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Morten\Documents\Visual Studio 2017\Projects\SharpCraftLibrary\SharpCraft\SharpCraft.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Morten\Documents\Visual Studio 2017\Projects\SharpCraftLibrary\SharpCraft\SharpCraft.xml</DocumentationFile>
+  </PropertyGroup>
+</Project>

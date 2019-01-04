@@ -1,0 +1,112 @@
+﻿using System;
+
+namespace SharpCraft
+{
+    /// <summary>
+    /// A class containing helpful method extensions
+    /// </summary>
+    public static class Helper
+    {
+        /// <summary>
+        /// Adds escape characters to the given text
+        /// </summary>
+        /// <param name="text">The text to escape</param>
+        /// <returns>The escaped text</returns>
+        public static string Escape(this string text)
+        {
+            return text.Replace("\"", "?-SBackSlash-??-SStringThing-?").Replace("\\", "?-SBackSlash-??-SBackSlash-?").Replace("?-SBackSlash-?", "\\").Replace("?-SStringThing-?", "\"");
+        }
+
+        /// <summary>
+        /// Converts the given double into a double Minecraft can use
+        /// </summary>
+        /// <param name="Double">The double to convert</param>
+        /// <returns>The converted double</returns>
+        public static string ToMinecraftDouble(this double Double)
+        {
+            return Double.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+        }
+        /// <summary>
+        /// Converts the given double into a double Minecraft can use
+        /// </summary>
+        /// <param name="Double">The double to convert</param>
+        /// <returns>The converted double</returns>
+        public static string ToMinecraftDouble(this double? Double)
+        {
+            return Double.Value.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+        }
+
+        /// <summary>
+        /// Takes the item and converts it into an value Minecraft can use
+        /// </summary>
+        /// <param name="item">The item to convert</param>
+        /// <returns>The converted item</returns>
+        public static string MinecraftValue(this ID.Item item)
+        {
+            return item.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// Takes the item and converts it into an value Minecraft can use
+        /// </summary>
+        /// <param name="item">The item to convert</param>
+        /// <returns>The converted item</returns>
+        public static string MinecraftValue(this ID.Item? item)
+        {
+            return item.Value.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// Takes a bool and converts it into a value Minecraft can use
+        /// </summary>
+        /// <param name="Bool">The bool to convert</param>
+        /// <returns>The converted bool</returns>
+        public static string ToMinecraftBool(this bool Bool)
+        {
+            return Bool.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// Takes a bool and converts it into a value Minecraft can use
+        /// </summary>
+        /// <param name="Bool">The bool to convert</param>
+        /// <returns>The converted bool</returns>
+        public static string ToMinecraftBool(this bool? Bool)
+        {
+            return Bool.Value.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// Converts an array of JSON strings into raw data string
+        /// </summary>
+        /// <param name="JSONArray">The array to convert</param>
+        /// <param name="forceArray">If the array should only should use extra</param>
+        /// <returns>Raw data string made out of the JSON array</returns>
+        public static string GetString(this JSON[] JSONArray, bool forceArray = true)
+        {
+            if (!forceArray)
+            {
+                string firstItemString = JSONArray[0].ToString();
+                if (JSONArray.Length == 1)
+                {
+                    return firstItemString;
+                }
+                string[] TempArray = new string[JSONArray.Length - 1];
+                for (int i = 1; i < JSONArray.Length; i++)
+                {
+                    TempArray[i] = JSONArray[i].ToString();
+                }
+                return firstItemString.Substring(0, firstItemString.Length - 1) + ",extra:[" + string.Join(",", TempArray) + "]}";
+            }
+            else
+            {
+                string[] TempArray = new string[JSONArray.Length];
+                for (int i = 0; i < JSONArray.Length; i++)
+                {
+                    TempArray[i] = JSONArray[i].ToString();
+                }
+                return "[" + string.Join(",", TempArray) + "]";
+            }
+        }
+    }
+}

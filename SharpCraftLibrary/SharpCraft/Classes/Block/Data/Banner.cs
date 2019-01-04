@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SharpCraft
+{
+    public partial class Block
+    {
+        /// <summary>
+        /// An object for banner blocks
+        /// </summary>
+        public class Banner : CloneBlock<Banner>
+        {
+            private int? _sRotation;
+
+
+            /// <summary>
+            /// Creates a new banner block
+            /// </summary>
+            /// <param name="type">The type of block</param>
+            public Banner(ID.Block? type) : base(type) { }
+
+            /// <summary>
+            /// Converts a group of blocks into a block object
+            /// </summary>
+            /// <param name="group"></param>
+            public Banner(Group group) : base(group) { }
+
+            /// <summary>
+            /// The way the banner is rotated.
+            /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
+            /// (Used for standing banners)
+            /// </summary>
+            [BlockData("rotation")]
+            public int? SRotation
+            {
+                get => _sRotation;
+                set
+                {
+                    if (value != null && (value < 0 || value > 15))
+                    {
+                        throw new ArgumentException(nameof(SRotation) + " has to be equel to or between 0 and 15");
+                    }
+                    _sRotation = value;
+                }
+            }
+            /// <summary>
+            /// The way the banner is facing.
+            /// (Used for banners on a wall)
+            /// </summary>
+            [BlockData("facing")]
+            public ID.Facing? SFacing { get; set; }
+
+            /// <summary>
+            /// The banners name.
+            /// This name is showed on maps which has clicked this banner.
+            /// </summary>
+            [BlockData]
+            public JSON[] DCustomName { get; set; }
+
+            /// <summary>
+            /// The banner's patterns
+            /// </summary>
+            [BlockData]
+            public BannerPattern[] DPatterns { get; set; }
+
+            /// <summary>
+            /// An object defining a banner pattern
+            /// </summary>
+            public class BannerPattern
+            {
+                /// <summary>
+                /// Creates a new banner pattern
+                /// </summary>
+                /// <param name="SetPattern">The pattern to use</param>
+                /// <param name="SetColor">The color of the pattern</param>
+                public BannerPattern(ID.BannerPattern SetPattern, ID.Color SetColor)
+                {
+                    Pattern = SetPattern;
+                    Color = SetColor;
+                }
+
+                /// <summary>
+                /// The pattern's color
+                /// </summary>
+                public ID.Color Color;
+                /// <summary>
+                /// The pattern
+                /// </summary>
+                public ID.BannerPattern Pattern;
+            }
+
+            /// <summary>
+            /// Gets the raw data for the data the block contains
+            /// </summary>
+            /// <returns>Raw data used by Minecraft</returns>
+            public override string GetDataString()
+            {
+                base.GetDataString();
+
+                List<string> TempList = new List<string>();
+
+                if (DCustomName != null) { TempList.Add("CustomName:\"" + DCustomName.GetString().Escape() + "\""); }
+                if (DPatterns != null)
+                {
+                    string TempString = "Patterns:[";
+                    for (int i = 0; i < DPatterns.Length; i++)
+                    {
+                        if (i != 0) { TempString += ","; }
+                        TempString += "{Color:" + (int)DPatterns[i].Color + ",Pattern:\"" + DPatterns[i].Pattern + "\"}";
+                    }
+                    TempString += "]";
+                    TempList.Add(TempString);
+                }
+
+                return string.Join(",", TempList);
+            }
+        }
+    }
+}
