@@ -122,6 +122,7 @@
         }
         public enum Block
         {
+            campfire,
             sweet_berry_bush,
             barrel,
             smoker,
@@ -790,16 +791,9 @@
             structure_block,
             BlockEnumEnd,
         }
-        public enum Fluid
-        {
-            empty,
-            flowing_water,
-            water,
-            flowing_lava,
-            lava
-        }
         public enum Item
         {
+            campfire,
             sweet_berries,
             barrel,
             smoker,
@@ -812,7 +806,6 @@
             bell,
             lantern,
             lectern,
-
             jigsaw,
             scaffolding,
             dead_tube_coral,
@@ -1689,6 +1682,8 @@
         }
         public enum Particle
         {
+            campfire_cosy_smoke,
+            campfire_signal_smoke,
             ambient_entity_effect,
             angry_villager,
             barrier,
