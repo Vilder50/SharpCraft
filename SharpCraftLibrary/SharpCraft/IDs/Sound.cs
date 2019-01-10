@@ -74,6 +74,8 @@ namespace SharpCraft
                 }
                 public static string Brewing { get; } = "block.brewing_stand.brew";
                 public static string Enchant { get; } = "block.enchantment_table.use";
+                public static string Campfire { get; } = "block.campfire.crackle";
+                public static string Bell { get; } = "block.bell.use";
                 public static class Chest
                 {
                     public static string Close { get; } = "block.chest.close";
@@ -388,11 +390,20 @@ namespace SharpCraft
                 public static class Cat
                 {
                     public static string Ambient { get; } = "entity.cat.ambient";
+                    public static string StrayAmbient { get; } = "entity.cat.stray_ambient";
+                    public static string BegFood { get; } = "entity.cat.beg_for_food";
                     public static string Death { get; } = "entity.cat.death";
+                    public static string Eat { get; } = "entity.cat.eat";
                     public static string Hurt { get; } = "entity.cat.hurt";
                     public static string Hiss { get; } = "entity.cat.hiss";
                     public static string Purr { get; } = "entity.cat.purr";
                     public static string Purrow { get; } = "entity.cat.purrow";
+                }
+                public static class Ocelot
+                {
+                    public static string Ambient { get; } = "entity.ocelot.ambient";
+                    public static string Death { get; } = "entity.ocelot.death";
+                    public static string Hurt { get; } = "entity.ocelot.hurt";
                 }
                 public static class Chicken
                 {
@@ -443,6 +454,22 @@ namespace SharpCraft
                     public static string Flap { get; } = "entity.ender_dragon.flap";
                     public static string Growl { get; } = "entity.ender_dragon.growl";
                     public static string Shoot { get; } = "entity.ender_dragon.shoot";
+                }
+                public static class IllagerBeast
+                {
+                    public static string Ambient { get; } = "entity.illager_beast.ambient";
+                    public static string Death { get; } = "entity.illager_beast.death";
+                    public static string Hurt { get; } = "entity.illager_beast.hurt";
+                    public static string Attack { get; } = "entity.illager_beast.attack";
+                    public static string Roar { get; } = "entity.illager_beast.roar";
+                    public static string Step { get; } = "entity.illager_beast.step";
+                    public static string Stunned { get; } = "entity.illager_beast.stunned";
+                }
+                public static class Pillager
+                {
+                    public static string Ambient { get; } = "entity.pillager.ambient";
+                    public static string Death { get; } = "entity.pillager.death";
+                    public static string Hurt { get; } = "entity.pillager.hurt";
                 }
                 public static string EnderBall { get; } = "entity.dragon_fireball.explode";
                 public static class EnderEye
@@ -650,6 +677,7 @@ namespace SharpCraft
                     {
                         public static string Blaze { get; } = "entity.parrot.imitate.blaze";
                         public static string Creeper { get; } = "entity.parrot.imitate.creeper";
+                        public static string Drowned { get; } = "entity.parrot.imitate.drowned";
                         public static string ElderGuardian { get; } = "entity.parrot.imitate.elder_guardian";
                         public static string EnderDragon { get; } = "entity.parrot.imitate.ender_dragon";
                         public static string Enderman { get; } = "entity.parrot.imitate.enderman";
@@ -660,6 +688,7 @@ namespace SharpCraft
                         public static string IllusionIllager { get; } = "entity.parrot.imitate.illusioner";
                         public static string MagmaCube { get; } = "entity.parrot.imitate.magma_cube";
                         public static string PolarBear { get; } = "entity.parrot.imitate.polar_bear";
+                        public static string Phantom { get; } = "entity.parrot.imitate.phantom";
                         public static string Shulker { get; } = "entity.parrot.imitate.shulker";
                         public static string Silverfish { get; } = "entity.parrot.imitate.silverfish";
                         public static string Skeleton { get; } = "entity.parrot.imitate.skeleton";
@@ -890,6 +919,20 @@ namespace SharpCraft
                     public static string Infect { get; } = "entity.zombie.infect";
                     public static string Step { get; } = "entity.zombie.step";
                 }
+                public static class Panda
+                {
+                    public static string Ambient { get; } = "entity.panda.ambient";
+                    public static string Death { get; } = "entity.panda.death";
+                    public static string Hurt { get; } = "entity.panda.hurt";
+                    public static string Step { get; } = "entity.panda.step";
+                    public static string AggressiveAmbient { get; } = "entity.panda.aggressive_ambient";
+                    public static string Bite { get; } = "entity.panda.bite";
+                    public static string CantBreed { get; } = "entity.panda.cant_breed";
+                    public static string Eat { get; } = "entity.panda.eat";
+                    public static string PreSneeze { get; } = "entity.panda.pre_sneeze";
+                    public static string Sneeze { get; } = "entity.panda.seeze";
+                    public static string WorriedAmbient { get; } = "entity.panda.worried_ambient";
+                }
                 public static class ZombieHorse
                 {
                     public static string Ambient { get; } = "entity.zombie_horse.ambient";
@@ -934,6 +977,11 @@ namespace SharpCraft
                     public static string Empty { get; } = "item.bottle.fill";
                     public static string Fill { get; } = "item.bottle.fill";
                     public static string FillDragonBreath { get; } = "item.bottle.fill_dragonbreath";
+                }
+                public static class Book
+                {
+                    public static string TurnPage { get; } = "item.book.page_turn";
+                    public static string Place { get; } = "item.book.put";
                 }
                 public static class Bucket
                 {
