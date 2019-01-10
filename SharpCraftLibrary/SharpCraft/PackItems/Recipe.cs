@@ -149,13 +149,32 @@ namespace SharpCraft
             RecipeWriter.WriteLine("}");
             RecipeWriter.Dispose();
         }
-        internal Recipe(Packspace Namespace, string Name, Item Input, ID.Item Output, double XpDrop, int CookTime)
+        internal Recipe(Packspace Namespace, string Name, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type)
         {
             MakeRecipePath(Namespace, Name);
             Path = Namespace.Name + ":" + Name.Replace("\\", "/");
             StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
-            RecipeWriter.WriteLine("{\"type\": \"smelting\", \"ingredient\": { \"item\": \"" + Input + "\"},\"result\": \"" + Output + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
+            RecipeWriter.Write("{\"type\":\"");
+            switch(type)
+            {
+                case ID.SmeltType.BlastFurnace:
+                    RecipeWriter.Write("blasting");
+                    break;
 
+                case ID.SmeltType.Furnace:
+                    RecipeWriter.Write("smelting");
+                    break;
+
+                case ID.SmeltType.Smoker:
+                    RecipeWriter.Write("smoking");
+                    break;
+
+                case ID.SmeltType.Campfire:
+                    RecipeWriter.Write("campfire");
+                    break;
+            }
+            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input + "\"},\"result\": \"" + Output + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
+            RecipeWriter.Dispose();
         }
         internal Recipe(Packspace Namespace, string Name)
         {
@@ -163,6 +182,7 @@ namespace SharpCraft
             Path = Namespace.Name + ":" + Name.Replace("\\", "/");
             StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
             RecipeWriter.WriteLine("{}");
+            RecipeWriter.Dispose();
         }
 
         /// <summary>

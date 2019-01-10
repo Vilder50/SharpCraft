@@ -2458,13 +2458,32 @@
         public enum StateRailShape {east_west, north_east, north_south, north_west, south_east, south_west, ascending_east, ascending_north, ascending_south, ascending_west }
         public enum StateSpecailRailShape { east_west, north_south, ascending_east, ascending_north, ascending_south, ascending_west }
         public enum StateRedstoneConnection {none, side, up }
-        /// <summary>
-        /// Outer == 5/8 of a block.
-        /// Inner == 7/8 of a block.
-        /// </summary>
-        public enum StateStairShape {inner_left, inner_right, outer_left, outer_right, straight }
+        public enum StateStairShape
+        {
+            /// <summary>
+            /// 7/8 of a block.
+            /// </summary>
+            inner_left,
+            /// <summary>
+            /// 7/8 of a block.
+            /// </summary>
+            inner_right,
+            /// <summary>
+            /// 5/8 of a block.
+            /// </summary>
+            outer_left,
+            /// <summary>
+            /// 5/8 of a block.
+            /// </summary>
+            outer_right,
+            /// <summary>
+            /// 6/8 of a block.
+            /// </summary>
+            straight
+        }
         public enum StateSimplePlaced {bottom, top }
 
+        public enum SmeltType {Furnace, Campfire, Smoker, BlastFurnace }
         public enum BlockAdd { destroy, keep, replace }
         public enum BlockFill
         {
