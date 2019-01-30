@@ -21,6 +21,8 @@
         }
         public enum Entity
         {
+            trader_llama,
+            wandering_trader,
             cat,
             ravager,
             panda,
