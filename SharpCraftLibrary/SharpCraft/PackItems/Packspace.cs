@@ -120,10 +120,10 @@ namespace SharpCraft
         /// <param name="xpDrop">the amount of xp the <see cref="Recipe"/> should output</param>
         /// <param name="cookTime">the amount of time the <see cref="Recipe"/> takes</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe NewRecipe(string name, Item input, ID.Item output, double xpDrop, int cookTime = 200)
+        public Recipe NewRecipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
         {
             name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), input, output, xpDrop, cookTime);
+            return new Recipe(this, name.ToLower(), input, output, xpDrop, cookTime, recipeType);
         }
 
         /// <summary>
