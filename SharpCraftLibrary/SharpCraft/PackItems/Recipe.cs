@@ -12,7 +12,7 @@ namespace SharpCraft
         /// <summary>
         /// Creates an <see cref="Recipe"/> object with the given string
         /// Used to give <see cref="Recipe"/>s which doesnt have an object
-        /// use fx <see cref="Packspace.NewRecipe(string, Item, ID.Item, double, int)"/> to create a new <see cref="Recipe"/>
+        /// use fx <see cref="Packspace.NewRecipe(string, Item, ID.Item, double, int, ID.SmeltType)"/> to create a new <see cref="Recipe"/>
         /// </summary>
         /// <param name="recipe">An string path to and <see cref="Recipe"/></param>
         public Recipe(string recipe)

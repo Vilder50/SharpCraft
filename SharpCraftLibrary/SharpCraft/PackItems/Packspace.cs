@@ -119,6 +119,7 @@ namespace SharpCraft
         /// <param name="output">the output <see cref="Item"/></param>
         /// <param name="xpDrop">the amount of xp the <see cref="Recipe"/> should output</param>
         /// <param name="cookTime">the amount of time the <see cref="Recipe"/> takes</param>
+        /// <param name="recipeType">The type of smelt recipe</param>
         /// <returns>The newly created recipe</returns>
         public Recipe NewRecipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
         {

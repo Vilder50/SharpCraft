@@ -122,6 +122,7 @@
         }
         public enum Block
         {
+            composter,
             campfire,
             sweet_berry_bush,
             barrel,
@@ -793,6 +794,7 @@
         }
         public enum Item
         {
+            composter,
             campfire,
             sweet_berries,
             barrel,
