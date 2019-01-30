@@ -22,7 +22,7 @@
         public enum Entity
         {
             cat,
-            illager_beast,
+            ravager,
             panda,
             pillager,
             lightning_bolt,

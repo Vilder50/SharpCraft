@@ -5,15 +5,15 @@ namespace SharpCraft
     public static partial class Entity
     {
         /// <summary>
-        /// Entity data for bats
+        /// Entity data for ravagers
         /// </summary>
-        public class IllagerBeast : BaseIllager
+        public class Ravager : BaseIllager
         {
             /// <summary>
-            /// Creates a new illager beast
+            /// Creates a new ravager
             /// </summary>
             /// <param name="type">the type of entity</param>
-            public IllagerBeast(ID.Entity? type = ID.Entity.illager_beast) : base(type) { }
+            public Ravager(ID.Entity? type = ID.Entity.ravager) : base(type) { }
 
             /// <summary>
             /// Cooldown till it can attack again
