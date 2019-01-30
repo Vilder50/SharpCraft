@@ -244,7 +244,18 @@ namespace SharpCraft
                         /// <summary>
                         /// Blocks in this group allows bamboo to be planted ontop
                         /// </summary>
-                        bamboo_plantable
+                        bamboo_plantable,
+
+                        /// <summary>
+                        /// Blocks the wither wont have easy to break
+                        /// </summary>
+                        wither_immune,
+
+                        /// <summary>
+                        /// Blocks the enderdragon wont destroy
+                        /// </summary>
+                        dragon_immune
+
                     }
                 }
 
