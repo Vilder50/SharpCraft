@@ -82,10 +82,22 @@ namespace SharpCraft
                     public static string Locked { get; } = "block.chest.locked";
                     public static string Open { get; } = "block.chest.open";
                 }
+                public static class Barrel
+                {
+                    public static string Close { get; } = "block.barrel.close";
+                    public static string Open { get; } = "block.barrel.open";
+                }
                 public static class Chorus
                 {
                     public static string Death { get; } = "block.chorus_flower.death";
                     public static string Grow { get; } = "block.chorus_flower.grow";
+                }
+                public static class Composter
+                {
+                    public static string Empty { get; } = "block.composter.empty";
+                    public static string Fill { get; } = "block.composter.fill";
+                    public static string FillSuccess { get; } = "block.composter.fill_success";
+                    public static string Ready { get; } = "block.composter.ready";
                 }
                 public static class Cloth
                 {
@@ -94,6 +106,14 @@ namespace SharpCraft
                     public static string Hit { get; } = "block.wool.hit";
                     public static string Place { get; } = "block.wool.place";
                     public static string Step { get; } = "block.wool.step";
+                }
+                public static class Scaffolding
+                {
+                    public static string Break { get; } = "block.scaffolding.break";
+                    public static string Fall { get; } = "block.scaffolding.fall";
+                    public static string Hit { get; } = "block.scaffolding.hit";
+                    public static string Place { get; } = "block.scaffolding.place";
+                    public static string Step { get; } = "block.scaffolding.step";
                 }
                 public static string Comparator { get; } = "block.comparator.click";
                 public static class Dispenser
@@ -119,6 +139,9 @@ namespace SharpCraft
                     public static string Open { get; } = "block.fence_gate.open";
                 }
                 public static string Furnace { get; } = "block.furnace.fire_cracle";
+                public static string BlastFurnace { get; } = "block.blastfurnace.fire_cracle";
+                public static string Smoker { get; } = "block.smoker.smoke";
+                public static string Grindstone { get; } = "block.grindstone.use";
                 public static class Glass
                 {
                     public static string Break { get; } = "block.glass.break";
@@ -126,6 +149,11 @@ namespace SharpCraft
                     public static string Hit { get; } = "block.glass.hit";
                     public static string Place { get; } = "block.glass.place";
                     public static string Step { get; } = "block.glass.step";
+                }
+                public static class SweetBerryBush
+                {
+                    public static string Break { get; } = "block.sweet_berry_bush.break";
+                    public static string Place { get; } = "block.sweet_berry_bush.place";
                 }
                 public static class Grass
                 {
@@ -455,15 +483,15 @@ namespace SharpCraft
                     public static string Growl { get; } = "entity.ender_dragon.growl";
                     public static string Shoot { get; } = "entity.ender_dragon.shoot";
                 }
-                public static class IllagerBeast
+                public static class Ravager
                 {
-                    public static string Ambient { get; } = "entity.illager_beast.ambient";
-                    public static string Death { get; } = "entity.illager_beast.death";
-                    public static string Hurt { get; } = "entity.illager_beast.hurt";
-                    public static string Attack { get; } = "entity.illager_beast.attack";
-                    public static string Roar { get; } = "entity.illager_beast.roar";
-                    public static string Step { get; } = "entity.illager_beast.step";
-                    public static string Stunned { get; } = "entity.illager_beast.stunned";
+                    public static string Ambient { get; } = "entity.ravager.ambient";
+                    public static string Death { get; } = "entity.ravager.death";
+                    public static string Hurt { get; } = "entity.ravager.hurt";
+                    public static string Attack { get; } = "entity.ravager.attack";
+                    public static string Roar { get; } = "entity.ravager.roar";
+                    public static string Step { get; } = "entity.ravager.step";
+                    public static string Stunned { get; } = "entity.ravager.stunned";
                 }
                 public static class Pillager
                 {
@@ -864,7 +892,16 @@ namespace SharpCraft
                     public static string Hurt { get; } = "entity.villager.hurt";
                     public static string No { get; } = "entity.villager.no";
                     public static string Yes { get; } = "entity.villager.yes";
-                    public static string Trading { get; } = "entity.villager.trading";
+                    public static string Trading { get; } = "entity.villager.trade";
+                }
+                public static class WanderingTrader
+                {
+                    public static string Ambient { get; } = "entity.wandering_trader.ambient";
+                    public static string Death { get; } = "entity.wandering_trader.death";
+                    public static string Hurt { get; } = "entity.wandering_trader.hurt";
+                    public static string No { get; } = "entity.wandering_trader.no";
+                    public static string Yes { get; } = "entity.wandering_trader.yes";
+                    public static string Trading { get; } = "entity.wandering_trader.trade";
                 }
                 public static class VindicationIllager
                 {
