@@ -47,6 +47,12 @@ namespace SharpCraft
             public bool? SSignalFire { get; set; }
 
             /// <summary>
+            /// The direction the block is facing (the way the bottom logs are facing)
+            /// </summary>
+            [BlockData("facing")]
+            public ID.Facing? SFacing { get; set; }
+
+            /// <summary>
             /// The items being burned in the fireplace.
             /// Use the item's slot tag to chose the slot they are in.
             /// (The fire place has 4 slots (0-3))
