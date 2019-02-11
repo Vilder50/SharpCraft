@@ -176,7 +176,7 @@ namespace SharpCraft
         /// The data the block will have when the item is placed
         /// </summary>
         [DataTag]
-        public Block BlockEntityTag { get; set; }
+        public Block BlockData { get; set; }
         /// <summary>
         /// The data the entity will have when the item is placed
         /// </summary>
@@ -295,7 +295,8 @@ namespace SharpCraft
                 }
                 if (Unbreakable != null) { TempList.Add("Unbreakable:" + Unbreakable); }
                 if (Damage != null) { TempList.Add("Damage:" + Damage + "s"); }
-                if (BlockEntityTag != null && BlockEntityTag.HasData) { TempList.Add("BlockEntityTag:{" + BlockEntityTag.GetDataString() + "}"); }
+                if (BlockData != null && BlockData.HasData) { TempList.Add("BlockEntityTag:{" + BlockData.GetDataString() + "}"); }
+                if (BlockData != null && BlockData.HasState) { TempList.Add("BlockStateTag:{" + BlockData.GetStateString().Replace("=",":\"") + "\"}"); }
                 if (EntityTag != null) { TempList.Add("EntityTag:{" + EntityTag.DataWithID + "}"); }
                 if (Enchants != null)
                 {
