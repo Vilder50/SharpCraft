@@ -296,7 +296,7 @@ namespace SharpCraft
                 if (Unbreakable != null) { TempList.Add("Unbreakable:" + Unbreakable); }
                 if (Damage != null) { TempList.Add("Damage:" + Damage + "s"); }
                 if (BlockData != null && BlockData.HasData) { TempList.Add("BlockEntityTag:{" + BlockData.GetDataString() + "}"); }
-                if (BlockData != null && BlockData.HasState) { TempList.Add("BlockStateTag:{" + BlockData.GetStateString().Replace("=",":\"") + "\"}"); }
+                if (BlockData != null && BlockData.HasState) { TempList.Add("BlockStateTag:{" + BlockData.GetStateString().Replace("=",":\"").Replace(",","\",") + "\"}"); }
                 if (EntityTag != null) { TempList.Add("EntityTag:{" + EntityTag.DataWithID + "}"); }
                 if (Enchants != null)
                 {
