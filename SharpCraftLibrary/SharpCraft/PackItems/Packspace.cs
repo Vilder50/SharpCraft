@@ -10,9 +10,14 @@ namespace SharpCraft
         readonly string _Name;
         readonly string _WorldPath;
         readonly string _PackName;
-        readonly private string Description;
-        readonly private int PackVersion;
+        readonly private string _description;
+        readonly private int _packVersion;
         internal string WorldPath { get { return _WorldPath; } }
+
+        /// <summary>
+        /// The name the next unamed file will get
+        /// </summary>
+        public int NextFileID { get; set; }
 
         /// <summary>
         /// The name of the datapack
@@ -37,8 +42,8 @@ namespace SharpCraft
             _Name = setNamespace.ToLower();
             _WorldPath = setWorldPath.ToLower();
             _PackName = setPackName.ToLower();
-            this.Description = description;
-            PackVersion = packFormat;
+            this._description = description;
+            _packVersion = packFormat;
 
             if (!File.Exists(_WorldPath + "\\datapacks\\" + _PackName + "\\pack.mcmeta"))
             {
@@ -62,11 +67,18 @@ namespace SharpCraft
         /// <summary>
         /// Creates a new function with the given name
         /// </summary>
-        /// <param name="functionName">The function's name</param>
+        /// <param name="functionName">The function's name. If null will get random name</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(string functionName)
+        public Function NewFunction(string functionName = null)
         {
-            return new Function(this, functionName.ToLower().Replace("/", "\\"));
+            if (string.IsNullOrWhiteSpace(functionName))
+            {
+                return new Function(this, null);
+            }
+            else
+            {
+                return new Function(this, functionName.ToLower().Replace("/", "\\"));
+            }
         }
 
         /// <summary>
@@ -78,6 +90,19 @@ namespace SharpCraft
         public Function NewFunction(string functionName, Function.FunctionCreater creater)
         {
             Function function = NewFunction(functionName);
+            creater(function);
+
+            return function;
+        }
+
+        /// <summary>
+        /// Creates a new randomly named function with the commands to the function
+        /// </summary>
+        /// <param name="creater">a method creating the function</param>
+        /// <returns>The newly created function</returns>
+        public Function NewFunction(Function.FunctionCreater creater)
+        {
+            Function function = NewFunction();
             creater(function);
 
             return function;
@@ -328,7 +353,7 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="Group"/></returns>
         public Group NewReloadFunctionGroup(Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
         {
-            return new Group(new Packspace(this.WorldPath,"minecraft",PackName,Description,PackVersion), "load", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
+            return new Group(new Packspace(this.WorldPath,"minecraft",PackName,_description,_packVersion), "load", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
         }
 
         /// <summary>
@@ -340,7 +365,7 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="Group"/></returns>
         public Group NewTickFunctionGroup(Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
         {
-            return new Group(new Packspace(this.WorldPath, "minecraft", PackName, Description, PackVersion), "tick", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
+            return new Group(new Packspace(this.WorldPath, "minecraft", PackName, _description, _packVersion), "tick", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
         }
         private string[] CreateFunctionGroupList(Function[] FunctionList, Group[] InsertGroups = null)
         {

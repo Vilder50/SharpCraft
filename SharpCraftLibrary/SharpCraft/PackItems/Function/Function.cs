@@ -113,9 +113,9 @@ namespace SharpCraft
         /// </summary>
         public FunctionWriter Writer = new FunctionWriter();
 
-        private Packspace Namespace;
-        private string Name;
-        private string Path;
+        private Packspace _namespace;
+        private string _name;
+        private string _path;
         /// <summary>
         /// null if the function isnt a group of functions
         /// The name of the group which contaions functions
@@ -135,22 +135,30 @@ namespace SharpCraft
         /// <param name="function">An string path to and <see cref="Function"/></param>
         public Function(string function)
         {
-            Path = function.ToLower().Replace("\\", "/");
+            _path = function.ToLower().Replace("\\", "/");
         }
         internal Function(Packspace space, string name)
         {
-            this.Name = name;
-            this.Namespace = space;
-            if (name.Contains("\\"))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                Directory.CreateDirectory(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + name.Substring(0, name.LastIndexOf("\\")));
+                _name = space.NextFileID.ToString();
+                space.NextFileID++;
+            }
+            else
+            {
+                _name = name;
+            }
+            _namespace = space;
+            if (_name.Contains("\\"))
+            {
+                Directory.CreateDirectory(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + _name.Substring(0, _name.LastIndexOf("\\")));
             }
             else
             {
                 Directory.CreateDirectory(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\");
             }
-            Path = space.Name + ":" + name.Replace("\\", "/");
-            Writer.LineWriter = new StreamWriter(new FileStream(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + name + ".mcfunction", FileMode.Create)) { AutoFlush = true };
+            _path = space.Name + ":" + _name.Replace("\\", "/");
+            Writer.LineWriter = new StreamWriter(new FileStream(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + _name + ".mcfunction", FileMode.Create)) { AutoFlush = true };
             Writer.NameSpaceName = space.Name;
             Writer.FunctionName = ToString();
 
@@ -178,7 +186,7 @@ namespace SharpCraft
         {
             if (FunctionGroup == null)
             {
-                return Path;
+                return _path;
             }
             else
             {
@@ -214,22 +222,41 @@ namespace SharpCraft
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
         /// </summary>
-        /// <param name="Name">The name of the new <see cref="Function"/></param>
+        /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string Name)
+        public Function NewChild(string name = null)
         {
-            Name = Name.Replace("/", "\\");
-            return new Function(Namespace, this.Name + "\\" + Name.ToLower().Replace("/", "\\")) {Parent = this };
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                name = _namespace.NextFileID.ToString();
+                _namespace.NextFileID++;
+            } 
+            else
+            {
+                name = name.Replace("/", "\\");
+            }
+            return new Function(_namespace, this._name + "\\" + name.ToLower().Replace("/", "\\")) {Parent = this };
         }
         /// <summary>
-        /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
+        /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name and commands
         /// </summary>
-        /// <param name="Name">The name of the new <see cref="Function"/></param>
+        /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string Name, FunctionCreater creater)
+        public Function NewChild(string name, FunctionCreater creater)
         {
-            Function function = NewChild(Name);
+            Function function = NewChild(name);
+            creater(function);
+            return function;
+        }
+        /// <summary>
+        /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified commands
+        /// </summary>
+        /// <param name="creater">a method creating the new <see cref="Function"/></param>
+        /// <returns>The new <see cref="Function"/></returns>
+        public Function NewChild(FunctionCreater creater)
+        {
+            Function function = NewChild();
             creater(function);
             return function;
         }
@@ -237,29 +264,48 @@ namespace SharpCraft
         /// <summary>
         /// Creates a new <see cref="Function"/> with the specified name in the same folder as this function
         /// </summary>
-        /// <param name="Name">The name of the new <see cref="Function"/></param>
+        /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewCousin(string Name)
+        public Function NewCousin(string name = null)
         {
-            Name = Name.Replace("/", "\\");
-            if (this.Name.Contains("\\"))
+            if (string.IsNullOrWhiteSpace(name))
             {
-                return new Function(Namespace, this.Name.Substring(0, this.Name.LastIndexOf("\\") + 1) + Name.ToLower()) { Parent = this };
+                name = _namespace.NextFileID.ToString();
+                _namespace.NextFileID++;
             }
             else
             {
-                return new Function(Namespace, Name.ToLower()) { Parent = this };
+                name = name.Replace("/", "\\");
+            }
+            if (this._name.Contains("\\"))
+            {
+                return new Function(_namespace, this._name.Substring(0, this._name.LastIndexOf("\\") + 1) + name.ToLower()) { Parent = this };
+            }
+            else
+            {
+                return new Function(_namespace, name.ToLower()) { Parent = this };
             }
         }
         /// <summary>
-        /// Creates a new <see cref="Function"/> with the specified name in the same folder as this function
+        /// Creates a new <see cref="Function"/> with the specified name and commands in the same folder as this function
         /// </summary>
-        /// <param name="Name">The name of the new <see cref="Function"/></param>
+        /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewCousin(string Name, FunctionCreater creater)
+        public Function NewCousin(string name, FunctionCreater creater)
         {
-            Function function = NewCousin(Name);
+            Function function = NewCousin(name);
+            creater(function);
+            return function;
+        }
+        /// <summary>
+        /// Creates a new <see cref="Function"/> with the specified commands in the same folder as this function
+        /// </summary>
+        /// <param name="creater">a method creating the new <see cref="Function"/></param>
+        /// <returns>The new <see cref="Function"/></returns>
+        public Function NewCousin(FunctionCreater creater)
+        {
+            Function function = NewCousin();
             creater(function);
             return function;
         }
