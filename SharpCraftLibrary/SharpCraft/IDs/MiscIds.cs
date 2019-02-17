@@ -2137,13 +2137,41 @@
             /// </summary>
             NoAI
         }
+
+        public enum VillagerProffession 
+        {
+            none,
+            armorer,
+            butcher,
+            cartographer,
+            cleric,
+            farmer,
+            fisherman,
+            fletcher,
+            leatherworker,
+            librarian,
+            mason,
+            nitwit,
+            shepherd,
+            toolsmith,
+            weaponsmith
+        }
+        public enum VillagerType 
+        {
+            desert,
+            jungle,
+            plains,
+            savanna,
+            snow,
+            swamp,
+            tiaga
+        }
         public enum Panda {Lazy,Worried,Playful,Aggresive,Weak,Brown,Normal }
         public enum Cat { Tabby, Tuxedo, Red, Siamese, BritishShorthair, Calico, Persian, Ragdoll, White, Jellie, Black }
         public enum Fox { red, snow}
         public enum Parrot { red, blue, green, cyan, silver }
         public enum Rabbit { Brown, White, Black, Gray, Yellow, Light_Brown, Killer = 99 }
         public enum ShulkerDirection { down, up, north, south, west, east }
-        public enum Villager { Farmer, Fisherman, Shepherd, Fletched, Librarian, Cartographer, Cleric, Armorer, Weapon_Smith, Tool_Smith, Butcher, Leatherworker, Nitwit }
         public enum Boat { oak, spruce, birch, jungle, acacia, dark_oak }
         public enum Facing { north, south, east, west }
         public enum Painting

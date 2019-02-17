@@ -46,11 +46,31 @@ namespace SharpCraft
             /// </summary>
             [DataTag]
             public Time VillagerConvertionTime { get; set; }
+
+            /// <summary>
+            /// The level of the villagers trading options
+            /// </summary>
+            [DataTag]
+            public int? VillagerLevel {get; set;}
+
+            /// <summary>
+            /// The villager's proffession
+            /// </summary>
+            [DataTag]
+            public ID.VillagerProffession? VillagerProffession {get; set;}
+
             /// <summary>
             /// The type of villager
             /// </summary>
             [DataTag]
-            public ID.Villager? VillagerProfession { get; set; }
+            public ID.VillagerType? VillagerType {get; set;}
+
+            /// <summary>
+            /// The trades the villager has
+            /// </summary>
+            [DataTag]
+            public Villager.Trade[] VillagerTrades { get; set; }
+
             /// <summary>
             /// The time it will take for the zombie to convert
             /// </summary>
@@ -79,39 +99,27 @@ namespace SharpCraft
                     if (PigmanAnger != null) { TempList.Add("Anger:" + PigmanAnger.AsTicks() + "s"); }
                     if (VillagerConvertUUID != null) { TempList.Add("ConversionPlayerMost:" + VillagerConvertUUID.Most + "L,ConversionPlayerLeast:" + VillagerConvertUUID.Least + "L"); }
                     if (VillagerConvertionTime != null) { TempList.Add("ConversionTime:" + VillagerConvertionTime); }
-                    if (VillagerProfession != null)
-                    {
-                        switch ((int)VillagerProfession)
-                        {
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                TempList.Add("Profession:0");
-                                break;
-                            case 4:
-                            case 5:
-                                TempList.Add("Profession:1");
-                                break;
-                            case 6:
-                                TempList.Add("Profession:2");
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                                TempList.Add("Profession:3");
-                                break;
-                            case 10:
-                            case 11:
-                                TempList.Add("Profession:4");
-                                break;
-                            case 12:
-                                TempList.Add("Profession:5");
-                                break;
-                        }
-                    }
                     if (ConvertionTime != null) { TempList.Add("DrownedConversionTime:" + ConvertionTime.AsTicks()); }
                     if (WaterTime != null) { TempList.Add("InWaterTime:" + WaterTime.AsTicks()); }
+                    if (VillagerLevel != null || VillagerProffession != null || VillagerType != null) 
+                    {
+                        List<string> typeList = new List<string>();
+                        if (VillagerLevel != null) {typeList.Add("level:" + VillagerLevel);}
+                        if (VillagerProffession != null) {typeList.Add("proffesion:\"" + VillagerProffession + "\"");}
+                        if (VillagerType != null) {typeList.Add("type:\"" + VillagerType + "\"");}
+                        TempList.Add("VillagerData:{" + string.Join(",", typeList) + "}");
+                    }
+                    if (VillagerTrades != null)
+                    {
+                        string TempString = "Offers:{Recipes:[";
+                        for (int a = 0; a < VillagerTrades.Length; a++)
+                        {
+                            if (a != 0) { TempString += ","; }
+                            TempString += "{" + VillagerTrades[a] + "}";
+                        }
+                        TempString += "]}";
+                        TempList.Add(TempString);
+                    }
 
                     return string.Join(",", TempList);
                 }

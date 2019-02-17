@@ -4,11 +4,10 @@ namespace SharpCraft
 {
     public static partial class Entity
     {
-        //TODO update to 1.14 Villagers
         /// <summary>
         /// Entity data for villagers
         /// </summary>
-        public class Villager :BaseBreedable
+        public class Villager : BaseBreedable
         {
             /// <summary>
             /// Creates a new villager
@@ -22,17 +21,7 @@ namespace SharpCraft
             /// </summary>
             [DataTag]
             public int? Riches { get; set; }
-            /// <summary>
-            /// The type of villager
-            /// </summary>
-            [DataTag]
-            public ID.Villager? VillagerType { get; set; }
-            /// <summary>
-            /// The current level of trading.
-            /// (This number is used to chose what trades are open / are going to open next)
-            /// </summary>
-            [DataTag]
-            public int? CareerLevel { get; set; }
+
             /// <summary>
             /// If the villager is willing to mate
             /// </summary>
@@ -48,6 +37,24 @@ namespace SharpCraft
             /// </summary>
             [DataTag]
             public Trade[] Trades { get; set; }
+
+            /// <summary>
+            /// The level of the villagers trading options
+            /// </summary>
+            [DataTag]
+            public int? Level {get; set;}
+
+            /// <summary>
+            /// The villager's proffession
+            /// </summary>
+            [DataTag]
+            public ID.VillagerProffession? Proffession {get; set;}
+
+            /// <summary>
+            /// The type of villager
+            /// </summary>
+            [DataTag]
+            public ID.VillagerType? Type {get; set;}
 
             /// <summary>
             /// An object used to define trades
@@ -110,44 +117,6 @@ namespace SharpCraft
                     string NormalData = BreedDataString;
                     if (NormalData.Length != 0) { TempList.Add(NormalData); }
                     if (Riches != null) { TempList.Add("Riches:" + Riches); }
-                    if (VillagerType != null)
-                    {
-                        switch ((int)VillagerType)
-                        {
-                            case 0:
-                            case 1:
-                            case 2:
-                            case 3:
-                                TempList.Add("Career:" + ((int)VillagerType + 1));
-                                TempList.Add("Profession:0");
-                                break;
-                            case 4:
-                            case 5:
-                                TempList.Add("Career:" + ((int)VillagerType - 3));
-                                TempList.Add("Profession:1");
-                                break;
-                            case 6:
-                                TempList.Add("Career:1");
-                                TempList.Add("Profession:2");
-                                break;
-                            case 7:
-                            case 8:
-                            case 9:
-                                TempList.Add("Career:" + ((int)VillagerType - 6));
-                                TempList.Add("Profession:3");
-                                break;
-                            case 10:
-                            case 11:
-                                TempList.Add("Career:" + ((int)VillagerType - 9));
-                                TempList.Add("Profession:4");
-                                break;
-                            case 12:
-                                TempList.Add("Career:1");
-                                TempList.Add("Profession:5");
-                                break;
-                        }
-                    }
-                    if (CareerLevel != null) { TempList.Add("CareerLevel:" + CareerLevel); }
                     if (Willing != null) { TempList.Add("Willing:" + Willing.ToMinecraftBool()); }
                     if (Inventory != null)
                     {
@@ -170,6 +139,14 @@ namespace SharpCraft
                         }
                         TempString += "]}";
                         TempList.Add(TempString);
+                    }
+                    if (Level != null || Proffession != null || Type != null) 
+                    {
+                        List<string> typeList = new List<string>();
+                        if (Level != null) {typeList.Add("level:" + Level);}
+                        if (Proffession != null) {typeList.Add("proffesion:\"" + Proffession + "\"");}
+                        if (Type != null) {typeList.Add("type:\"" + Type + "\"");}
+                        TempList.Add("VillagerData:{" + string.Join(",", typeList) + "}");
                     }
 
 
