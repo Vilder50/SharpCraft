@@ -21,6 +21,7 @@
         }
         public enum Entity
         {
+            fox,
             trader_llama,
             wandering_trader,
             cat,
@@ -796,6 +797,7 @@
         }
         public enum Item
         {
+            fox_spawn_egg,
             composter,
             campfire,
             sweet_berries,
@@ -2137,6 +2139,7 @@
         }
         public enum Panda {Lazy,Worried,Playful,Aggresive,Weak,Brown,Normal }
         public enum Cat { Tabby, Tuxedo, Red, Siamese, BritishShorthair, Calico, Persian, Ragdoll, White, Jellie, Black }
+        public enum Fox { red, snow}
         public enum Parrot { red, blue, green, cyan, silver }
         public enum Rabbit { Brown, White, Black, Gray, Yellow, Light_Brown, Killer = 99 }
         public enum ShulkerDirection { down, up, north, south, west, east }

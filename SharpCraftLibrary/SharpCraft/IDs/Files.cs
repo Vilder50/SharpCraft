@@ -99,6 +99,11 @@ namespace SharpCraft
                 }
 
                 /// <summary>
+                /// A random item dropped by cats at the morning
+                /// </summary>
+                public static string CatMorningGift { get => "gameplay\\cat_morning_gift"; }
+
+                /// <summary>
                 /// Loot tables Minecraft uses for chest loot
                 /// </summary>
                 public static class Chest
@@ -122,8 +127,31 @@ namespace SharpCraft
                     public static string StrongholdLibrary { get => "chests\\stronghold_library"; }
                     public static string UnderwaterRuinBig { get => "chests\\underwater_ruin_big"; }
                     public static string UnderwaterRuinSmall { get => "chests\\underwater_ruin_small"; }
-                    public static string VillageBlacksmith { get => "chests\\village_blacksmith"; }
                     public static string WoodlandMansion { get => "chests\\woodland_mansion"; }
+
+                    /// <summary>
+                    /// Loot tables for chests in villagers
+                    /// </summary>
+                    public static class Village 
+                    {
+                        public static string Armorer { get => "chests\\village\\village_armorer"; }
+                        public static string Butcher { get => "chests\\village\\village_butcher"; }
+                        public static string Cartographer { get => "chests\\village\\village_cartographer"; }
+                        public static string DesertHouse { get => "chests\\village\\village_desert_house"; }
+                        public static string Fisher { get => "chests\\village\\village_fisher"; }
+                        public static string Fletcher { get => "chests\\village\\village_fletcher"; }
+                        public static string Mason { get => "chests\\village\\village_mason"; }
+                        public static string PlainsHouse { get => "chests\\village\\village_plains_house"; }
+                        public static string SavannaHouse { get => "chests\\village\\village_savanna_house"; }
+                        public static string Shepherd { get => "chests\\village\\village_shepherd"; }
+                        public static string SnowyHouse { get => "chests\\village\\village_snowy_house"; }
+                        public static string TaigaHouse { get => "chests\\village\\village_taiga_house"; }
+                        public static string Tannery { get => "chests\\village\\village_tannery"; }
+                        public static string Temple { get => "chests\\village\\village_temple"; }
+                        public static string Toolsmith { get => "chests\\village\\village_toolsmith"; }
+                        public static string Weaponsmith { get => "chests\\village\\village_weaponsmith"; }
+                    }
+
                     #pragma warning restore 1591
                 }
             }

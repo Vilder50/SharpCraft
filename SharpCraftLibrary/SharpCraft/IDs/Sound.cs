@@ -433,6 +433,19 @@ namespace SharpCraft
                     public static string Death { get; } = "entity.ocelot.death";
                     public static string Hurt { get; } = "entity.ocelot.hurt";
                 }
+                public static class Fox
+                {
+                    public static string Ambient { get; } = "entity.fox.ambient";
+                    public static string Death { get; } = "entity.fox.death";
+                    public static string Hurt { get; } = "entity.fox.hurt";
+                    public static string Aggro { get; } = "entity.fox.aggro";
+                    public static string Bark { get; } = "entity.fox.bark";
+                    public static string Bite { get; } = "entity.fox.bite";
+                    public static string Eat { get; } = "entity.fox.eat";
+                    public static string Sleep { get; } = "entity.fox.sleep";
+                    public static string Spit { get; } = "entity.fox.spit";
+                    public static string Sniff { get; } = "entity.fox.sniff";
+                }
                 public static class Chicken
                 {
                     public static string Ambient { get; } = "entity.chicken.ambient";
