@@ -10,8 +10,30 @@
         https://github.com/PepijnMC/Minecraft/tree/master/Data
         */
 
-        #pragma warning disable 1591
-        public enum CoordType { Relative, Local, Normal }
+#pragma warning disable 1591
+        public enum CoordType
+        {
+            /// <summary>
+            /// A coordinate relative to another place
+            /// </summary>
+            Relative,
+            /// <summary>
+            /// A coordinate in a direction
+            /// </summary>
+            Local,
+            /// <summary>
+            /// A coordinate in the world
+            /// </summary>
+            Normal,
+            /// <summary>
+            /// Not used ingame. This coordinate type is for math.
+            /// </summary>
+            Vector,
+            /// <summary>
+            /// Used to mark a coordinate as a mix between relative and normal coords
+            /// </summary>
+            Mixed
+        }
         public enum Gamemode
         {
             creative,
@@ -2403,7 +2425,6 @@
             /// </summary>
             subtract
         }
-        public enum StatePillarAxis { x, y, z }
         public enum StatePortalAxis { x, z }
         public enum StateNoteInstrument { basedrum, xylophone, chime, guitar, bell, flute, bass, hat, snare, harp }
         public enum StateSlabPart { bottom, top, both }
@@ -2705,6 +2726,7 @@
             /// </summary>
             days
         }
+        public enum Axis { x, y, z }
 
         public enum LootCheckEntity
         {

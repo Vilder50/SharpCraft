@@ -28,7 +28,7 @@ namespace SharpCraft
             /// The axis the pillar is parallel to
             /// </summary>
             [BlockData("axis")]
-            public ID.StatePillarAxis? SAxis { get; set; }
+            public ID.Axis? SAxis { get; set; }
         }
     }
 }
