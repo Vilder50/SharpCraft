@@ -658,7 +658,7 @@ namespace SharpCraft
                         break;
 
                     case AdvancementTrigger.construct_beacon:
-                        if (Level != null) { TempList.Add("\"level\":" + Level); }
+                        if (Level != null) { TempList.Add(Level.JSONString("level"));}
                         break;
 
                     case AdvancementTrigger.consume_item:
@@ -729,13 +729,13 @@ namespace SharpCraft
 
                     case AdvancementTrigger.item_durability_changed:
                         if (Item != null) { TempList.Add("\"item\":" + Item); }
-                        if (Durability != null) { TempList.Add("\"durability\":" + Durability); }
-                        if (DurabilityChange != null) { TempList.Add("\"delta\":" + DurabilityChange); }
+                        if (Durability != null) { TempList.Add(Durability.JSONString("durability")); }
+                        if (DurabilityChange != null) { TempList.Add(DurabilityChange.JSONString("delta")); }
                         break;
 
                     case AdvancementTrigger.levitation:
                         if (Distance != null) { TempList.Add("\"distance\":" + Distance); }
-                        if (Duration != null) { TempList.Add("\"duratoin\":" + Duration); }
+                        if (Duration != null) { TempList.Add(Duration.JSONString("duration")); }
                         break;
 
                     case AdvancementTrigger.location:
@@ -777,7 +777,7 @@ namespace SharpCraft
                         break;
 
                     case AdvancementTrigger.used_ender_eye:
-                        if (EyeDistance != null) { TempList.Add("\"distance\":" + EyeDistance); }
+                        if (EyeDistance != null) { TempList.Add(EyeDistance.JSONString("distance"));}
                         break;
 
                     case AdvancementTrigger.villager_trade:
