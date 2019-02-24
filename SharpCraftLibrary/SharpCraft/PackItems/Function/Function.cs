@@ -123,14 +123,14 @@ namespace SharpCraft
         public string FunctionGroup;
 
         /// <summary>
-        /// The parent function which made this function using <see cref="NewChild(string)"/> or <see cref="NewCousin(string)"/>
+        /// The parent function which made this function using <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
         /// </summary>
         public Function Parent;
 
         /// <summary>
         /// Creates a <see cref="Function"/> object with the given string
         /// Used to run <see cref="Function"/> which doesnt have an object
-        /// use <see cref="Packspace.NewFunction(string)"/> to create a new <see cref="Function"/> or <see cref="NewChild(string)"/> or <see cref="NewCousin(string)"/>
+        /// use <see cref="Packspace.NewFunction(string)"/> to create a new <see cref="Function"/> or <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
         /// </summary>
         /// <param name="function">An string path to and <see cref="Function"/></param>
         public Function(string function)
@@ -266,7 +266,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewCousin(string name = null)
+        public Function NewSibling(string name = null)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -292,9 +292,9 @@ namespace SharpCraft
         /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewCousin(string name, FunctionCreater creater)
+        public Function NewSibling(string name, FunctionCreater creater)
         {
-            Function function = NewCousin(name);
+            Function function = NewSibling(name);
             creater(function);
             return function;
         }
@@ -303,9 +303,9 @@ namespace SharpCraft
         /// </summary>
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewCousin(FunctionCreater creater)
+        public Function NewSibling(FunctionCreater creater)
         {
-            Function function = NewCousin();
+            Function function = NewSibling();
             creater(function);
             return function;
         }
