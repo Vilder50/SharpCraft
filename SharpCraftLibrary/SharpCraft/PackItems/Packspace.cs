@@ -59,7 +59,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="newNamespace">The namespace to change it to</param>
         /// <returns>A new <see cref="Packspace"/> with the new namespace</returns>
-        public Packspace Minecraft(string newNamespace = "minecraft")
+        public Packspace ChangeNamespace(string newNamespace)
         {
             return new Packspace(_WorldPath, newNamespace, PackName);
         }
