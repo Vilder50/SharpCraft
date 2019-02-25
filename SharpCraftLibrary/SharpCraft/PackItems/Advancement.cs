@@ -764,7 +764,7 @@ namespace SharpCraft
                         break;
 
                     case AdvancementTrigger.recipe_unlocked:
-                        TempList.Add("\"recipe\":" + Recipe);
+                        TempList.Add("\"recipe\":\"" + Recipe + "\"");
                         break;
 
                     case AdvancementTrigger.slept_in_bed:

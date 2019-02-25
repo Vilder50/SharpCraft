@@ -111,7 +111,7 @@ namespace SharpCraft
                         List<string> TempRecipeList = new List<string>();
                         for (int i = 0; i < UnlockRecipes.Length; i++)
                         {
-                            TempRecipeList.Add("\"" + UnlockRecipes.ToString() + "\"");
+                            TempRecipeList.Add("\"" + UnlockRecipes[i].ToString() + "\"");
                         }
                         TempList.Add("Recipes:[" + string.Join(",", TempRecipeList) + "]");
                     }
