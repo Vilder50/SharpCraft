@@ -314,6 +314,9 @@ namespace SharpCraft
         /// <returns>if they are the same or not</returns>
         public static bool operator == (Coords coords1, Coords coords2)
         {
+            if (coords1 is null && coords2 is null) { return true; }
+            if (coords1 is null && !(coords2 is null)) { return false; }
+            if (coords2 is null && !(coords1 is null)) { return false; }
             if (!SameTypeCoords(coords1, coords2)) { return false; }
             if (coords1.X != coords2.X) { return false; }
             if (coords1.Y != coords2.Y) { return false; }
