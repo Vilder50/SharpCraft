@@ -158,22 +158,22 @@ namespace SharpCraft
             switch(type)
             {
                 case ID.SmeltType.BlastFurnace:
-                    RecipeWriter.Write("blasting");
+                    RecipeWriter.Write("minecraft:blasting");
                     break;
 
                 case ID.SmeltType.Furnace:
-                    RecipeWriter.Write("smelting");
+                    RecipeWriter.Write("minecraft:smelting");
                     break;
 
                 case ID.SmeltType.Smoker:
-                    RecipeWriter.Write("smoking");
+                    RecipeWriter.Write("minecraft:smoking");
                     break;
 
                 case ID.SmeltType.Campfire:
-                    RecipeWriter.Write("campfire");
+                    RecipeWriter.Write("minecraft:campfire_cooking");
                     break;
             }
-            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input + "\"},\"result\": \"" + Output + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
+            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
             RecipeWriter.Dispose();
         }
         internal Recipe(Packspace Namespace, string Name)
