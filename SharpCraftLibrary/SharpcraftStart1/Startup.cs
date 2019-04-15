@@ -10,7 +10,6 @@ namespace SharpCraftBeginning
             //Insert a packspace
             throw new NotImplementedException("No packspace has been defined");
             //RunWriters.Run(new Packspace());
-            Console.ReadKey();
         }
     }
 }
