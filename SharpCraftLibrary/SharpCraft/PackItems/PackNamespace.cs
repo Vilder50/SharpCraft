@@ -1,18 +1,27 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SharpCraft
 {
     /// <summary>
-    /// A datapack and namespace object
+    /// An <see cref="object"/> used to define a namespace in a datapack
     /// </summary>
-    public class Packspace
+    public class PackNamespace
     {
-        readonly string _Name;
-        readonly string _WorldPath;
-        readonly string _PackName;
-        readonly private string _description;
-        readonly private int _packVersion;
-        internal string WorldPath { get { return _WorldPath; } }
+        string _name;
+        Datapack _datapack;
+
+        /// <summary>
+        /// Creates a new namespace in a datapack
+        /// </summary>
+        /// <param name="datapack">The datapack to add the namespace to</param>
+        /// <param name="namespaceName">the name of the namespace</param>
+        public PackNamespace(Datapack datapack, string namespaceName)
+        {
+            Name = namespaceName;
+            Datapack = datapack;
+            Directory.CreateDirectory(datapack.WorldPath + "\\datapacks\\" + datapack.PackName + "\\data\\" + namespaceName);
+        }
 
         /// <summary>
         /// The name the next unamed file will get
@@ -20,48 +29,43 @@ namespace SharpCraft
         public int NextFileID { get; set; }
 
         /// <summary>
-        /// The name of the datapack
+        /// The name of this namespace
         /// </summary>
-        public string Name { get { return _Name; } }
-
-        /// <summary>
-        /// The name of the namespace
-        /// </summary>
-        public string PackName { get { return _PackName; } }
-
-        /// <summary>
-        /// Creates a new <see cref="Packspace"/> with the given parameters
-        /// </summary>
-        /// <param name="setWorldPath">The path to the world's save file (not the datapack folder)</param>
-        /// <param name="setNamespace">The namespace of the pack</param>
-        /// <param name="setPackName">The datapack's name</param>
-        /// <param name="description">The datapack's description</param>
-        /// <param name="packFormat">The datapack's format</param>
-        public Packspace(string setWorldPath, string setNamespace, string setPackName, string description = "Generated with Sharpcraft", int packFormat = 0)
+        public string Name
         {
-            _Name = setNamespace.ToLower();
-            _WorldPath = setWorldPath.ToLower();
-            _PackName = setPackName.ToLower();
-            this._description = description;
-            _packVersion = packFormat;
-
-            if (!File.Exists(_WorldPath + "\\datapacks\\" + _PackName + "\\pack.mcmeta"))
+            get
             {
-                Directory.CreateDirectory(_WorldPath + "\\datapacks\\" + _PackName + "\\data\\" + _Name);
-                StreamWriter WriteMeta = new StreamWriter(new FileStream(_WorldPath + "\\datapacks\\" + _PackName + "\\pack.mcmeta",FileMode.Create)) { AutoFlush = true };
-                WriteMeta.Write("{\"pack\": {\"pack_format\": " + packFormat + ",\"description\": \"" + description + "\"}}");
-                WriteMeta.Dispose();
+                return _name;
+            }
+
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException(nameof(Name) + " may not be null or empty");
+                }
+
+                _name = value;
             }
         }
-
         /// <summary>
-        /// Outputs a <see cref="Packspace"/> with the same datapack name but another namespace
+        /// The datapack this namespace is a part of
         /// </summary>
-        /// <param name="newNamespace">The namespace to change it to</param>
-        /// <returns>A new <see cref="Packspace"/> with the new namespace</returns>
-        public Packspace ChangeNamespace(string newNamespace)
+        public Datapack Datapack
         {
-            return new Packspace(_WorldPath, newNamespace, PackName);
+            get
+            {
+                return _datapack;
+            }
+
+            private set
+            {
+                if (value is null)
+                {
+                    throw new ArgumentException(nameof(Datapack) + " may not be null");
+                }
+                _datapack = value;
+            }
         }
 
         /// <summary>
@@ -119,7 +123,7 @@ namespace SharpCraft
         public Recipe NewRecipe(string name, Item[,] recipe, Item output, string group = null)
         {
             name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), recipe,output,group);
+            return new Recipe(this, name.ToLower(), recipe, output, group);
         }
 
         /// <summary>
@@ -174,11 +178,11 @@ namespace SharpCraft
 
             if (tableName.Contains("\\"))
             {
-                Directory.CreateDirectory(WorldPath + "\\datapacks\\" + PackName + "\\data\\" + Name + "\\loot_tables\\" + tableName.ToLower().Substring(0, tableName.LastIndexOf("\\")));
+                Directory.CreateDirectory(Datapack.GetDataPath() + Name + "\\loot_tables\\" + tableName.ToLower().Substring(0, tableName.LastIndexOf("\\")));
             }
             else
             {
-                Directory.CreateDirectory(WorldPath + "\\datapacks\\" + PackName + "\\data\\" + Name + "\\loot_tables\\");
+                Directory.CreateDirectory(Datapack.GetDataPath() + Name + "\\loot_tables\\");
             }
             return new Loottable(this, tableName.ToLower(), lootPools);
         }
@@ -219,10 +223,10 @@ namespace SharpCraft
         /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="Advancement"/></param>
         /// <param name="hidden">if the <see cref="Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
         /// <returns>the newly created <see cref="Advancement"/></returns>
-        public Advancement NewAdvancement(string advancementName,JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false )
+        public Advancement NewAdvancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
         {
             advancementName = advancementName.Replace("/", "\\");
-            return new Advancement(this,advancementName.ToLower(), ingameName,description,icon,background,requirement,reward,frame,showToast,chatAnnounce,hidden);
+            return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, background, requirement, reward, frame, showToast, chatAnnounce, hidden);
         }
 
         /// <summary>
@@ -245,7 +249,7 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="Group"/></returns>
         public Group NewGroup(string GroupName, Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
         {
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), CreateFunctionGroupList(FunctionList,InsertGroups), Replace,0);
+            return new Group(this, GroupName.ToLower().Replace("/", "\\"), CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
         }
 
         /// <summary>
@@ -277,7 +281,7 @@ namespace SharpCraft
             {
                 ToString[i] = BlockList[i].ToString();
             }
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace,1);
+            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 1);
         }
 
         /// <summary>
@@ -309,7 +313,7 @@ namespace SharpCraft
             {
                 ToString[i] = ItemList[i].MinecraftValue();
             }
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace,2);
+            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 2);
         }
 
         /// <summary>
@@ -344,29 +348,6 @@ namespace SharpCraft
             return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 3);
         }
 
-        /// <summary>
-        /// Creates a new <see cref="Group"/> with <see cref="Function"/>s which should run on world (re)load
-        /// </summary>
-        /// <param name="FunctionList">the <see cref="Function"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewReloadFunctionGroup(Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
-        {
-            return new Group(new Packspace(this.WorldPath,"minecraft",PackName,_description,_packVersion), "load", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
-        }
-
-        /// <summary>
-        /// Creates a new <see cref="Group"/> with <see cref="Function"/>s which should run every tick
-        /// </summary>
-        /// <param name="FunctionList">the <see cref="Function"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewTickFunctionGroup(Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
-        {
-            return new Group(new Packspace(this.WorldPath, "minecraft", PackName, _description, _packVersion), "tick", CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
-        }
         private string[] CreateFunctionGroupList(Function[] FunctionList, Group[] InsertGroups = null)
         {
             int Start = 0;

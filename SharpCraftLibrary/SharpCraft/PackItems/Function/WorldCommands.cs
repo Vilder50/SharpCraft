@@ -636,23 +636,23 @@
                     Writer = CommandsList;
                 }
                 /// <summary>
-                /// Disables the specified <see cref="Packspace"/>
+                /// Disables the specified <see cref="SharpCraft.Datapack"/>
                 /// </summary>
-                /// <param name="PackSpace">the <see cref="Packspace"/> to disable</param>
-                public void Disable(Packspace PackSpace)
+                /// <param name="datapack">the <see cref="SharpCraft.Datapack"/> to disable</param>
+                public void Disable(Datapack datapack)
                 {
-                    Writer.Add("datapack disable " + PackSpace.PackName);
+                    Writer.Add("datapack disable " + datapack.PackName);
                     Writer.NewLine();
                 }
                 /// <summary>
-                /// Enables the specified <see cref="Packspace"/>
+                /// Enables the specified <see cref="SharpCraft.Datapack"/>
                 /// </summary>
-                /// <param name="PackSpace">the <see cref="Packspace"/> to enable</param>
-                /// <param name="PlaceAt">choses where the <see cref="Packspace"/> should be placed relative to other enabled <see cref="Packspace"/>s</param>
-                /// <param name="OtherPack">the <see cref="Packspace"/> the <paramref name="PackSpace"/> is placed relative to</param>
-                public void Enable(Packspace PackSpace, ID.DatapackPlace? PlaceAt = null, Packspace OtherPack = null)
+                /// <param name="datapack">the <see cref="SharpCraft.Datapack"/> to enable</param>
+                /// <param name="PlaceAt">choses where the <see cref="SharpCraft.Datapack"/> should be placed relative to other enabled <see cref="SharpCraft.Datapack"/>s</param>
+                /// <param name="OtherPack">the <see cref="SharpCraft.Datapack"/> the <paramref name="datapack"/> is placed relative to</param>
+                public void Enable(Datapack datapack, ID.DatapackPlace? PlaceAt = null, Datapack OtherPack = null)
                 {
-                    Writer.Add("datapack enable " + PackSpace.PackName);
+                    Writer.Add("datapack enable " + datapack.PackName);
                     if (PlaceAt != null) { Writer.Add(" " + PlaceAt); }
                     if (PlaceAt.Value >= ID.DatapackPlace.first) { Writer.Add(" " + OtherPack.PackName); }
                     Writer.NewLine();

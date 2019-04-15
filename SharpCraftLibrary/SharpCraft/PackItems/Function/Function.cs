@@ -113,7 +113,7 @@ namespace SharpCraft
         /// </summary>
         public FunctionWriter Writer = new FunctionWriter();
 
-        private Packspace _namespace;
+        private PackNamespace _namespace;
         private string _name;
         private string _path;
         /// <summary>
@@ -130,14 +130,14 @@ namespace SharpCraft
         /// <summary>
         /// Creates a <see cref="Function"/> object with the given string
         /// Used to run <see cref="Function"/> which doesnt have an object
-        /// use <see cref="Packspace.NewFunction(string)"/> to create a new <see cref="Function"/> or <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
+        /// use <see cref="PackNamespace.NewFunction(string)"/> to create a new <see cref="Function"/> or <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
         /// </summary>
         /// <param name="function">An string path to and <see cref="Function"/></param>
         public Function(string function)
         {
             _path = function.ToLower().Replace("\\", "/");
         }
-        internal Function(Packspace space, string name)
+        internal Function(PackNamespace space, string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -151,14 +151,14 @@ namespace SharpCraft
             _namespace = space;
             if (_name.Contains("\\"))
             {
-                Directory.CreateDirectory(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + _name.Substring(0, _name.LastIndexOf("\\")));
+                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\functions\\" + _name.Substring(0, _name.LastIndexOf("\\")));
             }
             else
             {
-                Directory.CreateDirectory(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\");
+                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\functions\\");
             }
             _path = space.Name + ":" + _name.Replace("\\", "/");
-            Writer.LineWriter = new StreamWriter(new FileStream(space.WorldPath + "\\datapacks\\" + space.PackName + "\\data\\" + space.Name + "\\functions\\" + _name + ".mcfunction", FileMode.Create)) { AutoFlush = true };
+            Writer.LineWriter = new StreamWriter(new FileStream(space.Datapack.GetDataPath() + space.Name + "\\functions\\" + _name + ".mcfunction", FileMode.Create)) { AutoFlush = true };
             Writer.NameSpaceName = space.Name;
             Writer.FunctionName = ToString();
 

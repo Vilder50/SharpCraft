@@ -8,7 +8,7 @@ namespace SharpCraft
     public class Group
     {
         readonly string Path;
-        internal Group(Packspace Namespace, string GroupName, string[] GroupItems, bool Replace, int Type)
+        internal Group(PackNamespace Namespace, string GroupName, string[] GroupItems, bool Replace, int Type)
         {
             Path = Namespace.Name + ":" + GroupName.Replace("\\", "/");
             string PathType = "";
@@ -18,13 +18,13 @@ namespace SharpCraft
             if (Type == 3) { PathType = "entity_types"; }
             if (GroupName.Contains("\\"))
             {
-                Directory.CreateDirectory(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\tags\\" + PathType + "\\" + GroupName.Substring(0, GroupName.LastIndexOf("\\")));
+                Directory.CreateDirectory(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\tags\\" + PathType + "\\" + GroupName.Substring(0, GroupName.LastIndexOf("\\")));
             }
             else
             {
-                Directory.CreateDirectory(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\tags\\" + PathType + "\\");
+                Directory.CreateDirectory(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\tags\\" + PathType + "\\");
             }
-            StreamWriter GroupWriter = new StreamWriter(new FileStream(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\tags\\" + PathType + "\\" + GroupName + ".json", FileMode.Create)) { AutoFlush = true };
+            StreamWriter GroupWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\tags\\" + PathType + "\\" + GroupName + ".json", FileMode.Create)) { AutoFlush = true };
             GroupWriter.Write("{\"replace\": " + Replace.ToString().ToLower() + ",\"values\": [\"" + string.Join("\",\"",GroupItems) + "\"]}");
             GroupWriter.Dispose();
         }
@@ -32,7 +32,7 @@ namespace SharpCraft
         /// <summary>
         /// Creates a <see cref="Group"/> object with the given string
         /// Used to use a <see cref="Group"/> which doesnt have an object
-        /// use <see cref="Packspace.NewGroup(string, Function[], bool, Group[])"/> to create a new <see cref="Group"/>
+        /// use <see cref="PackNamespace.NewGroup(string, Function[], bool, Group[])"/> to create a new <see cref="Group"/>
         /// </summary>
         /// <param name="Group">An string path to and <see cref="Group"/></param>
         public Group(string Group)

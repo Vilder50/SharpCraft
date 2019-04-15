@@ -13,17 +13,17 @@ namespace SharpCraft
         /// <summary>
         /// Creates a <see cref="Loottable"/> object with the given string
         /// Used to use a <see cref="Loottable"/> which doesnt have an object
-        /// use <see cref="Packspace.NewLoottable(string, Pool[])"/> to create a new <see cref="Loottable"/>
+        /// use <see cref="PackNamespace.NewLoottable(string, Pool[])"/> to create a new <see cref="Loottable"/>
         /// </summary>
         /// <param name="loottable">An string path to and <see cref="Loottable"/></param>
         public Loottable(string loottable)
         {
             _path = loottable.ToLower().Replace("\\", "/");
         }
-        internal Loottable(Packspace Namespace, string TableName, Pool[] LootPools)
+        internal Loottable(PackNamespace Namespace, string TableName, Pool[] LootPools)
         {
             _path = Namespace.Name + ":" + TableName.Replace("\\", "/");
-            StreamWriter TableWriter = new StreamWriter(new FileStream(Namespace.WorldPath + "\\datapacks\\" + Namespace.PackName + "\\data\\" + Namespace.Name + "\\loot_tables\\" + TableName + ".json", FileMode.Create)) { AutoFlush = true };
+            StreamWriter TableWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\loot_tables\\" + TableName + ".json", FileMode.Create)) { AutoFlush = true };
             string[] StringPools = new string[LootPools.Length];
             for (int i = 0; i < LootPools.Length; i++)
             {
