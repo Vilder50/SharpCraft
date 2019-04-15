@@ -10,6 +10,7 @@ namespace SharpCraft
     {
         string _name;
         Datapack _datapack;
+        int _nextFileID;
 
         /// <summary>
         /// Creates a new namespace in a datapack
@@ -20,13 +21,20 @@ namespace SharpCraft
         {
             Name = namespaceName;
             Datapack = datapack;
-            Directory.CreateDirectory(datapack.WorldPath + "\\datapacks\\" + datapack.PackName + "\\data\\" + namespaceName);
+            Directory.CreateDirectory(datapack.WorldPath + "\\datapacks\\" + datapack.PackName + "\\data\\" + Name);
         }
 
         /// <summary>
         /// The name the next unamed file will get
         /// </summary>
-        public int NextFileID { get; set; }
+        public int NextFileID
+        {
+            get
+            {
+                _nextFileID++;
+                return _nextFileID;
+            }
+        }
 
         /// <summary>
         /// The name of this namespace
@@ -45,7 +53,7 @@ namespace SharpCraft
                     throw new ArgumentException(nameof(Name) + " may not be null or empty");
                 }
 
-                _name = value;
+                _name = value.ToLower();
             }
         }
         /// <summary>

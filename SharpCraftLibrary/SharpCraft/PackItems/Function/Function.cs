@@ -142,7 +142,6 @@ namespace SharpCraft
             if (string.IsNullOrWhiteSpace(name))
             {
                 _name = space.NextFileID.ToString();
-                space.NextFileID++;
             }
             else
             {
@@ -229,7 +228,6 @@ namespace SharpCraft
             if (string.IsNullOrWhiteSpace(name))
             {
                 name = _namespace.NextFileID.ToString();
-                _namespace.NextFileID++;
             } 
             else
             {
@@ -271,7 +269,6 @@ namespace SharpCraft
             if (string.IsNullOrWhiteSpace(name))
             {
                 name = _namespace.NextFileID.ToString();
-                _namespace.NextFileID++;
             }
             else
             {
