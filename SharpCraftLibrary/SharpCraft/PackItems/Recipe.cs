@@ -184,6 +184,14 @@ namespace SharpCraft
             RecipeWriter.WriteLine("{}");
             RecipeWriter.Dispose();
         }
+        internal Recipe(PackNamespace Namespace, string Name, Item Input, Item Output)
+        {
+            MakeRecipePath(Namespace, Name);
+            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            RecipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.ID.MinecraftValue() + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
+            RecipeWriter.Dispose();
+        }
 
         /// <summary>
         /// Returns the namespace path of this <see cref="Recipe"/>

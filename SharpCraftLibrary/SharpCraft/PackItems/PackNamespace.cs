@@ -149,7 +149,7 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new furnace <see cref="Recipe"/> with the given parameters
+        /// Creates a new furnace/a type of furnace <see cref="Recipe"/> with the given parameters
         /// </summary>
         /// <param name="name">The <see cref="Recipe"/>'s name</param>
         /// <param name="input">The input <see cref="Item"/></param>
@@ -162,6 +162,19 @@ namespace SharpCraft
         {
             name = name.Replace("/", "\\");
             return new Recipe(this, name.ToLower(), input, output, xpDrop, cookTime, recipeType);
+        }
+
+        /// <summary>
+        /// Creates a new stonecutter <see cref="Recipe"/>
+        /// </summary>
+        /// <param name="name">The <see cref="Recipe"/>'s name</param>
+        /// <param name="input">The input <see cref="Item"/></param>
+        /// <param name="output">the output <see cref="Item"/></param>
+        /// <returns>The newly created <see cref="Recipe"/></returns>
+        public Recipe NewRecipe(string name, Item input, Item output)
+        {
+            name = name.Replace("/", "\\");
+            return new Recipe(this, name.ToLower(), input, output);
         }
 
         /// <summary>
