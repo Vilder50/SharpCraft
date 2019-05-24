@@ -43,12 +43,26 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Creates a new <see cref="Datapack"/> object with the given name.
+        /// (This is used for enable/disable datapack commands)
+        /// </summary>
+        /// <param name="datapackName"></param>
+        public Datapack(string datapackName)
+        {
+            _PackName = datapackName.ToLower();
+        }
+
+        /// <summary>
         /// Outputs a <see cref="PackNamespace"/> for this datapack
         /// </summary>
         /// <param name="packNamespace">The namespace the namespace has</param>
         /// <returns>A new <see cref="PackNamespace"/> with the given namespace</returns>
         public PackNamespace Namespace(string packNamespace)
         {
+            if (string.IsNullOrWhiteSpace(WorldPath))
+            {
+                throw new ArgumentException("Cannot create namespaces in basic datapack");
+            }
             return new PackNamespace(this, packNamespace);
         }
 
