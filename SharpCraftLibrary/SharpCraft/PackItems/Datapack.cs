@@ -46,7 +46,7 @@ namespace SharpCraft
         /// Creates a new <see cref="Datapack"/> object with the given name.
         /// (This is used for enable/disable datapack commands)
         /// </summary>
-        /// <param name="datapackName"></param>
+        /// <param name="datapackName">A <see cref="Datapack"/> with the name</param>
         public Datapack(string datapackName)
         {
             _PackName = datapackName.ToLower();
