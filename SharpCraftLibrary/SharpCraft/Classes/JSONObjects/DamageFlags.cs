@@ -67,14 +67,14 @@ namespace SharpCraft
             {
                 List<string> TempList = new List<string>();
 
-                if (ByPassArmor != null) { TempList.Add("\"bypasses_armor\":" + ByPassArmor); }
-                if (Unblockable != null) { TempList.Add("\"bypasses_invulnerability\":" + Unblockable); }
-                if (Starvation != null) { TempList.Add("\"bypasses_magic\":" + Starvation); }
-                if (Explosion != null) { TempList.Add("\"is_explosion\":" + Explosion); }
-                if (Fire != null) { TempList.Add("\"is_fire\":" + Fire); }
-                if (Magic != null) { TempList.Add("\"is_magic\":" + Magic); }
-                if (Projectile != null) { TempList.Add("\"is_projectile\":" + Projectile); }
-                if (Lightning != null) { TempList.Add("\"is_lightning\":" + Lightning); }
+                if (ByPassArmor != null) { TempList.Add("\"bypasses_armor\":" + ByPassArmor.ToMinecraftBool()); }
+                if (Unblockable != null) { TempList.Add("\"bypasses_invulnerability\":" + Unblockable.ToMinecraftBool()); }
+                if (Starvation != null) { TempList.Add("\"bypasses_magic\":" + Starvation.ToMinecraftBool()); }
+                if (Explosion != null) { TempList.Add("\"is_explosion\":" + Explosion.ToMinecraftBool()); }
+                if (Fire != null) { TempList.Add("\"is_fire\":" + Fire.ToMinecraftBool()); }
+                if (Magic != null) { TempList.Add("\"is_magic\":" + Magic.ToMinecraftBool()); }
+                if (Projectile != null) { TempList.Add("\"is_projectile\":" + Projectile.ToMinecraftBool()); }
+                if (Lightning != null) { TempList.Add("\"is_lightning\":" + Lightning.ToMinecraftBool()); }
                 if (DamagingEntity != null) { TempList.Add("\"direct_entity\":" + DamagingEntity); }
                 if (SourceEntity != null) { TempList.Add("\"source_entity\":" + SourceEntity); }
 

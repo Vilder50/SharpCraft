@@ -152,7 +152,7 @@ namespace SharpCraft
                 _lootType = LootType.item;
                 _entryType = EntryType.normal;
                 _weight = weight;
-                _Item = item.ToString();
+                _Item = item.MinecraftValue();
                 _conditions = conditions;
                 if (conditions != null)
                 {
@@ -216,7 +216,7 @@ namespace SharpCraft
                 _lootType = LootType.item;
                 _entryType = EntryType.Change;
                 _weight = weight;
-                _Item = item.ToString();
+                _Item = item.MinecraftValue();
                 _changes = changes;
 
                 return this;
@@ -753,7 +753,7 @@ namespace SharpCraft
                         break;
                     case ChangeType.Looting:
                         ReturnString = "{\"function\":\"minecraft:looting_enchant\"," + _value.JSONString("count");
-                        if (_radius != 0) { ReturnString += ",\"limit\":" + _radius; }
+                        if (_radius != null) { ReturnString += ",\"limit\":" + _radius; }
                         break;
                     case ChangeType.SetAttribute:
                         ReturnString = "{\"function\":\"minecraft:set_attributes\",\"modifiers\":[{\"name\":\"" + _attribute + "\",\"attribute\":\"" + _attribute.ToString().Replace("_", ".") + "\"," + _value.JSONString("amount") + ",\"operation\":\"" + _operation.ToString() + "\"";
