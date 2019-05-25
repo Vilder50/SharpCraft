@@ -53,10 +53,10 @@
             lightning_bolt,
             dolphin,
             drowned,
-            cod_mob,
+            cod,
             turtle,
             phantom,
-            salmon_mob,
+            salmon,
             pufferfish,
             tropical_fish,
             player,
@@ -1671,7 +1671,7 @@
             music_disc_ward,
             music_disc_11,
             music_disc_wait,
-            TtemEnumEnd
+            ItemEnumEnd
         }
         public enum Color
         {
