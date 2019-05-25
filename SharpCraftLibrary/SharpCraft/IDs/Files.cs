@@ -99,6 +99,28 @@ namespace SharpCraft
                 }
 
                 /// <summary>
+                /// Gifts given by villagers from hero of the village
+                /// </summary>
+                public static class VillagerGifts
+                {
+#pragma warning disable 1591
+                    public static string ArmorerGift { get { return "gameplay\\hero_of_the_village\\armorer_gift"; } }
+                    public static string ButcherGift { get { return "gameplay\\hero_of_the_village\\butcher_gift"; } }
+                    public static string CartographerGift { get { return "gameplay\\hero_of_the_village\\cartographer_gift"; } }
+                    public static string ClericGift { get { return "gameplay\\hero_of_the_village\\cleric_gift"; } }
+                    public static string FarmerGift { get { return "gameplay\\hero_of_the_village\\farmer_gift"; } }
+                    public static string FishermanGift { get { return "gameplay\\hero_of_the_village\\fisherman_gift"; } }
+                    public static string FletcherGift { get { return "gameplay\\hero_of_the_village\\fletcher_gift"; } }
+                    public static string LeatherWorkerGift { get { return "gameplay\\hero_of_the_village\\leatherworker_gift"; } }
+                    public static string LibrarianGift { get { return "gameplay\\hero_of_the_village\\librarian_gift"; } }
+                    public static string MasonGift { get { return "gameplay\\hero_of_the_village\\mason_gift"; } }
+                    public static string ShepherdGift { get { return "gameplay\\hero_of_the_village\\shepherd_gift"; } }
+                    public static string ToolSmithGift { get { return "gameplay\\hero_of_the_village\\toolsmith_gift"; } }
+                    public static string WeaponsmithGift { get { return "gameplay\\hero_of_the_village\\weaponsmith_gift"; } }
+#pragma warning restore 1591
+                }
+
+                /// <summary>
                 /// A random item dropped by cats at the morning
                 /// </summary>
                 public static string CatMorningGift { get => "gameplay\\cat_morning_gift"; }
