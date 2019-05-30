@@ -46,8 +46,7 @@ namespace SharpCraft
             public override string ToString()
             {
                 List<string> TempList = new List<string>();
-                if (Biome != null && Biome != ID.Biome.empty) { TempList.Add("\"biome\": \"" + Biome + "\""); }
-                else if (Biome == ID.Biome.empty) { TempList.Add("\"biome\": \"void\""); }
+                if (Biome != null) { TempList.Add("\"biome\": \"" + Biome + "\""); }
                 if (Structure != null) { TempList.Add("\"feature\": \"" + Structure + "\""); }
                 if (Dimension != null) { TempList.Add("\"dimension\": \"" + Dimension + "\""); }
                 if (Y != null || X != null || Z != null)
