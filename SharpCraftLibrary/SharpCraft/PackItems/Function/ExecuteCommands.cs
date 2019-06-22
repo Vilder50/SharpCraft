@@ -97,7 +97,7 @@ namespace SharpCraft
             /// <param name="blockCoords">the <see cref="Coords"/> of the block</param>
             /// <param name="findBlock">the <see cref="Block"/> to find</param>
             /// <param name="want">false if it should execute when it's false</param>
-            public void IfBlock(Coords blockCoords, Block findBlock, bool want = true)
+            public void IfBlock(Block findBlock, Coords blockCoords, bool want = true)
             { 
                 Writer.Add((want ? "if" : "unless") + " block " + blockCoords + " " + findBlock + " ", true);
             }
