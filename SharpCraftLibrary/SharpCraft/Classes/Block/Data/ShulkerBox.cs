@@ -29,7 +29,7 @@ namespace SharpCraft
             /// The direction the shulker box is facing (the way it opens out into )
             /// </summary>
             [BlockData("facing")]
-            public ID.FacingFull SFacing { get; set; }
+            public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// The item's inside the shulker box.
