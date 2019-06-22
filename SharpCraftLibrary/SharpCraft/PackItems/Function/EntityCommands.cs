@@ -335,7 +335,7 @@
                 {
                     toSelector.Limited();
                     fromSelector.Limited();
-                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {(index > 0 ? "after" : "before")} {System.Math.Abs(index)} from entity {fromSelector} {fromDataPath}");
+                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} from entity {fromSelector} {fromDataPath}");
                     Writer.NewLine();
                 }
             }

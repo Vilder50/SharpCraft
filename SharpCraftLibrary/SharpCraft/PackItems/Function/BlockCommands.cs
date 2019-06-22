@@ -248,7 +248,7 @@
                 /// <param name="fromDataPath">The datapath to copy from</param>
                 public void Copy(Coords toBlock, string toDataPath, int index, Selector fromSelector, string fromDataPath)
                 {
-                    writer.Add($"data modify entity {toBlock} {toDataPath} insert {(index > 0 ? "after" : "before")} {System.Math.Abs(index)} from entity {fromSelector} {fromDataPath}");
+                    writer.Add($"data modify entity {toBlock} {toDataPath} insert {System.Math.Abs(index)} from entity {fromSelector} {fromDataPath}");
                     writer.NewLine();
                 }
             }
