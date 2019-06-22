@@ -259,7 +259,7 @@
                 public void Change(Selector toSelector, string toDataPath, string copyData, int index)
                 {
                     toSelector.Limited();
-                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {(index > 0 ? "after" : "before")} {System.Math.Abs(index)} value {copyData}");
+                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} value {copyData}");
                     Writer.NewLine();
                 }
 
@@ -319,7 +319,7 @@
                 public void Copy(Selector toSelector, string toDataPath, Coords fromBlock, string fromDataPath, int index)
                 {
                     toSelector.Limited();
-                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {(index > 0 ? "after" : "before")} {System.Math.Abs(index)} from block {fromBlock} {fromDataPath}");
+                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} from block {fromBlock} {fromDataPath}");
                     Writer.NewLine();
                 }
 
