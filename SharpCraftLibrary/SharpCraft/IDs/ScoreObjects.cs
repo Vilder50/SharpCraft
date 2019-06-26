@@ -114,6 +114,7 @@
                 public static string ShulkerBox { get; } = "minecraft.custom:minecraft.open_shulker_box";
                 public static string Villager { get; } = "minecraft.custom:minecraft.talked_to_villager";
                 public static string TrappedChest { get; } = "minecraft.custom:minecraft.trigger_trapped_chest";
+                public static string Barrel { get; } = "minecraft.custom:minecraft.open_barrel";
                 #pragma warning restore 1591
             }
 
