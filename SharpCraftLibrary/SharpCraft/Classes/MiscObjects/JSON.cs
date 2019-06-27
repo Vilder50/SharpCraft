@@ -181,7 +181,7 @@ namespace SharpCraft
                     }
                     else if (BlockCoords != null)
                     {
-                        TempList.Add("\"block\":\""+ BlockCoords.X + " " + BlockCoords.Y + " " + BlockCoords.Z + "\",\"nbt\":\"" + DataPath + "\"");
+                        TempList.Add("\"block\":\""+ BlockCoords.ToString() + "\",\"nbt\":\"" + DataPath + "\"");
                     }
 
                     if (interpret != null) { TempList.Add("\"interpret\":" + interpret); }
