@@ -81,7 +81,7 @@ namespace SharpCraft
         /// <param name="hexColor">the string to convert</param>
         public HexColor(string hexColor)
         {
-            hexColor.TrimStart('#');
+            hexColor = hexColor.TrimStart('#');
             if (hexColor.Length > 6)
             {
                 throw new ArgumentException("The given hex color is too long.");
@@ -89,12 +89,12 @@ namespace SharpCraft
             try
             {
                 Red = int.Parse(hexColor.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
-                Green = int.Parse(hexColor.Substring(2, 4), System.Globalization.NumberStyles.HexNumber);
-                Blue = int.Parse(hexColor.Substring(4, 6), System.Globalization.NumberStyles.HexNumber);
+                Green = int.Parse(hexColor.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                Blue = int.Parse(hexColor.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
             }
-            catch
+            catch (Exception ex)
             {
-                throw new ArgumentException("The given hex color is invalid");
+                throw new ArgumentException("The given hex color is invalid" + ex);
             }
         }
 
