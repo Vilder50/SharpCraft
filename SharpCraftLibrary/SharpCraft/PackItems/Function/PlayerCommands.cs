@@ -326,6 +326,7 @@
                 {
                     kill.Limited();
                     Writer.Add($"loot give {player} kill {kill}");
+                    Writer.NewLine();
                 }
 
                 /// <summary>
@@ -339,8 +340,9 @@
                     Writer.Add($"loot give {player} mine {breakBlock}");
                     if (breakWith != null)
                     {
-                        Writer.Add(" " + breakWith);
+                        Writer.Add(" " + breakWith.IDDataString);
                     }
+                    Writer.NewLine();
                 }
 
                 /// <summary>
@@ -371,6 +373,36 @@
                     Writer.Add("replaceitem entity " + player + " hotbar." + giveItem.Slot + " " + giveItem.IDDataString);
                     Writer.NewLine();
                 }
+
+                /// <summary>
+                /// Puts the item from the loot table into the players hotbar
+                /// </summary>
+                /// <param name="player">the <see cref="Selector"/> to use</param>
+                /// <param name="loot">the <see cref="Loottable"/> to give the player</param>
+                /// <param name="slot">The hotbar slot to put the item in</param>
+                public void GiveHotbar(Selector player, Loottable loot, int slot)
+                {
+                    Writer.Add($"loot replace entity {player} hotbar.{slot} loot {loot}");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// Puts the item from the loot table into the players hotbar
+                /// </summary>
+                /// <param name="player">the <see cref="Selector"/> to use</param>
+                /// <param name="breakBlock">the coords of the block</param>
+                /// <param name="breakWith">the item used to break the block</param>
+                /// <param name="slot">The hotbar slot to put the item in</param>
+                public void GiveHotbar(Selector player, Coords breakBlock, Item breakWith, int slot)
+                {
+                    Writer.Add($"loot replace entity {player} hotbar.{slot} mine {breakBlock}");
+                    if (breakWith != null)
+                    {
+                        Writer.Add(" " + breakWith.IDDataString);
+                    }
+                    Writer.NewLine();
+                }
+
                 /// <summary>
                 /// Inserts an item into the selected players' selected slot
                 /// </summary>

@@ -406,6 +406,7 @@ namespace SharpCraft
                 SetContent,
                 SetLootTable,
                 FillPlayerHead,
+                CopyNBT,
             }
 
             enum LootBonusFormula
@@ -425,6 +426,8 @@ namespace SharpCraft
             }
             private readonly Condition[] _conditions;
 
+            private CopyOperation[] _operations;
+            private ID.LootTarget _target;
             private ChangeType _type;
             private Range _value;
             private Item _itemNBT;
@@ -720,6 +723,53 @@ namespace SharpCraft
             }
 
             /// <summary>
+            /// Copies NBT from the target onto the item
+            /// </summary>
+            /// <param name="copyFrom">the target to copy from</param>
+            /// <param name="operations">The copy operations</param>
+            /// <returns>this <see cref="Change"/></returns>
+            public Change CopyNBT(ID.LootTarget copyFrom, CopyOperation[] operations)
+            {
+                _type = ChangeType.CopyNBT;
+                _target = copyFrom;
+                _operations = operations;
+                
+                return this;
+            }
+
+            /// <summary>
+            /// An object for storing a copy operation for <see cref="CopyNBT(ID.LootTarget, CopyOperation[])"/>
+            /// </summary>
+            public class CopyOperation
+            {
+                /// <summary>
+                /// The path to copy from (the path to the target's data)
+                /// </summary>
+                public string CopyFromPath { get; private set; }
+                /// <summary>
+                /// The path to copy to (the path to the item's data)
+                /// </summary>
+                public string CopyToPath { get; private set; }
+                /// <summary>
+                /// The way to copy the data
+                /// </summary>
+                public ID.DataCopyWay CopyWay { get; private set; }
+
+                /// <summary>
+                /// Creates a new <see cref="CopyOperation"/> object
+                /// </summary>
+                /// <param name="copyFromPath">The path to copy from (the path to the target's data)</param>
+                /// <param name="copyToPath">The path to copy to (The path starts at tag like this: Item.tag[This Path])</param>
+                /// <param name="copyWay">The way to copy the data</param>
+                public CopyOperation(string copyFromPath, string copyToPath, ID.DataCopyWay copyWay)
+                {
+                    CopyFromPath = copyFromPath;
+                    CopyToPath = copyToPath;
+                    CopyWay = copyWay;
+                }
+            }
+
+            /// <summary>
             /// Ourputs raw data used by the game
             /// </summary>
             /// <returns>Raw data used by Minecraft</returns>
@@ -803,6 +853,18 @@ namespace SharpCraft
                     case ChangeType.FillPlayerHead:
                         ReturnString = "{\"function\":\"minecraft:fill_player_head\",\"entity\":\"" + _entity + "\"";
                         break;
+                    case ChangeType.CopyNBT:
+                        ReturnString = "{\"function\":\"minecraft:copy_nbt\",\"source\":\"" + _target + "\",\"ops\":[";
+                        for (int i = 0; i < _operations.Length; i++)
+                        {
+                            if (i != 0)
+                            {
+                                ReturnString += ",";
+                            }
+                            ReturnString += "{\"source\":\"" + _operations[i].CopyFromPath + "\",\"target\":\"" + _operations[i].CopyToPath + "\",\"op\":\"" + _operations[i].CopyWay + "\"}";
+                        }
+                        ReturnString += "]";
+                        break;
                 }
 
                 if (_conditions != null)
@@ -847,7 +909,7 @@ namespace SharpCraft
 
             private readonly bool _inverted;
 
-            private ID.LootCheckEntity _checkEntity;
+            private ID.LootTarget _checkEntity;
             private LootCondition _condition;
             private JSONObjects.Entity _entity;
             private Range _range;
@@ -868,7 +930,7 @@ namespace SharpCraft
             /// <param name="entity">the entity its supposed to be</param>
             /// <param name="select">the entity to check</param>
             /// <returns>this <see cref="Condition"/></returns>
-            public Condition EntityProperties(JSONObjects.Entity entity, ID.LootCheckEntity select)
+            public Condition EntityProperties(JSONObjects.Entity entity, ID.LootTarget select)
             {
                 _condition = LootCondition.EntityProperties;
                 _entity = entity;
@@ -884,7 +946,7 @@ namespace SharpCraft
             /// <param name="range">the range the score has to be in</param>
             /// <param name="select">the entity to check</param>
             /// <returns>this <see cref="Condition"/></returns>
-            public Condition EntityScore(ScoreObject scoreObject, Range range, ID.LootCheckEntity select)
+            public Condition EntityScore(ScoreObject scoreObject, Range range, ID.LootTarget select)
             {
                 _condition = LootCondition.EntityScore;
                 _scoreObject = scoreObject;

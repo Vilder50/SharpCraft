@@ -2709,7 +2709,7 @@
         }
         public enum Axis { x, y, z }
 
-        public enum LootCheckEntity
+        public enum LootTarget
         {
             /// <summary>
             /// Checks as the killed entity
@@ -2724,7 +2724,19 @@
             /// <summary>
             /// Checks as the killer if the killer is a player
             /// </summary>
-            Killer_player
+            Killer_player,
+
+            /// <summary>
+            /// The mined block
+            /// </summary>
+            block_entity,
+        }
+
+        public enum DataCopyWay
+        {
+            replace,
+            append,
+            merge
         }
 
         public enum AdvancementFrame
