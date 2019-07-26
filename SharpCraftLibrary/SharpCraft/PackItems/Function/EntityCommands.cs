@@ -278,6 +278,17 @@
                 }
 
                 /// <summary>
+                /// Removes the data from the <see cref="SharpCraft.Entity"/> at the given datapath
+                /// </summary>
+                /// <param name="selector">The <see cref="Selector"/> to remove data from</param>
+                /// <param name="dataPath">The datapath</param>
+                public void Remove(Selector selector, string dataPath)
+                {
+                    Writer.Add("data remove entity " + selector + " " + dataPath);
+                    Writer.NewLine();
+                }
+
+                /// <summary>
                 /// Copies data from one entity to another entity
                 /// </summary>
                 /// <param name="toSelector">The entity to copy the data to</param>
