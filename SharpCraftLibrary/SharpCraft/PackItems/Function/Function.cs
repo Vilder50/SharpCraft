@@ -166,6 +166,7 @@ namespace SharpCraft
             Execute = new ExecuteCommands(Writer);
             World = new WorldCommands(Writer);
             Player = new PlayerCommands(Writer);
+            Custom = new CustomCommands(this);
         }
 
         /// <summary>
@@ -217,6 +218,11 @@ namespace SharpCraft
         /// Commands run on the world
         /// </summary>
         public WorldCommands World;
+
+        /// <summary>
+        /// Custom commands to make life easier
+        /// </summary>
+        public CustomCommands Custom;
 
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
