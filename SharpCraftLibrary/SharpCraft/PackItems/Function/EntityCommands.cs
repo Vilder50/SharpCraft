@@ -242,7 +242,7 @@
                 /// <param name="toDataPath">The data path to copy to</param>
                 /// <param name="copyData">The data to insert</param>
                 /// <param name="modifierType">The way to add the data</param>
-                public void Change(Selector toSelector, string toDataPath, string copyData, ID.EntityDataModifierType modifierType = ID.EntityDataModifierType.merge)
+                public void Change(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, string copyData)
                 {
                     toSelector.Limited();
                     Writer.Add($"data modify entity {toSelector} {toDataPath} {modifierType} value {copyData}");
@@ -296,7 +296,7 @@
                 /// <param name="fromSelector">The entity to copy from</param>
                 /// <param name="fromDataPath">The data path to copy from</param>
                 /// <param name="modifierType">The way to add the data</param>
-                public void Copy(Selector toSelector, string toDataPath, Selector fromSelector, string fromDataPath, ID.EntityDataModifierType modifierType = ID.EntityDataModifierType.merge)
+                public void Copy(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Selector fromSelector, string fromDataPath)
                 {
                     toSelector.Limited();
                     fromSelector.Limited();
@@ -312,7 +312,7 @@
                 /// <param name="fromBlock">The block to copy from</param>
                 /// <param name="fromDataPath">The data path to copy from</param>
                 /// <param name="modifierType">The way to add the data</param>
-                public void Copy(Selector toSelector, string toDataPath, Coords fromBlock, string fromDataPath, ID.EntityDataModifierType modifierType = ID.EntityDataModifierType.merge)
+                public void Copy(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Coords fromBlock, string fromDataPath)
                 {
                     toSelector.Limited();
                     Writer.Add($"data modify entity {toSelector} {toDataPath} {modifierType} from block {fromBlock} {fromDataPath}");
