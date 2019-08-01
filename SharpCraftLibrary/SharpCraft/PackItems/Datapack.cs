@@ -19,10 +19,25 @@ namespace SharpCraft
         /// </summary>
         public bool WriteFunctionCalls { get; set; }
 
+        private bool hideFileNames;
         /// <summary>
         /// If true all file names will be numbers and harder to search through.
         /// </summary>
-        public bool HideFileNames { get; set; }
+        public bool HideFileNames
+        {
+            get
+            {
+                return hideFileNames;
+            }
+            set
+            {
+                if (value)
+                {
+                    throw new NotImplementedException();
+                }
+                hideFileNames = value;
+            }
+        }
 
         /// <summary>
         /// The name of the namespace

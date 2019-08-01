@@ -77,6 +77,68 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Converts the given <see cref="ID.Item"/> into an <see cref="ID.Block"/>
+        /// </summary>
+        /// <param name="item">The item to convert</param>
+        /// <returns>The block</returns>
+        public static ID.Block ConvertToBlock(this ID.Item item)
+        {
+            try
+            {
+                return (ID.Block)Enum.Parse(typeof(ID.Block), item.ToString());
+            }
+            catch
+            {
+                throw new ArgumentException("item doesn't have a block type", nameof(item));
+            }
+        }
+
+        /// <summary>
+        /// Converts the given <see cref="ID.Item"/> into an <see cref="ID.Block"/>
+        /// </summary>
+        /// <param name="item">The item to convert</param>
+        /// <returns>The block</returns>
+        public static ID.Block ConvertToBlock(this ID.Item? item)
+        {
+            if (item is null)
+            {
+                throw new ArgumentNullException(nameof(item), "item may not be null");
+            }
+            return ConvertToBlock(item.Value);
+        }
+
+        /// <summary>
+        /// Converts the given <see cref="ID.Block"/> into an <see cref="ID.Item"/>
+        /// </summary>
+        /// <param name="block">The block to convert</param>
+        /// <returns>The item</returns>
+        public static ID.Item ConvertToItem(this ID.Block block)
+        {
+            try
+            {
+                return (ID.Item)Enum.Parse(typeof(ID.Item), block.ToString());
+            }
+            catch
+            {
+                throw new ArgumentException("block doesn't have a item type", nameof(block));
+            }
+        }
+
+        /// <summary>
+        /// Converts the given <see cref="ID.Item"/> into an <see cref="ID.Block"/>
+        /// </summary>
+        /// <param name="block">The block to convert</param>
+        /// <returns>The item</returns>
+        public static ID.Item ConvertToItem(this ID.Block? block)
+        {
+            if (block is null)
+            {
+                throw new ArgumentNullException(nameof(block), "block may not be null");
+            }
+            return ConvertToItem(block.Value);
+        }
+
+        /// <summary>
         /// Converts an array of JSON strings into raw data string
         /// </summary>
         /// <param name="JSONArray">The array to convert</param>
