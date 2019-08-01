@@ -164,7 +164,7 @@ namespace SharpCraft
             Block = new BlockCommands(Writer);
             Entity = new EntityCommands(Writer);
             Execute = new ExecuteCommands(Writer);
-            World = new WorldCommands(Writer);
+            World = new WorldCommands(Writer, this);
             Player = new PlayerCommands(Writer);
             Custom = new CustomCommands(this);
         }

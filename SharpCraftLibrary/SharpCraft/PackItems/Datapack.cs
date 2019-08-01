@@ -15,6 +15,16 @@ namespace SharpCraft
         internal string WorldPath { get { return _WorldPath; } }
 
         /// <summary>
+        /// If true when a function runs another function it adds a comment in called function's file with information.
+        /// </summary>
+        public bool WriteFunctionCalls { get; set; }
+
+        /// <summary>
+        /// If true all file names will be numbers and harder to search through.
+        /// </summary>
+        public bool HideFileNames { get; set; }
+
+        /// <summary>
         /// The name of the namespace
         /// </summary>
         public string PackName { get { return _PackName; } }
@@ -26,12 +36,17 @@ namespace SharpCraft
         /// <param name="packName">The datapack's name</param>
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
-        public Datapack(string worldPath, string packName, string description = "Generated with Sharpcraft", int packFormat = 0)
+        /// <param name="writeFunctionCalls">If true when a function runs another function it adds a comment in called function's file with information.</param>
+        /// <param name="hideFileNames">If true all file names will be numbers and harder to search through.</param>
+        public Datapack(string worldPath, string packName, string description = "Generated with Sharpcraft", int packFormat = 0, bool writeFunctionCalls = true, bool hideFileNames = false)
         {
             _WorldPath = worldPath.ToLower();
             _PackName = packName.ToLower();
             this._description = description;
             _packVersion = packFormat;
+
+            WriteFunctionCalls = writeFunctionCalls;
+            HideFileNames = hideFileNames;
 
             if (!File.Exists(_WorldPath + "\\datapacks\\" + _PackName + "\\pack.mcmeta"))
             {

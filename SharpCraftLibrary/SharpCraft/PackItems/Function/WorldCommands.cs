@@ -8,10 +8,12 @@
         public class WorldCommands
         {
             FunctionWriter Writer;
+            readonly Function function;
 
-            internal WorldCommands(FunctionWriter CommandsList)
+            internal WorldCommands(FunctionWriter CommandsList, Function parentFunction)
             {
                 Writer = CommandsList;
+                function = parentFunction;
                 Rule = new ClassRules(CommandsList);
                 Objective = new ClassObjective(CommandsList);
                 Team = new ClassTeam(CommandsList);
@@ -106,7 +108,7 @@
             /// <returns>The ran function</returns>
             public Function Function(Function runFunction, Time delay = null)
             {
-                if (!runFunction.ToString().Contains("#"))
+                if (!runFunction.ToString().Contains("#") && function._namespace.Datapack.WriteFunctionCalls)
                 {
                     runFunction.Writer.CopyState();
                     runFunction.Writer.HasExecute = false;
