@@ -193,7 +193,7 @@ namespace SharpCraft
                 if (Bold != null) { TempList.Add("\"bold\":" + Bold); }
                 if (Italic != null) { TempList.Add("\"italic\":" + Italic); }
                 if (Strikethrough != null) { TempList.Add("\"strikethrough\":" + Strikethrough); }
-                if (Underline != null) { TempList.Add("\"underline\":" + Underline); }
+                if (Underline != null) { TempList.Add("\"underlined\":" + Underline); }
                 if (Reset != null) { TempList.Add("\"Reset\":" + Reset); }
                 if (ClickShiftInsertion != null) { TempList.Add("\"insertion\":\"" + ClickShiftInsertion.Escape() + "\""); }
                 if (ClickURL != null) { TempList.Add("\"clickEvent\":{ \"action\":\"open_url\",\"value\":\"" + ClickURL.Escape() + "\"}"); }

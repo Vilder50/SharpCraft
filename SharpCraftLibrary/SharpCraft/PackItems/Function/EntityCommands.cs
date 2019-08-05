@@ -557,7 +557,7 @@
                 /// <param name="armorSlot">the armor slot to put the item in</param>
                 public void Armor(Selector selector, Item giveItem, ID.ArmorSlot armorSlot)
                 {
-                    Writer.Add("replaceitem entity " + selector + " armor." + armorSlot + " " + giveItem.IDDataString);
+                    Writer.Add("replaceitem entity " + selector + " armor." + armorSlot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     Writer.NewLine();
                 }
 
@@ -571,11 +571,11 @@
                 {
                     if (offHand)
                     {
-                        Writer.Add("replaceitem entity " + selector + " weapon.offhand" + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + " weapon.offhand" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     }
                     else
                     {
-                        Writer.Add("replaceitem entity " + selector + " weapon" + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + " weapon" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     }
                     Writer.NewLine();
                 }
@@ -591,7 +591,7 @@
                     {
                         addItem.Slot = 0;
                     }
-                    Writer.Add("replaceitem entity " + selector + " container." + addItem.Slot + " " + addItem.IDDataString);
+                    Writer.Add("replaceitem entity " + selector + " container." + addItem.Slot + " " + addItem.IDDataString + " " + (addItem.Count ?? 1));
                     Writer.NewLine();
                 }
 
@@ -606,7 +606,7 @@
                     {
                         addItem.Slot = 0;
                     }
-                    Writer.Add("replaceitem entity " + selector + "villager." + addItem.Slot + " " + addItem.IDDataString);
+                    Writer.Add("replaceitem entity " + selector + "villager." + addItem.Slot + " " + addItem.IDDataString + " " + (addItem.Count ?? 1));
                     Writer.NewLine();
                 }
 
@@ -636,7 +636,7 @@
                         {
                             giveItem.Slot = 0;
                         }
-                        Writer.Add("replaceitem entity " + selector + "horse." + giveItem.Slot + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + "horse." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                         Writer.NewLine();
                     }
 
@@ -647,7 +647,7 @@
                     /// <param name="giveItem">the item to add to the horses.</param>
                     public void Saddle(Selector selector, Item giveItem)
                     {
-                        Writer.Add("replaceitem entity " + selector + "horse.saddle " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + "horse.saddle " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                         Writer.NewLine();
                     }
                     /// <summary>
@@ -657,7 +657,7 @@
                     /// <param name="giveItem">the item to add to the horses.</param>
                     public void Armor(Selector selector, Item giveItem)
                     {
-                        Writer.Add("replaceitem entity " + selector + "horse.armor " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + "horse.armor " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                         Writer.NewLine();
                     }
                     /// <summary>
@@ -667,7 +667,7 @@
                     /// <param name="giveItem">the item to add to the horses.</param>
                     public void Chest(Selector selector, Item giveItem)
                     {
-                        Writer.Add("replaceitem entity " + selector + "horse.chest " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + "horse.chest " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                         Writer.NewLine();
                     }
                 }

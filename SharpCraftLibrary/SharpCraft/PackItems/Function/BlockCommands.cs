@@ -72,7 +72,7 @@
                 {
                     AddItem.Slot = 0;
                 }
-                writer.Add("replaceitem block " + BlockCoords + " container." + AddItem.Slot + " " + AddItem.IDDataString);
+                writer.Add("replaceitem block " + BlockCoords + " container." + AddItem.Slot + " " + AddItem.IDDataString + " " + (AddItem.Count ?? 1));
                 writer.NewLine();
             }
 

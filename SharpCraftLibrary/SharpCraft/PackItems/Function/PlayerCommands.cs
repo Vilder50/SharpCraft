@@ -201,7 +201,7 @@
                 public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
                 {
                     Writer.Add("particle " + particle + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                    if (force) { Writer.Add(" force"); }
+                    if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
                     if (player != null) { Writer.Add(" " + player); }
                     Writer.NewLine();
                 }
@@ -220,7 +220,7 @@
                 public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
                 {
                     Writer.Add("particle dust " + (decimal.Divide(color.Red, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Green, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Blue, 255).ToString().Replace(",", ".")) + " " + particleSize.ToString().Replace(",", ".") + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                    if (force) { Writer.Add(" force"); }
+                    if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
                     if (player != null) { Writer.Add(" " + player); }
                     Writer.NewLine();
                 }
@@ -247,7 +247,7 @@
                         Writer.Add("particle block ");
                     }
                     Writer.Add(block + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                    if (force) { Writer.Add(" force"); }
+                    if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
                     if (player != null) { Writer.Add(" " + player); }
                     Writer.NewLine();
                 }
@@ -265,7 +265,7 @@
                 public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
                 {
                     Writer.Add("particle item " + item.IDDataString + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                    if (force) { Writer.Add(" force"); }
+                    if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
                     if (player != null) { Writer.Add(" " + player); }
                     Writer.NewLine();
                 }
@@ -296,7 +296,7 @@
                     if (giveItem.Slot != null)
                     {
                         if (giveItem.Slot > 26) { giveItem.Slot = 26; }
-                        Writer.Add("replaceitem entity " + player + " inventory." + giveItem.Slot + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + player + " inventory." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                         Writer.NewLine();
                     }
                     else
@@ -356,7 +356,7 @@
                     {
                         giveItem.Slot = 0;
                     }
-                    Writer.Add("replaceitem entity " + player + " enderchest." + giveItem.Slot + " " + giveItem.IDDataString);
+                    Writer.Add("replaceitem entity " + player + " enderchest." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     Writer.NewLine();
                 }
                 /// <summary>
@@ -370,7 +370,7 @@
                     {
                         giveItem.Slot = 0;
                     }
-                    Writer.Add("replaceitem entity " + player + " hotbar." + giveItem.Slot + " " + giveItem.IDDataString);
+                    Writer.Add("replaceitem entity " + player + " hotbar." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     Writer.NewLine();
                 }
 
@@ -413,11 +413,11 @@
                 {
                     if (offHand)
                     {
-                        Writer.Add("replaceitem entity " + selector + " weapon.offhand" + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + " weapon.offhand" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     }
                     else
                     {
-                        Writer.Add("replaceitem entity " + selector + " weapon" + " " + giveItem.IDDataString);
+                        Writer.Add("replaceitem entity " + selector + " weapon" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
                     }
                     Writer.NewLine();
                 }
