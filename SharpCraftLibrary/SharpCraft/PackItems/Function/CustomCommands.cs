@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SharpCraft
 {
@@ -67,6 +69,10 @@ namespace SharpCraft
                 int halfSize = ((maximum - minimum) / 2) + minimum;
                 int numbersLeft = maximum - minimum;
 
+                if (first)
+                {
+                    function.Writer.CopyState();
+                }
                 method(function, minimum, halfSize);
                 if (minimum != halfSize)
                 {
@@ -76,7 +82,11 @@ namespace SharpCraft
                 {
                     command(function, halfSize);
                 }
-                
+
+                if (first)
+                {
+                    function.Writer.PasteState();
+                }
                 method(function, halfSize + 1, maximum);
                 if (halfSize + 1 != maximum)
                 {
@@ -88,6 +98,62 @@ namespace SharpCraft
                 }
 
                 return function;
+            }
+
+            /// <summary>
+            /// Summons a new entity and runs the given commands as the entity
+            /// </summary>
+            /// <param name="entity">The entity to summon</param>
+            /// <param name="functionName">The name of the function it should run</param>
+            /// <param name="runCommands">the commands the entity should run</param>
+            /// <param name="executeAt">True if it should run the commands at the entity's location</param>
+            /// <returns>The function the entity runs</returns>
+            public Function SummonExecute(Entity.EntityBasic entity, string functionName, FunctionCreater runCommands, bool executeAt = true)
+            {
+                return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt);
+            }
+
+            /// <summary>
+            /// Summons a new entity and runs the given commands as the entity
+            /// </summary>
+            /// <param name="entity">The entity to summon</param>
+            /// <param name="functionName">The name of the function it should run (this function is created as a sibling to the function running this)</param>
+            /// <param name="runCommands">the commands the entity should run</param>
+            /// <param name="executeAt">True if it should run the commands at the entity's location</param>
+            /// <param name="spawnCoords">The place to spawn the entity at</param>
+            /// <returns>The function the entity runs</returns>
+            public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, FunctionCreater runCommands, bool executeAt = true)
+            {
+                if (string.IsNullOrWhiteSpace(functionName))
+                {
+                    throw new ArgumentException("function name cannot be null or empty", nameof(functionName));
+                }
+                if (runCommands is null)
+                {
+                    throw new ArgumentNullException(nameof(runCommands), "value may not be null");
+                }
+
+                //add tag to find the summoned entity
+                Tag findTag = new Tag("SharpSummon");
+                Entity.EntityBasic createEntity = (Entity.EntityBasic)entity.Clone();
+                List<Tag> tags = createEntity.Tags.ToList() ?? new List<Tag>();
+                tags.Add(findTag);
+                createEntity.Tags = tags.ToArray();
+
+                //summon entity and execute as it
+                function.Writer.CopyState();
+                function.Entity.Add(createEntity, spawnCoords);
+                function.Writer.PasteState();
+                function.Execute.As(new Selector(ID.Selector.e, findTag));
+                if (executeAt)
+                {
+                    function.Execute.At();
+                }
+                Function executeAs = function.World.Function(function.NewSibling(functionName));
+                executeAs.Entity.Tag.Remove(new Selector(), findTag);
+                runCommands(executeAs);
+
+                return executeAs;
             }
         }
     }
