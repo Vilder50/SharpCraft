@@ -7,15 +7,14 @@ namespace SharpCraft
     public partial class Block
     {
         /// <summary>
-        /// An object for bamboo (sapling) blocks
+        /// An object for bamboo blocks
         /// </summary>
-        public class Bamboo : Block, IBlock.IAge, IBlock.IStage
+        public class Bamboo : BambooSapling, IBlock.IAge
         {
             private int? _sAge;
-            private int? _sStage;
 
             /// <summary>
-            /// Creates a new bamboo (sapling) block
+            /// Creates a new bamboo block
             /// </summary>
             /// <param name="type">The type of block</param>
             public Bamboo(ID.Block? type = SharpCraft.ID.Block.bamboo) : base(type) { }
@@ -30,7 +29,6 @@ namespace SharpCraft
             /// The age of the bamboo.
             /// (0-1)
             /// 1 = Bamboo looks thicker.
-            /// (<see cref="ID.Block.bamboo_sapling"/> does not support this)
             /// </summary>
             [BlockData("age")]
             public int? SAge
@@ -45,6 +43,32 @@ namespace SharpCraft
                     _sAge = value;
                 } 
             }
+
+            /// <summary>
+            /// The bamboo's leaves' size
+            /// </summary>
+            [BlockData("leaves")]
+            public ID.StateBambooLeave? SLeaves { get; set; }
+        }
+
+        /// <summary>
+        /// An object for bamboo sapling blocks
+        /// </summary>
+        public class BambooSapling : Block, IBlock.IStage
+        {
+            private int? _sStage;
+
+            /// <summary>
+            /// Creates a new bamboo sapling block
+            /// </summary>
+            /// <param name="type">The type of block</param>
+            public BambooSapling(ID.Block? type = SharpCraft.ID.Block.bamboo_sapling) : base(type) { }
+
+            /// <summary>
+            /// Converts a group of blocks into a block object
+            /// </summary>
+            /// <param name="group"></param>
+            public BambooSapling(Group group) : base(group) { }
 
             /// <summary>
             /// The stage of the bamboo
@@ -64,13 +88,6 @@ namespace SharpCraft
                     _sStage = value;
                 }
             }
-
-            /// <summary>
-            /// The bamboo's leaves' size
-            /// (<see cref="ID.Block.bamboo_sapling"/> does not support this)
-            /// </summary>
-            [BlockData("leaves")]
-            public ID.StateBambooLeave? SLeaves { get; set; }
         }
     }
 }
