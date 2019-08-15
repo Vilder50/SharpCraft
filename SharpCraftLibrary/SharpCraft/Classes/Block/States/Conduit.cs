@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for conduit blocks
         /// </summary>
-        public class Conduit : Block
+        public class Conduit : Block, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a new conduit block

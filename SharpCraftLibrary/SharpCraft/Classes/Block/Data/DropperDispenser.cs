@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for dispensers / dropper blocks
         /// </summary>
-        public class DropperDispenser : BaseContainer<DropperDispenser>
+        public class DropperDispenser : BaseContainer<DropperDispenser>, IBlock.IPowered, IBlock.IFacingFull
         {
             private Item[] _dItems;
 

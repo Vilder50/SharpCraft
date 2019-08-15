@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SharpCraft.IBlock
+{
+    /// <summary>
+    /// Defines a block state for the level of the block
+    /// </summary>
+    public interface ILevel
+    {
+        /// <summary>
+        /// The level of the block.
+        /// </summary>
+        [BlockData("level")]
+        int? SLevel { get; set; }
+    }
+}

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for loom blocks
         /// </summary>
-        public class Loom : Block
+        public class Loom : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new loom block

@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SharpCraft.IBlock
+{
+    /// <summary>
+    /// Defines a block state for if the block is open
+    /// </summary>
+    public interface IOpen
+    {
+        /// <summary>
+        /// If the block is open.
+        /// </summary>
+        [BlockData("open")]
+        bool? SOpen { get; set; }
+    }
+}

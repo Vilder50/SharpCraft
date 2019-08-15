@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for button blocks.
         /// </summary>
-        public class Button : Block
+        public class Button : Block, IBlock.IFacing, IBlock.IPlacedOn, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new button block
@@ -27,19 +27,19 @@ namespace SharpCraft
             /// The way the button is placed
             /// </summary>
             [BlockData("face")]
-            public ID.StatePlaced? PlacedOn { get; set; }
+            public ID.StatePlaced? SPlacedOn { get; set; }
 
             /// <summary>
             /// The way the button is facing
             /// </summary>
             [BlockData("facing")]
-            public ID.Facing? Facing { get; set; }
+            public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the button is clicked
             /// </summary>
             [BlockData("powered")]
-            public bool? Clicked { get; set; }
+            public bool? SPowered { get; set; }
         }
     }
 }

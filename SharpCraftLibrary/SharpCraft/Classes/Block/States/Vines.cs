@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for vine blocks
         /// </summary>
-        public class Vines : Block
+        public class Vines : Block, IBlock.IConnected
         {
             /// <summary>
             /// Creates a new vine block

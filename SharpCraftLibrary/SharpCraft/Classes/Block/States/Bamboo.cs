@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for bamboo (sapling) blocks
         /// </summary>
-        public class Bamboo : Block
+        public class Bamboo : Block, IBlock.IAge, IBlock.IStage
         {
             private int? _sAge;
             private int? _sStage;

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for beetroot, berry bush and nether wart blocks
         /// </summary>
-        public class BeetrootNetherWartBerryBush : Block
+        public class BeetrootNetherWartBerryBush : Block, IBlock.IAge
         {
             private int? _sAge;
 

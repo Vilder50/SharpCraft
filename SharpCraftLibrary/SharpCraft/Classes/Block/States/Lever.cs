@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for lever blocks
         /// </summary>
-        public class Lever : Block
+        public class Lever : Block, IBlock.IPlacedOn, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new lever block

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for blocks being moved by a piston
         /// </summary>
-        public class MovedByPiston : CloneBlock<MovedByPiston>
+        public class MovedByPiston : CloneBlock<MovedByPiston>, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new block being moved by a piston
@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The way the block is being pushed
             /// </summary>
             [BlockData("facing")]
-            public ID.FacingFull? SPushing { get; set; }
+            public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// The type of piston base used

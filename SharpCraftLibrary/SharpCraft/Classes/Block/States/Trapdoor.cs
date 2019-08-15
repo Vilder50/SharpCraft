@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for trapdoor blocks
         /// </summary>
-        public class Trapdoor : Block
+        public class Trapdoor : Block, IBlock.IFacing, IBlock.IOpen, IBlock.IPowered, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a trapdoor block
@@ -33,7 +33,7 @@ namespace SharpCraft
             /// The type of trapdoor
             /// </summary>
             [BlockData("half")]
-            public ID.StateSimplePlaced? SType { get; set; }
+            public ID.StateSimplePlaced? SPlaced { get; set; }
 
             /// <summary>
             /// If the trapdoor is open

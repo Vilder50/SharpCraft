@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for redstone repeater blocks
         /// </summary>
-        public class RedstoneRepeater : Block
+        public class RedstoneRepeater : Block, IBlock.IPower, IBlock.IFacing, IBlock.IPowered
         {
             private int? _sDelay;
 
@@ -30,14 +30,14 @@ namespace SharpCraft
             /// (1-4 ticks)
             /// </summary>
             [BlockData("power")]
-            public int? SDelay
+            public int? SPower
             {
                 get => _sDelay;
                 set
                 {
                     if (value != null && (value < 1 || value > 4))
                     {
-                        throw new ArgumentException(nameof(SDelay) + " has to be equel to or between 1 and 4");
+                        throw new ArgumentException(nameof(SPower) + " has to be equel to or between 1 and 4");
                     }
                     _sDelay = value;
                 }

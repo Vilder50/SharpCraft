@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for daylight detector blocks
         /// </summary>
-        public class DaylightDetector : Block
+        public class DaylightDetector : Block, IBlock.IPower
         {
             private int? _sPower;
 

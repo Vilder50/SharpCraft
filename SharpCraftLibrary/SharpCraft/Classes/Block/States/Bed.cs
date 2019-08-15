@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for anvil blocks
         /// </summary>
-        public class Bed : Block
+        public class Bed : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new bed block
@@ -36,7 +36,7 @@ namespace SharpCraft
             public bool? SOccupied { get; set; }
 
             /// <summary>
-            /// The direction the bed is facing
+            /// The part of the bed this block is
             /// </summary>
             [BlockData("part")]
             public ID.StateBedPart? SPart { get; set; }

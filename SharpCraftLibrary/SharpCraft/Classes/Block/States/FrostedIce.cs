@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for frosted ice blocks
         /// </summary>
-        public class FrostedIce : Block
+        public class FrostedIce : Block, IBlock.IAge
         {
             private int? _sAge;
 

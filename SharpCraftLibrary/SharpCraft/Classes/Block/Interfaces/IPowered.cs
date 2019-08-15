@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace SharpCraft.IBlock
+{
+    /// <summary>
+    /// Defines a block state for if the block is powered
+    /// </summary>
+    public interface IPowered
+    {
+        /// <summary>
+        /// If the block is powered.
+        /// </summary>
+        [BlockData("powered")]
+        bool? SPowered { get; set; }
+    }
+}

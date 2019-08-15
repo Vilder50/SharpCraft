@@ -10,7 +10,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for campfire blocks
         /// </summary>
-        public class Campfire : CloneBlock<Campfire>
+        public class Campfire : CloneBlock<Campfire>, IBlock.IWaterLogged, IBlock.ILit
         {
             private Item[] _dItems;
             private Time[] _dCookingTimes;
@@ -32,7 +32,7 @@ namespace SharpCraft
             /// If the block is waterlogged
             /// </summary>
             [BlockData("waterlogged")]
-            public bool? SWaterlogged { get; set; }
+            public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// If the fireplace's fire should be shown

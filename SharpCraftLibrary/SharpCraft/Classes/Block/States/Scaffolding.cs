@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for scaffolding blocks
         /// </summary>
-        public class Scaffolding : Block
+        public class Scaffolding : Block, IBlock.IDistance, IBlock.IWaterLogged
         {
             private int? _sDistance;
 

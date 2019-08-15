@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for end portal frame blocks
         /// </summary>
-        public class EndPortalFrame : Block
+        public class EndPortalFrame : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new end portal frame block

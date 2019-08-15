@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for krlp blocks
         /// </summary>
-        public class Kelp : Block
+        public class Kelp : Block, IBlock.IAge
         {
             private int? _sAge;
 

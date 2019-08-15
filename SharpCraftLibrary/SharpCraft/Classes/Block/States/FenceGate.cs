@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for fence gate blocks
         /// </summary>
-        public class FenceGate : Block
+        public class FenceGate : Block, IBlock.IPowered, IBlock.IOpen, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new fence gate block
@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The direction the gate's door will swing into when open
             /// </summary>
             [BlockData("facing")]
-            public ID.Facing SFacing { get; set; }
+            public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// Will lower the gate to be in the same height as a wall

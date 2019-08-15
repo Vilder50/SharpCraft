@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for note block blocks
         /// </summary>
-        public class NoteBlock : Block
+        public class NoteBlock : Block, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new note block block

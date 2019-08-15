@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for large flower blocks
         /// </summary>
-        public class LargeFlower : Block
+        public class LargeFlower : Block, IBlock.IPart
         {
             /// <summary>
             /// Creates a new large flower block

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for composter blocks
         /// </summary>
-        public class Composter : Block
+        public class Composter : Block, IBlock.ILevel
         {
             private int? _sLevel;
 

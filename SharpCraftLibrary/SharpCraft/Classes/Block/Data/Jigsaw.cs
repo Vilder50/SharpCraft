@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for jigsaw blocks
         /// </summary>
-        public class Jigsaw : CloneBlock<Jigsaw>
+        public class Jigsaw : CloneBlock<Jigsaw>, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new jigsaw block

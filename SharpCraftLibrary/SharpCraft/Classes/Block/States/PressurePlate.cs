@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for pressure plate blocks
         /// </summary>
-        public class PressurePlate : Block
+        public class PressurePlate : Block, IBlock.IPowered, IBlock.IPower
         {
             private int? _sPower;
 
@@ -29,7 +29,7 @@ namespace SharpCraft
             /// If the plate is pushed down
             /// </summary>
             [BlockData("powered")]
-            public bool? SDown { get; set; }
+            public bool? SPowered { get; set; }
 
             /// <summary>
             /// How much redstone power the plate outputs

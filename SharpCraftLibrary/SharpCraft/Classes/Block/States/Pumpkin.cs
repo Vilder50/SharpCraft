@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for pumpkin blocks
         /// </summary>
-        public class Pumpkin : Block
+        public class Pumpkin : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new pumpkin block

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for slab blocks
         /// </summary>
-        public class Slab : Block
+        public class Slab : Block, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a new slab block

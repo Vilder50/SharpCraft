@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for coral plants (not blocks)
         /// </summary>
-        public class Coral : Block
+        public class Coral : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a new coral plant (not block)

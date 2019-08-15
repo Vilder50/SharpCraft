@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for terracotta blocks
         /// </summary>
-        public class Terracotta : Anvil
+        public class Terracotta : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new terracotta block
@@ -22,6 +22,12 @@ namespace SharpCraft
             /// </summary>
             /// <param name="group"></param>
             public Terracotta(Group group) : base(group) { }
+
+            /// <summary>
+            /// The direction the block is facing
+            /// </summary>
+            [BlockData("facing")]
+            public ID.Facing? SFacing { get; set; }
         }
     }
 }

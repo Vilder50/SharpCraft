@@ -12,7 +12,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for chorus flower blocks
         /// </summary>
-        public class ChorusFlower : Block
+        public class ChorusFlower : Block, IBlock.IAge
         {
             private int? _sAge;
 

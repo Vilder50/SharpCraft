@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for door blocks
         /// </summary>
-        public class Door : Block
+        public class Door : Block, IBlock.IFacing, IBlock.IPowered, IBlock.IPart, IBlock.IOpen
         {
             /// <summary>
             /// Creates a new door block

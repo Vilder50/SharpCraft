@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for cocoa bean blocks
         /// </summary>
-        public class CocoaBean : Block
+        public class CocoaBean : Block, IBlock.IAge, IBlock.IFacing
         {
             private int? _sAge;
 
@@ -47,7 +47,7 @@ namespace SharpCraft
             /// The direction of the log the bean is placed on.
             /// </summary>
             [BlockData("facing")]
-            public ID.Facing? Facing { get; set; }
+            public ID.Facing? SFacing { get; set; }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for fire blocks
         /// </summary>
-        public class Fire : Block
+        public class Fire : Block, IBlock.IAge
         {
             private int? _sAge;
 

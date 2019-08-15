@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for mushroom blocks
         /// </summary>
-        public class MushroomBlock : Block
+        public class MushroomBlock : Block, IBlock.IConnected
         {
             /// <summary>
             /// Creates a new mushroom block

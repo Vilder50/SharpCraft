@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for chorus plant blocks
         /// </summary>
-        public class ChorusPlant : Block
+        public class ChorusPlant : Block, IBlock.IConnected
         {
             /// <summary>
             /// Creates a new chorus plant block

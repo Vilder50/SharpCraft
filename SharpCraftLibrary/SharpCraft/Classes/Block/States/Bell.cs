@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for bell blocks
         /// </summary>
-        public class Bell : Block
+        public class Bell : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a bell block

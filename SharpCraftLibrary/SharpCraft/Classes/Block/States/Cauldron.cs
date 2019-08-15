@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for cauldron blocks
         /// </summary>
-        public class Cauldron : Block
+        public class Cauldron : Block, IBlock.ILevel
         {
             private int? _sLevel;
 

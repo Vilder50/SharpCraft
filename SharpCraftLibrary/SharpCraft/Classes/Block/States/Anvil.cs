@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for anvil blocks
         /// </summary>
-        public class Anvil : Block
+        public class Anvil : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new anvil block

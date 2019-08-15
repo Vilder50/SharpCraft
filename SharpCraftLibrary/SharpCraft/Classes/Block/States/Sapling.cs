@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for sapling blocks
         /// </summary>
-        public class Sapling : Block
+        public class Sapling : Block, IBlock.IStage
         {
             private int? _sStage;
 

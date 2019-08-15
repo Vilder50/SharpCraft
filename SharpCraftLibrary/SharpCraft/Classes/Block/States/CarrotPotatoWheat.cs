@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for carrot, potato or wheat blocks
         /// </summary>
-        public class CarrotPotatoWheat : Block
+        public class CarrotPotatoWheat : Block, IBlock.IAge
         {
             private int? _sAge;
 

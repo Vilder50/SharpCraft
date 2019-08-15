@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for piston blocks
         /// </summary>
-        public class Piston : Block
+        public class Piston : Block, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new piston block

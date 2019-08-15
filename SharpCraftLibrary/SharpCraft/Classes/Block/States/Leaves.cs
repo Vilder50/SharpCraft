@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for leave blocks
         /// </summary>
-        public class Leaves : Block
+        public class Leaves : Block, IBlock.IDistance
         {
             private int? _sDistance;
 

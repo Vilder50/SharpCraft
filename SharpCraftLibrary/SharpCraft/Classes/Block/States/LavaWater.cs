@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for lava and water blocks
         /// </summary>
-        public class LavaWater : Block
+        public class LavaWater : Block, IBlock.ILevel
         {
             private int? _sLevel;
 

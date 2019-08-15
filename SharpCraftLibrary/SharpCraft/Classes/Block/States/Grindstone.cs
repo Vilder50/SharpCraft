@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for grindstone blocks
         /// </summary>
-        public class Grindstone : Block
+        public class Grindstone : Block, IBlock.IPlacedOn, IBlock.IFacing
         {
             /// <summary>
             /// Creates a grindstone block
@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The way the grindstone is placed
             /// </summary>
             [BlockData("face")]
-            public ID.StatePlaced? SPlaced { get; set; }
+            public ID.StatePlaced? SPlacedOn { get; set; }
 
             /// <summary>
             /// The way the grindstone faces

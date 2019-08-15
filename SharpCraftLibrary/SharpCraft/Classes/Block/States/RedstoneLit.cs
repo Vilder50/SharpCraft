@@ -7,12 +7,12 @@ namespace SharpCraft
     public partial class Block
     {
         /// <summary>
-        /// An object for redstone lamp, torches and ore blocks
+        /// An object for redstone lamp and ore blocks
         /// </summary>
-        public class RedstoneLit : WallTorch
+        public class RedstoneLit : Block
         {
             /// <summary>
-            /// Creates a new redstone lamp, torches or ore block
+            /// Creates a new redstone lamp  or ore block
             /// </summary>
             /// <param name="type">The type of block</param>
             public RedstoneLit(ID.Block? type) : base(type) { }
@@ -22,6 +22,7 @@ namespace SharpCraft
             /// </summary>
             /// <param name="group"></param>
             public RedstoneLit(Group group) : base(group) { }
+
 
             /// <summary>
             /// If the block is lit up

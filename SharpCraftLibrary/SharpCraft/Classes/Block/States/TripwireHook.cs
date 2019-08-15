@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for tripwire hook blocks
         /// </summary>
-        public class TripwireHook : Block
+        public class TripwireHook : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
             /// Creates a tripwire hook block
@@ -39,7 +39,7 @@ namespace SharpCraft
             /// If the tripwire hook's tripwire is being stepped on
             /// </summary>
             [BlockData("powered")]
-            public bool? SPowerd { get; set; }
+            public bool? SPowered { get; set; }
         }
     }
 }

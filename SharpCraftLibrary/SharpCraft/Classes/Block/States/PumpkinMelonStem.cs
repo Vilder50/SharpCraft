@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for stem blocks
         /// </summary>
-        public class PumpkinMelonStem : Block
+        public class PumpkinMelonStem : Block, IBlock.IFacing, IBlock.IAge
         {
             private int? _sAge;
 
@@ -47,7 +47,7 @@ namespace SharpCraft
             /// The direction of the block the stem is growing into
             /// </summary>
             [BlockData("facing")]
-            public ID.Facing? SGrowInto { get; set; }
+            public ID.Facing? SFacing { get; set; }
         }
     }
 }

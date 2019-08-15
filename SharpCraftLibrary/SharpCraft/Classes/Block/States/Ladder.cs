@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for ladder blocks
         /// </summary>
-        public class Ladder : Block
+        public class Ladder : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a new ladder block
@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The direction of the block the ladder is on
             /// </summary>
             [BlockData("facing")]
-            public ID.Facing? SSupportBlockDirection { get; set; }
+            public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the ladder is water logged

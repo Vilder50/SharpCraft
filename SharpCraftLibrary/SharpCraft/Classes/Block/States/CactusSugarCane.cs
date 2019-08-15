@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for cactus and sugar cane blocks
         /// </summary>
-        public class CactusSugarCane : Block
+        public class CactusSugarCane : Block, IBlock.IAge
         {
             private int? _sAge;
 

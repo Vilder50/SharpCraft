@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for shulker box and barral blocks
         /// </summary>
-        public class Barrel : BaseContainer<Barrel>
+        public class Barrel : BaseContainer<Barrel>, IBlock.IOpen, IBlock.IFacingFull
         {
             private Item[] _dItems;
 

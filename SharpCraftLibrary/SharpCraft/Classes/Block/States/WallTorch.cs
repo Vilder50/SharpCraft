@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for wall torch blocks
         /// </summary>
-        public class WallTorch : Block
+        public class WallTorch : Block, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new wall torch block

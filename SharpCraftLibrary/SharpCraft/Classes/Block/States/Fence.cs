@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for fence blocks
         /// </summary>
-        public class Fence : Block
+        public class Fence : Block, IBlock.IWaterLogged, IBlock.IConnectedCardinal
         {
             /// <summary>
             /// Creates a new fence block

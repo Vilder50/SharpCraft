@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for end rod blocks
         /// </summary>
-        public class EndRod : Block
+        public class EndRod : Block, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new end rod block
@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The direction of the block its attached to.
             /// </summary>
             [BlockData("facing")]
-            public ID.FacingFull? SAttached { get; set; }
+            public ID.FacingFull? SFacing { get; set; }
         }
     }
 }

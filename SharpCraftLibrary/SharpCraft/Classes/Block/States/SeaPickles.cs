@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for sea picle blocks
         /// </summary>
-        public class SeaPicles : Block
+        public class SeaPicles : Block, IBlock.IWaterLogged
         {
             private int? _sPicles;
 

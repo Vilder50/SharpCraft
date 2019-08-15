@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for comparator blocks
         /// </summary>
-        public class Comparator : CloneBlock<Comparator>
+        public class Comparator : CloneBlock<Comparator>, IBlock.IPowered, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new comparator block

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for stair blocks
         /// </summary>
-        public class Stair : Block
+        public class Stair : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a stair block
@@ -38,7 +38,7 @@ namespace SharpCraft
             /// <summary>
             /// The block the stair is placed on
             /// </summary>
-            [BlockData("shape")]
+            [BlockData("half")]
             public ID.StateSimplePlaced? SPlaced { get; set; }
 
             /// <summary>

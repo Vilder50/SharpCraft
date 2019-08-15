@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for skull / head blocks
         /// </summary>
-        public class Skull : CloneBlock<Skull>
+        public class Skull : CloneBlock<Skull>, IBlock.IRotation, IBlock.IFacing
         {
             private int? _sRotation;
             private string _dDataSkin;

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for observer blocks
         /// </summary>
-        public class Observer : Block
+        public class Observer : Block, IBlock.IFacingFull, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new observer block

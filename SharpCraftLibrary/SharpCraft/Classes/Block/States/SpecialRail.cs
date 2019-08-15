@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for special rail blocks
         /// </summary>
-        public class SpecialRail : Block
+        public class SpecialRail : Block, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new special rail block

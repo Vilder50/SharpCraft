@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for redstone wire blocks
         /// </summary>
-        public class RedstoneDust : Block
+        public class RedstoneDust : Block, IBlock.IPower
         {
             private int? _sPower;
 
