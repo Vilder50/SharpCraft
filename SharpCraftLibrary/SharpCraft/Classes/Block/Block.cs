@@ -26,7 +26,12 @@ namespace SharpCraft
             Group = group;
         }
 
-        internal IEnumerable<PropertyInfo> GetProperties(BlockDataAttribute.DataType propertyType)
+        /// <summary>
+        /// Gets a list of all of the properties of the given type from this block
+        /// </summary>
+        /// <param name="propertyType">The property type to find</param>
+        /// <returns>A list of all the properties of that type</returns>
+        protected IEnumerable<PropertyInfo> GetProperties(BlockDataAttribute.DataType propertyType)
         {
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
@@ -50,23 +55,44 @@ namespace SharpCraft
         public Group Group { get; set; }
 
         /// <summary>
+        /// Returns a list of all the block state properties
+        /// </summary>
+        /// <returns>A list of properties containing data about the block's state</returns>
+        public IEnumerable<PropertyInfo> GetStates()
+        {
+            return GetProperties(BlockDataAttribute.DataType.State);
+        }
+
+        /// <summary>
         /// Checks if the block has any block states defined
         /// </summary>
         public bool HasState
         {
             get
             {
-                IEnumerable<PropertyInfo> properties = GetProperties(BlockDataAttribute.DataType.State);
-                foreach(PropertyInfo property in properties)
-                {
-                    if (property.GetValue(this) != null)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
+                return GetStates().Any(p => !(p.GetValue(this) is null));
             }
+        }
+
+        /// <summary>
+        /// Clears the block's state
+        /// </summary>
+        public void ClearStates()
+        {
+            IEnumerable<PropertyInfo> properties = GetStates();
+            foreach (PropertyInfo property in properties)
+            {
+                property.SetValue(this, null);
+            }
+        }
+
+        /// <summary>
+        /// Returns a list of all the block data properties
+        /// </summary>
+        /// <returns>A list of properties containing data about the block's data</returns>
+        public IEnumerable<PropertyInfo> GetData()
+        {
+            return GetProperties(BlockDataAttribute.DataType.Data);
         }
 
         /// <summary>
@@ -76,27 +102,7 @@ namespace SharpCraft
         {
             get
             {
-                IEnumerable<PropertyInfo> properties = GetProperties(BlockDataAttribute.DataType.Data);
-                foreach (PropertyInfo property in properties)
-                {
-                    if (property.GetValue(this) != null)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-        }
-        /// <summary>
-        /// Clears the block's state
-        /// </summary>
-        public void ClearStates()
-        {
-            IEnumerable<PropertyInfo> properties = GetProperties(BlockDataAttribute.DataType.State);
-            foreach (PropertyInfo property in properties)
-            {
-                property.SetValue(this, null);
+                return GetData().Any(p => !(p.GetValue(this) is null));
             }
         }
 
@@ -105,7 +111,7 @@ namespace SharpCraft
         /// </summary>
         public void ClearData()
         {
-            IEnumerable<PropertyInfo> properties = GetProperties(BlockDataAttribute.DataType.Data);
+            IEnumerable<PropertyInfo> properties = GetData();
             foreach (PropertyInfo property in properties)
             {
                 property.SetValue(this, null);
