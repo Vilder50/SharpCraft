@@ -29,6 +29,16 @@ namespace SharpCraft
             public Campfire(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.campfire;
+            }
+
+            /// <summary>
             /// If the block is waterlogged
             /// </summary>
             [BlockData("waterlogged")]
@@ -134,6 +144,7 @@ namespace SharpCraft
                         TempString += "{" + DItems[a].DataString + "}";
                     }
                     TempString += "]";
+                    TempList.Add(TempString);
                 }
 
                 return string.Join(",", TempList);

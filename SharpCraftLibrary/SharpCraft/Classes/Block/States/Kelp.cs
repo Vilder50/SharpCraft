@@ -14,7 +14,7 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new krlp block
+            /// Creates a new kelp block
             /// </summary>
             /// <param name="type">The type of block</param>
             public Kelp(ID.Block? type = SharpCraft.ID.Block.kelp) : base(type) { }
@@ -24,6 +24,16 @@ namespace SharpCraft
             /// </summary>
             /// <param name="group"></param>
             public Kelp(Group group) : base(group) { }
+
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.kelp;
+            }
 
             /// <summary>
             /// The age of the kelp.

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for stem blocks
         /// </summary>
-        public class PumpkinMelonStem : Block, IBlock.IFacing, IBlock.IAge
+        public class PumpkinMelonStem : Block, IBlock.IAge
         {
             private int? _sAge;
 
@@ -24,6 +24,16 @@ namespace SharpCraft
             /// </summary>
             /// <param name="group"></param>
             public PumpkinMelonStem(Group group) : base(group) { }
+
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.melon_stem || block == SharpCraft.ID.Block.pumpkin_stem;
+            }
 
             /// <summary>
             /// The age of the stem.
@@ -41,6 +51,34 @@ namespace SharpCraft
                     }
                     _sAge = value;
                 }
+            }
+        }
+
+        /// <summary>
+        /// An object for attached stem blocks
+        /// </summary>
+        public class AttachedPumpkinMelonStem : PumpkinMelonStem, IBlock.IFacing
+        {
+            /// <summary>
+            /// Creates a new stem block
+            /// </summary>
+            /// <param name="type">The type of block</param>
+            public AttachedPumpkinMelonStem(ID.Block? type) : base(type) { }
+
+            /// <summary>
+            /// Converts a group of blocks into a block object
+            /// </summary>
+            /// <param name="group"></param>
+            public AttachedPumpkinMelonStem(Group group) : base(group) { }
+
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.attached_melon_stem || block == SharpCraft.ID.Block.attached_pumpkin_stem;
             }
 
             /// <summary>

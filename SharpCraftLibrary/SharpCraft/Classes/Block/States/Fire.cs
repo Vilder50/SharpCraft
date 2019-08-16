@@ -26,6 +26,16 @@ namespace SharpCraft
             public Fire(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.fire;
+            }
+
+            /// <summary>
             /// The age of the fire.
             /// (0-15. Has a 1/3 chance of going up each tick)
             /// </summary>

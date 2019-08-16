@@ -24,6 +24,16 @@ namespace SharpCraft
             public MushroomBlock(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.mushroom_stem || block == SharpCraft.ID.Block.brown_mushroom_block || block == SharpCraft.ID.Block.red_mushroom_block;
+            }
+
+            /// <summary>
             /// If the texture should be shown downwards.
             /// False will show pores texture
             /// </summary>

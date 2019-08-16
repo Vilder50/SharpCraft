@@ -26,6 +26,16 @@ namespace SharpCraft
             public Cake(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.cake;
+            }
+
+            /// <summary>
             /// How much cake there has been eaten
             /// (0-6. 0 = Full cake. 6 = One bite left)
             /// </summary>

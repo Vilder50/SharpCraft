@@ -24,6 +24,16 @@ namespace SharpCraft
             public CommandBlock(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.command_block || block == SharpCraft.ID.Block.chain_command_block || block == SharpCraft.ID.Block.repeating_command_block;
+            }
+
+            /// <summary>
             /// The direction the command block is facing
             /// </summary>
             [BlockData("facing")]

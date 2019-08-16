@@ -24,6 +24,16 @@ namespace SharpCraft
             public Door(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block.ToString().Contains("_door");
+            }
+
+            /// <summary>
             /// The direction the door is placed in.
             /// (The direction the door will fill less in.)
             /// </summary>

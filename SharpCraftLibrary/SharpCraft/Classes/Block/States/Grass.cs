@@ -24,6 +24,16 @@ namespace SharpCraft
             public Grass(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.grass;
+            }
+
+            /// <summary>
             /// If there is snow ontop of the block
             /// </summary>
             [BlockData("snowy")]

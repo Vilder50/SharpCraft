@@ -24,6 +24,16 @@ namespace SharpCraft
             /// <param name="group"></param>
             public ShulkerBox(Group group) : base(group) { }
 
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                string blockName = block.ToString();
+                return (blockName.Contains("shulker"));
+            }
 
             /// <summary>
             /// The direction the shulker box is facing (the way it opens out into )

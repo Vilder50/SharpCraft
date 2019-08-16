@@ -26,6 +26,16 @@ namespace SharpCraft
             public LavaWater(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.water || block == SharpCraft.ID.Block.lava;
+            }
+
+            /// <summary>
             /// The type of lava / water.
             /// (0-15. 0 == source block. 1-7 = flowing. 8-15 = falling (the number is 8+the number from the source its falling from))
             /// </summary>

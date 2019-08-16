@@ -14,6 +14,10 @@ namespace SharpCraft
         /// <param name="type">The block's ID/Type</param>
         public Block(ID.Block? type)
         {
+            if (!(type is null) && !FitsBlock(type.Value))
+            {
+                throw new ArgumentException("The given block type doesn't fit this block object", nameof(type));
+            }
             ID = type;
         }
 
@@ -187,8 +191,7 @@ namespace SharpCraft
                 throw new ArgumentNullException(nameof(ID) + " or " + nameof(Group) + " has to have a value to convert the block to string");
             }
 
-            string outputString = "";
-
+            string outputString;
             if (ID != null)
             {
                 outputString = ID.ToString();
@@ -219,12 +222,59 @@ namespace SharpCraft
             }
         }
 
+#pragma warning disable IDE0060
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public static bool FitsBlock(ID.Block block)
+        {
+            return true;
+        }
+#pragma warning restore IDE0060
+
         /// <summary>
         /// Converts a block id into a block
         /// </summary>
         /// <param name="type">The block id to convert</param>
         public static implicit operator Block(ID.Block type)
         {
+            return new Block(type);
+        }
+
+        private static List<(MethodInfo method, Type block)> fitBlockMethods;
+
+        /// <summary>
+        /// Converts a block id into the correct block for the given id
+        /// </summary>
+        /// <param name="type">the id to convert into a block</param>
+        /// <returns>The block</returns>
+        public static Block GetFullBlock(ID.Block type)
+        {
+            if (fitBlockMethods is null)
+            {
+                fitBlockMethods = new List<(MethodInfo method, Type block)>();
+                Type blockType = typeof(Block);
+                Type[] types = Assembly.GetAssembly(typeof(Block)).GetTypes().Where(t => t.IsSubclassOf(blockType) && !t.IsAbstract).ToArray();
+                foreach (Type classType in types)
+                {
+                    MethodInfo fitBlockMethod = classType.GetMethod("FitsBlock", BindingFlags.Public | BindingFlags.Static);
+                    if (!(fitBlockMethod is null))
+                    {
+                        fitBlockMethods.Add((fitBlockMethod, classType));
+                    }
+                }
+            }
+
+            foreach((MethodInfo method, Type block) method in fitBlockMethods)
+            {
+                if ((bool)method.method.Invoke(null, new object[] { type }))
+                {
+                    return (Block)Activator.CreateInstance(method.block, type);
+                }
+            }
+
             return new Block(type);
         }
     }

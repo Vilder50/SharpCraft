@@ -26,6 +26,16 @@ namespace SharpCraft
             /// <param name="group"></param>
             public Furnace(Group group) : base(group) { }
 
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.furnace || block == SharpCraft.ID.Block.blast_furnace || block == SharpCraft.ID.Block.smoker;
+            }
+
 
             /// <summary>
             /// The item's inside the brewing stand.

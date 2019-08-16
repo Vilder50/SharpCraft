@@ -27,6 +27,16 @@ namespace SharpCraft
             public BrewingStand(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.brewing_stand;
+            }
+
+            /// <summary>
             /// If the brewing stand block should display a bottle in slot 0
             /// </summary>
             [BlockData("has_bottle_0")]

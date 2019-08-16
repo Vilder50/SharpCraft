@@ -9,47 +9,21 @@ namespace SharpCraft
         /// <summary>
         /// An object for skull / head blocks
         /// </summary>
-        public class Skull : CloneBlock<Skull>, IBlock.IRotation, IBlock.IFacing
+        public abstract class BaseSkull<T> : CloneBlock<T> where T : Block
         {
-            private int? _sRotation;
             private string _dDataSkin;
 
             /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Skull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
+            public BaseSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
 
             /// <summary>
             /// Converts a group of blocks into a block object
             /// </summary>
             /// <param name="group"></param>
-            public Skull(Group group) : base(group) { }
-
-            /// <summary>
-            /// The way the skull / head is rotated.
-            /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
-            /// (Used for standing skulls / heads)
-            /// </summary>
-            [BlockData("rotation")]
-            public int? SRotation
-            {
-                get => _sRotation;
-                set
-                {
-                    if (value != null && (value < 0 || value > 15))
-                    {
-                        throw new ArgumentException(nameof(SRotation) + " has to be equel to or between 0 and 15");
-                    }
-                    _sRotation = value;
-                }
-            }
-            /// <summary>
-            /// The way the skull / head is facing.
-            /// (Used for skulls / heads on a wall)
-            /// </summary>
-            [BlockData("facing")]
-            public ID.Facing? SFacing { get; set; }
+            public BaseSkull(Group group) : base(group) { }
 
             /// <summary>
             /// The name of the player whose skin to display
@@ -99,6 +73,91 @@ namespace SharpCraft
 
                 return string.Join(",", TempList);
             }
+        }
+
+        /// <summary>
+        /// An object for skull / head blocks
+        /// </summary>
+        public class GroundSkull : BaseSkull<GroundSkull>, IBlock.IRotation
+        {
+            private int? _sRotation;
+
+            /// <summary>
+            /// Creates a new skull / head block
+            /// </summary>
+            /// <param name="type">The type of block</param>
+            public GroundSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
+
+            /// <summary>
+            /// Converts a group of blocks into a block object
+            /// </summary>
+            /// <param name="group"></param>
+            public GroundSkull(Group group) : base(group) { }
+
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                string blockName = block.ToString();
+                return (blockName.Contains("skull") && !blockName.Contains("wall"));
+            }
+
+            /// <summary>
+            /// The way the skull / head is rotated.
+            /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
+            /// (Used for standing skulls / heads)
+            /// </summary>
+            [BlockData("rotation")]
+            public int? SRotation
+            {
+                get => _sRotation;
+                set
+                {
+                    if (value != null && (value < 0 || value > 15))
+                    {
+                        throw new ArgumentException(nameof(SRotation) + " has to be equel to or between 0 and 15");
+                    }
+                    _sRotation = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// An object for skull / head blocks
+        /// </summary>
+        public class WallSkull : BaseSkull<WallSkull>, IBlock.IFacing
+        {
+            /// <summary>
+            /// Creates a new skull / head block
+            /// </summary>
+            /// <param name="type">The type of block</param>
+            public WallSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
+
+            /// <summary>
+            /// Converts a group of blocks into a block object
+            /// </summary>
+            /// <param name="group"></param>
+            public WallSkull(Group group) : base(group) { }
+
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                string blockName = block.ToString();
+                return (blockName.Contains("skull") && blockName.Contains("wall"));
+            }
+
+            /// <summary>
+            /// The way the skull / head is facing.
+            /// </summary>
+            [BlockData("facing")]
+            public ID.Facing? SFacing { get; set; }
         }
     }
 }

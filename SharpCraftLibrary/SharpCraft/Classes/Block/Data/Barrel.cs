@@ -24,6 +24,15 @@ namespace SharpCraft
             /// <param name="group"></param>
             public Barrel(Group group) : base(group) { }
 
+            /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.barrel;
+            }
 
             /// <summary>
             /// The direction the barrel is facing (the way it opens out into )

@@ -26,6 +26,16 @@ namespace SharpCraft
             public BeetrootNetherWartBerryBush(Group group) : base(group) { }
 
             /// <summary>
+            /// Tests if the given block type fits this type of block object
+            /// </summary>
+            /// <param name="block">The block to test</param>
+            /// <returns>true if the block fits</returns>
+            public new static bool FitsBlock(ID.Block block)
+            {
+                return block == SharpCraft.ID.Block.beetroots || block == SharpCraft.ID.Block.nether_wart || block == SharpCraft.ID.Block.sweet_berry_bush;
+            }
+
+            /// <summary>
             /// How far the beetroot / berry bush / nether wart has grown
             /// (0-3. 3 == fully grown)
             /// </summary>
