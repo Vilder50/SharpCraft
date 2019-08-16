@@ -56,5 +56,116 @@ namespace SharpCraft.Tests
                 Assert.IsTrue(used, "0 blocks fits the block: " + block);
             }
         }
+
+        [TestMethod]
+        public void TestHasStates()
+        {
+            Block.Anvil anvil = new Block.Anvil(ID.Block.anvil);
+            Assert.IsFalse(anvil.HasState);
+            anvil.SFacing = ID.Facing.east;
+            Assert.IsTrue(anvil.HasState);
+            Assert.IsFalse(((Block)ID.Block.stone).HasState);
+        }
+
+        [TestMethod]
+        public void TestClearStates()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            {
+                SFacing = ID.Facing.east,
+                DItems = new Item[] { new Item(ID.Item.stone, 10) }
+            };
+            furnace.ClearStates();
+            Assert.IsNull(furnace.SFacing);
+            Assert.AreEqual(ID.Item.stone, furnace.DItems[0].ID);
+        }
+
+        [TestMethod]
+        public void TestGetStates()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            {
+                SFacing = ID.Facing.east,
+                DItems = new Item[] { new Item(ID.Item.stone, 10) }
+            };
+
+            List<PropertyInfo> stateProperties = furnace.GetStates().ToList();
+            Assert.AreEqual(2, stateProperties.Count);
+
+            PropertyInfo facingState = stateProperties.Single(s => s.Name == "SFacing");
+            facingState.SetValue(furnace, ID.Facing.north);
+
+            Assert.AreEqual(ID.Facing.north, furnace.SFacing);
+        }
+
+        [TestMethod]
+        public void TestHasData()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace);
+            Assert.IsFalse(furnace.HasData);
+            furnace.DBurnTime = new Time(100, ID.TimeType.seconds);
+            Assert.IsTrue(furnace.HasData);
+            Assert.IsFalse(((Block)ID.Block.stone).HasData);
+        }
+
+        [TestMethod]
+        public void TestClearData()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            {
+                SFacing = ID.Facing.east,
+                DItems = new Item[] { new Item(ID.Item.stone, 10) }
+            };
+            furnace.ClearData();
+            Assert.IsNull(furnace.DItems);
+            Assert.AreEqual(ID.Facing.east, furnace.SFacing);
+        }
+
+        [TestMethod]
+        public void TestGetData()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            {
+                SFacing = ID.Facing.east,
+                DItems = new Item[] { new Item(ID.Item.stone, 10) }
+                
+            };
+
+            List<PropertyInfo> dataProperties = furnace.GetData().ToList();
+            Assert.AreEqual(8, dataProperties.Count);
+
+            PropertyInfo itemsData = dataProperties.Single(s => s.Name == "DItems");
+            itemsData.SetValue(furnace, new Item[] { new Item(ID.Item.dirt, 10) });
+
+            Assert.AreEqual(ID.Item.dirt, furnace.DItems[0].ID);
+        }
+
+        [TestMethod]
+        public void TestCloneBlock()
+        {
+            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            {
+                SFacing = ID.Facing.east,
+                DItems = new Item[] { new Item(ID.Item.stone, 10) }
+            };
+            Block.Furnace furnaceCopy = (Block.Furnace)furnace.Clone();
+            Assert.AreNotEqual(furnace, furnaceCopy);
+            Assert.AreEqual(furnace.SFacing, furnaceCopy.SFacing);
+            Assert.AreEqual(furnace.DItems, furnaceCopy.DItems);
+            Assert.IsNull(furnaceCopy.SLit);
+
+            furnaceCopy.SLit = true;
+            furnaceCopy.SFacing = ID.Facing.north;
+            furnaceCopy.DItems = new Item[] { new Item(ID.Item.dirt, 11) };
+            Assert.AreNotEqual(furnace.SFacing, furnaceCopy.SFacing);
+            Assert.AreNotEqual(furnace.DItems, furnaceCopy.DItems);
+            Assert.IsNull(furnace.SLit);
+        }
+
+        [TestMethod]
+        public void TestBlockFromID()
+        {
+            Assert.AreEqual(((Block)ID.Block.stone).ID, ID.Block.stone);
+        }
     }
 }

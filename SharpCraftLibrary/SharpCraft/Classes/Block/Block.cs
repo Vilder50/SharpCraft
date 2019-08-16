@@ -8,16 +8,14 @@ namespace SharpCraft
 {
     public partial class Block
     {
+        private ID.Block? id;
+
         /// <summary>
         /// Creates a new block which is the given type of block
         /// </summary>
         /// <param name="type">The block's ID/Type</param>
         public Block(ID.Block? type)
         {
-            if (!(type is null) && !FitsBlock(type.Value))
-            {
-                throw new ArgumentException("The given block type doesn't fit this block object", nameof(type));
-            }
             ID = type;
         }
 
@@ -51,7 +49,18 @@ namespace SharpCraft
         /// <summary>
         /// The block's ID
         /// </summary>
-        public ID.Block? ID { get; set; }
+        public ID.Block? ID
+        {
+            get => id;
+            set
+            {
+                if (!(value is null) && !FitsBlock(value.Value))
+                {
+                    throw new ArgumentException("The given block type doesn't fit this block object", nameof(ID));
+                }
+                id = value;
+            }
+        }
 
         /// <summary>
         /// The name of the block group
