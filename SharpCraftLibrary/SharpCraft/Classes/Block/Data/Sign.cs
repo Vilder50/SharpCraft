@@ -48,6 +48,7 @@ namespace SharpCraft
             /// (Used for standing signs)
             /// </summary>
             [BlockData("rotation")]
+            [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
                 get => _sRotation;

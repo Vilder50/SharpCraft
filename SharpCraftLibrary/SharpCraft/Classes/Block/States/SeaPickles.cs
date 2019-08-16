@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (1-4)
             /// </summary>
             [BlockData("pickles")]
+            [BlockIntStateRange(1, 4)]
             public int? SPicles
             {
                 get => _sPicles;

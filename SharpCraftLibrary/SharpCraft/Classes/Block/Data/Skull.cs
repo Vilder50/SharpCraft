@@ -111,6 +111,7 @@ namespace SharpCraft
             /// (Used for standing skulls / heads)
             /// </summary>
             [BlockData("rotation")]
+            [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
                 get => _sRotation;

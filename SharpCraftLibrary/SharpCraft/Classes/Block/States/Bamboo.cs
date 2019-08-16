@@ -41,6 +41,7 @@ namespace SharpCraft
             /// 1 = Bamboo looks thicker.
             /// </summary>
             [BlockData("age")]
+            [BlockIntStateRange(0, 1)]
             public int? SAge
             {
                 get => _sAge;

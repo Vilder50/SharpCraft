@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-7. 7 == will start to fall)
             /// </summary>
             [BlockData("distance")]
+            [BlockIntStateRange(0, 7)]
             public int? SDistance
             {
                 get => _sDistance;

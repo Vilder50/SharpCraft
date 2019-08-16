@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (1-4 ticks)
             /// </summary>
             [BlockData("power")]
+            [BlockIntStateRange(1, 4)]
             public int? SPower
             {
                 get => _sDelay;

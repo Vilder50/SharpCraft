@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (1-8)
             /// </summary>
             [BlockData("layers")]
+            [BlockIntStateRange(1, 8)]
             public int? SLayers
             {
                 get => _sLayers;

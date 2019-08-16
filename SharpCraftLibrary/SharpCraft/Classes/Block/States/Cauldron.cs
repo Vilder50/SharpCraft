@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-3. 0 = no water. 3 = full)
             /// </summary>
             [BlockData("level")]
+            [BlockIntStateRange(0, 3)]
             public int? SLevel
             {
                 get => _sLevel;

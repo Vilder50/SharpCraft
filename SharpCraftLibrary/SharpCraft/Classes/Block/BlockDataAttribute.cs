@@ -53,4 +53,35 @@ namespace SharpCraft
             ForceInt = toInt;
         }
     }
+
+    /// <summary>
+    /// An attribute used for marking the range a block state can be in
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property)]
+    public class BlockIntStateRange : Attribute
+    {
+        /// <summary>
+        /// Intializes a new <see cref="BlockIntStateRange"/> for defining the range of the state
+        /// </summary>
+        /// <param name="intRange">the range the int can be in</param>
+        public BlockIntStateRange(Range intRange)
+        {
+            IntRange = intRange;
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="BlockIntStateRange"/> for defining the range of the state
+        /// </summary>
+        /// <param name="min">the minimum the number can be</param>
+        /// <param name="max">the maximum the number can be</param>
+        public BlockIntStateRange(int min, int max)
+        {
+            IntRange = new Range(min, max);
+        }
+
+        /// <summary>
+        /// the range the int can be in
+        /// </summary>
+        public Range IntRange { get; set; }
+    }
 }

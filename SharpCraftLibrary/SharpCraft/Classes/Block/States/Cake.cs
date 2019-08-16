@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-6. 0 = Full cake. 6 = One bite left)
             /// </summary>
             [BlockData("bites")]
+            [BlockIntStateRange(0, 6)]
             public int? SBites
             {
                 get => _sBites;

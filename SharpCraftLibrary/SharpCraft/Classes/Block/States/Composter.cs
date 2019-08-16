@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-8. 0 = compost. 8 = full)
             /// </summary>
             [BlockData("level")]
+            [BlockIntStateRange(0, 8)]
             public int? SLevel
             {
                 get => _sLevel;

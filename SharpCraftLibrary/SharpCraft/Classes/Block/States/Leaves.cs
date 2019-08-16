@@ -41,6 +41,7 @@ namespace SharpCraft
             /// (1-7. 7 == Can despawn)
             /// </summary>
             [BlockData("distance")]
+            [BlockIntStateRange(0, 7)]
             public int? SDistance
             {
                 get => _sDistance;

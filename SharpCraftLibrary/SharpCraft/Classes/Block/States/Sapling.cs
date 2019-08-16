@@ -42,6 +42,7 @@ namespace SharpCraft
             /// 1 = sapling will grow soon.
             /// </summary>
             [BlockData("stage")]
+            [BlockIntStateRange(0, 1)]
             public int? SStage
             {
                 get => _sStage;

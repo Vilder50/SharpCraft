@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-15. 0 == source block. 1-7 = flowing. 8-15 = falling (the number is 8+the number from the source its falling from))
             /// </summary>
             [BlockData("level")]
+            [BlockIntStateRange(0, 15)]
             public int? SLevel
             {
                 get => _sLevel;

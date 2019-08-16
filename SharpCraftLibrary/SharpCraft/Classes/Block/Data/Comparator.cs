@@ -46,7 +46,7 @@ namespace SharpCraft
             /// <summary>
             /// If the comparator is powered
             /// </summary>
-            [BlockData("powerd")]
+            [BlockData("powered")]
             public bool? SPowered { get; set; }
 
             /// <summary>

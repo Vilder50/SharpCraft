@@ -41,6 +41,7 @@ namespace SharpCraft
             /// (1-4)
             /// </summary>
             [BlockData("eggs")]
+            [BlockIntStateRange(1, 4)]
             public int? SEggs
             {
                 get => _sEggs;

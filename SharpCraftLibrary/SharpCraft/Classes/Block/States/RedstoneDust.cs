@@ -40,6 +40,7 @@ namespace SharpCraft
             /// (0-15)
             /// </summary>
             [BlockData("power")]
+            [BlockIntStateRange(0, 15)]
             public int? SPower
             {
                 get => _sPower;

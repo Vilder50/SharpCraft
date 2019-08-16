@@ -43,6 +43,7 @@ namespace SharpCraft
             /// (Used for standing banners)
             /// </summary>
             [BlockData("rotation")]
+            [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
                 get => _sRotation;

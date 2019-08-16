@@ -43,6 +43,7 @@ namespace SharpCraft
             /// (0-5. 1-4 = still growin. 5 = fully grown)
             /// </summary>
             [BlockData("age")]
+            [BlockIntStateRange(0, 5)]
             public int? SAge
             {
                 get => _sAge;
