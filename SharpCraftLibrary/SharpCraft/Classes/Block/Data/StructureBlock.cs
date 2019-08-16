@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for structure blocks
         /// </summary>
-        public class StructureBlock : CloneBlock<StructureBlock>
+        public class StructureBlock : Block
         {
             /// <summary>
             /// Creates a new structure block

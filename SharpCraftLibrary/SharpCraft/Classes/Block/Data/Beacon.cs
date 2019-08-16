@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for beacon blocks
         /// </summary>
-        public class Beacon : CloneBlock<Beacon>
+        public class Beacon : Block
         {
             private int? _dLevels;
 

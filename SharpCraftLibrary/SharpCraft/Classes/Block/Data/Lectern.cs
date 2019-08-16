@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for lectern blocks
         /// </summary>
-        public class Lectern : CloneBlock<Lectern>, IBlock.IFacing, IBlock.IPowered
+        public class Lectern : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
             /// Creates a new lectern block

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for end gateway blocks
         /// </summary>
-        public class EndGateWay : CloneBlock<EndGateWay>
+        public class EndGateWay : Block
         {
             /// <summary>
             /// Creates a new end gateway block

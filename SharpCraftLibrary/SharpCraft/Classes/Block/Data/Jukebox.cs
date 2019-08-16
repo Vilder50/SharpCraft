@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for jukebox blocks
         /// </summary>
-        public class Jukebox : CloneBlock<Jukebox>
+        public class Jukebox : Block
         {
             /// <summary>
             /// Creates a new jukebox block

@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="Classes\Block\Block.cs" />
     <Compile Include="Classes\Block\BlockDataAttribute.cs" />
-    <Compile Include="Classes\Block\CloneBlock.cs" />
     <Compile Include="Classes\Block\Data\Banner.cs" />
     <Compile Include="Classes\Block\Data\Barrel.cs" />
     <Compile Include="Classes\Block\Data\BaseContainer.cs" />

@@ -10,7 +10,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for campfire blocks
         /// </summary>
-        public class Campfire : CloneBlock<Campfire>, IBlock.IWaterLogged, IBlock.ILit
+        public class Campfire : Block, IBlock.IWaterLogged, IBlock.ILit
         {
             private Item[] _dItems;
             private Time[] _dCookingTimes;

@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for skull / head blocks
         /// </summary>
-        public abstract class BaseSkull<T> : CloneBlock<T> where T : Block
+        public abstract class BaseSkull : Block
         {
             private string _dDataSkin;
 
@@ -78,7 +78,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for skull / head blocks
         /// </summary>
-        public class GroundSkull : BaseSkull<GroundSkull>, IBlock.IRotation
+        public class GroundSkull : BaseSkull, IBlock.IRotation
         {
             private int? _sRotation;
 
@@ -128,7 +128,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for skull / head blocks
         /// </summary>
-        public class WallSkull : BaseSkull<WallSkull>, IBlock.IFacing
+        public class WallSkull : BaseSkull, IBlock.IFacing
         {
             /// <summary>
             /// Creates a new skull / head block

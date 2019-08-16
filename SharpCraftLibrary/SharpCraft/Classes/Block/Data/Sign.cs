@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for sign blocks
         /// </summary>
-        public class Sign : CloneBlock<Sign>, IBlock.IRotation, IBlock.IWaterLogged
+        public class Sign : Block, IBlock.IRotation, IBlock.IWaterLogged
         {
             private int? _sRotation;
 

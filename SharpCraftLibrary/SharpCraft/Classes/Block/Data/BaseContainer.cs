@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// A base class ofr blocks with inventories
         /// </summary>
-        public abstract class BaseContainer<T> : BaseInventory<T> where T : Block
+        public abstract class BaseContainer : BaseInventory
         {
             /// <summary>
             /// Creates a new inventory block

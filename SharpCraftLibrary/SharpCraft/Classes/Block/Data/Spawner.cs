@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for end spawner blocks
         /// </summary>
-        public class Spawner : CloneBlock<Spawner>
+        public class Spawner : Block
         {
             /// <summary>
             /// Creates a new end spawner block

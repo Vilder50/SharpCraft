@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for banner blocks
         /// </summary>
-        public class Banner : CloneBlock<Banner>, IBlock.IRotation, IBlock.IFacing
+        public class Banner : Block, IBlock.IRotation, IBlock.IFacing
         {
             private int? _sRotation;
 

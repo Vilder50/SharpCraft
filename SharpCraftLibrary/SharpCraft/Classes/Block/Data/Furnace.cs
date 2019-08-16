@@ -10,7 +10,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for furnace blocks.
         /// </summary>
-        public class Furnace : BaseInventory<Furnace>, IBlock.IFacing, IBlock.ILit
+        public class Furnace : BaseInventory, IBlock.IFacing, IBlock.ILit
         {
             private Item[] _dItems;
 

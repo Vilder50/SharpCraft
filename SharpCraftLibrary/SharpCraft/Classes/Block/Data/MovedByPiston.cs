@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for blocks being moved by a piston
         /// </summary>
-        public class MovedByPiston : CloneBlock<MovedByPiston>, IBlock.IFacingFull
+        public class MovedByPiston : Block, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new block being moved by a piston

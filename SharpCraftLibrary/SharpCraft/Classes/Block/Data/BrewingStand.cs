@@ -10,7 +10,7 @@ namespace SharpCraft
         /// An object for brewing stand blocks.
         /// (Blocks like bone blocks and purpur pillars)
         /// </summary>
-        public class BrewingStand : BaseInventory<BrewingStand>
+        public class BrewingStand : BaseInventory
         {
             private Item[] _dItems;
 

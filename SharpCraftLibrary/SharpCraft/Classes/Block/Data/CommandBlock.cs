@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for chest blocks
         /// </summary>
-        public class CommandBlock : CloneBlock<CommandBlock>, IBlock.IFacingFull
+        public class CommandBlock : Block, IBlock.IFacingFull
         {
             /// <summary>
             /// Creates a new chest block

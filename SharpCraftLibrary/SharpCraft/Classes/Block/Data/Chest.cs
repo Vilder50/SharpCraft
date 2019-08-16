@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for chest blocks
         /// </summary>
-        public class Chest : BaseContainer<Chest>, IBlock.IFacing, IBlock.IWaterLogged
+        public class Chest : BaseContainer, IBlock.IFacing, IBlock.IWaterLogged
         {
             private Item[] _dItems;
 

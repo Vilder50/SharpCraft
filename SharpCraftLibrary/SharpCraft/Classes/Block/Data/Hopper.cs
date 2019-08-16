@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for hopper blocks
         /// </summary>
-        public class Hopper : BaseContainer<Hopper>
+        public class Hopper : BaseContainer
         {
             private Item[] _dItems;
 
