@@ -5,34 +5,38 @@ namespace SharpCraft
     /// <summary>
     /// An object for effects
     /// </summary>
-    public class Effect
+    public class Effect : Data.DataHolderBase
     {
         /// <summary>
         /// The duration of the effect (in ticks)
         /// </summary>
-        public int? Duration;
+        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
+        public Time Duration { get; set; }
 
         /// <summary>
         /// The amplifier of the effect
         /// (0 = level 1)
         /// </summary>
-        public int? Amplifier;
+        public byte? Amplifier { get; set; }
 
         /// <summary>
         /// The type of effect
         /// </summary>
-        public ID.Effect? Type;
+        [Data.DataTag("Id", ForceType = ID.NBTTagType.TagByte)]
+        public ID.Effect? Type { get; set; }
 
         /// <summary>
         /// If the effect should show particles or not
         /// </summary>
-        public bool? ShowParticles;
+        [Data.DataTag]
+        public bool? ShowParticles { get; set; }
 
         /// <summary>
         /// If the effect is an ambiant effect
         /// (comes from a beacon / conduit)
         /// </summary>
-        public bool? Ambiant;
+        [Data.DataTag]
+        public bool? Ambiant { get; set; }
 
         /// <summary>
         /// Creates an empty effect
@@ -46,7 +50,7 @@ namespace SharpCraft
         /// <param name="EffectDuration">the duration of the effect (in ticks)</param>
         /// <param name="EffectAmplifier">the amplifier of the effect (0 = level 1)</param>
         /// <param name="ShowParticles">if the effect should show particles or not</param>
-        public Effect(ID.Effect EffectType, int EffectDuration, int EffectAmplifier, bool? ShowParticles = null)
+        public Effect(ID.Effect EffectType, int EffectDuration, byte EffectAmplifier, bool? ShowParticles = null)
         {
             Duration = EffectDuration;
             Amplifier = EffectAmplifier;
@@ -63,7 +67,7 @@ namespace SharpCraft
             List<string> TempList = new List<string>();
 
             if (Type != null) { TempList.Add("Id:" + ((int)Type + 1) + "b"); }
-            if (Duration != null) { TempList.Add("Duration:" + Duration); }
+            if (Duration != null) { TempList.Add("Duration:" + Duration.AsTicks()); }
             if (Amplifier != null) { TempList.Add("Amplifier:" + Amplifier + "b"); }
             if (Ambiant != null) { TempList.Add("Ambient:" + Ambiant); }
             if (ShowParticles != null) { TempList.Add("ShowParticles:" + ShowParticles); }

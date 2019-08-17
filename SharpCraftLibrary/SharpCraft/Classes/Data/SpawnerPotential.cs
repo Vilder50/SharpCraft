@@ -3,8 +3,16 @@
     /// <summary>
     /// An object used to define an entity's spawner potential
     /// </summary>
-    public class SpawnerPotential
+    public class SpawnerPotential : Data.DataHolderBase
     {
+        /// <summary>
+        /// Creates a new <see cref="SpawnerPotential"/>
+        /// </summary>
+        public SpawnerPotential()
+        {
+
+        }
+
         /// <summary>
         /// Creates a new <see cref="SpawnerPotential"/> for the entity with the given weight
         /// </summary>
@@ -15,8 +23,18 @@
             this.Entity = Entity;
             this.Weight = Weight;
         }
-        private readonly Entity.BaseEntity Entity;
-        private readonly int Weight;
+
+        /// <summary>
+        /// The entity this spawner potential is for
+        /// </summary>
+        [Data.DataTag]
+        public Entity.BaseEntity Entity { get; set; }
+
+        /// <summary>
+        /// The weight for this potential to be selected
+        /// </summary>
+        [Data.DataTag]
+        public int? Weight { get; set; }
 
         /// <summary>
         /// Returns the raw data for this object as a string

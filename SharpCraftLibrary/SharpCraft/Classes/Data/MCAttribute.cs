@@ -3,8 +3,16 @@
     /// <summary>
     /// An object used for minecraft attributes
     /// </summary>
-    public class MCAttribute
+    public class MCAttribute : Data.DataHolderBase
     {
+        /// <summary>
+        /// Creates a new attribute
+        /// </summary>
+        public MCAttribute()
+        {
+
+        }
+
         /// <summary>
         /// Creates a new attribute for an item
         /// </summary>
@@ -41,32 +49,38 @@
         /// <summary>
         /// The type of attribute
         /// </summary>
-        public ID.AttributeType ID;
+        [Data.CustomDataTag]
+        public ID.AttributeType ID { get; set; }
 
         /// <summary>
         /// The base amount of the attribute
         /// </summary>
-        public double Base;
+        [Data.CustomDataTag]
+        public double Base { get; set; }
 
         /// <summary>
         /// The slot the attribute affects
         /// </summary>
-        public ID.AttributeSlot? Slot;
+        [Data.CustomDataTag]
+        public ID.AttributeSlot? Slot { get; set; }
 
         /// <summary>
         /// The operation used to add the <see cref="ChangeAmount"/> with
         /// </summary>
-        public ID.AttributeOperation Operation;
+        [Data.CustomDataTag]
+        public ID.AttributeOperation Operation { get; set; }
 
         /// <summary>
         /// The amount to change the atttribute with
         /// </summary>
-        public double? ChangeAmount;
+        [Data.CustomDataTag]
+        public double? ChangeAmount { get; set; }
 
         /// <summary>
         /// The UUID of the attribute
         /// </summary>
-        public UUID UUID;
+        [Data.CustomDataTag]
+        public UUID UUID { get; set; }
 
         /// <summary>
         /// Gets the raw data used for items
