@@ -17,6 +17,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public ChorusFlower()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new chorus flower block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -42,7 +50,7 @@ namespace SharpCraft
             /// The age of the flower.
             /// (0-5. 1-4 = still growin. 5 = fully grown)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 5)]
             public int? SAge
             {

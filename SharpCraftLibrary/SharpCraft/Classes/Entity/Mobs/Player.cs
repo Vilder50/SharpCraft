@@ -19,91 +19,108 @@ namespace SharpCraft
             /// <summary>
             /// The ID of the Minecraft version the player is in
             /// </summary>
-            [DataTag]
+            [Data.DataTag("DataVersion")]
             public int? Version { get; set; }
+
             /// <summary>
             /// The player's gamemode
             /// </summary>
-            [DataTag]
+            [Data.DataTag("playerGameType", ForceType = ID.NBTTagType.TagInt)]
             public ID.Gamemode? Gamemode { get; set; }
+
             /// <summary>
             /// The score displayed on death
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Score")]
             public int? DeathScore { get; set; }
+
             /// <summary>
             /// The slot the player has selected
             /// (0-8)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("SelectedItemSlot")]
             public int? SelectedSlot { get; set; }
+
             /// <summary>
             /// The item the player has selected
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public SharpCraft.Item SelectedItem { get; set; }
+
             /// <summary>
             /// The player's spawnpoint
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords Spawn { get; set; }
+
             /// <summary>
             /// If the player should spawn at the given <see cref="Spawn"/> even if there is no bed
             /// </summary>
-            [DataTag]
+            [Data.DataTag("SpawnForced")]
             public bool? ForceSpawn { get; set; }
+
             /// <summary>
             /// If the player is sleeping
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Sleeping { get; set; }
+
             /// <summary>
             /// The amount of time the player has been sleeping
             /// </summary>
-            [DataTag]
+            [Data.DataTag("SleepTimer",ForceType = ID.NBTTagType.TagShort)]
             public Time SleepTime { get; set; }
+
             /// <summary>
             /// How much food the player has
             /// (0-20)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("foodLevel")]
             public int? Food { get; set; }
+
             /// <summary>
             /// How close a food bar is from dissapearing
             /// (4=lose one bar)
             /// </summary>
-            [DataTag]
-            public double? FoodExhaustion { get; set; }
+            [Data.DataTag("foodExhaustionLevel")]
+            public float? FoodExhaustion { get; set; }
+
             /// <summary>
             /// How much saturation the player has
             /// </summary>
-            [DataTag]
-            public double? FoodSaturation { get; set; }
+            [Data.DataTag("FoodSaturationLevel")]
+            public float? FoodSaturation { get; set; }
+
             /// <summary>
             /// When this hits 80 ticks and the player has enough food, they will be healed
             /// </summary>
-            [DataTag]
+            [Data.DataTag("foodTickTimer", ForceType = ID.NBTTagType.TagInt)]
             public Time FoodTimer { get; set; }
+
             /// <summary>
             /// The level the player has
             /// </summary>
-            [DataTag]
+            [Data.DataTag("XpLevel")]
             public int? Level { get; set; }
+
             /// <summary>
             /// How far the player is to hit next level
             /// </summary>
-            [DataTag]
-            public double? XPPogress { get; set; }
+            [Data.DataTag("XpP")]
+            public float? XPPogress { get; set; }
+
             /// <summary>
             /// The total amount of xp the player has picked up since last death
             /// </summary>
-            [DataTag]
+            [Data.DataTag("XpTotal")]
             public int? Totalxp { get; set; }
+
             /// <summary>
             /// The seed used to determine which enchantments should show up for the player
             /// </summary>
-            [DataTag]
+            [Data.DataTag("XpSeed")]
             public int? EnchantSeed { get; set; }
+
             /// <summary>
             /// The player's inventory.
             /// (Slot 0-8 = hotbar left to right)
@@ -111,53 +128,53 @@ namespace SharpCraft
             /// (Slot 100 = boots, 101 = leggings, 102 = chestplate, 103 = helmet)
             /// (Slot -106 = off hand)
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public Item[] Inventory { get; set; }
             /// <summary>
             /// The items in the player's enderchest
             /// (Slot 0-26 = left top to right bottom slots)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("EnderItems")]
             public Item[] Enderchest { get; set; }
             /// <summary>
             /// The entity the player is riding
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public BaseEntity Riding { get; set; }
             /// <summary>
             /// The entity on the player's left shoulder
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public BaseEntity ShoulderEntityLeft { get; set; }
             /// <summary>
             /// The entity on the player's right shoulder
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public BaseEntity ShoulderEntityRight { get; set; }
             /// <summary>
             /// True if the player has seen the end to overworld credits
             /// </summary>
-            [DataTag]
+            [Data.DataTag("seenCredits")]
             public bool? SeenCredits { get; set; }
             /// <summary>
             /// True if the player only sees the recipes they have unlocked
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public bool? RecipeBookFiltered { get; set; }
             /// <summary>
             /// True if the player has the book open
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public bool? RecipeBookOpen { get; set; }
             /// <summary>
             /// A list of recipes the player has unlocked
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Recipe[] UnlockedRecipes { get; set; }
             /// <summary>
             /// A list of recipes the player has unlocked, but still haven't seen in the crafting table.
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Recipe[] NotSeenRecipes { get; set; }
 
             /// <summary>
@@ -181,11 +198,11 @@ namespace SharpCraft
                     if (Sleeping != null) { TempList.Add("Sleeping:" + Sleeping); }
                     if (SleepTime != null) { TempList.Add("SleepTimer:" + SleepTime.AsTicks(Time.TimerType.Short) + "s"); }
                     if (Food != null) { TempList.Add("foodLevel:" + Food); }
-                    if (FoodExhaustion != null) { TempList.Add("foodExhaustionLevel:" + FoodExhaustion.ToMinecraftDouble() + "f"); }
-                    if (FoodSaturation != null) { TempList.Add("foodSaturationLevel:" + FoodSaturation.ToMinecraftDouble() + "f"); }
+                    if (FoodExhaustion != null) { TempList.Add("foodExhaustionLevel:" + FoodExhaustion.ToMinecraftFloat() + "f"); }
+                    if (FoodSaturation != null) { TempList.Add("foodSaturationLevel:" + FoodSaturation.ToMinecraftFloat() + "f"); }
                     if (FoodTimer != null) { TempList.Add("foodTickTimer:" + FoodTimer.AsTicks()); }
                     if (Level != null) { TempList.Add("XpLevel:" + Level); }
-                    if (XPPogress != null) { TempList.Add("XpP:" + XPPogress.ToMinecraftDouble() + "f"); }
+                    if (XPPogress != null) { TempList.Add("XpP:" + XPPogress.ToMinecraftFloat() + "f"); }
                     if (Totalxp != null) { TempList.Add("XpTotal:" + Totalxp); }
                     if (EnchantSeed != null) { TempList.Add("XpSeed:" + EnchantSeed); }
                     if (Inventory != null)

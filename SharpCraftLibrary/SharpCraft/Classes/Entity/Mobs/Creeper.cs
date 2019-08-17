@@ -18,22 +18,25 @@ namespace SharpCraft
             /// <summary>
             /// If the creeper is charged (was hit by lightning)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("powered")]
             public bool? Charged { get; set; }
+
             /// <summary>
             /// The size of the explosion caused by the exploded creeper
             /// </summary>
-            [DataTag]
-            public int? ExplosionRadius { get; set; }
+            [Data.DataTag]
+            public byte? ExplosionRadius { get; set; }
+
             /// <summary>
             /// The time till the creeper will explode when trying to explode
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Fuse { get; set; }
+
             /// <summary>
             /// If the creeper is ignited and is forced to blow up
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Ignited { get; set; }
 
             /// <summary>

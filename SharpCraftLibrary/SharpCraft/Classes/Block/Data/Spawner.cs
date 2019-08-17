@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Spawner : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Spawner()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new end spawner block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -51,45 +59,45 @@ namespace SharpCraft
             /// <summary>
             /// The entities the spawner can spawn
             /// </summary>
-            [BlockData]
+            [Data.DataTag("SpawnerPotentials")]
             public SpawnerPotential[] DPotentials { get; set; }
 
             /// <summary>
             /// How many entities to try to spawn every time
             /// </summary>
-            [BlockData]
-            public int? DSpawnCount { get; set; }
+            [Data.DataTag("SpawnCount")]
+            public short? DSpawnCount { get; set; }
 
             /// <summary>
             /// The range to spawn the entities in
             /// </summary>
-            [BlockData]
-            public int? DSpawnRange { get; set; }
+            [Data.DataTag("SpawnRange")]
+            public short? DSpawnRange { get; set; }
 
             /// <summary>
             /// Time till the next spawn
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Delay", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
             public Time DDelay { get; set; }
 
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public Range DRandomDelay { get; set; }
 
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn
             /// </summary>
-            [BlockData]
-            public int? DMaxEntities { get; set; }
+            [Data.DataTag("MaxNearbyEntities")]
+            public short? DMaxEntities { get; set; }
 
             /// <summary>
             /// The range the player has to be in for the spawner to start spawning
             /// (<see cref="DMaxEntities"/> has to be set for this to work)
             /// </summary>
-            [BlockData]
-            public int? DPlayerRange { get; set; }
+            [Data.DataTag("RequiredPlayerRange")]
+            public short? DPlayerRange { get; set; }
 
             /// <summary>
             /// Gets the raw data for the data the block contains

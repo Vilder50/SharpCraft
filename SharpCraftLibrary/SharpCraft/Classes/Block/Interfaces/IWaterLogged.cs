@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is water logged.
         /// </summary>
-        [BlockData("waterlogged")]
+        [BlockState("waterlogged")]
         bool? SWaterLogged { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace SharpCraft
             /// <summary>
             /// Choses which slots are locked
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public LockedSlots SlotRules { get; set; }
 
             /// <summary>
@@ -196,81 +196,81 @@ namespace SharpCraft
             /// Makes the armor stand a marker armor stand.
             /// The armor stand wont have a hitbox.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Marker { get; set; }
             /// <summary>
             /// The items there is in the armor stand's hands.
             /// 0: main hand. 1: off hand.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public Item[] HandItems { get; set; }
             /// <summary>
             /// The items the armor stand has on
             /// 0: boots. 1: leggings. 2: chestplate. 3: helmet
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public Item[] ArmorItems { get; set; }
             /// <summary>
             /// Makes the armor stand invisible
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Invisible { get; set; }
             /// <summary>
             /// Removes the armor stand's stone plate
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? NoBasePlate { get; set; }
             /// <summary>
             /// Makes the armor stand fly when falling if it has an elytra on.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? FallFlying { get; set; }
             /// <summary>
             /// If the armor stand should show its arms
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? ShowArms { get; set; }
             /// <summary>
             /// If the armor stand is a small armor stand
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Small { get; set; }
             /// <summary>
             /// Rotates the armor stand's body
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] BodyRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] BodyRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's left arm
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] ArmLeftRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] ArmLeftRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's right arm
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] ArmRightRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] ArmRightRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's left leg
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] LegLeftRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] LegLeftRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's right leg
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] LegRightRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] LegRightRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's head
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [DataTag]
-            public double?[] HeadRotation { get; set; }
+            [Data.CustomDataTag]
+            public float?[] HeadRotation { get; set; }
 
             /// <summary>
             /// Gets the raw data from this entity

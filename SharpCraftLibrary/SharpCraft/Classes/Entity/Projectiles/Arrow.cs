@@ -18,57 +18,57 @@ namespace SharpCraft
             /// <summary>
             /// The arrow shaking when hitting a block
             /// </summary>
-            [DataTag]
-            public int? Shake { get; set; }
+            [Data.DataTag("shake")]
+            public byte? Shake { get; set; }
             /// <summary>
             /// Rules for picking up the arrow
             /// </summary>
-            [DataTag]
+            [Data.DataTag("pickup",ForceType = ID.NBTTagType.TagByte)]
             public ID.ArrowPickup? Pickupable { get; set; }
             /// <summary>
             /// If the arrow is shot by a player
             /// </summary>
-            [DataTag]
+            [Data.DataTag("player")]
             public bool? PlayerShot { get; set; }
             /// <summary>
             /// When it hits 1200 ticks while not moving the arrow despawns
             /// </summary>
-            [DataTag]
+            [Data.DataTag("life",ForceType = ID.NBTTagType.TagShort)]
             public Time Life { get; set; }
             /// <summary>
             /// The amount of damage dealt by the arrow
             /// </summary>
-            [DataTag]
+            [Data.DataTag("damage")]
             public double? Damage { get; set; }
             /// <summary>
             /// If the arrow is in the ground
             /// </summary>
-            [DataTag]
+            [Data.DataTag("inGround")]
             public bool? InGround { get; set; }
             /// <summary>
             /// If the deals critical damage
             /// </summary>
-            [DataTag]
+            [Data.DataTag("crit")]
             public bool? Crit { get; set; }
             /// <summary>
             /// The color of the arrow
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public HexColor Color { get; set; }
             /// <summary>
             /// The effects given by the arrow
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public Effect[] CustomPotionEffects { get; set; }
             /// <summary>
             /// The color of the arrow's particles
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public HexColor CustomPotionColor { get; set; }
             /// <summary>
             /// The amount of duration of the glowing effect given by the spectral arrow
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Duration", ForceType = ID.NBTTagType.TagInt)]
             public Time SpectralDuration { get; set; }
 
             /// <summary>

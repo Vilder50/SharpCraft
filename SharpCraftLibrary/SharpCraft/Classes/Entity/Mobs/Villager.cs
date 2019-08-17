@@ -15,75 +15,74 @@ namespace SharpCraft
             /// <param name="type">the type of entity</param>
             public Villager(ID.Entity? type = ID.Entity.villager) : base(type) { }
 
-
-            /// <summary>
-            /// The amount of emeralds given to the villager
-            /// </summary>
-            [DataTag]
-            public int? Riches { get; set; }
-
             /// <summary>
             /// If the villager is willing to mate
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Willing { get; set; }
             /// <summary>
             /// The villager's inventory
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public Item[] Inventory { get; set; }
             /// <summary>
             /// The trades the villager has
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Offers")]
             public Trade[] Trades { get; set; }
-
-            /// <summary>
-            /// The level of the villagers trading options
-            /// </summary>
-            [DataTag]
-            public int? Level {get; set;}
 
             /// <summary>
             /// The villager's proffession
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
+            public int? Level { get; set; }
+
+            /// <summary>
+            /// The villager's proffession
+            /// </summary>
+            [Data.CustomDataTag]
             public ID.VillagerProffession? Proffession {get; set;}
 
             /// <summary>
             /// The type of villager
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public ID.VillagerType? Type {get; set;}
 
             /// <summary>
             /// An object used to define trades
             /// </summary>
-            public class Trade
+            public class Trade : Data.DataHolderBase
             {
                 /// <summary>
                 /// True if the villager gives xp when traded with
                 /// </summary>
+                [Data.DataTag("rewardExp")]
                 public bool? RewardExp { get; set; }
                 /// <summary>
                 /// The maximum number of times the trade can be traded before closing
                 /// </summary>
+                [Data.DataTag("maxUses")]
                 public int? MaxUses { get; set; }
                 /// <summary>
                 /// The amount of times the trade has been used
                 /// </summary>
+                [Data.DataTag("uses")]
                 public int? Uses { get; set; }
                 /// <summary>
                 /// The first item the villager is buying in this trade
                 /// </summary>
+                [Data.DataTag("buy")]
                 public Item BuyItem1 { get; set; }
                 /// <summary>
                 /// The second item the villager is buying in this trade
                 /// </summary>
+                [Data.DataTag("buyB")]
                 public Item BuyItem2 { get; set; }
                 /// <summary>
                 /// The item the villager is selling in this trade
                 /// </summary>
+                [Data.DataTag("sell")]
                 public Item SellItem { get; set; }
 
                 /// <summary>
@@ -116,7 +115,6 @@ namespace SharpCraft
 
                     string NormalData = BreedDataString;
                     if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Riches != null) { TempList.Add("Riches:" + Riches); }
                     if (Willing != null) { TempList.Add("Willing:" + Willing.ToMinecraftBool()); }
                     if (Inventory != null)
                     {

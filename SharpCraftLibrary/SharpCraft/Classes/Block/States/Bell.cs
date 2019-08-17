@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Bell : Block, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Bell()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a bell block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The way the bell is attached
             /// </summary>
-            [BlockData("attachment")]
+            [BlockState("attachment")]
             public ID.StateBellAttachment? SAttachement { get; set; }
 
             /// <summary>
             /// The way the bell faces
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

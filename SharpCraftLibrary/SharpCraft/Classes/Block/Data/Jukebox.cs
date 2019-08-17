@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Jukebox : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Jukebox()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new jukebox block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// If the jukebox block should display it has an item inside
             /// </summary>
-            [BlockData("has_record")]
+            [BlockState("has_record")]
             public bool? SHasRecord{get; set;}
 
             /// <summary>
             /// The item in the jukebox
             /// </summary>
-            [BlockData]
+            [Data.DataTag("RecordItem")]
             public Item DRecordItem { get; set; }
 
             /// <summary>

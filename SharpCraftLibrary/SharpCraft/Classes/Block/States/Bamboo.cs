@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Bamboo()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new bamboo block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -40,7 +48,7 @@ namespace SharpCraft
             /// (0-1)
             /// 1 = Bamboo looks thicker.
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 1)]
             public int? SAge
             {
@@ -58,7 +66,7 @@ namespace SharpCraft
             /// <summary>
             /// The bamboo's leaves' size
             /// </summary>
-            [BlockData("leaves")]
+            [BlockState("leaves")]
             public ID.StateBambooLeave? SLeaves { get; set; }
         }
 
@@ -68,6 +76,14 @@ namespace SharpCraft
         public class BambooSapling : Block, IBlock.IStage
         {
             private int? _sStage;
+
+            /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BambooSapling()
+            {
+                ID = null;
+            }
 
             /// <summary>
             /// Creates a new bamboo sapling block
@@ -86,7 +102,7 @@ namespace SharpCraft
             /// (0-1)
             /// 1 = Bamboo will grow soon.
             /// </summary>
-            [BlockData("stage")]
+            [BlockState("stage")]
             public int? SStage
             {
                 get => _sStage;

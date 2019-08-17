@@ -6,9 +6,17 @@ using System.Linq;
 
 namespace SharpCraft
 {
-    public partial class Block
+    public partial class Block : Data.DataHolderBase
     {
         private ID.Block? id;
+
+        /// <summary>
+        /// Intilizes a new block object
+        /// </summary>
+        public Block()
+        {
+            ID = null;
+        }
 
         /// <summary>
         /// Creates a new block which is the given type of block
@@ -29,17 +37,16 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Gets a list of all of the properties of the given type from this block
+        /// Gets a list of this block's state properties
         /// </summary>
-        /// <param name="propertyType">The property type to find</param>
-        /// <returns>A list of all the properties of that type</returns>
-        protected IEnumerable<PropertyInfo> GetProperties(BlockDataAttribute.DataType propertyType)
+        /// <returns>A list of all the state properties for this block</returns>
+        public IEnumerable<PropertyInfo> GetStateProperties()
         {
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                BlockDataAttribute attribute = (BlockDataAttribute)property.GetCustomAttribute(typeof(BlockDataAttribute));
-                if (attribute != null && attribute.Type == propertyType)
+                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                if (attribute != null)
                 {
                     yield return property;
                 }
@@ -68,22 +75,13 @@ namespace SharpCraft
         public Group Group { get; set; }
 
         /// <summary>
-        /// Returns a list of all the block state properties
-        /// </summary>
-        /// <returns>A list of properties containing data about the block's state</returns>
-        public IEnumerable<PropertyInfo> GetStates()
-        {
-            return GetProperties(BlockDataAttribute.DataType.State);
-        }
-
-        /// <summary>
         /// Checks if the block has any block states defined
         /// </summary>
         public bool HasState
         {
             get
             {
-                return GetStates().Any(p => !(p.GetValue(this) is null));
+                return GetStateProperties().Any(p => !(p.GetValue(this) is null));
             }
         }
 
@@ -92,39 +90,7 @@ namespace SharpCraft
         /// </summary>
         public void ClearStates()
         {
-            IEnumerable<PropertyInfo> properties = GetStates();
-            foreach (PropertyInfo property in properties)
-            {
-                property.SetValue(this, null);
-            }
-        }
-
-        /// <summary>
-        /// Returns a list of all the block data properties
-        /// </summary>
-        /// <returns>A list of properties containing data about the block's data</returns>
-        public IEnumerable<PropertyInfo> GetData()
-        {
-            return GetProperties(BlockDataAttribute.DataType.Data);
-        }
-
-        /// <summary>
-        /// Checks if the block has any block data defined
-        /// </summary>
-        public bool HasData
-        {
-            get
-            {
-                return GetData().Any(p => !(p.GetValue(this) is null));
-            }
-        }
-
-        /// <summary>
-        /// Clears the block's data
-        /// </summary>
-        public void ClearData()
-        {
-            IEnumerable<PropertyInfo> properties = GetData();
+            IEnumerable<PropertyInfo> properties = GetStateProperties();
             foreach (PropertyInfo property in properties)
             {
                 property.SetValue(this, null);
@@ -155,7 +121,7 @@ namespace SharpCraft
                 throw new ArgumentException("The block has no states and can therefore not output it");
             }
 
-            IEnumerable<PropertyInfo> properties = GetProperties(BlockDataAttribute.DataType.State);
+            IEnumerable<PropertyInfo> properties = GetStateProperties();
             List<string> states = new List<string>();
 
             foreach (PropertyInfo property in properties)
@@ -163,7 +129,7 @@ namespace SharpCraft
                 object value = property.GetValue(this);
                 if (value != null)
                 {
-                    BlockDataAttribute attribute = ((BlockDataAttribute)property.GetCustomAttribute(typeof(BlockDataAttribute)));
+                    BlockStateAttribute attribute = ((BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute)));
                     string state = attribute.DataName + "=";
                     if (property.PropertyType == typeof(bool?))
                     {
@@ -216,19 +182,27 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a copy of this block
+        /// Creates a clone of this block with all its data, states and its ID
         /// </summary>
-        /// <returns>The copied new block</returns>
-        public Block Clone()
+        /// <returns>The new block cloned</returns>
+        public Block FullClone()
         {
-            if (Group == null)
+            Block baseClone = (Block)base.Clone();
+            baseClone.ID = ID;
+
+            //add states
+            IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
+            foreach (PropertyInfo property in properties)
             {
-                return DataTagAttribute.Clone((Block)Activator.CreateInstance(GetType(), new object[] { ID }), this);
+                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                if (!(attribute is null))
+                {
+                    object value = property.GetValue(this);
+                    property.SetValue(baseClone, value);
+                }
             }
-            else
-            {
-                return DataTagAttribute.Clone((Block)Activator.CreateInstance(GetType(), new object[] { Group }), this);
-            }
+
+            return baseClone;
         }
 
 #pragma warning disable IDE0060

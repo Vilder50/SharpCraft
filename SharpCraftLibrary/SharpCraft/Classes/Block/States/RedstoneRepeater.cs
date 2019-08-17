@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sDelay;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public RedstoneRepeater()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new redstone repeater block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How many ticks delay the repeater gives.
             /// (1-4 ticks)
             /// </summary>
-            [BlockData("power")]
+            [BlockState("power")]
             [BlockIntStateRange(1, 4)]
             public int? SPower
             {
@@ -57,19 +65,19 @@ namespace SharpCraft
             /// <summary>
             /// The direction the output will be send in
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the repeater is locked
             /// </summary>
-            [BlockData("locked")]
+            [BlockState("locked")]
             public bool? SLocked { get; set; }
 
             /// <summary>
             /// If the repeater is powered
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

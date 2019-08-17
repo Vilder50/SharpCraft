@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The phase the ender dragon is in
             /// </summary>
-            [DataTag]
+            [Data.DataTag("DragonPhase", ForceType = ID.NBTTagType.TagInt)]
             public ID.DragonPhase? Phase { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

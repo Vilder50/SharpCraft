@@ -18,17 +18,17 @@ namespace SharpCraft
             /// <summary>
             /// The location of the turtles home
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords HomePos { get; set; }
             /// <summary>
             /// The location the turtle is traveling to
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords TravelPos { get; set; }
             /// <summary>
             /// True if the turtle has eggs
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? HasEgg { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

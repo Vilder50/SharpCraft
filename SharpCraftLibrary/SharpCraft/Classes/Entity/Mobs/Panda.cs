@@ -18,12 +18,13 @@ namespace SharpCraft
             /// <summary>
             /// The type of the panda
             /// </summary>
-            [DataTag]
+            [Data.DataTag("MainGene", ForceType = ID.NBTTagType.TagString)]
             public ID.Panda? MainType { get; set; }
+
             /// <summary>
             /// The panda's hidden type which can be transfered to it's children
             /// </summary>
-            [DataTag]
+            [Data.DataTag("HiddenGene", ForceType = ID.NBTTagType.TagString)]
             public ID.Panda? HiddenType { get; set; }
 
             /// <summary>

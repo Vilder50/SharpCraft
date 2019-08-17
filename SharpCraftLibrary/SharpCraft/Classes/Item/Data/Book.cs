@@ -36,34 +36,34 @@ namespace SharpCraft
             /// The generation of the book.
             /// (How much it has been copied)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("generation", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public ID.BookGeneration? Generation { get; set; }
             /// <summary>
             /// The auther of the book
             /// </summary>
-            [DataTag]
+            [Data.DataTag("author")]
             public string Author { get; set; }
             /// <summary>
             /// The book's title
             /// </summary>
-            [DataTag]
+            [Data.DataTag("title")]
             public string Title { get; set; }
             /// <summary>
             /// The book's pages.
             /// Each index in the first array means a new page.
             /// </summary>
-            [DataTag]
+            [Data.DataTag("generation", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
             public JSON[][] Pages { get; set; }
             /// <summary>
             /// The recipes unlocked when right clicking a recipe book
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Recipes", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public Recipe[] UnlockRecipes { get; set; }
 
             /// <summary>
             /// The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.
             /// </summary>
-            [DataTag]
+            [Data.DataTag("StoredEnchantments")]
             public Enchantment[] StoredEnchants { get; set; }
 
             /// <summary>

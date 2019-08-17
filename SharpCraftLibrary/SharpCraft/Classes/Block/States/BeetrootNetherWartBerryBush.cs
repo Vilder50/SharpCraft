@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BeetrootNetherWartBerryBush()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new beetroot, berry bush or nether wart block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How far the beetroot / berry bush / nether wart has grown
             /// (0-3. 3 == fully grown)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 3)]
             public int? SAge
             {

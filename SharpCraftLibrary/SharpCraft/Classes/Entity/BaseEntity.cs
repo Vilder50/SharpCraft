@@ -7,7 +7,7 @@ namespace SharpCraft
         /// <summary>
         /// The base class for all entities
         /// </summary>
-        public abstract class BaseEntity
+        public abstract class BaseEntity : Data.DataHolderBase
         {
             /// <summary>
             /// This entity's data without its type
@@ -41,15 +41,6 @@ namespace SharpCraft
             /// The type of the entity
             /// </summary>
             public ID.Entity? EntityType { get; set; }
-
-            /// <summary>
-            /// Creates a clone of this entity
-            /// </summary>
-            /// <returns>The cloned new entity</returns>
-            public BaseEntity Clone()
-            {
-                return DataTagAttribute.Clone((BaseEntity)Activator.CreateInstance(GetType(), new object[] { EntityType }), this);
-            }
         }
     }
 }

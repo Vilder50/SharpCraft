@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _dLevels;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Beacon()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new beacon block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,13 +47,13 @@ namespace SharpCraft
             /// The inventory's lock.
             /// (Players have to use an item with the given name to open the block)
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Lock")]
             public string DLock { get; set; }
 
             /// <summary>
             /// The number of layers the beacon pyramide has
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Levels")]
             public int? DLevels
             {
                 get => _dLevels;
@@ -61,12 +69,13 @@ namespace SharpCraft
             /// <summary>
             /// The primary effect chosen in the beacon
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Primary", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public ID.Effect? DPrimary { get; set; }
+
             /// <summary>
             /// The secondary effect chosen in the beacon
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Secondary", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public ID.Effect? DSecondary { get; set; }
 
             /// <summary>

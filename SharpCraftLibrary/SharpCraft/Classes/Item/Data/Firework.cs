@@ -32,17 +32,17 @@ namespace SharpCraft
             /// <summary>
             /// The data for a single firework star item
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Explosion")]
             public SharpCraft.Firework FireworkStar { get; set; }
             /// <summary>
             /// The data for a firework rocket
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public SharpCraft.Firework[] FireworkRocket { get; set; }
             /// <summary>
             /// How many seconds the rocket will fly for
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public int? RocketFlight { get; set; }
 
             /// <summary>

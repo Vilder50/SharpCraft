@@ -18,17 +18,17 @@ namespace SharpCraft
             /// <summary>
             /// Force along the x axis
             /// </summary>
-            [DataTag]
-            public int? PushX { get; set; }
+            [Data.DataTag]
+            public double? PushX { get; set; }
             /// <summary>
             /// Force along the y axis
             /// </summary>
-            [DataTag]
-            public int? PushZ { get; set; }
+            [Data.DataTag]
+            public double? PushZ { get; set; }
             /// <summary>
             /// The time till the furnace's fuel runs out
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Fuel { get; set; }
 
             /// <summary>

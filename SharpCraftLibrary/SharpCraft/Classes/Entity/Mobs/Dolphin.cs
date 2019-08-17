@@ -18,17 +18,19 @@ namespace SharpCraft
             /// <summary>
             /// The location of the treasure the dolphin will lead the player to
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords TreasureLocation { get; set; }
+
             /// <summary>
             /// If the dolphin has gotten any fish from the player
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? GotFish { get; set; }
+
             /// <summary>
             /// If the dolphin will lead the player to a treasure
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? CanFindTreasure { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// If the vindicator is a Johnny vindicator (attacks everything)
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Johnny { get; set; }
 
             /// <summary>

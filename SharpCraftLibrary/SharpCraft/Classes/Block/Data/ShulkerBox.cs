@@ -14,6 +14,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public ShulkerBox()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new shulker box
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -38,13 +46,14 @@ namespace SharpCraft
             /// <summary>
             /// The direction the shulker box is facing (the way it opens out into )
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// The item's inside the shulker box.
             /// (0-26)
             /// </summary>
+            [Data.DataTag("Items")]
             public override Item[] DItems
             {
                 get => _dItems;

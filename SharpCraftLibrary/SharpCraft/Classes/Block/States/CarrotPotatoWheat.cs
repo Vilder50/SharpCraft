@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public CarrotPotatoWheat()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new carrot, potato or wheat block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much the carrot / potato / wheat block has grown
             /// (0-7. 7 == fully grown)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 15)]
             public int? SAge
             {

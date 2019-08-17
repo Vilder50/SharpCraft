@@ -20,7 +20,7 @@ namespace SharpCraft
             /// The block the enderman is holding.
             /// Note: block data is not supported
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Block Holding { get; set; }
 
             /// <summary>

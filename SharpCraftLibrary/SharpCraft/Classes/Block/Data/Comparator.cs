@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Comparator : Block, IBlock.IPowered, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Comparator()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new comparator block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,23 +44,23 @@ namespace SharpCraft
             /// <summary>
             /// The direction the comparator is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
             /// <summary>
             /// The comparator's compara mode
             /// </summary>
-            [BlockData("mode")]
+            [BlockState("mode")]
             public ID.StateCompareMode? SCompareMode { get; set; }
             /// <summary>
             /// If the comparator is powered
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
 
             /// <summary>
             /// The strenght of the comparators output
             /// </summary>
-            [BlockData]
+            [Data.DataTag("OutputSignal")]
             public int? DOutputSignal { get; set; }
 
             /// <summary>

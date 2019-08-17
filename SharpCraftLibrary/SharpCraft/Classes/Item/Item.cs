@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SharpCraft
 {
-    public partial class Item
+    public partial class Item : Data.DataHolderBase
     {
         /// <summary>
         /// Creates an item without an id or anything but which can have data
@@ -155,84 +155,84 @@ namespace SharpCraft
         /// <summary>
         /// Makes the item unbreakable
         /// </summary>
-        [DataTag]
+        [Data.DataTag]
         public bool? Unbreakable { get; set; }
         /// <summary>
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
-        [DataTag]
+        [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public ID.Block[] CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
-        [DataTag]
+        [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public ID.Block[] CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
-        [DataTag]
+        [Data.DataTag]
         public int? Damage { get; set; }
         /// <summary>
         /// The data the block will have when the item is placed
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public Block BlockData { get; set; }
         /// <summary>
         /// The data the entity will have when the item is placed
         /// </summary>
-        [DataTag]
+        [Data.DataTag]
         public Entity.BaseEntity EntityTag { get; set; }
         /// <summary>
         /// The enchants the item has on
         /// </summary>
-        [DataTag]
+        [Data.DataTag("Enchantments")]
         public Enchantment[] Enchants { get; set; }
         /// <summary>
         /// Number of levels to add to the base levels when using an anvil
         /// </summary>
-        [DataTag]
+        [Data.DataTag]
         public int? RepairCost { get; set; }
         /// <summary>
         /// The color of the leather armor
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public HexColor LeatherColor { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public HexColor MapColor { get; set; }
         /// <summary>
         /// The item's shown name
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public JSON[] Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public JSON[][] Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public HideFlags HiddenFlags { get; set; }
         /// <summary>
         /// The attributes the item has
         /// </summary>
-        [DataTag]
+        [Data.DataTag("AttributeModifiers")]
         public MCAttribute[] Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
-        [DataTag]
+        [Data.CustomDataTag]
         public string FakeTag { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>
-        [DataTag]
+        [Data.DataTag]
         public int? CustomModelData { get; set; }
 
 
@@ -358,7 +358,7 @@ namespace SharpCraft
                     throw new ArgumentNullException(nameof(ID) + " or " + nameof(Group) + " has to have a value to convert the item into a giveable item");
                 }
 
-                string outputString = "";
+                string outputString;
 
                 if (ID != null)
                 {
@@ -372,22 +372,6 @@ namespace SharpCraft
                 if (!string.IsNullOrEmpty(TagDataString)) { outputString += "{" + tagData + "}"; }
 
                 return outputString;
-            }
-        }
-
-        /// <summary>
-        /// Creates a clone of this item
-        /// </summary>
-        /// <returns>The cloned new item</returns>
-        public Item Clone()
-        {
-            if (Group == null)
-            {
-                return DataTagAttribute.Clone((Item)Activator.CreateInstance(GetType(), new object[] { ID, Count, Slot }), this);
-            }
-            else
-            {
-                return DataTagAttribute.Clone((Item)Activator.CreateInstance(GetType(), new object[] { Group }), this);
             }
         }
 

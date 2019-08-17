@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Cauldron()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new cauldron block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much water there is in the cauldron
             /// (0-3. 0 = no water. 3 = full)
             /// </summary>
-            [BlockData("level")]
+            [BlockState("level")]
             [BlockIntStateRange(0, 3)]
             public int? SLevel
             {

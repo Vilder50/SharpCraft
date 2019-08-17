@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// If the bedrock should be shown under the crystal
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? ShowBottom { get; set; }
             /// <summary>
             /// The coords the crystal's beam should point to
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords BeamTarget { get; set; }
 
             /// <summary>

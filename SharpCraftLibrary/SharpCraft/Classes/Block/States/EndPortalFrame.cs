@@ -12,6 +12,14 @@ namespace SharpCraft
         public class EndPortalFrame : Block, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public EndPortalFrame()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new end portal frame block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,14 +44,14 @@ namespace SharpCraft
             /// <summary>
             /// If there is an eye in the portal
             /// </summary>
-            [BlockData("eye")]
+            [BlockState("eye")]
             public bool? SEye { get; set; }
 
             /// <summary>
             /// The direction the frame is pointing.
             /// The last frame to get an eye has to face inward the portal.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

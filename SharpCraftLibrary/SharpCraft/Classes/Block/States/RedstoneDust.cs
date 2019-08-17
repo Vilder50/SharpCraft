@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sPower;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public RedstoneDust()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new redstone wire block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much power the dust has
             /// (0-15)
             /// </summary>
-            [BlockData("power")]
+            [BlockState("power")]
             [BlockIntStateRange(0, 15)]
             public int? SPower
             {
@@ -57,25 +65,25 @@ namespace SharpCraft
             /// <summary>
             /// The way the redstone is connected in the direction
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public ID.StateRedstoneConnection? SEast { get; set; }
 
             /// <summary>
             /// The way the redstone is connected in the direction
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public ID.StateRedstoneConnection? SNorth { get; set; }
 
             /// <summary>
             /// The way the redstone is connected in the direction
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public ID.StateRedstoneConnection? SSouth { get; set; }
 
             /// <summary>
             /// The way the redstone is connected in the direction
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public ID.StateRedstoneConnection? SWest { get; set; }
         }
     }

@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The size of the explosion caused by the ghast's fireballs
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? ExplosionPower { get; set; }
 
             /// <summary>

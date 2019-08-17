@@ -17,7 +17,7 @@ namespace SharpCraft
             /// <summary>
             /// True when flying. False when hanging
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? BatFlags { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

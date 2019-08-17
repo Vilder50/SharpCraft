@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Conduit : Block, IBlock.IWaterLogged
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Conduit()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new conduit block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// If the conduit is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
         }
     }

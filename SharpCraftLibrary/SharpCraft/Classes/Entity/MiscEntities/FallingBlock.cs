@@ -19,38 +19,38 @@ namespace SharpCraft
             /// The time the entity has been falling.
             /// If this number is 0 the entity will dissapear the next tick
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time Time { get; set; }
 
             /// <summary>
             /// The falling block
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Block TheBlock { get; set; }
 
             /// <summary>
             /// If the block should be dropped if the falling block is destroyed
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? DropItem { get; set; }
 
             /// <summary>
             /// If the block should damage entities it lands on
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? HurtEntities { get; set; }
 
             /// <summary>
             /// The maximum amount of damage it can cause
             /// </summary>
-            [DataTag]
+            [Data.DataTag("FallHurtMax")]
             public int? MaxDamage { get; set; }
 
             /// <summary>
             /// The amount of damage it should cause per block fallen
             /// </summary>
-            [DataTag]
-            public double? DamageAmount { get; set; }
+            [Data.DataTag("FallHurtAmount")]
+            public float? DamageAmount { get; set; }
 
             /// <summary>
             /// Gets the raw data from this entity

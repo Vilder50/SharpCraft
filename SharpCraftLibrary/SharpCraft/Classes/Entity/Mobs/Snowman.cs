@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// True if the snowman has a pumpkin on
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Pumpkin { get; set; }
 
             /// <summary>

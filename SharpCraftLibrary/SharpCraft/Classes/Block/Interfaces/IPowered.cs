@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is powered.
         /// </summary>
-        [BlockData("powered")]
+        [BlockState("powered")]
         bool? SPowered { get; set; }
     }
 }

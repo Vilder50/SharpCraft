@@ -14,6 +14,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Barrel()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a barrel block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,19 +45,20 @@ namespace SharpCraft
             /// <summary>
             /// The direction the barrel is facing (the way it opens out into )
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// If the barrel is open or not
             /// </summary>
-            [BlockData("open")]
+            [BlockState("open")]
             public bool? SOpen { get; set; }
 
             /// <summary>
             /// The item's inside the barrel.
             /// (0-26)
             /// </summary>
+            [Data.DataTag("Items")]
             public override Item[] DItems
             {
                 get => _dItems;

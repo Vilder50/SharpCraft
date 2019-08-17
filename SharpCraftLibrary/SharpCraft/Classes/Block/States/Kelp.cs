@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Kelp()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new kelp block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The age of the kelp.
             /// (0-25. 1-24 == will try to grow. 25 = won't try to grow)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 25)]
             public int? SAge
             {

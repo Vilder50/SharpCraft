@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// If true the golem wont attack players
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? PlayerCreated { get; set; }
 
             /// <summary>

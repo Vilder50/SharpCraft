@@ -12,6 +12,14 @@ namespace SharpCraft
         public class RedstoneWallTorch : Block, IBlock.IFacing, IBlock.ILit
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public RedstoneWallTorch()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new redstone torch
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The way the torch is facing. (The way it points)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the block is lit up
             /// </summary>
-            [BlockData("lit")]
+            [BlockState("lit")]
             public bool? SLit { get; set; }
         }
     }

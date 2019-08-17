@@ -32,28 +32,33 @@ namespace SharpCraft
             /// <summary>
             /// A class used to define map icons
             /// </summary>
-            public class Icon
+            public class Icon : Data.DataHolderBase
             {
                 /// <summary>
                 /// A random name for the marker
                 /// </summary>
+                [Data.DataTag("id")]
                 public string ID { get; set; }
                 /// <summary>
                 /// The type of marker symbol
                 /// </summary>
+                [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagByte)]
                 public ID.MapMarker? MarkerType { get; set; }
                 /// <summary>
                 /// The location to show it at.
                 /// </summary>
-                public int? X { get; set; }
+                [Data.DataTag("x")]
+                public double? X { get; set; }
                 /// <summary>
                 /// Tge location to show it at.
                 /// </summary>
-                public int? Y { get; set; }
+                [Data.DataTag("z")]
+                public double? Z { get; set; }
                 private double? _Rotation;
                 /// <summary>
                 /// The icon's rotation
                 /// </summary>
+                [Data.DataTag("rot")]
                 public double? Rotation
                 {
                     get
@@ -80,7 +85,7 @@ namespace SharpCraft
                         if (ID != null) { TempList.Add("id:\"" + ID.Escape() + "\""); }
                         if (Rotation != null) { TempList.Add("rot:" + Rotation.ToString().Replace(",", ".")); }
                         if (X != null) { TempList.Add("x:" + X); }
-                        if (Y != null) { TempList.Add("x:" + Y); }
+                        if (Z != null) { TempList.Add("x:" + Z); }
                         if (MarkerType != null) { TempList.Add("type:" + (int)MarkerType); }
 
                         return string.Join(",", TempList);
@@ -91,12 +96,12 @@ namespace SharpCraft
             /// <summary>
             /// The map's ID
             /// </summary>
-            [DataTag]
+            [Data.DataTag("map")]
             public int? MapID { get; set; }
             /// <summary>
             /// The icons displayed on the map.
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Decorations")]
             public Icon[] Icons { get; set; }
 
             /// <summary>

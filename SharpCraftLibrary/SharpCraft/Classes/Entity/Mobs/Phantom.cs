@@ -18,13 +18,13 @@ namespace SharpCraft
             /// <summary>
             /// The phantom will circle around this location when not attacking
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords Area { get; set; }
             /// <summary>
             /// The size of the phantom.
             /// (0-64) Damage = 6+size
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? Size { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

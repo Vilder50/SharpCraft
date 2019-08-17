@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Door : Block, IBlock.IFacing, IBlock.IPowered, IBlock.IPart, IBlock.IOpen
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Door()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new door block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,31 +45,31 @@ namespace SharpCraft
             /// The direction the door is placed in.
             /// (The direction the door will fill less in.)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// The part of the door
             /// </summary>
-            [BlockData("half")]
+            [BlockState("half")]
             public ID.StatePart? SPart { get; set; }
 
             /// <summary>
             /// What side the hinges are on
             /// </summary>
-            [BlockData("hinge")]
+            [BlockState("hinge")]
             public ID.StateDoorHinge? SHingeLocation { get; set; }
 
             /// <summary>
             /// If the door is open
             /// </summary>
-            [BlockData("open")]
+            [BlockState("open")]
             public bool? SOpen { get; set; }
 
             /// <summary>
             /// If the door is powered by redstone
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

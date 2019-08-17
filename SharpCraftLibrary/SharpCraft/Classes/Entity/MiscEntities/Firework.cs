@@ -18,22 +18,25 @@ namespace SharpCraft
             /// <summary>
             /// Makes the firework stop flying upwards automatically
             /// </summary>
-            [DataTag]
+            [Data.DataTag("ShotAtAngle")]
             public bool? Angled { get; set; }
+
             /// <summary>
             /// The amount of time the firework has been flying
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time Life { get; set; }
+
             /// <summary>
             /// The time before the firework blows up
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time LifeTime { get; set; }
+
             /// <summary>
             /// The firework displayed when the rocket blows up
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Firework[] Fireworks { get; set; }
 
             /// <summary>

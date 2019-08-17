@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sRotation;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Sign()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new sign block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// <summary>
             /// If the sign is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
@@ -47,7 +55,7 @@ namespace SharpCraft
             /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
             /// (Used for standing signs)
             /// </summary>
-            [BlockData("rotation")]
+            [BlockState("rotation")]
             [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
@@ -65,37 +73,37 @@ namespace SharpCraft
             /// The way the sign is facing.
             /// (Used for signs on a wall)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// The color of the text on the sign
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Color", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public ID.MinecraftColor? DColor { get; set; }
 
             /// <summary>
             /// The text on line 1
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Text1", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DText1 { get; set; }
 
             /// <summary>
             /// The text on line 2
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Text2", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DText2 { get; set; }
 
             /// <summary>
             /// The text on line 3
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Text3", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DText3 { get; set; }
 
             /// <summary>
             /// The text on line 4
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Text4", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DText4 { get; set; }
 
             /// <summary>

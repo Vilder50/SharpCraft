@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sPower;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public DaylightDetector()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new daylight detector block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much redstone power it outputs
             /// (0-15)
             /// </summary>
-            [BlockData("power")]
+            [BlockState("power")]
             public int? SPower
             {
                 get => _sPower;

@@ -14,6 +14,14 @@ namespace SharpCraft
             private string _dDataSkin;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BaseSkull()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -28,14 +36,14 @@ namespace SharpCraft
             /// <summary>
             /// The name of the player whose skin to display
             /// </summary>
-            [BlockData]
+            [Data.DataTag("SkullOwner")]
             public string DPlayerSkin { get; set; }
 
             /// <summary>
             /// The raw data for a skin.
             /// (Starting from the Owner tag)
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public string DDataSkin
             {
                 get => _dDataSkin;
@@ -83,6 +91,14 @@ namespace SharpCraft
             private int? _sRotation;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public GroundSkull()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -110,7 +126,7 @@ namespace SharpCraft
             /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
             /// (Used for standing skulls / heads)
             /// </summary>
-            [BlockData("rotation")]
+            [BlockState("rotation")]
             [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
@@ -131,6 +147,14 @@ namespace SharpCraft
         /// </summary>
         public class WallSkull : BaseSkull, IBlock.IFacing
         {
+            /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public WallSkull()
+            {
+                ID = null;
+            }
+
             /// <summary>
             /// Creates a new skull / head block
             /// </summary>
@@ -157,7 +181,7 @@ namespace SharpCraft
             /// <summary>
             /// The way the skull / head is facing.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

@@ -14,6 +14,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Chest()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new chest block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -38,25 +46,26 @@ namespace SharpCraft
             /// <summary>
             /// If the chest is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// The direction the chest is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// How the chest is connected to another chest
             /// </summary>
-            [BlockData("type")]
+            [BlockState("type")]
             public ID.StateChestType? SConnectionType { get; set; }
 
             /// <summary>
             /// The item's inside the chest.
             /// (0-26)
             /// </summary>
+            [Data.DataTag("Items")]
             public override Item[] DItems
             {
                 get => _dItems;

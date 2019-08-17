@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Lantern : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Lantern()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new lantern block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// If the lantern is hanging from the roof
             /// </summary>
-            [BlockData("hanging")]
+            [BlockState("hanging")]
             public bool? SHanging { get; set; }
         }
     }

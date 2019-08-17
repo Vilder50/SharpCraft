@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sBites;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Cake()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new cake block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much cake there has been eaten
             /// (0-6. 0 = Full cake. 6 = One bite left)
             /// </summary>
-            [BlockData("bites")]
+            [BlockState("bites")]
             [BlockIntStateRange(0, 6)]
             public int? SBites
             {

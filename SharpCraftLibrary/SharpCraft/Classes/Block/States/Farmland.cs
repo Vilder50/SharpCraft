@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sHydration;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Farmland()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new farm land block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How hydrated the farmland is.
             /// (0-7. 7 == fully hydrated)
             /// </summary>
-            [BlockData("moisture")]
+            [BlockState("moisture")]
             public int? SHydration
             {
                 get => _sHydration;

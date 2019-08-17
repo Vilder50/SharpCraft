@@ -15,6 +15,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BrewingStand()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new brewing stand block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,25 +47,26 @@ namespace SharpCraft
             /// <summary>
             /// If the brewing stand block should display a bottle in slot 0
             /// </summary>
-            [BlockData("has_bottle_0")]
+            [BlockState("has_bottle_0")]
             public bool? SHasBottle0 { get; set; }
 
             /// <summary>
             /// If the brewing stand block should display a bottle in slot 1
             /// </summary>
-            [BlockData("has_bottle_1")]
+            [BlockState("has_bottle_1")]
             public bool? SHasBottle1 { get; set; }
 
             /// <summary>
             /// If the brewing stand block should display a bottle in slot 2
             /// </summary>
-            [BlockData("has_bottle_2")]
+            [BlockState("has_bottle_2")]
             public bool? SHasBottle2 { get; set; }
 
             /// <summary>
             /// The item's inside the brewing stand.
             /// 0-2 = potion slots (left to right). 3 = ingredient slot. 4 = fuel slot.
             /// </summary>
+            [Data.DataTag("Items")]
             public override Item[] DItems
             {
                 get => _dItems;
@@ -75,14 +84,14 @@ namespace SharpCraft
             /// The amount of time the potion has brewed.
             /// Done when hitting 20 seconds.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("BrewTime", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public Time DBrewTime { get; set; }
 
             /// <summary>
             /// The amount of fule in the brewing stand.
             /// (Fuel is used up everytime the brewing stand brews)
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Fuel", ForceType = SharpCraft.ID.NBTTagType.TagByte)]
             public int? DFule { get; set; }
 
             /// <summary>

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Button : Block, IBlock.IFacing, IBlock.IPlacedOn, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Button()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new button block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,19 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// The way the button is placed
             /// </summary>
-            [BlockData("face")]
+            [BlockState("face")]
             public ID.StatePlaced? SPlacedOn { get; set; }
 
             /// <summary>
             /// The way the button is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the button is clicked
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

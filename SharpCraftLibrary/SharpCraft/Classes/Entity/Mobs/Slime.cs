@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// The size of the slime
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? Size { get; set; }
             /// <summary>
             /// True if the slime touches the ground
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? WasOnGround { get; set; }
 
             /// <summary>

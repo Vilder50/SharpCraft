@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Grindstone : Block, IBlock.IPlacedOn, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Grindstone()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a grindstone block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The way the grindstone is placed
             /// </summary>
-            [BlockData("face")]
+            [BlockState("face")]
             public ID.StatePlaced? SPlacedOn { get; set; }
 
             /// <summary>
             /// The way the grindstone faces
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

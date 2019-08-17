@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Piston : Block, IBlock.IFacingFull
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Piston()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new piston block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The direction the piston will push.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// If the piston is extendend
             /// </summary>
-            [BlockData("extended")]
+            [BlockState("extended")]
             public bool? SExtended { get; set; }
         }
     }

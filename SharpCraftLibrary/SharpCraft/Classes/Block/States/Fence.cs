@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Fence : Block, IBlock.IWaterLogged, IBlock.IConnectedCardinal
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Fence()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new fence block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,31 +45,31 @@ namespace SharpCraft
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
 
             /// <summary>
             /// If the block is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
         }
     }

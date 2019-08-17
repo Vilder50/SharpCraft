@@ -12,6 +12,14 @@ namespace SharpCraft
         public class MovedByPiston : Block, IBlock.IFacingFull
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public MovedByPiston()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new block being moved by a piston
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,50 +44,50 @@ namespace SharpCraft
             /// <summary>
             /// The way the block is being pushed
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// The type of piston base used
             /// </summary>
-            [BlockData("type")]
+            [BlockState("type")]
             public ID.PistonType? SPistonBase { get; set; }
 
             /// <summary>
             /// If the piston arm is short
             /// </summary>
-            [BlockData("short")]
+            [BlockState("short")]
             public bool? SShort { get; set; }
 
             /// <summary>
             /// The block being moved
             /// Note: block data is not supported
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public Block DMovingBlock { get; set; }
 
             /// <summary>
             /// The way the block is being pushed / pulled from
             /// </summary>
-            [BlockData]
+            [Data.DataTag("facing", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public ID.FacingFull? DDirection { get; set; }
 
             /// <summary>
             /// How far the black has been moved
             /// </summary>
-            [BlockData]
-            public double? DProgress { get; set; }
+            [Data.DataTag("progress")]
+            public float? DProgress { get; set; }
 
             /// <summary>
             /// If the block is pushed or pulled
             /// </summary>
-            [BlockData]
+            [Data.DataTag("extending")]
             public bool? Pushed { get; set; }
 
             /// <summary>
             /// If the block actually is the piston's piston head
             /// </summary>
-            [BlockData]
+            [Data.DataTag("source")]
             public bool? PistonHead { get; set; }
 
             /// <summary>

@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is open.
         /// </summary>
-        [BlockData("open")]
+        [BlockState("open")]
         bool? SOpen { get; set; }
     }
 }

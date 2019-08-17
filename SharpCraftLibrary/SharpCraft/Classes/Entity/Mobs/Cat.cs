@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// The cat's skin
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public ID.Cat? CatType { get; set; }
             /// <summary>
             /// The color of the cat's collar
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.Color? CollarColor { get; set; }
 
             /// <summary>

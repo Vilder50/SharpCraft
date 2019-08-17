@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sDistance;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Leaves()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new leave block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -40,7 +48,7 @@ namespace SharpCraft
             /// The distance to the nearest wooden block.
             /// (1-7. 7 == Can despawn)
             /// </summary>
-            [BlockData("distance")]
+            [BlockState("distance")]
             [BlockIntStateRange(0, 7)]
             public int? SDistance
             {
@@ -58,7 +66,7 @@ namespace SharpCraft
             /// <summary>
             /// If the leave shouldn't decay
             /// </summary>
-            [BlockData("persistent")]
+            [BlockState("persistent")]
             public bool? SPersistant { get; set; }
         }
     }

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class NoteBlock : Block, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public NoteBlock()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new note block block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,19 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// The block's instrument
             /// </summary>
-            [BlockData("instrument")]
+            [BlockState("instrument")]
             public ID.StateNoteInstrument? SInstrument { get; set; }
 
             /// <summary>
             /// The note to play
             /// </summary>
-            [BlockData("note", true)]
+            [BlockState("note", true)]
             public ID.StateNote? SNote { get; set; }
 
             /// <summary>
             /// If the block is powered by redstone.
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

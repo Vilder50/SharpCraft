@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The time before the wither actually spawns / can be fought
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time Invul { get; set; }
 
             /// <summary>

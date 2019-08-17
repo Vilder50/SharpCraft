@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// How the parrot looks
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public ID.Parrot? ParrotType { get; set; }
 
             /// <summary>

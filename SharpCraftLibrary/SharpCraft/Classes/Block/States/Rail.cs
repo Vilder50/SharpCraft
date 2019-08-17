@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Rail : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Rail()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new rail block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// The direction the rail is going in
             /// </summary>
-            [BlockData("direction")]
+            [BlockState("direction")]
             public ID.StateRailShape? SDirection { get; set; }
         }
     }

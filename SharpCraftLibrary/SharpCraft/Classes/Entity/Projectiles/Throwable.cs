@@ -18,23 +18,23 @@ namespace SharpCraft
             /// <summary>
             /// The entity shaking when hitting a block
             /// </summary>
-            [DataTag]
-            public int? Shake { get; set; }
+            [Data.DataTag("shake")]
+            public byte? Shake { get; set; }
             /// <summary>
             /// The owner of the projectile
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID Owner { get; set; }
             /// <summary>
             /// The type of thrown potion
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public SharpCraft.Item Potion { get; set; }
             /// <summary>
             /// The item the entity is displayed as
             /// (Potions do not support use this)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Item")]
             public SharpCraft.Item DisplayItem { get; set; }
 
             /// <summary>

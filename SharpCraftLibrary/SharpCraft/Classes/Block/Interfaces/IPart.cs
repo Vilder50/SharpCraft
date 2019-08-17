@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The part this block is
         /// </summary>
-        [BlockData("half")]
+        [BlockState("half")]
         ID.StatePart? SPart { get; set; }
     }
 }

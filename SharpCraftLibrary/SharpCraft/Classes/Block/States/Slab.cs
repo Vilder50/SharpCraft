@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Slab : Block, IBlock.IWaterLogged
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Slab()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new slab block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,13 +45,13 @@ namespace SharpCraft
             /// <summary>
             /// If the slab is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// The type of slab
             /// </summary>
-            [BlockData("type")]
+            [BlockState("type")]
             public ID.StateSlabPart? SPart { get; set; }
         }
     }

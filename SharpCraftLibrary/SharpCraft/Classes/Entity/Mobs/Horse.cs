@@ -18,49 +18,49 @@ namespace SharpCraft
             /// <summary>
             /// Makes the mob stay close to other mobs of the same time with this tag being true
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Bred { get; set; }
             /// <summary>
             /// Makes the horse graze
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? EatingHayStack { get; set; }
             /// <summary>
             /// Makes the horse easier to tame.
             /// (Goes up when the horse is fed.)
             /// (A number between 0-100. the higher the easier to tame)
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? Temper { get; set; }
             /// <summary>
             /// The <see cref="UUID"/> of the owner of the horse
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID OwnerUUID { get; set; }
             /// <summary>
             /// The item the horse has as it's saddle
             /// </summary>
-            [DataTag]
+            [Data.DataTag("SaddleItem")]
             public Item HorseSaddle { get; set; }
             /// <summary>
             /// The armor the horse has on
             /// </summary>
-            [DataTag]
+            [Data.DataTag("ArmorItem")]
             public Item HorseArmor { get; set; }
             /// <summary>
             /// If the donkey has a chest
             /// </summary>
-            [DataTag]
+            [Data.DataTag("ChestedHorse")]
             public bool? DonkeyChested { get; set; }
             /// <summary>
             /// The items inside the donkeys inventory
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Items")]
             public Item[] DonkeyItems { get; set; }
             /// <summary>
             /// The horse variant
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Variant HorseVariant { get; set; }
             /// <summary>
             /// A object used to defina a horse variant
@@ -89,27 +89,27 @@ namespace SharpCraft
             /// How many items the llama can hold
             /// (1-5. Slots = x * 3)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Strength")]
             public int? LlamaStrenght { get; set; }
             /// <summary>
             /// The item the llama has on. (Normally carpet)
             /// </summary>
-            [DataTag]
+            [Data.DataTag("DecorItem")]
             public Item LlamaDecorItem { get; set; }
             /// <summary>
             /// If the skeleton horse is a trap
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? SkeletonTrap { get; set; }
             /// <summary>
             /// The time the skeleton trap has existed. When at 18000 ticks it despawns
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time SkeletonTrapTime { get; set; }
             /// <summary>
             /// If the mob is tame
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Tame { get; set; }
 
             /// <summary>

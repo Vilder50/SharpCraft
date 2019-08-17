@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// If the mob is sitting (wont follow / tp to its owner)
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Sitting { get; set; }
             /// <summary>
             /// the <see cref="UUID"/> of the owner
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public UUID OwnerUUID { get; set; }
 
             /// <summary>

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class SpecialRail : Block, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public SpecialRail()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new special rail block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The direction the rail is going in.
             /// </summary>
-            [BlockData("direction")]
+            [BlockState("direction")]
             public ID.StateSpecailRailShape? SDirection { get; set; }
 
             /// <summary>
             /// If the rail is activated
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

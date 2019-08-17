@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// Makes the chicken despawnable and drop 10 xp
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? IsChickenJockey { get; set; }
             /// <summary>
             /// The time till the chicken lays another egg
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time EggLayTime { get; set; }
 
             /// <summary>

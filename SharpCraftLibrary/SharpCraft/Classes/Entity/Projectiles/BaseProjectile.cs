@@ -19,13 +19,13 @@ namespace SharpCraft
             /// <summary>
             /// The coords of the block
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords TileCoords { get; set; }
 
             /// <summary>
             /// The block this projectile is in
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Block InBlock { get; set; }
 
             /// <summary>

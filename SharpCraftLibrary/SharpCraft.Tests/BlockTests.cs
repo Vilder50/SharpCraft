@@ -19,7 +19,7 @@ namespace SharpCraft.Tests
 
             //make sure a normal block like stone doesn't get anything else than block
             Type normalTestType = Block.GetFullBlock(ID.Block.stone).GetType();
-            Assert.IsTrue(normalTestType.BaseType == typeof(object), "normal blocks falls into wrong block catagory");
+            Assert.IsTrue(normalTestType.BaseType == typeof(Data.DataHolderBase), "normal blocks falls into wrong block catagory");
 
             //make sure all catagories are in use
             List<(MethodInfo method, Type block, bool used)> fitBlockMethods = new List<(MethodInfo method, Type block, bool used)>();
@@ -81,7 +81,7 @@ namespace SharpCraft.Tests
         }
 
         [TestMethod]
-        public void TestGetStates()
+        public void TestGetStateProperties()
         {
             Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
             {
@@ -89,7 +89,7 @@ namespace SharpCraft.Tests
                 DItems = new Item[] { new Item(ID.Item.stone, 10) }
             };
 
-            List<PropertyInfo> stateProperties = furnace.GetStates().ToList();
+            List<PropertyInfo> stateProperties = furnace.GetStateProperties().ToList();
             Assert.AreEqual(2, stateProperties.Count);
 
             PropertyInfo facingState = stateProperties.Single(s => s.Name == "SFacing");
@@ -99,56 +99,14 @@ namespace SharpCraft.Tests
         }
 
         [TestMethod]
-        public void TestHasData()
-        {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace);
-            Assert.IsFalse(furnace.HasData);
-            furnace.DBurnTime = new Time(100, ID.TimeType.seconds);
-            Assert.IsTrue(furnace.HasData);
-            Assert.IsFalse(((Block)ID.Block.stone).HasData);
-        }
-
-        [TestMethod]
-        public void TestClearData()
+        public void TestFullCloneBlock()
         {
             Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
             {
                 SFacing = ID.Facing.east,
                 DItems = new Item[] { new Item(ID.Item.stone, 10) }
             };
-            furnace.ClearData();
-            Assert.IsNull(furnace.DItems);
-            Assert.AreEqual(ID.Facing.east, furnace.SFacing);
-        }
-
-        [TestMethod]
-        public void TestGetData()
-        {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
-            {
-                SFacing = ID.Facing.east,
-                DItems = new Item[] { new Item(ID.Item.stone, 10) }
-                
-            };
-
-            List<PropertyInfo> dataProperties = furnace.GetData().ToList();
-            Assert.AreEqual(8, dataProperties.Count);
-
-            PropertyInfo itemsData = dataProperties.Single(s => s.Name == "DItems");
-            itemsData.SetValue(furnace, new Item[] { new Item(ID.Item.dirt, 10) });
-
-            Assert.AreEqual(ID.Item.dirt, furnace.DItems[0].ID);
-        }
-
-        [TestMethod]
-        public void TestCloneBlock()
-        {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
-            {
-                SFacing = ID.Facing.east,
-                DItems = new Item[] { new Item(ID.Item.stone, 10) }
-            };
-            Block.Furnace furnaceCopy = (Block.Furnace)furnace.Clone();
+            Block.Furnace furnaceCopy = (Block.Furnace)furnace.FullClone();
             Assert.AreNotEqual(furnace, furnaceCopy);
             Assert.AreEqual(furnace.SFacing, furnaceCopy.SFacing);
             Assert.AreEqual(furnace.DItems, furnaceCopy.DItems);

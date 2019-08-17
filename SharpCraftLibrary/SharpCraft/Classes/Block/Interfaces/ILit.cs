@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is lit.
         /// </summary>
-        [BlockData("lit")]
+        [BlockState("lit")]
         bool? SLit { get; set; }
     }
 }

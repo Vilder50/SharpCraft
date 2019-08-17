@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Fire()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new fire block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The age of the fire.
             /// (0-15. Has a 1/3 chance of going up each tick)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             public int? SAge
             {
                 get => _sAge;
@@ -57,35 +65,35 @@ namespace SharpCraft
             /// If the fire texture shows that way
             /// (If there is a flameable block there)
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the fire texture shows that way
             /// (If there is a flameable block there)
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the fire texture shows that way
             /// (If there is a flameable block there)
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the fire texture shows that way
             /// (If there is a flameable block there)
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
 
             /// <summary>
             /// If the fire texture shows that way
             /// (If there is a flameable block there)
             /// </summary>
-            [BlockData("up")]
+            [BlockState("up")]
             public bool? SUp { get; set; }
         }
     }

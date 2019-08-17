@@ -18,27 +18,27 @@ namespace SharpCraft
             /// <summary>
             /// The hopper's loottable
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public Loottable LootTable { get; set; }
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public long? LootTableSeed { get; set; }
             /// <summary>
             /// The items in the hopper
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public SharpCraft.Item[] Items { get; set; }
             /// <summary>
             /// If the hopper is enabled
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Enabled { get; set; }
             /// <summary>
             /// Time until it transfer another item
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time TransferCooldown { get; set; }
 
             /// <summary>

@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// If the ocelot trusts the player
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Trusting")]
             public bool? Trust { get; set; }
 
             /// <summary>

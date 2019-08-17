@@ -14,6 +14,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public DropperDispenser()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new chest dispenser / dropper
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -38,12 +46,12 @@ namespace SharpCraft
             /// <summary>
             /// The direction the dispenser / dropper is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
             /// <summary>
             /// If the dispenser / dropper is powered right now
             /// </summary>
-            [BlockData("triggered")]
+            [BlockState("triggered")]
             public bool? SPowered { get; set; }
 
             /// <summary>

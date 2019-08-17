@@ -18,12 +18,13 @@ namespace SharpCraft
             /// <summary>
             /// The amount of time before the fangs appear
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time Warmup { get; set; }
+
             /// <summary>
             /// The <see cref="UUID"/> of the entity who summoned the fangs
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID OwnerUUID { get; set; }
 
             /// <summary>

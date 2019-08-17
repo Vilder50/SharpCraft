@@ -18,17 +18,17 @@ namespace SharpCraft
             /// <summary>
             /// The chest's loottable
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public Loottable LootTable { get; set; }
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public long? LootTableSeed { get; set; }
             /// <summary>
             /// The items in the chest
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public SharpCraft.Item[] Items { get; set; }
 
             /// <summary>

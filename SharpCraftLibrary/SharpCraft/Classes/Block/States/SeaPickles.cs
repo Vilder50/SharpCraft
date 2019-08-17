@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sPicles;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public SeaPicles()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new sea picle block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The amount of picles in the block
             /// (1-4)
             /// </summary>
-            [BlockData("pickles")]
+            [BlockState("pickles")]
             [BlockIntStateRange(1, 4)]
             public int? SPicles
             {
@@ -57,7 +65,7 @@ namespace SharpCraft
             /// <summary>
             /// If the picles are water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
         }
     }

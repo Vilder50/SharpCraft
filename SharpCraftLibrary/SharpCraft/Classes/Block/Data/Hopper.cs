@@ -14,6 +14,14 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Hopper()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new hopper block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -38,18 +46,19 @@ namespace SharpCraft
             /// <summary>
             /// If the hopper is allowed to transfer items
             /// </summary>
-            [BlockData("enabled")]
+            [BlockState("enabled")]
             public bool? SEnabled { get; set; }
             /// <summary>
             /// The direction the hopper is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.StateHopperFacing? SFacing { get; set; }
 
             /// <summary>
             /// The item's inside the hopper.
             /// (0-4)
             /// </summary>
+            [Data.DataTag("Items")]
             public override Item[] DItems
             {
                 get => _dItems;
@@ -66,7 +75,7 @@ namespace SharpCraft
             /// <summary>
             /// The time till the hopper again will transfer an item.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("TransferCooldown", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public Time DCooldown { get; set; }
 
             /// <summary>

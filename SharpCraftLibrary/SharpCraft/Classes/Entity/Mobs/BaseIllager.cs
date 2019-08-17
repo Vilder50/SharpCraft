@@ -18,32 +18,37 @@ namespace SharpCraft
             /// <summary>
             /// If the illager has a raid goal
             /// </summary>
-            [DataTag]
+            [Data.DataTag("HadRaidGoal")]
             public bool? HasGoal { get; set; }
+
             /// <summary>
             /// If the illager is patrolling
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Patrolling { get; set; }
+
             /// <summary>
             /// If the illager is the leader
             /// </summary>
-            [DataTag]
+            [Data.DataTag("PatrolLeader")]
             public bool? Leader { get; set; }
+
             /// <summary>
             /// The place the illager is patrolling to
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords PatrolTarget { get; set; }
+
             /// <summary>
             /// The id of the raid the illager is in
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? RaidID { get; set; }
+
             /// <summary>
             /// the wave number the illager is in
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? Wave { get; set; }
 
             /// <summary>

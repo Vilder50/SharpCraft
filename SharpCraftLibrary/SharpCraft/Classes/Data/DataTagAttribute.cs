@@ -3,21 +3,40 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 
-namespace SharpCraft
+namespace SharpCraft.Data
 {
     /// <summary>
-    /// An attribute used to mark data.
+    /// An attribute used to mark NBT data tags.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class DataTagAttribute : Attribute
     {
         /// <summary>
-        /// Creates a new data marking attribute
+        /// Marks the property as a datatag holder
         /// </summary>
         public DataTagAttribute()
         {
 
         }
+
+        /// <summary>
+        /// Marks the property as a datatag holder holding a tag with the given name
+        /// </summary>
+        /// <param name="dataTagName">the name of the data tag its holding</param>
+        public DataTagAttribute(string dataTagName)
+        {
+            DataTagName = dataTagName;
+        }
+
+        /// <summary>
+        /// The name of this data tag
+        /// </summary>
+        public string DataTagName { get; }
+
+        /// <summary>
+        /// The type this data actually is
+        /// </summary>
+        public ID.NBTTagType ForceType { get; set; }
 
         /// <summary>
         /// Clones all properties with a <see cref="DataTagAttribute"/> from one object to another
@@ -40,5 +59,13 @@ namespace SharpCraft
 
             return emptyCopy;
         }
+    }
+
+    /// <summary>
+    /// An attribute used to mark customly made NBT data tags
+    /// </summary>
+    public class CustomDataTagAttribute : DataTagAttribute
+    {
+
     }
 }

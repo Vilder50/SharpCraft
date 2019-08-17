@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Vines : Block, IBlock.IConnected
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Vines()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new vine block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,37 +44,37 @@ namespace SharpCraft
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("down")]
+            [BlockState("down")]
             public bool? SDown { get; set; }
 
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("up")]
+            [BlockState("up")]
             public bool? SUp { get; set; }
 
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the vine should be displayed in this direction
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
         }
     }

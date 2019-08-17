@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Pumpkin : Block, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Pumpkin()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new pumpkin block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// The direction the pumpkin is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

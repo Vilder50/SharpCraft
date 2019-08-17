@@ -18,39 +18,39 @@ namespace SharpCraft
             /// <summary>
             /// The entities the spawner can spawn
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public SpawnerPotential[] Potentials { get; set; }
             /// <summary>
             /// How many entities to try to spawn every time
             /// </summary>
-            [DataTag]
-            public int? SpawnCount { get; set; }
+            [Data.DataTag]
+            public short? SpawnCount { get; set; }
             /// <summary>
             /// The range to spawn the entities in
             /// </summary>
-            [DataTag]
-            public int? SpawnRange { get; set; }
+            [Data.DataTag]
+            public short? SpawnRange { get; set; }
             /// <summary>
             /// Time till the next spawn
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Delay { get; set; }
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Range RandomDelay { get; set; }
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn
             /// </summary>
-            [DataTag]
-            public int? MaxEntities { get; set; }
+            [Data.DataTag("MaxNearbyEntities")]
+            public short? MaxEntities { get; set; }
             /// <summary>
             /// The range the player has to be in for the spawner to start spawning
             /// (<see cref="MaxEntities"/> has to be set for this to work)
             /// </summary>
-            [DataTag]
-            public int? PlayerRange { get; set; }
+            [Data.DataTag("RequiredPlayerRange")]
+            public short? PlayerRange { get; set; }
 
             /// <summary>
             /// Gets the raw data from this entity

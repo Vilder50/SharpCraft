@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public FrostedIce()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new frosted ice block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The age of the ice.
             /// (0-3. When 3 it has a chance to break)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 3)]
             public int? SAge
             {

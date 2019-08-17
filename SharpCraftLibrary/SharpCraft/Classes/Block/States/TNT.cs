@@ -12,6 +12,14 @@ namespace SharpCraft
         public class TNT : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public TNT()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a tnt block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// If the tnt gets ignited when broken
             /// </summary>
-            [BlockData("unstable")]
+            [BlockState("unstable")]
             public bool? SUnstable { get; set; }
         }
     }

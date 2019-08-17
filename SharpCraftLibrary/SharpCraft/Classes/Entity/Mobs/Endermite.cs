@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// The time the endermite has existed. When hitting 24000 it despawns
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time LifeTime { get; set; }
             /// <summary>
             /// If the endermite was spawned by a player. If true endermen will attack it.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? PlayerSpawned { get; set; }
 
             /// <summary>

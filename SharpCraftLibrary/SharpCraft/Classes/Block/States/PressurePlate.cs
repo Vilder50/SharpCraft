@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sPower;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public PressurePlate()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new pressure plate block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// <summary>
             /// If the plate is pushed down
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
 
             /// <summary>
@@ -47,7 +55,7 @@ namespace SharpCraft
             /// (0-15)
             /// Note: only works for metal plates
             /// </summary>
-            [BlockData("power")]
+            [BlockState("power")]
             public int? SPower
             {
                 get => _sPower;

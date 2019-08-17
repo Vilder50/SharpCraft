@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The surface the block is placed on
         /// </summary>
-        [BlockData("facing")]
+        [BlockState("facing")]
         ID.StatePlaced? SPlacedOn { get; set; }
     }
 }

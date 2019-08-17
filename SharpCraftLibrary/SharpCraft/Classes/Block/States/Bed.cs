@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Bed : Block, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Bed()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new bed block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,19 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// The direction the bed is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the bed is occupied
             /// </summary>
-            [BlockData("occupied")]
+            [BlockState("occupied")]
             public bool? SOccupied { get; set; }
 
             /// <summary>
             /// The part of the bed this block is
             /// </summary>
-            [BlockData("part")]
+            [BlockState("part")]
             public ID.StateBedPart? SPart { get; set; }
         }
     }

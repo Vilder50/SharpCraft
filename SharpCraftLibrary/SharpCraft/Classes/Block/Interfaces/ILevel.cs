@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The level of the block.
         /// </summary>
-        [BlockData("level")]
+        [BlockState("level")]
         int? SLevel { get; set; }
     }
 }

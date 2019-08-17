@@ -12,25 +12,25 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is connected in east
         /// </summary>
-        [BlockData("east")]
+        [BlockState("east")]
         bool? SEast { get; set; }
 
         /// <summary>
         /// If the block is connected in north
         /// </summary>
-        [BlockData("north")]
+        [BlockState("north")]
         bool? SNorth { get; set; }
 
         /// <summary>
         /// If the block is connected in south
         /// </summary>
-        [BlockData("south")]
+        [BlockState("south")]
         bool? SSouth { get; set; }
 
         /// <summary>
         /// If the block is connected in west
         /// </summary>
-        [BlockData("west")]
+        [BlockState("west")]
         bool? SWest { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The time in ticks before the tnt blows up
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public int? Fuse { get; set; }
 
             /// <summary>

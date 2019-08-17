@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The stage of the block.
         /// </summary>
-        [BlockData("stage")]
+        [BlockState("stage")]
         int? SStage { get; set; }
     }
 }

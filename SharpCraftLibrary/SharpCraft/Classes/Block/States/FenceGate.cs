@@ -12,6 +12,14 @@ namespace SharpCraft
         public class FenceGate : Block, IBlock.IPowered, IBlock.IOpen, IBlock.IFacing
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public FenceGate()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new fence gate block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,25 +45,25 @@ namespace SharpCraft
             /// <summary>
             /// The direction the gate's door will swing into when open
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// Will lower the gate to be in the same height as a wall
             /// </summary>
-            [BlockData("in_wall")]
+            [BlockState("in_wall")]
             public bool? SPartOfWall { get; set; }
 
             /// <summary>
             /// If the gate is open
             /// </summary>
-            [BlockData("open")]
+            [BlockState("open")]
             public bool? SOpen { get; set; }
 
             /// <summary>
             /// If the gate is powered by redstone
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

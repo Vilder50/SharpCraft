@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Ladder : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Ladder()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new ladder block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The direction of the block the ladder is on
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the ladder is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
         }
     }

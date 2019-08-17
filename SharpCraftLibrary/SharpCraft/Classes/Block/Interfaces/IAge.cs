@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The age of the block.
         /// </summary>
-        [BlockData("age")]
+        [BlockState("age")]
         int? SAge { get; set; }
     }
 }

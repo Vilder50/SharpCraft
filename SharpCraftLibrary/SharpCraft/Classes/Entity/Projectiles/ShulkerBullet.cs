@@ -18,32 +18,32 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the bullet
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID Owner { get; set; }
             /// <summary>
             /// The owner's location
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords OwnerCoords { get; set; }
             /// <summary>
             /// The bullet's target
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID Target { get; set; }
             /// <summary>
             /// The target's location
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords TargetCoords { get; set; }
             /// <summary>
             /// The amount of steps it takes to get to the target
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? Steps { get; set; }
             /// <summary>
             /// The offset distance from the bullet to the target
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords OffsetTarget { get; set; }
 
             /// <summary>

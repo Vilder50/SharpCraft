@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Observer : Block, IBlock.IFacingFull, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Observer()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new observer block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,13 +44,13 @@ namespace SharpCraft
             /// <summary>
             /// The direction the observer is observing.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// If the observer has observed a change
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

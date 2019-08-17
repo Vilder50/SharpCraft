@@ -18,22 +18,22 @@ namespace SharpCraft
             /// <summary>
             /// The direction the projectile flies in
             /// </summary>
-            [DataTag]
+            [Data.DataTag("direction", ForceType = ID.NBTTagType.TagDoubleArray)]
             public Coords Direction { get; set; }
             /// <summary>
             /// The amount of time the projectile hasnt been moving
             /// </summary>
-            [DataTag]
+            [Data.DataTag("life",ForceType = ID.NBTTagType.TagInt)]
             public Time Life { get; set; }
             /// <summary>
             /// The direction the projectile flies in nonestop
             /// </summary>
-            [DataTag]
+            [Data.DataTag("power",ForceType = ID.NBTTagType.TagDoubleArray)]
             public Coords Power { get; set; }
             /// <summary>
             /// The power of the explosion caused by the ghast ball
             /// </summary>
-            [DataTag]
+            [Data.DataTag("ExplosionPower")]
             public int? GhastExplosionPower { get; set; }
 
             /// <summary>

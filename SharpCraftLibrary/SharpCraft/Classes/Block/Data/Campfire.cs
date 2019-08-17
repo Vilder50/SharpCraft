@@ -17,6 +17,14 @@ namespace SharpCraft
             private Time[] _dTotalCookingTimes;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Campfire()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new campfire block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -41,25 +49,25 @@ namespace SharpCraft
             /// <summary>
             /// If the block is waterlogged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// If the fireplace's fire should be shown
             /// </summary>
-            [BlockData("lit")]
+            [BlockState("lit")]
             public bool? SLit { get; set; }
 
             /// <summary>
             /// If the smoke from the fireplace should go extra high up
             /// </summary>
-            [BlockData("signal_fire")]
+            [BlockState("signal_fire")]
             public bool? SSignalFire { get; set; }
 
             /// <summary>
             /// The direction the block is facing (the way the bottom logs are facing)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
@@ -67,7 +75,7 @@ namespace SharpCraft
             /// Use the item's slot tag to chose the slot they are in.
             /// (The fire place has 4 slots (0-3))
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Items")]
             public Item[] DItems
             {
                 get => _dItems;
@@ -85,7 +93,7 @@ namespace SharpCraft
             /// How long the items have been burning.
             /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CookingTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
             public Time[] DCookingTimes
             {
                 get => _dCookingTimes;
@@ -103,7 +111,7 @@ namespace SharpCraft
             /// How long it takes for the items to burn.
             /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CookingTotalTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
             public Time[] DTotalCookingTimes
             {
                 get => _dTotalCookingTimes;

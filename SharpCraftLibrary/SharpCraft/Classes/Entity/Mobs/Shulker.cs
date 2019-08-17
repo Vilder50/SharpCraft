@@ -18,23 +18,23 @@ namespace SharpCraft
             /// <summary>
             /// The direction of the block the shulker is placed on
             /// </summary>
-            [DataTag]
+            [Data.DataTag("AttachFace", ForceType = ID.NBTTagType.TagByte)]
             public ID.ShulkerDirection? PlacedOn { get; set; }
             /// <summary>
             /// The shulker's color.
             /// Setting this to (ID.Color)16 makes it the normal shulker color
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.Color? Color { get; set; }
             /// <summary>
             /// The height of the shulker peek
             /// </summary>
-            [DataTag]
-            public int? Peek { get; set; }
+            [Data.DataTag]
+            public byte? Peek { get; set; }
             /// <summary>
             /// The approximate location of the shulker
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords ApproxCoords { get; set; }
 
             /// <summary>

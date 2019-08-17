@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Lever : Block, IBlock.IPlacedOn, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Lever()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new lever block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,19 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// The way the lever is placed
             /// </summary>
-            [BlockData("face")]
+            [BlockState("face")]
             public ID.StatePlaced? SPlacedOn { get; set; }
 
             /// <summary>
             /// The way the lever is facing (oppesite of the direction of the block its placed on)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the lever is turned on
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

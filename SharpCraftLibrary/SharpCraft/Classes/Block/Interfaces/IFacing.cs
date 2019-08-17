@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The direction the block is facing
         /// </summary>
-        [BlockData("facing")]
+        [BlockState("facing")]
         ID.Facing? SFacing { get; set; }
     }
 }

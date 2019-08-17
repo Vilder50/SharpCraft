@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The type of boat
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public ID.Boat? Type { get; set; }
 
             /// <summary>

@@ -7,7 +7,7 @@
         /// </summary>
         public class WorldCommands
         {
-            FunctionWriter Writer;
+            readonly FunctionWriter Writer;
             readonly Function function;
 
             internal WorldCommands(FunctionWriter CommandsList, Function parentFunction)
@@ -167,7 +167,7 @@
             /// </summary>
             public class ClassRules
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassRules(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -394,7 +394,7 @@
             /// </summary>
             public class ClassObjective
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassObjective(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -491,7 +491,7 @@
             /// </summary>
             public class ClassTeam
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassTeam(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -632,7 +632,7 @@
             /// </summary>
             public class ClassDatapack
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassDatapack(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -670,7 +670,7 @@
             /// </summary>
             public class ClassTime
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassTime(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -730,7 +730,7 @@
             /// </summary>
             public class ClassBorder
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassBorder(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;
@@ -817,7 +817,7 @@
             /// </summary>
             public class ClassBossBar
             {
-                FunctionWriter Writer;
+                readonly FunctionWriter Writer;
                 internal ClassBossBar(FunctionWriter CommandsList)
                 {
                     Writer = CommandsList;

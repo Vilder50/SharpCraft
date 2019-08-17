@@ -12,6 +12,14 @@ namespace SharpCraft
         public class ChorusPlant : Block, IBlock.IConnected
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public ChorusPlant()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new chorus plant block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,37 +44,37 @@ namespace SharpCraft
             /// <summary>
             /// If the plant is connected downwards
             /// </summary>
-            [BlockData("down")]
+            [BlockState("down")]
             public bool? SDown { get; set; }
 
             /// <summary>
             /// If the plant is connected upwards
             /// </summary>
-            [BlockData("up")]
+            [BlockState("up")]
             public bool? SUp { get; set; }
 
             /// <summary>
             /// If the plant is connected in east
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the plant is connected in north
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the plant is connected in south
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the plant is connected in west
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
         }
     }

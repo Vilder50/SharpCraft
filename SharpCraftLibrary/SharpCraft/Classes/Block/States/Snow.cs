@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sLayers;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Snow()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a snow block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The amount of snow layers
             /// (1-8)
             /// </summary>
-            [BlockData("layers")]
+            [BlockState("layers")]
             [BlockIntStateRange(1, 8)]
             public int? SLayers
             {

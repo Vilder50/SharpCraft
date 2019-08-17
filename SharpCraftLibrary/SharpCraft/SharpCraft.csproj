@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Block\Block.cs" />
-    <Compile Include="Classes\Block\BlockDataAttribute.cs" />
+    <Compile Include="Classes\Block\BlockStateAttribute.cs" />
     <Compile Include="Classes\Block\Data\Banner.cs" />
     <Compile Include="Classes\Block\Data\Barrel.cs" />
     <Compile Include="Classes\Block\Data\BaseContainer.cs" />
@@ -152,7 +152,9 @@
     <Compile Include="Classes\Block\States\Vines.cs" />
     <Compile Include="Classes\Block\States\Wall.cs" />
     <Compile Include="Classes\Block\States\WallTorch.cs" />
-    <Compile Include="Classes\DataTagAttribute.cs" />
+    <Compile Include="Classes\Data\DataHolderBase.cs" />
+    <Compile Include="Classes\Data\DataPath.cs" />
+    <Compile Include="Classes\Data\DataTagAttribute.cs" />
     <Compile Include="Classes\Entity\BaseEntity.cs" />
     <Compile Include="Classes\Entity\BasicEntity.cs" />
     <Compile Include="Classes\Entity\MiscEntities\AreaCloud.cs" />

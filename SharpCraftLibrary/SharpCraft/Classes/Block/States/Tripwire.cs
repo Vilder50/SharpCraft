@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Tripwire : Block, IBlock.IConnectedCardinal, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Tripwire()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a tripwire block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,43 +44,43 @@ namespace SharpCraft
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
 
             /// <summary>
             /// If the tripwire is attached to tripwire hook
             /// </summary>
-            [BlockData("attached")]
+            [BlockState("attached")]
             public bool? SAttached { get; set; }
 
             /// <summary>
             /// If the tripwire has been disarmed
             /// </summary>
-            [BlockData("disarmed")]
+            [BlockState("disarmed")]
             public bool? SDisarmed { get; set; }
 
             /// <summary>
             /// If the tripwire is being stepped on
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

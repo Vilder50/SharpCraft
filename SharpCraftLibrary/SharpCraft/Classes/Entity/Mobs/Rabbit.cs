@@ -18,13 +18,13 @@ namespace SharpCraft
             /// <summary>
             /// The type of rabbit
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public ID.Rabbit? RabbitType { get; set; }
             /// <summary>
             /// Set to 40 when the rabbit has eaten a carrot.
             /// Goes down by 0-2 every tick.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? MoreCarrotTicks { get; set; }
 
             /// <summary>

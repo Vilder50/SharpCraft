@@ -18,23 +18,25 @@ namespace SharpCraft
             /// <summary>
             /// The age of the item in ticks. When it hits 6000 it despawns
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public int? Age { get; set; }
+
             /// <summary>
             /// The health of the item. despawns when at 0
             /// </summary>
-            [DataTag]
-            public int? Health { get; set; }
+            [Data.DataTag]
+            public byte? Health { get; set; }
+
             /// <summary>
             /// The amount of xp in the orb
             /// </summary>
-            [DataTag]
-            public int? Value { get; set; }
+            [Data.DataTag]
+            public short? Value { get; set; }
+
             /// <summary>
             /// Makes the orb not despawn
             /// (This overwrites <see cref="Age"/>)
             /// </summary>
-            [DataTag]
             public bool IgnoreAge
             {
                 get

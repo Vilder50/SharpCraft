@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sStage;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Sapling()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new sapling block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -41,7 +49,7 @@ namespace SharpCraft
             /// (0-1)
             /// 1 = sapling will grow soon.
             /// </summary>
-            [BlockData("stage")]
+            [BlockState("stage")]
             [BlockIntStateRange(0, 1)]
             public int? SStage
             {

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Jigsaw : Block, IBlock.IFacingFull
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Jigsaw()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new jigsaw block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,24 +44,26 @@ namespace SharpCraft
             /// <summary>
             /// The way the jigsaw is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// The name of the structure pool to use
             /// </summary>
-            [BlockData]
+            [Data.DataTag("target_pool")]
             public string DPool { get; set; }
             /// <summary>
             /// The block the jigsaw should transform into when done
             /// </summary>
-            [BlockData]
+
+            [Data.DataTag("final_state")]
             public ID.Block? DFinishedBlock { get; set; }
+
             /// <summary>
             /// The name of the jigsaw block.
             /// (Jigsaws only connects to other jigsaws with the same name)
             /// </summary>
-            [BlockData]
+            [Data.DataTag("attachment_type")]
             public string DName { get; set; }
 
             /// <summary>

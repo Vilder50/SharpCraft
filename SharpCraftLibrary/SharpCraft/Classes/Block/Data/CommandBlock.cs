@@ -12,6 +12,14 @@ namespace SharpCraft
         public class CommandBlock : Block, IBlock.IFacingFull
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public CommandBlock()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new chest block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,74 +44,74 @@ namespace SharpCraft
             /// <summary>
             /// The direction the command block is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.FacingFull? SFacing { get; set; }
 
             /// <summary>
             /// If the command block is conditional
             /// </summary>
-            [BlockData("conditional")]
+            [BlockState("conditional")]
             public bool? SConditional { get; set; }
 
             /// <summary>
             /// The name of the command block
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DCustomName { get; set; }
 
             /// <summary>
             /// The command in the command block
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Command")]
             public string DCommand { get; set; }
 
             /// <summary>
             /// The last command's string output
             /// </summary>
-            [BlockData]
+            [Data.DataTag("LastOutput", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DLastOutput { get; set; }
 
             /// <summary>
             /// The last command's success output
             /// </summary>
-            [BlockData]
+            [Data.DataTag("SuccessCount")]
             public int? DSuccessCount { get; set; }
 
             /// <summary>
             /// The point in time the last command was ran
             /// </summary>
-            [BlockData]
+            [Data.DataTag("LastExecution")]
             public long? DLastExecution { get; set; }
 
             /// <summary>
             /// If the command block should store <see cref="DLastOutput"/>
             /// </summary>
-            [BlockData]
+            [Data.DataTag("TrackOutput")]
             public bool? DTrackOutput { get; set; }
 
             /// <summary>
             /// If the command block is powered
             /// </summary>
-            [BlockData]
+            [Data.DataTag("powered")]
             public bool? DPowered { get; set; }
 
             /// <summary>
             /// If the command block doesnt haeve to be powered to run the command
             /// </summary>
-            [BlockData]
+            [Data.DataTag("auto")]
             public bool? DAuto { get; set; }
 
             /// <summary>
             /// If the command block ran last time
             /// </summary>
-            [BlockData]
+            [Data.DataTag("conditionMet")]
             public bool? DConditionMet { get; set; }
 
             /// <summary>
             /// If the command block should be able to run multiple times in the same tick.
             /// </summary>
-            [BlockData]
-            public bool? DUpdateLastExecution { get; set; }
+            [Data.DataTag("UpdateLastExecution", ForceType = SharpCraft.ID.NBTTagType.TagString)]
+            public bool? DCanRunMultipleTimes { get; set; }
 
             /// <summary>
             /// Gets the raw data for the data the block contains
@@ -123,7 +131,7 @@ namespace SharpCraft
                 if (DTrackOutput != null) { TempList.Add("TrackOutput:" + DTrackOutput); }
                 if (DPowered != null) { TempList.Add("powered:" + DPowered); }
                 if (DConditionMet != null) { TempList.Add("conditionMet:" + DConditionMet); }
-                if (DUpdateLastExecution != null) { TempList.Add("UpdateLastExecution:" + DUpdateLastExecution); }
+                if (DCanRunMultipleTimes != null) { TempList.Add("UpdateLastExecution:" + DCanRunMultipleTimes); }
 
                 return string.Join(",", TempList);
             }

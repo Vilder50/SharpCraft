@@ -2520,6 +2520,23 @@
         }
         public enum StateSimplePlaced {bottom, top }
 
+        public enum NBTTagType
+        {
+            TagByte,
+            TagByteArray,
+            TagShort,
+            TagInt,
+            TagIntArray,
+            TagLong,
+            TagLongArray,
+            TagFloat,
+            TagDouble,
+            TagDoubleArray,
+            TagString,
+            TagStringArray,
+            TagCompound
+        }
+
         public enum SmeltType {Furnace, Campfire, Smoker, BlastFurnace }
         public enum BlockAdd { destroy, keep, replace }
         public enum BlockFill

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class StructureBlock : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public StructureBlock()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new structure block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,65 +44,69 @@ namespace SharpCraft
             /// <summary>
             /// The way the block should display
             /// </summary>
-            [BlockData("mode")]
+            [BlockState("mode")]
             public ID.StructureMode? SMode { get; set; }
-            
+
 
             /// <summary>
             /// The name of the structure
             /// </summary>
-            [BlockData]
+            [Data.DataTag("name")]
             public string DName { get; set; }
             /// <summary>
             /// The name of the structure's creator
             /// </summary>
-            [BlockData]
-            public string DAuthor { get; set; }
-            /// <summary>
-            /// Custom data for the structure
-            /// </summary>
-            [BlockData]
+
+            [Data.DataTag("metadata")]
             public string DMetadata { get; set; }
+
             /// <summary>
             /// The location relative to the structure block to load/save the structure
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public Coords DCoords { get; set; }
+
             /// <summary>
             /// The size of the structure to save
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public Coords DSize { get; set; }
+
             /// <summary>
             /// The way the structure is rotated when loaded
             /// </summary>
-            [BlockData]
+            [Data.DataTag("rotation", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public ID.StructureRotation? DRotation { get; set; }
+
             /// <summary>
             /// The way the structure is mirrored when loaded
             /// </summary>
-            [BlockData]
+            [Data.DataTag("mirror", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public ID.StructureMirror? DMirror { get; set; }
+
             /// <summary>
             /// The mode the structure block is in
             /// </summary>
-            [BlockData]
+            [Data.DataTag("mode", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public ID.StructureMode? DMode { get; set; }
+
             /// <summary>
             /// If the structure block should ignore entities
             /// </summary>
-            [BlockData]
+            [Data.DataTag("ignoreEntities")]
             public bool? DIgnoreEntities { get; set; }
+
             /// <summary>
             /// The percent amount of random air blocks in the structure.
             /// (0 = none. 1 = all)
             /// </summary>
-            [BlockData]
+            [Data.DataTag("integrity")]
             public double? DIntegrity { get; set; }
+
             /// <summary>
             /// The seed to use when placing the random air blocks with <see cref="DIntegrity"/>
             /// </summary>
-            [BlockData]
+            [Data.DataTag("seed")]
             public long? DSeed { get; set; }
 
             /// <summary>
@@ -109,7 +121,6 @@ namespace SharpCraft
 
 
                 if (DName != null) { TempList.Add("name:\"" + DName.Escape() + "\""); }
-                if (DAuthor != null) { TempList.Add("author:\"" + DAuthor.Escape() + "\""); }
                 if (DMetadata != null) { TempList.Add("metadata:\"" + DMetadata.Escape() + "\""); }
                 if (DRotation != null) { TempList.Add("rotation:\"" + DRotation + "\""); }
                 if (DMirror != null) { TempList.Add("mirror:\"" + DMirror + "\""); }

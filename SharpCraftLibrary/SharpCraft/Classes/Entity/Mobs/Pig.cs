@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// If the pig has a saddle on
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Saddle { get; set; }
 
             /// <summary>

@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The rotation of the block.
         /// </summary>
-        [BlockData("rotation")]
+        [BlockState("rotation")]
         int? SRotation { get; set; }
     }
 }

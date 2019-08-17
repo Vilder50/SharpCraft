@@ -12,6 +12,14 @@ namespace SharpCraft
         public class RedstoneLit : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public RedstoneLit()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new redstone lamp, ground torches or ore block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// If the block is lit up
             /// </summary>
-            [BlockData("lit")]
+            [BlockState("lit")]
             public bool? SLit { get; set; }
         }
     }

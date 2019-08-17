@@ -12,13 +12,13 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// If the block is connected downwards
         /// </summary>
-        [BlockData("down")]
+        [BlockState("down")]
         bool? SDown { get; set; }
 
         /// <summary>
         /// If the block is connected upwards
         /// </summary>
-        [BlockData("up")]
+        [BlockState("up")]
         bool? SUp { get; set; }
     }
 }

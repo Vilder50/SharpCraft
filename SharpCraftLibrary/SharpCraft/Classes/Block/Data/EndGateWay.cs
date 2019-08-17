@@ -12,6 +12,14 @@ namespace SharpCraft
         public class EndGateWay : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public EndGateWay()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new end gateway block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,18 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// The location the entity gets teleported to when entering
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public Coords DExit { get; set; }
             /// <summary>
             /// If the entity should be teleported to this exact location
             /// </summary>
-            [BlockData]
+            [Data.DataTag("ExactTeleport")]
             public bool? DExactTeleport { get; set; }
+
             /// <summary>
             /// The amount of time the portal has existed.
             /// x&lt;200 = magenta beam.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Age", ForceType = SharpCraft.ID.NBTTagType.TagLong)]
             public Time DAge { get; set; }
 
             /// <summary>

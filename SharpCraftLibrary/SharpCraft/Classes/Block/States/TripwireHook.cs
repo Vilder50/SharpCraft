@@ -12,6 +12,14 @@ namespace SharpCraft
         public class TripwireHook : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public TripwireHook()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a tripwire hook block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,19 +44,19 @@ namespace SharpCraft
             /// <summary>
             /// If the tripwire hook is attached to a tripwire
             /// </summary>
-            [BlockData("attached")]
+            [BlockState("attached")]
             public bool? SAttached { get; set; }
 
             /// <summary>
             /// The direction the tripwire hook is facing into
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// If the tripwire hook's tripwire is being stepped on
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
         }
     }

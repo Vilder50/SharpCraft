@@ -19,95 +19,111 @@ namespace SharpCraft
             /// <summary>
             /// The entity's motion
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
             public Coords Motion { get; set; }
+
             /// <summary>
             /// The entity's rotation
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
             public Rotation Rotation { get; set; }
+
             /// <summary>
             /// The entity's location
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Pos", ForceType = ID.NBTTagType.TagDoubleArray)]
             public Coords Coords { get; set; }
+
             /// <summary>
             /// The distance the entity has fallen
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public float? FallDistance { get; set; }
+
             /// <summary>
             /// The time before the fire on the entity goes out.
             /// Negative value means how long it takes for the entity to turn on fire.
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Fire { get; set; }
+
             /// <summary>
             /// How much air the entity has left.
             /// (Being 0 under water will make the entity drown)
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Air { get; set; }
+
             /// <summary>
             /// If the entity is on the ground or not
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? OnGround { get; set; }
+
             /// <summary>
             /// If the entity shouldn't be effected by gravity
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? NoGravity { get; set; }
             /// <summary>
             /// The dimension the entity is in
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public ID.Dimension? Dimension { get; set; }
+
             /// <summary>
             /// If the entity is Invulnerable.
             /// (Can't be killed)
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Invulnerable { get; set; }
+
             /// <summary>
             /// The amount of time before the entity can go through a portal again.
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time PortalCooldown { get; set; }
+
             /// <summary>
             /// The entity's UUID
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID UUID { get; set; }
+
             /// <summary>
             /// The entity's shown name
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public JSON[] CustomName { get; set; }
+
             /// <summary>
             /// If the entity's name should be shown always
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? CustomNameVisible { get; set; }
+
             /// <summary>
             /// If the entity should be silent and not make any sounds
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Silent { get; set; }
+
             /// <summary>
             /// The entities riding on the entity
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public BaseEntity[] Passengers { get; set; }
+
             /// <summary>
             /// If the entity should glow
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Glowing { get; set; }
+
             /// <summary>
             /// The entity's tags
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public Tag[] Tags { get; set; }
 
             /// <summary>

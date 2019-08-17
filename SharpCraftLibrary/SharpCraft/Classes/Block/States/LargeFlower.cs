@@ -12,6 +12,14 @@ namespace SharpCraft
         public class LargeFlower : Block, IBlock.IPart
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public LargeFlower()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new large flower block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -42,7 +50,7 @@ namespace SharpCraft
             /// <summary>
             /// The part of the flower
             /// </summary>
-            [BlockData("half")]
+            [BlockState("half")]
             public ID.StatePart? SPart { get; set; }
         }
     }

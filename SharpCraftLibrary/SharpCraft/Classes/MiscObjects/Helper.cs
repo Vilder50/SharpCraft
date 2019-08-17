@@ -37,6 +37,25 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Converts the given float into a double Minecraft can use
+        /// </summary>
+        /// <param name="Float">The float to convert</param>
+        /// <returns>The converted float</returns>
+        public static string ToMinecraftFloat(this float Float)
+        {
+            return Float.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+        }
+        /// <summary>
+        /// Converts the given float into a float Minecraft can use
+        /// </summary>
+        /// <param name="Float">The float to convert</param>
+        /// <returns>The converted float</returns>
+        public static string ToMinecraftFloat(this float? Float)
+        {
+            return Float.Value.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+        }
+
+        /// <summary>
         /// Takes the item and converts it into an value Minecraft can use
         /// </summary>
         /// <param name="item">The item to convert</param>

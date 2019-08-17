@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The power of the block.
         /// </summary>
-        [BlockData("power")]
+        [BlockState("power")]
         int? SPower { get; set; }
     }
 }

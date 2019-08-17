@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sDistance;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Scaffolding()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new scaffolding block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How far out the scaffolding has gone
             /// (0-7. 7 == will start to fall)
             /// </summary>
-            [BlockData("distance")]
+            [BlockState("distance")]
             [BlockIntStateRange(0, 7)]
             public int? SDistance
             {
@@ -57,13 +65,13 @@ namespace SharpCraft
             /// <summary>
             /// If the scaffoling is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// If there isn't a block under the scaffolding
             /// </summary>
-            [BlockData("bottom")]
+            [BlockState("bottom")]
             public bool? SNoBlockUnder { get; set; }
         }
     }

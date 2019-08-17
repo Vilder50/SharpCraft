@@ -12,6 +12,14 @@ namespace SharpCraft
         public abstract class BaseInventory : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BaseInventory()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new inventory block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -27,17 +35,19 @@ namespace SharpCraft
             /// The inventory's lock.
             /// (Players have to use an item with the given name to open the block)
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Lock")]
             public string DLock { get; set; }
             /// <summary>
             /// The custom name displayed at the top left corner when you open the block
             /// </summary>
-            [BlockData]
+
+            [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DCustomName { get; set; }
             /// <summary>
             /// The items in the inventory
             /// </summary>
-            [BlockData]
+
+            [Data.DataTag("Items")]
             public abstract Item[] DItems { get; set; }
 
             /// <summary>

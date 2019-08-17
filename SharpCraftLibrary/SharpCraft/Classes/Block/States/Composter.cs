@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Composter()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new composter block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much compost there is in the composter
             /// (0-8. 0 = compost. 8 = full)
             /// </summary>
-            [BlockData("level")]
+            [BlockState("level")]
             [BlockIntStateRange(0, 8)]
             public int? SLevel
             {

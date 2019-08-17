@@ -21,7 +21,7 @@ namespace SharpCraft
             /// <summary>
             /// The time till the next spell is casted
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time SpellTicks { get; set; }
 
             /// <summary>

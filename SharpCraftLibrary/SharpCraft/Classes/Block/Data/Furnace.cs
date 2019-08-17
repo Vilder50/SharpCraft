@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace SharpCraft
 {
@@ -13,6 +14,14 @@ namespace SharpCraft
         public class Furnace : BaseInventory, IBlock.IFacing, IBlock.ILit
         {
             private Item[] _dItems;
+
+            /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Furnace()
+            {
+                ID = null;
+            }
 
             /// <summary>
             /// Creates a new furnace block
@@ -36,7 +45,6 @@ namespace SharpCraft
                 return block == SharpCraft.ID.Block.furnace || block == SharpCraft.ID.Block.blast_furnace || block == SharpCraft.ID.Block.smoker;
             }
 
-
             /// <summary>
             /// The item's inside the brewing stand.
             /// 0 = Smelting item slot. 1 = Fuel slot. 2 = Result slot.
@@ -57,43 +65,43 @@ namespace SharpCraft
             /// <summary>
             /// The direction the furnace is facing.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
             /// <summary>
             /// If the furnace is lit or not
             /// </summary>
-            [BlockData("lit")]
+            [BlockState("lit")]
             public bool? SLit { get; set; }
 
             /// <summary>
             /// The amount of time till the used fuel item runs out
             /// </summary>
-            [BlockData]
+            [Data.DataTag("BurnTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
             public Time DBurnTime { get; set; }
 
             /// <summary>
             /// The amount of time the item has been smelting for
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CookTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
             public Time DCookTime { get; set; }
 
             /// <summary>
             /// The amount of time it will take for the item to smelt.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CookTimeTotal", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
             public Time DCookTimeTotal { get; set; }
 
             /// <summary>
-            /// The ID of the last new recipe smelted in the furnace
+            /// The number of used recipes in this furnace
             /// </summary>
-            [BlockData]
-            public int? DLastNewRecipeID { get; set; }
+            [Data.DataTag("RecipesUsedSize")]
+            public short? DRecipesUsed { get; set; }
 
             /// <summary>
             /// A list of all recipes the furnace has smelted.
             /// Each recipes' number shows how many of the recipe there has been smelted since the player last took out the xp.
             /// </summary>
-            [BlockData]
+            [Data.CustomDataTag]
             public SmeltedRecipe[] DSmeltedRecipes {get; set;}
 
             /// <summary>
@@ -163,7 +171,7 @@ namespace SharpCraft
                 if (DBurnTime != null) { TempList.Add("BurnTime:" + DBurnTime.AsTicks(Time.TimerType.Short) + "s"); }
                 if (DCookTime != null) { TempList.Add("CookTime:" + DCookTime.AsTicks(Time.TimerType.Short) + "s"); }
                 if (DCookTimeTotal != null) { TempList.Add("CookTimeTotal:" + DCookTimeTotal.AsTicks(Time.TimerType.Short) + "s"); }
-                if (DLastNewRecipeID != null) { TempList.Add("RecipeUsedSize:" + DLastNewRecipeID + "s"); }
+                if (DRecipesUsed != null) { TempList.Add("RecipeUsedSize:" + DRecipesUsed + "s"); }
                 if (DSmeltedRecipes != null) { TempList.Add(string.Join(",",DSmeltedRecipes.ToList())); }
 
                 return string.Join(",", TempList);

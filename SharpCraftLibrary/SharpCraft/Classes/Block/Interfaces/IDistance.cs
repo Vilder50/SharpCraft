@@ -12,7 +12,7 @@ namespace SharpCraft.IBlock
         /// <summary>
         /// The distance of the block.
         /// </summary>
-        [BlockData("distance")]
+        [BlockState("distance")]
         int? SDistance { get; set; }
     }
 }

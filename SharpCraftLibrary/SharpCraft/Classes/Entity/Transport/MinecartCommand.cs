@@ -18,22 +18,22 @@ namespace SharpCraft
             /// <summary>
             /// The command to run
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public string Command { get; set; }
             /// <summary>
             /// The command's text output
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public string LastOutput { get; set; }
             /// <summary>
             /// The command's output
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? SuccessCount { get; set; }
             /// <summary>
             /// Makes it so last output will be stored in <see cref="LastOutput"/>
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? TrackOutput { get; set; }
 
             /// <summary>

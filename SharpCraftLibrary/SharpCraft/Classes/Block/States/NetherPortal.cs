@@ -12,6 +12,14 @@ namespace SharpCraft
         public class NetherPortal : Block
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public NetherPortal()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new nether portal block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,7 +44,7 @@ namespace SharpCraft
             /// <summary>
             /// The axis the portal is parallel to
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public ID.StatePortalAxis? SAxis { get; set; }
         }
     }

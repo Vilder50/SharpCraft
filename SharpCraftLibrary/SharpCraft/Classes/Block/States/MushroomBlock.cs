@@ -12,6 +12,14 @@ namespace SharpCraft
         public class MushroomBlock : Block, IBlock.IConnected
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public MushroomBlock()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new mushroom block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,42 +45,42 @@ namespace SharpCraft
             /// If the texture should be shown downwards.
             /// False will show pores texture
             /// </summary>
-            [BlockData("down")]
+            [BlockState("down")]
             public bool? SDown { get; set; }
 
             /// <summary>
             /// If the texture should be shown upwards.
             /// False will show pores texture
             /// </summary>
-            [BlockData("up")]
+            [BlockState("up")]
             public bool? SUp { get; set; }
 
             /// <summary>
             /// If the texture should be in east.
             /// False will show pores texture
             /// </summary>
-            [BlockData("east")]
+            [BlockState("east")]
             public bool? SEast { get; set; }
 
             /// <summary>
             /// If the texture should be in north.
             /// False will show pores texture
             /// </summary>
-            [BlockData("north")]
+            [BlockState("north")]
             public bool? SNorth { get; set; }
 
             /// <summary>
             /// If the texture should be in south.
             /// False will show pores texture
             /// </summary>
-            [BlockData("south")]
+            [BlockState("south")]
             public bool? SSouth { get; set; }
 
             /// <summary>
             /// If the texture should be in west.
             /// False will show pores texture
             /// </summary>
-            [BlockData("west")]
+            [BlockState("west")]
             public bool? SWest { get; set; }
         }
     }

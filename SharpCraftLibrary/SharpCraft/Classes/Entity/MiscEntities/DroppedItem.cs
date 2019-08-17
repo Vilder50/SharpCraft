@@ -18,32 +18,37 @@ namespace SharpCraft
             /// <summary>
             /// The age of the item in ticks. When it hits 6000 it despawns
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Age { get; set; }
+
             /// <summary>
             /// The health of the item. despawns when at 0
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public float? Health { get; set; }
+
             /// <summary>
             /// The delay before the item can be picked up in ticks
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time PickupDelay { get; set; }
+
             /// <summary>
             /// The <see cref="UUID"/> of the entity who can pick up the item
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID Owner { get; set; }
+
             /// <summary>
             /// The <see cref="UUID"/> of the entity who threw the item
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public UUID Thrower { get; set; }
+
             /// <summary>
             /// The item itself
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Item")]
             public SharpCraft.Item ItemData { get; set; }
 
             /// <summary>

@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Lectern : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Lectern()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new lectern block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -36,26 +44,32 @@ namespace SharpCraft
             /// <summary>
             /// The way the lectern is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing{get; set;}
 
             /// <summary>
             /// If the lectern should show a book
             /// </summary>
-            [BlockData("has_book")]
+            [BlockState("has_book")]
             public bool? SHasBook { get; set; }
 
             /// <summary>
             /// If the lectern is outputting a redstone signal
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
 
             /// <summary>
             /// The book in the lectern
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Book")]
             public Item DBook { get; set; }
+
+            /// <summary>
+            /// The page the book in the lantern is on
+            /// </summary>
+            [Data.DataTag("Page")]
+            public int DPage { get; set; }
 
             /// <summary>
             /// Gets the raw data for the data the block contains

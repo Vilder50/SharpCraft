@@ -12,6 +12,14 @@ namespace SharpCraft
         public abstract class BaseContainer : BaseInventory
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public BaseContainer()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new inventory block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -26,12 +34,13 @@ namespace SharpCraft
             /// <summary>
             /// The loot table with items to put into the chest when opened
             /// </summary>
-            [BlockData]
+            [Data.DataTag("LootTable", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public Loottable DLootTable { get; set; }
+
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>
-            [BlockData]
+            [Data.DataTag("LootTableSeed")]
             public long? DLootTableSeed { get; set; }
 
             /// <summary>

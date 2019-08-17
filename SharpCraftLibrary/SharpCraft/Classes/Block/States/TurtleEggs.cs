@@ -15,6 +15,14 @@ namespace SharpCraft
             private int? _sHatching;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public TurtleEggs()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a turtle egg block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -40,7 +48,7 @@ namespace SharpCraft
             /// The amount of eggs in the block.
             /// (1-4)
             /// </summary>
-            [BlockData("eggs")]
+            [BlockState("eggs")]
             [BlockIntStateRange(1, 4)]
             public int? SEggs
             {
@@ -59,7 +67,7 @@ namespace SharpCraft
             /// How far the eggs has hatched.
             /// (0-2. 2 == Will hatch soon)
             /// </summary>
-            [BlockData("hatch")]
+            [BlockState("hatch")]
             public int? SHatching
             {
                 get => _sHatching;

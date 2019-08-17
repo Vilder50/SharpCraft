@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// The color of the wolf's collar
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.Color? Color { get; set; }
             /// <summary>
             /// If the wolf is angry
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Angry { get; set; }
 
             /// <summary>

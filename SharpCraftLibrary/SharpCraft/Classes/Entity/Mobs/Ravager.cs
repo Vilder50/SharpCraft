@@ -18,17 +18,17 @@ namespace SharpCraft
             /// <summary>
             /// Cooldown till it can attack again
             /// </summary>
-            [DataTag]
+            [Data.DataTag("AttackTick",ForceType = ID.NBTTagType.TagInt)]
             public Time Attack { get; set; }
             /// <summary>
             /// Cooldown till it can roar again
             /// </summary>
-            [DataTag]
+            [Data.DataTag("RoarTick",ForceType = ID.NBTTagType.TagInt)]
             public Time Roar { get; set; }
             /// <summary>
             /// Cooldown till it can stun again
             /// </summary>
-            [DataTag]
+            [Data.DataTag("StunTick", ForceType = ID.NBTTagType.TagInt)]
             public Time Stun { get; set; }
 
             /// <summary>

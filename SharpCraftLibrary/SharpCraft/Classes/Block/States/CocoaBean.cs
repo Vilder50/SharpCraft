@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public CocoaBean()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new cocoa bean block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// How much the cocoa bean has grown
             /// (0-2. 2 == fully grown)
             /// </summary>
-            [BlockData("age")]
+            [BlockState("age")]
             [BlockIntStateRange(0, 2)]
             public int? SAge
             {
@@ -57,7 +65,7 @@ namespace SharpCraft
             /// <summary>
             /// The direction of the log the bean is placed on.
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

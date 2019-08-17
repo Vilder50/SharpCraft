@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Stair : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Stair()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a stair block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,25 +45,25 @@ namespace SharpCraft
             /// <summary>
             /// If the stair is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
 
             /// <summary>
             /// The shape of the stair
             /// </summary>
-            [BlockData("shape")]
+            [BlockState("shape")]
             public ID.StateStairShape? SShape { get; set; }
 
             /// <summary>
             /// The block the stair is placed on
             /// </summary>
-            [BlockData("half")]
+            [BlockState("half")]
             public ID.StateSimplePlaced? SPlaced { get; set; }
 
             /// <summary>
             /// The direction the full stair part is facing
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
         }
     }

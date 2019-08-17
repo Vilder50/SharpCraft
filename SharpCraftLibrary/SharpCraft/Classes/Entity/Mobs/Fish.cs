@@ -19,7 +19,7 @@ namespace SharpCraft
             /// <summary>
             /// Fow the tropical fish looks
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Variant FishVariant { get; set; }
 
             /// <summary>
@@ -63,13 +63,13 @@ namespace SharpCraft
             /// If the fish comes from a bucket.
             /// It wont despawn.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? FromBucket { get; set; }
             /// <summary>
             /// The puff state for pufferfish.
             /// 0 = deflated. 1 = halfway puffed-up. 2 = puffed-up.
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? PuffState { get; set; }
             /// <summary>
             /// Gets the raw data from this entity

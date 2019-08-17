@@ -18,19 +18,19 @@ namespace SharpCraft
             /// <summary>
             /// The fox' skin
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public ID.Fox? FoxType { get; set; }
 
             /// <summary>
             /// If the fox is sleeping
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Sleeping { get; set; }
 
             /// <summary>
             /// If the fox is crouching
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Crouching { get; set; }
             
 

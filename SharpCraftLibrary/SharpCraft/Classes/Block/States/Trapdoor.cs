@@ -12,6 +12,14 @@ namespace SharpCraft
         public class Trapdoor : Block, IBlock.IFacing, IBlock.IOpen, IBlock.IPowered, IBlock.IWaterLogged
         {
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Trapdoor()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a trapdoor block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -37,31 +45,31 @@ namespace SharpCraft
             /// <summary>
             /// The direction the trapdoor will be most open in
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// The type of trapdoor
             /// </summary>
-            [BlockData("half")]
+            [BlockState("half")]
             public ID.StateSimplePlaced? SPlaced { get; set; }
 
             /// <summary>
             /// If the trapdoor is open
             /// </summary>
-            [BlockData("open")]
+            [BlockState("open")]
             public bool? SOpen { get; set; }
 
             /// <summary>
             /// If the trapdoor is powered by redstone
             /// </summary>
-            [BlockData("powered")]
+            [BlockState("powered")]
             public bool? SPowered { get; set; }
 
             /// <summary>
             /// If the trapdoor is water logged
             /// </summary>
-            [BlockData("waterlogged")]
+            [BlockState("waterlogged")]
             public bool? SWaterLogged { get; set; }
         }
     }

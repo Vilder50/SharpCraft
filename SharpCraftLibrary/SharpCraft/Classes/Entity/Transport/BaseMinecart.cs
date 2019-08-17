@@ -19,18 +19,18 @@ namespace SharpCraft
             /// <summary>
             /// If <see cref="DisplayBlock"/> should be displayed
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? CustomDisplayTile { get; set; }
             /// <summary>
             /// The block to display
             /// Note: block data is not supported
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Block DisplayBlock { get; set; }
             /// <summary>
             /// The y-offset the block is displayed with
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public int? DisplayOffset { get; set; }
 
             /// <summary>

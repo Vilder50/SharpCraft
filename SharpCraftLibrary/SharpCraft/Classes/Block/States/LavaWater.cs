@@ -14,6 +14,14 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public LavaWater()
+            {
+                ID = null;
+            }
+
+            /// <summary>
             /// Creates a new lava or water block
             /// </summary>
             /// <param name="type">The type of block</param>
@@ -39,7 +47,7 @@ namespace SharpCraft
             /// The type of lava / water.
             /// (0-15. 0 == source block. 1-7 = flowing. 8-15 = falling (the number is 8+the number from the source its falling from))
             /// </summary>
-            [BlockData("level")]
+            [BlockState("level")]
             [BlockIntStateRange(0, 15)]
             public int? SLevel
             {

@@ -18,12 +18,12 @@ namespace SharpCraft
             /// <summary>
             /// The sheep's color
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.Color? Color { get; set; }
             /// <summary>
             /// If the sheep is sheared
             /// </summary>
-            [DataTag]
+            [Data.DataTag]
             public bool? Sheared { get; set; }
 
             /// <summary>

@@ -18,34 +18,38 @@ namespace SharpCraft
             /// <summary>
             /// The block the entity is inside
             /// </summary>
-            [DataTag]
+            [Data.CustomDataTag]
             public Coords InTile { get; set; }
             /// <summary>
             /// The direction the entity is facing
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.Facing? Facing { get; set; }
+
             /// <summary>
             /// The type of painting
             /// </summary>
-            [DataTag]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public ID.Painting? Painting { get; set; }
+
             /// <summary>
             /// The item in the item frame
             /// </summary>
-            [DataTag]
+            [Data.DataTag("Item")]
             public Item FrameItem { get; set; }
+
             /// <summary>
             /// The chance of the frame dropping its item
             /// (0-1)
             /// </summary>
-            [DataTag]
-            public double? FrameDropChance { get; set; }
+            [Data.DataTag("ItemDropChance")]
+            public float? FrameDropChance { get; set; }
+
             /// <summary>
             /// The rotation of the item in the item frame.
             /// Rotation = <see cref="FrameRotation"/> * 45 degrees clockwise
             /// </summary>
-            [DataTag]
+            [Data.DataTag("ItemRotation")]
             public int? FrameRotation { get; set; }
 
             /// <summary>

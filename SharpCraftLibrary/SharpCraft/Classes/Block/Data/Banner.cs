@@ -13,6 +13,13 @@ namespace SharpCraft
         {
             private int? _sRotation;
 
+            /// <summary>
+            /// Intilizes a new block object
+            /// </summary>
+            public Banner()
+            {
+                ID = null;
+            }
 
             /// <summary>
             /// Creates a new banner block
@@ -42,7 +49,7 @@ namespace SharpCraft
             /// (0-15. Rotation = X*22.5+South (goes south-west-north-east))
             /// (Used for standing banners)
             /// </summary>
-            [BlockData("rotation")]
+            [BlockState("rotation")]
             [BlockIntStateRange(0, 15)]
             public int? SRotation
             {
@@ -60,26 +67,26 @@ namespace SharpCraft
             /// The way the banner is facing.
             /// (Used for banners on a wall)
             /// </summary>
-            [BlockData("facing")]
+            [BlockState("facing")]
             public ID.Facing? SFacing { get; set; }
 
             /// <summary>
             /// The banners name.
             /// This name is showed on maps which has clicked this banner.
             /// </summary>
-            [BlockData]
+            [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DCustomName { get; set; }
 
             /// <summary>
             /// The banner's patterns
             /// </summary>
-            [BlockData]
+            [Data.DataTag("Patterns")]
             public BannerPattern[] DPatterns { get; set; }
 
             /// <summary>
             /// An object defining a banner pattern
             /// </summary>
-            public class BannerPattern
+            public class BannerPattern : Data.DataHolderBase
             {
                 /// <summary>
                 /// Creates a new banner pattern
@@ -95,11 +102,14 @@ namespace SharpCraft
                 /// <summary>
                 /// The pattern's color
                 /// </summary>
-                public ID.Color Color;
+                [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagInt)]
+                public ID.Color Color { get; set; }
+
                 /// <summary>
                 /// The pattern
                 /// </summary>
-                public ID.BannerPattern Pattern;
+                [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagString)]
+                public ID.BannerPattern Pattern { get; set; }
             }
 
             /// <summary>
