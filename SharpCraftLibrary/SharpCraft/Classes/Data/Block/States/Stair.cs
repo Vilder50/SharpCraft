@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Stair : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Stair()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a stair block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Composter()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new composter block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -12,14 +12,6 @@ namespace SharpCraft
         public class CommandBlock : Block, IBlock.IFacingFull
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public CommandBlock()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new chest block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public CactusSugarCane()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new cactus or sugar cane block
             /// </summary>
             /// <param name="type">The type of block</param>

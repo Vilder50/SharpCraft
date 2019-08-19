@@ -15,14 +15,6 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public BrewingStand()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new brewing stand block
             /// </summary>
             /// <param name="type">The type of block</param>

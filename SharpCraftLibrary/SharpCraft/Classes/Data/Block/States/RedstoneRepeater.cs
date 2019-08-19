@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sDelay;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public RedstoneRepeater()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new redstone repeater block
             /// </summary>
             /// <param name="type">The type of block</param>

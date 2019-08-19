@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Coral : Block, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Coral()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new coral plant (not block)
             /// </summary>
             /// <param name="type">The type of plant</param>
@@ -54,14 +46,6 @@ namespace SharpCraft
         /// </summary>
         public class CoralFan : Coral, IBlock.IFacing
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public CoralFan()
-            {
-                ID = null;
-            }
-
             /// <summary>
             /// Creates a new coral wall plant
             /// </summary>

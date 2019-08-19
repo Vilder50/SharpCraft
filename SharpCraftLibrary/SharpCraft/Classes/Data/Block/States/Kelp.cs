@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Kelp()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new kelp block
             /// </summary>
             /// <param name="type">The type of block</param>

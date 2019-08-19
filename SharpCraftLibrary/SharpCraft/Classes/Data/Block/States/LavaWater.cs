@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public LavaWater()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new lava or water block
             /// </summary>
             /// <param name="type">The type of block</param>

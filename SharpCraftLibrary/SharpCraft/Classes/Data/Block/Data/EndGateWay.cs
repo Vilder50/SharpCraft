@@ -12,14 +12,6 @@ namespace SharpCraft
         public class EndGateWay : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public EndGateWay()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new end gateway block
             /// </summary>
             /// <param name="type">The type of block</param>

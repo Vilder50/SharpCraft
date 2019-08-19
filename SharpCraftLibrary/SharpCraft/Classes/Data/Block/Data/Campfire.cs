@@ -17,14 +17,6 @@ namespace SharpCraft
             private Time[] _dTotalCookingTimes;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Campfire()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new campfire block
             /// </summary>
             /// <param name="type">The type of block</param>

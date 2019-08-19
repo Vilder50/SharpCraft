@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Bed : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Bed()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new bed block
             /// </summary>
             /// <param name="type">The type of block</param>

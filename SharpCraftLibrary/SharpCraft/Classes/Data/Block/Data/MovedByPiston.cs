@@ -12,14 +12,6 @@ namespace SharpCraft
         public class MovedByPiston : Block, IBlock.IFacingFull
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public MovedByPiston()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new block being moved by a piston
             /// </summary>
             /// <param name="type">The type of block</param>

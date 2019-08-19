@@ -13,14 +13,6 @@ namespace SharpCraft
         public class Pillar : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Pillar()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new pillar block
             /// </summary>
             /// <param name="type">The type of block</param>

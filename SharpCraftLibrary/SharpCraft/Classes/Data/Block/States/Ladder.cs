@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class Ladder : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Ladder()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new ladder block

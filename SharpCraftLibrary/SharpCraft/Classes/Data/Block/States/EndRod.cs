@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class EndRod : Block, IBlock.IFacingFull
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public EndRod()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new end rod block

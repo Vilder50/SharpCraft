@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class StoneCutter : Block, IBlock.IFacing
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public StoneCutter()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new anvil block

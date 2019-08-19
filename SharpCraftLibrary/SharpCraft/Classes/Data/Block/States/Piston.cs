@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Piston : Block, IBlock.IFacingFull
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Piston()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new piston block
             /// </summary>
             /// <param name="type">The type of block</param>

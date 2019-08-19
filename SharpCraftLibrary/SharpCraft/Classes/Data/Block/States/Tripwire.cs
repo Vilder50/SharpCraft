@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Tripwire : Block, IBlock.IConnectedCardinal, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Tripwire()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a tripwire block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -12,14 +12,6 @@ namespace SharpCraft
         public class TripwireHook : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public TripwireHook()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a tripwire hook block
             /// </summary>
             /// <param name="type">The type of block</param>

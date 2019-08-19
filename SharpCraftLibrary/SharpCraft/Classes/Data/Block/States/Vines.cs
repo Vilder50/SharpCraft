@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class Vines : Block, IBlock.IConnected
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Vines()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new vine block

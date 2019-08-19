@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Lantern : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Lantern()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new lantern block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -60,7 +60,28 @@ namespace SharpCraft.Data
         /// <returns>the cloned object</returns>
         public DataHolderBase Clone()
         {
-            DataHolderBase clonedObject = (DataHolderBase)Activator.CreateInstance(GetType());
+            DataHolderBase clonedObject = null;
+            ConstructorInfo[] constructors = GetType().GetConstructors();
+            Type nullAbleType = typeof(Nullable);
+            foreach(ConstructorInfo constructor in constructors)
+            {
+                ParameterInfo[] parameters = constructor.GetParameters();
+                if (parameters.Length == 0)
+                {
+                    clonedObject = (DataHolderBase)Activator.CreateInstance(GetType(), true);
+                    break;
+                }
+                if(parameters.Length == 1 && !(Nullable.GetUnderlyingType(parameters[0].ParameterType) is null))
+                {
+                    clonedObject = (DataHolderBase)constructor.Invoke(new object[] { null });
+                    break;
+                }
+            }
+
+            if (clonedObject is null)
+            {
+                throw new NotSupportedException("The object to clone doesn't have any parameterless constructors.");
+            }
 
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)

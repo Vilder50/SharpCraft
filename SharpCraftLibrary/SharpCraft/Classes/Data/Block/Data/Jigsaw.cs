@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Jigsaw : Block, IBlock.IFacingFull
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Jigsaw()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new jigsaw block
             /// </summary>
             /// <param name="type">The type of block</param>

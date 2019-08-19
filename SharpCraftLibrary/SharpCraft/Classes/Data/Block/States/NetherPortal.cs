@@ -10,15 +10,7 @@ namespace SharpCraft
         /// An object for nether portal blocks
         /// </summary>
         public class NetherPortal : Block
-        {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public NetherPortal()
-            {
-                ID = null;
-            }
-
+        { 
             /// <summary>
             /// Creates a new nether portal block
             /// </summary>

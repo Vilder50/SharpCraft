@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sStage;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Sapling()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new sapling block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -14,14 +14,6 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public ShulkerBox()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new shulker box
             /// </summary>
             /// <param name="type">The type of block</param>

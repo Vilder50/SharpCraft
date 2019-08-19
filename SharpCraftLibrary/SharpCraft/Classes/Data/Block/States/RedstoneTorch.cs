@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class RedstoneWallTorch : Block, IBlock.IFacing, IBlock.ILit
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public RedstoneWallTorch()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new redstone torch

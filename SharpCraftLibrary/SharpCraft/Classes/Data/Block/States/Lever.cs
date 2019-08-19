@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Lever : Block, IBlock.IPlacedOn, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Lever()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new lever block
             /// </summary>
             /// <param name="type">The type of block</param>

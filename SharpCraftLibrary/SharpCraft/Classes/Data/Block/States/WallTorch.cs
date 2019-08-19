@@ -12,14 +12,6 @@ namespace SharpCraft
         public class WallTorch : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public WallTorch()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new wall torch block
             /// </summary>
             /// <param name="type">The type of block</param>

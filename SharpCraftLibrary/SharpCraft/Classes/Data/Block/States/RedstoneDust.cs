@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sPower;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public RedstoneDust()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new redstone wire block
             /// </summary>
             /// <param name="type">The type of block</param>

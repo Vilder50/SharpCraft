@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Jukebox : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Jukebox()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new jukebox block
             /// </summary>
             /// <param name="type">The type of block</param>

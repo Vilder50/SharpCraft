@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _dLevels;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Beacon()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new beacon block
             /// </summary>
             /// <param name="type">The type of block</param>

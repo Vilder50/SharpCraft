@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sPower;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public PressurePlate()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new pressure plate block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sRotation;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Sign()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new sign block
             /// </summary>
             /// <param name="type">The type of block</param>

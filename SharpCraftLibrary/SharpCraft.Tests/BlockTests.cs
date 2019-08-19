@@ -118,6 +118,9 @@ namespace SharpCraft.Tests
             Assert.AreNotEqual(furnace.SFacing, furnaceCopy.SFacing);
             Assert.AreNotEqual(furnace.DItems, furnaceCopy.DItems);
             Assert.IsNull(furnace.SLit);
+
+            //can copy blocks with auto id givers
+            new Block.BrewingStand().FullClone();
         }
 
         [TestMethod]

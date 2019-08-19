@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sBites;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Cake()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new cake block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -12,14 +12,6 @@ namespace SharpCraft
         public class EndPortalFrame : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public EndPortalFrame()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new end portal frame block
             /// </summary>
             /// <param name="type">The type of block</param>

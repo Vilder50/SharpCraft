@@ -12,14 +12,6 @@ namespace SharpCraft
         public class MushroomBlock : Block, IBlock.IConnected
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public MushroomBlock()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new mushroom block
             /// </summary>
             /// <param name="type">The type of block</param>

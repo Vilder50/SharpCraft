@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Comparator : Block, IBlock.IPowered, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Comparator()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new comparator block
             /// </summary>
             /// <param name="type">The type of block</param>

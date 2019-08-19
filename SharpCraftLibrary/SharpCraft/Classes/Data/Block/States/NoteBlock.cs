@@ -12,14 +12,6 @@ namespace SharpCraft
         public class NoteBlock : Block, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public NoteBlock()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new note block block
             /// </summary>
             /// <param name="type">The type of block</param>

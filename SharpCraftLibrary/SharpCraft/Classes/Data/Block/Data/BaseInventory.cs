@@ -12,14 +12,6 @@ namespace SharpCraft
         public abstract class BaseInventory : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public BaseInventory()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new inventory block
             /// </summary>
             /// <param name="type">The type of block</param>

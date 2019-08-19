@@ -14,14 +14,6 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Chest()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new chest block
             /// </summary>
             /// <param name="type">The type of block</param>

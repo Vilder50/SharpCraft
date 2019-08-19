@@ -14,14 +14,6 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public DropperDispenser()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new chest dispenser / dropper
             /// </summary>
             /// <param name="type">The type of block</param>

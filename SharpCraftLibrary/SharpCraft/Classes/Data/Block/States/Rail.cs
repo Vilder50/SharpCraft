@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class Rail : Block
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Rail()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new rail block

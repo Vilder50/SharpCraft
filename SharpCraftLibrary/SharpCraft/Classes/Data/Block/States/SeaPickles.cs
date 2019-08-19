@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sPicles;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public SeaPicles()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new sea picle block
             /// </summary>
             /// <param name="type">The type of block</param>

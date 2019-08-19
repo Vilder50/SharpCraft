@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class Slab : Block, IBlock.IWaterLogged
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Slab()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new slab block

@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Button : Block, IBlock.IFacing, IBlock.IPlacedOn, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Button()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new button block
             /// </summary>
             /// <param name="type">The type of block</param>

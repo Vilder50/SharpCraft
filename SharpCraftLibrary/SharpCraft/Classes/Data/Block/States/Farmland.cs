@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sHydration;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Farmland()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new farm land block
             /// </summary>
             /// <param name="type">The type of block</param>

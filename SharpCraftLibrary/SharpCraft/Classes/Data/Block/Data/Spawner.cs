@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Spawner : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Spawner()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new end spawner block
             /// </summary>
             /// <param name="type">The type of block</param>

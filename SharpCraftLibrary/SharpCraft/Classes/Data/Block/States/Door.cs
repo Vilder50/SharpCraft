@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Door : Block, IBlock.IFacing, IBlock.IPowered, IBlock.IPart, IBlock.IOpen
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Door()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new door block
             /// </summary>
             /// <param name="type">The type of block</param>

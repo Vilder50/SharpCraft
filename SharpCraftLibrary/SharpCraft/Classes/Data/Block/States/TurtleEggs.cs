@@ -15,14 +15,6 @@ namespace SharpCraft
             private int? _sHatching;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public TurtleEggs()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a turtle egg block
             /// </summary>
             /// <param name="type">The type of block</param>

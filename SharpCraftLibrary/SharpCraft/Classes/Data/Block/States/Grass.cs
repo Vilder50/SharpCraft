@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Grass : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Grass()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new grass, mycelium or podzol block
             /// </summary>
             /// <param name="type">The type of block</param>

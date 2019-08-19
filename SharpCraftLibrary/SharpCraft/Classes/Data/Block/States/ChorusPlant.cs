@@ -11,13 +11,6 @@ namespace SharpCraft
         /// </summary>
         public class ChorusPlant : Block, IBlock.IConnected
         {
-            /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public ChorusPlant()
-            {
-                ID = null;
-            }
 
             /// <summary>
             /// Creates a new chorus plant block

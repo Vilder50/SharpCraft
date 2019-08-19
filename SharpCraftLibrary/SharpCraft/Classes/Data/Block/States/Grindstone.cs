@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Grindstone : Block, IBlock.IPlacedOn, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Grindstone()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a grindstone block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sLayers;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Snow()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a snow block
             /// </summary>
             /// <param name="type">The type of block</param>

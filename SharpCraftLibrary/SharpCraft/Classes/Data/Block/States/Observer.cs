@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Observer : Block, IBlock.IFacingFull, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Observer()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new observer block
             /// </summary>
             /// <param name="type">The type of block</param>

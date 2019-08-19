@@ -12,14 +12,6 @@ namespace SharpCraft
         public class FenceGate : Block, IBlock.IPowered, IBlock.IOpen, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public FenceGate()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new fence gate block
             /// </summary>
             /// <param name="type">The type of block</param>

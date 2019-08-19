@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Wall : Block, IBlock.IConnectedCardinal, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Wall()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new wall block
             /// </summary>
             /// <param name="type">The type of block</param>

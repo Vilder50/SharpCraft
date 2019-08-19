@@ -14,14 +14,6 @@ namespace SharpCraft
             private int? _sDistance;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Scaffolding()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new scaffolding block
             /// </summary>
             /// <param name="type">The type of block</param>

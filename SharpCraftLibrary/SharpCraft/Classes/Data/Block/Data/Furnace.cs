@@ -16,14 +16,6 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Furnace()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new furnace block
             /// </summary>
             /// <param name="type">The type of block</param>

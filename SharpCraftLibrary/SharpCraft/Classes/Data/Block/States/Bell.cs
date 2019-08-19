@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Bell : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Bell()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a bell block
             /// </summary>
             /// <param name="type">The type of block</param>

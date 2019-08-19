@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Lectern : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Lectern()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new lectern block
             /// </summary>
             /// <param name="type">The type of block</param>

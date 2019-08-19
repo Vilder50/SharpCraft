@@ -12,14 +12,6 @@ namespace SharpCraft
         public class StructureBlock : Block
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public StructureBlock()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new structure block
             /// </summary>
             /// <param name="type">The type of block</param>

@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Fence : Block, IBlock.IWaterLogged, IBlock.IConnectedCardinal
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Fence()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new fence block
             /// </summary>
             /// <param name="type">The type of block</param>

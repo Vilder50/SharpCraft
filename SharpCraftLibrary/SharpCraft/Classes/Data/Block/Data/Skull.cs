@@ -14,14 +14,6 @@ namespace SharpCraft
             private string _dDataSkin;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public BaseSkull()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>

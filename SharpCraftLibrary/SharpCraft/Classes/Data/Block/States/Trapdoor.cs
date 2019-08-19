@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Trapdoor : Block, IBlock.IFacing, IBlock.IOpen, IBlock.IPowered, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Trapdoor()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a trapdoor block
             /// </summary>
             /// <param name="type">The type of block</param>

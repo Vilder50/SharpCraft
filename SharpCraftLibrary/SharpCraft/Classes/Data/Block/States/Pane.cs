@@ -12,14 +12,6 @@ namespace SharpCraft
         public class Pane : Block, IBlock.IConnectedCardinal, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public Pane()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new pane block
             /// </summary>
             /// <param name="type">The type of block</param>
