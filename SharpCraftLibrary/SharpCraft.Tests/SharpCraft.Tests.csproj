@@ -52,6 +52,7 @@
     <Compile Include="BlockTests.cs" />
     <Compile Include="DataPathTests.cs" />
     <Compile Include="DataHolderBaseTests.cs" />
+    <Compile Include="DataTagTreeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

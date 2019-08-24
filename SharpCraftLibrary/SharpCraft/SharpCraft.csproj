@@ -152,9 +152,10 @@
     <Compile Include="Classes\Data\Block\States\Vines.cs" />
     <Compile Include="Classes\Data\Block\States\Wall.cs" />
     <Compile Include="Classes\Data\Block\States\WallTorch.cs" />
-    <Compile Include="Classes\Data\DataHolderBase.cs" />
-    <Compile Include="Classes\Data\DataPath.cs" />
-    <Compile Include="Classes\Data\DataTagAttribute.cs" />
+    <Compile Include="Classes\Data\DataMarking\DataHolderBase.cs" />
+    <Compile Include="Classes\Data\DataMarking\DataTagTree.cs" />
+    <Compile Include="Classes\Data\DataMarking\DataPath.cs" />
+    <Compile Include="Classes\Data\DataMarking\DataTagAttribute.cs" />
     <Compile Include="Classes\Data\Entity\BaseEntity.cs" />
     <Compile Include="Classes\Data\Entity\BasicEntity.cs" />
     <Compile Include="Classes\Data\Entity\MiscEntities\AreaCloud.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Classes\Data\Entity\Transport\MinecartHopper.cs" />
     <Compile Include="Classes\Data\Entity\Transport\MinecartSpawner.cs" />
     <Compile Include="Classes\Data\Entity\Transport\MinecartTNT.cs" />
+    <Compile Include="Classes\Data\DataMarking\IConvertable.cs" />
     <Compile Include="Classes\Data\Item\Data\Book.cs" />
     <Compile Include="Classes\Data\Item\Data\Firework.cs" />
     <Compile Include="Classes\Data\Item\Data\Map.cs" />

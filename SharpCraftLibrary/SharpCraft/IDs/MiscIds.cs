@@ -2523,18 +2523,24 @@
         public enum NBTTagType
         {
             TagByte,
-            TagByteArray,
             TagShort,
             TagInt,
-            TagIntArray,
             TagLong,
-            TagLongArray,
             TagFloat,
             TagDouble,
-            TagDoubleArray,
             TagString,
-            TagStringArray,
-            TagCompound
+
+            TagCompound,
+            TagArrayArray = 100,
+
+            TagByteArray = 101,
+            TagShortArray = 102,
+            TagIntArray = 103,
+            TagLongArray = 104,
+            TagFloatArray = 105,
+            TagDoubleArray = 106,
+            TagStringArray = 107,
+            TagObjectArray = 108,
         }
 
         public enum SmeltType {Furnace, Campfire, Smoker, BlastFurnace }

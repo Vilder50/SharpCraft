@@ -11,10 +11,11 @@ namespace SharpCraft
         /// Adds escape characters to the given text
         /// </summary>
         /// <param name="text">The text to escape</param>
+        /// <param name="escape">The letter to escape</param>
         /// <returns>The escaped text</returns>
-        public static string Escape(this string text)
+        public static string Escape(this string text, char escape = '"')
         {
-            return text.Replace("\"", "?-SBackSlash-??-SStringThing-?").Replace("\\", "?-SBackSlash-??-SBackSlash-?").Replace("?-SBackSlash-?", "\\").Replace("?-SStringThing-?", "\"");
+            return text.Replace(escape.ToString(), "?-SBackSlash-??-SStringThing-?").Replace("\\", "?-SBackSlash-??-SBackSlash-?").Replace("?-SBackSlash-?", "\\").Replace("?-SStringThing-?", escape.ToString());
         }
 
         /// <summary>
