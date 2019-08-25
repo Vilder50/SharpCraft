@@ -93,6 +93,11 @@ namespace SharpCraft.Tests
             dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[][] { null, null }, null, null)));
             dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10.5)));
             Assert.AreEqual("{PathOne:[],PathTwo:10.5d}", dataObject.GetDataString());
+
+            dataObject = new DataPartObject();
+            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(null, null, null)));
+            dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10.5)));
+            Assert.AreEqual("{PathTwo:10.5d}", dataObject.GetDataString());
         }
     }
 

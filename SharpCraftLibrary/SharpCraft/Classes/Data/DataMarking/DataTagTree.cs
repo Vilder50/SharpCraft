@@ -160,6 +160,7 @@ namespace SharpCraft.Data
     {
         private ID.NBTTagType? arrayType;
         private readonly List<IDataPartPathEnding> items;
+        private bool isEmpty;
 
         /// <summary>
         /// Intializes a new <see cref="DataPartArray"/> with the given value
@@ -170,6 +171,12 @@ namespace SharpCraft.Data
         public DataPartArray(object data, ID.NBTTagType? forceType, object[] conversionParams)
         {
             items = new List<IDataPartPathEnding>();
+
+            if (data is null)
+            {
+                isEmpty = true;
+                return;
+            }
 
             if (!data.GetType().IsArray)
             {
@@ -333,7 +340,7 @@ namespace SharpCraft.Data
         /// <returns>True if its empty</returns>
         public bool IsEmpty()
         {
-            return false;
+            return isEmpty;
         }
     }
 
