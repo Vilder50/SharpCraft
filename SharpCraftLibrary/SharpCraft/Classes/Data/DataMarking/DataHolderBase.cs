@@ -12,19 +12,28 @@ namespace SharpCraft.Data
     /// <summary>
     /// An interface for classes which holds data
     /// </summary>
-    public interface IDataHolder
+    public abstract class SimpleDataHolder
     {
         /// <summary>
         /// Returns the data inside this object
         /// </summary>
         /// <returns>The data in this object</returns>
-        string GetDataString();
+        public abstract string GetDataString();
+
+        /// <summary>
+        /// Converts a string into a <see cref="DataHoldingString"/> which is a subclass of <see cref="DataHolderBase"/>
+        /// </summary>
+        /// <param name="data">The data the <see cref="DataHoldingString"/> object should hold</param>
+        public static implicit operator SimpleDataHolder(string data)
+        {
+            return new DataHoldingString(data);
+        }
     }
 
     /// <summary>
     /// The base class for all classes which can hold NBT data tags
     /// </summary>
-    public abstract class DataHolderBase : IDataHolder
+    public abstract class DataHolderBase : SimpleDataHolder
     {
         /// <summary>
         /// Gets a list of all the data tag properties for this object
@@ -119,7 +128,7 @@ namespace SharpCraft.Data
         /// Returns the data from this object as a string used by Minecraft
         /// </summary>
         /// <returns>the data in raw string form</returns>
-        public string GetDataString()
+        public override string GetDataString()
         {
             return GetDataTree().GetDataString();
         }
@@ -188,9 +197,13 @@ namespace SharpCraft.Data
                                         pathAtLocation.AddValue(new DataPartPath(pathParts[i], dataObject.GetDataTree()));
                                     }
                                 }
+                                else if(!(convertAbleTag is null))
+                                {
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData)));
+                                }
                                 else
                                 {
-                                    throw new ArgumentException("Cannot convert the given type into an data tag object. (" + pathParts[i] + ")");
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType)));
                                 }
                             }
                             else if ((property.PropertyType.IsArray && forceType is null && !(data is JSON[])) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
@@ -218,7 +231,7 @@ namespace SharpCraft.Data
                                 }
                                 else
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType)));
                                 }
                             }
                         }
@@ -268,7 +281,7 @@ namespace SharpCraft.Data
     /// <summary>
     /// Used for converting from a data holding string to a data holding object
     /// </summary>
-    public class DataHoldingString : DataHolderBase
+    class DataHoldingString : SimpleDataHolder
     {
         readonly string data;
 
@@ -282,71 +295,12 @@ namespace SharpCraft.Data
         }
 
         /// <summary>
-        /// Checks if this object has any data tags defined
+        /// Returns the data inside this object
         /// </summary>
-        public new bool HasData
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Returns the string inside of this <see cref="DataHoldingString"/>
-        /// </summary>
-        /// <returns>The data in this object as a string</returns>
-        public new string GetDataString()
+        /// <returns>The data in this object</returns>
+        public override string GetDataString()
         {
             return data;
-        }
-
-        /// <summary>
-        /// Invalid Method
-        /// </summary>
-        /// <returns>Invalid Method</returns>
-        [Obsolete]
-        public new DataPartObject GetDataTree()
-        {
-            throw new InvalidOperationException("This object does not support the given method");
-        }
-
-        /// <summary>
-        /// Invalid Method
-        /// </summary>
-        /// <returns>Invalid Method</returns>
-        [Obsolete]
-        public new void ClearData()
-        {
-            throw new InvalidOperationException("This object does not support the given method");
-        }
-
-        /// <summary>
-        /// Invalid Method
-        /// </summary>
-        /// <returns>Invalid Method</returns>
-        [Obsolete]
-        public new IEnumerable<PropertyInfo> GetDataProperties()
-        {
-            throw new InvalidOperationException("This object does not support the given method");
-        }
-
-        /// <summary>
-        /// Clones all properties with a <see cref="DataTagAttribute"/> from this object onto a newly created object
-        /// </summary>
-        /// <returns>the cloned object</returns>
-        public new DataHolderBase Clone()
-        {
-            return new DataHoldingString(data);
-        }
-
-        /// <summary>
-        /// Converts a string into a <see cref="DataHoldingString"/> which is a subclass of <see cref="DataHolderBase"/>
-        /// </summary>
-        /// <param name="data">The data the <see cref="DataHoldingString"/> object should hold</param>
-        public static implicit operator DataHoldingString(string data)
-        {
-            return new DataHoldingString(data);
         }
     }
 }

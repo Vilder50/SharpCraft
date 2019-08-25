@@ -152,7 +152,7 @@
                 /// <param name="toDataPath">the datapath to copy to</param>
                 /// <param name="modifierType">The way to data should be copied in</param>
                 /// <param name="copyData">The data to insert</param>
-                public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Data.IDataHolder copyData)
+                public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
                 {
                     writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} value {copyData.GetDataString()}");
                     writer.NewLine();
@@ -165,7 +165,7 @@
                 /// <param name="toDataPath">the datapath to copy to</param>
                 /// <param name="index">The index to copy the data to</param>
                 /// <param name="copyData">The data to insert</param>
-                public void Change(Coords toBlock, string toDataPath, int index, Data.IDataHolder copyData)
+                public void Change(Coords toBlock, string toDataPath, int index, Data.SimpleDataHolder copyData)
                 {
                     writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} value {copyData.GetDataString()}");
                     writer.NewLine();

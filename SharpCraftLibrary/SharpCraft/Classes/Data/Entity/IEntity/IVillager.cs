@@ -16,19 +16,19 @@ namespace SharpCraft.IEntity
         /// The villager's level (~Amount of trades)
         /// </summary>
         [DataTag("VillagerData.level")]
-        int VillagerLevel { get; set; }
+        int? VillagerLevel { get; set; }
 
         /// <summary>
         /// The villagers proffesion
         /// </summary>
         [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagNamespacedString)]
-        ID.VillagerProffession VillagerProfession { get; set; }
+        ID.VillagerProffession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager
         /// </summary>
         [DataTag("VillagerData.type", ForceType = ID.NBTTagType.TagNamespacedString)]
-        ID.VillagerType VillagerType { get; set; }
+        ID.VillagerType? VillagerType { get; set; }
 
         /// <summary>
         /// The gossips the villager has
@@ -39,7 +39,7 @@ namespace SharpCraft.IEntity
         /// <summary>
         /// The villager's trades
         /// </summary>
-        [DataTag("Offsers.Recipes")]
+        [DataTag("Offers.Recipes")]
         Trade[] Trades { get; set; }
     }
 

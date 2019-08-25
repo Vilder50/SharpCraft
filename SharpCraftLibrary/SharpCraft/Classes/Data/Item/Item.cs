@@ -224,8 +224,13 @@ namespace SharpCraft
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
-        [DataTag("tag",Merge = true)]
-        public DataHolderBase FakeTag { get; set; }
+        [DataTag("tag.Data", ForceType = SharpCraft.ID.NBTTagType.TagCompound)]
+        public string FakeTag { get; set; }
+        /// <summary>
+        /// Extra data for this item to hold
+        /// </summary>
+        [DataTag("tag.Data")]
+        public DataHolderBase ExtraTags { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>

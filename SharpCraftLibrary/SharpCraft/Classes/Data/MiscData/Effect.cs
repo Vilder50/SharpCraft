@@ -58,23 +58,5 @@ namespace SharpCraft
             Type = EffectType;
             this.ShowParticles = ShowParticles;
         }
-
-        /// <summary>
-        /// Gets the raw effect data
-        /// </summary>
-        /// <returns>the raw effect data used by the game</returns>
-        public override string ToString()
-        {
-            List<string> TempList = new List<string>();
-
-            if (Type != null) { TempList.Add("Id:" + ((int)Type + 1) + "b"); }
-            if (Duration != null) { TempList.Add("Duration:" + Duration.AsTicks()); }
-            if (Amplifier != null) { TempList.Add("Amplifier:" + Amplifier + "b"); }
-            if (Ambiant != null) { TempList.Add("Ambient:" + Ambiant); }
-            if (ShowParticles != null) { TempList.Add("ShowParticles:" + ShowParticles); }
-
-            return string.Join(",", TempList);
-
-        }
     }
 }

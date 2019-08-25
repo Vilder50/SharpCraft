@@ -28,7 +28,7 @@ namespace SharpCraft
             /// </summary>
             /// <param name="display">The entity to display</param>
             /// <param name="type">The type of block</param>
-            public Spawner(SharpCraft.Entity.BaseEntity display, ID.Block? type = SharpCraft.ID.Block.spawner) : base(type)
+            public Spawner(Entity.BaseEntity display, ID.Block? type = SharpCraft.ID.Block.spawner) : base(type)
             {
                 DPotentials = new SpawnerPotential[]
                 {
@@ -51,7 +51,7 @@ namespace SharpCraft
             /// <summary>
             /// The entities the spawner can spawn
             /// </summary>
-            [Data.DataTag("SpawnerPotentials")]
+            [Data.DataTag("SpawnPotentials")]
             public SpawnerPotential[] DPotentials { get; set; }
 
             /// <summary>

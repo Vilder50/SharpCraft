@@ -1813,7 +1813,7 @@
         }
         public enum Effect
         {
-            speed,
+            speed = 1,
             slowness,
             haste,
             mining_fatigue,
@@ -1841,8 +1841,10 @@
             luck,
             unluck,
             slow_falling,
-            dolphins_grace,
             conduit_power,
+            dolphins_grace,
+            bad_omen,
+            hero_of_the_village,
             EffectEnumEnd
         }
         public enum Keys

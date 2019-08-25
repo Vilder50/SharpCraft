@@ -7,19 +7,25 @@ namespace SharpCraft.Data
     /// <summary>
     /// Interface for classes which can be at the end of a <see cref="DataPartPath"/>
     /// </summary>
-    public interface IDataPartPathEnding : IDataHolder
+    public interface IDataPartPathEnding
     {
         /// <summary>
         /// If the tree part's tags are all empty
         /// </summary>
         /// <returns>True if its empty</returns>
         bool IsEmpty();
+
+        /// <summary>
+        /// Returns the data inside this object
+        /// </summary>
+        /// <returns>The data in this object</returns>
+        string GetDataString();
     }
 
     /// <summary>
     /// A part of a data tag tree for holding data objects
     /// </summary>
-    public class DataPartObject : IDataPartPathEnding
+    public class DataPartObject : SimpleDataHolder, IDataPartPathEnding
     {
         private readonly List<DataPartPath> values;
 
@@ -93,7 +99,7 @@ namespace SharpCraft.Data
         /// Returns this data as a string Minecraft can use
         /// </summary>
         /// <returns>This object as a string</returns>
-        public string GetDataString()
+        public override string GetDataString()
         {
             if (IsEmpty())
             {
@@ -156,7 +162,7 @@ namespace SharpCraft.Data
     /// <summary>
     /// A part of a data tag tree for holding data arrays
     /// </summary>
-    public class DataPartArray : IDataPartPathEnding
+    public class DataPartArray : SimpleDataHolder, IDataPartPathEnding
     {
         private ID.NBTTagType? arrayType;
         private readonly List<IDataPartPathEnding> items;
@@ -219,7 +225,14 @@ namespace SharpCraft.Data
                     }
                     else if (!(canBeTag is null))
                     {
-                        AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                        if (forceType is null)
+                        {
+                            AddItem(canBeTag.GetAsTag(null, conversionParams));
+                        }
+                        else
+                        {
+                            AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                        }
                     }
                     else if (!(dataTag is null))
                     {
@@ -231,7 +244,14 @@ namespace SharpCraft.Data
                     }
                     else
                     {
-                        AddItem(new DataPartTag(value));
+                        if (forceType is null)
+                        {
+                            AddItem(new DataPartTag(value, null));
+                        }
+                        else
+                        {
+                            AddItem(new DataPartTag(value, (ID.NBTTagType)(int)forceType - 101));
+                        }
                     }
                 }
             }
@@ -302,9 +322,9 @@ namespace SharpCraft.Data
         /// Returns this data as a string Minecraft can use
         /// </summary>
         /// <returns>This object as a string</returns>
-        public string GetDataString()
+        public override string GetDataString()
         {
-            if (items.All(i => i.IsEmpty()))
+            if (items.Count == 0)
             {
                 return "[]";
             }
@@ -315,8 +335,9 @@ namespace SharpCraft.Data
                 returnString += "I;";
             }
             bool addedOne = false;
-            foreach(IDataPartPathEnding item in items)
+            for (int i = 0; i < items.Count; i++)
             {
+                IDataPartPathEnding item = items[i];
                 if (!item.IsEmpty())
                 {
                     if (!addedOne)
@@ -328,6 +349,18 @@ namespace SharpCraft.Data
                         returnString += ",";
                     }
                     returnString += item.GetDataString();
+                }
+                else if (ArrayType == ID.NBTTagType.TagObjectArray)
+                {
+                    if (!addedOne)
+                    {
+                        addedOne = true;
+                    }
+                    else
+                    {
+                        returnString += ",";
+                    }
+                    returnString += "{}";
                 }
             }
 
@@ -486,20 +519,20 @@ namespace SharpCraft.Data
                 }
                 else if (TagType == ID.NBTTagType.TagNamespacedString)
                 {
-                    return "'minecraft:" + ((string)Value).Escape('\'') + "'";
+                    return "\"minecraft:" + ((string)Value).Escape() + "\"";
                 }
                 else
                 {
-                    return "'" + ((string)Value).Escape('\'') + "'";
+                    return "\"" + ((string)Value).Escape() + "\"";
                 }
             }
             else if (Value is JSON[] jsonArray)
             {
-                return "'" + jsonArray.GetString() + "'";
+                return "\"" + jsonArray.GetString().Escape() + "\"";
             }
             else if (Value is JSON jsonObject)
             {
-                return "'" + jsonObject.ToString() + "'";
+                return "\"" + jsonObject.ToString().Escape() + "\"";
             }
             else if (Value.GetType().IsEnum)
             {
@@ -523,9 +556,9 @@ namespace SharpCraft.Data
                         }
                         return value + "b";
                     case ID.NBTTagType.TagString:
-                        return "'" + Value + "'";
+                        return "\"" + Value + "\"";
                     case ID.NBTTagType.TagNamespacedString:
-                        return "'minecraft:" + Value + "'";
+                        return "\"minecraft:" + Value + "\"";
                 }
             }
 

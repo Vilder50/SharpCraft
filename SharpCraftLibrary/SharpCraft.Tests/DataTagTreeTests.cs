@@ -193,7 +193,7 @@ namespace SharpCraft.Tests
                 new JSON() { Text = "Hey" },
                 new JSON() { Text = "Hey2" }
             }, null, null);
-            Assert.AreEqual("['[{\"text\":\"Hey\"}]','[{\"text\":\"Hey2\"}]']", array.GetDataString());
+            Assert.AreEqual("[\"[{\\\"text\\\":\\\"Hey\\\"}]\",\"[{\\\"text\\\":\\\"Hey2\\\"}]\"]", array.GetDataString());
             array = new DataPartArray(new int[]
             {
             }, null, null);
@@ -281,21 +281,21 @@ namespace SharpCraft.Tests
 
             //string
             dataTag = new DataPartTag("hello world");
-            Assert.AreEqual("'hello world'", dataTag.GetDataString());
+            Assert.AreEqual("\"hello world\"", dataTag.GetDataString());
             dataTag = new DataPartTag("\"\\'");
-            Assert.AreEqual("'\"\\\\\\''", dataTag.GetDataString());
+            Assert.AreEqual("\"\\\"\\\\'\"", dataTag.GetDataString());
             dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagString);
-            Assert.AreEqual("'ValueEight'", dataTag.GetDataString());
+            Assert.AreEqual("\"ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("{test:\"1\"}", ID.NBTTagType.TagCompound);
             Assert.AreEqual("{test:\"1\"}", dataTag.GetDataString());
             dataTag = new DataPartTag(new JSON[] { new JSON() { Text = "hello" } }, ID.NBTTagType.TagCompound);
-            Assert.AreEqual("'[{\"text\":\"hello\"}]'", dataTag.GetDataString());
+            Assert.AreEqual("\"[{\\\"text\\\":\\\"hello\\\"}]\"", dataTag.GetDataString());
             dataTag = new DataPartTag(new JSON() { Text = "hello" }, ID.NBTTagType.TagCompound);
-            Assert.AreEqual("'{\"text\":\"hello\"}'", dataTag.GetDataString());
+            Assert.AreEqual("\"{\\\"text\\\":\\\"hello\\\"}\"", dataTag.GetDataString());
             dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagNamespacedString);
-            Assert.AreEqual("'minecraft:ValueEight'", dataTag.GetDataString());
+            Assert.AreEqual("\"minecraft:ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("stone", ID.NBTTagType.TagNamespacedString);
-            Assert.AreEqual("'minecraft:stone'", dataTag.GetDataString());
+            Assert.AreEqual("\"minecraft:stone\"", dataTag.GetDataString());
 
             //null
             dataTag = new DataPartTag(null);

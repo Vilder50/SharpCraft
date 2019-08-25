@@ -43,10 +43,10 @@ namespace SharpCraft.Tests
         public void TestCondition()
         {
             DataPath path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested);
-            path.Condition(1,"{raw:'Data'}",new NestedArraysTestClass());
+            path.Condition(1, "{raw:\"Data\"}", new NestedArraysTestClass());
 
             DataPath otherPath = DataPath.GetDataPath<NestedArraysTestClass>(t => t.OtherData);
-            otherPath.Condition("{raw:'Data'}");
+            otherPath.Condition("{raw:\"Data\"}");
             otherPath.Condition(new NestedArraysTestClass());
 
             //exceptions
@@ -75,9 +75,9 @@ namespace SharpCraft.Tests
         {
             DataPath path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested).SetNextPath(DataPath.GetDataPath<NestedArraysTestClass>(t => t.OtherData));
             Assert.AreEqual("arrays.nested[][][].OtherData", path.ToString());
-            path.Condition(1, "{raw:'Data'}", new NestedArraysTestClass() { OtherData = "hello world" });
-            path.GetNextpath().Condition("{raw:'Other Data'}");
-            Assert.AreEqual("arrays.nested[1][{raw:'Data'}][].OtherData{raw:'Other Data'}", path.ToString());
+            path.Condition(1, "{raw:\"Data\"}", new NestedArraysTestClass() { OtherData = "hello world" });
+            path.GetNextpath().Condition("{raw:\"Other Data\"}");
+            Assert.AreEqual("arrays.nested[1][{raw:\"Data\"}][].OtherData{raw:\"Other Data\"}", path.ToString());
         }
 
         [TestMethod]
@@ -97,7 +97,6 @@ namespace SharpCraft.Tests
 
             condition = new DataPathCondition(new NestedArraysTestClass());
             Assert.AreEqual(DataPathCondition.ConditionType.Data, condition.Type);
-            //TODO test if data outputs correct string
 
             //test implicit convertsion
             condition = -1;

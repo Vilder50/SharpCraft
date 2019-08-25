@@ -123,7 +123,7 @@ namespace SharpCraft
             /// <summary>
             /// The entity's tags
             /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagStringArray)]
             public Tag[] Tags { get; set; }
         }
     }

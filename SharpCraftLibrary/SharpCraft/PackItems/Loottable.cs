@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// A minecraft Loot Table
     /// </summary>
-    public class Loottable
+    public class Loottable : IConvertableToDataTag
     {
         private readonly string _path;
 
@@ -40,6 +41,17 @@ namespace SharpCraft
         public override string ToString()
         {
             return _path;
+        }
+
+        /// <summary>
+        /// Converts this loot table into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(ToString());
         }
 
         /// <summary>
@@ -788,7 +800,7 @@ namespace SharpCraft
                         ReturnString = "{\"function\":\"minecraft:set_damage\"," + _value.JSONString("damage");
                         break;
                     case ChangeType.SetNbt:
-                        ReturnString = "{\"function\":\"minecraft:set_nbt\",\"tag\":\"{" + _itemNBT.GetItemTagString().Escape() + "}\"";
+                        ReturnString = "{\"function\":\"minecraft:set_nbt\",\"tag\":\"" + _itemNBT.GetItemTagString().Escape() + "\"";
                         break;
                     case ChangeType.EnchantRandom:
                         ReturnString = "{\"function\":\"minecraft:enchant_randomly\"";

@@ -240,7 +240,7 @@
                 /// <param name="toDataPath">The data path to copy to</param>
                 /// <param name="copyData">The data to insert</param>
                 /// <param name="modifierType">The way to add the data</param>
-                public void Change(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Data.IDataHolder copyData)
+                public void Change(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
                 {
                     toSelector.Limited();
                     Writer.Add($"data modify entity {toSelector} {toDataPath} {modifierType} value {copyData.GetDataString()}");
@@ -254,7 +254,7 @@
                 /// <param name="toDataPath">The data path to copy to</param>
                 /// <param name="copyData">The data to insert</param>
                 /// <param name="index">the index to insert the data at</param>
-                public void Change(Selector toSelector, string toDataPath, int index, Data.IDataHolder copyData)
+                public void Change(Selector toSelector, string toDataPath, int index, Data.SimpleDataHolder copyData)
                 {
                     toSelector.Limited();
                     Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} value {copyData.GetDataString()}");
