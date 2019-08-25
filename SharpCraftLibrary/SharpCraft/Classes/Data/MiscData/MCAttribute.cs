@@ -1,9 +1,11 @@
-﻿namespace SharpCraft
+﻿using SharpCraft.Data;
+
+namespace SharpCraft
 {
     /// <summary>
     /// An object used for minecraft attributes
     /// </summary>
-    public class MCAttribute : Data.DataHolderBase
+    public class MCAttribute : IConvertableToDataObject
     {
         /// <summary>
         /// Creates a new attribute
@@ -49,69 +51,81 @@
         /// <summary>
         /// The type of attribute
         /// </summary>
-        [Data.CustomDataTag]
         public ID.AttributeType ID { get; set; }
 
         /// <summary>
         /// The base amount of the attribute
         /// </summary>
-        [Data.CustomDataTag]
         public double Base { get; set; }
 
         /// <summary>
         /// The slot the attribute affects
         /// </summary>
-        [Data.CustomDataTag]
         public ID.AttributeSlot? Slot { get; set; }
 
         /// <summary>
         /// The operation used to add the <see cref="ChangeAmount"/> with
         /// </summary>
-        [Data.CustomDataTag]
         public ID.AttributeOperation Operation { get; set; }
 
         /// <summary>
         /// The amount to change the atttribute with
         /// </summary>
-        [Data.CustomDataTag]
         public double? ChangeAmount { get; set; }
 
         /// <summary>
         /// The UUID of the attribute
         /// </summary>
-        [Data.CustomDataTag]
         public UUID UUID { get; set; }
 
         /// <summary>
-        /// Gets the raw data used for items
+        /// Converts this <see cref="MCAttribute"/> into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <returns>Raw data used by the game in items</returns>
-        public string ItemString()
+        /// <param name="conversionData">0: "Entity" for entity tag and "Item" for item tag</param>
+        /// <returns>the made <see cref="DataPartObject"/></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
         {
-            string TempString = "{";
-
-            TempString += "AttributeName:\"" + ID.ToString().Replace("_", ".") + "\",Name:\"" + ID + "\",Amount:" + ChangeAmount.ToMinecraftDouble() + ",Operation:" + (int)Operation;
-            if (Slot != null) { TempString += ",Slot:" + Slot; }
-            if (UUID != null) { TempString += ",UUIDMost:" + UUID.Most + ",UUIDLeast:" + UUID.Least; }
-
-            return TempString + "}";
-        }
-
-        /// <summary>
-        /// Gets the raw data used for entities
-        /// </summary>
-        /// <returns>Raw data used by the game in entities</returns>
-        public string EntityString()
-        {
-            string TempString = "{";
-
-            TempString += "Name:\"" + ID.ToString().Replace("_", ".") + "\",Base:" + Base.ToMinecraftDouble();
-            if (ChangeAmount != null)
+            if (conversionData.Length == 1 && conversionData[0] is string type)
             {
-                TempString += " Modifiers:{Name:\"" + ID + "\",Amount:" + ChangeAmount.ToMinecraftDouble() + ",Operation:" + (int)Operation + ",UUIDMost:" + UUID.Most + ",UUIDLeast:" + UUID.Least + "}";
-            }
+                if (type == "Entity")
+                {
+                    DataPartObject returnObject = new DataPartObject();
+                    returnObject.AddValue(new DataPartPath("Name", new DataPartTag(ID.ToString())));
+                    returnObject.AddValue(new DataPartPath("Base", new DataPartTag(Base)));
+                    if (!(ChangeAmount is null))
+                    {
+                        DataPartObject modifier = new DataPartObject();
+                        modifier.AddValue(new DataPartPath("Name", new DataPartTag(ID.ToString())));
+                        modifier.AddValue(new DataPartPath("Amount", new DataPartTag(ChangeAmount)));
+                        modifier.AddValue(new DataPartPath("Operation", new DataPartTag((int)Operation)));
+                        modifier.MergeDataPartObject(UUID.GetAsDataObject(new object[] { "UUIDMost", "UUIDLeast" }));
 
-            return TempString + "}";
+                        returnObject.AddValue(new DataPartPath("Modifiers", new DataPartArray(modifier, null, null)));
+                    }
+
+                    return returnObject;
+                }
+                else if (type == "Item")
+                {
+                    DataPartObject returnObject = new DataPartObject();
+                    returnObject.AddValue(new DataPartPath("AttributeName", new DataPartTag(ID.ToString())));
+                    returnObject.AddValue(new DataPartPath("Name", new DataPartTag(ID.ToString())));
+                    returnObject.AddValue(new DataPartPath("Amount", new DataPartTag(ChangeAmount)));
+                    returnObject.AddValue(new DataPartPath("Operation", new DataPartTag((int)Operation)));
+                    if (!(Slot is null))
+                    {
+                        returnObject.AddValue(new DataPartPath("Slot", new DataPartTag(Slot.ToString())));
+                    }
+                    if (!(UUID is null))
+                    {
+                        returnObject.MergeDataPartObject(UUID.GetAsDataObject(new object[] { "UUIDMost", "UUIDLeast" }));
+                    }
+
+                    return returnObject;
+                }
+            }
+            
+            throw new System.ArgumentException("The conversion data is not correct for converting this MCAttribute");
         }
     }
 }

@@ -38,7 +38,7 @@ namespace SharpCraft
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"MinSpawnDelay","MaxSpawnDelay", ID.NBTTagType.TagShort, Merge = true)]
             public Range RandomDelay { get; set; }
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn
@@ -51,37 +51,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("RequiredPlayerRange")]
             public short? PlayerRange { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MinecartDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Potentials != null)
-                    {
-                        List<string> TempPontentList = new List<string>();
-                        for (int i = 0; i < Potentials.Length; i++)
-                        {
-                            TempPontentList.Add(Potentials[i].ToString());
-                        }
-                        TempList.Add("SpawnPotentials:[" + string.Join(",", TempPontentList) + "]");
-                    }
-                    if (SpawnCount != null) { TempList.Add("SpawnCount:" + SpawnCount + "s"); }
-                    if (SpawnRange != null) { TempList.Add("SpawnRange:" + SpawnRange + "s"); }
-                    if (Delay != null) { TempList.Add("Delay:" + Delay.AsTicks(Time.TimerType.Short) + "s"); }
-                    if (MaxEntities != null) { TempList.Add("MaxNearbyEntities:" + MaxEntities + "s"); }
-                    if (PlayerRange != null) { TempList.Add("RequiredPlayerRange:" + PlayerRange + "s"); }
-                    if (RandomDelay != null) { TempList.Add("MinSpawnDelay:" + RandomDelay.Min + "s,MaxSpawnDelay:" + RandomDelay.Max + "s"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

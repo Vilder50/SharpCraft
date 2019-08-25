@@ -25,24 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Angry { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = TameDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Color != null) { TempList.Add("CollarColor:" + (int)Color + "b"); }
-                    if (Angry != null) { TempList.Add("Angry:" + Angry.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

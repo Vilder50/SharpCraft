@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SharpCraft.Data;
+using System.Linq;
 
 namespace SharpCraft
 {
-    public partial class Item : Data.DataHolderBase
+    public partial class Item : DataHolderBase
     {
         /// <summary>
         /// Creates an item without an id or anything but which can have data
@@ -18,7 +20,7 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ID.Item? itemID, int? count = null, int? slot = null)
+        public Item(ID.Item? itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
@@ -43,33 +45,37 @@ namespace SharpCraft
         /// The count of this item.
         /// If null the item doesnt have a count
         /// </summary>
-        public int? Count;
+        [DataTag]
+        public sbyte? Count { get; set; }
 
         /// <summary>
         /// The slot this item is in
         /// If null the item isnt in a slot
         /// </summary>
-        public int? Slot;
+        [DataTag]
+        public sbyte? Slot { get; set; }
 
         /// <summary>
         /// The item type
         /// If null the item isnt any item type
         /// </summary>
-        public ID.Item? ID;
-
+        [DataTag("id")]
+        public ID.Item? ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
         /// </summary>
-        public class Enchantment
+        public class Enchantment : DataHolderBase
         {
             /// <summary>
             /// The type of the enchantment
             /// </summary>
+            [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public ID.Enchant? ID { get; set; }
             /// <summary>
             /// The level of the enchantment
             /// </summary>
+            [DataTag("lvl", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public int? LVL { get; set; }
             /// <summary>
             /// Creates a new enchantment
@@ -105,7 +111,7 @@ namespace SharpCraft
         /// <summary>
         /// An object used to define what flags on an item are hidden
         /// </summary>
-        public class HideFlags
+        public class HideFlags : IConvertableToDataTag
         {
             /// <summary>
             /// If enchantments should be hidden
@@ -150,198 +156,116 @@ namespace SharpCraft
                 }
             }
 
+            /// <summary>
+            /// Converts this <see cref="HideFlags"/> object into a <see cref="DataPartTag"/>
+            /// </summary>
+            /// <param name="asType">Not used</param>
+            /// <param name="extraConversionData">Not used</param>
+            /// <returns>the made <see cref="DataPartTag"/></returns>
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+            {
+                return new DataPartTag(HideFlagsNumber);
+            }
         }
 
         /// <summary>
         /// Makes the item unbreakable
         /// </summary>
-        [Data.DataTag]
+        [DataTag("tag.Unbreakable")]
         public bool? Unbreakable { get; set; }
         /// <summary>
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
-        [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public ID.Block[] CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
-        [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public ID.Block[] CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
-        [Data.DataTag]
+        [DataTag("tag.Damage")]
         public int? Damage { get; set; }
         /// <summary>
         /// The data the block will have when the item is placed
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.BlockEntityTag")]
         public Block BlockData { get; set; }
         /// <summary>
         /// The data the entity will have when the item is placed
         /// </summary>
-        [Data.DataTag]
+        [DataTag("tag.EntityTag")]
         public Entity.BaseEntity EntityTag { get; set; }
         /// <summary>
         /// The enchants the item has on
         /// </summary>
-        [Data.DataTag("Enchantments")]
+        [DataTag("tag.Enchantments")]
         public Enchantment[] Enchants { get; set; }
         /// <summary>
         /// Number of levels to add to the base levels when using an anvil
         /// </summary>
-        [Data.DataTag]
+        [DataTag("tag.RepairCost")]
         public int? RepairCost { get; set; }
         /// <summary>
         /// The color of the leather armor
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.display.color")]
         public HexColor LeatherColor { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.display.MapColor")]
         public HexColor MapColor { get; set; }
         /// <summary>
         /// The item's shown name
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
         public JSON[] Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public JSON[][] Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
-        [Data.CustomDataTag]
+        [DataTag("tag.HideFlags")]
         public HideFlags HiddenFlags { get; set; }
         /// <summary>
         /// The attributes the item has
         /// </summary>
-        [Data.DataTag("AttributeModifiers")]
+        [DataTag("tag.AttributeModifiers")]
         public MCAttribute[] Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
-        [Data.CustomDataTag]
-        public string FakeTag { get; set; }
+        [DataTag("tag",Merge = true)]
+        public DataHolderBase FakeTag { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>
-        [Data.DataTag]
+        [DataTag("tag.CustomModelData")]
         public int? CustomModelData { get; set; }
 
-
-
         /// <summary>
-        /// The item's raw data containing its slot, count and id
-        /// Used for item objects in other objects
+        /// Returns the item's data from the .tag tag
         /// </summary>
-        public string DataString
+        /// <returns>the .tag data. Null if there is not data there</returns>
+        public string GetItemTagString()
         {
-            get
+            DataPartObject tree = GetDataTree();
+            DataPartObject tagTag = (DataPartObject)tree.GetValues().SingleOrDefault(o => o.PathName == "tag")?.PathValue;
+            if (tagTag is null)
             {
-                List<string> TempList = new List<string>();
-
-                if (Slot != null) { TempList.Add("Slot:" + Slot + "b"); }
-                if (Count != null) { TempList.Add("Count:" + Count + "b"); }
-                if (ID != null) { TempList.Add("id:\"minecraft:" + ID.MinecraftValue() + "\""); }
-
-                string TempString = TagDataString;
-                if (!string.IsNullOrEmpty(TempString))
-                {
-                    TempList.Add("tag:{" + TempString + "}");
-                }
-                return string.Join(",", TempList);
+                return null;
             }
-        }
-
-        /// <summary>
-        /// The items raw data
-        /// (The data inside the item tag)
-        /// </summary>
-        public virtual string TagDataString
-        {
-            get
+            else
             {
-                List<string> TempList = new List<string>();
-                List<string> DisplayTempList = new List<string>();
-
-                if (CanDestroy != null)
-                {
-                    string TempString = "CanDestroy:[";
-                    for (int a = 0; a < CanDestroy.Length; a++)
-                    {
-                        if (a != 0) { TempString += ","; }
-                        TempString += "\"" + CanDestroy[a] + "\"";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-                if (CanPlaceOn != null)
-                {
-                    string TempString = "CanPlaceOn:[";
-                    for (int a = 0; a < CanPlaceOn.Length; a++)
-                    {
-                        if (a != 0) { TempString += ","; }
-                        TempString += "\"" + CanPlaceOn[a] + "\"";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-                if (Unbreakable != null) { TempList.Add("Unbreakable:" + Unbreakable); }
-                if (Damage != null) { TempList.Add("Damage:" + Damage + "s"); }
-                if (BlockData != null && BlockData.HasData) { TempList.Add("BlockEntityTag:{" + BlockData.GetDataString() + "}"); }
-                if (BlockData != null && BlockData.HasState) { TempList.Add("BlockStateTag:{" + BlockData.GetStateString().Replace("=",":\"").Replace(",","\",") + "\"}"); }
-                if (EntityTag != null) { TempList.Add("EntityTag:{" + EntityTag.DataWithID + "}"); }
-                if (Enchants != null)
-                {
-                    string TempString = "Enchantments:[";
-                    for (int a = 0; a < Enchants.Length; a++)
-                    {
-                        if (a != 0) { TempString += ","; }
-                        TempString += "{" + Enchants[a].EnchantDataString + "}";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-                if (RepairCost != null) { TempList.Add("RepairCost:" + RepairCost); }
-                if (LeatherColor != null) { DisplayTempList.Add("color:" + LeatherColor.ColorInt); }
-                if (MapColor != null) { DisplayTempList.Add("MapColor:" + MapColor.ColorInt); }
-                if (Name != null) { DisplayTempList.Add("Name:\"" + Name.GetString().Escape() + "\""); }
-                if (Lore != null)
-                {
-                    string TempString = "Lore:[\"";
-                    for (int a = 0; a < Lore.Length; a++)
-                    {
-                        if (a != 0) { TempString += "\",\""; }
-                        TempString += Lore[a].GetString().Escape();
-                    }
-                    TempString += "\"]";
-                    DisplayTempList.Add(TempString);
-                }
-                if (HiddenFlags != null) { TempList.Add("HideFlags:" + HiddenFlags.HideFlagsNumber); }
-                if (CustomModelData != null) { TempList.Add("CustomModelData:" + CustomModelData); }
-                if (Attributes != null)
-                {
-                    List<string> TempAtList = new List<string>();
-                    for (int i = 0; i < Attributes.Length; i++)
-                    {
-                        TempAtList.Add(Attributes[i].ItemString());
-                    }
-                    TempList.Add("AttributeModifiers:[" + string.Join(",", TempAtList) + "]");
-                }
-                if (FakeTag != null) { TempList.Add(FakeTag); }
-
-                if (DisplayTempList.Count != 0)
-                {
-                    TempList.Add("display:{" + string.Join(",", DisplayTempList) + "}");
-                }
-                return string.Join(",", TempList);
+                return tagTag.GetDataString();
             }
         }
 
@@ -368,8 +292,8 @@ namespace SharpCraft
                 {
                     outputString = "#" + Group.ToString();
                 }
-                string tagData = TagDataString;
-                if (!string.IsNullOrEmpty(TagDataString)) { outputString += "{" + tagData + "}"; }
+                string tagData = GetItemTagString();
+                if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
 
                 return outputString;
             }

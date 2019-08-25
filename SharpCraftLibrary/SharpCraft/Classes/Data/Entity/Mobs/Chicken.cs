@@ -25,24 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time EggLayTime { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (IsChickenJockey != null) { TempList.Add("IsChickenJockey:" + IsChickenJockey); }
-                    if (EggLayTime != null) { TempList.Add("EggLayTime:" + EggLayTime.AsTicks()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -44,18 +44,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("RecordItem")]
             public Item DRecordItem { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                if (DRecordItem != null) { return "RecordItem:{" + DRecordItem.DataString + "}"; }
-                return "";
-            }
         }
     }
 }

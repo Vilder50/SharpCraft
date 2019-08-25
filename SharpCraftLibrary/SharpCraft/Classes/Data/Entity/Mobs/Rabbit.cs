@@ -26,24 +26,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public int? MoreCarrotTicks { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (RabbitType != null) { TempList.Add("RabbitType:" + (int)RabbitType); }
-                    if (MoreCarrotTicks != null) { TempList.Add("MoreCarrotTicks:" + (int)MoreCarrotTicks); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

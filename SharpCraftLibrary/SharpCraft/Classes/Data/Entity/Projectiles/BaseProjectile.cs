@@ -19,37 +19,14 @@ namespace SharpCraft
             /// <summary>
             /// The coords of the block
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"xTile", "yTile", "zTile", ID.NBTTagType.TagInt, Merge = true)]
             public Coords TileCoords { get; set; }
 
             /// <summary>
             /// The block this projectile is in
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("inBlockState","Name","Properties")]
             public Block InBlock { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            /// <returns>raw data Minecraft uses</returns>
-            public string ProjectileDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    if (InBlock != null && (InBlock.ID != null || InBlock.HasState))
-                    {
-                        string blockState = "BlockState:{";
-                        if (InBlock.ID != null) { blockState += "Name:\"minecraft:" + InBlock.ID.ToString() + "\""; }
-                        if (InBlock.ID != null && InBlock.HasState) { blockState += ","; }
-                        if (InBlock.HasState) { blockState += "Properties:{" + InBlock.GetStateString().ToString().Replace("=", ":\"").Replace(",", "\",") + "\"}"; }
-                        TempList.Add(blockState + "}");
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

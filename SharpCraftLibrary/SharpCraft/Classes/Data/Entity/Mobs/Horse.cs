@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -18,54 +19,54 @@ namespace SharpCraft
             /// <summary>
             /// Makes the mob stay close to other mobs of the same time with this tag being true
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? Bred { get; set; }
             /// <summary>
             /// Makes the horse graze
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? EatingHayStack { get; set; }
             /// <summary>
             /// Makes the horse easier to tame.
             /// (Goes up when the horse is fed.)
             /// (A number between 0-100. the higher the easier to tame)
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public int? Temper { get; set; }
             /// <summary>
             /// The <see cref="UUID"/> of the owner of the horse
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag(ForceType = ID.NBTTagType.TagString)]
             public UUID OwnerUUID { get; set; }
             /// <summary>
             /// The item the horse has as it's saddle
             /// </summary>
-            [Data.DataTag("SaddleItem")]
+            [DataTag("SaddleItem")]
             public Item HorseSaddle { get; set; }
             /// <summary>
             /// The armor the horse has on
             /// </summary>
-            [Data.DataTag("ArmorItem")]
+            [DataTag("ArmorItem")]
             public Item HorseArmor { get; set; }
             /// <summary>
             /// If the donkey has a chest
             /// </summary>
-            [Data.DataTag("ChestedHorse")]
+            [DataTag("ChestedHorse")]
             public bool? DonkeyChested { get; set; }
             /// <summary>
             /// The items inside the donkeys inventory
             /// </summary>
-            [Data.DataTag("Items")]
+            [DataTag("Items")]
             public Item[] DonkeyItems { get; set; }
             /// <summary>
             /// The horse variant
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Variant")]
             public Variant HorseVariant { get; set; }
             /// <summary>
             /// A object used to defina a horse variant
             /// </summary>
-            public class Variant
+            public class Variant : IConvertableToDataTag
             {
                 /// <summary>
                 /// The color of the horse
@@ -75,6 +76,17 @@ namespace SharpCraft
                 /// The markings
                 /// </summary>
                 public ID.HorseMarkings Markings { get; set; }
+
+                /// <summary>
+                /// Converts this <see cref="Variant"/> object into a <see cref="DataPartTag"/>
+                /// </summary>
+                /// <param name="asType">Not used</param>
+                /// <param name="extraConversionData">Not used</param>
+                /// <returns>the made <see cref="DataPartTag"/></returns>
+                public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+                {
+                    return new DataPartTag(GetValue());
+                }
 
                 /// <summary>
                 /// Gets the value Minecraft uses to define horse variants
@@ -89,68 +101,28 @@ namespace SharpCraft
             /// How many items the llama can hold
             /// (1-5. Slots = x * 3)
             /// </summary>
-            [Data.DataTag("Strength")]
+            [DataTag("Strength")]
             public int? LlamaStrenght { get; set; }
             /// <summary>
             /// The item the llama has on. (Normally carpet)
             /// </summary>
-            [Data.DataTag("DecorItem")]
+            [DataTag("DecorItem")]
             public Item LlamaDecorItem { get; set; }
             /// <summary>
             /// If the skeleton horse is a trap
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? SkeletonTrap { get; set; }
             /// <summary>
             /// The time the skeleton trap has existed. When at 18000 ticks it despawns
             /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
+            [DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time SkeletonTrapTime { get; set; }
             /// <summary>
             /// If the mob is tame
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? Tame { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Bred != null) { TempList.Add("Bred:" + Bred.ToMinecraftBool()); }
-                    if (Tame != null) { TempList.Add("Tame:" + Tame.ToMinecraftBool()); }
-                    if (EatingHayStack != null) { TempList.Add("EatingHayStack:" + EatingHayStack.ToMinecraftBool()); }
-                    if (Temper != null) { TempList.Add("Temper:" + Temper); }
-                    if (OwnerUUID != null) { TempList.Add("OwnerUUID:" + OwnerUUID); }
-                    if (HorseSaddle != null) { TempList.Add("SaddleItem:{" + HorseSaddle.DataString + "}"); }
-                    if (HorseArmor != null) { TempList.Add("SaddleItem:{" + HorseSaddle.DataString + "}"); }
-                    if (DonkeyChested != null) { TempList.Add("ChestedHorse:" + DonkeyChested.ToMinecraftBool()); }
-                    if (HorseVariant != null) { TempList.Add("Variant:" + HorseVariant.GetValue()); }
-                    if (LlamaStrenght != null) { TempList.Add("Strenght:" + LlamaStrenght); }
-                    if (LlamaDecorItem != null) { TempList.Add("DecorItem:{" + LlamaDecorItem.DataString + "}"); }
-                    if (SkeletonTrap != null) { TempList.Add("SkeletonTrap:" + SkeletonTrap.ToMinecraftBool()); }
-                    if (SkeletonTrapTime != null) { TempList.Add("SkeletonTrapTime:" + SkeletonTrapTime.AsTicks()); }
-                    if (DonkeyItems != null)
-                    {
-                        string TempString = "Items:[";
-                        for (int a = 0; a < DonkeyItems.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + DonkeyItems[a].DataString + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

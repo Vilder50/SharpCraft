@@ -21,23 +21,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time TNTFuse { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MinecartDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (TNTFuse != null) { TempList.Add("TNTFuse:" + TNTFuse.AsTicks()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

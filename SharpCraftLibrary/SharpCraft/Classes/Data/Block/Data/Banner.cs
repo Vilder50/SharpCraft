@@ -103,32 +103,6 @@ namespace SharpCraft
                 [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagString)]
                 public ID.BannerPattern Pattern { get; set; }
             }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DCustomName != null) { TempList.Add("CustomName:\"" + DCustomName.GetString().Escape() + "\""); }
-                if (DPatterns != null)
-                {
-                    string TempString = "Patterns:[";
-                    for (int i = 0; i < DPatterns.Length; i++)
-                    {
-                        if (i != 0) { TempString += ","; }
-                        TempString += "{Color:" + (int)DPatterns[i].Color + ",Pattern:\"" + DPatterns[i].Pattern + "\"}";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

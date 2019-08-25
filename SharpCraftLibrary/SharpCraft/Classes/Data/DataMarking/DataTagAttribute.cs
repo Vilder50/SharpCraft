@@ -23,9 +23,10 @@ namespace SharpCraft.Data
         /// <summary>
         /// Marks the property as a datatag holder
         /// </summary>
-        public DataTagAttribute()
+        /// <param name="conversionParams">Extra values used for converting the object correctly</param>
+        public DataTagAttribute(params object[] conversionParams)
         {
-            ConversionParams = new object[0];
+            ConversionParams = conversionParams;
         }
 
         /// <summary>
@@ -101,13 +102,5 @@ namespace SharpCraft.Data
 
             return emptyCopy;
         }
-    }
-
-    /// <summary>
-    /// An attribute used to mark customly made NBT data tags
-    /// </summary>
-    public class CustomDataTagAttribute : DataTagAttribute
-    {
-
     }
 }

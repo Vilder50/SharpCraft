@@ -1,9 +1,12 @@
-﻿namespace SharpCraft
+﻿using SharpCraft.Data;
+using System;
+
+namespace SharpCraft
 {
     /// <summary>
     /// An object for rotations
     /// </summary>
-    public class Rotation
+    public class Rotation : IConvertableToDataArray
     {
         /// <summary>
         /// The rotation
@@ -55,6 +58,25 @@
             if (RYRot) { TempString += "~"; }
             TempString += YRot.ToString().Replace(",", ".");
             return TempString;
+        }
+
+        /// <summary>
+        /// Converts this rotation into a <see cref="DataPartArray"/>
+        /// </summary>
+        /// <param name="extraConversionData">Not used</param>
+        /// <param name="asType">The type of array</param>
+        /// <returns>the made <see cref="DataPartArray"/></returns>
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (asType == ID.NBTTagType.TagDoubleArray)
+            {
+                DataPartArray dataArray = new DataPartArray(new double[] { XRot, YRot }, null, null);
+                return dataArray;
+            }
+            else
+            {
+                throw new ArgumentException("Can only convert the rotation in a double array");
+            }
         }
     }
 }

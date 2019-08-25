@@ -38,26 +38,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Ignited { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Charged != null) { TempList.Add("powered:" + Charged); }
-                    if (Ignited != null) { TempList.Add("ignited:" + Ignited); }
-                    if (ExplosionRadius != null) { TempList.Add("ExplosionRadius:" + ExplosionRadius + "b"); }
-                    if (Fuse != null) { TempList.Add("Fuse:" + Fuse.AsTicks(Time.TimerType.Short) + "s"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

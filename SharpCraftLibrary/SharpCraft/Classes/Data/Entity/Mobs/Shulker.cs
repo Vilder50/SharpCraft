@@ -34,28 +34,8 @@ namespace SharpCraft
             /// <summary>
             /// The approximate location of the shulker
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"APX","APY","APZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords ApproxCoords { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Color != null) { TempList.Add("Color:" + (int)Color + "b"); }
-                    if (Peek != null) { TempList.Add("Peek:" + Peek + "b"); }
-                    if (PlacedOn != null) { TempList.Add("AttachFace:" + PlacedOn + "b"); }
-                    if (ApproxCoords != null) { TempList.Add("APX:" + ApproxCoords.X + ",APY:" + ApproxCoords.Y + ",APZ:" + ApproxCoords.Z); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

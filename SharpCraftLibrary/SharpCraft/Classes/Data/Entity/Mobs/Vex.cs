@@ -24,26 +24,8 @@ namespace SharpCraft
             /// The location the vex should fly around in
             /// (It flies to random location in a 15x11x15 around this spot)
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"BoundX", "BoundY", "BoundZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords Bound { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (LifeTicks != null) { TempList.Add("LifeTicks:" + LifeTicks.AsTicks()); }
-                    if (Bound != null) { TempList.Add("BoundX:" + (int)Bound.X + ",BoundY:" + (int)Bound.Y + ",BoundZ:" + (int)Bound.Z); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

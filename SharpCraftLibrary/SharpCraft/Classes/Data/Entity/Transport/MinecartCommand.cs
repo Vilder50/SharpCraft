@@ -35,26 +35,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? TrackOutput { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MinecartDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Command != null) { TempList.Add("Command:\"" + Command.Escape() + "\""); }
-                    if (LastOutput != null) { TempList.Add("LastOutput:\"" + LastOutput.Escape() + "\""); }
-                    if (SuccessCount != null) { TempList.Add("SuccessCount:" + SuccessCount); }
-                    if (TrackOutput != null) { TempList.Add("TrackOutput:" + TrackOutput.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SharpCraft
 {
@@ -10,11 +11,6 @@ namespace SharpCraft
         public abstract class BaseEntity : Data.DataHolderBase
         {
             /// <summary>
-            /// This entity's data without its type
-            /// </summary>
-            public abstract string DataString { get; }
-
-            /// <summary>
             /// Creates a new entity
             /// </summary>
             /// <param name="type">the type of entity</param>
@@ -24,22 +20,25 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// This entity's data with the entity's type
+            /// Returns this entity's data without its entity type
             /// </summary>
-            public string DataWithID
+            /// <returns>This entity's data without its entity type</returns>
+            public string GetDataWithoutID()
             {
-                get
+                Data.DataPartObject dataObject = GetDataTree();
+                Data.DataPartPath idPath = dataObject.GetValues().SingleOrDefault(p => p.PathName == "id");
+                if (!(idPath is null))
                 {
-                    string TempString = "";
-                    if (EntityType != null) { TempString += "id:" + EntityType.Value; }
-                    if (DataString != "") { TempString += "," + DataString; }
-                    return TempString.TrimStart(',');
+                    idPath.PathValue = new Data.DataPartTag(null);
                 }
+
+                return dataObject.GetDataString();
             }
 
             /// <summary>
             /// The type of the entity
             /// </summary>
+            [Data.DataTag("id", ForceType = ID.NBTTagType.TagString)]
             public ID.Entity? EntityType { get; set; }
         }
     }

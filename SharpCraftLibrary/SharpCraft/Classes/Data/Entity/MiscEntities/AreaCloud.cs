@@ -49,7 +49,7 @@ namespace SharpCraft
             /// <summary>
             /// The UUID of the entity who made the cloud
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"OwnerUUIDMost","OwnerUUIDLeast")]
             public UUID OwnerUUID { get; set; }
 
             /// <summary>
@@ -108,44 +108,6 @@ namespace SharpCraft
                     {
                         Duration = null;
                     }
-                }
-            }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Duration != null) { TempList.Add("Duration:" + Duration.AsTicks()); }
-                    if (Effects != null)
-                    {
-                        string TempString = "Effects:[";
-                        for (int a = 0; a < Effects.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + Effects[a] + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-                    if (Color != null) { TempList.Add("Color:" + Color.ColorInt); }
-                    if (Age != null) { TempList.Add("Age:" + Age.AsTicks()); }
-                    if (WaitTime != null) { TempList.Add("WaitTime:" + WaitTime.AsTicks()); }
-                    if (ReapplicationDealy != null) { TempList.Add("ReapplicationDealy:" + ReapplicationDealy.AsTicks()); }
-                    if (OwnerUUID != null) { TempList.Add("OwnerUUIDLeast:" + OwnerUUID.Least + ",OwnerUUIDMost:" + OwnerUUID.Most); }
-                    if (DurationOnUse != null) { TempList.Add("DurationOnUse:" + DurationOnUse.AsTicks()); }
-                    if (Radius != null) { TempList.Add("Radius:" + Radius.ToString().Replace(",", ".") + "f"); }
-                    if (RadiusOnUse != null) { TempList.Add("RadiusOnUse:" + RadiusOnUse.ToString().Replace(",", ".") + "f"); }
-                    if (RadiusPerTick != null) { TempList.Add("RadiusPerTick:" + RadiusPerTick.ToString().Replace(",", ".") + "f"); }
-                    if (Particle != null) { TempList.Add("Particle:" + Particle); }
-
-                    return string.Join(",", TempList);
                 }
             }
         }

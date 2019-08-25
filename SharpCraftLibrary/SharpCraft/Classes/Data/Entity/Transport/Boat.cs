@@ -20,23 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public ID.Boat? Type { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Type != null) { TempList.Add("Type:" + Type); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

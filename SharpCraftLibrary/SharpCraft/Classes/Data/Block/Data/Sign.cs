@@ -97,25 +97,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Text4", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public JSON[] DText4 { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DColor != null) { TempList.Add("Color:\"" + DColor.ToString() + "\""); }
-                if (DText1 != null) { TempList.Add("Text1:\"" + DText1.GetString().Escape() + "\""); }
-                if (DText2 != null) { TempList.Add("Text2:\"" + DText2.GetString().Escape() + "\""); }
-                if (DText3 != null) { TempList.Add("Text3:\"" + DText3.GetString().Escape() + "\""); }
-                if (DText4 != null) { TempList.Add("Text4:\"" + DText4.GetString().Escape() + "\""); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

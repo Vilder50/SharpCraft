@@ -127,7 +127,7 @@ namespace SharpCraft.Tests
             {
                 new TestClass[] { new TestClass(1), new TestClass(2), new TestClass(3) },
                 new TestClass[] { new TestClass(4), new TestClass(5) }
-            }, ID.NBTTagType.TagString, new object[] { "hello" });
+            }, ID.NBTTagType.TagStringArray, new object[] { "hello" });
             Assert.AreEqual(ID.NBTTagType.TagArrayArray, array.ArrayType);
             Assert.AreEqual(2, ((DataPartTag)((DataPartArray)array.GetItems()[0]).GetItems()[1]).Value);
 
@@ -183,6 +183,16 @@ namespace SharpCraft.Tests
                 new long[] { 4,5,6 }
             }, null, null);
             Assert.AreEqual("[[1L,2L,3L],[4L,5L,6L]]", array.GetDataString());
+            array = new DataPartArray(new JSON[][]
+            {
+                new JSON() { Text = "Hey" },
+                new JSON() { Text = "Hey2" }
+            }, null, null);
+            Assert.AreEqual("['[{\"text\":\"Hey\"}]','[{\"text\":\"Hey2\"}]']", array.GetDataString());
+            array = new DataPartArray(new int[]
+            {
+            }, null, null);
+            Assert.AreEqual("[]", array.GetDataString());
         }
     }
 
@@ -271,6 +281,12 @@ namespace SharpCraft.Tests
             Assert.AreEqual("'\"\\\\\\''", dataTag.GetDataString());
             dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagString);
             Assert.AreEqual("'ValueEight'", dataTag.GetDataString());
+            dataTag = new DataPartTag("{test:\"1\"}", ID.NBTTagType.TagCompound);
+            Assert.AreEqual("{test:\"1\"}", dataTag.GetDataString());
+            dataTag = new DataPartTag(new JSON[] { new JSON() { Text = "hello" } }, ID.NBTTagType.TagCompound);
+            Assert.AreEqual("'[{\"text\":\"hello\"}]'", dataTag.GetDataString());
+            dataTag = new DataPartTag(new JSON() { Text = "hello" }, ID.NBTTagType.TagCompound);
+            Assert.AreEqual("'{\"text\":\"hello\"}'", dataTag.GetDataString());
 
             //null
             dataTag = new DataPartTag(null);

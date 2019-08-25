@@ -41,33 +41,6 @@ namespace SharpCraft
 
             [Data.DataTag("Items")]
             public abstract Item[] DItems { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the inventory data
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DLock != null) { TempList.Add("Lock:\"" + DLock.Escape() + "\""); }
-                if (DCustomName != null) { TempList.Add("CustomName:\"" + DCustomName.GetString().Escape() + "\""); }
-                if (DItems != null)
-                {
-                    string TempString = "Items:[";
-                    for (int a = 0; a < DItems.Length; a++)
-                    {
-                        if (a != 0) { TempString += ","; }
-                        TempString += "{" + DItems[a].DataString + "}";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

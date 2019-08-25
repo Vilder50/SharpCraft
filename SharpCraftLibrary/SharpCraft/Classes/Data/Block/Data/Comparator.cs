@@ -54,22 +54,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("OutputSignal")]
             public int? DOutputSignal { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                if (DOutputSignal != null)
-                {
-                    return "OutputSignal:" + DOutputSignal;
-                }
-
-                return "";
-            }
         }
     }
 }

@@ -25,24 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public UUID OwnerUUID { get; set; }
-
-            /// <summary>
-            /// Gets the raw basic data for tameable mobs
-            /// </summary>
-            public string TameDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string BreedData = BreedDataString;
-                    if (BreedData.Length != 0) { TempList.Add(BreedData); }
-                    if (Sitting != null) { TempList.Add("Sitting:" + Sitting); }
-                    if (OwnerUUID != null) { TempList.Add("OwnerUUID:" + OwnerUUID); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
 
         /// <summary>
@@ -55,16 +37,6 @@ namespace SharpCraft
             /// </summary>
             /// <param name="type">the type of entity</param>
             public Tameable(ID.Entity? type) : base(type) { }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    return TameDataString;
-                }
-            }
         }
     }
 }

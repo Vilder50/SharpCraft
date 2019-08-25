@@ -55,13 +55,13 @@ namespace SharpCraft
             /// <summary>
             /// The location relative to the structure block to load/save the structure
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"posX","posY","posZ",SharpCraft.ID.NBTTagType.TagInt, Merge = true)]
             public Coords DCoords { get; set; }
 
             /// <summary>
             /// The size of the structure to save
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"sizeX", "sizeY", "sizeZ", SharpCraft.ID.NBTTagType.TagInt, Merge = true)]
             public Coords DSize { get; set; }
 
             /// <summary>
@@ -100,31 +100,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("seed")]
             public long? DSeed { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-
-                if (DName != null) { TempList.Add("name:\"" + DName.Escape() + "\""); }
-                if (DMetadata != null) { TempList.Add("metadata:\"" + DMetadata.Escape() + "\""); }
-                if (DRotation != null) { TempList.Add("rotation:\"" + DRotation + "\""); }
-                if (DMirror != null) { TempList.Add("mirror:\"" + DMirror + "\""); }
-                if (DMode != null) { TempList.Add("mode:\"" + DMode.ToString().ToUpper() + "\""); }
-                if (DIgnoreEntities != null) { TempList.Add("ignoreEntities:" + DIgnoreEntities); }
-                if (DCoords != null) { TempList.Add("posX:" + (int)DCoords.X + ",posY:" + (int)DCoords.Y + ",posZ:" + (int)DCoords.Z); }
-                if (DSize != null) { TempList.Add("sizeX:" + (int)DSize.X + ",sizeY:" + (int)DSize.Y + ",sizeZ:" + (int)DSize.Z); }
-                if (DSeed != null) { TempList.Add("seed:" + DSeed + "L"); }
-                if (DIntegrity != null) { TempList.Add("integrity:" + DIntegrity); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

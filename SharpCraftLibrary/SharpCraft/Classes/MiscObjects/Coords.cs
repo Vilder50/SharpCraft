@@ -6,7 +6,7 @@ namespace SharpCraft
     /// <summary>
     /// An object for coordinates
     /// </summary>
-    public class Coords
+    public class Coords : IConvertableToDataObject, IConvertableToDataArray
     {
         /// <summary>
         /// A static coordinate which is positive in x
@@ -419,6 +419,58 @@ namespace SharpCraft
                     return NegativeZ;
                 default:
                     return PositiveZ;
+            }
+        }
+
+        /// <summary>
+        /// Converts this coordinate into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: x path name, 1: y path name, 2: z path name, 3: type of the coord values</param>
+        /// <returns>the made <see cref="DataPartObject"/></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 4)
+            {
+                throw new ArgumentException("There has to be exacly 4 conversion params to convert a coordinate to a data object.");
+            }
+
+            if (conversionData[0] is string xName && conversionData[1] is string yName && conversionData[2] is string zName && conversionData[3] is ID.NBTTagType forceType)
+            {
+                DataPartObject dataObject = new DataPartObject();
+                if (forceType == ID.NBTTagType.TagInt)
+                {
+                    dataObject.AddValue(new DataPartPath(xName, new DataPartTag((int)X)));
+                    dataObject.AddValue(new DataPartPath(yName, new DataPartTag((int)Y)));
+                    dataObject.AddValue(new DataPartPath(zName, new DataPartTag((int)Z)));
+                }
+                else
+                {
+                    throw new ArgumentException("Coord values cannot convert to the given type");
+                }
+
+                return dataObject;
+            }
+            else
+            {
+                throw new ArgumentException("The 3 conversion params has be be strings and 1 has to be an NBT enum to convert a coordinate to a data object.");
+            }
+        }
+
+        /// <summary>
+        /// Converts this coordinate into a <see cref="DataPartArray"/>
+        /// </summary>
+        /// <param name="extraConversionData">Not used</param>
+        /// <param name="asType">The type of array</param>
+        /// <returns>the made <see cref="DataPartArray"/></returns>
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (asType == ID.NBTTagType.TagDoubleArray)
+            {
+                return new DataPartArray(new double[] { X, Y, Z }, null, null);
+            }
+            else
+            {
+                throw new ArgumentException("Can only convert the coordinate in a double array");
             }
         }
     }

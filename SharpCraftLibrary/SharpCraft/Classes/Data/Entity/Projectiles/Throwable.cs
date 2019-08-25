@@ -23,7 +23,7 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the projectile
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("owner","M","L")]
             public UUID Owner { get; set; }
             /// <summary>
             /// The type of thrown potion
@@ -36,25 +36,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Item")]
             public SharpCraft.Item DisplayItem { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = ProjectileDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Potion != null) { TempList.Add("Potion:{" + Potion.DataString + "}"); }
-                    if (Shake != null) { TempList.Add("shake:" + Shake + "b"); }
-                    if (Owner != null) { TempList.Add("owner:{L:" + Owner.Least + "M:" + Owner.Most + "}"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

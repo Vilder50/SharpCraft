@@ -18,25 +18,8 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the spit
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("Owner","OwnerUUIDMost","OwnerUUIDLeast")]
             public UUID OwnerUUID { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (OwnerUUID != null) { TempList.Add("Owner:{OwnerUUIDLeast:" + OwnerUUID.Least + "L,OwnerUUIDMost:" + OwnerUUID.Most + "L}"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

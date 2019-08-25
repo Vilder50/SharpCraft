@@ -25,10 +25,9 @@
             /// <param name="addEntity">The entity to add to the world</param>
             public void Add(Entity.BaseEntity addEntity)
             {
-                string TempString = addEntity.DataString;
-                if (TempString != "")
+                if (addEntity.HasData)
                 {
-                    Writer.Add("summon " + addEntity.EntityType + " " + new Coords() + " {" + addEntity.DataString + "}");
+                    Writer.Add("summon " + addEntity.EntityType + " " + new Coords() + " " + addEntity.GetDataWithoutID());
                 }
                 else
                 {
@@ -44,10 +43,9 @@
             /// <param name="coords">The coords to add the entity at</param>
             public void Add(Entity.BaseEntity addEntity, Coords coords)
             {
-                string TempString = addEntity.DataString;
-                if (TempString != "")
+                if (addEntity.HasData)
                 {
-                    Writer.Add("summon " + addEntity.EntityType + " " + coords + " {" + addEntity.DataString + "}");
+                    Writer.Add("summon " + addEntity.EntityType + " " + coords + " " + addEntity.GetDataWithoutID());
                 }
                 else
                 {
@@ -231,7 +229,7 @@
                 public void Change(Selector selector, Entity.BaseEntity newEntity)
                 {
                     selector.Limited();
-                    Writer.Add("data merge entity " + selector + " {" + newEntity.DataWithID + "}");
+                    Writer.Add("data merge entity " + selector + " " + newEntity.GetDataString());
                     Writer.NewLine();
                 }
 
@@ -242,10 +240,10 @@
                 /// <param name="toDataPath">The data path to copy to</param>
                 /// <param name="copyData">The data to insert</param>
                 /// <param name="modifierType">The way to add the data</param>
-                public void Change(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, string copyData)
+                public void Change(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Data.IDataHolder copyData)
                 {
                     toSelector.Limited();
-                    Writer.Add($"data modify entity {toSelector} {toDataPath} {modifierType} value {copyData}");
+                    Writer.Add($"data modify entity {toSelector} {toDataPath} {modifierType} value {copyData.GetDataString()}");
                     Writer.NewLine();
                 }
 
@@ -256,10 +254,10 @@
                 /// <param name="toDataPath">The data path to copy to</param>
                 /// <param name="copyData">The data to insert</param>
                 /// <param name="index">the index to insert the data at</param>
-                public void Change(Selector toSelector, string toDataPath, string copyData, int index)
+                public void Change(Selector toSelector, string toDataPath, int index, Data.IDataHolder copyData)
                 {
                     toSelector.Limited();
-                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} value {copyData}");
+                    Writer.Add($"data modify entity {toSelector} {toDataPath} insert {System.Math.Abs(index)} value {copyData.GetDataString()}");
                     Writer.NewLine();
                 }
 

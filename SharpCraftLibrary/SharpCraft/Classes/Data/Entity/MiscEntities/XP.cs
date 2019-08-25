@@ -62,26 +62,6 @@ namespace SharpCraft
                     }
                 }
             }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            /// <returns>raw data Minecraft uses</returns>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Age != null) { TempList.Add("Age:" + Age + "s"); }
-                    if (Health != null) { TempList.Add("Health:" + Health + "b"); }
-                    if (Value != null) { TempList.Add("Value:" + Value + "s"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

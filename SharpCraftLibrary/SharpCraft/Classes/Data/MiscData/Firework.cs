@@ -28,13 +28,13 @@ namespace SharpCraft
         /// <summary>
         /// the colors of the explosion
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagIntArray)]
+        [Data.DataTag]
         public HexColor[] Colors { get; set; }
 
         /// <summary>
         /// the colors the explosion fades into
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagIntArray)]
+        [Data.DataTag]
         public HexColor[] FadeColors { get; set; }
 
         /// <summary>

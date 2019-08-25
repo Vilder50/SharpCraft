@@ -30,25 +30,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public Time Fuel { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MinecartDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (PushX != null) { TempList.Add("PushX:" + PushX + "b"); }
-                    if (PushZ != null) { TempList.Add("PushZ:" + PushZ + "b"); }
-                    if (Fuel != null) { TempList.Add("Fuel:" + Fuel.AsTicks(Time.TimerType.Short) + "s"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

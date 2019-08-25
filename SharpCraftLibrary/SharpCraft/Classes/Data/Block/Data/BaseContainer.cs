@@ -34,22 +34,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("LootTableSeed")]
             public long? DLootTableSeed { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the inventory data
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                List<string> TempList = new List<string>();
-
-                string InventoryData = base.GetDataString();
-                if (InventoryData.Length != 0) { TempList.Add(InventoryData); }
-                if (DLootTable != null) { TempList.Add("LootTable:\"" + DLootTable + "\""); }
-                if (DLootTableSeed != null) { TempList.Add("LootTableSeed:" + DLootTableSeed + "L"); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

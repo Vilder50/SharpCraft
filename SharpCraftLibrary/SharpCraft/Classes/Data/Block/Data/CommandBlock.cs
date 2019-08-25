@@ -104,29 +104,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("UpdateLastExecution", ForceType = SharpCraft.ID.NBTTagType.TagString)]
             public bool? DCanRunMultipleTimes { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DCustomName != null) { TempList.Add("CustomName:\"" + DCustomName.GetString(false).Escape() + "\""); }
-                if (DCommand != null) { TempList.Add("Command:\"" + DCommand.Escape() + "\""); }
-                if (DLastOutput != null) { TempList.Add("LastOutput:\"" + DLastOutput.GetString(false).Escape() + "\""); }
-                if (DSuccessCount != null) { TempList.Add("SuccessCount:" + DSuccessCount); }
-                if (DLastExecution != null) { TempList.Add("LastExecution:" + DLastExecution); }
-                if (DTrackOutput != null) { TempList.Add("TrackOutput:" + DTrackOutput); }
-                if (DPowered != null) { TempList.Add("powered:" + DPowered); }
-                if (DConditionMet != null) { TempList.Add("conditionMet:" + DConditionMet); }
-                if (DCanRunMultipleTimes != null) { TempList.Add("UpdateLastExecution:" + DCanRunMultipleTimes); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

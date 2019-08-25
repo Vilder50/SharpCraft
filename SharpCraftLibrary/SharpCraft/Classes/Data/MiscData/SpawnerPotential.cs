@@ -35,14 +35,5 @@
         /// </summary>
         [Data.DataTag]
         public int? Weight { get; set; }
-
-        /// <summary>
-        /// Returns the raw data for this object as a string
-        /// </summary>
-        /// <returns>Raw data used by the game</returns>
-        public override string ToString()
-        {
-            return "{Entity:{" + Entity.DataWithID + "},Weight:" + Weight + "}";
-        }
     }
 }

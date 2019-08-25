@@ -158,6 +158,7 @@
     <Compile Include="Classes\Data\DataMarking\DataTagAttribute.cs" />
     <Compile Include="Classes\Data\Entity\BaseEntity.cs" />
     <Compile Include="Classes\Data\Entity\BasicEntity.cs" />
+    <Compile Include="Classes\Data\Entity\IEntity\IVillager.cs" />
     <Compile Include="Classes\Data\Entity\MiscEntities\AreaCloud.cs" />
     <Compile Include="Classes\Data\Entity\MiscEntities\Armorstand.cs" />
     <Compile Include="Classes\Data\Entity\MiscEntities\Crystal.cs" />
@@ -204,6 +205,8 @@
     <Compile Include="Classes\Data\Entity\Mobs\Vindicator.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Wither.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Wolf.cs" />
+    <Compile Include="Classes\Data\Entity\Mobs\ZombieVillager.cs" />
+    <Compile Include="Classes\Data\Entity\Mobs\ZombiePigman.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Zombie.cs" />
     <Compile Include="Classes\Data\Entity\Projectiles\Arrow.cs" />
     <Compile Include="Classes\Data\Entity\Projectiles\BaseProjectile.cs" />

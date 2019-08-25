@@ -1,11 +1,12 @@
 ﻿using System;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// An object used for UUID's
     /// </summary>
-    public class UUID
+    public class UUID : IConvertableToDataObject, IConvertableToDataTag
     {
         /// <summary>
         /// the UUIDLeast
@@ -58,6 +59,51 @@ namespace SharpCraft
         public override string ToString()
         {
             return UUIDString;
+        }
+
+        /// <summary>
+        /// Converts this UUID into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: UUIDMost path, 1: UUIDLeast path</param>
+        /// <returns>the made <see cref="DataPartObject"/></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 2)
+            {
+                throw new ArgumentException("There has to be exacly 2 conversion params to convert a UUID to a data object.");
+            }
+
+            if (conversionData[0] is string most && conversionData[1] is string least)
+            {
+                DataPartObject dataObject = new DataPartObject();
+                dataObject.AddValue(new DataPartPath(most, new DataPartTag(Most)));
+                dataObject.AddValue(new DataPartPath(least, new DataPartTag(Least)));
+
+
+                return dataObject;
+            }
+            else
+            {
+                throw new ArgumentException("The 2 conversion params has be strings to convert a UUID to a data object.");
+            }
+        }
+
+        /// <summary>
+        /// Converts this UUID into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">The type to convert the uuid into</param>
+        /// <param name="extraConversionData">Not used</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (asType == ID.NBTTagType.TagString)
+            {
+                return new DataPartTag(UUIDString);
+            }
+            else
+            {
+                throw new ArgumentException("Cannot convert the UUID into " + asType);
+            }
         }
     }
 }

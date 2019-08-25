@@ -25,7 +25,7 @@ namespace SharpCraft
             /// <summary>
             /// The falling block
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("BlockState","Name","Properties")]
             public Block TheBlock { get; set; }
 
             /// <summary>
@@ -51,39 +51,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("FallHurtAmount")]
             public float? DamageAmount { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Time != null) { TempList.Add("Time:" + Time.AsTicks()); }
-                    if (TheBlock != null)
-                    {
-                        if (TheBlock.ID != null || TheBlock.HasState)
-                        {
-                            string blockState = "BlockState:{";
-                            if (TheBlock.ID != null) { blockState += "Name:\"minecraft:" + TheBlock.ID.ToString() + "\""; }
-                            if (TheBlock.ID != null && TheBlock.HasState) { blockState += ","; }
-                            if (TheBlock.HasState) { blockState += "Properties:{" + TheBlock.GetStateString().ToString().Replace("=", ":\"").Replace(",", "\",") + "\"}"; }
-                            TempList.Add(blockState + "}");
-                        }
-                        if (TheBlock.HasData) { TempList.Add(",TileEntityData:{" + TheBlock.GetDataString() + "}"); }
-                    }
-                    if (DropItem != null) { TempList.Add("DropItem:" + DropItem); }
-                    if (HurtEntities != null) { TempList.Add("HurtEntities:" + HurtEntities); }
-                    if (MaxDamage != null) { TempList.Add("FallHurtMax:" + MaxDamage); }
-                    if (DamageAmount != null) { TempList.Add("FallHurtAmount:" + DamageAmount.ToString().Replace(",", ".") + "f"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

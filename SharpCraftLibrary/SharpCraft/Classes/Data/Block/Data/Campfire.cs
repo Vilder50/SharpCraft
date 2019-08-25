@@ -116,39 +116,6 @@ namespace SharpCraft
                     _dTotalCookingTimes = value;
                 }
             }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DTotalCookingTimes != null && DTotalCookingTimes.Length != 0)
-                {
-                    TempList.Add("CookingTotalTimes:[I;" + string.Join(",", DTotalCookingTimes.ToList()) + "]");
-                }
-                if (DCookingTimes != null && DCookingTimes.Length != 0)
-                {
-                    TempList.Add("CookingTimes:[I;" + string.Join(",", DCookingTimes.ToList()) + "]");
-                }
-                if (DItems != null)
-                {
-                    string TempString = "Items:[";
-                    for (int a = 0; a < DItems.Length; a++)
-                    {
-                        if (a != 0) { TempString += ","; }
-                        TempString += "{" + DItems[a].DataString + "}";
-                    }
-                    TempString += "]";
-                    TempList.Add(TempString);
-                }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

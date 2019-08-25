@@ -503,11 +503,11 @@ namespace SharpCraft
                 {
                     if (NotNBT)
                     {
-                        TempList.Add("nbt=!{" + NBT.DataString + "}");
+                        TempList.Add("nbt=!" + NBT.GetDataWithoutID());
                     }
                     else
                     {
-                        TempList.Add("nbt={" + NBT.DataString + "}");
+                        TempList.Add("nbt=" + NBT.GetDataWithoutID());
                     }
                 }
 

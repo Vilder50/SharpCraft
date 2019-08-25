@@ -69,21 +69,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("TransferCooldown", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public Time DCooldown { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                List<string> TempList = new List<string>();
-
-                string InventoryData = base.GetDataString();
-                if (InventoryData.Length != 0) { TempList.Add(InventoryData); }
-                if (DCooldown != null) { TempList.Add("TransferCooldown:" + DCooldown.AsTicks()); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

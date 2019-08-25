@@ -85,22 +85,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Fuel", ForceType = SharpCraft.ID.NBTTagType.TagByte)]
             public int? DFule { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                List<string> TempList = new List<string>();
-
-                string InventoryData = base.GetDataString();
-                if (InventoryData.Length != 0) { TempList.Add(InventoryData); }
-                if (DBrewTime != null) { TempList.Add("BrewTime:" + DBrewTime.AsTicks()); }
-                if (DFule != null) { TempList.Add("Fuel:" + DFule + "b"); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

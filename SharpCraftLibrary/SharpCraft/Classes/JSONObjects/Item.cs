@@ -88,7 +88,7 @@ namespace SharpCraft
                     }
                     TempList.Add("\"enchantments\": [" + string.Join(",", TempEnchantList) + "]");
                 }
-                if (NBT != null) { TempList.Add("\"nbt\":\"{" + NBT.TagDataString.Escape() + " }\""); }
+                if (NBT != null) { TempList.Add("\"nbt\":\"" + NBT.GetItemTagString().Escape() + "\""); }
 
                 return "{" + string.Join(",", TempList) + "}";
             }
@@ -100,7 +100,7 @@ namespace SharpCraft
             public static implicit operator Item(SharpCraft.Item item)
             {
                 Item returnItem = new Item() {Id = item.ID, Count = item.Count };
-                if (string.IsNullOrEmpty(item.TagDataString))
+                if (string.IsNullOrEmpty(item.GetItemTagString()))
                 {
                     returnItem.NBT = item;
                 }

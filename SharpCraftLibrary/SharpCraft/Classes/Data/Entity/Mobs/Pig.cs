@@ -20,23 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Saddle { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Saddle != null) { TempList.Add("Saddle:" + Saddle.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SharpCraft
             /// <param name="ItemID">The type of the item. If null the item has no type</param>
             /// <param name="Count">The amount of the item. If null the item has no amount</param>
             /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-            public Map(ID.Item? ItemID, int? Count = null, int? Slot = null) : base(ItemID, Count, Slot) { }
+            public Map(ID.Item? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
             /// <summary>
             /// Creates an item object which refereces to an item group
@@ -96,42 +96,13 @@ namespace SharpCraft
             /// <summary>
             /// The map's ID
             /// </summary>
-            [Data.DataTag("map")]
+            [Data.DataTag("tag.map")]
             public int? MapID { get; set; }
             /// <summary>
             /// The icons displayed on the map.
             /// </summary>
-            [Data.DataTag("Decorations")]
+            [Data.DataTag("tag.Decorations")]
             public Icon[] Icons { get; set; }
-
-            /// <summary>
-            /// The items raw data
-            /// (The data inside the item tag)
-            /// </summary>
-            public override string TagDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-                    string NormalData = base.TagDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-
-                    if (MapID != null) { TempList.Add("map:" + MapID); }
-                    if (Icons != null)
-                    {
-                        string TempString = "Decorations:[";
-                        for (int a = 0; a < Icons.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + Icons[a].IconString + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -10,9 +10,21 @@ using System.Reflection;
 namespace SharpCraft.Data
 {
     /// <summary>
+    /// An interface for classes which holds data
+    /// </summary>
+    public interface IDataHolder
+    {
+        /// <summary>
+        /// Returns the data inside this object
+        /// </summary>
+        /// <returns>The data in this object</returns>
+        string GetDataString();
+    }
+
+    /// <summary>
     /// The base class for all classes which can hold NBT data tags
     /// </summary>
-    public abstract class DataHolderBase
+    public abstract class DataHolderBase : IDataHolder
     {
         /// <summary>
         /// Gets a list of all the data tag properties for this object
@@ -181,7 +193,7 @@ namespace SharpCraft.Data
                                     throw new ArgumentException("Cannot convert the given type into an data tag object. (" + pathParts[i] + ")");
                                 }
                             }
-                            else if ((property.PropertyType.IsArray && forceType is null) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
+                            else if ((property.PropertyType.IsArray && forceType is null && !(data is JSON[])) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
                             {
                                 //if its an array
                                 if (!(convertAbleArray is null))

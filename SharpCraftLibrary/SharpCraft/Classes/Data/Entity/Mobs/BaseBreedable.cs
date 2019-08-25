@@ -37,29 +37,8 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity who fed the mob
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"LoveCauseMost","LoveCauseLeast", Merge = true)]
             public UUID LoveCause { get; set; }
-
-            /// <summary>
-            /// Gets the raw basic data for breedable mobs
-            /// </summary>
-            public string BreedDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string MobData = MobDataString;
-
-                    if (MobData.Length != 0) { TempList.Add(MobData); }
-                    if (InLove != null) { TempList.Add("InLove:" + InLove.AsTicks()); }
-                    if (Age != null) { TempList.Add("Age:" + Age.AsTicks()); }
-                    if (ForcedAge != null) { TempList.Add("ForcedAge:" + ForcedAge.AsTicks()); }
-                    if (LoveCause != null) { TempList.Add("LoveCauseLeast:" + LoveCause.Least + "L,LoveCauseMost:" + LoveCause.Most + "L"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
 
         /// <summary>
@@ -72,18 +51,6 @@ namespace SharpCraft
             /// </summary>
             /// <param name="type">the type of entity</param>
             public Breedable(ID.Entity? type) : base(type) { }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    return BreedDataString;
-                }
-            }
         }
-
     }
 }

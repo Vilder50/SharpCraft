@@ -54,7 +54,7 @@ namespace SharpCraft
                     }
                     TempList.Add("\"effects\": {" + string.Join(",", TempEffectList) + "}");
                 }
-                if (NBT != null) { TempList.Add("\"nbt\":\"{" + NBT.DataWithID.Escape() + "}\""); }
+                if (NBT != null) { TempList.Add("\"nbt\":\"" + NBT.GetDataString().Escape() + "\""); }
 
                 return "{" + string.Join(",", TempList) + "}";
             }

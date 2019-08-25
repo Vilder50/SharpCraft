@@ -20,24 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
             public int? Fuse { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            /// <returns>raw data Minecraft uses</returns>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Fuse != null) { TempList.Add("Fuse:" + Fuse + "s"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

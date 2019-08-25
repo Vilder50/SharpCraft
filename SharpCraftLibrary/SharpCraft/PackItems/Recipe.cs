@@ -1,12 +1,13 @@
 ﻿using System.IO;
 using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// A object used to create <see cref="Recipe"/>s
     /// </summary>
-    public class Recipe
+    public class Recipe : IConvertableToDataTag
     {
         readonly string Path;
         /// <summary>
@@ -212,6 +213,17 @@ namespace SharpCraft
             {
                 Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\recipes\\");
             }
+        }
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(ToString());
         }
     }
 }

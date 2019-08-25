@@ -24,7 +24,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity who summoned the fangs
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("Owner","OwnerUUIDMost","OwnerUUIDLeast")]
             public UUID OwnerUUID { get; set; }
 
             /// <summary>
@@ -47,24 +47,6 @@ namespace SharpCraft
                     {
                         Warmup = null;
                     }
-                }
-            }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Warmup != null) { TempList.Add("Warmup:" + Warmup.AsTicks()); }
-                    if (OwnerUUID != null) { TempList.Add("Owner:{OwnerUUIDLeast:" + OwnerUUID.Least + "L,OwnerUUIDMost:" + OwnerUUID.Most + "L}"); }
-
-                    return string.Join(",", TempList);
                 }
             }
         }

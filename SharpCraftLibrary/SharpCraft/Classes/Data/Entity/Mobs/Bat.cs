@@ -19,22 +19,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? BatFlags { get; set; }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (BatFlags != null) { TempList.Add("BatFlags:" + BatFlags); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

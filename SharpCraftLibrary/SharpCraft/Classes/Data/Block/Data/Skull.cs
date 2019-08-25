@@ -11,8 +11,6 @@ namespace SharpCraft
         /// </summary>
         public abstract class BaseSkull : Block
         {
-            private string _dDataSkin;
-
             /// <summary>
             /// Creates a new skull / head block
             /// </summary>
@@ -33,46 +31,10 @@ namespace SharpCraft
 
             /// <summary>
             /// The raw data for a skin.
-            /// (Starting from the Owner tag)
+            /// (Starting from the Owner tag... so Owner:[value] (remember the {}))
             /// </summary>
-            [Data.CustomDataTag]
-            public string DDataSkin
-            {
-                get => _dDataSkin;
-                set
-                {
-                    if (value.StartsWith("{"))
-                    {
-                        value = value.Substring(1,value.Length - 1);
-                    }
-                    if (value.EndsWith("}"))
-                    {
-                        value = value.Substring(0, value.Length - 1);
-                    }
-                    if (!value.StartsWith("Owner:{"))
-                    {
-                        throw new FormatException("The raw data is invalid for a player head");
-                    }
-
-                    _dDataSkin = value;
-                }
-            }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DPlayerSkin != null) { TempList.Add("SkullOwner:\"" + DPlayerSkin.Escape() + "\""); }
-                if (DDataSkin != null) { TempList.Add(DDataSkin.Escape()); }
-
-                return string.Join(",", TempList);
-            }
+            [Data.DataTag("Owner", ForceType = SharpCraft.ID.NBTTagType.TagCompound)]
+            public string DDataSkin { get; set; }
         }
 
         /// <summary>

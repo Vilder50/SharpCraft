@@ -36,13 +36,13 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity who can pick up the item
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"M","L")]
             public UUID Owner { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who threw the item
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"M", "L")]
             public UUID Thrower { get; set; }
 
             /// <summary>
@@ -107,28 +107,6 @@ namespace SharpCraft
                     {
                         Age = null;
                     }
-                }
-            }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Age != null) { TempList.Add("Age:" + Age.AsTicks(Time.TimerType.Short) + "s"); }
-                    if (Health != null) { TempList.Add("Health:" + Health + "s"); }
-                    if (PickupDelay != null) { TempList.Add("PickupDelay:" + PickupDelay.AsTicks(Time.TimerType.Short) + "s"); }
-                    if (Owner != null) { TempList.Add("Owner:{L:\"" + Owner.Least + "\",M:\"" + Owner.Most + "\"}"); }
-                    if (Thrower != null) { TempList.Add("Thrower:{L:\"" + Thrower.Least + "\",M:\"" + Thrower.Most + "\"}"); }
-                    if (ItemData != null) { TempList.Add("Item:{" + ItemData.DataString + "}"); }
-
-                    return string.Join(",", TempList);
                 }
             }
         }

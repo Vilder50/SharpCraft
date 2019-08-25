@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using System.Linq;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
-    public partial class Block : Data.DataHolderBase
+    public partial class Block : Data.DataHolderBase, IConvertableToDataObject
     {
         private ID.Block? id;
 
@@ -98,19 +99,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Gets the raw data for the data the block contains
-        /// </summary>
-        /// <returns>Raw data used by Minecraft</returns>
-        public virtual string GetDataString()
-        {
-            if (!HasData)
-            {
-                throw new ArgumentException("The block has no data and can therefore not output it");
-            }
-            return "";
-        }
-
-        /// <summary>
         /// Gets the raw data for the states the block has
         /// </summary>
         /// <returns>Raw data used by Minecraft</returns>
@@ -127,34 +115,54 @@ namespace SharpCraft
             foreach (PropertyInfo property in properties)
             {
                 object value = property.GetValue(this);
-                if (value != null)
+                if (!(value is null))
                 {
-                    BlockStateAttribute attribute = ((BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute)));
-                    string state = attribute.DataName + "=";
-                    if (property.PropertyType == typeof(bool?))
-                    {
-                        state += ((bool?)value).ToMinecraftBool();
-                    }
-                    else
-                    {
-                        if (value != null)
-                        {
-                            if (attribute.ForceInt)
-                            {
-                                state += Convert.ToInt32(value);
-                            }
-                            else
-                            {
-                                state += value.ToString();
-                            }
-                        }
-                    }
-                    states.Add(state);
+                    BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                    states.Add(attribute.DataName + "=" + GetStateValue(property));
                 }
             }
 
             return string.Join(",", states);
         }
+
+        /// <summary>
+        /// Returns the states value as a string
+        /// </summary>
+        /// <param name="stateProperty">the property holding the state</param>
+        /// <returns></returns>
+        public string GetStateValue(PropertyInfo stateProperty)
+        {
+            object value = stateProperty.GetValue(this);
+            if (!(value is null))
+            {
+                BlockStateAttribute attribute = (BlockStateAttribute)stateProperty.GetCustomAttribute(typeof(BlockStateAttribute));
+                if (attribute is null)
+                {
+                    throw new ArgumentException("The given property is not a state holding property", nameof(stateProperty));
+                }
+                if (stateProperty.PropertyType == typeof(bool?))
+                {
+                    return ((bool?)value).ToMinecraftBool();
+                }
+                else
+                {
+                    if (value != null)
+                    {
+                        if (attribute.ForceInt)
+                        {
+                            return Convert.ToInt32(value).ToString();
+                        }
+                        else
+                        {
+                            return value.ToString();
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
         /// <summary>
         /// Gets the raw data used to set block this block
         /// </summary>
@@ -176,7 +184,7 @@ namespace SharpCraft
                 outputString = "#" + Group.ToString();
             }
             if (HasState) { outputString += "[" + GetStateString() + "]"; }
-            if (HasData) { outputString += "{" + GetDataString() + "}"; }
+            if (HasData) { outputString += GetDataString(); }
 
             return outputString;
         }
@@ -259,6 +267,47 @@ namespace SharpCraft
             }
 
             return new Block(type);
+        }
+
+        /// <summary>
+        /// Converts this block into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: the path to the block id, 1: the path to the state holding <see cref="DataPartObject"/></param>
+        /// <returns>the made <see cref="DataPartObject"/></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 2)
+            {
+                throw new ArgumentException("There has to be exacly 2 conversion params to convert a block to a data object.");
+            }
+
+            if (conversionData[0] is string idPath && conversionData[1] is string statePath)
+            {
+                DataPartObject dataObject = new DataPartObject();
+                if (!(ID is null))
+                {
+                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag("minecraft:" + ID)));
+                }
+                if (HasState)
+                {
+                    DataPartObject states = new DataPartObject();
+                    dataObject.AddValue(new DataPartPath(statePath, states));
+
+                    //get state tags
+                    PropertyInfo[] properties = GetStateProperties().ToArray();
+                    foreach(PropertyInfo property in properties)
+                    {
+                        BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                        states.AddValue(new DataPartPath(attribute.DataName, new DataPartTag(GetStateValue(property))));
+                    }
+                }
+
+                return dataObject;
+            }
+            else
+            {
+                throw new ArgumentException("The 2 conversion params has be strings to convert a block to a data object.");
+            }
         }
     }
 }

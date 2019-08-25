@@ -57,23 +57,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("attachment_type")]
             public string DName { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DPool != null) { TempList.Add("target_pool:\"" + DPool.Escape() + "\""); }
-                if (DFinishedBlock != null) { TempList.Add("final_state:\"" + DFinishedBlock.ToString().Escape() + "\""); }
-                if (DName != null) { TempList.Add("attachment_type:\"" + DName.Escape() + "\""); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

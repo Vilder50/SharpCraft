@@ -75,7 +75,7 @@ namespace SharpCraft
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"MinSpawnDelay", "MaxSpawnDelay", SharpCraft.ID.NBTTagType.TagShort, Merge = true)]
             public Range DRandomDelay { get; set; }
 
             /// <summary>
@@ -90,35 +90,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("RequiredPlayerRange")]
             public short? DPlayerRange { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DPotentials != null)
-                {
-                    List<string> TempPontentList = new List<string>();
-                    for (int i = 0; i < DPotentials.Length; i++)
-                    {
-                        TempPontentList.Add(DPotentials[i].ToString());
-                    }
-                    TempList.Add("SpawnPotentials:[" + string.Join(",", TempPontentList) + "]");
-                }
-                if (DSpawnCount != null) { TempList.Add("SpawnCount:" + DSpawnCount + "s"); }
-                if (DSpawnRange != null) { TempList.Add("SpawnRange:" + DSpawnRange + "s"); }
-                if (DDelay != null) { TempList.Add("Delay:" + DDelay.AsTicks(Time.TimerType.Short) + "s"); }
-                if (DMaxEntities != null) { TempList.Add("MaxNearbyEntities:" + DMaxEntities + "s"); }
-                if (DPlayerRange != null) { TempList.Add("RequiredPlayerRange:" + DPlayerRange + "s"); }
-                if (DRandomDelay != null) { TempList.Add("MinSpawnDelay:" + DRandomDelay.Min + "s,MaxSpawnDelay:" + DRandomDelay.Max + "s"); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

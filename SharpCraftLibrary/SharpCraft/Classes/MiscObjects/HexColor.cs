@@ -1,11 +1,12 @@
 ﻿using System;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// An object for rgb colors
     /// </summary>
-    public class HexColor
+    public class HexColor : IConvertableToDataTag
     {
         int _Red;
         /// <summary>
@@ -116,6 +117,17 @@ namespace SharpCraft
         public override string ToString()
         {
             return ColorInt.ToString();
+        }
+
+        /// <summary>
+        /// Converts this HexColor into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(ColorInt);
         }
 
         /// <summary>

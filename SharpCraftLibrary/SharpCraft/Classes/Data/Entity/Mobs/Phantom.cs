@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The phantom will circle around this location when not attacking
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"AX","AY","AZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords Area { get; set; }
             /// <summary>
             /// The size of the phantom.
@@ -26,22 +26,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public int? Size { get; set; }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Area != null) { TempList.Add("AX:" + Area.X + ",AY:" + Area.Y + ",AZ:" + Area.Z); }
-                    if (Size != null) { TempList.Add("Size:" + Size); }
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace SharpCraft
             /// The block being moved
             /// Note: block data is not supported
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("blockState", "Name", "Properties")]
             public Block DMovingBlock { get; set; }
 
             /// <summary>
@@ -81,33 +81,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("source")]
             public bool? PistonHead { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DMovingBlock != null && (DMovingBlock.ID != null || DMovingBlock.HasState))
-                {
-                    string blockState = "BlockState:{";
-                    if (DMovingBlock.ID != null) { blockState += "Name:\"minecraft:" + DMovingBlock.ID.ToString() + "\""; }
-                    if (DMovingBlock.ID != null && DMovingBlock.HasState) { blockState += ","; }
-                    if (DMovingBlock.HasState) { blockState += "Properties:{" + DMovingBlock.GetStateString().ToString().Replace("=", ":\"").Replace(",", "\",") + "\"}"; }
-                    TempList.Add(blockState + "}");
-                }
-
-                if (DDirection != null) { TempList.Add("facing:" + (int)DDirection); }
-                if (DProgress != null) { TempList.Add("progress:" + DProgress + "f"); }
-                if (Pushed != null) { TempList.Add("extending:" + Pushed.ToMinecraftBool()); }
-                if (PistonHead != null) { TempList.Add("source:" + PistonHead.ToMinecraftBool()); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

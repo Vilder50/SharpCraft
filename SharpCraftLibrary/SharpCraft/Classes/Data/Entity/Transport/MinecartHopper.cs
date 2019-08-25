@@ -40,37 +40,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time TransferCooldown { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MinecartDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (LootTable != null) { TempList.Add("LootTable:\"" + LootTable + "\""); }
-                    if (LootTableSeed != null) { TempList.Add("LootTableSeed:" + LootTableSeed + "L"); }
-                    if (Enabled != null) { TempList.Add("Enabled:" + Enabled.ToMinecraftBool()); }
-                    if (TransferCooldown != null) { TempList.Add("TransferCooldown:" + TransferCooldown.AsTicks()); }
-                    if (Items != null)
-                    {
-                        string TempString = "Items:[";
-                        for (int a = 0; a < Items.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + Items[a].DataString + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -19,13 +20,13 @@ namespace SharpCraft
             /// <summary>
             /// Fow the tropical fish looks
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Variant")]
             public Variant FishVariant { get; set; }
 
             /// <summary>
             /// A object used to define how a fish looks
             /// </summary>
-            public class Variant
+            public class Variant : IConvertableToDataTag
             {
                 /// <summary>
                 /// The size of the fish
@@ -43,6 +44,17 @@ namespace SharpCraft
                 /// The color of the pattern on the fish
                 /// </summary>
                 public ID.Color PatternColor { get; set; }
+
+                /// <summary>
+                /// Converts this <see cref="Variant"/> object into a <see cref="DataPartTag"/>
+                /// </summary>
+                /// <param name="asType">Not used</param>
+                /// <param name="extraConversionData">Not used</param>
+                /// <returns>the made <see cref="DataPartTag"/></returns>
+                public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+                {
+                    return new DataPartTag(GetValue());
+                }
 
                 /// <summary>
                 /// Gets the value Minecraft uses
@@ -63,31 +75,14 @@ namespace SharpCraft
             /// If the fish comes from a bucket.
             /// It wont despawn.
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? FromBucket { get; set; }
             /// <summary>
             /// The puff state for pufferfish.
             /// 0 = deflated. 1 = halfway puffed-up. 2 = puffed-up.
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public int? PuffState { get; set; }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (FishVariant != null) { TempList.Add("Variant:" + FishVariant.GetValue()); }
-                    if (PuffState != null) { TempList.Add("PuffState:" + PuffState); }
-                    if (FromBucket != null) { TempList.Add("FromBucket:" + FromBucket + "b"); }
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

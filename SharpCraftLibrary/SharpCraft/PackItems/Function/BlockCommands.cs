@@ -141,7 +141,7 @@
                 public void Change(Coords place, Block data)
                 {
                     if (!data.HasData) { throw new System.ArgumentException(nameof(data) + " was supposed to have data"); }
-                    writer.Add("data merge block " + place + " {" + data.GetDataString() + "}");
+                    writer.Add("data merge block " + place + " " + data.GetDataString());
                     writer.NewLine();
                 }
 
@@ -152,9 +152,9 @@
                 /// <param name="toDataPath">the datapath to copy to</param>
                 /// <param name="modifierType">The way to data should be copied in</param>
                 /// <param name="copyData">The data to insert</param>
-                public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, string copyData)
+                public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Data.IDataHolder copyData)
                 {
-                    writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} value {copyData}");
+                    writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} value {copyData.GetDataString()}");
                     writer.NewLine();
                 }
 
@@ -165,9 +165,9 @@
                 /// <param name="toDataPath">the datapath to copy to</param>
                 /// <param name="index">The index to copy the data to</param>
                 /// <param name="copyData">The data to insert</param>
-                public void Change(Coords toBlock, string toDataPath, int index, string copyData)
+                public void Change(Coords toBlock, string toDataPath, int index, Data.IDataHolder copyData)
                 {
-                    writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} value {copyData}");
+                    writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} value {copyData.GetDataString()}");
                     writer.NewLine();
                 }
 

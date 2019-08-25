@@ -25,24 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? WasOnGround { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Size != null) { TempList.Add("Size:" + Size); }
-                    if (WasOnGround != null) { TempList.Add("wasOnGround:" + WasOnGround.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

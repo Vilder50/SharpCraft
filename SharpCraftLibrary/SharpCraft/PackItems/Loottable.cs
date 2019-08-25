@@ -788,7 +788,7 @@ namespace SharpCraft
                         ReturnString = "{\"function\":\"minecraft:set_damage\"," + _value.JSONString("damage");
                         break;
                     case ChangeType.SetNbt:
-                        ReturnString = "{\"function\":\"minecraft:set_nbt\",\"tag\":\"{" + _itemNBT.TagDataString.Escape() + "}\"";
+                        ReturnString = "{\"function\":\"minecraft:set_nbt\",\"tag\":\"{" + _itemNBT.GetItemTagString().Escape() + "}\"";
                         break;
                     case ChangeType.EnchantRandom:
                         ReturnString = "{\"function\":\"minecraft:enchant_randomly\"";
@@ -865,6 +865,17 @@ namespace SharpCraft
                         }
                         ReturnString += "]";
                         break;
+                    case ChangeType.Map:
+                        ReturnString = "{\"function\":\"minecraft:exploration_map\",\"destination\":\"" + _structure + "\",\"decoration\":\"" + _marker + "\",\"skip_existing_chunks\":" + _allow;
+                        if (!(_zoom is null))
+                        {
+                            ReturnString += ",\"zoom\":" + _zoom;
+                        }
+                        if (!(_radius is null))
+                        {
+                            ReturnString += ",\"search_radius\":" + _radius;
+                        }
+                        break;
                 }
 
                 if (_conditions != null)
@@ -909,6 +920,8 @@ namespace SharpCraft
 
             private readonly bool _inverted;
 
+            private ID.Enchant _enchant;
+            private double[] _chances;
             private ID.LootTarget _checkEntity;
             private LootCondition _condition;
             private JSONObjects.Entity _entity;
@@ -1080,6 +1093,8 @@ namespace SharpCraft
             public Condition RandomEnchantmentChance(ID.Enchant enchant, double[] chancesPerLevel)
             {
                 _condition = LootCondition.RandomEnchantmentChance;
+                _enchant = enchant;
+                _chances = chancesPerLevel;
 
                 return this;
             }
@@ -1141,7 +1156,13 @@ namespace SharpCraft
                         return "{\"condition\":\"random_chance\",\"chance\":" + _random.ToMinecraftDouble() + "}";
 
                     case LootCondition.RandomEnchantmentChance:
-                        return "{\"condition\":\"table_bonus\"}";
+                        string returnString = "{\"condition\":\"table_bonus\",\"enchantment\":\"" + _enchant + "\",\"chances\":[";
+                        List<string> values = new List<string>();
+                        foreach(double number in _chances)
+                        {
+                            values.Add(number.ToMinecraftDouble());
+                        }
+                        return returnString + string.Join("],[",values) + "]}";
 
                     case LootCondition.RandomLootChance:
                         return "{\"condition\":\"looting_multiplier\",\"chance\":" + _random.ToMinecraftDouble() + ",\"looting_multiplier\":" + _Multiplier.ToMinecraftDouble() + "}";

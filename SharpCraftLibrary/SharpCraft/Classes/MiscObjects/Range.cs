@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using SharpCraft.Data;
+using System;
 
 namespace SharpCraft
 {
     /// <summary>
     /// An object for ranges
     /// </summary>
-    public class Range
+    public class Range : IConvertableToDataObject
     {
         /// <summary>
         /// The smallest number in the range
@@ -89,6 +91,45 @@ namespace SharpCraft
                 {
                     return Min.ToString();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Converts this range into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: min path name, 1: max path name, 2: type of the range values</param>
+        /// <returns>the made <see cref="DataPartObject"/></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 3)
+            {
+                throw new ArgumentException("There has to be exacly 3 conversion params to convert a range to a data object.");
+            }
+            
+            if (conversionData[0] is string minName && conversionData[1] is string maxName && conversionData[2] is ID.NBTTagType forceType)
+            {
+                DataPartObject dataObject = new DataPartObject();
+                if (forceType == ID.NBTTagType.TagShort)
+                {
+                    if (!(Min is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((short)Min)));
+                    }
+                    if (!(Max is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((short)Max)));
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("Range values cannot convert to the given type");
+                }
+
+                return dataObject;
+            }
+            else
+            {
+                throw new ArgumentException("The 2 conversion params has be strings and 1 has to be an NBT enum to convert a range to a data object.");
             }
         }
 

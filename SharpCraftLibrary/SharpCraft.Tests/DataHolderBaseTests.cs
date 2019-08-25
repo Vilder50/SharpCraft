@@ -57,6 +57,9 @@ namespace SharpCraft.Tests
 
             [DataTag]
             public bool? Boolean { get; set; }
+
+            [DataTag]
+            public JSON[] Name { get; set; }
         }
 
         /// <summary>
@@ -167,7 +170,7 @@ namespace SharpCraft.Tests
         {
             DataHolderTestClass testObject = new DataHolderTestClass();
             List<PropertyInfo> properties = testObject.GetDataProperties().ToList();
-            Assert.AreEqual(13, properties.Count);
+            Assert.AreEqual(14, properties.Count);
             PropertyInfo boolProperty = properties.Single(p => p.Name == "Boolean");
             boolProperty.SetValue(testObject, true);
             Assert.IsTrue(testObject.Boolean.Value);
@@ -219,7 +222,8 @@ namespace SharpCraft.Tests
                     SmallNumber = 127,
                     SmallNumberArray = new byte[] { 10, 5 },
                     Text = "hey",
-                    TextArray = new string[] { "hello", "world" }
+                    TextArray = new string[] { "hello", "world" },
+                    Name = new JSON[] { new JSON() { Text = "1" }, new JSON() { Text = "2" } }
                 }
             };
             Assert.AreEqual("{Inside:{" +
@@ -228,6 +232,7 @@ namespace SharpCraft.Tests
                 "FloatPointNumber:0.1f," +
                 "LongNumber:999999999999999L," +
                 "LongNumberArray:[0L,1L,1L]," +
+                "Name:'[{\"text\":\"1\"},{\"text\":\"2\"}]'," +
                 "NumberArray:[I;1,2]," +
                 "PointNumber:11.1d," +
                 "PointNumberArray:[32.3d,22.44d]," +

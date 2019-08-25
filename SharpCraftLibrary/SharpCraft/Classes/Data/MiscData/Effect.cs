@@ -17,7 +17,8 @@ namespace SharpCraft
         /// The amplifier of the effect
         /// (0 = level 1)
         /// </summary>
-        public byte? Amplifier { get; set; }
+        [Data.DataTag]
+        public sbyte? Amplifier { get; set; }
 
         /// <summary>
         /// The type of effect
@@ -50,7 +51,7 @@ namespace SharpCraft
         /// <param name="EffectDuration">the duration of the effect (in ticks)</param>
         /// <param name="EffectAmplifier">the amplifier of the effect (0 = level 1)</param>
         /// <param name="ShowParticles">if the effect should show particles or not</param>
-        public Effect(ID.Effect EffectType, int EffectDuration, byte EffectAmplifier, bool? ShowParticles = null)
+        public Effect(ID.Effect EffectType, int EffectDuration, sbyte EffectAmplifier, bool? ShowParticles = null)
         {
             Duration = EffectDuration;
             Amplifier = EffectAmplifier;

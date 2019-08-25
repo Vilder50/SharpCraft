@@ -34,40 +34,31 @@ namespace SharpCraft
             public Time LifeTime { get; set; }
 
             /// <summary>
-            /// The firework displayed when the rocket blows up
+            /// The firework displayed when the rocket blows up.
+            /// This also sets <see cref="ItemID"/> and <see cref="ItemCount"/>
             /// </summary>
-            [Data.CustomDataTag]
-            public Firework[] Fireworks { get; set; }
+            [Data.DataTag("FireworksItem.tag.Fireworks.Explosions")]
+            public SharpCraft.Firework[] Fireworks { get; set; }
 
             /// <summary>
-            /// Gets the raw data from this entity
+            /// The id of the firework item (is normally <see cref="ID.Item.firework_rocket"/>).
+            /// This is automatically set by <see cref="Fireworks"/>
             /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
+            [Data.DataTag("id", ForceType = ID.NBTTagType.TagString)]
+            public ID.Item ItemID { get; set; }
 
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Life != null) { TempList.Add("Life:" + Life.AsTicks()); }
-                    if (LifeTime != null) { TempList.Add("LifeTime:" + LifeTime.AsTicks()); }
-                    if (Fireworks != null)
-                    {
-                        string TempString = "FireworksItem:{id:firework_rocket,Count:1,tag:{Fireworks:{Explosions:[";
-                        for (int a = 0; a < Fireworks.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + Fireworks[a] + "}";
-                        }
-                        TempString += "]}}}";
-                        TempList.Add(TempString);
-                    }
-                    if (Angled != null) { TempList.Add("ShotAtAngle:" + Angled.ToMinecraftBool()); }
+            /// <summary>
+            /// The amount of firework items (is normally 1).
+            /// This is automatically set by <see cref="Fireworks"/>
+            /// </summary>
+            [Data.DataTag("Count")]
+            public sbyte ItemCount { get; set; }
 
-                    return string.Join(",", TempList);
-                }
-            }
+            /// <summary>
+            /// The amount of time the firework will fly
+            /// </summary>
+            [Data.DataTag]
+            public sbyte Flight { get; set; }
         }
     }
 }

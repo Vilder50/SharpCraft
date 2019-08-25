@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The block the entity is inside
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"TileX","TileY","TileZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords InTile { get; set; }
             /// <summary>
             /// The direction the entity is facing
@@ -51,29 +51,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("ItemRotation")]
             public int? FrameRotation { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            /// <returns>raw data Minecraft uses</returns>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (InTile != null) { TempList.Add("TileX:" + InTile.X + ",TileY:" + InTile.Y + ",TileZ:" + InTile.Z); }
-                    if (Facing != null) { TempList.Add("Facing:" + Facing + "b"); }
-                    if (Painting != null) { TempList.Add("Motive:\"" + Painting + "\""); }
-                    if (FrameItem != null) { TempList.Add("Item:{" + FrameItem.DataString + "}"); }
-                    if (FrameDropChance != null) { TempList.Add("ItemDropChance:" + FrameDropChance.ToString().Replace(",", ".") + "f"); }
-                    if (FrameRotation != null) { TempList.Add("ItemRotation:" + FrameRotation + "b"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

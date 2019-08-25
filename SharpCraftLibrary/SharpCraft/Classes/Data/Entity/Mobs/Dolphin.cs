@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The location of the treasure the dolphin will lead the player to
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"TreasurePosX", "TreasurePosY", "TreasurePosZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords TreasureLocation { get; set; }
 
             /// <summary>
@@ -32,23 +32,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? CanFindTreasure { get; set; }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (TreasureLocation != null) { TempList.Add("TreasurePosX:" + TreasureLocation.X + ",TreasurePosY:" + TreasureLocation.Y + ",TreasurePosZ:" + TreasureLocation.Z); }
-                    if (GotFish != null) { TempList.Add("GotFish:" + GotFish + "b"); }
-                    if (CanFindTreasure != null) { TempList.Add("CanFindTreasure:" + GotFish + "b"); }
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

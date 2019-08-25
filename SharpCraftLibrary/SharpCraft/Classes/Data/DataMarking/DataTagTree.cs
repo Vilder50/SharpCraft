@@ -7,19 +7,13 @@ namespace SharpCraft.Data
     /// <summary>
     /// Interface for classes which can be at the end of a <see cref="DataPartPath"/>
     /// </summary>
-    public interface IDataPartPathEnding
+    public interface IDataPartPathEnding : IDataHolder
     {
         /// <summary>
         /// If the tree part's tags are all empty
         /// </summary>
         /// <returns>True if its empty</returns>
         bool IsEmpty();
-
-        /// <summary>
-        /// Returns this data as a string Minecraft can use
-        /// </summary>
-        /// <returns>This object as a string</returns>
-        string GetDataString();
     }
 
     /// <summary>
@@ -191,7 +185,7 @@ namespace SharpCraft.Data
                 {
                     continue;
                 }
-                if (value.GetType().IsArray)
+                if (value.GetType().IsArray && !(value is JSON[]))
                 {
                     AddItem(new DataPartArray(value, forceType, conversionParams));
                 }
@@ -218,7 +212,7 @@ namespace SharpCraft.Data
                     }
                     else if (!(canBeTag is null))
                     {
-                        AddItem(canBeTag.GetAsTag(forceType, conversionParams));
+                        AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
                     }
                     else if (!(dataTag is null))
                     {
@@ -354,7 +348,7 @@ namespace SharpCraft.Data
         /// Intializes a new <see cref="DataPartTag"/> with the given value
         /// </summary>
         /// <param name="value">The thing this <see cref="DataPartTag"/> should be</param>
-        /// <param name="forceType">The type the object should be forced into. Ignored unless object is an enum</param>
+        /// <param name="forceType">The type the object should be forced into. Used for enums and marking strings as objects</param>
         public DataPartTag(object value, ID.NBTTagType? forceType = null)
         {
             TagType = forceType;
@@ -411,9 +405,12 @@ namespace SharpCraft.Data
                 {
                     TagType = ID.NBTTagType.TagDouble;
                 }
-                else if (value is string)
+                else if (value is string || value is JSON[] || value is JSON)
                 {
-                    TagType = ID.NBTTagType.TagString;
+                    if (TagType != ID.NBTTagType.TagCompound)
+                    {
+                        TagType = ID.NBTTagType.TagString;
+                    }
                 }
                 else if (!(value.GetType().IsEnum))
                 {
@@ -476,7 +473,22 @@ namespace SharpCraft.Data
             }
             else if (Value is string)
             {
-                return "'" + ((string)Value).Escape('\'') + "'";
+                if (TagType == ID.NBTTagType.TagCompound)
+                {
+                    return (string)Value;
+                }
+                else
+                {
+                    return "'" + ((string)Value).Escape('\'') + "'";
+                }
+            }
+            else if (Value is JSON[] jsonArray)
+            {
+                return "'" + jsonArray.GetString() + "'";
+            }
+            else if (Value is JSON jsonObject)
+            {
+                return "'" + jsonObject.ToString() + "'";
             }
             else if (Value.GetType().IsEnum)
             {

@@ -36,7 +36,7 @@ namespace SharpCraft
             /// <summary>
             /// The place the illager is patrolling to
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"X","Y","Z", ID.NBTTagType.TagInt)]
             public Coords PatrolTarget { get; set; }
 
             /// <summary>
@@ -50,28 +50,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public int? Wave { get; set; }
-
-            /// <summary>
-            /// Gets the raw basic data for illagers
-            /// </summary>
-            public string IllagerDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string MobData = MobDataString;
-                    if (MobData.Length != 0) { TempList.Add(MobData); }
-                    if (HasGoal != null) { TempList.Add("HasRaidGoal:" + HasGoal.ToMinecraftBool()); }
-                    if (Patrolling != null) { TempList.Add("Patrolling:" + Patrolling.ToMinecraftBool()); }
-                    if (Leader != null) { TempList.Add("PatrolLeader:" + Leader.ToMinecraftBool()); }
-                    if (PatrolTarget != null) { TempList.Add("PatrolTarget:{X:" + System.Math.Round(PatrolTarget.X) + ",Y:" + System.Math.Round(PatrolTarget.Y) + ",Z:" + System.Math.Round(PatrolTarget.Z) + "}"); }
-                    if (RaidID != null) { TempList.Add("RaidId:" + RaidID); }
-                    if (Wave != null) { TempList.Add("Wave:" + Wave); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
 
         /// <summary>
@@ -84,17 +62,6 @@ namespace SharpCraft
             /// </summary>
             /// <param name="type">the type of entity</param>
             public Illager(ID.Entity? type = ID.Entity.pillager) : base(type) { }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    return IllagerDataString;
-                }
-            }
         }
     }
 }

@@ -32,26 +32,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Crouching { get; set; }
-            
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = TameDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (FoxType != null) { TempList.Add("Type:\"" + FoxType + "\""); }
-                    if (Sleeping != null) { TempList.Add("Sleeping:" + Sleeping.ToMinecraftBool() + "b"); }
-                    if (Crouching != null) { TempList.Add("Crouching:" + Crouching.ToMinecraftBool() + "b"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace SharpCraft
             /// <summary>
             /// The location the entity gets teleported to when entering
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag("ExitPortal","X","Y","Z", SharpCraft.ID.NBTTagType.TagInt)]
             public Coords DExit { get; set; }
             /// <summary>
             /// If the entity should be teleported to this exact location
@@ -50,23 +50,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Age", ForceType = SharpCraft.ID.NBTTagType.TagLong)]
             public Time DAge { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DExit != null) { TempList.Add("ExitPortal: { X: " + DExit.X + ",Y: " + DExit.Y + ",Z: " + DExit.Z + "}"); }
-                if (DExactTeleport != null) { TempList.Add("ExactTeleport:" + DExactTeleport); }
-                if (DAge != null) { TempList.Add("Age:" + DAge.AsTicks()); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

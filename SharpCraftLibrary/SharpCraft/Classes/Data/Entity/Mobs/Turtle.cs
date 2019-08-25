@@ -18,35 +18,18 @@ namespace SharpCraft
             /// <summary>
             /// The location of the turtles home
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"HomePosX","HomePosY","HomePosZ",ID.NBTTagType.TagInt, Merge = true)]
             public Coords HomePos { get; set; }
             /// <summary>
             /// The location the turtle is traveling to
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"TravelPosX", "TravelPosY", "TravelPosZ", ID.NBTTagType.TagInt, Merge = true)]
             public Coords TravelPos { get; set; }
             /// <summary>
             /// True if the turtle has eggs
             /// </summary>
             [Data.DataTag]
             public bool? HasEgg { get; set; }
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (HomePos != null) { TempList.Add("HomePosX:" + HomePos.X + ",HomePosY:" + HomePos.Y + ",HomePosZ:" + HomePos.Z); }
-                    if (TravelPos != null) { TempList.Add("TravelPosX:" + TravelPos.X + ",TravelPosY:" + TravelPos.Y + ",TravelPosZ:" + TravelPos.Z); }
-                    if (HasEgg != null) { TempList.Add("HasEgg:" + HasEgg.ToMinecraftBool()); }
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

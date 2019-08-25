@@ -87,7 +87,7 @@ namespace SharpCraft
             /// <summary>
             /// The entity's UUID
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"UUIDMost","UUIDLeast")]
             public UUID UUID { get; set; }
 
             /// <summary>
@@ -125,55 +125,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
             public Tag[] Tags { get; set; }
-
-            /// <summary>
-            /// Gets the raw basic data for this entity
-            /// </summary>
-            public string BasicDataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-                    if (Motion != null) { TempList.Add("Motion:[" + Motion.X.ToString().Replace(",", ".") + "d," + Motion.Y.ToString().Replace(",", ".") + "d," + Motion.Z.ToString().Replace(",", ".") + "d]"); }
-                    if (Rotation != null) { TempList.Add("Rotation:[" + Rotation.XRot + "f," + Rotation.YRot + "f]"); }
-                    if (FallDistance != null) { TempList.Add("FallDistance:" + FallDistance.ToString().Replace(",", ".") + "f"); }
-                    if (Fire != null) { TempList.Add("Fire:" + Fire.AsTicks(Time.TimerType.Short) + "s"); }
-                    if (Air != null) { TempList.Add("Air:" + Air.AsTicks(Time.TimerType.Short) + "s"); }
-                    if (OnGround != null) { TempList.Add("OnGround:" + OnGround); }
-                    if (NoGravity != null) { TempList.Add("NoGravity:" + NoGravity); }
-                    if (Dimension != null) { TempList.Add("Dimension:" + (int)Dimension); }
-                    if (Invulnerable != null) { TempList.Add("Invulnerable:" + Invulnerable); }
-                    if (PortalCooldown != null) { TempList.Add("PortalCooldown:" + PortalCooldown.AsTicks()); }
-                    if (UUID != null) { TempList.Add("UUIDMost:" + UUID.Least + "L,UUIDLeast:" + UUID.Least + "L"); }
-                    if (CustomName != null) { TempList.Add("CustomName:\"" + CustomName.GetString().Escape() + "\""); }
-                    if (CustomNameVisible != null) { TempList.Add("CustomNameVisible:" + CustomNameVisible); }
-                    if (Silent != null) { TempList.Add("Silent:" + Silent); }
-                    if (Glowing != null) { TempList.Add("Glowing:" + Glowing); }
-                    if (Coords != null) { TempList.Add("Pos:[" + Coords.X + "," + Coords.Y + "," + Coords.Z + "]"); }
-
-                    if (Passengers != null)
-                    {
-                        string TempString = "Passengers:[";
-                        for (int i = 0; i < Passengers.Length; i++)
-                        {
-                            if (i != 0) { TempString += ","; }
-                            TempString += "{" + Passengers[i].DataWithID + "}";
-                        }
-                        TempList.Add(TempString + "]");
-                    }
-                    if (Tags != null)
-                    {
-                        List<string> TempTagList = new List<string>();
-                        for (int i = 0; i < Tags.Length; i++)
-                        {
-                            TempTagList.Add("\"" + Tags[i] + "\"");
-                        }
-                        TempList.Add("Tags:[" + string.Join(",", TempTagList) + "]");
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

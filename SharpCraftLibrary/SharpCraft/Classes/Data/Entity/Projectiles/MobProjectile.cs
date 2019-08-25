@@ -35,26 +35,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("ExplosionPower")]
             public int? GhastExplosionPower { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = ProjectileDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Life != null) { TempList.Add("Life:" + Life.AsTicks()); }
-                    if (GhastExplosionPower != null) { TempList.Add("ExplosionPower:" + GhastExplosionPower); }
-                    if (Direction != null) { TempList.Add("direction:[" + Direction.X + "f," + Direction.Y + "f," + Direction.Z + "f]"); }
-                    if (Power != null) { TempList.Add("power:[" + Power.X + "f," + Power.Y + "f," + Power.Z + "f]"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

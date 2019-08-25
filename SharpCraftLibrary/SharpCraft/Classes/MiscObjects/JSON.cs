@@ -200,7 +200,7 @@ namespace SharpCraft
                 if (ClickCommand != null) { TempList.Add("\"clickEvent\":{ \"action\":\"run_command\",\"value\":\"" + ClickCommand.Escape() + "\"}"); }
                 if (ClickInsertion != null) { TempList.Add("\"clickEvent\":{ \"action\":\"suggest_command\",\"value\":\"" + ClickInsertion.Escape() + "\"}"); }
                 if (ClickBookPageChange != null) { TempList.Add("\"clickEvent\":{ \"action\":\"change_page\",\"value\":\"" + ClickBookPageChange + "\"}"); }
-                if (HoverItem != null) { TempList.Add("\"hoverEvent\":{ \"action\":\"show_text\",\"value\":\"{" + HoverItem.DataString.Escape() + "}\"}"); }
+                if (HoverItem != null) { TempList.Add("\"hoverEvent\":{ \"action\":\"show_text\",\"value\":\"" + HoverItem.GetDataString().Escape() + "\"}"); }
                 if (HoverText != null)
                 {
                     string TempString = "\"hoverEvent\":{ \"action\":\"show_text\",\"value\":[";

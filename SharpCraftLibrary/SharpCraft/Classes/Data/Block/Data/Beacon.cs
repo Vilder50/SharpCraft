@@ -69,24 +69,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Secondary", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
             public ID.Effect? DSecondary { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                List<string> TempList = new List<string>();
-
-                if (DLock != null) { TempList.Add("Lock:\"" + DLock.Escape() + "\""); }
-                if (DLevels != null) { TempList.Add("Levels:" + DLevels); }
-                if (DPrimary != null) { TempList.Add("Primary:" + (int)DPrimary); }
-                if (DSecondary != null) { TempList.Add("Secondary:" + (int)DSecondary); }
-
-                return string.Join(",", TempList);
-            }
         }
     }
 }

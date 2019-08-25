@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// An object used to define time
     /// </summary>
-    public class Time
+    public class Time : IConvertableToDataTag
     {
         /// <summary>
         /// The type of time to output
@@ -110,6 +111,40 @@ namespace SharpCraft
                         throw new OverflowException("The time cannot be over " + float.MaxValue + " or less than " + float.MinValue + " ticks in total");
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Converts this time into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="extraConversionData">Not used</param>
+        /// <param name="asType">The type of tag</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            long savedTime;
+            switch (_timeType)
+            {
+                case ID.TimeType.days:
+                    savedTime =  _time * 24000;
+                    break;
+                case ID.TimeType.seconds:
+                    savedTime = _time * 20;
+                    break;
+                default:
+                    savedTime = _time;
+                    break;
+            }
+            switch (asType)
+            {
+                case ID.NBTTagType.TagInt:
+                    return new DataPartTag((int)savedTime);
+                case ID.NBTTagType.TagShort:
+                    return new DataPartTag((short)savedTime);
+                case ID.NBTTagType.TagLong:
+                    return new DataPartTag(savedTime);
+                default:
+                    throw new ArgumentException("Cannot convert time into a " + asType + " object");
             }
         }
     }

@@ -2169,6 +2169,15 @@
             swamp,
             tiaga
         }
+        public enum GossipType
+        {
+            major_negative,
+            minor_negative,
+            major_positive,
+            minor_positive,
+            trading,
+            golem
+        }
         public enum Panda {Lazy,Worried,Playful,Aggresive,Weak,Brown,Normal }
         public enum Cat { Tabby, Tuxedo, Red, Siamese, BritishShorthair, Calico, Persian, Ragdoll, White, Jellie, Black }
         public enum Fox { red, snow}

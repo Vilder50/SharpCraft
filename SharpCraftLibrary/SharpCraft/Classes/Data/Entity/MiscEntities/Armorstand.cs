@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -20,13 +21,13 @@ namespace SharpCraft
             /// <summary>
             /// Choses which slots are locked
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag]
             public LockedSlots SlotRules { get; set; }
 
             /// <summary>
             /// Used to define what slots on an armor stand are locked
             /// </summary>
-            public class LockedSlots
+            public class LockedSlots : IConvertableToDataTag
             {
                 /// <summary>
                 /// Locks the boots item 100%
@@ -190,147 +191,98 @@ namespace SharpCraft
 
                     return returnValue;
                 }
+
+                /// <summary>
+                /// Converts this <see cref="LockedSlots"/> object into a <see cref="DataPartTag"/>
+                /// </summary>
+                /// <param name="extraConversionData">Not used</param>
+                /// <param name="asType">Not used</param>
+                /// <returns>the made <see cref="DataPartTag"/></returns>
+                public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+                {
+                    return new DataPartTag(GetValue());
+                }
             }
 
             /// <summary>
             /// Makes the armor stand a marker armor stand.
             /// The armor stand wont have a hitbox.
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? Marker { get; set; }
             /// <summary>
             /// The items there is in the armor stand's hands.
             /// 0: main hand. 1: off hand.
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public Item[] HandItems { get; set; }
             /// <summary>
             /// The items the armor stand has on
             /// 0: boots. 1: leggings. 2: chestplate. 3: helmet
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public Item[] ArmorItems { get; set; }
             /// <summary>
             /// Makes the armor stand invisible
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? Invisible { get; set; }
             /// <summary>
             /// Removes the armor stand's stone plate
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? NoBasePlate { get; set; }
             /// <summary>
             /// Makes the armor stand fly when falling if it has an elytra on.
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? FallFlying { get; set; }
             /// <summary>
             /// If the armor stand should show its arms
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? ShowArms { get; set; }
             /// <summary>
             /// If the armor stand is a small armor stand
             /// </summary>
-            [Data.DataTag]
+            [DataTag]
             public bool? Small { get; set; }
             /// <summary>
             /// Rotates the armor stand's body
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.Body")]
             public float?[] BodyRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's left arm
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.LeftArm")]
             public float?[] ArmLeftRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's right arm
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.RightArm")]
             public float?[] ArmRightRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's left leg
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.LeftLeg")]
             public float?[] LegLeftRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's right leg
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.RightLeg")]
             public float?[] LegRightRotation { get; set; }
             /// <summary>
             /// Rotates the armor stand's head
             /// 0: x. 1: y. 2: z.
             /// </summary>
-            [Data.CustomDataTag]
+            [DataTag("Pose.Head")]
             public float?[] HeadRotation { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Marker != null) { TempList.Add("Marker:" + Marker); }
-                    if (HandItems != null)
-                    {
-                        string TempString = "HandItems:[";
-                        for (int a = 0; a < HandItems.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + HandItems[a].DataString + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-                    if (ArmorItems != null)
-                    {
-                        string TempString = "ArmorItems:[";
-                        for (int a = 0; a < ArmorItems.Length; a++)
-                        {
-                            if (a != 0) { TempString += ","; }
-                            TempString += "{" + ArmorItems[a].DataString + "}";
-                        }
-                        TempString += "]";
-                        TempList.Add(TempString);
-                    }
-                    if (Invisible != null) { TempList.Add("Invisible:" + Invisible); }
-                    if (NoBasePlate != null) { TempList.Add("NoBasePlate:" + NoBasePlate); }
-                    if (FallFlying != null) { TempList.Add("FallFlying:" + Marker); }
-                    if (ShowArms != null) { TempList.Add("ShowArms:" + ShowArms); }
-                    if (Small != null) { TempList.Add("Small:" + Small); }
-                    if (BodyRotation != null || ArmLeftRotation != null || ArmRightRotation != null || LegLeftRotation != null || LegRightRotation != null || HeadRotation != null)
-                    {
-                        List<string> TempListRotation = new List<string>();
-                        if (BodyRotation != null) { TempListRotation.Add("Body:[" + BodyRotation[0].ToString().Replace(",", ".") + "f," + BodyRotation[1].ToString().Replace(",", ".") + "f," + BodyRotation[2].ToString().Replace(",", ".") + "f]"); }
-                        if (ArmLeftRotation != null) { TempListRotation.Add("LeftArm:[" + ArmLeftRotation[0].ToString().Replace(",", ".") + "f," + ArmLeftRotation[1].ToString().Replace(",", ".") + "f," + ArmLeftRotation[2].ToString().Replace(",", ".") + "f]"); }
-                        if (ArmRightRotation != null) { TempListRotation.Add("RightArm:[" + ArmRightRotation[0].ToString().Replace(",", ".") + "f," + ArmRightRotation[1].ToString().Replace(",", ".") + "f," + ArmRightRotation[2].ToString().Replace(",", ".") + "f]"); }
-                        if (LegLeftRotation != null) { TempListRotation.Add("LeftLeg:[" + LegLeftRotation[0].ToString().Replace(",", ".") + "f," + LegLeftRotation[1].ToString().Replace(",", ".") + "f," + LegLeftRotation[2].ToString().Replace(",", ".") + "f]"); }
-                        if (LegRightRotation != null) { TempListRotation.Add("RightLeg:[" + LegRightRotation[0].ToString().Replace(",", ".") + "f," + LegRightRotation[1].ToString().Replace(",", ".") + "f," + LegRightRotation[2].ToString().Replace(",", ".") + "f]"); }
-                        if (HeadRotation != null) { TempListRotation.Add("Head:[" + HeadRotation[0].ToString().Replace(",", ".") + "f," + HeadRotation[1].ToString().Replace(",", ".") + "f," + HeadRotation[2].ToString().Replace(",", ".") + "f]"); }
-
-                        TempList.Add("Pose:{" + string.Join(",", TempListRotation) + "}");
-                    }
-                    if (SlotRules != null)
-                    {
-                        TempList.Add("DisabledSlots:" + SlotRules.GetValue());
-                    }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

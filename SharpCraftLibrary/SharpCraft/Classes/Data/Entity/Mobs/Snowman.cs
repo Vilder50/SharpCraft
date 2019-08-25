@@ -20,23 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Pumpkin { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Pumpkin != null) { TempList.Add("Pumpkin:" + Pumpkin.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

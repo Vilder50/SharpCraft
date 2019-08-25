@@ -62,18 +62,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("Page")]
             public int DPage { get; set; }
-
-            /// <summary>
-            /// Gets the raw data for the data the block contains
-            /// </summary>
-            /// <returns>Raw data used by Minecraft</returns>
-            public override string GetDataString()
-            {
-                base.GetDataString();
-
-                if (DBook != null) { return "RecordItem:{" + DBook.DataString + "}"; }
-                return "";
-            }
         }
     }
 }

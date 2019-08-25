@@ -30,25 +30,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("StunTick", ForceType = ID.NBTTagType.TagInt)]
             public Time Stun { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = IllagerDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Attack != null) { TempList.Add("AttackTick:" + Attack.AsTicks()); }
-                    if (Roar != null) { TempList.Add("RoarTick:" + Roar.AsTicks()); }
-                    if (Stun != null) { TempList.Add("StunTick:" + Stun.AsTicks()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

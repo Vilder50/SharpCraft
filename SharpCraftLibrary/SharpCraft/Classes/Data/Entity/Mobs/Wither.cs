@@ -20,23 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
             public Time Invul { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = MobDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Invul != null) { TempList.Add("Invul:" + Invul.AsTicks()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

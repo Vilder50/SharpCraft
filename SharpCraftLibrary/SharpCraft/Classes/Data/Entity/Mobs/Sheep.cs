@@ -25,24 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Sheared { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BreedDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Color != null) { TempList.Add("Color:" + (int)Color + "b"); }
-                    if (Sheared != null) { TempList.Add("Sheared:" + Sheared.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

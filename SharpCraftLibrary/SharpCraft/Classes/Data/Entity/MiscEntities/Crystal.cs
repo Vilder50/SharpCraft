@@ -23,26 +23,8 @@ namespace SharpCraft
             /// <summary>
             /// The coords the crystal's beam should point to
             /// </summary>
-            [Data.CustomDataTag]
+            [Data.DataTag((object)"X","Y","Z",ID.NBTTagType.TagInt)]
             public Coords BeamTarget { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = BasicDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (ShowBottom != null) { TempList.Add("ShowBottom:" + ShowBottom); }
-                    if (BeamTarget != null) { TempList.Add("BeamTarget:{X:" + BeamTarget.X + ",Y:" + BeamTarget.Y + ",Z:" + BeamTarget.Z + "}"); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }

@@ -20,23 +20,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public bool? Johnny { get; set; }
-
-            /// <summary>
-            /// Gets the raw data from this entity
-            /// </summary>
-            public override string DataString
-            {
-                get
-                {
-                    List<string> TempList = new List<string>();
-
-                    string NormalData = IllagerDataString;
-                    if (NormalData.Length != 0) { TempList.Add(NormalData); }
-                    if (Johnny != null) { TempList.Add("Johnny:" + Johnny.ToMinecraftBool()); }
-
-                    return string.Join(",", TempList);
-                }
-            }
         }
     }
 }
