@@ -2538,8 +2538,9 @@
             TagFloat,
             TagDouble,
             TagString,
+            TagNamespacedString,
 
-            TagCompound,
+            TagCompound = 99,
             TagArrayArray = 100,
 
             TagByteArray = 101,
@@ -2549,7 +2550,8 @@
             TagFloatArray = 105,
             TagDoubleArray = 106,
             TagStringArray = 107,
-            TagObjectArray = 108,
+            TagNamespacedStringArray = 108,
+            TagObjectArray = 199,
         }
 
         public enum SmeltType {Furnace, Campfire, Smoker, BlastFurnace }

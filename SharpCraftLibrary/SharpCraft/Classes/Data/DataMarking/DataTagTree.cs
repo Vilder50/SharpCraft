@@ -160,7 +160,7 @@ namespace SharpCraft.Data
     {
         private ID.NBTTagType? arrayType;
         private readonly List<IDataPartPathEnding> items;
-        private bool isEmpty;
+        private readonly bool isEmpty;
 
         /// <summary>
         /// Intializes a new <see cref="DataPartArray"/> with the given value
@@ -383,7 +383,7 @@ namespace SharpCraft.Data
                     {
                         throw new ArgumentNullException("The enum cannot be converted into a null type.", nameof(TagType));
                     }
-                    if (!(TagType == ID.NBTTagType.TagByte || TagType == ID.NBTTagType.TagInt || TagType == ID.NBTTagType.TagShort || TagType == ID.NBTTagType.TagLong || TagType == ID.NBTTagType.TagString))
+                    if (!(TagType == ID.NBTTagType.TagByte || TagType == ID.NBTTagType.TagInt || TagType == ID.NBTTagType.TagShort || TagType == ID.NBTTagType.TagLong || TagType == ID.NBTTagType.TagString || TagType == ID.NBTTagType.TagNamespacedString))
                     {
                         throw new ArgumentException("The enum cannot be converted into the given type.", nameof(TagType));
                     }
@@ -414,7 +414,7 @@ namespace SharpCraft.Data
                 }
                 else if (value is string || value is JSON[] || value is JSON)
                 {
-                    if (TagType != ID.NBTTagType.TagCompound)
+                    if (TagType != ID.NBTTagType.TagCompound && TagType != ID.NBTTagType.TagNamespacedString)
                     {
                         TagType = ID.NBTTagType.TagString;
                     }
@@ -484,6 +484,10 @@ namespace SharpCraft.Data
                 {
                     return (string)Value;
                 }
+                else if (TagType == ID.NBTTagType.TagNamespacedString)
+                {
+                    return "'minecraft:" + ((string)Value).Escape('\'') + "'";
+                }
                 else
                 {
                     return "'" + ((string)Value).Escape('\'') + "'";
@@ -520,6 +524,8 @@ namespace SharpCraft.Data
                         return value + "b";
                     case ID.NBTTagType.TagString:
                         return "'" + Value + "'";
+                    case ID.NBTTagType.TagNamespacedString:
+                        return "'minecraft:" + Value + "'";
                 }
             }
 

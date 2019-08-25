@@ -286,7 +286,7 @@ namespace SharpCraft
                 DataPartObject dataObject = new DataPartObject();
                 if (!(ID is null))
                 {
-                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag("minecraft:" + ID)));
+                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag(ID, SharpCraft.ID.NBTTagType.TagNamespacedString)));
                 }
                 if (HasState)
                 {

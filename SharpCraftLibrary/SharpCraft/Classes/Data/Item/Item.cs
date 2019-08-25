@@ -59,7 +59,7 @@ namespace SharpCraft
         /// The item type
         /// If null the item isnt any item type
         /// </summary>
-        [DataTag("id")]
+        [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagNamespacedString)]
         public ID.Item? ID { get; set; }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace SharpCraft
             /// <summary>
             /// The type of the enchantment
             /// </summary>
-            [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
+            [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagNamespacedString)]
             public ID.Enchant? ID { get; set; }
             /// <summary>
             /// The level of the enchantment
@@ -86,25 +86,6 @@ namespace SharpCraft
             {
                 this.ID = ID;
                 LVL = Level;
-            }
-
-            /// <summary>
-            /// Outputs the raw data used by the game
-            /// </summary>
-            public string EnchantDataString
-            {
-                get
-                {
-                    if (ID != null && LVL != null)
-                    {
-                        return "id:" + ID + ",lvl:" + LVL + "s";
-                    }
-                    else if (LVL != null)
-                    {
-                        return "lvl:" + LVL + "s";
-                    }
-                    return "id:" + ID;
-                }
             }
         }
 
@@ -176,12 +157,12 @@ namespace SharpCraft
         /// <summary>
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
-        [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagNamespacedStringArray)]
         public ID.Block[] CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
-        [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagNamespacedStringArray)]
         public ID.Block[] CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
