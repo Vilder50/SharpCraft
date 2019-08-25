@@ -82,7 +82,7 @@ namespace SharpCraft.Tests
             Assert.IsFalse(dataObject.IsEmpty());
 
             dataObject = new DataPartObject();
-            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[][] { null, null }, null, null)));
+            dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(null)));
             Assert.IsTrue(dataObject.IsEmpty());
         }
 
@@ -92,7 +92,7 @@ namespace SharpCraft.Tests
             DataPartObject dataObject = new DataPartObject();
             dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[][] { null, null }, null, null)));
             dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10.5)));
-            Assert.AreEqual("{PathTwo:10.5d}", dataObject.GetDataString());
+            Assert.AreEqual("{PathOne:[],PathTwo:10.5d}", dataObject.GetDataString());
         }
     }
 
@@ -165,7 +165,7 @@ namespace SharpCraft.Tests
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(null) },
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(null) }
             }, null, null);
-            Assert.IsTrue(array.IsEmpty());
+            Assert.IsFalse(array.IsEmpty());
         }
 
         [TestMethod]

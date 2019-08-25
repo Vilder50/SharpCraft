@@ -297,7 +297,7 @@ namespace SharpCraft.Data
         /// <returns>This object as a string</returns>
         public string GetDataString()
         {
-            if (IsEmpty())
+            if (items.All(i => i.IsEmpty()))
             {
                 return "[]";
             }
@@ -333,7 +333,7 @@ namespace SharpCraft.Data
         /// <returns>True if its empty</returns>
         public bool IsEmpty()
         {
-            return items.All(i => i.IsEmpty());
+            return false;
         }
     }
 
