@@ -459,7 +459,6 @@ namespace SharpCraft
             private Entry[] _entries;
             private long _seed;
             private Loottable _loottable;
-            private JSONObjects.Entity _entity;
 
             /// <summary>
             /// enchants the <see cref="Item"/> with one of the enchantments
@@ -724,12 +723,12 @@ namespace SharpCraft
             /// Fills the player head with the specified entity's data
             /// (Only supports player entities)
             /// </summary>
-            /// <param name="entity">The entity whose data to use</param>
+            /// <param name="target">The entity whose data to use</param>
             /// <returns>this <see cref="Change"/></returns>
-            public Change FillPlayerHead(JSONObjects.Entity entity)
+            public Change FillPlayerHead(ID.LootTarget target)
             {
                 _type = ChangeType.FillPlayerHead;
-                _entity = entity;
+                _target = target;
 
                 return this;
             }
@@ -863,10 +862,10 @@ namespace SharpCraft
                         ReturnString = "{\"function\":\"minecraft:set_loot_table\",\"name\":\"" + _loottable + "\",\"seed\":\"" + _seed + "\"";
                         break;
                     case ChangeType.FillPlayerHead:
-                        ReturnString = "{\"function\":\"minecraft:fill_player_head\",\"entity\":\"" + _entity + "\"";
+                        ReturnString = "{\"function\":\"minecraft:fill_player_head\",\"entity\":\"" + _target.ToString().ToLower() + "\"";
                         break;
                     case ChangeType.CopyNBT:
-                        ReturnString = "{\"function\":\"minecraft:copy_nbt\",\"source\":\"" + _target + "\",\"ops\":[";
+                        ReturnString = "{\"function\":\"minecraft:copy_nbt\",\"source\":\"" + _target.ToString().ToLower() + "\",\"ops\":[";
                         for (int i = 0; i < _operations.Length; i++)
                         {
                             if (i != 0)

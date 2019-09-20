@@ -21,6 +21,7 @@
                 Time = new ClassTime(CommandsList);
                 Border = new ClassBorder(CommandsList);
                 BossBar = new ClassBossBar(CommandsList);
+                LoadSquare = new ClassLoadSquare(Writer);
             }
 
             /// <summary>
@@ -32,6 +33,85 @@
                 Writer.Add("setworldspawn " + coords);
                 Writer.NewLine();
             }
+
+            /// <summary>
+            /// Commands for loading chunks
+            /// </summary>
+            public readonly ClassLoadSquare LoadSquare;
+
+            /// <summary>
+            /// Commands for loading chunks
+            /// </summary>
+            public class ClassLoadSquare
+            {
+                readonly FunctionWriter Writer;
+                internal ClassLoadSquare(FunctionWriter CommandsList)
+                {
+                    Writer = CommandsList;
+                }
+
+                /// <summary>
+                /// Loads the chunks containing the coordinates from corner to oppesiteCorner
+                /// </summary>
+                /// <param name="corner">One of the corners of the square to load</param>
+                /// <param name="oppesiteCorner">The oppesite corner in the square to load</param>
+                public void ForceLoad(Coords corner, Coords oppesiteCorner)
+                {
+                    Writer.Add($"forceload add {corner.StringX} {corner.StringZ} {oppesiteCorner.StringX} {oppesiteCorner.StringZ}");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// Loads the chunk containing the coordinate
+                /// </summary>
+                /// <param name="coordinate">Coordinate in the chunk to load</param>
+                public void ForceLoad(Coords coordinate)
+                {
+                    Writer.Add($"forceload add {coordinate.StringX} {coordinate.StringZ}");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// stops the chunks containing the coordinates from corner to oppesiteCorner from being forced loaded
+                /// </summary>
+                /// <param name="corner">One of the corners of the square to stop loading</param>
+                /// <param name="oppesiteCorner">The oppesite corner in the square to stop loading</param>
+                public void StopLoad(Coords corner, Coords oppesiteCorner)
+                {
+                    Writer.Add($"forceload remove {corner.StringX} {corner.StringZ} {oppesiteCorner.StringX} {oppesiteCorner.StringZ}");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// Stops the chunk at the coordinate from being forcedloaded
+                /// </summary>
+                /// <param name="coordinate">Coordinate in the chunk to stop loading</param>
+                public void StopLoad(Coords coordinate)
+                {
+                    Writer.Add($"forceload remove {coordinate.StringX} {coordinate.StringZ}");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// Stops all chunks from being forced loaded
+                /// </summary>
+                public void StopLoad()
+                {
+                    Writer.Add($"forceload remove all");
+                    Writer.NewLine();
+                }
+
+                /// <summary>
+                /// Checks if the given coords are loaded
+                /// </summary>
+                /// <param name="coordinate">The coordinate to check if loaded</param>
+                public void IsLoaded(Coords coordinate)
+                {
+                    Writer.Add($"forceload query {coordinate.StringX} {coordinate.StringZ}");
+                    Writer.NewLine();
+                }
+            }
+
 
             /// <summary>
             /// Says a message in the chat
@@ -559,7 +639,7 @@
                 /// <param name="FriendlyFire">If the team should be able to damage their own team or not</param>
                 public void FriendlyFire(Team ChangeTeam, bool FriendlyFire)
                 {
-                    Writer.Add("team modify " + ChangeTeam + " friendlyfire " + FriendlyFire.ToMinecraftBool());
+                    Writer.Add("team modify " + ChangeTeam + " friendlyFire " + FriendlyFire.ToMinecraftBool());
                     Writer.NewLine();
                 }
                 /// <summary>

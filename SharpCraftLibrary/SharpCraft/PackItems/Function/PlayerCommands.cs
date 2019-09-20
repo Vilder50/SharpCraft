@@ -574,6 +574,7 @@
                 {
                     Writer.CopyState();
                     Writer.Add("title " + Player + " times " + StartFade + " " + Stay + " " + EndFade);
+                    Writer.NewLine();
 
                     Writer.PasteState();
                     if (BottomMessage != null)

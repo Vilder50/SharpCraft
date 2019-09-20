@@ -24,7 +24,7 @@ namespace SharpCraft
             /// The direction the entity is facing
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
-            public ID.Facing? Facing { get; set; }
+            public ID.FacingFull? Facing { get; set; }
 
             /// <summary>
             /// The type of painting
@@ -50,7 +50,7 @@ namespace SharpCraft
             /// Rotation = <see cref="FrameRotation"/> * 45 degrees clockwise
             /// </summary>
             [Data.DataTag("ItemRotation")]
-            public int? FrameRotation { get; set; }
+            public sbyte? FrameRotation { get; set; }
         }
     }
 }
