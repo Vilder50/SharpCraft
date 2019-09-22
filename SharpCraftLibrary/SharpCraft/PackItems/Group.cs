@@ -59,15 +59,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts a <see cref="Group"/> into a <see cref="Function"/> so it can be used
-        /// </summary>
-        /// <param name="group">the <see cref="Group"/> to convert</param>
-        public static implicit operator Function(Group group)
-        {
-            return new Function(group);
-        }
-
-        /// <summary>
         /// Converts a <see cref="Group"/> into an <see cref="Item"/> so it can be used
         /// </summary>
         /// <param name="group">the <see cref="Group"/> to convert</param>

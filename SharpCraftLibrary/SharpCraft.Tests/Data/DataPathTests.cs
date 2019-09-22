@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using SharpCraft.Data;
 
-namespace SharpCraft.Tests
+namespace SharpCraft.Tests.Data
 {
     [TestClass]
     public class DataPathTests

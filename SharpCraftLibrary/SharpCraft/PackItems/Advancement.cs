@@ -8,39 +8,64 @@ namespace SharpCraft
     /// <summary>
     /// A object used to create <see cref="Advancement"/>s
     /// </summary>
-    public class Advancement
+    public class Advancement : BaseFile, IAdvancement
     {
-        string Path;
         /// <summary>
-        /// Creates an <see cref="Advancement"/> object with the given string
-        /// Used to run <see cref="Advancement"/> which doesnt have an object
-        /// use <see cref="PackNamespace.NewAdvancement(string, JSON[], JSON[], JSONObjects.Item, string, Requirement, Reward, ID.AdvancementFrame, bool, bool, bool)"/> to create a new <see cref="Advancement"/>
+        /// Intializes a new child advancement
         /// </summary>
-        /// <param name="advancement">An string path to and <see cref="Advancement"/></param>
-        public Advancement(string advancement)
+        /// <param name="space">The namespace the advancement is in</param>
+        /// <param name="fileName">The name of the advancement</param>
+        /// <param name="IngameName">The shown advancement name</param>
+        /// <param name="Description">The advancement description</param>
+        /// <param name="Icon">The advancement icon</param>
+        /// <param name="Parent">The parent advancement</param>
+        /// <param name="Requirement">The requirements for getting the advacnement</param>
+        /// <param name="Reward">The rewards for getting this advancement</param>
+        /// <param name="Frame">The advancement frame</param>
+        /// <param name="ShowToast">If the advancement toast should show</param>
+        /// <param name="ChatAnnounce">If the advancement should be announced in chat</param>
+        /// <param name="Hidden">If the advancement should be hidden</param>
+        public Advancement(PackNamespace space, string fileName, JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, Advancement Parent, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            Path = advancement.ToLower().Replace("\\", "/");
+            MakeAdvancementPath();
+            WriteFile(IngameName, Description, Icon, Parent, null, Requirement, Reward, Frame, ShowToast, ChatAnnounce, Hidden);
         }
-        internal Advancement(PackNamespace Namespace, string AdvancementName, JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, Advancement Parent, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden)
+
+        /// <summary>
+        /// Intializes a new parent advancement
+        /// </summary>
+        /// <param name="space">The namespace the advancement is in</param>
+        /// <param name="fileName">The name of the advancement</param>
+        /// <param name="IngameName">The shown advancement name</param>
+        /// <param name="Description">The advancement description</param>
+        /// <param name="Icon">The advancement icon</param>
+        /// <param name="Requirement">The requirements for getting the advacnement</param>
+        /// <param name="Reward">The rewards for getting this advancement</param>
+        /// <param name="Frame">The advancement frame</param>
+        /// <param name="ShowToast">If the advancement toast should show</param>
+        /// <param name="ChatAnnounce">If the advancement should be announced in chat</param>
+        /// <param name="Hidden">If the advancement should be hidden</param>
+        /// <param name="Background">The background image for the advancement</param>
+        public Advancement(PackNamespace space, string fileName, JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, string Background, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeAdvancementPath(Namespace, AdvancementName);
-            WriteFile(Namespace, AdvancementName, IngameName, Description, Icon, Parent, null, Requirement, Reward, Frame, ShowToast, ChatAnnounce, Hidden);
+            MakeAdvancementPath();
+            WriteFile(IngameName, Description, Icon, null, Background, Requirement, Reward, Frame, ShowToast, ChatAnnounce, Hidden);
         }
-        internal Advancement(PackNamespace Namespace, string AdvancementName, JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, string Background, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden)
+
+        /// <summary>
+        /// Intializes a new invalid advancement
+        /// </summary>
+        /// <param name="space">The namespace the advancement is in</param>
+        /// <param name="fileName">The name of the advancement</param>
+        public Advancement(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeAdvancementPath(Namespace, AdvancementName);
-            WriteFile(Namespace, AdvancementName, IngameName, Description, Icon, null, Background, Requirement, Reward, Frame, ShowToast, ChatAnnounce, Hidden);
-        }
-        internal Advancement(PackNamespace Namespace, string AdvancementName)
-        {
-            MakeAdvancementPath(Namespace, AdvancementName);
-            Path = Namespace.Name + ":" + AdvancementName.Replace("\\", "/");
-            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\advancements\\" + AdvancementName + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeAdvancementPath();
+            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "advancements\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
             AdvancementWriter.Write("{\"parent\":\"notoast:notoast\",\"criteria\":{\"impossible\":{\"trigger\":\"minecraft:imp0ssible\"}}}");
+            AdvancementWriter.Dispose();
         }
-        private void WriteFile(PackNamespace Namespace, string AdvancementName, JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, Advancement Parent, string Background, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden)
+        private void WriteFile(JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, Advancement Parent, string Background, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden)
         {
-            Path = Namespace.Name + ":" + AdvancementName.Replace("\\", "/");
             List<Trigger> UsedTriggers = new List<Trigger>();
             if (Requirement != null)
             {
@@ -58,7 +83,7 @@ namespace SharpCraft
                 }
             }
 
-            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\advancements\\" + AdvancementName + ".json", FileMode.Create)) { AutoFlush = true };
+            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "advancements\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
 
             AdvancementWriter.WriteLine("{");
             if (Icon != null)
@@ -85,15 +110,15 @@ namespace SharpCraft
             AdvancementWriter.Dispose();
         }
 
-        private static void MakeAdvancementPath(PackNamespace Namespace, string advancementName)
+        private void MakeAdvancementPath()
         {
-            if (advancementName.Contains("\\"))
+            if (FileName.Contains("\\"))
             {
-                Directory.CreateDirectory(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\advancements\\" + advancementName.ToLower().Substring(0, advancementName.LastIndexOf("\\")));
+                Directory.CreateDirectory(PackNamespace.GetPath() + "advancements\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
             }
             else
             {
-                Directory.CreateDirectory(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\advancements\\");
+                Directory.CreateDirectory(PackNamespace.GetPath() + "advancements\\");
             }
         }
 
@@ -1015,7 +1040,52 @@ namespace SharpCraft
         /// <returns>this <see cref="Advancement"/>'s name</returns>
         public override string ToString()
         {
-            return Path;
+            return GetNamespacedName();
+        }
+
+        /// <summary>
+        /// Writes this advancememnt file
+        /// </summary>
+        /// <param name="stream">The stream used for writing</param>
+        protected override void WriteFile(TextWriter stream)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Used for calling advancements outside this program
+    /// </summary>
+    public class EmptyAdvancement : IAdvancement
+    {
+        /// <summary>
+        /// Intializes a new <see cref="EmptyAdvancement"/>
+        /// </summary>
+        /// <param name="packNamespace">The namespace the advancement is in</param>
+        /// <param name="fileName">The name of the advancement</param>
+        public EmptyAdvancement(BasePackNamespace packNamespace, string fileName)
+        {
+            PackNamespace = packNamespace;
+            FileName = fileName;
+        }
+
+        /// <summary>
+        /// The name of the advancement
+        /// </summary>
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// The namespace the advancement is in
+        /// </summary>
+        public BasePackNamespace PackNamespace { get; private set; }
+
+        /// <summary>
+        /// Returns the string used for evoking this advancement
+        /// </summary>
+        /// <returns>The string used for evoking this advancement</returns>
+        public string GetNamespacedName()
+        {
+            return PackNamespace.Name + ":" + FileName;
         }
     }
 }

@@ -6,7 +6,6 @@ namespace SharpCraft
         /// <summary>
         /// A list of all sounds in the game
         /// This list can be used in /playsound and /stopsound commands
-        /// <see cref="Function.PlayerCommands.ClassSound.Play(SharpCraft.Selector, string, SoundSource, Coords, double, double, double)"/> and <see cref="Function.PlayerCommands.ClassSound.Stop(SharpCraft.Selector, SoundSource?, string)"/>
         /// </summary>
         public static class Sounds
         {

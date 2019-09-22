@@ -4,8 +4,9 @@ using SharpCraft;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
+using SharpCraft.Data;
 
-namespace SharpCraft.Tests
+namespace SharpCraft.Tests.Data
 {
     [TestClass]
     public class BlockTests
@@ -19,7 +20,7 @@ namespace SharpCraft.Tests
 
             //make sure a normal block like stone doesn't get anything else than block
             Type normalTestType = Block.GetFullBlock(ID.Block.stone).GetType();
-            Assert.IsTrue(normalTestType.BaseType == typeof(Data.DataHolderBase), "normal blocks falls into wrong block catagory");
+            Assert.IsTrue(normalTestType.BaseType == typeof(DataHolderBase), "normal blocks falls into wrong block catagory");
 
             //make sure all catagories are in use
             List<(MethodInfo method, Type block, bool used)> fitBlockMethods = new List<(MethodInfo method, Type block, bool used)>();

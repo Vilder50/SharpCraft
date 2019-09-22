@@ -154,7 +154,7 @@ namespace SharpCraft.Data
                 for (int i = 0; i < arrayCount; i++)
                 {
                     fullPath += "[";
-                    if (!(conditions is null) && !(conditions[i] is null) && conditions[i].Type != DataPathCondition.ConditionType.Data) //TODO get correct string here
+                    if (!(conditions is null) && !(conditions[i] is null) && conditions[i].Type != DataPathCondition.ConditionType.Data)
                     {
                         fullPath += conditions[i];
                     }
@@ -301,8 +301,7 @@ namespace SharpCraft.Data
         /// <returns>a string used in Minecraft</returns>
         public override string ToString()
         {
-            //TODO use the correct way to get data string from data
-            return rawData ?? data?.ToString() ?? index.ToString();
+            return rawData ?? data?.GetDataString() ?? index.ToString();
         }
 
         /// <summary>

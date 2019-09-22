@@ -7,24 +7,26 @@ namespace SharpCraft
     /// <summary>
     /// A minecraft Loot Table
     /// </summary>
-    public class Loottable : IConvertableToDataTag
+    public class Loottable : BaseFile, ILoottable, IConvertableToDataTag
     {
-        private readonly string _path;
-
         /// <summary>
-        /// Creates a <see cref="Loottable"/> object with the given string
-        /// Used to use a <see cref="Loottable"/> which doesnt have an object
-        /// use <see cref="PackNamespace.NewLoottable(string, Pool[])"/> to create a new <see cref="Loottable"/>
+        /// Intializes a new <see cref="Loottable"/>
         /// </summary>
-        /// <param name="loottable">An string path to and <see cref="Loottable"/></param>
-        public Loottable(string loottable)
+        /// <param name="space">The namespace the loot table is in</param>
+        /// <param name="fileName">The name of the loot table</param>
+        /// <param name="LootPools">The pools in the loot table</param>
+        public Loottable(PackNamespace space, string fileName, Pool[] LootPools) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            _path = loottable.ToLower().Replace("\\", "/");
-        }
-        internal Loottable(PackNamespace Namespace, string TableName, Pool[] LootPools)
-        {
-            _path = Namespace.Name + ":" + TableName.Replace("\\", "/");
-            StreamWriter TableWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\loot_tables\\" + TableName + ".json", FileMode.Create)) { AutoFlush = true };
+            if (FileName.Contains("\\"))
+            {
+                Directory.CreateDirectory(PackNamespace.GetPath() + "loot_tables\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
+            }
+            else
+            {
+                Directory.CreateDirectory(PackNamespace.GetPath() + "loot_tables\\");
+            }
+
+            StreamWriter TableWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "loot_tables\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
             string[] StringPools = new string[LootPools.Length];
             for (int i = 0; i < LootPools.Length; i++)
             {
@@ -40,7 +42,7 @@ namespace SharpCraft
         /// <returns>this <see cref="Loottable"/>'s name</returns>
         public override string ToString()
         {
-            return _path;
+            return GetNamespacedName();
         }
 
         /// <summary>
@@ -52,6 +54,15 @@ namespace SharpCraft
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
             return new DataPartTag(ToString());
+        }
+
+        /// <summary>
+        /// Writes this loot table file
+        /// </summary>
+        /// <param name="stream">The stream used for writing</param>
+        protected override void WriteFile(TextWriter stream)
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -1220,6 +1231,42 @@ namespace SharpCraft
             {
                 return new Condition[] { condition };
             }
+        }
+    }
+
+    /// <summary>
+    /// Used for calling loot tables outside this program
+    /// </summary>
+    public class EmptyLoottable : ILoottable
+    {
+        /// <summary>
+        /// Intializes a new <see cref="EmptyLoottable"/>
+        /// </summary>
+        /// <param name="packNamespace">The namespace the loot table is in</param>
+        /// <param name="fileName">The name of the loot table</param>
+        public EmptyLoottable(BasePackNamespace packNamespace, string fileName)
+        {
+            PackNamespace = packNamespace;
+            FileName = fileName;
+        }
+
+        /// <summary>
+        /// The name of the loot table
+        /// </summary>
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// The namespace the loot table is in
+        /// </summary>
+        public BasePackNamespace PackNamespace { get; private set; }
+
+        /// <summary>
+        /// Returns the string used for evoking this loot table
+        /// </summary>
+        /// <returns>The string used for evoking this loot table</returns>
+        public string GetNamespacedName()
+        {
+            return PackNamespace.Name + ":" + FileName;
         }
     }
 }

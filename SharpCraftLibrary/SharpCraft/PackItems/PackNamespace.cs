@@ -1,27 +1,33 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SharpCraft
 {
     /// <summary>
     /// An <see cref="object"/> used to define a namespace in a datapack
     /// </summary>
-    public class PackNamespace
+    public class PackNamespace : BasePackNamespace
     {
-        string _name;
-        Datapack _datapack;
         int _nextFileID;
+
+        /// <summary>
+        /// Intializes a new namespace. Make sure to call <see cref="BasePackNamespace.Setup(BaseDatapack, string)"/> after using this
+        /// </summary>
+        public PackNamespace() : base()
+        {
+            
+        }
 
         /// <summary>
         /// Creates a new namespace in a datapack
         /// </summary>
         /// <param name="datapack">The datapack to add the namespace to</param>
         /// <param name="namespaceName">the name of the namespace</param>
-        public PackNamespace(Datapack datapack, string namespaceName)
+        public PackNamespace(BaseDatapack datapack, string namespaceName) : base(datapack, namespaceName)
         {
-            Name = namespaceName;
-            Datapack = datapack;
-            Directory.CreateDirectory(datapack.WorldPath + "\\datapacks\\" + datapack.PackName + "\\data\\" + Name);
+            Directory.CreateDirectory(datapack.GetDataPath() + Name);
         }
 
         /// <summary>
@@ -37,46 +43,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// The name of this namespace
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                return _name;
-            }
-
-            private set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentException(nameof(Name) + " may not be null or empty");
-                }
-
-                _name = value.ToLower();
-            }
-        }
-        /// <summary>
-        /// The datapack this namespace is a part of
-        /// </summary>
-        public Datapack Datapack
-        {
-            get
-            {
-                return _datapack;
-            }
-
-            private set
-            {
-                if (value is null)
-                {
-                    throw new ArgumentException(nameof(Datapack) + " may not be null");
-                }
-                _datapack = value;
-            }
-        }
-
-        /// <summary>
         /// Creates a new function with the given name
         /// </summary>
         /// <param name="functionName">The function's name. If null will get random name</param>
@@ -87,9 +53,15 @@ namespace SharpCraft
             {
                 return new Function(this, null);
             }
+
+            Function returnFunction = GetFile<Function>(functionName);
+            if (returnFunction is null)
+            {
+                return new Function(this, functionName);
+            }
             else
             {
-                return new Function(this, functionName.ToLower().Replace("/", "\\"));
+                return returnFunction;
             }
         }
 
@@ -130,8 +102,16 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe NewRecipe(string name, Item[,] recipe, Item output, string group = null)
         {
-            name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), recipe, output, group);
+            Recipe returnRecipe = GetFile<Recipe>(name);
+
+            if (returnRecipe is null)
+            {
+                return new Recipe(this, name, recipe, output, group);
+            }
+            else
+            {
+                return returnRecipe;
+            }
         }
 
         /// <summary>
@@ -144,8 +124,16 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe NewRecipe(string name, Item[] recipe, Item output, string group = null)
         {
-            name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), recipe, output, group);
+            Recipe returnRecipe = GetFile<Recipe>(name);
+
+            if (returnRecipe is null)
+            {
+                return new Recipe(this, name, recipe, output, group);
+            }
+            else
+            {
+                return returnRecipe;
+            }
         }
 
         /// <summary>
@@ -160,8 +148,16 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe NewRecipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
         {
-            name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), input, output, xpDrop, cookTime, recipeType);
+            Recipe returnRecipe = GetFile<Recipe>(name);
+
+            if (returnRecipe is null)
+            {
+                return new Recipe(this, name, input, output, xpDrop, cookTime, recipeType);
+            }
+            else
+            {
+                return returnRecipe;
+            }
         }
 
         /// <summary>
@@ -173,8 +169,16 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="Recipe"/></returns>
         public Recipe NewRecipe(string name, Item input, Item output)
         {
-            name = name.Replace("/", "\\");
-            return new Recipe(this, name.ToLower(), input, output);
+            Recipe returnRecipe = GetFile<Recipe>(name);
+
+            if (returnRecipe is null)
+            {
+                return new Recipe(this, name, input, output);
+            }
+            else
+            {
+                return returnRecipe;
+            }
         }
 
         /// <summary>
@@ -183,8 +187,16 @@ namespace SharpCraft
         /// <param name="name">The <see cref="Recipe"/>'s name</param>
         public void HideRecipe(string name)
         {
-            name = name.Replace("/", "\\");
-            new Recipe(this, name);
+            Recipe returnRecipe = GetFile<Recipe>(name);
+
+            if (returnRecipe is null)
+            {
+                new Recipe(this, name).Dispose();
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot hide recipe since it is in use in this namespace");
+            }
         }
 
         /// <summary>
@@ -195,17 +207,16 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="Recipe"/></returns>
         public Loottable NewLoottable(string tableName, Loottable.Pool[] lootPools)
         {
-            tableName = tableName.Replace("/", "\\");
+            Loottable returnTable = GetFile<Loottable>(tableName);
 
-            if (tableName.Contains("\\"))
+            if (returnTable is null)
             {
-                Directory.CreateDirectory(Datapack.GetDataPath() + Name + "\\loot_tables\\" + tableName.ToLower().Substring(0, tableName.LastIndexOf("\\")));
+                return new Loottable(this, tableName.ToLower(), lootPools);
             }
             else
             {
-                Directory.CreateDirectory(Datapack.GetDataPath() + Name + "\\loot_tables\\");
+                return returnTable;
             }
-            return new Loottable(this, tableName.ToLower(), lootPools);
         }
 
         /// <summary>
@@ -225,8 +236,16 @@ namespace SharpCraft
         /// <returns>the newly created <see cref="Advancement"/></returns>
         public Advancement NewAdvancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, Advancement parent, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
         {
-            advancementName = advancementName.Replace("/", "\\");
-            return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, parent, requirement, reward, frame, showToast, chatAnnounce, hidden);
+            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+
+            if (returnAdvancement is null)
+            {
+                return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, parent, requirement, reward, frame, showToast, chatAnnounce, hidden);
+            }
+            else
+            {
+                return returnAdvancement;
+            }
         }
 
         /// <summary>
@@ -246,8 +265,16 @@ namespace SharpCraft
         /// <returns>the newly created <see cref="Advancement"/></returns>
         public Advancement NewAdvancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
         {
-            advancementName = advancementName.Replace("/", "\\");
-            return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, background, requirement, reward, frame, showToast, chatAnnounce, hidden);
+            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+
+            if (returnAdvancement is null)
+            {
+                return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, background, requirement, reward, frame, showToast, chatAnnounce, hidden);
+            }
+            else
+            {
+                return returnAdvancement;
+            }
         }
 
         /// <summary>
@@ -256,8 +283,16 @@ namespace SharpCraft
         /// <param name="advancementName">The <see cref="Advancement"/>'s name</param>
         public void HideAdvancement(string advancementName)
         {
-            advancementName = advancementName.Replace("/", "\\");
-            new Advancement(this, advancementName);
+            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+
+            if (returnAdvancement is null)
+            {
+                new Advancement(this, advancementName).Dispose();
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot hide advancement since it's getting used inside the namespace");
+            }
         }
 
         /// <summary>
@@ -392,6 +427,15 @@ namespace SharpCraft
             }
 
             return ToString;
+        }
+
+        /// <summary>
+        /// Adds the given setting to this namespace
+        /// </summary>
+        /// <param name="setting">The setting to add</param>
+        public void AddSetting(INamespaceSetting setting)
+        {
+            settings.Add(setting);
         }
     }
 }

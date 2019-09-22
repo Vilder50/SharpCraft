@@ -49,10 +49,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlockTests.cs" />
-    <Compile Include="DataPathTests.cs" />
-    <Compile Include="DataHolderBaseTests.cs" />
-    <Compile Include="DataTagTreeTests.cs" />
+    <Compile Include="Data\BlockTests.cs" />
+    <Compile Include="Data\DataPathTests.cs" />
+    <Compile Include="Data\DataHolderBaseTests.cs" />
+    <Compile Include="Data\DataTagTreeTests.cs" />
+    <Compile Include="PackItems\BaseDatapackTests.cs" />
+    <Compile Include="PackItems\BaseFileTests.cs" />
+    <Compile Include="PackItems\BasePackNamespaceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

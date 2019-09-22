@@ -7,24 +7,20 @@ namespace SharpCraft
     /// <summary>
     /// A object used to create <see cref="Recipe"/>s
     /// </summary>
-    public class Recipe : IConvertableToDataTag
+    public class Recipe : BaseFile, IRecipe, IConvertableToDataTag
     {
-        readonly string Path;
         /// <summary>
-        /// Creates an <see cref="Recipe"/> object with the given string
-        /// Used to give <see cref="Recipe"/>s which doesnt have an object
-        /// use fx <see cref="PackNamespace.NewRecipe(string, Item, ID.Item, double, ID.SmeltType, int)"/> to create a new <see cref="Recipe"/>
+        /// Intializes a new crafting recipe.
         /// </summary>
-        /// <param name="recipe">An string path to and <see cref="Recipe"/></param>
-        public Recipe(string recipe)
+        /// <param name="space">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        /// <param name="Recipe">The recipe (max 3x3)</param>
+        /// <param name="Output">The output item from the recipe</param>
+        /// <param name="Group">The group the recipe is in</param>
+        public Recipe(PackNamespace space, string fileName, Item[,] Recipe, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            Path = recipe.ToLower().Replace("\\", "/");
-        }
-        internal Recipe(PackNamespace Namespace, string Name,Item[,] Recipe, Item Output, string Group)
-        {
-            MakeRecipePath(Namespace, Name);
-            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeRecipePath();
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
 
             List<string> Keys = new List<string>();
             int[,] RecipeWithKeys = new int[3, 3];
@@ -121,11 +117,19 @@ namespace SharpCraft
             RecipeWriter.WriteLine("}");
             RecipeWriter.Dispose();
         }
-        internal Recipe(PackNamespace Namespace, string Name, Item[] NeededItems, Item Output, string Group)
+
+        /// <summary>
+        /// Intializes a new shapeless crafting recipe
+        /// </summary>
+        /// <param name="space">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        /// <param name="NeededItems">List of item's needed for the recipe</param>
+        /// <param name="Output">The output item from the recipe</param>
+        /// <param name="Group">The group the recipe is in</param>
+        public Recipe(PackNamespace space, string fileName, Item[] NeededItems, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeRecipePath(Namespace, Name);
-            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeRecipePath();
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
 
             RecipeWriter.WriteLine("{\"type\":\"crafting_shapeless\",\"ingredients\":[");
             for (int i = 0; i < NeededItems.Length; i++)
@@ -150,11 +154,21 @@ namespace SharpCraft
             RecipeWriter.WriteLine("}");
             RecipeWriter.Dispose();
         }
-        internal Recipe(PackNamespace Namespace, string Name, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type)
+
+        /// <summary>
+        /// Intializes a new smelting recipe
+        /// </summary>
+        /// <param name="space">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        /// <param name="Input">The item to smelt</param>
+        /// <param name="Output">The output item from the recipe</param>
+        /// <param name="XpDrop"></param>
+        /// <param name="CookTime">The amount of time it takes to smelt the item</param>
+        /// <param name="type">The type of smelting recipe</param>
+        public Recipe(PackNamespace space, string fileName, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeRecipePath(Namespace, Name);
-            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeRecipePath();
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(space.GetPath() + "recipes\\" + fileName + ".json", FileMode.Create)) { AutoFlush = true };
             RecipeWriter.Write("{\"type\":\"");
             switch(type)
             {
@@ -177,19 +191,31 @@ namespace SharpCraft
             RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
             RecipeWriter.Dispose();
         }
-        internal Recipe(PackNamespace Namespace, string Name)
+
+        /// <summary>
+        /// Intializes a new invalid recipe
+        /// </summary>
+        /// <param name="space">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        public Recipe(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeRecipePath(Namespace, Name);
-            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeRecipePath();
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(space.GetPath() + "recipes\\" + fileName + ".json", FileMode.Create)) { AutoFlush = true };
             RecipeWriter.WriteLine("{}");
             RecipeWriter.Dispose();
         }
-        internal Recipe(PackNamespace Namespace, string Name, Item Input, Item Output)
+
+        /// <summary>
+        /// Intializes a new recipe for the stone cutter
+        /// </summary>
+        /// <param name="space">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        /// <param name="Input">The item to cut</param>
+        /// <param name="Output">The output item</param>
+        public Recipe(PackNamespace space, string fileName, Item Input, Item Output) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            MakeRecipePath(Namespace, Name);
-            Path = Namespace.Name + ":" + Name.Replace("\\", "/");
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(Namespace.Datapack.GetDataPath() + Namespace.Name + "\\recipes\\" + Name + ".json", FileMode.Create)) { AutoFlush = true };
+            MakeRecipePath();
+            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
             RecipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.ID.MinecraftValue() + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
             RecipeWriter.Dispose();
         }
@@ -200,18 +226,18 @@ namespace SharpCraft
         /// <returns>this <see cref="Recipe"/>'s name</returns>
         public override string ToString()
         {
-            return Path;
+            return PackNamespace.GetPath();
         }
 
-        private static void MakeRecipePath(PackNamespace space, string name)
+        private void MakeRecipePath()
         {
-            if (name.Contains("\\"))
+            if (FileName.Contains("\\"))
             {
-                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\recipes\\" + name.ToLower().Substring(0, name.LastIndexOf("\\")));
+                Directory.CreateDirectory(PackNamespace.GetPath() + "recipes\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
             }
             else
             {
-                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\recipes\\");
+                Directory.CreateDirectory(PackNamespace.GetPath() + "recipes\\");
             }
         }
 
@@ -224,6 +250,51 @@ namespace SharpCraft
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
             return new DataPartTag(ToString());
+        }
+
+        /// <summary>
+        /// Writes this recipe file
+        /// </summary>
+        /// <param name="stream">The stream used for writing</param>
+        protected override void WriteFile(TextWriter stream)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Used for giving recipes outside this program
+    /// </summary>
+    public class EmptyRecipe : IRecipe
+    {
+        /// <summary>
+        /// Intializes a new <see cref="EmptyRecipe"/>
+        /// </summary>
+        /// <param name="packNamespace">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe</param>
+        public EmptyRecipe(BasePackNamespace packNamespace, string fileName)
+        {
+            PackNamespace = packNamespace;
+            FileName = fileName;
+        }
+
+        /// <summary>
+        /// The name of the recipe
+        /// </summary>
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// The namespace the recipe is in
+        /// </summary>
+        public BasePackNamespace PackNamespace { get; private set; }
+
+        /// <summary>
+        /// Returns the string used for evoking this recipe
+        /// </summary>
+        /// <returns>The string used for evoking this recipe</returns>
+        public string GetNamespacedName()
+        {
+            return PackNamespace.Name + ":" + FileName;
         }
     }
 }

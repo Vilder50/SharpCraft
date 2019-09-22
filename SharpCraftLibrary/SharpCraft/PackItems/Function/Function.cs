@@ -1,11 +1,12 @@
 ﻿using System.IO;
+using System;
 
 namespace SharpCraft
 {
     /// <summary>
     /// A object used to create <see cref="Function"/>s
     /// </summary>
-    public partial class Function
+    public class Function : BaseFile, IFunction
     {
         /// <summary>
         /// Used to add commands to the given function
@@ -113,69 +114,46 @@ namespace SharpCraft
         /// </summary>
         public FunctionWriter Writer = new FunctionWriter();
 
-        private PackNamespace _namespace;
-        private string _name;
-        private string _path;
-        /// <summary>
-        /// null if the function isnt a group of functions
-        /// The name of the group which contaions functions
-        /// </summary>
-        public string FunctionGroup;
-
         /// <summary>
         /// The parent function which made this function using <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
         /// </summary>
         public Function Parent;
 
         /// <summary>
-        /// Creates a <see cref="Function"/> object with the given string
-        /// Used to run <see cref="Function"/> which doesnt have an object
-        /// use <see cref="PackNamespace.NewFunction(string)"/> to create a new <see cref="Function"/> or <see cref="NewChild(string)"/> or <see cref="NewSibling(string)"/>
+        /// Intializes a new <see cref="Function"/> with the given values
         /// </summary>
-        /// <param name="function">An string path to and <see cref="Function"/></param>
-        public Function(string function)
+        /// <param name="space">The namespace the function is in</param>
+        /// <param name="fileName">The name of the function</param>
+        public Function(BasePackNamespace space, string fileName) : base(space, fileName, WriteSetting.Auto)
         {
-            _path = function.ToLower().Replace("\\", "/");
-        }
-        internal Function(PackNamespace space, string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
+            if (FileName.Contains("\\"))
             {
-                _name = space.NextFileID.ToString();
+                Directory.CreateDirectory(PackNamespace.GetPath() + "functions\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
             }
             else
             {
-                _name = name;
+                Directory.CreateDirectory(PackNamespace.GetPath() + "functions\\");
             }
-            _namespace = space;
-            if (_name.Contains("\\"))
-            {
-                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\functions\\" + _name.Substring(0, _name.LastIndexOf("\\")));
-            }
-            else
-            {
-                Directory.CreateDirectory(space.Datapack.GetDataPath() + space.Name + "\\functions\\");
-            }
-            _path = space.Name + ":" + _name.Replace("\\", "/");
-            Writer.LineWriter = new StreamWriter(new FileStream(space.Datapack.GetDataPath() + space.Name + "\\functions\\" + _name + ".mcfunction", FileMode.Create)) { AutoFlush = true };
-            Writer.NameSpaceName = space.Name;
+            Writer.LineWriter = (StreamWriter)GetStream();
+            Writer.NameSpaceName = PackNamespace.Name;
             Writer.FunctionName = ToString();
 
-            Block = new BlockCommands(Writer);
-            Entity = new EntityCommands(Writer);
-            Execute = new ExecuteCommands(Writer);
-            World = new WorldCommands(Writer, this);
-            Player = new PlayerCommands(Writer);
-            Custom = new CustomCommands(this);
+            Block = new FunctionWriters.BlockCommands(Writer);
+            Entity = new FunctionWriters.EntityCommands(Writer);
+            Execute = new FunctionWriters.ExecuteCommands(Writer);
+            World = new FunctionWriters.WorldCommands(Writer, this);
+            Player = new FunctionWriters.PlayerCommands(Writer);
+            Custom = new FunctionWriters.CustomCommands(this);
         }
 
         /// <summary>
-        /// Converts a group of functions into a function which runs all the group's functions
+        /// Returns the streamwriter to use
         /// </summary>
-        /// <param name="FunctionGroup">the function group to convert</param>
-        public Function(Group FunctionGroup)
+        /// <returns>the streamwriter to use</returns>
+        protected override TextWriter GetStream()
         {
-            this.FunctionGroup = "#" + FunctionGroup;
+            StreamWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "functions\\" + FileName + ".mcfunction", FileMode.Create)) { AutoFlush = true };
+            return StreamWriter;
         }
 
         /// <summary>
@@ -184,45 +162,38 @@ namespace SharpCraft
         /// <returns>this <see cref="Function"/>'s name</returns>
         public override string ToString()
         {
-            if (FunctionGroup == null)
-            {
-                return _path;
-            }
-            else
-            {
-                return FunctionGroup;
-            }
+            return GetNamespacedName();
         }
 
         /// <summary>
         /// Commands run on blocks
         /// </summary>
-        public BlockCommands Block;
+        public FunctionWriters.BlockCommands Block;
 
         /// <summary>
         /// Commands run on entities
         /// </summary>
-        public EntityCommands Entity;
+        public FunctionWriters.EntityCommands Entity;
 
         /// <summary>
         /// Execute commands
         /// </summary>
-        public ExecuteCommands Execute;
+        public FunctionWriters.ExecuteCommands Execute;
 
         /// <summary>
         /// Commands run on players
         /// </summary>
-        public PlayerCommands Player;
+        public FunctionWriters.PlayerCommands Player;
 
         /// <summary>
         /// Commands run on the world
         /// </summary>
-        public WorldCommands World;
+        public FunctionWriters.WorldCommands World;
 
         /// <summary>
         /// Custom commands to make life easier
         /// </summary>
-        public CustomCommands Custom;
+        public FunctionWriters.CustomCommands Custom;
 
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
@@ -233,13 +204,16 @@ namespace SharpCraft
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                name = _namespace.NextFileID.ToString();
-            } 
-            else
-            {
-                name = name.Replace("/", "\\");
+                if (PackNamespace is PackNamespace space)
+                {
+                    name = space.NextFileID.ToString();
+                }
+                else
+                {
+                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
+                }
             }
-            return new Function(_namespace, this._name + "\\" + name.ToLower().Replace("/", "\\")) {Parent = this };
+            return new Function(PackNamespace, FileName + "\\" + name.ToLower().Replace("/", "\\")) {Parent = this };
         }
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name and commands
@@ -274,19 +248,22 @@ namespace SharpCraft
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                name = _namespace.NextFileID.ToString();
+                if (PackNamespace is PackNamespace space)
+                {
+                    name = space.NextFileID.ToString();
+                }
+                else
+                {
+                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
+                }
+            }
+            if (FileName.Contains("\\"))
+            {
+                return new Function(PackNamespace, FileName.Substring(0, FileName.LastIndexOf("\\") + 1) + name.ToLower()) { Parent = this };
             }
             else
             {
-                name = name.Replace("/", "\\");
-            }
-            if (this._name.Contains("\\"))
-            {
-                return new Function(_namespace, this._name.Substring(0, this._name.LastIndexOf("\\") + 1) + name.ToLower()) { Parent = this };
-            }
-            else
-            {
-                return new Function(_namespace, name.ToLower()) { Parent = this };
+                return new Function(PackNamespace, name.ToLower()) { Parent = this };
             }
         }
         /// <summary>
@@ -312,5 +289,52 @@ namespace SharpCraft
             creater(function);
             return function;
         }
+
+        /// <summary>
+        /// Writes this function file
+        /// </summary>
+        /// <param name="stream">The stream used for writing</param>
+        protected override void WriteFile(TextWriter stream)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Class for functions which should be callable.
+    /// </summary>
+    public class EmptyFunction : IFunction
+    {
+        /// <summary>
+        /// Intializes a new <see cref="EmptyFunction"/>
+        /// </summary>
+        /// <param name="packNamespace">The namespace the function is in</param>
+        /// <param name="name">The name of the function</param>
+        public EmptyFunction(PackNamespace packNamespace, string name)
+        {
+            FileName = name;
+            PackNamespace = packNamespace;
+        }
+
+        /// <summary>
+        /// The name of the function
+        /// </summary>
+        public string FileName { get; private set; }
+
+        /// <summary>
+        /// The namespace the function is in
+        /// </summary>
+        public BasePackNamespace PackNamespace { get; private set; }
+
+        /// <summary>
+        /// Returns the string used for running this function
+        /// </summary>
+        /// <returns>The string used for running this function</returns>
+        public string GetNamespacedName()
+        {
+            return PackNamespace.Name + ":" + FileName;
+        }
+
+        //TODO make way to convert from string into this
     }
 }
