@@ -78,7 +78,7 @@ namespace SharpCraft.Tests.Data
             };
             furnace.ClearStates();
             Assert.IsNull(furnace.SFacing);
-            Assert.AreEqual(ID.Item.stone, furnace.DItems[0].ID);
+            Assert.IsTrue(furnace.DItems[0].ID == ID.Item.stone);
         }
 
         [TestMethod]

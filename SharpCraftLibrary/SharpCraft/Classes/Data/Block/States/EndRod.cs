@@ -11,18 +11,17 @@ namespace SharpCraft
         /// </summary>
         public class EndRod : Block, IBlock.IFacingFull
         {
-
             /// <summary>
-            /// Creates a new end rod block
+            /// Creates an end rod block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndRod(ID.Block? type = SharpCraft.ID.Block.end_rod) : base(type) { }
+            public EndRod(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates an end rod block
             /// </summary>
-            /// <param name="group"></param>
-            public EndRod(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public EndRod(ID.Block type = SharpCraft.ID.Block.end_rod) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

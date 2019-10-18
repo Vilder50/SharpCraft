@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new bamboo block
+            /// Creates a bamboo block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Bamboo(ID.Block? type = SharpCraft.ID.Block.bamboo) : base(type) { }
+            public Bamboo(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a barrel block
             /// </summary>
-            /// <param name="group"></param>
-            public Bamboo(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Bamboo(ID.Block type = SharpCraft.ID.Block.bamboo) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -78,16 +78,16 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Creates a new bamboo sapling block
+            /// Creates a bamboo sapling block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BambooSapling(ID.Block? type = SharpCraft.ID.Block.bamboo_sapling) : base(type) { }
+            public BambooSapling(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a bamboo sapling block
             /// </summary>
-            /// <param name="group"></param>
-            public BambooSapling(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public BambooSapling(ID.Block type = SharpCraft.ID.Block.bamboo_sapling) : base(type) { }
 
             /// <summary>
             /// The stage of the bamboo

@@ -15,16 +15,16 @@ namespace SharpCraft
             private Item[] _dItems;
 
             /// <summary>
-            /// Creates a new brewing stand block
+            /// Creates a brewingstand block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BrewingStand(ID.Block? type = SharpCraft.ID.Block.brewing_stand) : base(type) { }
+            public BrewingStand(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a brewingstand block
             /// </summary>
-            /// <param name="group"></param>
-            public BrewingStand(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public BrewingStand(ID.Block type = SharpCraft.ID.Block.brewing_stand) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

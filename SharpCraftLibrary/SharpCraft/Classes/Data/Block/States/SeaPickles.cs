@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sPicles;
 
             /// <summary>
-            /// Creates a new sea picle block
+            /// Creates a sea picle block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public SeaPicles(ID.Block? type = SharpCraft.ID.Block.sea_pickle) : base(type) { }
+            public SeaPicles(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a sea picle block
             /// </summary>
-            /// <param name="group"></param>
-            public SeaPicles(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public SeaPicles(ID.Block type = SharpCraft.ID.Block.sea_pickle) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

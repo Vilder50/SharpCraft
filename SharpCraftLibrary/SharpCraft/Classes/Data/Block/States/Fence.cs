@@ -15,13 +15,7 @@ namespace SharpCraft
             /// Creates a new fence block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Fence(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public Fence(Group group) : base(group) { }
+            public Fence(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

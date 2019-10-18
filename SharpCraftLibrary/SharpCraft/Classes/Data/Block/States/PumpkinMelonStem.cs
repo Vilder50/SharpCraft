@@ -17,13 +17,7 @@ namespace SharpCraft
             /// Creates a new stem block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public PumpkinMelonStem(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public PumpkinMelonStem(Group group) : base(group) { }
+            public PumpkinMelonStem(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -64,13 +58,7 @@ namespace SharpCraft
             /// Creates a new stem block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public AttachedPumpkinMelonStem(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public AttachedPumpkinMelonStem(Group group) : base(group) { }
+            public AttachedPumpkinMelonStem(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

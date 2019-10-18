@@ -192,29 +192,18 @@ namespace SharpCraft
         /// </summary>
         public class EntityType
         {
-            private readonly string _groupPath;
             private readonly bool Want;
-            private readonly ID.Entity EntityID;
+            private readonly SharpCraft.EntityType EntityID;
 
             /// <summary>
             /// Creates the object with the given parameters
             /// </summary>
             /// <param name="ID">The type of entity the entity has / has not to be</param>
             /// <param name="Wanted">If the entity should be the type or not</param>
-            public EntityType(ID.Entity ID, bool Wanted = true)
+            public EntityType(SharpCraft.EntityType ID, bool Wanted = true)
             {
                 Want = Wanted;
-                EntityID = ID;
-            }
-
-            /// <summary>
-            /// Creates an <see cref="EntityType"/> which referes to an entity group
-            /// The entity must be a type which is in the given group
-            /// </summary>
-            /// <param name="entityGroup">the entity group to refere to</param>
-            public EntityType(Group entityGroup)
-            {
-                _groupPath = "#" + entityGroup;
+                EntityID = ID ?? throw new System.ArgumentNullException(nameof(ID), "ID may not be null");
             }
 
             /// <summary>
@@ -222,14 +211,9 @@ namespace SharpCraft
             /// </summary>
             public override string ToString()
             {
-                if (_groupPath != null)
-                {
-                    return "type=" + _groupPath;
-                }
-
                 string TempString = "type=";
                 if (!Want) { TempString += "!"; }
-                TempString += EntityID;
+                TempString += EntityID.Name;
                 return TempString;
             }
 

@@ -17,13 +17,7 @@ namespace SharpCraft
             /// Creates a new beetroot, berry bush or nether wart block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BeetrootNetherWartBerryBush(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public BeetrootNetherWartBerryBush(Group group) : base(group) { }
+            public BeetrootNetherWartBerryBush(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

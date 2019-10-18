@@ -175,34 +175,6 @@
             Writer.Add("teleport " + selector + " " + toSelector);
             Writer.NewLine();
         }
-        /// <summary>
-        /// Teleports the selected entities to another entity facing another entity
-        /// </summary>
-        /// <param name="selector">The <see cref="Selector"/> to use</param>
-        /// <param name="toSelector">The entity to teleport to</param>
-        /// <param name="facing">The entity to look at</param>
-        /// <param name="facingPart">The part to look at</param>
-        public void Teleport(Selector selector, Selector toSelector, Selector facing, ID.FacingAnchor? facingPart = null)
-        {
-            facing.Limited();
-            toSelector.Limited();
-            Writer.Add("teleport " + selector + " " + toSelector + " facing entity " + facing);
-            if (facingPart != null) { Writer.Add(" " + facingPart); }
-            Writer.NewLine();
-        }
-        /// <summary>
-        /// Teleports the selected entities to another entity facing a block
-        /// </summary>
-        /// <param name="selector">The <see cref="Selector"/> to use</param>
-        /// <param name="toSelector">The entity to teleport to</param>
-        /// <param name="facing">The block to look at</param>
-        public void Teleport(Selector selector, Selector toSelector, Coords facing)
-        {
-            toSelector.Limited();
-            Writer.Add("teleport " + selector + " " + toSelector);
-            if (facing != null) { Writer.Add(" facing " + facing); }
-            Writer.NewLine();
-        }
 
         /// <summary>
         /// All commands using entity data

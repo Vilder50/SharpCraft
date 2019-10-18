@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Lectern : Block, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
-            /// Creates a new lectern block
+            /// Creates a lectern block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Lectern(ID.Block? type = SharpCraft.ID.Block.lectern) : base(type) { }
+            public Lectern(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a lectern block
             /// </summary>
-            /// <param name="group"></param>
-            public Lectern(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Lectern(ID.Block type = SharpCraft.ID.Block.lectern) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

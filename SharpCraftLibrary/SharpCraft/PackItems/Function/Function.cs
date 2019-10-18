@@ -147,6 +147,14 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
+        /// </summary>
+        public string Name
+        {
+            get => GetNamespacedName();
+        }
+
+        /// <summary>
         /// Returns the streamwriter to use
         /// </summary>
         /// <returns>the streamwriter to use</returns>
@@ -333,6 +341,14 @@ namespace SharpCraft
         public string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + FileName;
+        }
+
+        /// <summary>
+        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
+        /// </summary>
+        public string Name
+        {
+            get => GetNamespacedName();
         }
 
         //TODO make way to convert from string into this

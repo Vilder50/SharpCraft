@@ -17,13 +17,7 @@ namespace SharpCraft
             /// Creates a new sign block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Sign(ID.Block? type = SharpCraft.ID.Block.oak_sign) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public Sign(Group group) : base(group) { }
+            public Sign(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

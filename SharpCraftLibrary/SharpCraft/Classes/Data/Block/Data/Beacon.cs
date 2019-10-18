@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _dLevels;
 
             /// <summary>
-            /// Creates a new beacon block
+            /// Creates a beacon block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Beacon(ID.Block? type = SharpCraft.ID.Block.beacon) : base(type) { }
+            public Beacon(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a beacon block
             /// </summary>
-            /// <param name="group"></param>
-            public Beacon(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Beacon(ID.Block type = SharpCraft.ID.Block.beacon) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

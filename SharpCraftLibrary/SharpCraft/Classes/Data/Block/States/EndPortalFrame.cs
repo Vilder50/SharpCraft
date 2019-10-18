@@ -12,16 +12,16 @@ namespace SharpCraft
         public class EndPortalFrame : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Creates a new end portal frame block
+            /// Creates an end portal frame block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndPortalFrame(ID.Block? type = SharpCraft.ID.Block.end_portal_frame) : base(type) { }
+            public EndPortalFrame(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates an end portal frame block
             /// </summary>
-            /// <param name="group"></param>
-            public EndPortalFrame(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public EndPortalFrame(ID.Block type = SharpCraft.ID.Block.end_portal_frame) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

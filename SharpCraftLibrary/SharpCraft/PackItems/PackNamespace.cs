@@ -296,137 +296,141 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new <see cref="Function"/> <see cref="Group"/>
+        /// Returns a <see cref="FunctionGroup"/> with the given functions
         /// </summary>
-        /// <param name="GroupName">the <see cref="Group"/> name</param>
-        /// <param name="FunctionList">a <see cref="Function"/> array containing the <see cref="Group"/>'s <see cref="Function"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewGroup(string GroupName, Function[] FunctionList, bool Replace = false, Group[] InsertGroups = null)
+        /// <param name="name">The name of the group</param>
+        /// <param name="functionList">The functions in the group</param>
+        /// <param name="append">If the functions should be appended to existing functions from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="FunctionGroup"/></returns>
+        public FunctionGroup Group(string name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), CreateFunctionGroupList(FunctionList, InsertGroups), Replace, 0);
+            FunctionGroup existingFile = GetFile<FunctionGroup>(name.Replace("/","\\"));
+            if (!(existingFile is null))
+            {
+                ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
+
+                existingFile.Items.AddRange(functionList);
+                return existingFile;
+            }
+            else
+            {
+                return new FunctionGroup(this, name, functionList, append, writeSetting);
+            }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Block"/> <see cref="Group"/>
+        /// Returns a <see cref="BlockGroup"/> with the given <see cref="BlockType"/>s
         /// </summary>
-        /// <param name="GroupName">the <see cref="Group"/> name</param>
-        /// <param name="BlockList">a <see cref="Block"/> array containing the <see cref="Group"/>'s <see cref="Block"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewGroup(string GroupName, ID.Block[] BlockList, bool Replace = false, Group[] InsertGroups = null)
+        /// <param name="name">The name of the group</param>
+        /// <param name="blockList">The <see cref="BlockType"/>s in the group</param>
+        /// <param name="append">If the <see cref="BlockType"/>s should be appended to existing <see cref="BlockType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="BlockGroup"/></returns>
+        public BlockGroup Group(string name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            int Start = 0;
-            string[] ToString;
-            if (InsertGroups == null)
+            BlockGroup existingFile = GetFile<BlockGroup>(name.Replace("/", "\\"));
+            if (!(existingFile is null))
             {
-                ToString = new string[BlockList.Length];
+                ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
+
+                existingFile.Items.AddRange(blockList);
+                return existingFile;
             }
             else
             {
-                ToString = new string[BlockList.Length + InsertGroups.Length];
-                for (int i = 0; i < InsertGroups.Length; i++)
-                {
-                    ToString[i] = "#" + InsertGroups[i].ToString();
-                }
-                Start = InsertGroups.Length;
+                return new BlockGroup(this, name, blockList, append, writeSetting);
             }
-            for (int i = Start; i < BlockList.Length; i++)
-            {
-                ToString[i] = BlockList[i].ToString();
-            }
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 1);
         }
 
         /// <summary>
-        /// Creates a new <see cref="Item"/> <see cref="Group"/>
+        /// Returns a <see cref="ItemGroup"/> with the given <see cref="ItemType"/>s
         /// </summary>
-        /// <param name="GroupName">the <see cref="Group"/> name</param>
-        /// <param name="ItemList">a <see cref="Item"/> array containing the <see cref="Group"/>'s <see cref="Item"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewGroup(string GroupName, ID.Item[] ItemList, bool Replace = false, Group[] InsertGroups = null)
+        /// <param name="name">The name of the group</param>
+        /// <param name="itemList">The <see cref="ItemType"/>s in the group</param>
+        /// <param name="append">If the <see cref="ItemType"/>s should be appended to existing <see cref="ItemType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="ItemGroup"/></returns>
+        public ItemGroup Group(string name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            int Start = 0;
-            string[] ToString;
-            if (InsertGroups == null)
+            ItemGroup existingFile = GetFile<ItemGroup>(name.Replace("/", "\\"));
+            if (!(existingFile is null))
             {
-                ToString = new string[ItemList.Length];
+                ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
+
+                existingFile.Items.AddRange(itemList);
+                return existingFile;
             }
             else
             {
-                ToString = new string[ItemList.Length + InsertGroups.Length];
-                for (int i = 0; i < InsertGroups.Length; i++)
-                {
-                    ToString[i] = "#" + InsertGroups[i].ToString();
-                }
-                Start = InsertGroups.Length;
+                return new ItemGroup(this, name, itemList, append, writeSetting);
             }
-            for (int i = Start; i < ItemList.Length; i++)
-            {
-                ToString[i] = ItemList[i].MinecraftValue();
-            }
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 2);
         }
 
         /// <summary>
-        /// Creates a new <see cref="Entity"/> <see cref="Group"/>
+        /// Returns a <see cref="EntityGroup"/> with the given <see cref="EntityType"/>s
         /// </summary>
-        /// <param name="GroupName">the <see cref="Group"/> name</param>
-        /// <param name="EntityList">a <see cref="Entity"/> array containing the <see cref="Group"/>'s <see cref="Entity"/>s</param>
-        /// <param name="Replace">true if this <see cref="Group"/> should override other <see cref="Group"/>s in the same namespace with the same name</param>
-        /// <param name="InsertGroups">a <see cref="Group"/> array containing <see cref="Group"/>s to add to this <see cref="Group"/></param>
-        /// <returns>The newly created <see cref="Group"/></returns>
-        public Group NewGroup(string GroupName, ID.Entity[] EntityList, bool Replace = false, Group[] InsertGroups = null)
+        /// <param name="name">The name of the group</param>
+        /// <param name="entityList">The <see cref="EntityType"/>s in the group</param>
+        /// <param name="append">If the <see cref="EntityType"/>s should be appended to existing <see cref="EntityType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="EntityGroup"/></returns>
+        public EntityGroup Group(string name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            int Start = 0;
-            string[] ToString;
-            if (InsertGroups == null)
+            EntityGroup existingFile = GetFile<EntityGroup>(name.Replace("/", "\\"));
+            if (!(existingFile is null))
             {
-                ToString = new string[EntityList.Length];
+                ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
+
+                existingFile.Items.AddRange(entityList);
+                return existingFile;
             }
             else
             {
-                ToString = new string[EntityList.Length + InsertGroups.Length];
-                for (int i = 0; i < InsertGroups.Length; i++)
-                {
-                    ToString[i] = "#" + InsertGroups[i].ToString();
-                }
-                Start = InsertGroups.Length;
+                return new EntityGroup(this, name, entityList, append, writeSetting);
             }
-            for (int i = Start; i < EntityList.Length; i++)
-            {
-                ToString[i] = EntityList[i].ToString();
-            }
-            return new Group(this, GroupName.ToLower().Replace("/", "\\"), ToString, Replace, 3);
         }
 
-        private string[] CreateFunctionGroupList(Function[] FunctionList, Group[] InsertGroups = null)
+        /// <summary>
+        /// Returns a <see cref="LiquidGroup"/> with the given <see cref="LiquidType"/>s
+        /// </summary>
+        /// <param name="name">The name of the group</param>
+        /// <param name="liquidList">The <see cref="LiquidType"/>s in the group</param>
+        /// <param name="append">If the <see cref="LiquidType"/>s should be appended to existing <see cref="LiquidType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="LiquidGroup"/></returns>
+        public LiquidGroup Group(string name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            int Start = 0;
-            string[] ToString;
-            if (InsertGroups == null)
+            LiquidGroup existingFile = GetFile<LiquidGroup>(name.Replace("/", "\\"));
+            if (!(existingFile is null))
             {
-                ToString = new string[FunctionList.Length];
+                ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
+
+                existingFile.Items.AddRange(liquidList);
+                return existingFile;
             }
             else
             {
-                ToString = new string[FunctionList.Length + InsertGroups.Length];
-                for (int i = 0; i < InsertGroups.Length; i++)
-                {
-                    ToString[i] = "#" + InsertGroups[i].ToString();
-                }
-                Start = InsertGroups.Length;
+                return new LiquidGroup(this, name, liquidList, append, writeSetting);
             }
-            for (int i = Start; i < FunctionList.Length; i++)
+        }
+
+        private void ThrowExceptionOnGroupStacking<TItem>(BaseGroup<TItem> existingFile, bool append, BaseFile.WriteSetting writeSetting) where TItem : IGroupable
+        {
+            if (existingFile.Disposed)
             {
-                ToString[i] = FunctionList[i].ToString();
+                throw new ArgumentException("Cannot get file since there already exists a file with the same name which has finished writing.");
             }
 
-            return ToString;
+            if (existingFile.Setting != writeSetting)
+            {
+                throw new ArgumentException("Cannot get file since there already exists a file with the same name which has a different write setting. (Setting: " + existingFile.Setting + ")");
+            }
+
+            if (existingFile.AppendGroup != append)
+            {
+                throw new ArgumentException("Cannot get file since there already exists a file with the same name which has a different append setting. (Setting: " + existingFile.AppendGroup + ")");
+            }
         }
 
         /// <summary>

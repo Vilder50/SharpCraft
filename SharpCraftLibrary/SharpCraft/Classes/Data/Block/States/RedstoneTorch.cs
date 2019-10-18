@@ -11,18 +11,17 @@ namespace SharpCraft
         /// </summary>
         public class RedstoneWallTorch : Block, IBlock.IFacing, IBlock.ILit
         {
-
             /// <summary>
-            /// Creates a new redstone torch
+            /// Creates a redstone torch block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public RedstoneWallTorch(ID.Block? type) : base(type) { }
+            public RedstoneWallTorch(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a redstone torch block
             /// </summary>
-            /// <param name="group"></param>
-            public RedstoneWallTorch(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public RedstoneWallTorch(ID.Block type = SharpCraft.ID.Block.redstone_wall_torch) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

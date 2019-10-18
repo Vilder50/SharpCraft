@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
-            /// Creates a new composter block
+            /// Creates a composter block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Composter(ID.Block? type = SharpCraft.ID.Block.composter) : base(type) { }
+            public Composter(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a composter block
             /// </summary>
-            /// <param name="group"></param>
-            public Composter(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Composter(ID.Block type = SharpCraft.ID.Block.composter) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

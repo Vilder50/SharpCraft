@@ -15,13 +15,7 @@ namespace SharpCraft
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BaseSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public BaseSkull(Group group) : base(group) { }
+            public BaseSkull(BlockType type) : base(type) { }
 
             /// <summary>
             /// The name of the player whose skin to display
@@ -45,24 +39,10 @@ namespace SharpCraft
             private int? _sRotation;
 
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public GroundSkull()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public GroundSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public GroundSkull(Group group) : base(group) { }
+            public GroundSkull(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -102,24 +82,10 @@ namespace SharpCraft
         public class WallSkull : BaseSkull, IBlock.IFacing
         {
             /// <summary>
-            /// Intilizes a new block object
-            /// </summary>
-            public WallSkull()
-            {
-                ID = null;
-            }
-
-            /// <summary>
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallSkull(ID.Block? type = SharpCraft.ID.Block.player_head) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public WallSkull(Group group) : base(group) { }
+            public WallSkull(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -17,16 +17,16 @@ namespace SharpCraft
             private Time[] _dTotalCookingTimes;
 
             /// <summary>
-            /// Creates a new campfire block
+            /// Creates a campfire block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Campfire(ID.Block? type = SharpCraft.ID.Block.campfire) : base(type) { }
+            public Campfire(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a campfire block
             /// </summary>
-            /// <param name="group"></param>
-            public Campfire(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Campfire(ID.Block type = SharpCraft.ID.Block.campfire) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

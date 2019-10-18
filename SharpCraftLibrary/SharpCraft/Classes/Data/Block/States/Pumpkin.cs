@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Pumpkin : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Creates a new pumpkin block
+            /// Creates a pumpkin block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Pumpkin(ID.Block? type = SharpCraft.ID.Block.pumpkin) : base(type) { }
+            public Pumpkin(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a pumpkin block
             /// </summary>
-            /// <param name="group"></param>
-            public Pumpkin(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Pumpkin(ID.Block type = SharpCraft.ID.Block.carved_pumpkin) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

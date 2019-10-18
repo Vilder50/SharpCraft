@@ -17,12 +17,13 @@ namespace SharpCraft
             /// Creates a barrel block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Barrel(ID.Block? type = SharpCraft.ID.Block.barrel) : base(type) { }
+            public Barrel(BlockType type) : base(type) { }
+
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a barrel block
             /// </summary>
-            /// <param name="group"></param>
-            public Barrel(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Barrel(ID.Block type = SharpCraft.ID.Block.barrel) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

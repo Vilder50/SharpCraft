@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sDistance;
 
             /// <summary>
-            /// Creates a new scaffolding block
+            /// Creates a scaffolding block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Scaffolding(ID.Block? type = SharpCraft.ID.Block.scaffolding) : base(type) { }
+            public Scaffolding(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a scaffolding block
             /// </summary>
-            /// <param name="group"></param>
-            public Scaffolding(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Scaffolding(ID.Block type = SharpCraft.ID.Block.scaffolding) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Jigsaw : Block, IBlock.IFacingFull
         {
             /// <summary>
-            /// Creates a new jigsaw block
+            /// Creates a jigsaw block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Jigsaw(ID.Block? type = SharpCraft.ID.Block.jigsaw) : base(type) { }
+            public Jigsaw(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a jigsaw block
             /// </summary>
-            /// <param name="group"></param>
-            public Jigsaw(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Jigsaw(ID.Block type = SharpCraft.ID.Block.jigsaw) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

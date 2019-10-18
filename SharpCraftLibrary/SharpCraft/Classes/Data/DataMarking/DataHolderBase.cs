@@ -91,7 +91,7 @@ namespace SharpCraft.Data
                     clonedObject = (DataHolderBase)Activator.CreateInstance(GetType(), true);
                     break;
                 }
-                if (parameters.Length == 1 && !(Nullable.GetUnderlyingType(parameters[0].ParameterType) is null))
+                if (parameters.Length == 1 && (!(Nullable.GetUnderlyingType(parameters[0].ParameterType) is null) || parameters[0].ParameterType is object))
                 {
                     clonedObject = (DataHolderBase)constructor.Invoke(new object[] { null });
                     break;

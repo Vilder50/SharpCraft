@@ -11,18 +11,17 @@ namespace SharpCraft
         /// </summary>
         public class Rail : Block
         {
-
             /// <summary>
-            /// Creates a new rail block
+            /// Creates a rail block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Rail(ID.Block? type = SharpCraft.ID.Block.rail) : base(type) { }
+            public Rail(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a rail block
             /// </summary>
-            /// <param name="group"></param>
-            public Rail(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Rail(ID.Block type = SharpCraft.ID.Block.rail) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

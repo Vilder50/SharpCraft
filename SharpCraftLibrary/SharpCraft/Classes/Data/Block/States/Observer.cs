@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Observer : Block, IBlock.IFacingFull, IBlock.IPowered
         {
             /// <summary>
-            /// Creates a new observer block
+            /// Creates a observer block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Observer(ID.Block? type = SharpCraft.ID.Block.observer) : base(type) { }
+            public Observer(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a observer block
             /// </summary>
-            /// <param name="group"></param>
-            public Observer(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Observer(ID.Block type = SharpCraft.ID.Block.observer) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

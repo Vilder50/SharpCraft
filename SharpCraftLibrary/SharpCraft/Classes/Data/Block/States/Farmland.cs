@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sHydration;
 
             /// <summary>
-            /// Creates a new farm land block
+            /// Creates a farmland block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Farmland(ID.Block? type = SharpCraft.ID.Block.farmland) : base(type) { }
+            public Farmland(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a farmland block
             /// </summary>
-            /// <param name="group"></param>
-            public Farmland(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Farmland(ID.Block type = SharpCraft.ID.Block.farmland) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

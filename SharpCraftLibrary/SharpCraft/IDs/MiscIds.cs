@@ -1673,6 +1673,13 @@
             music_disc_wait,
             ItemEnumEnd
         }
+        public enum Liquid
+        {
+            lava,
+            flowing_lava,
+            water,
+            flowing_water
+        }
         public enum Color
         {
             white,

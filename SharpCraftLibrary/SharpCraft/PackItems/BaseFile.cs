@@ -73,21 +73,15 @@ namespace SharpCraft
         public string FileName
         {
             get => fileName;
-            set
+            private set
             {
-                //don't allow changing name if file is in auto mode
-                if (!(fileName is null) && Setting == WriteSetting.Auto)
-                {
-                    throw new ArgumentException("Cannot change the file name when the file write mode is Auto", nameof(FileName));
-                }
-
                 //validate file
                 if (value is null)
                 {
                     throw new ArgumentNullException(nameof(FileName), "FileName may not be null");
                 }
 
-                //fix name
+                //fix name and validate
                 string fixedName = value.ToLower().Replace("/","\\");
 
                 if (!ValidateFileName(fixedName))
@@ -146,10 +140,7 @@ namespace SharpCraft
         /// Returns the stream this file is going to use for writing it's file
         /// </summary>
         /// <returns>The stream for this file</returns>
-        protected virtual TextWriter GetStream()
-        {
-            return new StreamWriter(PackNamespace.GetPath() + FileName);
-        }
+        protected abstract TextWriter GetStream();
 
         /// <summary>
         /// Disposes this file. If the write setting is OnDispose it will write the file
@@ -175,7 +166,7 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Extra things to do after dispose is ran
+        /// Extra things to do after dispose was ran
         /// </summary>
         protected virtual void AfterDispose()
         {
@@ -196,6 +187,44 @@ namespace SharpCraft
             if (!Disposed && (Setting == WriteSetting.OnDispose || Setting == WriteSetting.LockedOnDispose))
             {
                 throw new Exception("File was never disposed and never written");
+            }
+        }
+
+        /// <summary>
+        /// Checks if this file can be changed
+        /// </summary>
+        /// <returns>True if it can be changed</returns>
+        public bool CanDoChanges()
+        {
+            return !(Setting == WriteSetting.Auto || Setting == WriteSetting.LockedAuto || Disposed);
+        }
+
+        /// <summary>
+        /// Throws an exception if the file isn't allowed to be changed
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
+        protected void ThrowExceptionOnInvalidChange()
+        {
+            if (!CanDoChanges())
+            {
+                throw new InvalidOperationException("Cannot do the following change since the file doesn't allow it.");
+            }
+        }
+
+        /// <summary>
+        /// Creates the directory for the given file
+        /// </summary>
+        /// <param name="file">The file to create the directory for</param>
+        /// <param name="folderPath">The base folder the file should be in</param>
+        public static void CreateDirectory(BaseFile file, string folderPath)
+        {
+            if (file.FileName.Contains("\\"))
+            {
+                Directory.CreateDirectory(file.PackNamespace.GetPath() + folderPath + "\\" + file.FileName.Substring(0, file.FileName.LastIndexOf("\\")));
+            }
+            else
+            {
+                Directory.CreateDirectory(file.PackNamespace.GetPath() + folderPath + "\\");
             }
         }
     }

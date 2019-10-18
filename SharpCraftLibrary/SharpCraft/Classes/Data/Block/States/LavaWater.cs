@@ -17,13 +17,7 @@ namespace SharpCraft
             /// Creates a new lava or water block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public LavaWater(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public LavaWater(Group group) : base(group) { }
+            public LavaWater(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

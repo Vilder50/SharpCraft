@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new cocoa bean block
+            /// Creates a cocoa bean block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public CocoaBean(ID.Block? type = SharpCraft.ID.Block.cocoa) : base(type) { }
+            public CocoaBean(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a cocoa bean block
             /// </summary>
-            /// <param name="group"></param>
-            public CocoaBean(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public CocoaBean(ID.Block type = SharpCraft.ID.Block.cocoa) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -21,13 +21,7 @@ namespace SharpCraft
             /// <param name="ItemID">The type of the item. If null the item has no type</param>
             /// <param name="Count">The amount of the item. If null the item has no amount</param>
             /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-            public Firework(ID.Item? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
-
-            /// <summary>
-            /// Creates an item object which refereces to an item group
-            /// </summary>
-            /// <param name="ItemGroup">The item group to refere to</param>
-            public Firework(Group ItemGroup) : base(ItemGroup) { }
+            public Firework(ItemType ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
             /// <summary>
             /// The data for a single firework star item

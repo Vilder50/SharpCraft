@@ -15,13 +15,7 @@ namespace SharpCraft
             /// Creates a new door block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Door(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public Door(Group group) : base(group) { }
+            public Door(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

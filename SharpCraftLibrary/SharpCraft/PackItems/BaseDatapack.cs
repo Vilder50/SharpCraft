@@ -108,6 +108,7 @@ namespace SharpCraft
         /// <summary>
         /// Outputs a namespace for this datapack
         /// </summary>
+        /// <typeparam name="TNamespace">The type of namespace</typeparam>
         /// <param name="name">The namespace to get</param>
         /// <returns>A namespace</returns>
         public TNamespace Namespace<TNamespace>(string name) where TNamespace : BasePackNamespace, new()

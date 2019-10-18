@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Spawner : Block
         {
             /// <summary>
-            /// Creates a new end spawner block
+            /// Creates a spawner block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Spawner(ID.Block? type = SharpCraft.ID.Block.spawner) : base(type) { }
+            public Spawner(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a spawner block
             /// </summary>
-            /// <param name="group"></param>
-            public Spawner(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Spawner(ID.Block type = SharpCraft.ID.Block.spawner) : base(type) { }
 
             /// <summary>
             /// Creates a spawner with the specified entity inside. The entity wont move and the spawner wont spawn the entity

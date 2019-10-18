@@ -17,13 +17,13 @@ namespace SharpCraft
             /// Creates a snow block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Snow(ID.Block? type = SharpCraft.ID.Block.snow) : base(type) { }
+            public Snow(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a snow block
             /// </summary>
-            /// <param name="group"></param>
-            public Snow(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Snow(ID.Block type = SharpCraft.ID.Block.snow) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

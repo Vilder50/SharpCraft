@@ -297,7 +297,7 @@
             /// <param name="setRule">if it should or not. null if you want to get the gamerule's value</param>
             public void DoFireTick(bool? setRule = null)
             {
-                Gamerule(setRule, "DoFireTick");
+                Gamerule(setRule, "doFireTick");
             }
             /// <summary>
             /// Changes if players have to have the recipe to be able to craft the item
@@ -387,7 +387,7 @@
             /// <param name="setRule">if it should or not. null if you want to get the gamerule's value</param>
             public void SendCommandFeedback(bool? setRule = null)
             {
-                Gamerule(setRule, "SendCommandFeedback");
+                Gamerule(setRule, "sendCommandFeedback");
             }
             /// <summary>
             /// Changes if death messages should be displayed in chat or not
@@ -395,7 +395,7 @@
             /// <param name="setRule">if it should or not. null if you want to get the gamerule's value</param>
             public void ShowDeathMessages(bool? setRule = null)
             {
-                Gamerule(setRule, "ShowDeathMessages");
+                Gamerule(setRule, "showDeathMessages");
             }
             /// <summary>
             /// Changes if players in spectator mode should be able to generate new chunks

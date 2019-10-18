@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new kelp block
+            /// Creates a kelp block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Kelp(ID.Block? type = SharpCraft.ID.Block.kelp) : base(type) { }
+            public Kelp(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a kelp block
             /// </summary>
-            /// <param name="group"></param>
-            public Kelp(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Kelp(ID.Block type = SharpCraft.ID.Block.kelp) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

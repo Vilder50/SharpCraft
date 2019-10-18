@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sLevel;
 
             /// <summary>
-            /// Creates a new cauldron block
+            /// Creates a cauldron block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Cauldron(ID.Block? type = SharpCraft.ID.Block.cauldron) : base(type) { }
+            public Cauldron(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a cauldron block
             /// </summary>
-            /// <param name="group"></param>
-            public Cauldron(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Cauldron(ID.Block type = SharpCraft.ID.Block.cauldron) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

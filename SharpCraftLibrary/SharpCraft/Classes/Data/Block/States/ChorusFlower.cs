@@ -17,16 +17,16 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new chorus flower block
+            /// Creates a chorus flower block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public ChorusFlower(ID.Block? type = SharpCraft.ID.Block.chorus_flower) : base(type) { }
+            public ChorusFlower(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a chorus flower block
             /// </summary>
-            /// <param name="group"></param>
-            public ChorusFlower(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public ChorusFlower(ID.Block type = SharpCraft.ID.Block.chorus_flower) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

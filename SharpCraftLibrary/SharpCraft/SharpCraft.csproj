@@ -254,6 +254,7 @@
     <Compile Include="Classes\MiscObjects\Time.cs" />
     <Compile Include="Classes\MiscObjects\UUID.cs" />
     <Compile Include="IDs\Files.cs" />
+    <Compile Include="IDs\Types.cs" />
     <Compile Include="IDs\MiscIds.cs" />
     <Compile Include="IDs\ScoreObjects.cs" />
     <Compile Include="IDs\Sound.cs" />
@@ -268,7 +269,12 @@
     <Compile Include="PackItems\Function\IFunction.cs" />
     <Compile Include="PackItems\Function\PlayerCommands.cs" />
     <Compile Include="PackItems\Function\WorldCommands.cs" />
-    <Compile Include="PackItems\Group.cs" />
+    <Compile Include="PackItems\Groups\LiquidGroup.cs" />
+    <Compile Include="PackItems\Groups\EntityGroup.cs" />
+    <Compile Include="PackItems\Groups\ItemGroup.cs" />
+    <Compile Include="PackItems\Groups\BlockGroup.cs" />
+    <Compile Include="PackItems\Groups\FunctionGroup.cs" />
+    <Compile Include="PackItems\Groups\BaseGroup.cs" />
     <Compile Include="PackItems\BaseDatapack.cs" />
     <Compile Include="PackItems\IRecipe.cs" />
     <Compile Include="PackItems\ILoottable.cs" />

@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Lantern : Block
         {
             /// <summary>
-            /// Creates a new lantern block
+            /// Creates a lantern block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Lantern(ID.Block? type = SharpCraft.ID.Block.lantern) : base(type) { }
+            public Lantern(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a lantern block
             /// </summary>
-            /// <param name="group"></param>
-            public Lantern(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Lantern(ID.Block type = SharpCraft.ID.Block.lantern) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

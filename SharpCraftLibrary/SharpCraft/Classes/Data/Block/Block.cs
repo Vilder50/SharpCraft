@@ -7,9 +7,9 @@ using SharpCraft.Data;
 
 namespace SharpCraft
 {
-    public partial class Block : Data.DataHolderBase, IConvertableToDataObject
+    public partial class Block : DataHolderBase, IConvertableToDataObject
     {
-        private ID.Block? id;
+        private BlockType id;
 
         /// <summary>
         /// Intilizes a new block object
@@ -23,18 +23,18 @@ namespace SharpCraft
         /// Creates a new block which is the given type of block
         /// </summary>
         /// <param name="type">The block's ID/Type</param>
-        public Block(ID.Block? type)
+        public Block(BlockType type)
         {
             ID = type;
         }
 
         /// <summary>
-        /// Converts a group of blocks into a block object
+        /// Creates a new block which is the given type of block
         /// </summary>
-        /// <param name="group"></param>
-        public Block(Group group)
+        /// <param name="type">The block's ID/Type</param>
+        public Block(ID.Block type)
         {
-            Group = group;
+            ID = type;
         }
 
         /// <summary>
@@ -57,23 +57,14 @@ namespace SharpCraft
         /// <summary>
         /// The block's ID
         /// </summary>
-        public ID.Block? ID
+        public BlockType ID
         {
             get => id;
             set
             {
-                if (!(value is null) && !FitsBlock(value.Value))
-                {
-                    throw new ArgumentException("The given block type doesn't fit this block object", nameof(ID));
-                }
                 id = value;
             }
         }
-
-        /// <summary>
-        /// The name of the block group
-        /// </summary>
-        public Group Group { get; set; }
 
         /// <summary>
         /// Checks if the block has any block states defined
@@ -169,20 +160,12 @@ namespace SharpCraft
         /// <returns>Raw data used by Minecraft</returns>
         public override string ToString()
         {
-            if (ID == null && Group == null)
+            if (ID == null)
             {
-                throw new ArgumentNullException(nameof(ID) + " or " + nameof(Group) + " has to have a value to convert the block to string");
+                throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the block to string");
             }
 
-            string outputString;
-            if (ID != null)
-            {
-                outputString = ID.ToString();
-            }
-            else
-            {
-                outputString = "#" + Group.ToString();
-            }
+            string outputString = ID.Name;
             if (HasState) { outputString += "[" + GetStateString() + "]"; }
             if (HasData) { outputString += GetDataString(); }
 
@@ -221,9 +204,18 @@ namespace SharpCraft
         /// <returns>true if the block fits</returns>
         public static bool FitsBlock(ID.Block block)
         {
-            return true;
+            return false;
         }
 #pragma warning restore IDE0060
+
+        /// <summary>
+        /// Converts a block id into a block
+        /// </summary>
+        /// <param name="type">The block id to convert</param>
+        public static implicit operator Block(BlockType type)
+        {
+            return new Block(type);
+        }
 
         /// <summary>
         /// Converts a block id into a block
@@ -262,7 +254,7 @@ namespace SharpCraft
             {
                 if ((bool)method.method.Invoke(null, new object[] { type }))
                 {
-                    return (Block)Activator.CreateInstance(method.block, type);
+                    return (Block)Activator.CreateInstance(method.block, (BlockType)type);
                 }
             }
 

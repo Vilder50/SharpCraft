@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Comparator : Block, IBlock.IPowered, IBlock.IFacing
         {
             /// <summary>
-            /// Creates a new comparator block
+            /// Creates a comparator block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Comparator(ID.Block? type = SharpCraft.ID.Block.comparator) : base(type) { }
+            public Comparator(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a comparator block
             /// </summary>
-            /// <param name="group"></param>
-            public Comparator(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Comparator(ID.Block type = SharpCraft.ID.Block.comparator) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

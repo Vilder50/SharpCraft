@@ -28,15 +28,7 @@ namespace SharpCraft
             bool[] NoneEmptyHRow = new bool[3];
             for (int i = 0; i < Recipe.Length; i++)
             {
-                string SearchFor;
-                if (Recipe[i / Recipe.GetLength(1), i % Recipe.GetLength(1)].Group == null)
-                {
-                    SearchFor = Recipe[i / Recipe.GetLength(1), i % Recipe.GetLength(1)].ID.MinecraftValue();
-                }
-                else
-                {
-                    SearchFor = "#" + Recipe[i / Recipe.GetLength(1), i % Recipe.GetLength(1)].Group.ToString();
-                }
+                string SearchFor = Recipe[i / Recipe.GetLength(1), i % Recipe.GetLength(1)].ID.Name;
 
                 if (SearchFor != "" && SearchFor != null)
                 {
@@ -110,7 +102,7 @@ namespace SharpCraft
                 }
             }
             RecipeWriter.Write(string.Join(",",writtenKeys));
-            RecipeWriter.WriteLine("},\"result\":{\"item\": \"" + Output.ID.MinecraftValue() +"\",\"count\": " + (Output.Count != null ? Output.Count : 1) + "}");
+            RecipeWriter.WriteLine("},\"result\":{\"item\": \"" + Output.ID.Name +"\",\"count\": " + (Output.Count != null ? Output.Count : 1) + "}");
             if (Group != null) { RecipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
             
 
@@ -140,14 +132,14 @@ namespace SharpCraft
                 }
                 else
                 {
-                    RecipeWriter.WriteLine("{\"item\":\"" + NeededItems[i].ID.MinecraftValue() + "\"}");
+                    RecipeWriter.WriteLine("{\"item\":\"" + NeededItems[i].ID.Name + "\"}");
                 }
                 if (i != NeededItems.Length - 1)
                 {
                     RecipeWriter.WriteLine(",");
                 }
             }
-            RecipeWriter.WriteLine("],\"result\":{\"item\": \"" + Output.ID.MinecraftValue() + "\",\"count\": " + (Output.Count != null ? Output.Count : 1 ) + "}");
+            RecipeWriter.WriteLine("],\"result\":{\"item\": \"" + Output.ID.Name + "\",\"count\": " + (Output.Count != null ? Output.Count : 1 ) + "}");
             if (Group != null) { RecipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
 
 
@@ -188,7 +180,7 @@ namespace SharpCraft
                     RecipeWriter.Write("minecraft:campfire_cooking");
                     break;
             }
-            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
+            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
             RecipeWriter.Dispose();
         }
 
@@ -216,7 +208,7 @@ namespace SharpCraft
         {
             MakeRecipePath();
             StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
-            RecipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.MinecraftValue() + "\"},\"result\": \"" + Output.ID.MinecraftValue() + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
+            RecipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.ID.Name + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
             RecipeWriter.Dispose();
         }
 
@@ -257,6 +249,15 @@ namespace SharpCraft
         /// </summary>
         /// <param name="stream">The stream used for writing</param>
         protected override void WriteFile(TextWriter stream)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the stream this file is going to use for writing it's file
+        /// </summary>
+        /// <returns>The stream for this file</returns>
+        protected override TextWriter GetStream()
         {
             throw new System.NotImplementedException();
         }

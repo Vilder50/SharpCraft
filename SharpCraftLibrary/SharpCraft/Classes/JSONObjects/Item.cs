@@ -12,7 +12,7 @@ namespace SharpCraft
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s id
             /// </summary>
-            public ID.Item? Id;
+            public ItemType Id;
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s durability
@@ -75,7 +75,7 @@ namespace SharpCraft
             {
                 List<string> TempList = new List<string>();
 
-                if (Id != null) { TempList.Add("\"item\": \"" + Id.MinecraftValue() + "\""); }
+                if (Id != null) { TempList.Add("\"item\": \"" + Id.Name + "\""); }
                 if (Durability != null) { TempList.Add(Durability.JSONString("durability")); }
                 if (Count != null) { TempList.Add(Count.JSONString("count")); }
                 if (Potion != null) { TempList.Add("\"potion\": \"" + Potion + "\""); }

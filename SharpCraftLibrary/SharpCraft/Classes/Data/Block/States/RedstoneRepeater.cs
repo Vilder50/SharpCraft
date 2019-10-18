@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sDelay;
 
             /// <summary>
-            /// Creates a new redstone repeater block
+            /// Creates a repeater block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public RedstoneRepeater(ID.Block? type = SharpCraft.ID.Block.repeater) : base(type) { }
+            public RedstoneRepeater(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a repeater block
             /// </summary>
-            /// <param name="group"></param>
-            public RedstoneRepeater(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public RedstoneRepeater(ID.Block type = SharpCraft.ID.Block.repeater) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -179,7 +179,6 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Group file names used by Minecraft which then can be used in / as a <see cref="Group"/>
             /// These groups are called tags in Minecraft. But let's face it. It's a bad name!
             /// </summary>
             public static class Groups

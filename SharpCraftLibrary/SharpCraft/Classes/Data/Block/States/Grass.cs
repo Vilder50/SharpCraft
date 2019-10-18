@@ -7,21 +7,21 @@ namespace SharpCraft
     public partial class Block
     {
         /// <summary>
-        /// An object for grass, mycelium and podzol blocks
+        /// An object for grass blocks
         /// </summary>
         public class Grass : Block
         {
             /// <summary>
-            /// Creates a new grass, mycelium or podzol block
+            /// Creates a grass block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Grass(ID.Block? type = SharpCraft.ID.Block.grass) : base(type) { }
+            public Grass(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a grass block
             /// </summary>
-            /// <param name="group"></param>
-            public Grass(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Grass(ID.Block type = SharpCraft.ID.Block.grass_block) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

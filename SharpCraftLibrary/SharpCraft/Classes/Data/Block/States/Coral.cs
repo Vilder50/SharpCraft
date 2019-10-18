@@ -15,13 +15,7 @@ namespace SharpCraft
             /// Creates a new coral plant (not block)
             /// </summary>
             /// <param name="type">The type of plant</param>
-            public Coral(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public Coral(Group group) : base(group) { }
+            public Coral(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -50,13 +44,7 @@ namespace SharpCraft
             /// Creates a new coral wall plant
             /// </summary>
             /// <param name="type">The type of plant</param>
-            public CoralFan(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public CoralFan(Group group) : base(group) { }
+            public CoralFan(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

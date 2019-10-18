@@ -12,16 +12,16 @@ namespace SharpCraft
         public class NoteBlock : Block, IBlock.IPowered
         {
             /// <summary>
-            /// Creates a new note block block
+            /// Creates a note block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public NoteBlock(ID.Block? type = SharpCraft.ID.Block.note_block) : base(type) { }
+            public NoteBlock(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a note block
             /// </summary>
-            /// <param name="group"></param>
-            public NoteBlock(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public NoteBlock(ID.Block type = SharpCraft.ID.Block.note_block) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

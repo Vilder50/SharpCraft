@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Lever : Block, IBlock.IPlacedOn, IBlock.IFacing, IBlock.IPowered
         {
             /// <summary>
-            /// Creates a new lever block
+            /// Creates a lever block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Lever(ID.Block? type = SharpCraft.ID.Block.lever) : base(type) { }
+            public Lever(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a lever block
             /// </summary>
-            /// <param name="group"></param>
-            public Lever(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Lever(ID.Block type = SharpCraft.ID.Block.lever) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

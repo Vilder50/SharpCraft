@@ -9,20 +9,19 @@ namespace SharpCraft
         /// <summary>
         /// An object for vine blocks
         /// </summary>
-        public class Vines : Block, IBlock.IConnected
+        public class Vine : Block, IBlock.IConnected
         {
-
             /// <summary>
-            /// Creates a new vine block
+            /// Creates a vine block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Vines(ID.Block? type = SharpCraft.ID.Block.vine) : base(type) { }
+            public Vine(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a vine block
             /// </summary>
-            /// <param name="group"></param>
-            public Vines(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Vine(ID.Block type = SharpCraft.ID.Block.vine) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

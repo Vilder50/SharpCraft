@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for turtle egg blocks
         /// </summary>
-        public class TurtleEggs : Block
+        public class TurtleEgg : Block
         {
             private int? _sEggs;
             private int? _sHatching;
@@ -18,13 +18,13 @@ namespace SharpCraft
             /// Creates a turtle egg block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public TurtleEggs(ID.Block? type = SharpCraft.ID.Block.turtle_egg) : base(type) { }
+            public TurtleEgg(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a turtle egg block
             /// </summary>
-            /// <param name="group"></param>
-            public TurtleEggs(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public TurtleEgg(ID.Block type = SharpCraft.ID.Block.turtle_egg) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

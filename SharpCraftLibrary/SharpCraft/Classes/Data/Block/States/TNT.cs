@@ -15,13 +15,13 @@ namespace SharpCraft
             /// Creates a tnt block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public TNT(ID.Block? type = SharpCraft.ID.Block.tnt) : base(type) { }
+            public TNT(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a tnt block
             /// </summary>
-            /// <param name="group"></param>
-            public TNT(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public TNT(ID.Block type = SharpCraft.ID.Block.tnt) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

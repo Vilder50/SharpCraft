@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for functions
     /// </summary>
-    public interface IFunction
+    public interface IFunction : IGroupable
     {
         /// <summary>
         /// The file name of the function

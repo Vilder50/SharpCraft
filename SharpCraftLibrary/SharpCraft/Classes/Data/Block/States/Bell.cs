@@ -15,13 +15,13 @@ namespace SharpCraft
             /// Creates a bell block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Bell(ID.Block? type = SharpCraft.ID.Block.bell) : base(type) { }
+            public Bell(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a bell block
             /// </summary>
-            /// <param name="group"></param>
-            public Bell(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Bell(ID.Block type = SharpCraft.ID.Block.bell) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

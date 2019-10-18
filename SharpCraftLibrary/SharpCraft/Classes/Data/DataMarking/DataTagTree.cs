@@ -204,26 +204,19 @@ namespace SharpCraft.Data
                 }
                 else
                 {
-                    DataHolderBase dataHolder = value as DataHolderBase;
-                    DataPartTag dataTag = value as DataPartTag;
-                    DataPartObject dataObject = value as DataPartObject;
-                    IConvertableToDataObject canBeObject = value as IConvertableToDataObject;
-                    IConvertableToDataArray canBeArray = value as IConvertableToDataArray;
-                    IConvertableToDataTag canBeTag = value as IConvertableToDataTag;
-
-                    if (!(dataHolder is null))
+                    if (value is DataHolderBase dataHolder)
                     {
                         AddItem(dataHolder.GetDataTree());
                     }
-                    else if (!(canBeObject is null))
+                    else if (value is IConvertableToDataObject canBeObject)
                     {
                         AddItem(canBeObject.GetAsDataObject(conversionParams));
                     }
-                    else if (!(canBeArray is null))
+                    else if (value is IConvertableToDataArray canBeArray)
                     {
                         AddItem(canBeArray.GetAsArray(forceType, conversionParams));
                     }
-                    else if (!(canBeTag is null))
+                    else if (value is IConvertableToDataTag canBeTag)
                     {
                         if (forceType is null)
                         {
@@ -234,11 +227,11 @@ namespace SharpCraft.Data
                             AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
                         }
                     }
-                    else if (!(dataTag is null))
+                    else if (value is DataPartTag dataTag)
                     {
                         AddItem(dataTag);
                     }
-                    else if (!(dataObject is null))
+                    else if (value is DataPartObject dataObject)
                     {
                         AddItem(dataObject);
                     }

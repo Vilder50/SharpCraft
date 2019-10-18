@@ -1051,6 +1051,15 @@ namespace SharpCraft
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Returns the stream this file is going to use for writing it's file
+        /// </summary>
+        /// <returns>The stream for this file</returns>
+        protected override TextWriter GetStream()
+        {
+            throw new NotImplementedException();
+        }
     }
 
     /// <summary>

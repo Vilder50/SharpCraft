@@ -14,16 +14,16 @@ namespace SharpCraft
             private int? _sAge;
 
             /// <summary>
-            /// Creates a new frosted ice block
+            /// Creates a frosted ice block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public FrostedIce(ID.Block? type = SharpCraft.ID.Block.frosted_ice) : base(type) { }
+            public FrostedIce(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a frosted ice block
             /// </summary>
-            /// <param name="group"></param>
-            public FrostedIce(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public FrostedIce(ID.Block type = SharpCraft.ID.Block.frosted_ice) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

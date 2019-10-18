@@ -12,16 +12,16 @@ namespace SharpCraft
         public class Loom : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Creates a new loom block
+            /// Creates a loom block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Loom(ID.Block? type) : base(type) { }
+            public Loom(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a loom block
             /// </summary>
-            /// <param name="group"></param>
-            public Loom(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Loom(ID.Block type = SharpCraft.ID.Block.loom) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

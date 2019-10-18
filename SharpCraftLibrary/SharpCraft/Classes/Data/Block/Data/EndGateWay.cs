@@ -12,16 +12,16 @@ namespace SharpCraft
         public class EndGateWay : Block
         {
             /// <summary>
-            /// Creates a new end gateway block
+            /// Creates an end gateway block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndGateWay(ID.Block? type = SharpCraft.ID.Block.end_gateway) : base(type) { }
+            public EndGateWay(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates an end gateway block
             /// </summary>
-            /// <param name="group"></param>
-            public EndGateWay(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public EndGateWay(ID.Block type = SharpCraft.ID.Block.end_gateway) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

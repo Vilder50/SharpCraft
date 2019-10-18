@@ -12,16 +12,16 @@ namespace SharpCraft
         public class WallTorch : Block, IBlock.IFacing
         {
             /// <summary>
-            /// Creates a new wall torch block
+            /// Creates a torch block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallTorch(ID.Block? type = SharpCraft.ID.Block.wall_torch) : base(type) { }
+            public WallTorch(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a torch block
             /// </summary>
-            /// <param name="group"></param>
-            public WallTorch(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public WallTorch(ID.Block type = SharpCraft.ID.Block.wall_torch) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

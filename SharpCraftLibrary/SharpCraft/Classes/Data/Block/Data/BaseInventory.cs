@@ -18,10 +18,10 @@ namespace SharpCraft
             public BaseInventory(ID.Block? type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a new inventory block
             /// </summary>
-            /// <param name="group"></param>
-            public BaseInventory(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public BaseInventory(BlockType type) : base(type) { }
 
             /// <summary>
             /// The inventory's lock.

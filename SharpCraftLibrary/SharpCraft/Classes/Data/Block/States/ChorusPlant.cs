@@ -13,16 +13,16 @@ namespace SharpCraft
         {
 
             /// <summary>
-            /// Creates a new chorus plant block
+            /// Creates a chorus plant block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public ChorusPlant(ID.Block? type = SharpCraft.ID.Block.chorus_plant) : base(type) { }
+            public ChorusPlant(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a chorus plant block
             /// </summary>
-            /// <param name="group"></param>
-            public ChorusPlant(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public ChorusPlant(ID.Block type = SharpCraft.ID.Block.chorus_plant) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

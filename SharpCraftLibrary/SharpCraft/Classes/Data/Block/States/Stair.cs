@@ -15,13 +15,7 @@ namespace SharpCraft
             /// Creates a stair block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Stair(ID.Block? type) : base(type) { }
-
-            /// <summary>
-            /// Converts a group of blocks into a block object
-            /// </summary>
-            /// <param name="group"></param>
-            public Stair(Group group) : base(group) { }
+            public Stair(BlockType type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

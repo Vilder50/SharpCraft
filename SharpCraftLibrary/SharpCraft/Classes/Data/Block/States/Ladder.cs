@@ -11,18 +11,17 @@ namespace SharpCraft
         /// </summary>
         public class Ladder : Block, IBlock.IFacing, IBlock.IWaterLogged
         {
-
             /// <summary>
-            /// Creates a new ladder block
+            /// Creates a ladder block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Ladder(ID.Block? type = SharpCraft.ID.Block.ladder) : base(type) { }
+            public Ladder(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Converts a group of blocks into a block object
+            /// Creates a ladder block
             /// </summary>
-            /// <param name="group"></param>
-            public Ladder(Group group) : base(group) { }
+            /// <param name="type">The type of block</param>
+            public Ladder(ID.Block type = SharpCraft.ID.Block.ladder) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

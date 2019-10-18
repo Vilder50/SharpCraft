@@ -20,26 +20,12 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ID.Item? itemID, sbyte? count = null, sbyte? slot = null)
+        public Item(ItemType itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
             Count = count;
         }
-
-        /// <summary>
-        /// Creates an item object which refereces to an item group
-        /// </summary>
-        /// <param name="ItemGroup">The item group to refere to</param>
-        public Item(Group ItemGroup)
-        {
-            Group = ItemGroup;
-        }
-
-        /// <summary>
-        /// The name of the item group
-        /// </summary>
-        public Group Group;
 
         /// <summary>
         /// The count of this item.
@@ -59,8 +45,8 @@ namespace SharpCraft
         /// The item type
         /// If null the item isnt any item type
         /// </summary>
-        [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagNamespacedString)]
-        public ID.Item? ID { get; set; }
+        [DataTag("id")]
+        public ItemType ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
@@ -157,13 +143,13 @@ namespace SharpCraft
         /// <summary>
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
-        [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagNamespacedStringArray)]
-        public ID.Block[] CanDestroy { get; set; }
+        [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        public BlockType[] CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
-        [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagNamespacedStringArray)]
-        public ID.Block[] CanPlaceOn { get; set; }
+        [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        public BlockType[] CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
@@ -263,21 +249,12 @@ namespace SharpCraft
         {
             get
             {
-                if (ID == null && Group == null)
+                if (ID == null)
                 {
-                    throw new ArgumentNullException(nameof(ID) + " or " + nameof(Group) + " has to have a value to convert the item into a giveable item");
+                    throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
                 }
 
-                string outputString;
-
-                if (ID != null)
-                {
-                    outputString = ID.ToString();
-                }
-                else
-                {
-                    outputString = "#" + Group.ToString();
-                }
+                string outputString = ID.ToString();
                 string tagData = GetItemTagString();
                 if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
 
