@@ -517,14 +517,28 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Sets <see cref="Limit"/> to 1 if this isnt a @s selector
+        /// Limits the selector to only selecting 1 entity
         /// </summary>
         public void Limited()
         {
-            if (SelectorType != ID.Selector.s)
+            if (!IsLimited())
             {
                 Limit = 1;
             }
+        }
+
+        /// <summary>
+        /// Returns true if the selector is limited to only one entity
+        /// </summary>
+        /// <returns>True if the selector is limited to only one entity</returns>
+        public bool IsLimited()
+        {
+            if (SelectorType == ID.Selector.s || SelectorType == ID.Selector.p || SelectorType == ID.Selector.r || SelectorType is null)
+            {
+                return true;
+            }
+
+            return (Limit == 1);
         }
 
         /// <summary>

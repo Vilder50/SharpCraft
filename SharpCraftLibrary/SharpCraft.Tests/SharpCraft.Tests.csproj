@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ExecuteTests.cs" />
     <Compile Include="Data\BlockTests.cs" />
     <Compile Include="Data\DataPathTests.cs" />
     <Compile Include="Data\DataHolderBaseTests.cs" />
