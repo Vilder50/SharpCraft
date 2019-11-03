@@ -2588,9 +2588,208 @@
             /// </summary>
             replace
         }
+        public enum BoolGamerule
+        {
+            /// <summary>
+            /// If the "Player has gotten advancement" message should be displayed
+            /// </summary>
+            announceAdvancements,
+
+            /// <summary>
+            /// If command blocks should tell admins when they run a command
+            /// </summary>
+            commandBlockOutput,
+
+            /// <summary>
+            /// If the server should skip checking player speed when flying with an elytra.
+            /// </summary>
+            disableElytraMovementCheck,
+
+            /// <summary>
+            /// If raids should be disabled
+            /// </summary>
+            disableRaids,
+
+            /// <summary>
+            /// If the daylight cycle runs
+            /// </summary>
+            doDaylightCycle,
+
+            /// <summary>
+            /// If entities should drop anything
+            /// </summary>
+            doEntityDrops,
+
+            /// <summary>
+            /// If fire should be able to spread
+            /// </summary>
+            doFireTick,
+
+            /// <summary>
+            /// If players only should be able to craft recipes they own
+            /// </summary>
+            doLimitedCrafting,
+
+            /// <summary>
+            /// If mobs should drop their loot
+            /// </summary>
+            doMobLoot,
+
+            /// <summary>
+            /// If mobs should be able to spawn naturally
+            /// </summary>
+            doMobSpawning,
+
+            /// <summary>
+            /// If blocks should drop their loot
+            /// </summary>
+            doTileDrops,
+
+            /// <summary>
+            /// If the weather cycle runs
+            /// </summary>
+            doWeatherCycle,
+
+            /// <summary>
+            /// If players should keep their inventory on death
+            /// </summary>
+            keepInventory,
+
+            /// <summary>
+            /// If admin commands should be logged in the server log
+            /// </summary>
+            logAdminCommands,
+
+            /// <summary>
+            /// If mobs should be able to grief/change blocks
+            /// </summary>
+            mobGriefing,
+
+            /// <summary>
+            /// If players should be able to heal if they have enough food
+            /// </summary>
+            naturalRegeneration,
+
+            /// <summary>
+            /// If the debug screen (f3) should show limited information
+            /// </summary>
+            reducedDegubInfo,
+
+            /// <summary>
+            /// If commands should tell players if they were successfull or not
+            /// </summary>
+            sendCommandFeedback,
+
+            /// <summary>
+            /// If death messages should be displayed in chat
+            /// </summary>
+            showDeathMessages,
+
+            /// <summary>
+            /// If spectators are able to generate new chunks
+            /// </summary>
+            spectatorsGenerateChunks,
+        }
+        public enum IntGamerule
+        {
+            /// <summary>
+            /// The amount of entities there can be in a crammed space before they start taking damage
+            /// </summary>
+            maxEntityCramming,
+
+            /// <summary>
+            /// The amount of random block ticks which happens per chunk per tick
+            /// </summary>
+            randomTickSpeed,
+
+            /// <summary>
+            /// The max distance players can spawn away from the world spawn center
+            /// </summary>
+            spawnRadius
+        }
+        public enum HorseSlot
+        {
+            saddle,
+            chest,
+            armor
+        }
+        public enum TeamDisplayName
+        {
+            preffix,
+            suffix,
+            displayName
+        }
+        public enum QueryTime
+        {
+            /// <summary>
+            /// Returns the amount of days which has passed in the world
+            /// </summary>
+            day,
+
+            /// <summary>
+            /// Returns the time of day
+            /// </summary>
+            daytime,
+
+            /// <summary>
+            /// Returns the total amount of time there has passed in this world (based of what time it is)
+            /// </summary>
+            gametime
+        }
+        public enum AddSetModifier
+        {
+            add,
+            set
+        }
+        public enum ScoreChange
+        {
+            add,
+            remove,
+            set
+        }
         public enum BlockClone { replace, filtered, masked }
         public enum BlockCloneWay { normal, move, force }
         public enum SoundSource { ambient, block, hostile, master, music, neutral, player, record, voice, weather }
+        public enum RelativeAdvancement
+        {
+            /// <summary>
+            /// Selects all the child advancements of this advancement
+            /// </summary>
+            from,
+            /// <summary>
+            /// Selects all advancements on the same branch as this advancement
+            /// </summary>
+            through,
+            /// <summary>
+            /// Selects all the ancestor advancements of this advancement
+            /// </summary>
+            untill
+        }
+        public enum BossBarValue
+        {
+            /// <summary>
+            /// The max value the boss bar can have
+            /// </summary>
+            max,
+            /// <summary>
+            /// The amount of players who can see the boss bar
+            /// </summary>
+            players,
+            /// <summary>
+            /// The value displayed in the boss bar
+            /// </summary>
+            value,
+            /// <summary>
+            /// 1 if visible. 0 if not visible
+            /// </summary>
+            visible
+        }
+        public enum DatapackList
+        {
+            all,
+            enabled,
+            disabled
+        }
         public enum Operation
         {
             /// <summary>

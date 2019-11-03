@@ -52,7 +52,7 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// The name of the namespace
+        /// The name of the datapack
         /// </summary>
         public string Name
         {

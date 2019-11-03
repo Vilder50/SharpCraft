@@ -29,6 +29,14 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// The name of the datapack
+        /// </summary>
+        public new string Name
+        {
+            get => "\"file/" + base.Name + "\"";
+        }
+
+        /// <summary>
         /// Outputs a <see cref="PackNamespace"/> for this datapack
         /// </summary>
         /// <param name="packNamespace">The namespace the namespace has</param>
@@ -48,10 +56,34 @@ namespace SharpCraft
         /// Intializes a new <see cref="EmptyDatapack"/>
         /// </summary>
         /// <param name="name">The name of the datapack</param>
-        public EmptyDatapack(string name) : base("", name)
+        /// <param name="fileDatapack">True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
+        public EmptyDatapack(string name, bool fileDatapack = true) : base("", name)
         {
-            
+            FileDatapack = fileDatapack;
         }
+
+        /// <summary>
+        /// The name of the datapack
+        /// </summary>
+        public new string Name
+        {
+            get 
+            {
+                if (FileDatapack)
+                {
+                    return "\"file/" + base.Name + "\"";
+                }
+                else
+                {
+                    return base.Name;
+                }
+            }
+        }
+
+        /// <summary>
+        /// True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
+        /// </summary>
+        public bool FileDatapack { get; set; }
 
         /// <summary>
         /// Don't use

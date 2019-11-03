@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SharpCraft.Commands
+{
+    /// <summary>
+    /// Command which adds/removes a tag from one or more entities
+    /// </summary>
+    public class TagCommand : ICommand
+    {
+        private Selector selector;
+        private Tag tag;
+
+        /// <summary>
+        /// Intializes a new <see cref="TagCommand"/>
+        /// </summary>
+        /// <param name="selector">Selector for selecting the entities to add/remove the tag from</param>
+        /// <param name="tag">The tag to add/remove</param>
+        /// <param name="addTag">True if the tag should be added. False if removed</param>
+        public TagCommand(Selector selector, Tag tag, bool addTag)
+        {
+            Selector = selector;
+            Tag = tag;
+            AddTag = addTag;
+        }
+
+        /// <summary>
+        /// Selector for selecting the entities to add/remove the tag from
+        /// </summary>
+        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+
+        /// <summary>
+        /// The tag to add/remove
+        /// </summary>
+        public Tag Tag { get => tag; set => tag = value ?? throw new ArgumentNullException(nameof(Tag), "Tag may not be null"); }
+
+        /// <summary>
+        /// True if the tag should be added. False if removed
+        /// </summary>
+        public bool AddTag { get; set; }
+
+        /// <summary>
+        /// Returns the part of the execute command there is special for this command
+        /// </summary>
+        /// <returns>tag [Selector] [AddTag] [Tag]</returns>
+        public string GetCommandString()
+        {
+            return $"tag {Selector} {(AddTag ? "add" : "remove")} {Tag.ToString()}";
+        }
+    }
+
+    /// <summary>
+    /// Command which returns a list of tags from one or more entities
+    /// </summary>
+    public class TagListCommand : ICommand
+    {
+        private Selector selector;
+
+        /// <summary>
+        /// Intializes a new <see cref="TagListCommand"/>
+        /// </summary>
+        /// <param name="selector">Selector for selecting the entities to get a list of tags from</param>
+        public TagListCommand(Selector selector)
+        {
+            Selector = selector;
+        }
+
+        /// <summary>
+        /// Selector for selecting the entities to get a list of tags from
+        /// </summary>
+        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+
+        /// <summary>
+        /// Returns the part of the execute command there is special for this command
+        /// </summary>
+        /// <returns>tag [Selector] list</returns>
+        public string GetCommandString()
+        {
+            return $"tag {Selector} list";
+        }
+    }
+}

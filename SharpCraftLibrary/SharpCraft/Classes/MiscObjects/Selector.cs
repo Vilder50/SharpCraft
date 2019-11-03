@@ -49,7 +49,7 @@ namespace SharpCraft
         /// <summary>
         /// The distance there has to be to the selected entity
         /// </summary>
-        public Range Radius;
+        public Range Distance;
 
         /// <summary>
         /// The x-rotation the selected entity must have
@@ -428,7 +428,7 @@ namespace SharpCraft
                 List<string> TempList = new List<string>();
 
                 if (Level != null) { TempList.Add(Level.SelectorString("level")); }
-                if (Radius != null) { TempList.Add(Radius.SelectorString("distance")); }
+                if (Distance != null) { TempList.Add(Distance.SelectorString("distance")); }
                 if (XRotation != null) { TempList.Add(XRotation.SelectorString("x_rotation")); }
                 if (YRotation != null) { TempList.Add(YRotation.SelectorString("y_rotation")); }
                 if (Limit != null && SelectorType != ID.Selector.s) { TempList.Add("limit=" + Limit); }
