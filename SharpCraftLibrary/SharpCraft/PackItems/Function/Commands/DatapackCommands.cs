@@ -37,7 +37,7 @@ namespace SharpCraft.Commands
         /// <returns>datapack disable [Datapack]</returns>
         public string GetCommandString()
         {
-            return $"datapack disable {Datapack.Name}";
+            return $"datapack disable {Datapack.IngameName}";
         }
     }
 
@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
         /// <returns>datapack enable [Datapack] [LoadFirst]</returns>
         public string GetCommandString()
         {
-            return $"datapack enable {Datapack.Name} {(LoadFirst ? "first" : "last")}";
+            return $"datapack enable {Datapack.IngameName} {(LoadFirst ? "first" : "last")}";
         }
     }
 
@@ -133,7 +133,7 @@ namespace SharpCraft.Commands
         /// <returns>datapack enable [Datapack] [LoadAfter] [OtherDatapack]</returns>
         public string GetCommandString()
         {
-            return $"datapack enable {Datapack.Name} {(LoadAfter ? "after" : "before")} {OtherDatapack.Name}";
+            return $"datapack enable {Datapack.IngameName} {(LoadAfter ? "after" : "before")} {OtherDatapack.IngameName}";
         }
     }
 

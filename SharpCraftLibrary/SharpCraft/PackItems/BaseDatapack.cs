@@ -72,6 +72,17 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// The name of the datapack used for refering to the datapack in game
+        /// </summary>
+        public string IngameName
+        {
+            get
+            {
+                return Name;
+            }
+        }
+
+        /// <summary>
         /// If the datapack has been disposed
         /// </summary>
         public bool Disposed { get; private set; }

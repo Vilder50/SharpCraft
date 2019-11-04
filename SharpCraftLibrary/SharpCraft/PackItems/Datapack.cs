@@ -29,9 +29,9 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// The name of the datapack
+        /// The name of the datapack used for refering to the datapack in game
         /// </summary>
-        public new string Name
+        public new string IngameName
         {
             get => "\"file/" + base.Name + "\"";
         }
@@ -63,19 +63,19 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// The name of the datapack
+        /// The name of the datapack used for refering to the datapack in game
         /// </summary>
-        public new string Name
+        public new string IngameName
         {
-            get 
+            get
             {
                 if (FileDatapack)
                 {
-                    return "\"file/" + base.Name + "\"";
+                    return "\"file/" + Name + "\"";
                 }
                 else
                 {
-                    return base.Name;
+                    return Name;
                 }
             }
         }
