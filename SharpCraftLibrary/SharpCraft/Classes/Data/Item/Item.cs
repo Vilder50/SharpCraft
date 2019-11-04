@@ -254,7 +254,7 @@ namespace SharpCraft
                     throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
                 }
 
-                string outputString = ID.ToString();
+                string outputString = ID.Name;
                 string tagData = GetItemTagString();
                 if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
 

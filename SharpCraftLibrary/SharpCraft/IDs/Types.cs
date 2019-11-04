@@ -47,6 +47,15 @@ namespace SharpCraft
         public string Name { get; protected set; }
 
         /// <summary>
+        /// Returns <see cref="Name"/>
+        /// </summary>
+        /// <returns><see cref="Name"/></returns>
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        /// <summary>
         /// Converts this <see cref="BlockType"/> into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
@@ -130,7 +139,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding an item id
     /// </summary>
-    public class ItemType : IGroupable
+    public class ItemType : IGroupable, IConvertableToDataTag
     {
         /// <summary>
         /// Intializes a new <see cref="ItemType"/> from a <see cref="ID.Item"/>
@@ -154,6 +163,15 @@ namespace SharpCraft
         /// The id
         /// </summary>
         public string Name { get; protected set; }
+
+        /// <summary>
+        /// Returns <see cref="Name"/>
+        /// </summary>
+        /// <returns><see cref="Name"/></returns>
+        public override string ToString()
+        {
+            return Name;
+        }
 
         /// <summary>
         /// Implicit converts a <see cref="ID.Item"/> into a <see cref="ItemType"/> object
@@ -206,6 +224,22 @@ namespace SharpCraft
         {
             return 539060726 + EqualityComparer<string>.Default.GetHashCode(Name);
         }
+
+        /// <summary>
+        /// Converts this <see cref="ItemType"/> into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>This <see cref="ItemType"/> as a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (!(asType is null) && asType != ID.NBTTagType.TagString)
+            {
+                throw new InvalidCastException("Cannot convert ItemType into the given type");
+            }
+
+            return new DataPartTag(Name);
+        }
     }
 
     /// <summary>
@@ -222,7 +256,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding an entity id
     /// </summary>
-    public class EntityType : IGroupable
+    public class EntityType : IGroupable, IConvertableToDataTag
     {
         /// <summary>
         /// Intializes a new <see cref="EntityType"/> from a <see cref="ID.Entity"/>
@@ -248,6 +282,15 @@ namespace SharpCraft
         public string Name { get; protected set; }
 
         /// <summary>
+        /// Returns <see cref="Name"/>
+        /// </summary>
+        /// <returns><see cref="Name"/></returns>
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        /// <summary>
         /// Implicit converts a <see cref="ID.Entity"/> into a <see cref="EntityType"/> object
         /// </summary>
         /// <param name="entity">The <see cref="ID.Entity"/> to convert</param>
@@ -255,6 +298,22 @@ namespace SharpCraft
         public static implicit operator EntityType(ID.Entity entity)
         {
             return new EntityType(entity);
+        }
+
+        /// <summary>
+        /// Converts this <see cref="EntityType"/> into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>This <see cref="EntityType"/> as a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (!(asType is null) && asType != ID.NBTTagType.TagString)
+            {
+                throw new InvalidCastException("Cannot convert EntityType into the given type");
+            }
+
+            return new DataPartTag(Name);
         }
     }
 
@@ -296,6 +355,15 @@ namespace SharpCraft
         /// The id
         /// </summary>
         public string Name { get; protected set; }
+
+        /// <summary>
+        /// Returns <see cref="Name"/>
+        /// </summary>
+        /// <returns><see cref="Name"/></returns>
+        public override string ToString()
+        {
+            return Name;
+        }
 
         /// <summary>
         /// Implicit converts a <see cref="ID.Liquid"/> into a <see cref="LiquidType"/> object
