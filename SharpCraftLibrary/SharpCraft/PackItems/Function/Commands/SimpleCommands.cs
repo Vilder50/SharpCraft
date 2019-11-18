@@ -341,7 +341,7 @@ namespace SharpCraft.Commands
         /// <returns>difficulty [Difficulty]</returns>
         public string GetCommandString()
         {
-            return $"defaultgamemode {Difficulty}";
+            return $"difficulty {Difficulty}";
         }
     }
 
@@ -356,7 +356,7 @@ namespace SharpCraft.Commands
         /// <returns>reload</returns>
         public string GetCommandString()
         {
-            return "Reload";
+            return "reload";
         }
     }
 
@@ -718,13 +718,10 @@ namespace SharpCraft.Commands
         /// <param name="respectTeams">True if teams should be grouped together. False if they shouldn't</param>
         public SpreadPlayersCommand(Coords coordinates, Selector selector, double distance, double maxRange, bool respectTeams)
         {
-            doTogetherCheck = false;
             Coordinates = coordinates;
             Selector = selector;
-            Distance = distance;
-            MaxRange = maxRange;
+            ChangeRanges(distance, maxRange);
             RespectTeams = respectTeams;
-            doTogetherCheck = true;
         }
 
         /// <summary>
@@ -735,7 +732,10 @@ namespace SharpCraft.Commands
         public void ChangeRanges(double distance, double maxRange)
         {
             doTogetherCheck = false;
-            ValidateRanges(distance, maxRange);
+            if (!ValidateRanges(distance, maxRange))
+            {
+                throw new ArgumentException(nameof(Distance), "Distance may not be higher than MaxRange or 1 away from it");
+            }
             Distance = distance;
             MaxRange = maxRange;
             doTogetherCheck = true;
@@ -777,9 +777,9 @@ namespace SharpCraft.Commands
                 {
                     throw new ArgumentOutOfRangeException(nameof(Distance), "Distance may not be less than 0");
                 }
-                if (doTogetherCheck && ValidateRanges(value, MaxRange))
+                if (doTogetherCheck && !ValidateRanges(value, MaxRange))
                 {
-                    throw new ArgumentException(nameof(Distance), "Distance may not be higher than MaxRange");
+                    throw new ArgumentException(nameof(Distance), "Distance may not be higher than MaxRange or 1 away from it");
                 }
                 distance = value;
             }
@@ -797,9 +797,9 @@ namespace SharpCraft.Commands
                 {
                     throw new ArgumentOutOfRangeException(nameof(MaxRange), "MaxRange may not be less than 1");
                 }
-                if (doTogetherCheck && ValidateRanges(Distance, value))
+                if (doTogetherCheck && !ValidateRanges(Distance, value))
                 {
-                    throw new ArgumentException(nameof(MaxRange), "MaxRange may not be less than Distance");
+                    throw new ArgumentException(nameof(MaxRange), "MaxRange may not be less than Distance or 1 away from it");
                 }
                 maxRange = value;
             }
@@ -807,7 +807,7 @@ namespace SharpCraft.Commands
 
         private static bool ValidateRanges(double distance, double maxRange)
         {
-            return (distance < maxRange);
+            return (distance + 1 < maxRange);
         }
 
         /// <summary>
@@ -821,7 +821,7 @@ namespace SharpCraft.Commands
         /// <returns>spreadplayers [Coordinates] [Distance] [MaxRange] [RespectTeams] [Selector]</returns>
         public string GetCommandString()
         {
-            return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance} {MaxRange} {RespectTeams} {Selector}";
+            return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector}";
         }
     }
 
@@ -1005,9 +1005,9 @@ namespace SharpCraft.Commands
             { 
                 if (!(value is null) && value < 0)
                 {
-                    throw new ArgumentException("MaxCount may not be less than 0.", nameof(MaxCount));
+                    throw new ArgumentOutOfRangeException("MaxCount may not be less than 0.", nameof(MaxCount));
                 }
-                if (MaxCount is null && !(value is null))
+                if (Item is null && !(value is null))
                 {
                     throw new ArgumentException("MaxCount cannot have a value if item doesn't have a value", nameof(MaxCount));
                 }
@@ -1235,10 +1235,10 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Returns the command as a string
         /// </summary>
-        /// <returns>playsound [Sound] [Selector] [Coordinates] [Volume] [Pitch] [MinimumVolume]</returns>
+        /// <returns>playsound [Sound] [Source] [Selector] [Coordinates] [Volume] [Pitch] [MinimumVolume]</returns>
         public string GetCommandString()
         {
-            return $"playsound {Sound} {Selector} {Coordinates} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
+            return $"playsound {Sound} {Source} {Selector} {Coordinates} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
         }
     }
 

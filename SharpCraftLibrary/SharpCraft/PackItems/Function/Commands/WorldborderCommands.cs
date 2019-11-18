@@ -11,6 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WorldborderSizeCommand : ICommand
     {
+        private double size;
+
         /// <summary>
         /// Intializes a new <see cref="WorldborderSizeCommand"/>
         /// </summary>
@@ -19,15 +21,31 @@ namespace SharpCraft.Commands
         /// <param name="time">The amount of time to modification takes. Leave null to make it happen instant</param>
         public WorldborderSizeCommand(double size, ID.AddSetModifier modifier, Time time)
         {
-            Size = size;
             Modifier = modifier;
+            Size = size;
             Time = time;
         }
 
         /// <summary>
         /// The size to modify with
         /// </summary>
-        public double Size { get; set; }
+        public double Size 
+        { 
+            get => size;
+            set
+            {
+                if (Modifier == ID.AddSetModifier.set && value < 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Size), "Size may not be less than 0 when setting");
+                }
+                if (value > 60_000_000)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Size), "Size may not be higher than 60000000");
+                }
+                size = value;
+            }
+        }
+
 
         /// <summary>
         /// The way to modify the size
@@ -47,11 +65,11 @@ namespace SharpCraft.Commands
         {
             if (Time is null)
             {
-                return $"worlborder {Modifier} {Size}";
+                return $"worldborder {Modifier} {Size.ToMinecraftDouble()}";
             }
             else
             {
-                return $"worldborder {Modifier} {Size} {Time.AsTicks()}";
+                return $"worldborder {Modifier} {Size.ToMinecraftDouble()} {Time.AsTicks()}";
             }
         }
     }
@@ -83,7 +101,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder center [Coordinates]</returns>
         public string GetCommandString()
         {
-            return $"worlderborder {Coordinates.StringX} {coordinates.StringZ}";
+            return $"worldborder center {Coordinates.StringX} {coordinates.StringZ}";
         }
     }
     
@@ -125,7 +143,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder damage amount [DamagePerBlock]</returns>
         public string GetCommandString()
         {
-            return $"worlderborder damage amount {DamagePerBlock.ToMinecraftDouble()}";
+            return $"worldborder damage amount {DamagePerBlock.ToMinecraftDouble()}";
         }
     }
 
@@ -167,7 +185,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder damage buffer [Buffer]</returns>
         public string GetCommandString()
         {
-            return $"worlderborder damage buffer {Buffer.ToMinecraftDouble()}";
+            return $"worldborder damage buffer {Buffer.ToMinecraftDouble()}";
         }
     }
 
@@ -182,7 +200,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder get</returns>
         public string GetCommandString()
         {
-            return $"worlderborder get";
+            return $"worldborder get";
         }
     }
 
@@ -224,7 +242,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder warning distance [Distance]</returns>
         public string GetCommandString()
         {
-            return $"worlderborder warning distance {Distance}";
+            return $"worldborder warning distance {Distance}";
         }
     }
 
@@ -247,7 +265,18 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time in advance the border should warn players when the border is shrinking
         /// </summary>
-        public Time Time { get => time; set => time = value ?? throw new ArgumentNullException(nameof(Time), "Time may not be null"); }
+        public Time Time 
+        { 
+            get => time;
+            set 
+            {
+                if (value?.IsNegative() ?? throw new ArgumentNullException(nameof(Time), "Time may not be null"))
+                {
+                    throw new ArgumentOutOfRangeException(nameof(Time), "Time may not be negative");
+                }
+                time = value;
+            }
+        }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -255,7 +284,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder warning time [Time]</returns>
         public string GetCommandString()
         {
-            return $"worlderborder warning time {Time.AsTicks()}";
+            return $"worldborder warning time {Time.AsTicks()}";
         }
     }
 }

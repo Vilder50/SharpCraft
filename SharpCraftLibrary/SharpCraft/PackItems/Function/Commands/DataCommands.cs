@@ -46,54 +46,111 @@ namespace SharpCraft.Commands
         /// <returns>data get [DataLocation] [Scale]</returns>
         public string GetCommandString()
         {
-            return $"data get {DataLocation.GetLocationString()} {Scale}";
+            return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
         }
     }
 
     /// <summary>
-    /// Command for merging data
+    /// Command for merging data on a block
     /// </summary>
-    public class DataMergeCommand : ICommand
+    public class DataMergeBlockCommand : ICommand
     {
-        private IDataLocation dataLocation;
-        private Data.DataHolderBase data;
+        private Coords coordinates;
+        private SimpleDataHolder data;
 
         /// <summary>
-        /// Intializes a new <see cref="DataMergeCommand"/>
+        /// Intializes a new <see cref="DataMergeBlockCommand"/>
         /// </summary>
-        /// <param name="dataLocation">The place to get merge the data to</param>
+        /// <param name="coordinates">The location of the block holding the data</param>
         /// <param name="data">The data to merge</param>
-        public DataMergeCommand(IDataLocation dataLocation, Data.DataHolderBase data)
+        public DataMergeBlockCommand(Coords coordinates, SimpleDataHolder data)
         {
-            DataLocation = dataLocation;
+            Coordinates = coordinates;
             Data = data;
         }
 
         /// <summary>
-        /// The place to get merge the data to
+        /// The location of the block holding the data
         /// </summary>
-        public IDataLocation DataLocation
+        public Coords Coordinates
         {
-            get => dataLocation;
-            set => dataLocation = value ?? throw new ArgumentNullException(nameof(DataLocation), "DataLocation may not be null");
+            get => coordinates;
+            set
+            {
+                coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null.");
+            }
         }
 
         /// <summary>
         /// The data to merge
         /// </summary>
-        public Data.DataHolderBase Data 
-        { 
-            get => data; 
+        public SimpleDataHolder Data
+        {
+            get => data;
             set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null");
         }
 
         /// <summary>
         /// Returns the command as a string
         /// </summary>
-        /// <returns>data merge [DataLocation] [Data]</returns>
+        /// <returns>data merge block [Coordinates] [Data]</returns>
         public string GetCommandString()
         {
-            return $"data merge {DataLocation.GetLocationString()} {data.GetDataString()}";
+            return $"data merge block {Coordinates.ToString()} {data.GetDataString()}";
+        }
+    }
+
+    /// <summary>
+    /// Command for merging data on a block
+    /// </summary>
+    public class DataMergeEntityCommand : ICommand
+    {
+        private Selector selector;
+        private SimpleDataHolder data;
+
+        /// <summary>
+        /// Intializes a new <see cref="DataMergeEntityCommand"/>
+        /// </summary>
+        /// <param name="selector">Selector selecting the entity holding the data</param>
+        /// <param name="data">The data to merge</param>
+        public DataMergeEntityCommand(Selector selector, SimpleDataHolder data)
+        {
+            Selector = selector;
+            Data = data;
+        }
+
+        /// <summary>
+        /// Selector selecting the entity holding the data
+        /// </summary>
+        public Selector Selector
+        {
+            get => selector;
+            set
+            {
+                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
+                {
+                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
+                }
+                selector = value;
+            }
+        }
+
+        /// <summary>
+        /// The data to merge
+        /// </summary>
+        public SimpleDataHolder Data
+        {
+            get => data;
+            set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null");
+        }
+
+        /// <summary>
+        /// Returns the command as a string
+        /// </summary>
+        /// <returns>data merge entity [Selector] [Data]</returns>
+        public string GetCommandString()
+        {
+            return $"data merge entity {Selector.ToString()} {data.GetDataString()}";
         }
     }
 
@@ -157,7 +214,7 @@ namespace SharpCraft.Commands
     public class DataModifyWithDataCommand : ICommand
     {
         private IDataLocation dataLocation;
-        private Data.DataHolderBase data;
+        private SimpleDataHolder data;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyWithDataCommand"/>
@@ -165,7 +222,7 @@ namespace SharpCraft.Commands
         /// <param name="dataLocation">The location of the data to modify</param>
         /// <param name="modifyType">The way to modify the data</param>
         /// <param name="data">The data to modify with</param>
-        public DataModifyWithDataCommand(IDataLocation dataLocation, ID.EntityDataModifierType modifyType, DataHolderBase data)
+        public DataModifyWithDataCommand(IDataLocation dataLocation, ID.EntityDataModifierType modifyType, SimpleDataHolder data)
         {
             DataLocation = dataLocation;
             Data = data;
@@ -184,7 +241,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The data to modify with
         /// </summary>
-        public Data.DataHolderBase Data
+        public SimpleDataHolder Data
         {
             get => data;
             set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null");
@@ -265,7 +322,7 @@ namespace SharpCraft.Commands
     public class DataModifyInsertDataCommand : ICommand
     {
         private IDataLocation dataLocation;
-        private Data.DataHolderBase data;
+        private SimpleDataHolder data;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyInsertDataCommand"/>
@@ -273,7 +330,7 @@ namespace SharpCraft.Commands
         /// <param name="dataLocation">The location of the data to modify</param>
         /// <param name="index">The index of the data to change</param>
         /// <param name="data">The data to modify with</param>
-        public DataModifyInsertDataCommand(IDataLocation dataLocation, int index, DataHolderBase data)
+        public DataModifyInsertDataCommand(IDataLocation dataLocation, int index, SimpleDataHolder data)
         {
             DataLocation = dataLocation;
             Data = data;
@@ -292,7 +349,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The data to modify with
         /// </summary>
-        public DataHolderBase Data
+        public SimpleDataHolder Data
         {
             get => data;
             set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null");

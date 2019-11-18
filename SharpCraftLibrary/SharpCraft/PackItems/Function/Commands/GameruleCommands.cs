@@ -44,7 +44,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"gamerule {Gamerule} {ChangeTo}";
+                return $"gamerule {Gamerule} {ChangeTo.ToMinecraftBool()}";
             }
         }
     }
@@ -61,7 +61,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="gamerule">The gamerule to change</param>
         /// <param name="changeTo">The value to change to. Leave null to not do a change.</param>
-        public GameruleSetIntCommand(ID.BoolGamerule gamerule, int? changeTo)
+        public GameruleSetIntCommand(ID.IntGamerule gamerule, int? changeTo)
         {
             Gamerule = gamerule;
             ChangeTo = changeTo;
@@ -70,7 +70,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The gamerule to change
         /// </summary>
-        public ID.BoolGamerule Gamerule { get; set; }
+        public ID.IntGamerule Gamerule { get; set; }
 
         /// <summary>
         /// The value to change to. Leave null to not do a change.

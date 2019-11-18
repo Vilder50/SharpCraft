@@ -65,6 +65,15 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Returns true if the time in this time object is negative
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNegative()
+        {
+            return _time < 0;
+        }
+
+        /// <summary>
         /// Outputs this time amount in ticks
         /// </summary>
         /// <param name="type">The type of output</param>

@@ -62,16 +62,16 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets a value from a boss bar
     /// </summary>
-    public class BossBarValueCommand : ICommand
+    public class BossBarGetValueCommand : ICommand
     {
         private BossBar bossBar;
 
         /// <summary>
-        /// Intializes a new <see cref="BossBarValueCommand"/>
+        /// Intializes a new <see cref="BossBarGetValueCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to the value from</param>
         /// <param name="getValue">The value to get from the boss bar</param>
-        public BossBarValueCommand(BossBar bossBar, ID.BossBarValue getValue)
+        public BossBarGetValueCommand(BossBar bossBar, ID.BossBarValue getValue)
         {
             BossBar = bossBar;
             GetValue = getValue;
@@ -107,7 +107,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns the amount of existing boss bars
     /// </summary>
-    public class BossBarListCommand : ICommand
+    public class BossBarGetAllCommand : ICommand
     {
         /// <summary>
         /// Returns the command as a string
@@ -165,7 +165,7 @@ namespace SharpCraft.Commands
         private BossBar bossBar;
 
         /// <summary>
-        /// Intializes a new <see cref="BossBarValueCommand"/>
+        /// Intializes a new <see cref="BossBarGetValueCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change color on</param>
         /// <param name="color">The new color for the bar</param>
@@ -430,7 +430,7 @@ namespace SharpCraft.Commands
         private BossBar bossBar;
 
         /// <summary>
-        /// Intializes a new <see cref="BossBarValueCommand"/>
+        /// Intializes a new <see cref="BossBarGetValueCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change style on</param>
         /// <param name="style">The new style for the bar</param>

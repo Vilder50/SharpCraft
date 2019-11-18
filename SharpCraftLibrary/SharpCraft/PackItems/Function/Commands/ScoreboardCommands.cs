@@ -70,7 +70,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives list</returns>
         public string GetCommandString()
         {
-            throw new NotImplementedException();
+            return "scoreboard objectives list";
         }
     }
 

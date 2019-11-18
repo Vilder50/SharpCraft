@@ -10,7 +10,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which replaces an item in a block
     /// </summary>
-    public class ReplaceitemBlockCommands : ICommand
+    public class ReplaceitemBlockCommand : ICommand
     {
         private IItemSlot slot;
         private Coords coordinates;
@@ -18,13 +18,13 @@ namespace SharpCraft.Commands
         private int count;
 
         /// <summary>
-        /// Intializes a new <see cref="ReplaceitemBlockCommands"/>
+        /// Intializes a new <see cref="ReplaceitemBlockCommand"/>
         /// </summary>
         /// <param name="coordinates">The coordinates of the block to put the item into</param>
         /// <param name="slot">The slot to put the item into</param>
         /// <param name="item">The item to put into the block</param>
         /// <param name="count">The amount of the item</param>
-        public ReplaceitemBlockCommands(Coords coordinates, IItemSlot slot, Item item, int count)
+        public ReplaceitemBlockCommand(Coords coordinates, IItemSlot slot, Item item, int count)
         {
             Coordinates = coordinates;
             Slot = slot;
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
             get => count;
             set 
             {
-                if (value < 0 || value > 64)
+                if (value < 1 || value > 64)
                 {
                     throw new ArgumentOutOfRangeException(nameof(Count), "Count may not be null");
                 }
@@ -76,7 +76,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which replaces an item on one or more entities
     /// </summary>
-    public class ReplaceitemEntityCommands : ICommand
+    public class ReplaceitemEntityCommand : ICommand
     {
         private IItemSlot slot;
         private Selector selector;
@@ -84,13 +84,13 @@ namespace SharpCraft.Commands
         private int count;
 
         /// <summary>
-        /// Intializes a new <see cref="ReplaceitemEntityCommands"/>
+        /// Intializes a new <see cref="ReplaceitemEntityCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the entities to replace the item on</param>
         /// <param name="slot">The slot to put the item into</param>
         /// <param name="item">The item to put into the block</param>
         /// <param name="count">The amount of the item</param>
-        public ReplaceitemEntityCommands(Selector selector, IItemSlot slot, Item item, int count)
+        public ReplaceitemEntityCommand(Selector selector, IItemSlot slot, Item item, int count)
         {
             Selector = selector;
             Slot = slot;
@@ -121,7 +121,7 @@ namespace SharpCraft.Commands
             get => count;
             set
             {
-                if (value < 0 || value > 64)
+                if (value < 1 || value > 64)
                 {
                     throw new ArgumentOutOfRangeException(nameof(Count), "Count may not be null");
                 }

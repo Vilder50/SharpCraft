@@ -461,7 +461,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] friendlyFire [Value]</returns>
         public string GetCommandString()
         {
-            return $"team modify {Team} friendlyFire {Value}";
+            return $"team modify {Team} friendlyFire {Value.ToMinecraftBool()}";
         }
     }
 
@@ -499,7 +499,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] seeFriendlyInvisibles [Value]</returns>
         public string GetCommandString()
         {
-            return $"team modify {Team} seeFriendlyInvisibles {Value}";
+            return $"team modify {Team} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
         }
     }
 }

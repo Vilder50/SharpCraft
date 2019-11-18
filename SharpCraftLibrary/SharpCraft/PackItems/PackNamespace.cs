@@ -442,4 +442,28 @@ namespace SharpCraft
             settings.Add(setting);
         }
     }
+
+    /// <summary>
+    /// A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
+    /// </summary>
+    public class EmptyNamespace : BasePackNamespace
+    {
+        /// <summary>
+        /// Intializes a new empty namespace. Make sure to call <see cref="BasePackNamespace.Setup(BaseDatapack, string)"/> after using this
+        /// </summary>
+        public EmptyNamespace() : base()
+        {
+
+        }
+
+        /// <summary>
+        /// Creates a new namespace in a datapack
+        /// </summary>
+        /// <param name="datapack">The datapack to add the namespace to</param>
+        /// <param name="namespaceName">the name of the namespace</param>
+        public EmptyNamespace(BaseDatapack datapack, string namespaceName) : base(datapack, namespaceName)
+        {
+            
+        }
+    }
 }

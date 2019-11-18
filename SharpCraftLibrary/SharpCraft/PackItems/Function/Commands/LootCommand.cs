@@ -111,7 +111,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"entity {Selector} {Slot.GetSlotString()}";
+                return $"replace entity {Selector} {Slot.GetSlotString()}";
             }
         }
 
@@ -122,6 +122,17 @@ namespace SharpCraft.Commands
         {
             private Coords coordinates;
             private IItemSlot slot;
+
+            /// <summary>
+            /// Intializes a new <see cref="BlockTarget"/>
+            /// </summary>
+            /// <param name="coordinates">The coordinates to spawn the loot at</param>
+            /// <param name="slot">The slot to insert the loot into</param>
+            public BlockTarget(Coords coordinates, IItemSlot slot)
+            {
+                Coordinates = coordinates;
+                Slot = slot;
+            }
 
             /// <summary>
             /// The coordinates to spawn the loot at
@@ -153,7 +164,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"block {Coordinates} {Slot.GetSlotString()}";
+                return $"replace block {Coordinates} {Slot.GetSlotString()}";
             }
         }
 
@@ -403,6 +414,15 @@ namespace SharpCraft.Commands
         public class KillSource : ILootSource
         {
             private Selector selector;
+
+            /// <summary>
+            /// Intializes a new <see cref="KillSource"/>
+            /// </summary>
+            /// <param name="selector">Selector selecting the entity to get kill loot from</param>
+            public KillSource(Selector selector)
+            {
+                Selector = selector;
+            }
 
             /// <summary>
             /// Selector selecting the entity to get kill loot from

@@ -12,7 +12,7 @@ namespace SharpCraft
     /// </summary>
     public abstract class BaseDatapack : IDisposable
     {
-        private const string pathPattern = @"^[\s\S]+[^\\/]{1}$";
+        private const string pathPattern = @"^[\s\S]*[^\\/]{1}$";
         private const string namePattern = @"^[0-9a-zA-Z_]+$";
 
         private string name;

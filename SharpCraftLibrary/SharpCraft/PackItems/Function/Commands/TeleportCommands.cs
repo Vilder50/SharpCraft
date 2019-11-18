@@ -143,11 +143,13 @@ namespace SharpCraft.Commands
         /// <param name="coordinates">The place to teleport the entities to</param>
         /// <param name="selector">Selector selecting the entities to teleport</param>
         /// <param name="facingSelector">The entity the other entities should face when teleported</param>
-        public TeleportToFacingEntityCommand(Coords coordinates, Selector selector, Selector facingSelector) : base(coordinates, selector)
+        /// <param name="anchor">The part of the entity to face</param>
+        public TeleportToFacingEntityCommand(Coords coordinates, Selector selector, Selector facingSelector, ID.FacingAnchor anchor) : base(coordinates, selector)
         {
             Coordinates = coordinates;
             Selector = selector;
             FacingSelector = facingSelector;
+            Anchor = anchor;
         }
 
         /// <summary>

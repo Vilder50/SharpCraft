@@ -57,7 +57,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="name">The name of the datapack</param>
         /// <param name="fileDatapack">True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
-        public EmptyDatapack(string name, bool fileDatapack = true) : base("", name)
+        public EmptyDatapack(string name, bool fileDatapack = true) : base("a", name)
         {
             FileDatapack = fileDatapack;
         }
@@ -81,19 +81,18 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
+        /// True if this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
         /// </summary>
         public bool FileDatapack { get; set; }
 
         /// <summary>
-        /// Don't use
+        /// Returns a new empty namespace
         /// </summary>
-        /// <param name="packNamespace">Don't use</param>
-        /// <returns>Don't use</returns>
-        [Obsolete]
-        public PackNamespace Namespace(string packNamespace)
+        /// <param name="packNamespace">The name of the namespace</param>
+        /// <returns>A new empty namespace</returns>
+        public EmptyNamespace Namespace(string packNamespace)
         {
-            throw new InvalidOperationException("Cannot get namespace from empty datapack");
+            return Namespace<EmptyNamespace>(packNamespace);
         }
     }
 }

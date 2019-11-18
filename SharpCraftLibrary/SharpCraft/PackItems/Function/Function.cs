@@ -318,7 +318,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="packNamespace">The namespace the function is in</param>
         /// <param name="name">The name of the function</param>
-        public EmptyFunction(PackNamespace packNamespace, string name)
+        public EmptyFunction(BasePackNamespace packNamespace, string name)
         {
             FileName = name;
             PackNamespace = packNamespace;

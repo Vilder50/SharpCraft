@@ -47,7 +47,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] everything</returns>
         public string GetCommandString()
         {
-            return $"advancement {(Grant ? "Grant" : "Revoke")} {Selector} everything";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} everything";
         }
     }
 
@@ -57,7 +57,7 @@ namespace SharpCraft.Commands
     public class AdvancementSingleCommand : ICommand
     {
         private Selector selector;
-        private Advancement advancement;
+        private IAdvancement advancement;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementSingleCommand"/>
@@ -66,7 +66,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="criterion">The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement</param>
-        public AdvancementSingleCommand(Selector selector, Advancement advancement, Advancement.Trigger criterion, bool grant = true)
+        public AdvancementSingleCommand(Selector selector, IAdvancement advancement, Advancement.Trigger criterion, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -89,7 +89,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The advancement to grant/revoke
         /// </summary>
-        public Advancement Advancement
+        public IAdvancement Advancement
         {
             get => advancement;
             set
@@ -114,7 +114,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] only [Advancement] (Criterion)</returns>
         public string GetCommandString()
         {
-            return $"advancement {(Grant ? "Grant" : "Revoke")} {Selector} only {Advancement.GetNamespacedName()} {Criterion?.Name ?? ""}";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} only {Advancement.GetNamespacedName()}{(Criterion is null ? "" : " " + Criterion.Name)}";
         }
     }
 
@@ -124,7 +124,7 @@ namespace SharpCraft.Commands
     public class AdvancementSomeCommand : ICommand
     {
         private Selector selector;
-        private Advancement advancement;
+        private IAdvancement advancement;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementSomeCommand"/>
@@ -133,7 +133,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="select">The advancements to grant/revoke</param>
-        public AdvancementSomeCommand(Selector selector, Advancement advancement, ID.RelativeAdvancement select, bool grant = true)
+        public AdvancementSomeCommand(Selector selector, IAdvancement advancement, ID.RelativeAdvancement select, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -156,7 +156,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The advancement to grant/revoke
         /// </summary>
-        public Advancement Advancement
+        public IAdvancement Advancement
         {
             get => advancement;
             set
@@ -181,7 +181,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] [Select] [Advancement]</returns>
         public string GetCommandString()
         {
-            return $"advancement {(Grant ? "Grant" : "Revoke")} {Selector} {Select} {Advancement.GetNamespacedName()}";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} {Select} {Advancement.GetNamespacedName()}";
         }
     }
 }

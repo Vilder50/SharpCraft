@@ -100,7 +100,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"effect give {Selector} {Effect} {Seconds} {Amplifier} {HideParticles}";
+                return $"effect give {Selector} {Effect} {Seconds} {Amplifier} {HideParticles.ToMinecraftBool()}";
             }
         }
     }

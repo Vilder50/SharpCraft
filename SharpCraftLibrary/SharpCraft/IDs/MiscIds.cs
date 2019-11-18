@@ -2763,7 +2763,7 @@
             /// <summary>
             /// Selects all the ancestor advancements of this advancement
             /// </summary>
-            untill
+            until
         }
         public enum BossBarValue
         {

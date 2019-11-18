@@ -49,7 +49,29 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AdvancementCommandsTests.cs" />
+    <Compile Include="Commands\BossBarCommandsTests.cs" />
+    <Compile Include="Commands\CloneCommandsTests.cs" />
+    <Compile Include="Commands\DataCommandsTests.cs" />
+    <Compile Include="Commands\DatapackCommandsTests.cs" />
+    <Compile Include="Commands\EffectCommandsTests.cs" />
     <Compile Include="Commands\ExecuteTests.cs" />
+    <Compile Include="Commands\ExperienceCommandsTests.cs" />
+    <Compile Include="Commands\FillCommandsTests.cs" />
+    <Compile Include="Commands\WorldborderCommandsTests.cs" />
+    <Compile Include="Commands\TitleCommandsTests.cs" />
+    <Compile Include="Commands\TimeCommandsTests.cs" />
+    <Compile Include="Commands\TeleportCommandsTests.cs" />
+    <Compile Include="Commands\TeamCommandsTests.cs" />
+    <Compile Include="Commands\TagCommandsTests.cs" />
+    <Compile Include="Commands\SimpleCommandsTests.cs" />
+    <Compile Include="Commands\ScoreboardCommandsTests.cs" />
+    <Compile Include="Commands\ReplaceitemCommandsTests.cs" />
+    <Compile Include="Commands\RecipeCommandsTests.cs" />
+    <Compile Include="Commands\ParticleCommandsTests.cs" />
+    <Compile Include="Commands\LootCommandsTests.cs" />
+    <Compile Include="Commands\GameruleCommandsTests.cs" />
+    <Compile Include="Commands\ForceloadCommandsTests.cs" />
     <Compile Include="Data\BlockTests.cs" />
     <Compile Include="Data\DataPathTests.cs" />
     <Compile Include="Data\DataHolderBaseTests.cs" />

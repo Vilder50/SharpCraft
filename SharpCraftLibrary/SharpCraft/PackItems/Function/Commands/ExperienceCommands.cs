@@ -69,11 +69,11 @@ namespace SharpCraft.Commands
         /// Intializes a new <see cref="ExperienceGetCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the player whose experience to get</param>
-        /// <param name="changeLevels">True to get the player's levels. False to get the player's points</param>
-        public ExperienceGetCommand(Selector selector, bool changeLevels)
+        /// <param name="getLevels">True to get the player's levels. False to get the player's points</param>
+        public ExperienceGetCommand(Selector selector, bool getLevels)
         {
             Selector = selector;
-            ChangeLevels = changeLevels;
+            GetLevels = getLevels;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// True to get the player's levels. False to get the player's points
         /// </summary>
-        public bool ChangeLevels { get; set; }
+        public bool GetLevels { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
         /// <returns>experience query [Selector] [ChangeLevels]</returns>
         public string GetCommandString()
         {
-            return $"xp query {Selector} {(ChangeLevels ? "levels" : "points")}";
+            return $"xp query {Selector} {(GetLevels ? "levels" : "points")}";
         }
     }
 }

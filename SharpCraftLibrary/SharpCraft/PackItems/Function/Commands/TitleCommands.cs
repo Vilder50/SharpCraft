@@ -181,7 +181,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] actionbar [Text]</returns>
         public string GetCommandString()
         {
-            return $"title {Selector} actionbar {Text}";
+            return $"title {Selector} actionbar {Text.GetString()}";
         }
     }
 
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] times [FadeIn] [Stay] [FadeOut]</returns>
         public string GetCommandString()
         {
-            return $"title {Selector} time {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
+            return $"title {Selector} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
         }
     }
 }

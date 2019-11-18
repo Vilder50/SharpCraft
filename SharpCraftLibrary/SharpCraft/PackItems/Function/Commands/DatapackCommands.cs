@@ -166,9 +166,13 @@ namespace SharpCraft.Commands
             {
                 return $"datapack list";
             }
+            else if (List == ID.DatapackList.disabled)
+            {
+                return $"datapack list available";
+            }
             else
             {
-                return $"datapack list {List}";
+                return $"datapack list enabled";
             }
         }
     }
