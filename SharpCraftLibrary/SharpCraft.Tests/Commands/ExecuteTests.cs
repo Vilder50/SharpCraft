@@ -63,5 +63,43 @@ namespace SharpCraft.Tests.Commands
             //test
             Assert.AreEqual("execute at @s align xz run hello world", command1.GetCommandString(), "Execute commands does not return correct GetCommandString");
         }
+
+        [TestMethod]
+        public void TestChangeCommand()
+        {
+            //setup
+            BaseExecuteCommand command = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) };
+
+            //test
+            CommandChange change1 = command.ChangeCommand(new ExecuteAs(ID.Selector.a));
+            Assert.IsFalse(change1.StopChanger, "Adding another execute command shouldnt stop the changer");
+            Assert.IsTrue(change1.StopCommand, "Adding another execute command should stop the command");
+
+            CommandChange change2 = command.ChangeCommand(new SayCommand("hello"));
+            Assert.IsTrue(change2.StopChanger, "Adding an end command should stop the changer");
+            Assert.IsTrue(change2.StopCommand, "Adding a command should stop the command");
+
+            CommandChange change3 = command.ChangeCommand(new SayCommand("hello"));
+            Assert.IsTrue(change3.StopChanger, "Execute command ending in a command should stop the changer");
+            Assert.IsFalse(change3.StopCommand, "Execute command ending in a command shouldn't stop the command");
+        }
+
+        [TestMethod]
+        public void TestHasEndCommand()
+        {
+            //setup
+            BaseExecuteCommand command1 = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) { ExecuteCommand = new SayCommand("hello") } };
+            BaseExecuteCommand command2 = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) { ExecuteCommand = new ExecuteAs(ID.Selector.a) } };
+
+            //test
+            Assert.IsTrue(command1.HasEndCommand(), "HasEndCommand doesn't see the end command");
+            Assert.IsFalse(command2.HasEndCommand(), "HasEndCommand doesn't see that the last command is an execute command");
+        }
+
+        [TestMethod]
+        public void TestAddCommand()
+        {
+            Assert.AreEqual("execute as @a at @p run say hello", new ExecuteAs(ID.Selector.a).AddCommand(new ExecuteAt(ID.Selector.p)).AddCommand(new SayCommand("hello")).GetCommandString(), "AddCommand doesn't work correctly");
+        }
     }
 }

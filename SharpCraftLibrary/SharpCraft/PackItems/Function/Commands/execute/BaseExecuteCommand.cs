@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Base class for execute commands
     /// </summary>
-    public abstract class BaseExecuteCommand : ICommand
+    public abstract class BaseExecuteCommand : ICommand, ICommandChanger
     {
         /// <summary>
         /// Returns the execute command string
@@ -45,6 +45,72 @@ namespace SharpCraft.Commands
             {
                 return part + " run " + ExecuteCommand.GetCommandString();
             }
+        }
+
+        /// <summary>
+        /// Adds the given command to the end of the execute line
+        /// </summary>
+        /// <param name="command">The command to add</param>
+        /// <returns>Information about the adding</returns>
+        public CommandChange ChangeCommand(ICommand command)
+        {
+            if (!HasEndCommand())
+            {
+                AddCommand(command);
+                if (command is BaseExecuteCommand)
+                {
+                    return new CommandChange() { StopChanger = false, StopCommand = true };
+                }
+                else
+                {
+                    return new CommandChange() { StopChanger = true, StopCommand = true };
+                }
+            }
+
+            return new CommandChange() { StopChanger = true };
+        }
+
+        /// <summary>
+        /// Returns true if the command at the end of the execute chain isn't an execute command. False if it is
+        /// </summary>
+        /// <returns>True if the command at the end of the execute chain isn't an execute command. False if it is</returns>
+        public bool HasEndCommand()
+        {
+            if (ExecuteCommand is null)
+            {
+                return false;
+            }
+
+            if (ExecuteCommand is BaseExecuteCommand execute)
+            {
+                return execute.HasEndCommand();
+            } 
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Adds the given command to the execute chain
+        /// </summary>
+        /// <param name="command">The command to add</param>
+        /// <returns>This execute command</returns>
+        public BaseExecuteCommand AddCommand(ICommand command)
+        {
+            if (ExecuteCommand is null)
+            {
+                ExecuteCommand = command;
+            }
+            else if (ExecuteCommand is BaseExecuteCommand execute)
+            {
+                execute.AddCommand(command);
+            }
+            else
+            {
+                throw new InvalidOperationException("Cannot add command to execute chain since the chain already ends in a command");
+            }
+            return this;
         }
 
         /// <summary>

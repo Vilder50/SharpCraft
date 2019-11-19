@@ -296,6 +296,7 @@
     <Compile Include="PackItems\Function\Commands\execute\ExecuteStoreBlock.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteStoreScore.cs" />
     <Compile Include="PackItems\Function\Commands\ExperienceCommands.cs" />
+    <Compile Include="PackItems\Function\Commands\ICommandChanger.cs" />
     <Compile Include="PackItems\Function\Commands\LootCommand.cs" />
     <Compile Include="PackItems\Function\Commands\FillCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ForceloadCommands.cs" />
