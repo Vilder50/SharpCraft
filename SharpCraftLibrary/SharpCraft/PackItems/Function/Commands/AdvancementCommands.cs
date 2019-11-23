@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which grants/revokes all advancements for some players
     /// </summary>
-    public class AdvancementAllCommand : ICommand
+    public class AdvancementAllCommand : BaseCommand
     {
         private Selector selector;
 
@@ -45,7 +45,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>advancement grant/revoke [Selector] everything</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"advancement {(Grant ? "grant" : "revoke")} {Selector} everything";
         }
@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which grants/revokes a single advancement or advancement criterion for some players
     /// </summary>
-    public class AdvancementSingleCommand : ICommand
+    public class AdvancementSingleCommand : BaseCommand
     {
         private Selector selector;
         private IAdvancement advancement;
@@ -112,7 +112,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>advancement grant/revoke [Selector] only [Advancement] (Criterion)</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"advancement {(Grant ? "grant" : "revoke")} {Selector} only {Advancement.GetNamespacedName()}{(Criterion is null ? "" : " " + Criterion.Name)}";
         }
@@ -121,7 +121,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which grants/revokes some advancement for some players based on the advancements relative position to another advancement
     /// </summary>
-    public class AdvancementSomeCommand : ICommand
+    public class AdvancementSomeCommand : BaseCommand
     {
         private Selector selector;
         private IAdvancement advancement;
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>advancement grant/revoke [Selector] [Select] [Advancement]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"advancement {(Grant ? "grant" : "revoke")} {Selector} {Select} {Advancement.GetNamespacedName()}";
         }

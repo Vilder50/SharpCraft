@@ -10,7 +10,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which replaces an item in a block
     /// </summary>
-    public class ReplaceitemBlockCommand : ICommand
+    public class ReplaceitemBlockCommand : BaseCommand
     {
         private IItemSlot slot;
         private Coords coordinates;
@@ -67,7 +67,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>replaceitem block [Coordinates] [Slot] [Item] [Count]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"replaceitem block {Coordinates} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
         }
@@ -76,7 +76,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which replaces an item on one or more entities
     /// </summary>
-    public class ReplaceitemEntityCommand : ICommand
+    public class ReplaceitemEntityCommand : BaseCommand
     {
         private IItemSlot slot;
         private Selector selector;
@@ -133,7 +133,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>replaceitem entity [Selector] [Slot] [Item] [Count]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"replaceitem entity {Selector} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
         }

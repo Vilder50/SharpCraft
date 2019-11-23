@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds/removes a tag from one or more entities
     /// </summary>
-    public class TagCommand : ICommand
+    public class TagCommand : BaseCommand
     {
         private Selector selector;
         private Tag tag;
@@ -46,7 +46,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tag [Selector] [AddTag] [Tag]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"tag {Selector} {(AddTag ? "add" : "remove")} {Tag.ToString()}";
         }
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns a list of tags from one or more entities
     /// </summary>
-    public class TagListCommand : ICommand
+    public class TagListCommand : BaseCommand
     {
         private Selector selector;
 
@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tag [Selector] list</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"tag {Selector} list";
         }

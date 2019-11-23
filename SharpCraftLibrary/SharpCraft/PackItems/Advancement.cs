@@ -60,9 +60,11 @@ namespace SharpCraft
         public Advancement(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeAdvancementPath();
-            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "advancements\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
-            AdvancementWriter.Write("{\"parent\":\"notoast:notoast\",\"criteria\":{\"impossible\":{\"trigger\":\"minecraft:imp0ssible\"}}}");
-            AdvancementWriter.Dispose();
+
+            using (TextWriter advancementWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + FileName + ".json"))
+            {
+                advancementWriter.Write("{\"parent\":\"notoast:notoast\",\"criteria\":{\"impossible\":{\"trigger\":\"minecraft:imp0ssible\"}}}");
+            }
         }
         private void WriteFile(JSON[] IngameName, JSON[] Description, JSONObjects.Item Icon, Advancement Parent, string Background, Requirement Requirement, Reward Reward, ID.AdvancementFrame Frame, bool ShowToast, bool ChatAnnounce, bool Hidden)
         {
@@ -83,7 +85,7 @@ namespace SharpCraft
                 }
             }
 
-            StreamWriter AdvancementWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "advancements\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
+            TextWriter AdvancementWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + FileName + ".json");
 
             AdvancementWriter.WriteLine("{");
             if (Icon != null)
@@ -112,14 +114,7 @@ namespace SharpCraft
 
         private void MakeAdvancementPath()
         {
-            if (FileName.Contains("\\"))
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "advancements\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
-            }
-            else
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "advancements\\");
-            }
+            CreateDirectory("advancements");
         }
 
         /*

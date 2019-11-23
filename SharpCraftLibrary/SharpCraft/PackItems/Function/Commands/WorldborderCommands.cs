@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the size of the worldborder
     /// </summary>
-    public class WorldborderSizeCommand : ICommand
+    public class WorldborderSizeCommand : BaseCommand
     {
         private double size;
 
@@ -61,7 +61,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder [Modifier] [Size] ([Time])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (Time is null)
             {
@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the center of the world border
     /// </summary>
-    public class WorldborderCenterCommand : ICommand
+    public class WorldborderCenterCommand : BaseCommand
     {
         private Coords coordinates;
 
@@ -99,7 +99,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder center [Coordinates]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder center {Coordinates.StringX} {coordinates.StringZ}";
         }
@@ -108,7 +108,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the amount of damage the worlder border does
     /// </summary>
-    public class WorldborderDamageAmountCommand : ICommand
+    public class WorldborderDamageAmountCommand : BaseCommand
     {
         private double damagePerBlock;
 
@@ -141,7 +141,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder damage amount [DamagePerBlock]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder damage amount {DamagePerBlock.ToMinecraftDouble()}";
         }
@@ -150,7 +150,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the amount of blocks players can be inside the border before taking damage
     /// </summary>
-    public class WorldborderDamageBufferCommand : ICommand
+    public class WorldborderDamageBufferCommand : BaseCommand
     {
         private double buffer;
 
@@ -183,7 +183,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder damage buffer [Buffer]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder damage buffer {Buffer.ToMinecraftDouble()}";
         }
@@ -192,13 +192,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns the size of the world border
     /// </summary>
-    public class WorldborderGetCommand : ICommand
+    public class WorldborderGetCommand : BaseCommand
     {
         /// <summary>
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder get</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder get";
         }
@@ -207,7 +207,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the distance players have to be away from the border to be warned
     /// </summary>
-    public class WorldborderWarningDistanceCommand : ICommand
+    public class WorldborderWarningDistanceCommand : BaseCommand
     {
         private int distance;
 
@@ -240,7 +240,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder warning distance [Distance]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder warning distance {Distance}";
         }
@@ -249,7 +249,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes how much time in advance the border should warn players when the border is shrinking
     /// </summary>
-    public class WorldborderWarningTimeCommand : ICommand
+    public class WorldborderWarningTimeCommand : BaseCommand
     {
         private Time time;
 
@@ -282,7 +282,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>worldborder warning time [Time]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"worldborder warning time {Time.AsTicks()}";
         }

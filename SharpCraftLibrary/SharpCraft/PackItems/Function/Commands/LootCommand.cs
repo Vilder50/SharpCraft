@@ -549,7 +549,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets the loot from somewhere and places it somewhere else
     /// </summary>
-    public class LootCommand : ICommand
+    public class LootCommand : BaseCommand
     {
         private LootSources.ILootSource source;
         private LootTargets.ILootTarget target;
@@ -579,7 +579,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>loot [Source] [Target]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"loot {Target.GetTargetString()} {Source.GetSourceString()}";
         }

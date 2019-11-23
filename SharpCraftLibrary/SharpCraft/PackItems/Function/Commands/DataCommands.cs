@@ -10,7 +10,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for getting data out of a place
     /// </summary>
-    public class DataGetCommand : ICommand
+    public class DataGetCommand : BaseCommand
     {
         private IDataLocation dataLocation;
         private double scale;
@@ -44,7 +44,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data get [DataLocation] [Scale]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
         }
@@ -53,7 +53,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for merging data on a block
     /// </summary>
-    public class DataMergeBlockCommand : ICommand
+    public class DataMergeBlockCommand : BaseCommand
     {
         private Coords coordinates;
         private SimpleDataHolder data;
@@ -94,7 +94,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data merge block [Coordinates] [Data]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data merge block {Coordinates.ToString()} {data.GetDataString()}";
         }
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for merging data on a block
     /// </summary>
-    public class DataMergeEntityCommand : ICommand
+    public class DataMergeEntityCommand : BaseCommand
     {
         private Selector selector;
         private SimpleDataHolder data;
@@ -148,7 +148,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data merge entity [Selector] [Data]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data merge entity {Selector.ToString()} {data.GetDataString()}";
         }
@@ -157,7 +157,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command used for modifying data at a location with data from another location
     /// </summary>
-    public class DataModifyWithLocationCommand : ICommand
+    public class DataModifyWithLocationCommand : BaseCommand
     {
         private IDataLocation dataLocation;
         private IDataLocation fromDataLocation;
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data modify [DataLocation] [ModifyType] from [FromDataLocation]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data modify {DataLocation.GetLocationString()} {ModifyType} from {FromDataLocation.GetLocationString()}";
         }
@@ -211,7 +211,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command used for modifying data at a location with given data
     /// </summary>
-    public class DataModifyWithDataCommand : ICommand
+    public class DataModifyWithDataCommand : BaseCommand
     {
         private IDataLocation dataLocation;
         private SimpleDataHolder data;
@@ -256,7 +256,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data modify [DataLocation] [ModifyType] value [Data]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data modify {DataLocation.GetLocationString()} {ModifyType} value {Data.GetDataString()}";
         }
@@ -265,7 +265,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command used for modifying data at a location at an index with data from another location
     /// </summary>
-    public class DataModifyInsertLocationCommand : ICommand
+    public class DataModifyInsertLocationCommand : BaseCommand
     {
         private IDataLocation dataLocation;
         private IDataLocation fromDataLocation;
@@ -310,7 +310,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data modify [DataLocation] insert [Index] from [FromDataLocation]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data modify {DataLocation.GetLocationString()} insert {Index} from {FromDataLocation.GetLocationString()}";
         }
@@ -319,7 +319,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command used for modifying data at a location at an index with given data
     /// </summary>
-    public class DataModifyInsertDataCommand : ICommand
+    public class DataModifyInsertDataCommand : BaseCommand
     {
         private IDataLocation dataLocation;
         private SimpleDataHolder data;
@@ -364,7 +364,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data modify [DataLocation] insert [Index] from [FromDataLocation]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data modify {DataLocation.GetLocationString()} insert {Index} value {Data.GetDataString()}";
         }
@@ -373,7 +373,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command used for deleting data at a given location
     /// </summary>
-    public class DataDeleteCommand : ICommand
+    public class DataDeleteCommand : BaseCommand
     {
         private IDataLocation dataLocation;
 
@@ -399,7 +399,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>data remove [DataLocation]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"data remove {DataLocation.GetLocationString()}";
         }

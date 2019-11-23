@@ -1,15 +1,17 @@
-﻿namespace SharpCraft.FunctionWriters
+﻿using SharpCraft.Commands;
+
+namespace SharpCraft.FunctionWriters
 {
     /// <summary>
     /// All the block commands
     /// </summary>
     public class BlockCommands
     {
-        readonly Function.FunctionWriter writer;
-        internal BlockCommands(Function.FunctionWriter commandsList)
+        readonly Function function;
+        internal BlockCommands(Function function)
         {
-            writer = commandsList;
-            Data = new ClassData(writer);
+            this.function = function;
+            Data = new ClassData(function);
         }
 
         /// <summary>
@@ -20,9 +22,7 @@
         /// <param name="type">how to place the block</param>
         public void Add(Block addBlock, Coords blockCoords, ID.BlockAdd type = ID.BlockAdd.replace)
         {
-            writer.Add("setblock " + blockCoords + " " + addBlock);
-            if (type != ID.BlockAdd.replace) { writer.Add(" " + type.ToString()); }
-            writer.NewLine();
+            function.AddCommand(new SetblockCommand(blockCoords, addBlock, type));
         }
 
         /// <summary>
@@ -35,10 +35,14 @@
         /// <param name="replaceBlock">the <see cref="SharpCraft.Block"/>s to replace</param>
         public void Fill(Block fillBlock, Coords corner1, Coords corner2, ID.BlockFill type = ID.BlockFill.replace, Block replaceBlock = null)
         {
-            writer.Add("fill " + corner1 + " " + corner2 + " " + fillBlock);
-            if (type != ID.BlockFill.replace) { writer.Add(" " + type.ToString()); }
-            if (type == ID.BlockFill.replace && replaceBlock != null) { writer.Add(" " + type.ToString() + " " + replaceBlock); }
-            writer.NewLine();
+            if (replaceBlock is null)
+            {
+                function.AddCommand(new FillCommand(corner1, corner2, fillBlock, type));
+            }
+            else
+            {
+                function.AddCommand(new FillReplaceCommand(corner1, corner2, fillBlock, replaceBlock));
+            }
         }
 
         /// <summary>
@@ -52,11 +56,14 @@
         /// <param name="filteredBlock">the <see cref="SharpCraft.Block"/> to copy</param>
         public void Clone(Coords corner1, Coords corner2, Coords copyTo, ID.BlockClone type = ID.BlockClone.replace, ID.BlockCloneWay way = ID.BlockCloneWay.normal, Block filteredBlock = null)
         {
-            writer.Add("clone " + corner1 + " " + corner2 + " " + copyTo);
-            if (type != ID.BlockClone.replace || way != ID.BlockCloneWay.normal) { writer.Add(" " + type.ToString()); }
-            if (type == ID.BlockClone.filtered && filteredBlock != null) { writer.Add(" " + filteredBlock); }
-            if (way != ID.BlockCloneWay.normal) { writer.Add(" " + way); }
-            writer.NewLine();
+            if (filteredBlock is null)
+            {
+                function.AddCommand(new CloneCommand(corner1, corner2, copyTo, (type == ID.BlockClone.masked), way));
+            }
+            else
+            {
+                function.AddCommand(new FilteredCloneCommand(corner1, corner2, copyTo, filteredBlock, way));
+            }
         }
 
         /// <summary>
@@ -66,24 +73,25 @@
         /// <param name="AddItem">The <see cref="Item"/> to insert (<see cref="Item.Slot"/> choses the slot)</param>
         public void AddItem(Coords BlockCoords, Item AddItem)
         {
-            if (AddItem.Slot == null || AddItem.Slot > 53 || AddItem.Slot < 0)
-            {
-                AddItem.Slot = 0;
-            }
-            writer.Add("replaceitem block " + BlockCoords + " container." + AddItem.Slot + " " + AddItem.IDDataString + " " + (AddItem.Count ?? 1));
-            writer.NewLine();
+            function.AddCommand(new ReplaceitemBlockCommand(BlockCoords, new Slots.ContainerSlot(AddItem.Slot ?? 0), AddItem, AddItem.Count ?? 1));
         }
 
         /// <summary>
-        /// Inserts the given <see cref="Loottable"/> into the <see cref="SharpCraft.Block"/>
+        /// Inserts the given <see cref="ILoottable"/> into the <see cref="SharpCraft.Block"/>
         /// </summary>
         /// <param name="block">the <see cref="SharpCraft.Block"/> to input into</param>
-        /// <param name="loot">the <see cref="Loottable"/> to input</param>
-        /// <param name="slot">the slot to insert the <see cref="Loottable"/> at</param>
-        public void Loot(Coords block, Loottable loot, int? slot = null)
+        /// <param name="loot">the <see cref="ILoottable"/> to input</param>
+        /// <param name="slot">the slot to insert the <see cref="ILoottable"/> at</param>
+        public void Loot(Coords block, ILoottable loot, int? slot = null)
         {
-            writer.Add($"loot {(slot is null ? "insert" : "replace block")} {block}{(slot is null ? "" : $" container.{slot}")} loot {loot}");
-            writer.NewLine();
+            if (slot is null)
+            {
+                function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.LoottableSource(loot)));
+            }
+            else
+            {
+                function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.LoottableSource(loot)));
+            }
         }
 
         /// <summary>
@@ -94,8 +102,14 @@
         /// <param name="slot">the slot to insert the <see cref="Loottable"/> at</param>
         public void Loot(Coords block, Selector kill, int? slot = null)
         {
-            writer.Add($"loot {(slot is null ? "insert" : "replace block")} {block}{(slot is null ? "" : $" container.{slot}")} kill {kill}");
-            writer.NewLine();
+            if (slot is null)
+            {
+                function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.KillSource(kill)));
+            }
+            else
+            {
+                function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.KillSource(kill)));
+            }
         }
 
         /// <summary>
@@ -105,14 +119,28 @@
         /// <param name="breakBlock">the <see cref="SharpCraft.Block"/>'s <see cref="Loottable"/> to input</param>
         /// <param name="breakWith">the tool used to break the <see cref="SharpCraft.Block"/></param>
         /// <param name="slot">the slot to insert the <see cref="Loottable"/> at</param>
-        public void Loot(Coords block, Coords breakBlock, Item breakWith = null, int slot = -1)
+        public void Loot(Coords block, Coords breakBlock, Item breakWith = null, int? slot = null)
         {
-            writer.Add($"loot {(slot == -1 ? "insert" : "replace block")} {block}{(slot == -1 ? "" : $" container.{slot}")} mine {breakBlock}");
-            if (breakWith != null)
+            LootTargets.ILootTarget target;
+            LootSources.ILootSource source;
+            if (slot is null)
             {
-                writer.Add(" " + breakWith);
+                target = new LootTargets.InsertTarget(block);
             }
-            writer.NewLine();
+            else
+            {
+                target = new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value));
+            }
+            if (breakWith is null)
+            {
+                source = new LootSources.MineItemSource(breakBlock, breakWith);
+            }
+            else
+            {
+                source = new LootSources.MineHandSource(breakBlock, true);
+            }
+
+            function.AddCommand(new LootCommand(target, source));
         }
 
         /// <summary>
@@ -125,10 +153,10 @@
         /// </summary>
         public class ClassData
         {
-            readonly Function.FunctionWriter writer;
-            internal ClassData(Function.FunctionWriter commandsList)
+            readonly Function function;
+            internal ClassData(Function function)
             {
-                writer = commandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -136,11 +164,9 @@
             /// </summary>
             /// <param name="data">The data to give to the <see cref="SharpCraft.Block"/></param>
             /// <param name="place">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to give the data to</param>
-            public void Change(Coords place, Block data)
+            public void Change(Coords place, Data.SimpleDataHolder data)
             {
-                if (!data.HasData) { throw new System.ArgumentException(nameof(data) + " was supposed to have data"); }
-                writer.Add("data merge block " + place + " " + data.GetDataString());
-                writer.NewLine();
+                function.AddCommand(new DataMergeBlockCommand(place, data));
             }
 
             /// <summary>
@@ -152,8 +178,7 @@
             /// <param name="copyData">The data to insert</param>
             public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
             {
-                writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} value {copyData.GetDataString()}");
-                writer.NewLine();
+                function.AddCommand(new DataModifyWithDataCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, copyData));
             }
 
             /// <summary>
@@ -165,8 +190,7 @@
             /// <param name="copyData">The data to insert</param>
             public void Change(Coords toBlock, string toDataPath, int index, Data.SimpleDataHolder copyData)
             {
-                writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} value {copyData.GetDataString()}");
-                writer.NewLine();
+                function.AddCommand(new DataModifyInsertDataCommand(new BlockDataLocation(toBlock, toDataPath), index, copyData));
             }
 
             /// <summary>
@@ -176,8 +200,7 @@
             /// <param name="place">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to remove the data from</param>
             public void Remove(Coords place, string dataPath)
             {
-                writer.Add("data remove block " + place + " " + dataPath);
-                writer.NewLine();
+                function.AddCommand(new DataDeleteCommand(new BlockDataLocation(place, dataPath)));
             }
 
             /// <summary>
@@ -188,9 +211,7 @@
             /// <param name="scale">the number to multiply the numeric value with</param>
             public void Get(Coords place, string dataPath, double scale = 1)
             {
-                writer.Add("data get block " + place + " " + dataPath);
-                if (scale != 1) { writer.Add(" " + scale.ToMinecraftDouble()); }
-                writer.NewLine();
+                function.AddCommand(new DataGetCommand(new BlockDataLocation(place, dataPath), scale));
             }
 
             /// <summary>
@@ -204,8 +225,7 @@
             public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Selector fromSelector, string fromDataPath)
             {
                 fromSelector.Limited();
-                writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} from entity {fromSelector} {fromDataPath}");
-                writer.NewLine();
+                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, new EntityDataLocation(fromSelector, fromDataPath)));
             }
 
             /// <summary>
@@ -218,8 +238,7 @@
             /// <param name="fromDataPath">The datapath to copy from</param>
             public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Coords fromBlock, string fromDataPath)
             {
-                writer.Add($"data modify block {toBlock} {toDataPath} {modifierType} from block {fromBlock} {fromDataPath}");
-                writer.NewLine();
+                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, new BlockDataLocation(fromBlock, fromDataPath)));
             }
 
             /// <summary>
@@ -232,8 +251,7 @@
             /// <param name="fromDataPath">The datapath to copy from</param>
             public void Copy(Coords toBlock, string toDataPath, int index, Coords fromBlock, string fromDataPath)
             {
-                writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} from block {fromBlock} {fromDataPath}");
-                writer.NewLine();
+                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, new BlockDataLocation(fromBlock, fromDataPath)));
             }
 
             /// <summary>
@@ -246,8 +264,8 @@
             /// <param name="fromDataPath">The datapath to copy from</param>
             public void Copy(Coords toBlock, string toDataPath, int index, Selector fromSelector, string fromDataPath)
             {
-                writer.Add($"data modify block {toBlock} {toDataPath} insert {System.Math.Abs(index)} from entity {fromSelector} {fromDataPath}");
-                writer.NewLine();
+                fromSelector.Limited();
+                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, new EntityDataLocation(fromSelector, fromDataPath)));
             }
         }
     }

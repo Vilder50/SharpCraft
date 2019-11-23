@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds/removes a forceloaded chunk
     /// </summary>
-    public class ForceloadChunkCommand : ICommand
+    public class ForceloadChunkCommand : BaseCommand
     {
         private Coords coordinates;
 
@@ -45,7 +45,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>forceload [AddChunk] [Coordinates]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"forceload {(AddChunk ? "add" : "remove")} {Coordinates.StringX} {Coordinates.StringZ}";
         }
@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds/removes a forceloaded chunk
     /// </summary>
-    public class ForceloadChunksCommand : ICommand
+    public class ForceloadChunksCommand : BaseCommand
     {
         private Coords corner1;
         private Coords corner2;
@@ -105,7 +105,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>forceload [AddChunk] [Corner1] [Corner2]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"forceload {(AddChunk ? "add" : "remove")} {Corner1.StringX} {Corner1.StringZ} {Corner2.StringX} {Corner2.StringZ}";
         }
@@ -114,13 +114,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which removes all force loaded chunks
     /// </summary>
-    public class ForceloadRemoveAllCommand : ICommand
+    public class ForceloadRemoveAllCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>forceload remove all</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"forceload remove all";
         }
@@ -129,13 +129,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which checks how many chunks are loaded
     /// </summary>
-    public class ForceloadQueryCommand : ICommand
+    public class ForceloadQueryCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>forceload query</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"forceload query";
         }
@@ -144,7 +144,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which checks if a chunk is force loaded
     /// </summary>
-    public class ForceloadQueryChunkCommand : ICommand
+    public class ForceloadQueryChunkCommand : BaseCommand
     {
         private Coords coordinates;
 
@@ -175,7 +175,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>forceload query [Coordinates]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"forceload query {Coordinates.StringX} {Coordinates.StringZ}";
         }

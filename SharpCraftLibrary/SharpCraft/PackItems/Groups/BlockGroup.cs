@@ -39,8 +39,8 @@ namespace SharpCraft
         /// <returns>The stream for this file</returns>
         protected override TextWriter GetStream()
         {
-            CreateDirectory(this, "tags\\blocks");
-            return new StreamWriter(new FileStream(PackNamespace.GetPath() + "tags\\blocks\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
+            CreateDirectory("tags\\blocks");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\blocks\\" + FileName + ".json");
         }
 
         /// <summary>

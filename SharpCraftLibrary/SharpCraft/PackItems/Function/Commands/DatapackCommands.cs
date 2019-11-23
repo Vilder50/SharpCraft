@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which disables a datapack
     /// </summary>
-    public class DatapackDisableCommand : ICommand
+    public class DatapackDisableCommand : BaseCommand
     {
         private BaseDatapack datapack;
 
@@ -35,7 +35,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>datapack disable [Datapack]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"datapack disable {Datapack.IngameName}";
         }
@@ -44,7 +44,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which enables a datapack
     /// </summary>
-    public class DatapackEnableCommand : ICommand
+    public class DatapackEnableCommand : BaseCommand
     {
         private BaseDatapack datapack;
 
@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>datapack enable [Datapack] [LoadFirst]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"datapack enable {Datapack.IngameName} {(LoadFirst ? "first" : "last")}";
         }
@@ -86,7 +86,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which enables a datapack before or after another datapack
     /// </summary>
-    public class DatapackEnableAtCommand : ICommand
+    public class DatapackEnableAtCommand : BaseCommand
     {
         private BaseDatapack datapack;
         private BaseDatapack otherDatapack;
@@ -131,7 +131,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>datapack enable [Datapack] [LoadAfter] [OtherDatapack]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"datapack enable {Datapack.IngameName} {(LoadAfter ? "after" : "before")} {OtherDatapack.IngameName}";
         }
@@ -140,7 +140,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns a list of datapacks
     /// </summary>
-    public class DatapackListCommand : ICommand
+    public class DatapackListCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="DatapackListCommand"/>
@@ -160,7 +160,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>datapack list [List]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (List == ID.DatapackList.all)
             {

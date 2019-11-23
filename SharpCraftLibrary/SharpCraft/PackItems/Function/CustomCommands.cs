@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using SharpCraft.Commands;
 
 namespace SharpCraft.FunctionWriters
 {
@@ -19,17 +20,17 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Used by binary search. The command to run when the number is found
         /// </summary>
-        /// <param name="command">The command to run</param>
         /// <param name="number">The found number</param>
-        public delegate void BinarySearchCommand(Function command, int number);
+        /// <returns>The command to run when the number is found</returns>
+        public delegate BaseCommand TreeSearchCommand(int number);
 
         /// <summary>
         /// Used by binary search. The command used for checking numbers
         /// </summary>
-        /// <param name="command">The command to check with</param>
         /// <param name="minNumber">The minimum the number can be</param>
         /// <param name="maxNumber">The maximum the number can be</param>
-        public delegate void BinarySearchMethod(Function command, int minNumber, int maxNumber);
+        /// <returns>The command used for searching</returns>
+        public delegate BaseExecuteCommand TreeSearchMethod(int minNumber, int maxNumber);
 
         /// <summary>
         /// Uses binary search to run a command based on a number. 
@@ -39,7 +40,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="command">The command to run when the number has been found</param>
         /// <param name="minimum">The smallest number to search for</param>
         /// <param name="maximum">The highest number to search for</param>
-        public Function BinarySearch(BinarySearchMethod method, BinarySearchCommand command, int minimum, int maximum)
+        public Function TreeSearch(TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum)
         {
             //Check parameters
             if (maximum <= minimum)
@@ -59,42 +60,44 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException(nameof(command), "command cannot be null");
             }
 
-            return WriteBinarySearchFile(function, method, command, minimum, maximum, true);
+            return WriteTreeSearch(function, method, command, minimum, maximum, true);
         }
 
-        private Function WriteBinarySearchFile(Function function, BinarySearchMethod method, BinarySearchCommand command, int minimum, int maximum, bool first = false)
+        private Function WriteTreeSearch(Function function, TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum, bool first = false)
         {
             int halfSize = ((maximum - minimum) / 2) + minimum;
             int numbersLeft = maximum - minimum;
 
-            if (first)
+            BaseCommand executeCommand = null;
+            if (first && function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                function.Writer.CopyState();
+                executeCommand = function.Commands.Last().ShallowClone();
             }
-            method(function, minimum, halfSize);
+            function.AddCommand(method(minimum, halfSize));
             if (minimum != halfSize)
             {
-                function.World.Function(WriteBinarySearchFile(first ? function.NewChild(minimum + "-" + halfSize) : function.NewSibling(minimum + "-" + halfSize), method, command, minimum, halfSize));
+                function.World.Function(WriteTreeSearch(first ? function.NewChild(minimum + "-" + halfSize) : function.NewSibling(minimum + "-" + halfSize), method, command, minimum, halfSize));
             }
             else
             {
-                command(function, halfSize);
+                function.AddCommand(command(halfSize));
             }
 
-            if (first)
+            if (first && !(executeCommand is null))
             {
-                function.Writer.PasteState();
+                function.AddCommand(executeCommand);
             }
-            method(function, halfSize + 1, maximum);
+            function.AddCommand(method(halfSize + 1, maximum));
             if (halfSize + 1 != maximum)
             {
-                function.World.Function(WriteBinarySearchFile(first ? function.NewChild((halfSize + 1) + "-" + maximum) : function.NewSibling((halfSize + 1) + "-" + maximum), method, command, halfSize + 1, maximum));
+                function.World.Function(WriteTreeSearch(first ? function.NewChild((halfSize + 1) + "-" + maximum) : function.NewSibling((halfSize + 1) + "-" + maximum), method, command, halfSize + 1, maximum));
             }
             else
             {
-                command(function, halfSize + 1);
+                function.AddCommand(command(halfSize + 1));
             }
 
+            function.Dispose();
             return function;
         }
 
@@ -105,10 +108,11 @@ namespace SharpCraft.FunctionWriters
         /// <param name="functionName">The name of the function it should run</param>
         /// <param name="runCommands">the commands the entity should run</param>
         /// <param name="executeAt">True if it should run the commands at the entity's location</param>
+        /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionCreater runCommands, bool executeAt = true)
+        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionCreater runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt);
+            return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt, writeSetting);
         }
 
         /// <summary>
@@ -119,8 +123,9 @@ namespace SharpCraft.FunctionWriters
         /// <param name="runCommands">the commands the entity should run</param>
         /// <param name="executeAt">True if it should run the commands at the entity's location</param>
         /// <param name="spawnCoords">The place to spawn the entity at</param>
+        /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, Function.FunctionCreater runCommands, bool executeAt = true)
+        public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, Function.FunctionCreater runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {
@@ -139,15 +144,22 @@ namespace SharpCraft.FunctionWriters
             createEntity.Tags = tags.ToArray();
 
             //summon entity and execute as it
-            function.Writer.CopyState();
+            BaseCommand executeCommand = null;
+            if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            {
+                executeCommand = function.Commands.Last().ShallowClone();
+            }
             function.Entity.Add(createEntity, spawnCoords);
-            function.Writer.PasteState();
+            if (!(executeCommand is null))
+            {
+                function.AddCommand(executeCommand);
+            }
             function.Execute.As(new Selector(ID.Selector.e, findTag));
             if (executeAt)
             {
                 function.Execute.At();
             }
-            Function executeAs = function.World.Function(function.NewSibling(functionName));
+            Function executeAs = (Function)function.World.Function(function.NewSibling(functionName, writeSetting));
             executeAs.Entity.Tag.Remove(new Selector(), findTag);
             runCommands(executeAs);
 

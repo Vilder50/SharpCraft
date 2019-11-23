@@ -243,8 +243,7 @@ namespace SharpCraft.Tests.Commands
         public void WeatherCommandTest()
         {
             Assert.AreEqual("weather clear 1000", new WeatherCommand(ID.WeatherType.clear, 1000).GetCommandString());
-
-            Assert.ThrowsException<ArgumentNullException>(() => new WeatherCommand(ID.WeatherType.clear, null));
+            Assert.AreEqual("weather clear", new WeatherCommand(ID.WeatherType.clear, null).GetCommandString());
         }
     }
 }

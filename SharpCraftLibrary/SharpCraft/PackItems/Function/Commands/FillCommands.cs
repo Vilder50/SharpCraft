@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which fills a square with a block
     /// </summary>
-    public class FillCommand : ICommand
+    public class FillCommand : BaseCommand
     {
         private Coords corner1;
         private Coords corner2;
@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>fill [Corner1] [Corner2] [Block] [FillMode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (FillMode == ID.BlockFill.replace)
             {
@@ -91,7 +91,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which replaces all blocks in a square with another block
     /// </summary>
-    public class FillReplaceCommand : ICommand
+    public class FillReplaceCommand : BaseCommand
     {
         private Coords corner1;
         private Coords corner2;
@@ -165,7 +165,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>fill [Corner1] [Corner2] [Block] replace [ReplaceBlock]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"fill {Corner1} {Corner2} {Block.ToString()} replace {ReplaceBlock.ToString()}";
         }

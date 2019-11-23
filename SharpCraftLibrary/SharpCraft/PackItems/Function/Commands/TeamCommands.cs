@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds a team to the world
     /// </summary>
-    public class TeamAddCommand : ICommand
+    public class TeamAddCommand : BaseCommand
     {
         private Team team;
 
@@ -38,7 +38,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team add [Team] ([DisplayName])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (DisplayName is null)
             {
@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which empties a team
     /// </summary>
-    public class TeamEmptyCommand : ICommand
+    public class TeamEmptyCommand : BaseCommand
     {
         private Team team;
 
@@ -76,7 +76,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team empty [Team]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team empty {Team}";
         }
@@ -85,7 +85,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes entities join a team
     /// </summary>
-    public class TeamJoinCommand : ICommand
+    public class TeamJoinCommand : BaseCommand
     {
         private Team team;
         private Selector selector;
@@ -115,7 +115,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team join [Team] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team join {Team} {Selector}";
         }
@@ -124,7 +124,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes entities leave their team
     /// </summary>
-    public class TeamLeaveCommand : ICommand
+    public class TeamLeaveCommand : BaseCommand
     {
         private Selector selector;
 
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team leave [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team leave {Selector}";
         }
@@ -155,13 +155,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns a list of all teams
     /// </summary>
-    public class TeamListCommand : ICommand
+    public class TeamListCommand : BaseCommand
     {
         /// <summary>
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team list</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team list";
         }
@@ -170,7 +170,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns a list of players in a team
     /// </summary>
-    public class TeamPlayerListCommand : ICommand
+    public class TeamPlayerListCommand : BaseCommand
     {
         private Team team;
 
@@ -192,7 +192,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team list [Team]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team list {Team}";
         }
@@ -201,7 +201,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which removes a team from the world
     /// </summary>
-    public class TeamRemoveCommand : ICommand
+    public class TeamRemoveCommand : BaseCommand
     {
         private Team team;
 
@@ -223,7 +223,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team remove [Team]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team remove {Team}";
         }
@@ -232,7 +232,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes how a team is displayed
     /// </summary>
-    public class TeamModifyDisplayCommand : ICommand
+    public class TeamModifyDisplayCommand : BaseCommand
     {
         private Team team;
         private JSON[] value;
@@ -269,7 +269,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] [DisplaySlot] [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} {DisplaySlot} {Value.GetString()}";
         }
@@ -278,7 +278,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes how collision works on a team
     /// </summary>
-    public class TeamModifyCollisionCommand : ICommand
+    public class TeamModifyCollisionCommand : BaseCommand
     {
         private Team team;
 
@@ -307,7 +307,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] collisionRule [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} collisionRule {Value}";
         }
@@ -316,7 +316,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the color of a team
     /// </summary>
-    public class TeamModifyColorCommand : ICommand
+    public class TeamModifyColorCommand : BaseCommand
     {
         private Team team;
 
@@ -345,7 +345,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] color [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} color {Value}";
         }
@@ -354,7 +354,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes who can see a team's death messages
     /// </summary>
-    public class TeamModifyDeathMessageCommand : ICommand
+    public class TeamModifyDeathMessageCommand : BaseCommand
     {
         private Team team;
 
@@ -383,7 +383,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] deathMessageVisibility [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} deathMessageVisibility {Value}";
         }
@@ -392,7 +392,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// A command which changes who can see a players on a team's names
     /// </summary>
-    public class TeamModifyNameVisibilityCommand : ICommand
+    public class TeamModifyNameVisibilityCommand : BaseCommand
     {
         private Team team;
 
@@ -421,7 +421,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] nametagVisibility [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} nametagVisibility {Value}";
         }
@@ -430,7 +430,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes if players on a team can hit each other
     /// </summary>
-    public class TeamModifyFriendlyFireCommand : ICommand
+    public class TeamModifyFriendlyFireCommand : BaseCommand
     {
         private Team team;
 
@@ -459,7 +459,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] friendlyFire [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} friendlyFire {Value.ToMinecraftBool()}";
         }
@@ -468,7 +468,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes if players on a team can see their invisible team mates
     /// </summary>
-    public class TeamModifyInvisibilityCommand : ICommand
+    public class TeamModifyInvisibilityCommand : BaseCommand
     {
         private Team team;
 
@@ -497,7 +497,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>team modify [Team] seeFriendlyInvisibles [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"team modify {Team} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
         }

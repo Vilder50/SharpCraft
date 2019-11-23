@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds the given boss bar to the world
     /// </summary>
-    public class BossBarAddCommand : ICommand
+    public class BossBarAddCommand : BaseCommand
     {
         private BossBar bossBar;
         private JSON[] name;
@@ -53,7 +53,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar add [Bossbar] [Name]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar add {BossBar.ToString()} {Name.GetString()}";
         }
@@ -62,7 +62,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets a value from a boss bar
     /// </summary>
-    public class BossBarGetValueCommand : ICommand
+    public class BossBarGetValueCommand : BaseCommand
     {
         private BossBar bossBar;
 
@@ -98,7 +98,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar add [Bossbar] [Name]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar get {BossBar.ToString()} {GetValue}";
         }
@@ -107,13 +107,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns the amount of existing boss bars
     /// </summary>
-    public class BossBarGetAllCommand : ICommand
+    public class BossBarGetAllCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar list</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "bossbar list";
         }
@@ -122,7 +122,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which removes a boss bar
     /// </summary>
-    public class BossBarRemoveCommand : ICommand
+    public class BossBarRemoveCommand : BaseCommand
     {
         private BossBar bossBar;
 
@@ -151,7 +151,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar remove [Bossbar]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar remove {BossBar.ToString()}";
         }
@@ -160,7 +160,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's color
     /// </summary>
-    public class BossBarChangeColorCommand : ICommand
+    public class BossBarChangeColorCommand : BaseCommand
     {
         private BossBar bossBar;
 
@@ -196,7 +196,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] color [Color]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} color {Color}";
         }
@@ -205,7 +205,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's max value
     /// </summary>
-    public class BossBarChangeMaxValueCommand : ICommand
+    public class BossBarChangeMaxValueCommand : BaseCommand
     {
         private BossBar bossBar;
         private int maxValue;
@@ -253,7 +253,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] max [MaxValue]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} max {MaxValue}";
         }
@@ -262,7 +262,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's value
     /// </summary>
-    public class BossBarChangeValueCommand : ICommand
+    public class BossBarChangeValueCommand : BaseCommand
     {
         private BossBar bossBar;
         private int barValue;
@@ -310,7 +310,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] value [Value]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} value {Value}";
         }
@@ -319,7 +319,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's name
     /// </summary>
-    public class BossBarChangeNameCommand : ICommand
+    public class BossBarChangeNameCommand : BaseCommand
     {
         private BossBar bossBar;
         private JSON[] name;
@@ -363,7 +363,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] name [Name]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} name {Name.GetString()}";
         }
@@ -372,7 +372,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes who can see a boss bar
     /// </summary>
-    public class BossBarChangePlayersCommand : ICommand
+    public class BossBarChangePlayersCommand : BaseCommand
     {
         private BossBar bossBar;
         private Selector selector;
@@ -416,7 +416,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] players [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} players {Selector.ToString()}";
         }
@@ -425,7 +425,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's style
     /// </summary>
-    public class BossBarChangeStyleCommand : ICommand
+    public class BossBarChangeStyleCommand : BaseCommand
     {
         private BossBar bossBar;
 
@@ -461,7 +461,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] style [Style]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} style {Style}";
         }
@@ -470,7 +470,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a boss bar's style
     /// </summary>
-    public class BossBarChangeVisibilityCommand : ICommand
+    public class BossBarChangeVisibilityCommand : BaseCommand
     {
         private BossBar bossBar;
 
@@ -506,7 +506,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>bossbar set [Bossbar] visible [Visible]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"bossbar set {BossBar.ToString()} visible {Visible.ToMinecraftBool()}";
         }

@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes one or more players' experience
     /// </summary>
-    public class ExperienceModifyCommand : ICommand
+    public class ExperienceModifyCommand : BaseCommand
     {
         private Selector selector;
 
@@ -52,7 +52,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>experience [Modifier] [Selector] [Value] [ChangeLevels]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"xp {Modifier} {Selector} {Value} {(ChangeLevels ? "levels" : "points")}";
         }
@@ -61,7 +61,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets a players experience
     /// </summary>
-    public class ExperienceGetCommand : ICommand
+    public class ExperienceGetCommand : BaseCommand
     {
         private Selector selector;
 
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>experience query [Selector] [ChangeLevels]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"xp query {Selector} {(GetLevels ? "levels" : "points")}";
         }

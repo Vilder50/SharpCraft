@@ -17,14 +17,28 @@ namespace SharpCraft
         /// <param name="packName">The datapack's name</param>
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
-        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 0) : base(path, packName)
+        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 0) : this(path, packName, description, packFormat, new FileCreator())
+        {
+
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Datapack"/> with the given parameters
+        /// </summary>
+        /// <param name="path">The path to the folder to create this datapack in</param>
+        /// <param name="packName">The datapack's name</param>
+        /// <param name="description">The datapack's description</param>
+        /// <param name="packFormat">The datapack's format</param>
+        /// <param name="fileCreator">Class for creating files and directories</param>
+        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : base(path, packName, fileCreator)
         {
             if (!File.Exists(Path + "\\" + Name + "\\pack.mcmeta"))
             {
-                Directory.CreateDirectory(Path + "\\" + Name);
-                StreamWriter WriteMeta = new StreamWriter(new FileStream(Path + "\\" + Name + "\\pack.mcmeta", FileMode.Create)) { AutoFlush = true };
-                WriteMeta.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
-                WriteMeta.Dispose();
+                FileCreator.CreateDirectory(Path + "\\" + Name);
+                using (TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta"))
+                {
+                    metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
+                }
             }
         }
 
@@ -33,7 +47,7 @@ namespace SharpCraft
         /// </summary>
         public new string IngameName
         {
-            get => "\"file/" + base.Name + "\"";
+            get => "\"file/" + Name + "\"";
         }
 
         /// <summary>

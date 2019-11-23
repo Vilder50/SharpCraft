@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which adds a new scoreboard objective to the world
     /// </summary>
-    public class ScoreboardObjectiveAddCommand : ICommand
+    public class ScoreboardObjectiveAddCommand : BaseCommand
     {
         private ScoreObject scoreObject;
         private string criterion;
@@ -46,7 +46,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives add [ScoreObject] [Criterion] [DisplayName]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (DisplayName is null)
             {
@@ -62,13 +62,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which returns a list of all existing scoreboard objectives
     /// </summary>
-    public class ScoreboardObjectiveListCommand : ICommand
+    public class ScoreboardObjectiveListCommand : BaseCommand
     {
         /// <summary>
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives list</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "scoreboard objectives list";
         }
@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the display name of an objective
     /// </summary>
-    public class ScoreboardObjectiveChangeNameCommand : ICommand
+    public class ScoreboardObjectiveChangeNameCommand : BaseCommand
     {
         private ScoreObject scoreObject;
         private JSON[] displayName;
@@ -108,7 +108,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives modify [ScoreObject] displayname [DisplayName]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
              return $"scoreboard objectives modify {ScoreObject.ToString()} displayname {DisplayName.GetString()}";
         }
@@ -117,7 +117,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes how an objective is displayed in tab
     /// </summary>
-    public class ScoreboardObjectiveChangeRenderCommand : ICommand
+    public class ScoreboardObjectiveChangeRenderCommand : BaseCommand
     {
         private ScoreObject scoreObject;
 
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives modify [ScoreObject] rendertype [Rendering]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"scoreboard objectives modify {ScoreObject.ToString()} rendertype {Rendering}";
         }
@@ -155,7 +155,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which removes an objective
     /// </summary>
-    public class ScoreboardObjectiveRemoveCommand : ICommand
+    public class ScoreboardObjectiveRemoveCommand : BaseCommand
     {
         private ScoreObject scoreObject;
 
@@ -177,7 +177,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives remove [ScoreObject]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"scoreboard objectives remove {ScoreObject.ToString()}";
         }
@@ -186,7 +186,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a display slot
     /// </summary>
-    public class ScoreboardSetDisplayCommand : ICommand
+    public class ScoreboardSetDisplayCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="ScoreboardSetDisplayCommand"/>
@@ -213,7 +213,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives setdisplay [DisplaySlot] ([ScoreObject])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ScoreObject is null)
             {
@@ -229,7 +229,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes a team sidebar display slot
     /// </summary>
-    public class ScoreboardSetTeamDisplayCommand : ICommand
+    public class ScoreboardSetTeamDisplayCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="ScoreboardSetTeamDisplayCommand"/>
@@ -256,7 +256,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard objectives setdisplay sidebar.team.[TeamColor] ([ScoreObject])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ScoreObject is null)
             {
@@ -272,7 +272,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the value of a score
     /// </summary>
-    public class ScoreboardValueChangeCommand : ICommand
+    public class ScoreboardValueChangeCommand : BaseCommand
     {
         private ScoreObject scoreObject;
         private Selector selector;
@@ -316,7 +316,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard players [ChangeType] [Selector] [ScoreObject] [ChangeNumber]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ChangeNumber < 0)
             {
@@ -336,7 +336,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the value of a score
     /// </summary>
-    public class ScoreboardValueGetCommand : ICommand
+    public class ScoreboardValueGetCommand : BaseCommand
     {
         private ScoreObject scoreObject;
         private Selector selector;
@@ -378,7 +378,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard players get [Selector] [ScoreObject]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"scoreboard players get {Selector} {ScoreObject}";
         }
@@ -387,7 +387,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which enables a trigger objective for one or more players
     /// </summary>
-    public class ScoreboardEnableTriggerCommand : ICommand
+    public class ScoreboardEnableTriggerCommand : BaseCommand
     {
         private ScoreObject scoreObject;
         private Selector selector;
@@ -418,7 +418,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard players enable [Selector] [ScoreObject]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"scoreboard players enable {Selector} {ScoreObject}";
         }
@@ -427,7 +427,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which resets a objective for one or more players
     /// </summary>
-    public class ScoreboardResetCommand : ICommand
+    public class ScoreboardResetCommand : BaseCommand
     {
         private Selector selector;
 
@@ -456,7 +456,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard players reset [Selector] [ScoreObject]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ScoreObject is null)
             {
@@ -514,7 +514,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which modfifies one score with another
     /// </summary>
-    public class ScoreboardOperationCommand : ICommand
+    public class ScoreboardOperationCommand : BaseCommand
     {
         private Selector selector1;
         private ScoreObject objective1;
@@ -581,7 +581,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>scoreboard players operation [Selector1] [Objective1] [Operator] [Selector2] [Objective2]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             string operatorString = "";
             switch(Operator)

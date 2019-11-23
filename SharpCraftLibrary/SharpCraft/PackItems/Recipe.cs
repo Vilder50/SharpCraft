@@ -20,7 +20,7 @@ namespace SharpCraft
         public Recipe(PackNamespace space, string fileName, Item[,] Recipe, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeRecipePath();
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
+            TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
 
             List<string> Keys = new List<string>();
             int[,] RecipeWithKeys = new int[3, 3];
@@ -53,7 +53,7 @@ namespace SharpCraft
                 }
             }
 
-            RecipeWriter.WriteLine("{\"type\":\"crafting_shaped\",\"pattern\":[");
+            recipeWriter.WriteLine("{\"type\":\"crafting_shaped\",\"pattern\":[");
 
             List<string> RecipeString = new List<string>();
             for (int i = 0; i < 3; i++)
@@ -82,7 +82,7 @@ namespace SharpCraft
                     RecipeString.Add(Row + "\"");
                 }
             }
-            RecipeWriter.WriteLine(string.Join(",",RecipeString) + "],\"key\": {");
+            recipeWriter.WriteLine(string.Join(",",RecipeString) + "],\"key\": {");
             List<string> writtenKeys = new List<string>();
             for (int i = 0; i < Keys.Count; i++)
             {
@@ -101,13 +101,13 @@ namespace SharpCraft
                     writtenKeys.Add(thisKey);
                 }
             }
-            RecipeWriter.Write(string.Join(",",writtenKeys));
-            RecipeWriter.WriteLine("},\"result\":{\"item\": \"" + Output.ID.Name +"\",\"count\": " + (Output.Count != null ? Output.Count : 1) + "}");
-            if (Group != null) { RecipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
+            recipeWriter.Write(string.Join(",",writtenKeys));
+            recipeWriter.WriteLine("},\"result\":{\"item\": \"" + Output.ID.Name +"\",\"count\": " + (Output.Count != null ? Output.Count : 1) + "}");
+            if (Group != null) { recipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
             
 
-            RecipeWriter.WriteLine("}");
-            RecipeWriter.Dispose();
+            recipeWriter.WriteLine("}");
+            recipeWriter.Dispose();
         }
 
         /// <summary>
@@ -121,30 +121,30 @@ namespace SharpCraft
         public Recipe(PackNamespace space, string fileName, Item[] NeededItems, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeRecipePath();
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
+            TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
 
-            RecipeWriter.WriteLine("{\"type\":\"crafting_shapeless\",\"ingredients\":[");
+            recipeWriter.WriteLine("{\"type\":\"crafting_shapeless\",\"ingredients\":[");
             for (int i = 0; i < NeededItems.Length; i++)
             {
                 if (NeededItems[i].ToString().Contains("#"))
                 {
-                    RecipeWriter.WriteLine("{\"tag\":\"" + NeededItems[i].ToString().Replace("#","") + "\"}");
+                    recipeWriter.WriteLine("{\"tag\":\"" + NeededItems[i].ToString().Replace("#","") + "\"}");
                 }
                 else
                 {
-                    RecipeWriter.WriteLine("{\"item\":\"" + NeededItems[i].ID.Name + "\"}");
+                    recipeWriter.WriteLine("{\"item\":\"" + NeededItems[i].ID.Name + "\"}");
                 }
                 if (i != NeededItems.Length - 1)
                 {
-                    RecipeWriter.WriteLine(",");
+                    recipeWriter.WriteLine(",");
                 }
             }
-            RecipeWriter.WriteLine("],\"result\":{\"item\": \"" + Output.ID.Name + "\",\"count\": " + (Output.Count != null ? Output.Count : 1 ) + "}");
-            if (Group != null) { RecipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
+            recipeWriter.WriteLine("],\"result\":{\"item\": \"" + Output.ID.Name + "\",\"count\": " + (Output.Count != null ? Output.Count : 1 ) + "}");
+            if (Group != null) { recipeWriter.WriteLine(",\"group\": \"" + Group + "\""); }
 
 
-            RecipeWriter.WriteLine("}");
-            RecipeWriter.Dispose();
+            recipeWriter.WriteLine("}");
+            recipeWriter.Dispose();
         }
 
         /// <summary>
@@ -160,28 +160,28 @@ namespace SharpCraft
         public Recipe(PackNamespace space, string fileName, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeRecipePath();
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(space.GetPath() + "recipes\\" + fileName + ".json", FileMode.Create)) { AutoFlush = true };
-            RecipeWriter.Write("{\"type\":\"");
+            TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
+            recipeWriter.Write("{\"type\":\"");
             switch(type)
             {
                 case ID.SmeltType.BlastFurnace:
-                    RecipeWriter.Write("minecraft:blasting");
+                    recipeWriter.Write("minecraft:blasting");
                     break;
 
                 case ID.SmeltType.Furnace:
-                    RecipeWriter.Write("minecraft:smelting");
+                    recipeWriter.Write("minecraft:smelting");
                     break;
 
                 case ID.SmeltType.Smoker:
-                    RecipeWriter.Write("minecraft:smoking");
+                    recipeWriter.Write("minecraft:smoking");
                     break;
 
                 case ID.SmeltType.Campfire:
-                    RecipeWriter.Write("minecraft:campfire_cooking");
+                    recipeWriter.Write("minecraft:campfire_cooking");
                     break;
             }
-            RecipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
-            RecipeWriter.Dispose();
+            recipeWriter.WriteLine("\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.MinecraftValue() + "\", \"experience\":" + XpDrop.ToMinecraftDouble() + ",\"cookingtime\":" + CookTime + "}}");
+            recipeWriter.Dispose();
         }
 
         /// <summary>
@@ -192,9 +192,10 @@ namespace SharpCraft
         public Recipe(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeRecipePath();
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(space.GetPath() + "recipes\\" + fileName + ".json", FileMode.Create)) { AutoFlush = true };
-            RecipeWriter.WriteLine("{}");
-            RecipeWriter.Dispose();
+            using (TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json"))
+            {
+                recipeWriter.WriteLine("{}");
+            }
         }
 
         /// <summary>
@@ -207,9 +208,10 @@ namespace SharpCraft
         public Recipe(PackNamespace space, string fileName, Item Input, Item Output) : base(space, fileName, WriteSetting.LockedAuto)
         {
             MakeRecipePath();
-            StreamWriter RecipeWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "recipes\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
-            RecipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.ID.Name + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
-            RecipeWriter.Dispose();
+            using (TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json"))
+            {
+                recipeWriter.WriteLine("{\"type\":\"minecraft:stonecutting\",\"ingredient\": { \"item\": \"" + Input.ID.Name + "\"},\"result\": \"" + Output.ID.Name + "\",\"count\":" + (Output.Count != null ? Output.Count : 1) + "}");
+            }
         }
 
         /// <summary>
@@ -223,14 +225,7 @@ namespace SharpCraft
 
         private void MakeRecipePath()
         {
-            if (FileName.Contains("\\"))
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "recipes\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
-            }
-            else
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "recipes\\");
-            }
+            CreateDirectory("recipes");
         }
 
         /// <summary>

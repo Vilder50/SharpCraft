@@ -9,13 +9,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Base class for execute commands
     /// </summary>
-    public abstract class BaseExecuteCommand : ICommand, ICommandChanger
+    public abstract class BaseExecuteCommand : BaseCommand, ICommandChanger
     {
         /// <summary>
         /// Returns the execute command string
         /// </summary>
         /// <returns>The execute command string</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "execute " + GetExecuteCommandPart();
         }
@@ -24,6 +24,11 @@ namespace SharpCraft.Commands
         /// The command this execute command is going to execute
         /// </summary>
         public ICommand ExecuteCommand { get; set; }
+
+        /// <summary>
+        /// True if this execute command is done changing commands.
+        /// </summary>
+        public bool DoneChanging { get; private set; }
 
         /// <summary>
         /// Returns the <see cref="GetCommandString"/> without the execute part at the beginning
@@ -52,22 +57,20 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="command">The command to add</param>
         /// <returns>Information about the adding</returns>
-        public CommandChange ChangeCommand(ICommand command)
+        public ICommand ChangeCommand(ICommand command)
         {
             if (!HasEndCommand())
             {
                 AddCommand(command);
-                if (command is BaseExecuteCommand)
+                if (!(command is BaseExecuteCommand))
                 {
-                    return new CommandChange() { StopChanger = false, StopCommand = true };
+                    DoneChanging = true;
                 }
-                else
-                {
-                    return new CommandChange() { StopChanger = true, StopCommand = true };
-                }
+                return null;
             }
 
-            return new CommandChange() { StopChanger = true };
+            DoneChanging = true;
+            return command;
         }
 
         /// <summary>

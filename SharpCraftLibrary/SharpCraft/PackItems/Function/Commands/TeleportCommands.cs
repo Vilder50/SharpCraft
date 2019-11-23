@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which teleports one or more entities to another location
     /// </summary>
-    public class TeleportToCommand : ICommand
+    public class TeleportToCommand : BaseCommand
     {
         private Coords coordinates;
         private Selector selector;
@@ -39,7 +39,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tp [Selector] [Coordinates]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"tp {Selector} {Coordinates}";
         }
@@ -48,7 +48,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which teleports one or more entities to another entity
     /// </summary>
-    public class TeleportToEntityCommand : ICommand
+    public class TeleportToEntityCommand : BaseCommand
     {
         private Selector selector;
         private Selector toSelector;
@@ -89,7 +89,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tp [Selector] [ToSelector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"tp {Selector} {ToSelector}";
         }

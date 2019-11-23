@@ -1,11 +1,14 @@
-﻿namespace SharpCraft.FunctionWriters
+﻿using SharpCraft.Commands;
+using System.Linq;
+
+namespace SharpCraft.FunctionWriters
 {
     /// <summary>
     /// All the player commands
     /// </summary>
     public class PlayerCommands
     {
-        readonly Function.FunctionWriter Writer;
+        readonly Function function;
         /// <summary>
         /// All commands for levels and xp
         /// </summary>
@@ -15,10 +18,10 @@
         /// </summary>
         public class ClassXP
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassXP(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassXP(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
             /// <summary>
             /// Adds the specified amount of levels to the selected players
@@ -27,8 +30,7 @@
             /// <param name="levels">The amount of levels to add. If this is negative levels will be removed</param>
             public void LevelsAdd(Selector player, int levels)
             {
-                Writer.Add("experience add " + player + " " + levels + " levels");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
             }
             /// <summary>
             /// Sets the selected players' levels to the specified amount
@@ -37,8 +39,7 @@
             /// <param name="levels">The amount to set the levels to</param>
             public void LevelsSet(Selector player, int levels)
             {
-                Writer.Add("experience set " + player + " " + levels + " levels");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
             }
             /// <summary>
             /// Outputs the amount of levels the selected player has
@@ -47,8 +48,7 @@
             public void LevelsGet(Selector player)
             {
                 player.Limited();
-                Writer.Add("experience quary " + player + " levels");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceGetCommand(player, true));
             }
             /// <summary>
             /// Adds the specified amount of points to the selected players
@@ -57,8 +57,7 @@
             /// <param name="points">The amount of points to add. If this is negative points will be removed</param>
             public void PointsAdd(Selector player, int points)
             {
-                Writer.Add("experience add " + player + " " + points + " points");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
             }
             /// <summary>
             /// Sets the selected players' points to the specified amount
@@ -67,8 +66,7 @@
             /// <param name="points">The amount to set the points to</param>
             public void PointsSet(Selector player, int points)
             {
-                Writer.Add("experience set " + player + " " + points + " points");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
             }
             /// <summary>
             /// Outputs the amount of points the selected player has
@@ -77,20 +75,19 @@
             public void PointsGet(Selector player)
             {
                 player.Limited();
-                Writer.Add("experience quary " + player + " points");
-                Writer.NewLine();
+                function.AddCommand(new ExperienceGetCommand(player, false));
             }
         }
-        internal PlayerCommands(Function.FunctionWriter CommandsList)
+        internal PlayerCommands(Function function)
         {
-            Writer = CommandsList;
-            XP = new ClassXP(CommandsList);
-            Particle = new ClassParticle(CommandsList);
-            Item = new ClassItem(CommandsList);
-            Sound = new ClassSound(CommandsList);
-            Title = new ClassTitle(CommandsList);
-            Recipe = new ClassRecipe(CommandsList);
-            Advancement = new ClassAdvancement(CommandsList);
+            this.function = function;
+            XP = new ClassXP(function);
+            Particle = new ClassParticle(function);
+            Item = new ClassItem(function);
+            Sound = new ClassSound(function);
+            Title = new ClassTitle(function);
+            Recipe = new ClassRecipe(function);
+            Advancement = new ClassAdvancement(function);
         }
 
         /// <summary>
@@ -100,8 +97,7 @@
         /// <param name="mode">the gamemode to change to</param>
         public void Gamemode(Selector player, ID.Gamemode mode)
         {
-            Writer.Add("gamemode " + mode + " " + player);
-            Writer.NewLine();
+            function.AddCommand(new GamemodeCommand(player, mode));
         }
 
         /// <summary>
@@ -112,7 +108,7 @@
         /// <param name="set">If the score should be set to the given number. If false it will be added instead</param>
         public void Trigger(ScoreObject scoreObject, int number, bool set = true)
         {
-            Writer.Add("trigger " + scoreObject + " " + (set ? "set" : "add") + " " + number);
+            function.AddCommand(new TriggerCommand(scoreObject, set, number));
         }
 
         /// <summary>
@@ -122,8 +118,7 @@
         /// <param name="message">The message to tell the player</param>
         public void Tell(Selector player, string message)
         {
-            Writer.Add("msg " + player + " " + message);
-            Writer.NewLine();
+            function.AddCommand(new MsgCommand(player, message));
         }
 
         /// <summary>
@@ -133,9 +128,7 @@
         /// <param name="spawn">The new spawnpoint location</param>
         public void Spawnpoint(Selector player, Coords spawn = null)
         {
-            Writer.Add("spawnpoint " + player);
-            if (spawn != null) { Writer.Add(" " + spawn); }
-            Writer.NewLine();
+            function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
 
         /// <summary>
@@ -145,8 +138,7 @@
         /// <param name="objective">The trigger (<see cref="ScoreObject"/>) to enable</param>
         public void EnableTrigger(Selector player, ScoreObject objective)
         {
-            Writer.Add("scoreboard players enable " + player + " " + objective);
-            Writer.NewLine();
+            function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
         }
 
         /// <summary>
@@ -156,8 +148,7 @@
         /// <param name="message">The message to tell the players</param>
         public void Tellraw(Selector player, JSON[] message)
         {
-            Writer.Add("tellraw " + player + " " + message.GetString());
-            Writer.NewLine();
+            function.AddCommand(new TellrawCommand(player, message));
         }
 
         /// <summary>
@@ -167,8 +158,7 @@
         /// <param name="message">The message to show</param>
         public void Actionbar(Selector player, JSON[] message)
         {
-            Writer.Add("title " + player + " actionbar " + message.GetString());
-            Writer.NewLine();
+            function.AddCommand(new TitleActionbarCommand(player, message));
         }
 
         /// <summary>
@@ -180,10 +170,10 @@
         /// </summary>
         public class ClassParticle
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassParticle(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassParticle(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -198,10 +188,7 @@
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
             public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
             {
-                Writer.Add("particle " + particle + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
-                if (player != null) { Writer.Add(" " + player); }
-                Writer.NewLine();
+                function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -217,10 +204,7 @@
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
             public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
             {
-                Writer.Add("particle dust " + (decimal.Divide(color.Red, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Green, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Blue, 255).ToString().Replace(",", ".")) + " " + particleSize.ToString().Replace(",", ".") + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
-                if (player != null) { Writer.Add(" " + player); }
-                Writer.NewLine();
+                function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -236,18 +220,7 @@
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
             public void Block(Block block, Coords displayCoords, Coords size, double speed, int count, bool dust = false, bool force = false, Selector player = null)
             {
-                if (dust)
-                {
-                    Writer.Add("particle falling_dust ");
-                }
-                else
-                {
-                    Writer.Add("particle block ");
-                }
-                Writer.Add(block + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
-                if (player != null) { Writer.Add(" " + player); }
-                Writer.NewLine();
+                function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
 
             /// <summary>
@@ -262,10 +235,7 @@
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
             public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
             {
-                Writer.Add("particle item " + item.IDDataString + " " + displayCoords + " " + size.X.ToString().Replace(",", ".") + " " + size.Y.ToString().Replace(",", ".") + " " + size.Z.ToString().Replace(",", ".") + " " + speed.ToString().Replace(",", ".") + " " + count);
-                if (force) { Writer.Add(" force"); } else { Writer.Add(" normal"); }
-                if (player != null) { Writer.Add(" " + player); }
-                Writer.NewLine();
+                function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
         }
 
@@ -278,10 +248,10 @@
         /// </summary>
         public class ClassItem
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassItem(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassItem(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -291,16 +261,13 @@
             /// <param name="giveItem">The <see cref="Item"/> to give to the players</param>
             public void GiveItem(Selector player, Item giveItem)
             {
-                if (giveItem.Slot != null)
+                if (giveItem.Slot is null)
                 {
-                    if (giveItem.Slot > 26) { giveItem.Slot = 26; }
-                    Writer.Add("replaceitem entity " + player + " inventory." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
-                    Writer.NewLine();
+                    function.AddCommand(new GiveCommand(player, giveItem, giveItem.Count ?? 1));
                 }
                 else
                 {
-                    Writer.Add("give " + player + " " + giveItem.IDDataString);
-                    Writer.NewLine();
+                    function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.InventorySlot((int)giveItem.Slot), giveItem, giveItem.Count ?? 1));
                 }
             }
 
@@ -309,10 +276,9 @@
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="loot">the <see cref="Loottable"/> to give the player</param>
-            public void GiveItem(Selector player, Loottable loot)
+            public void GiveItem(Selector player, ILoottable loot)
             {
-                Writer.Add($"loot give {player} loot {loot}");
-                Writer.NewLine();
+                function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
@@ -323,8 +289,7 @@
             public void GiveItem(Selector player, Selector kill)
             {
                 kill.Limited();
-                Writer.Add($"loot give {player} kill {kill}");
-                Writer.NewLine();
+                function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
             }
 
             /// <summary>
@@ -335,12 +300,14 @@
             /// <param name="breakWith">the item used to break the block</param>
             public void GiveItem(Selector player, Coords breakBlock, Item breakWith)
             {
-                Writer.Add($"loot give {player} mine {breakBlock}");
-                if (breakWith != null)
+                if (breakWith is null)
                 {
-                    Writer.Add(" " + breakWith.IDDataString);
+                    function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineHandSource(breakBlock, true)));
                 }
-                Writer.NewLine();
+                else
+                {
+                    function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineItemSource(breakBlock, breakWith)));
+                }
             }
 
             /// <summary>
@@ -350,12 +317,7 @@
             /// <param name="giveItem">The item to insert into the enderchest. <see cref="Item.Slot"/> choses the slot.</param>
             public void GiveEnderChest(Selector player, Item giveItem)
             {
-                if (giveItem.Slot == null || giveItem.Slot > 26 || giveItem.Slot < 0)
-                {
-                    giveItem.Slot = 0;
-                }
-                Writer.Add("replaceitem entity " + player + " enderchest." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
-                Writer.NewLine();
+                function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Puts an item into the selected players' hotbars
@@ -364,12 +326,7 @@
             /// <param name="giveItem">The item to insert into the hotbar. <see cref="Item.Slot"/> choses the slot.</param>
             public void GiveHotbar(Selector player, Item giveItem)
             {
-                if (giveItem.Slot == null || giveItem.Slot > 8 || giveItem.Slot < 0)
-                {
-                    giveItem.Slot = 0;
-                }
-                Writer.Add("replaceitem entity " + player + " hotbar." + giveItem.Slot + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
-                Writer.NewLine();
+                function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
 
             /// <summary>
@@ -378,10 +335,9 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="loot">the <see cref="Loottable"/> to give the player</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, Loottable loot, int slot)
+            public void GiveHotbar(Selector player, ILoottable loot, int slot)
             {
-                Writer.Add($"loot replace entity {player} hotbar.{slot} loot {loot}");
-                Writer.NewLine();
+                function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
@@ -393,12 +349,14 @@
             /// <param name="slot">The hotbar slot to put the item in</param>
             public void GiveHotbar(Selector player, Coords breakBlock, Item breakWith, int slot)
             {
-                Writer.Add($"loot replace entity {player} hotbar.{slot} mine {breakBlock}");
-                if (breakWith != null)
+                if (breakWith is null)
                 {
-                    Writer.Add(" " + breakWith.IDDataString);
+                    function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineHandSource(breakBlock, true)));
                 }
-                Writer.NewLine();
+                else
+                {
+                    function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineItemSource(breakBlock, breakWith)));
+                }
             }
 
             /// <summary>
@@ -409,15 +367,7 @@
             /// <param name="offHand">If it should insert into the offhand instead</param>
             public void GiveWeapon(Selector selector, Item giveItem, bool offHand = false)
             {
-                if (offHand)
-                {
-                    Writer.Add("replaceitem entity " + selector + " weapon.offhand" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
-                }
-                else
-                {
-                    Writer.Add("replaceitem entity " + selector + " weapon" + " " + giveItem.IDDataString + " " + (giveItem.Count ?? 1));
-                }
-                Writer.NewLine();
+                function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Clears an item from the selected players' inventories
@@ -427,10 +377,7 @@
             /// <param name="amount">The maximum amount of the item to clear. null clears all</param>
             public void Clear(Selector player, Item item = null, int? amount = null)
             {
-                Writer.Add("clear " + player);
-                if (item != null) { Writer.Add(" " + item.IDDataString); }
-                if (amount != null) { Writer.Add(" " + amount); }
-                Writer.NewLine();
+                function.AddCommand(new ClearCommand(player, item, amount));
             }
         }
 
@@ -443,10 +390,10 @@
         /// </summary>
         public class ClassSound
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassSound(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassSound(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -459,33 +406,22 @@
             /// <param name="volume">the maximum volume of the sound</param>
             /// <param name="speed">the speed of the sound (0-2)</param>
             /// <param name="minValue">the minimum volume of the sound (0-2)</param>
-            public void Play(Selector player, string sound, ID.SoundSource source, Coords location = null, double volume = 1, double speed = 1, double minValue = 0)
+            public void Play(Selector player, string sound, ID.SoundSource source, Coords location, double volume = 1, double speed = 1, double minValue = 0)
             {
-                Writer.Add("playsound " + sound + " " + source + " " + player);
-                if (location != null) { Writer.Add(" " + location); }
-                if (location == null && (volume != 1 || speed != 1 || minValue != 0)) { Writer.Add(" ~ ~ ~"); }
-                if (volume != 1 || speed != 1 || minValue != 0) { Writer.Add(" " + volume.ToMinecraftDouble()); }
-                if (speed != 1 || minValue != 0) { Writer.Add(" " + speed.ToMinecraftDouble()); }
-                if (minValue != 0) { Writer.Add(" " + minValue.ToMinecraftDouble()); }
-                Writer.NewLine();
+                function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
             }
 
             /// <summary>
             /// Stops sounds for the selected players
             /// (If no source and sound is specified it will stop all sounds)
             /// </summary>
-            /// <param name="Player">the <see cref="Selector"/> to use</param>
-            /// <param name="Source">the source to stop sounds at. Null will stop the sound from any source</param>
+            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="source">the source to stop sounds at. Null will stop the sound from any source</param>
             /// <param name="sound">the sound to stop. Null will stop any sound in the given source</param>
-            public void Stop(Selector Player, ID.SoundSource? Source = null, string sound = null)
+            public void Stop(Selector player, ID.SoundSource? source = null, string sound = null)
             {
-                Writer.Add("stopsound " + Player);
-                if (Source != null) { Writer.Add(" " + Source); }
-                if (Source == null && sound != null) { Writer.Add(" *"); }
-                if (sound != null) { Writer.Add(" " + sound); }
-                Writer.NewLine();
+                function.AddCommand(new StopSoundCommand(player, sound, source));
             }
-
         }
 
         /// <summary>
@@ -497,10 +433,10 @@
         /// </summary>
         public class ClassTitle
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassTitle(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassTitle(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -510,8 +446,7 @@
             /// <param name="message">The message to show the players</param>
             public void Title(Selector player, JSON[] message)
             {
-                Writer.Add("title " + player + " title " + message.GetString());
-                Writer.NewLine();
+                function.AddCommand(new TitleCommand(player, message));
             }
 
             /// <summary>
@@ -522,8 +457,7 @@
             /// <param name="message">The message to show the players</param>
             public void SubTitle(Selector player, JSON[] message)
             {
-                Writer.Add("title " + player + " subtitle " + message.GetString());
-                Writer.NewLine();
+                function.AddCommand(new TitleSubtitleCommand(player, message));
             }
 
             /// <summary>
@@ -533,10 +467,9 @@
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void Time(Selector player, int startFade, int stay, int endFade)
+            public void Time(Selector player, Time startFade, Time stay, Time endFade)
             {
-                Writer.Add("title " + player + " times " + startFade + " " + stay + " " + endFade);
-                Writer.NewLine();
+                function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
             }
 
             /// <summary>
@@ -545,8 +478,7 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             public void Clear(Selector player)
             {
-                Writer.Add("title " + player + " clear");
-                Writer.NewLine();
+                function.AddCommand(new TitleClearCommand(player));
             }
 
             /// <summary>
@@ -555,45 +487,46 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             public void Reset(Selector player)
             {
-                Writer.Add("title " + player + " reset");
-                Writer.NewLine();
+                function.AddCommand(new TitleResetCommand(player));
             }
 
             /// <summary>
             /// Displays a whole title for the selected players
             /// </summary>
-            /// <param name="Player">the <see cref="Selector"/> to use</param>
-            /// <param name="TopMessage">The main title message</param>
-            /// <param name="BottomMessage">the bottom part of the title message</param>
-            /// <param name="StartFade">The amount of ticks it takes for the title to fade in</param>
-            /// <param name="Stay">The amount of ticks the title stays on screen</param>
-            /// <param name="EndFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(Selector Player, JSON[] TopMessage, JSON[] BottomMessage, int StartFade, int Stay, int EndFade)
+            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="topMessage">The main title message</param>
+            /// <param name="bottomMessage">the bottom part of the title message</param>
+            /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
+            /// <param name="stay">The amount of ticks the title stays on screen</param>
+            /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
+            public void FullTitle(Selector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
             {
-                Writer.CopyState();
-                Writer.Add("title " + Player + " times " + StartFade + " " + Stay + " " + EndFade);
-                Writer.NewLine();
-
-                Writer.PasteState();
-                if (BottomMessage != null)
+                BaseExecuteCommand executeCommand = null;
+                if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
                 {
-                    Writer.Add("title " + Player + " subtitle " + BottomMessage.GetString());
-                    Writer.NewLine();
+                    executeCommand = (BaseExecuteCommand)execute.ShallowClone();
                 }
-
-                Writer.PasteState();
-                if (TopMessage != null)
+                function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
+                if (!(bottomMessage is null))
                 {
-                    Writer.Add("title " + Player + " title " + TopMessage.GetString());
-                    Writer.NewLine();
+                    if (!(executeCommand is null))
+                    {
+                        function.AddCommand(executeCommand);
+                    }
+                    function.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
+                }
+                if (!(executeCommand is null))
+                {
+                    function.AddCommand(executeCommand);
+                }
+                if (topMessage is null)
+                {
+                    function.AddCommand(new TitleCommand(player, new JSON("")));
                 }
                 else
                 {
-                    Writer.Add("title " + Player + " title " + new JSON[] { new JSON("") }.GetString());
-                    Writer.NewLine();
+                    function.AddCommand(new TitleCommand(player, topMessage));
                 }
-
-                Writer.NewLine();
             }
         }
 
@@ -606,10 +539,10 @@
         /// </summary>
         public class ClassRecipe
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassRecipe(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassRecipe(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
 
             /// <summary>
@@ -617,10 +550,9 @@
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="giveRecipe">The <see cref="Recipe"/> to give</param>
-            public void Give(Selector player, Recipe giveRecipe)
+            public void Give(Selector player, IRecipe giveRecipe)
             {
-                Writer.Add("recipe give " + player + " " + giveRecipe);
-                Writer.NewLine();
+                function.AddCommand(new RecipeCommand(giveRecipe, player, true));
             }
             /// <summary>
             /// Gives all recipes to the selected players
@@ -628,8 +560,7 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             public void GiveAll(Selector player)
             {
-                Writer.Add("recipe give " + player + " *");
-                Writer.NewLine();
+                function.AddCommand(new RecipeAllCommand(player, true));
             }
             /// <summary>
             /// Removes a recipe from the selected players
@@ -638,8 +569,7 @@
             /// <param name="giveRecipe">the <see cref="Recipe"/> to remove</param>
             public void Remove(Selector player, Recipe giveRecipe)
             {
-                Writer.Add("recipe take " + player + " " + giveRecipe);
-                Writer.NewLine();
+                function.AddCommand(new RecipeCommand(giveRecipe, player, false));
             }
             /// <summary>
             /// removes all recipes from the selected players
@@ -647,8 +577,7 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             public void RemoveAll(Selector player)
             {
-                Writer.Add("recipe take " + player + " *");
-                Writer.NewLine();
+                function.AddCommand(new RecipeAllCommand(player, false));
             }
         }
 
@@ -661,10 +590,10 @@
         /// </summary>
         public class ClassAdvancement
         {
-            readonly Function.FunctionWriter Writer;
-            internal ClassAdvancement(Function.FunctionWriter CommandsList)
+            readonly Function function;
+            internal ClassAdvancement(Function function)
             {
-                Writer = CommandsList;
+                this.function = function;
             }
             /// <summary>
             /// grants/evokes all advancements for the selected players
@@ -673,8 +602,7 @@
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             public void Everything(Selector player, bool revoke = false)
             {
-                Writer.Add("advancement " + GrantRevoke(revoke) + " " + player + " everything");
-                Writer.NewLine();
+                function.AddCommand(new AdvancementAllCommand(player, !revoke));
             }
             /// <summary>
             /// Grants/revokes all advancements up to the specified advancement for the selected players
@@ -683,10 +611,9 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke up to</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Untill(Selector player, Advancement advancement, bool revoke = false)
+            public void Until(Selector player, IAdvancement advancement, bool revoke = false)
             {
-                Writer.Add("advancement " + GrantRevoke(revoke) + " " + player + " until " + advancement);
-                Writer.NewLine();
+                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
             }
             /// <summary>
             /// grants/revokes all advancements after the specified advancement for the selected players
@@ -695,10 +622,9 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke from</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void From(Selector player, Advancement advancement, bool revoke = false)
+            public void From(Selector player, IAdvancement advancement, bool revoke = false)
             {
-                Writer.Add("advancement " + GrantRevoke(revoke) + " " + player + " from " + advancement);
-                Writer.NewLine();
+                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
             }
 
             /// <summary>
@@ -708,10 +634,9 @@
             /// <param name="player">the <see cref="Selector"/> to use</param>
             /// <param name="advancement">an advancement in the branch to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Branch(Selector player, Advancement advancement, bool revoke = false)
+            public void Branch(Selector player, IAdvancement advancement, bool revoke = false)
             {
-                Writer.Add("advancement " + GrantRevoke(revoke) + " " + player + " through " + advancement);
-                Writer.NewLine();
+                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
             }
 
             /// <summary>
@@ -722,16 +647,9 @@
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(Selector player, Advancement advancement, bool revoke = false, Advancement.Trigger trigger = null)
+            public void Only(Selector player, IAdvancement advancement, bool revoke = false, Advancement.Trigger trigger = null)
             {
-                Writer.Add("advancement " + GrantRevoke(revoke) + " " + player + " only " + advancement);
-                if (trigger != null) { Writer.Add(" " + trigger); }
-                Writer.NewLine();
-            }
-
-            private string GrantRevoke(bool revoke)
-            {
-                return revoke ? "revoke" : "grant";
+                function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }
         }
     }

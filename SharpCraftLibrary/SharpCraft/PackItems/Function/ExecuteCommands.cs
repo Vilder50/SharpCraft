@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System;
 using System.Collections.Generic;
+using SharpCraft.Commands;
 
 namespace SharpCraft.FunctionWriters
 {
@@ -9,11 +10,11 @@ namespace SharpCraft.FunctionWriters
     /// </summary>
     public class ExecuteCommands
     {
-        readonly Function.FunctionWriter Writer;
+        readonly Function function;
 
-        internal ExecuteCommands(Function.FunctionWriter commandsList)
+        internal ExecuteCommands(Function function)
         {
-            Writer = commandsList;
+            this.function = function;
         }
 
         /// <summary>
@@ -21,25 +22,18 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public void Stop()
         {
-            Writer.NewLine();
+            function.AddCommand(new StopExecuteCommand());   
         }
 
         /// <summary>
         /// Aligns the execute coordinates on the given axis
         /// </summary>
-        /// <param name="axis">The axis to align to insert x and/or z and/or y</param>
-        public void Align(string axis)
+        /// <param name="alignX">If it should align on the x axis</param>
+        /// <param name="alignY">If it should align on the y axis</param>
+        /// <param name="alignZ">If it should align on the z axis</param>
+        public void Align(bool alignX, bool alignY, bool alignZ)
         {
-            axis = axis.ToLower();
-            if (string.IsNullOrWhiteSpace(axis))
-            {
-                throw new ArgumentNullException(nameof(axis) + " cannot be empty");
-            }
-            else if (!axis.All(letter => letter == 'x' || letter == 'y' || letter == 'z'))
-            {
-                throw new ArgumentException(nameof(axis) + " only allows xyz");
-            }
-            Writer.Add("align " + axis + " ", true);
+            function.AddCommand(new ExecuteAlign(alignX, alignY, alignZ));
         }
 
         /// <summary>
@@ -48,10 +42,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="center">True if it should center to the block</param>
         public void Align(bool center = false)
         {
-            Writer.Add("align xyz ", true);
+            function.AddCommand(new ExecuteAlign());
             if (center)
             {
-                Positioned(new Coords(0.5, 0.5, 0.5));
+                function.AddCommand(new ExecutePosition(new Coords(0.5, 0.5, 0.5)));
             }
         }
 
@@ -61,11 +55,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="atEntity">The <see cref="Selector"/> to execute at</param>
         public void At(Selector atEntity)
         {
-            if (atEntity is null)
-            {
-                throw new ArgumentNullException(nameof(atEntity) + " cannot be null");
-            }
-            Writer.Add("at " + atEntity + " ", true);
+            function.AddCommand(new ExecuteAt(atEntity));
         }
 
         /// <summary>
@@ -73,7 +63,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public void At()
         {
-            Writer.Add("at @s ", true);
+            function.AddCommand(new ExecuteAt(ID.Selector.s));
         }
 
         /// <summary>
@@ -82,11 +72,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="asEntity">The <see cref="Selector"/> to execute as</param>
         public void As(Selector asEntity)
         {
-            if (asEntity is null)
-            {
-                throw new ArgumentNullException(nameof(asEntity) + " cannot be null");
-            }
-            Writer.Add("as " + asEntity + " ", true);
+            function.AddCommand(new ExecuteAs(asEntity));
         }
 
         /// <summary>
@@ -97,7 +83,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfBlock(Block findBlock, Coords blockCoords, bool want = true)
         {
-            Writer.Add((want ? "if" : "unless") + " block " + blockCoords + " " + findBlock + " ", true);
+            function.AddCommand(new ExecuteIfBlock(blockCoords, findBlock, want));
         }
 
         /// <summary>
@@ -110,7 +96,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfBlocks(Coords corner1, Coords corner2, Coords testCoords, bool masked = false, bool want = true)
         {
-            Writer.Add((want ? "if" : "unless") + " blocks " + corner1 + " " + corner2 + " " + testCoords + " " + (masked ? "masked" : "all") + " ", true);
+            function.AddCommand(new ExecuteIfBlocks(corner1, corner2, testCoords, masked, want));
         }
 
         /// <summary>
@@ -120,7 +106,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfEntity(Selector entitySelector, bool want = true)
         {
-            Writer.Add((want ? "if" : "unless") + " entity " + entitySelector + " ", true);
+            function.AddCommand(new ExecuteIfEntity(entitySelector, want));
         }
 
         /// <summary>
@@ -131,8 +117,8 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfData(Selector entitySelector, string dataPath, bool want = true)
         {
-            entitySelector.Limit = 1;
-            Writer.Add($"{(want ? "if" : "unless")} data entity {entitySelector} {dataPath} ", true);
+            entitySelector.Limited();
+            function.AddCommand(new ExecuteIfEntityData(entitySelector, dataPath, want));
         }
 
         /// <summary>
@@ -143,7 +129,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfData(Coords block, string dataPath, bool want = true)
         {
-            Writer.Add($"{(want ? "if" : "unless")} data block {block} {dataPath} ", true);
+            function.AddCommand(new ExecuteIfBlockData(block, dataPath, want));
         }
 
         /// <summary>
@@ -157,34 +143,9 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfScore(Selector mainSelector, ScoreObject mainObject, ID.IfScoreOperation operation, Selector otherSelector, ScoreObject otherObject, bool want = true)
         {
-            mainSelector.Limit = 1;
-            otherSelector.Limit = 1;
-            string OperationString;
-
-            switch (operation)
-            {
-                case ID.IfScoreOperation.Equel:
-                    OperationString = "=";
-                    break;
-                case ID.IfScoreOperation.Higher:
-                    OperationString = ">";
-                    break;
-                case ID.IfScoreOperation.HigherOrEquel:
-                    OperationString = ">=";
-                    break;
-                case ID.IfScoreOperation.Smaller:
-                    OperationString = "<";
-                    break;
-                case ID.IfScoreOperation.SmallerOrEquel:
-                    OperationString = "<=";
-                    break;
-
-                default:
-                    OperationString = "=";
-                    break;
-            }
-            Writer.Add((want ? "if" : "unless") + " score " + mainSelector + " " + mainObject + " " + OperationString + " " + otherSelector + " " + otherObject + " ", true);
-
+            mainSelector.Limited();
+            otherSelector.Limited();
+            function.AddCommand(new ExecuteIfScoreRelative(mainSelector, mainObject, operation, otherSelector, otherObject, want));
         }
 
         /// <summary>
@@ -196,12 +157,8 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfScore(Selector selector, ScoreObject scoreObject, Range range, bool want = true)
         {
-            selector.Limit = 1;
-            string Unless = "if";
-            if (!want) { Unless = "unless"; }
-
-            Writer.Add(Unless + " score " + selector + " " + scoreObject + " matches " + range.SelectorString() + " ", true);
-
+            selector.Limited();
+            function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
         }
 
         /// <summary>
@@ -210,7 +167,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="position">the <see cref="Coords"/> to execute at</param>
         public void Positioned(Coords position)
         {
-            Writer.Add("positioned " + position + " ", true);
+            function.AddCommand(new ExecutePosition(position));
         }
 
         /// <summary>
@@ -219,7 +176,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="entity">The <see cref="Selector"/> to execute at</param>
         public void Positioned(Selector entity)
         {
-            Writer.Add("positioned as " + entity + " ", true);
+            function.AddCommand(new ExecutePositionedAs(entity));
         }
 
         /// <summary>
@@ -232,8 +189,8 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(Selector entity, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
-            entity.Limit = 1;
-            Writer.Add("store " + (storeSucces ? "success" : "result") + " entity " + entity + " " + dataPath + " " + dataType.ToString().ToLower() + " " + scale.ToMinecraftDouble() + " ", true);
+            entity.Limited();
+            function.AddCommand(new ExecuteStoreEntity(entity, dataPath, dataType, scale, !storeSucces));
         }
 
         /// <summary>
@@ -246,7 +203,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(Coords blockCoords, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
-            Writer.Add("store " + (storeSucces ? "success" : "result") + " block " + blockCoords + " " + dataPath + " " + dataType.ToString().ToLower() + " " + scale.ToMinecraftDouble() + " ", true);
+            function.AddCommand(new ExecuteStoreBlock(blockCoords, dataPath, dataType, scale, !storeSucces));
         }
 
         /// <summary>
@@ -257,7 +214,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(Selector entity, ScoreObject scoreObject, bool storeSucces = false)
         {
-            Writer.Add("store " + (storeSucces ? "success" : "result") + " score " + entity + " " + scoreObject + " ", true);
+            function.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
         }
 
         /// <summary>
@@ -268,7 +225,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(BossBar bossBar, bool value = true, bool storeSucces = false)
         {
-            Writer.Add("store " + (storeSucces ? "success" : "result") + " bossbar " + bossBar + " " + (value ? "value" : "max") + " ", true);
+            function.AddCommand(new ExecuteStoreBossbar(bossBar, value, !storeSucces));
         }
 
         /// <summary>
@@ -278,7 +235,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="facing">the part of the <see cref="Entity"/> to be faced at</param>
         public void Facing(Selector entity, ID.FacingAnchor facing = ID.FacingAnchor.feet)
         {
-            Writer.Add("facing entity " + entity + " " + facing + " ", true);
+            function.AddCommand(new ExecuteFacingEntity(entity, facing));
         }
 
         /// <summary>
@@ -287,7 +244,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="coords">the <see cref="Coords"/> to be rotated at</param>
         public void Facing(Coords coords)
         {
-            Writer.Add("facing " + coords + " ", true);
+            function.AddCommand(new ExecuteFacingCoord(coords));
         }
 
         /// <summary>
@@ -296,7 +253,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="rotation">the <see cref="Rotation"/> to execute with</param>
         public void Rotated(Rotation rotation)
         {
-            Writer.Add("rotated " + rotation + " ", true);
+            function.AddCommand(new ExecuteRotated(rotation));
         }
 
         /// <summary>
@@ -305,7 +262,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="entity">the <see cref="Entity"/> to execute rotated as</param>
         public void Rotated(Selector entity)
         {
-            Writer.Add("rotated as " + entity + " ", true);
+            function.AddCommand(new ExecuteRotatedAs(entity));
         }
 
         /// <summary>
@@ -314,16 +271,16 @@ namespace SharpCraft.FunctionWriters
         /// <param name="dimension">The dimension</param>
         public void Dimension(ID.Dimension dimension)
         {
-            Writer.Add("in " + dimension + " ", true);
+            function.AddCommand(new ExecuteDimension(dimension));
         }
 
         /// <summary>
-        /// The place to anchor local <see cref="Coords"/> at 
+        /// Changes where the origin used by coordinates are at
         /// </summary>
-        /// <param name="Anchor">The place</param>
-        public void Anchored(ID.FacingAnchor Anchor)
+        /// <param name="anchor">The origin</param>
+        public void Anchored(ID.FacingAnchor anchor)
         {
-            Writer.Add("anchored " + Anchor + " ", true);
+            function.AddCommand(new ExecuteAnchored(anchor));
         }
     }
 }

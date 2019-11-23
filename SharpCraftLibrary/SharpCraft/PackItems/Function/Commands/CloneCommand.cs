@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which clones blocks from one place to another
     /// </summary>
-    public class CloneCommand : ICommand
+    public class CloneCommand : BaseCommand
     {
         private Coords corner1;
         private Coords corner2;
@@ -82,7 +82,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>clone [Corner1] [Corner2] [Location] [Masked] [Mode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"clone {Corner1} {Corner2} {Location} {(Masked ? "masked" : "replace")} {Mode}";
         }
@@ -91,7 +91,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which copies specific blocks from one location to another
     /// </summary>
-    public class FilteredCloneCommand : ICommand
+    public class FilteredCloneCommand : BaseCommand
     {
         private Coords corner1;
         private Coords corner2;
@@ -172,7 +172,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>clone [Corner1] [Corner2] [Location] filtered [FilterBlock] [Mode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"clone {Corner1} {Corner2} {Location} filtered {FilterBlock.ToString()} {Mode}";
         }

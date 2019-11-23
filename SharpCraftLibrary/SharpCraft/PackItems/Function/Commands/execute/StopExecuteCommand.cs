@@ -7,14 +7,17 @@ using System.Threading.Tasks;
 namespace SharpCraft.Commands
 {
     /// <summary>
-    /// Interface for commands
+    /// Command used for stopping an execute chain
     /// </summary>
-    public interface ICommand
+    public class StopExecuteCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
-        /// <returns>The command as a string</returns>
-        string GetCommandString();
+        /// <returns>NULL</returns>
+        public override string GetCommandString()
+        {
+            return null;
+        }
     }
 }

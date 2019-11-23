@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gives/takes a recipe from one or more players
     /// </summary>
-    public class RecipeCommand : ICommand
+    public class RecipeCommand : BaseCommand
     {
         private IRecipe recipe;
         private Selector selector;
@@ -46,7 +46,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>recipe [GiveRecipe] [Selector] [Recipe]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} {Recipe.GetNamespacedName()}";
         }
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gives/takes all recipes from one or more players
     /// </summary>
-    public class RecipeAllCommand : ICommand
+    public class RecipeAllCommand : BaseCommand
     {
         private Selector selector;
 
@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>recipe [GiveRecipe] [Selector] *</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} *";
         }

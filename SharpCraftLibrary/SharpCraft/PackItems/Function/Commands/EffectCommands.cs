@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for giving entities an effect
     /// </summary>
-    public class EffectGiveCommand : ICommand
+    public class EffectGiveCommand : BaseCommand
     {
         private Selector selector;
         private int seconds;
@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>effect give [Selector] [Effect] [Seconds] [Amplifier] [HideParticles]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (!HideParticles)
             {
@@ -108,7 +108,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which removes one or more effects from some entities
     /// </summary>
-    public class EffectClearCommand : ICommand
+    public class EffectClearCommand : BaseCommand
     {
         private Selector selector;
 
@@ -144,7 +144,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>effect clear [Selector] [Effect]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"effect clear {Selector.ToString()} {Effect}";
         }

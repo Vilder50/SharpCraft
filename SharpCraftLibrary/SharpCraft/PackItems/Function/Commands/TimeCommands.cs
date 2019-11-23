@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the time in the world
     /// </summary>
-    public class TimeModifyCommand : ICommand
+    public class TimeModifyCommand : BaseCommand
     {
         private Time time;
 
@@ -53,7 +53,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>time [Modifier] [Time]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"time {Modifier} {Time.ToString()}";
         }
@@ -62,7 +62,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets the time in the world
     /// </summary>
-    public class TimeQueryCommand : ICommand
+    public class TimeQueryCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="TimeQueryCommand"/>
@@ -82,7 +82,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>time query [Query]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"time query {Query}";
         }

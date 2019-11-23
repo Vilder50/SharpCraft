@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Says some text with the executing entity's name and a * at the beginning
     /// </summary>
-    public class SayMeCommand : ICommand
+    public class SayMeCommand : BaseCommand
     {
         private string text;
 
@@ -42,7 +42,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>me [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"me {Text}";
         }
@@ -51,7 +51,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Says some text with the executing entity's name in [] at the beginning
     /// </summary>
-    public class SayCommand : ICommand
+    public class SayCommand : BaseCommand
     {
         private string text;
 
@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>say [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"say {Text}";
         }
@@ -93,7 +93,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Sends a private message to one or more players
     /// </summary>
-    public class MsgCommand : ICommand
+    public class MsgCommand : BaseCommand
     {
         private string text;
         private Selector selector;
@@ -141,7 +141,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>msg [Selector] [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"msg {Selector} {Text}";
         }
@@ -150,7 +150,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Private messages players on the same team as the player executing this command
     /// </summary>
-    public class TeamMsgCommand : ICommand
+    public class TeamMsgCommand : BaseCommand
     {
         private string text;
 
@@ -183,7 +183,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>say [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"teammsg {Text}";
         }
@@ -192,13 +192,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which gets the seed of the world
     /// </summary>
-    public class SeedCommand : ICommand
+    public class SeedCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>seed</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "seed";
         }
@@ -207,7 +207,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which locates where the closest structure of the given type is at
     /// </summary>
-    public class LocateCommand : ICommand
+    public class LocateCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="LocateCommand"/>
@@ -227,7 +227,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>locate [Structure]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"locate {Structure}";
         }
@@ -237,7 +237,7 @@ namespace SharpCraft.Commands
     /// Changes a trigger objective for the executing player.
     /// Player doesn't need op to run this command.
     /// </summary>
-    public class TriggerCommand : ICommand
+    public class TriggerCommand : BaseCommand
     {
         private ScoreObject objective;
 
@@ -281,7 +281,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>trigger [Objective] [ShouldSet] [Score]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"trigger {Objective} {(ShouldSet ? "set" : "add")} {Score}";
         }
@@ -290,7 +290,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the default gamemode in the world
     /// </summary>
-    public class DefaultGamemodeCommand : ICommand
+    public class DefaultGamemodeCommand : BaseCommand
     {
         /// <summary>
         /// intializes a new <see cref="DefaultGamemodeCommand"/>
@@ -310,7 +310,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>defaultgamemode [Gamemode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"defaultgamemode {Gamemode}";
         }
@@ -319,7 +319,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the difficulty in the world
     /// </summary>
-    public class DifficultyCommand : ICommand
+    public class DifficultyCommand : BaseCommand
     {
         /// <summary>
         /// intializes a new <see cref="DifficultyCommand"/>
@@ -339,7 +339,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>difficulty [Difficulty]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"difficulty {Difficulty}";
         }
@@ -348,13 +348,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which reloads datapacks in the world
     /// </summary>
-    public class ReloadCommand : ICommand
+    public class ReloadCommand : BaseCommand
     {
         /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>reload</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "reload";
         }
@@ -363,7 +363,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which enchants a player's selected item with an enchant
     /// </summary>
-    public class EnchantCommand : ICommand
+    public class EnchantCommand : BaseCommand
     {
         private Selector selector;
         private int level;
@@ -419,7 +419,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>enchant [Selector] [Enchant] [Level]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"enchant {Selector} {Enchant} {Level}";
         }
@@ -428,7 +428,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for running a function
     /// </summary>
-    public class RunFunctionCommand : ICommand
+    public class RunFunctionCommand : BaseCommand
     {
         private IFunction function;
 
@@ -457,7 +457,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>function [Function]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"function {Function.GetNamespacedName()}";
         }
@@ -466,7 +466,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes player's gamemode
     /// </summary>
-    public class GamemodeCommand : ICommand
+    public class GamemodeCommand : BaseCommand
     {
         private Selector selector;
 
@@ -502,7 +502,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>gamemode [Selector] [Gamemode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"gamemode {Selector} {Gamemode}";
         }
@@ -511,7 +511,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes player's gamemode
     /// </summary>
-    public class KillCommand : ICommand
+    public class KillCommand : BaseCommand
     {
         private Selector selector;
 
@@ -540,7 +540,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>kill [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"kill {Selector}";
         }
@@ -549,7 +549,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command for scheduling a function
     /// </summary>
-    public class ScheduleCommand : ICommand
+    public class ScheduleCommand : BaseCommand
     {
         private IFunction function;
         private Time time;
@@ -593,7 +593,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>schedule function [Function] [Time]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"schedule function {Function.GetNamespacedName()} {Time.ToString()}";
         }
@@ -602,7 +602,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which places a block in the world
     /// </summary>
-    public class SetblockCommand : ICommand
+    public class SetblockCommand : BaseCommand
     {
         private Coords coordinates;
         private Block block;
@@ -653,7 +653,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>setblock [Coordinates] [Block] [Mode]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"setblock {Coordinates} {Block.ToString()} {Mode}";
         }
@@ -662,7 +662,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the world spawn
     /// </summary>
-    public class SetWorldSpawnCommand : ICommand
+    public class SetWorldSpawnCommand : BaseCommand
     {
         private Coords coordinates;
 
@@ -691,7 +691,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>setworldspawn [Coordinates]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"setworldspawn {Coordinates}";
         }
@@ -700,7 +700,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which spreads entities around a location
     /// </summary>
-    public class SpreadPlayersCommand : ICommand
+    public class SpreadPlayersCommand : BaseCommand
     {
         private Selector selector;
         private Coords coordinates;
@@ -819,7 +819,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>spreadplayers [Coordinates] [Distance] [MaxRange] [RespectTeams] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector}";
         }
@@ -828,7 +828,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which summons an entity at the given location
     /// </summary>
-    public class SummonCommand : ICommand
+    public class SummonCommand : BaseCommand
     {
         private Entity.BaseEntity entity;
         private Coords coordinates;
@@ -882,7 +882,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>summon [Entity(type)] [Coordinates] [Entity(data)]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"summon {Entity.EntityType} {Coordinates} {Entity.GetDataWithoutID()}";
         }
@@ -891,7 +891,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Sends a private message to one or more players
     /// </summary>
-    public class TellrawCommand : ICommand
+    public class TellrawCommand : BaseCommand
     {
         private JSON[] text;
         private Selector selector;
@@ -939,7 +939,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>tellraw [Selector] [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"tellraw {Selector} {Text.GetString()}";
         }
@@ -948,7 +948,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Clears one or more items from some selected players' inventories
     /// </summary>
-    public class ClearCommand : ICommand
+    public class ClearCommand : BaseCommand
     {
         private Item item;
         private Selector selector;
@@ -1019,7 +1019,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>clear [Selector] ([Item]) ([MaxCount])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (Item is null)
             {
@@ -1039,7 +1039,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Commands which gives a player an item
     /// </summary>
-    public class GiveCommand : ICommand
+    public class GiveCommand : BaseCommand
     {
         private Item item;
         private Selector selector;
@@ -1102,7 +1102,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>give [Selector] [Item] [Count]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (count == 1)
             {
@@ -1118,7 +1118,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which plays a sound
     /// </summary>
-    public class PlaySoundCommand : ICommand
+    public class PlaySoundCommand : BaseCommand
     {
         private string sound;
         private double volume;
@@ -1236,7 +1236,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>playsound [Sound] [Source] [Selector] [Coordinates] [Volume] [Pitch] [MinimumVolume]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"playsound {Sound} {Source} {Selector} {Coordinates} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
         }
@@ -1245,7 +1245,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes one or more player's spawnpoints
     /// </summary>
-    public class SpawnPointCommand : ICommand
+    public class SpawnPointCommand : BaseCommand
     {
         private Coords coordinates;
         private Selector selector;
@@ -1282,7 +1282,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>clear [Selector] ([Item]) ([MaxCount])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"spawnpoint {Selector} {Coordinates}";
         }
@@ -1291,7 +1291,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which stops a sound for one or more players
     /// </summary>
-    public class StopSoundCommand : ICommand
+    public class StopSoundCommand : BaseCommand
     {
         private Selector selector;
 
@@ -1334,7 +1334,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>stopsound [Selector] ([Source]) ([Sound])</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (Sound is null)
             {
@@ -1364,7 +1364,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes the weather for some time
     /// </summary>
-    public class WeatherCommand : ICommand
+    public class WeatherCommand : BaseCommand
     {
         private Time time;
 
@@ -1382,7 +1382,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time the weather is there for
         /// </summary>
-        public Time Time { get => time; set => time = value ?? throw new ArgumentNullException(nameof(Time), "Time may not be null"); }
+        public Time Time { get => time; set => time = value; }
 
         /// <summary>
         /// The weather to change the weather to
@@ -1393,9 +1393,16 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>weather [Weather] [Time]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
-            return $"weather {Weather} {Time.AsTicks()}";
+            if (Time is null)
+            {
+                return $"weather {Weather}";
+            }
+            else
+            {
+                return $"weather {Weather} {Time.AsTicks()}";
+            }
         }
     }
 }

@@ -24,11 +24,23 @@ namespace SharpCraft
         /// </summary>
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
-        public BaseDatapack(string path, string packName)
+        public BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
+        {
+            
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="BaseDatapack"/> with the given parameters
+        /// </summary>
+        /// <param name="path">The path to the folder to create this datapack in</param>
+        /// <param name="packName">The datapack's name</param>
+        /// <param name="fileCreator">Class for creating files and directories</param>
+        public BaseDatapack(string path, string packName, IFileCreator fileCreator)
         {
             Path = path;
             Name = packName.ToLower();
             namespaces = new List<BasePackNamespace>();
+            FileCreator = fileCreator;
         }
 
         /// <summary>
@@ -86,6 +98,11 @@ namespace SharpCraft
         /// If the datapack has been disposed
         /// </summary>
         public bool Disposed { get; private set; }
+
+        /// <summary>
+        /// Used for getting text streams and create directories
+        /// </summary>
+        public IFileCreator FileCreator { get; private set; }
 
         /// <summary>
         /// Gets the path to the data folder in the datapack

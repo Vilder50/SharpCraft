@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes one of the boolean gamerules
     /// </summary>
-    public class GameruleSetBoolCommand : ICommand
+    public class GameruleSetBoolCommand : BaseCommand
     {
         /// <summary>
         /// Intializes a new <see cref="GameruleSetBoolCommand"/>
@@ -36,7 +36,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>gamerule [Gamerule] [ChangeTo]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ChangeTo is null)
             {
@@ -52,7 +52,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes one of the integer gamerules
     /// </summary>
-    public class GameruleSetIntCommand : ICommand
+    public class GameruleSetIntCommand : BaseCommand
     {
         private int? changeTo;
 
@@ -92,7 +92,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>gamerule [Gamerule] [ChangeTo]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (ChangeTo is null)
             {

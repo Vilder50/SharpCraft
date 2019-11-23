@@ -17,23 +17,17 @@ namespace SharpCraft
         /// <param name="LootPools">The pools in the loot table</param>
         public Loottable(PackNamespace space, string fileName, Pool[] LootPools) : base(space, fileName, WriteSetting.LockedAuto)
         {
-            if (FileName.Contains("\\"))
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "loot_tables\\" + FileName.Substring(0, FileName.LastIndexOf("\\")));
-            }
-            else
-            {
-                Directory.CreateDirectory(PackNamespace.GetPath() + "loot_tables\\");
-            }
+            CreateDirectory("loot_tables");
 
-            StreamWriter TableWriter = new StreamWriter(new FileStream(PackNamespace.GetPath() + "loot_tables\\" + FileName + ".json", FileMode.Create)) { AutoFlush = true };
-            string[] StringPools = new string[LootPools.Length];
-            for (int i = 0; i < LootPools.Length; i++)
+            using (TextWriter tableWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + FileName + ".json"))
             {
-                StringPools[i] = LootPools[i].ToString();
+                string[] StringPools = new string[LootPools.Length];
+                for (int i = 0; i < LootPools.Length; i++)
+                {
+                    StringPools[i] = LootPools[i].ToString();
+                }
+                tableWriter.Write("{\"pools\": [" + string.Join(",", StringPools) + "]}");
             }
-            TableWriter.Write("{\"pools\": [" + string.Join(",",StringPools) + "]}");
-            TableWriter.Dispose();
         }
 
         /// <summary>

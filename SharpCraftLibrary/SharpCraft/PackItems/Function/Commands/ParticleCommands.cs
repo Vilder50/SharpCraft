@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes particles appear
     /// </summary>
-    public class ParticleNormalCommand : ICommand
+    public class ParticleNormalCommand : BaseCommand
     {
         private Coords displayCoords;
         private Coords size;
@@ -98,7 +98,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>particle [Particle] [DisplayCoords] [Size] [Speed] [Count] [Force] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (Selector is null)
             {
@@ -121,7 +121,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes colored dust particles appear
     /// </summary>
-    public class ParticleColoredDustCommand : ICommand
+    public class ParticleColoredDustCommand : BaseCommand
     {
         private Coords displayCoords;
         private Coords size;
@@ -231,7 +231,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>particle dust [Color] [ParticleSize] [DisplayCoords] [Size] [Speed] [Count] [Force] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             string colorString = (decimal.Divide(color.Red, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Green, 255).ToString().Replace(",", ".")) + " " + (decimal.Divide(color.Blue, 255).ToString().Replace(",", "."));
 
@@ -256,7 +256,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes block particles appear
     /// </summary>
-    public class ParticleBlockCommand : ICommand
+    public class ParticleBlockCommand : BaseCommand
     {
         private Coords displayCoords;
         private Coords size;
@@ -353,7 +353,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>particle [AsBlockDust] [Block] [DisplayCoords] [Size] [Speed] [Count] [Force] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             string particleType = AsBlockDust ? "falling_dust" : "block";
             if (Selector is null)
@@ -377,7 +377,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which makes item particles appear
     /// </summary>
-    public class ParticleItemCommand : ICommand
+    public class ParticleItemCommand : BaseCommand
     {
         private Coords displayCoords;
         private Coords size;
@@ -467,7 +467,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>particle [AsBlockDust] [Block] [DisplayCoords] [Size] [Speed] [Count] [Force] [Selector]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             if (Selector is null)
             {

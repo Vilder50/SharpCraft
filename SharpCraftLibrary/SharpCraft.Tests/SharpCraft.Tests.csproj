@@ -79,6 +79,7 @@
     <Compile Include="PackItems\BaseDatapackTests.cs" />
     <Compile Include="PackItems\BaseFileTests.cs" />
     <Compile Include="PackItems\BasePackNamespaceTests.cs" />
+    <Compile Include="PackItems\FunctionTests.cs" />
     <Compile Include="PackItems\GroupTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -263,6 +263,7 @@
     <Compile Include="PackItems\Advancement.cs" />
     <Compile Include="PackItems\BaseFile.cs" />
     <Compile Include="PackItems\Datapack.cs" />
+    <Compile Include="PackItems\FileCreator.cs" />
     <Compile Include="PackItems\Function\BlockCommands.cs" />
     <Compile Include="PackItems\Function\Commands\AdvancementCommands.cs" />
     <Compile Include="PackItems\Function\Commands\BossBarCommands.cs" />
@@ -295,13 +296,14 @@
     <Compile Include="PackItems\Function\Commands\execute\ExecuteStoreEntity.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteStoreBlock.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteStoreScore.cs" />
+    <Compile Include="PackItems\Function\Commands\execute\StopExecuteCommand.cs" />
     <Compile Include="PackItems\Function\Commands\ExperienceCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ICommandChanger.cs" />
     <Compile Include="PackItems\Function\Commands\LootCommand.cs" />
     <Compile Include="PackItems\Function\Commands\FillCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ForceloadCommands.cs" />
     <Compile Include="PackItems\Function\Commands\GameruleCommands.cs" />
-    <Compile Include="PackItems\Function\Commands\ICommand.cs" />
+    <Compile Include="PackItems\Function\Commands\BaseCommand.cs" />
     <Compile Include="PackItems\Function\Commands\ParticleCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ReplaceitemCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ScoreboardCommands.cs" />

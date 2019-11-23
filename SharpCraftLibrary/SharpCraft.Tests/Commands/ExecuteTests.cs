@@ -8,9 +8,9 @@ using SharpCraft.Commands;
 
 namespace SharpCraft.Tests.Commands
 {
-    class TestICommand : ICommand
+    class TestICommand : BaseCommand
     {
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return "hello world";
         }
@@ -47,6 +47,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute store result bossbar test:test max", new ExecuteStoreBossbar(new BossBar("test:test"), false, true).GetCommandString(), "ExecuteStoreBossbar does not return correct GetCommandString");
             Assert.AreEqual("execute store result entity @s cake long 10", new ExecuteStoreEntity(new Selector(), "cake", ID.StoreTypes.Long, 10).GetCommandString(), "ExecuteStoreEntity does not return correct GetCommandString");
             Assert.AreEqual("execute store result score @s test", new ExecuteStoreScore(new Selector(), new ScoreObject("test")).GetCommandString(), "ExecuteStoreScore does not return correct GetCommandString");
+            Assert.IsNull(new StopExecuteCommand().GetCommandString());
         }
 
         [TestMethod]
@@ -68,20 +69,21 @@ namespace SharpCraft.Tests.Commands
         public void TestChangeCommand()
         {
             //setup
-            BaseExecuteCommand command = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) };
+            BaseExecuteCommand command1 = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) };
+            BaseExecuteCommand command2 = new ExecuteAt(new Selector()) { ExecuteCommand = new ExecuteAlign(true, true, true) };
 
             //test
-            CommandChange change1 = command.ChangeCommand(new ExecuteAs(ID.Selector.a));
-            Assert.IsFalse(change1.StopChanger, "Adding another execute command shouldnt stop the changer");
-            Assert.IsTrue(change1.StopCommand, "Adding another execute command should stop the command");
+            Assert.IsNull(command1.ChangeCommand(new ExecuteAs(ID.Selector.a)));
+            Assert.IsFalse(command1.DoneChanging, "Adding another execute command shouldnt stop the changer");
 
-            CommandChange change2 = command.ChangeCommand(new SayCommand("hello"));
-            Assert.IsTrue(change2.StopChanger, "Adding an end command should stop the changer");
-            Assert.IsTrue(change2.StopCommand, "Adding a command should stop the command");
+            Assert.IsNull(command1.ChangeCommand(new SayCommand("hello")));
+            Assert.IsTrue(command1.DoneChanging, "Adding an end command should stop the changer");
 
-            CommandChange change3 = command.ChangeCommand(new SayCommand("hello"));
-            Assert.IsTrue(change3.StopChanger, "Execute command ending in a command should stop the changer");
-            Assert.IsFalse(change3.StopCommand, "Execute command ending in a command shouldn't stop the command");
+            Assert.IsNotNull(command1.ChangeCommand(new SayCommand("hello")));
+            Assert.IsTrue(command1.DoneChanging, "Execute command ending in a command should stop the changer");
+
+            Assert.IsNull(command2.ChangeCommand(new StopExecuteCommand()));
+            Assert.IsTrue(command2.DoneChanging, "Execute command is not done executing after adding stop command");
         }
 
         [TestMethod]

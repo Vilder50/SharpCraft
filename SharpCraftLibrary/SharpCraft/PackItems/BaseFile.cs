@@ -99,12 +99,21 @@ namespace SharpCraft
         public WriteSetting Setting { get; }
 
         /// <summary>
-        /// If the file has been disposed
+        /// Returns true if <see cref="Setting"/> is either <see cref="WriteSetting.Auto"/> or <see cref="WriteSetting.LockedAuto"/>
         /// </summary>
-        public bool Disposed { get; private set; }
+        /// <returns>True if the file setting is auto</returns>
+        public bool IsAuto()
+        {
+            return Setting == WriteSetting.Auto || Setting == WriteSetting.LockedAuto;
+        }
 
         /// <summary>
-        /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto
+        /// If the file has been disposed
+        /// </summary>
+        public bool Disposed { get; protected set; }
+
+        /// <summary>
+        /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
         /// </summary>
         protected TextWriter StreamWriter { get; set; }
 
@@ -145,11 +154,11 @@ namespace SharpCraft
         /// <summary>
         /// Disposes this file. If the write setting is OnDispose it will write the file
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (!Disposed)
             {
-                if (Setting == WriteSetting.Auto || Setting == WriteSetting.LockedAuto)
+                if (IsAuto())
                 {
                     StreamWriter?.Dispose();
                 }
@@ -214,17 +223,16 @@ namespace SharpCraft
         /// <summary>
         /// Creates the directory for the given file
         /// </summary>
-        /// <param name="file">The file to create the directory for</param>
         /// <param name="folderPath">The base folder the file should be in</param>
-        public static void CreateDirectory(BaseFile file, string folderPath)
+        protected void CreateDirectory(string folderPath)
         {
-            if (file.FileName.Contains("\\"))
+            if (FileName.Contains("\\"))
             {
-                Directory.CreateDirectory(file.PackNamespace.GetPath() + folderPath + "\\" + file.FileName.Substring(0, file.FileName.LastIndexOf("\\")));
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\" + FileName.Substring(0, FileName.LastIndexOf("\\")) + "\\");
             }
             else
             {
-                Directory.CreateDirectory(file.PackNamespace.GetPath() + folderPath + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\");
             }
         }
     }

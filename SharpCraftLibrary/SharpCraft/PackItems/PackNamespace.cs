@@ -27,7 +27,7 @@ namespace SharpCraft
         /// <param name="namespaceName">the name of the namespace</param>
         public PackNamespace(BaseDatapack datapack, string namespaceName) : base(datapack, namespaceName)
         {
-            Directory.CreateDirectory(datapack.GetDataPath() + Name);
+            Datapack.FileCreator.CreateDirectory(Datapack.GetDataPath() + Name);
         }
 
         /// <summary>
@@ -46,18 +46,19 @@ namespace SharpCraft
         /// Creates a new function with the given name
         /// </summary>
         /// <param name="functionName">The function's name. If null will get random name</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(string functionName = null)
+        public Function NewFunction(string functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {
-                return new Function(this, null);
+                return new Function(this, null, setting);
             }
 
             Function returnFunction = GetFile<Function>(functionName);
             if (returnFunction is null)
             {
-                return new Function(this, functionName);
+                return new Function(this, functionName, setting);
             }
             else
             {
@@ -70,10 +71,11 @@ namespace SharpCraft
         /// </summary>
         /// <param name="functionName">The function's name</param>
         /// <param name="creater">a method creating the function</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(string functionName, Function.FunctionCreater creater)
+        public Function NewFunction(string functionName, Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Function function = NewFunction(functionName);
+            Function function = NewFunction(functionName, setting);
             creater(function);
 
             return function;
@@ -83,10 +85,11 @@ namespace SharpCraft
         /// Creates a new randomly named function with the commands to the function
         /// </summary>
         /// <param name="creater">a method creating the function</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(Function.FunctionCreater creater)
+        public Function NewFunction(Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Function function = NewFunction();
+            Function function = NewFunction((string)null, setting);
             creater(function);
 
             return function;

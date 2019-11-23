@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which clears the title on the selected players' screens
     /// </summary>
-    public class TitleClearCommand : ICommand
+    public class TitleClearCommand : BaseCommand
     {
         private Selector selector;
 
@@ -31,7 +31,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] clear</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} clear";
         }
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which clears the selected players' title settings
     /// </summary>
-    public class TitleResetCommand : ICommand
+    public class TitleResetCommand : BaseCommand
     {
         private Selector selector;
 
@@ -62,7 +62,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] reset</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} reset";
         }
@@ -71,7 +71,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which displayes a title
     /// </summary>
-    public class TitleCommand : ICommand
+    public class TitleCommand : BaseCommand
     {
         private Selector selector;
         private JSON[] text;
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] title [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} title {Text.GetString()}";
         }
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which sets the sub title to display next
     /// </summary>
-    public class TitleSubtitleCommand : ICommand
+    public class TitleSubtitleCommand : BaseCommand
     {
         private Selector selector;
         private JSON[] text;
@@ -140,7 +140,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] subtitle [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} subtitle {Text.GetString()}";
         }
@@ -149,7 +149,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which sets the text shown in the selected players' action bars
     /// </summary>
-    public class TitleActionbarCommand : ICommand
+    public class TitleActionbarCommand : BaseCommand
     {
         private Selector selector;
         private JSON[] text;
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] actionbar [Text]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} actionbar {Text.GetString()}";
         }
@@ -188,7 +188,7 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which changes how long a title will appear for the selected players
     /// </summary>
-    public class TitleTimesCommand : ICommand
+    public class TitleTimesCommand : BaseCommand
     {
         private Selector selector;
         private Time fadeIn;
@@ -234,7 +234,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>title [Selector] times [FadeIn] [Stay] [FadeOut]</returns>
-        public string GetCommandString()
+        public override string GetCommandString()
         {
             return $"title {Selector} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
         }
