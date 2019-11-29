@@ -128,8 +128,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("scoreboard players operation @s score1 += @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Add, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 /= @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Divide, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 = @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Equel, selector2, scoreObject2).GetCommandString());
-            Assert.AreEqual("scoreboard players operation @s score1 < @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.GetHigher, selector2, scoreObject2).GetCommandString());
-            Assert.AreEqual("scoreboard players operation @s score1 > @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.GetLowest, selector2, scoreObject2).GetCommandString());
+            Assert.AreEqual("scoreboard players operation @s score1 > @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.GetHigher, selector2, scoreObject2).GetCommandString());
+            Assert.AreEqual("scoreboard players operation @s score1 < @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.GetLowest, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 *= @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Multiply, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 %= @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Remainder, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 -= @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Subtract, selector2, scoreObject2).GetCommandString());

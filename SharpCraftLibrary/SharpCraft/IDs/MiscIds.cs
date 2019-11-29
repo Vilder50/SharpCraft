@@ -2715,7 +2715,7 @@
         }
         public enum TeamDisplayName
         {
-            preffix,
+            prefix,
             suffix,
             displayName
         }

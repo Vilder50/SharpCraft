@@ -501,10 +501,10 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Returns the command as a string
         /// </summary>
-        /// <returns>gamemode [Selector] [Gamemode]</returns>
+        /// <returns>gamemode [Gamemode] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"gamemode {Selector} {Gamemode}";
+            return $"gamemode {Gamemode} {Selector}";
         }
     }
 

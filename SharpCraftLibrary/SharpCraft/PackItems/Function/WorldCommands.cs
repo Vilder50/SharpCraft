@@ -435,9 +435,9 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="preffixJson">The new prefix to show</param>
-            public void Preffix(Team changeTeam, JSON[] preffixJson)
+            public void Prefix(Team changeTeam, JSON[] preffixJson)
             {
-                function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.preffix, preffixJson));
+                function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.prefix, preffixJson));
             }
             /// <summary>
             /// Changes the suffix shown after the name of players in the specified <see cref="Team"/>

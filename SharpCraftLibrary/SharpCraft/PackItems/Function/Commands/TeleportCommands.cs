@@ -124,7 +124,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tp [Selector] [Coordinates] facing [FacingCoordinates]</returns>
-        public new string GetCommandString()
+        public override string GetCommandString()
         {
             return $"{base.GetCommandString()} facing {FacingCoordinates}";
         }
@@ -177,7 +177,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tp [Selector] [Coordinates] facing entity [FacingSelector] [Anchor]</returns>
-        public new string GetCommandString()
+        public override string GetCommandString()
         {
             return $"{base.GetCommandString()} facing entity {FacingSelector} {Anchor}";
         }
@@ -212,7 +212,7 @@ namespace SharpCraft.Commands
         /// Returns the part of the execute command there is special for this command
         /// </summary>
         /// <returns>tp [Selector] [Coordinates] [Rotation]</returns>
-        public new string GetCommandString()
+        public override string GetCommandString()
         {
             return $"{base.GetCommandString()} {Rotation}";
         }

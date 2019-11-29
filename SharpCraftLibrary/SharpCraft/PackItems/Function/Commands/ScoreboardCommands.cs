@@ -596,10 +596,10 @@ namespace SharpCraft.Commands
                     operatorString = "=";
                     break;
                 case ID.Operation.GetHigher:
-                    operatorString = "<";
+                    operatorString = ">";
                     break;
                 case ID.Operation.GetLowest:
-                    operatorString = ">";
+                    operatorString = "<";
                     break;
                 case ID.Operation.Multiply:
                     operatorString = "*=";

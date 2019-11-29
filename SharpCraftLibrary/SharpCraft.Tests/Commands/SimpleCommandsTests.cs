@@ -108,7 +108,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void GamemodeCommandTest()
         {
-            Assert.AreEqual("gamemode @a adventure", new GamemodeCommand(ID.Selector.a, ID.Gamemode.adventure).GetCommandString());
+            Assert.AreEqual("gamemode adventure @a", new GamemodeCommand(ID.Selector.a, ID.Gamemode.adventure).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new GamemodeCommand(null, ID.Gamemode.adventure));
         }
