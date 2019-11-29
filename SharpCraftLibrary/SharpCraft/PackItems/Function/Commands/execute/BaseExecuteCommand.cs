@@ -124,5 +124,20 @@ namespace SharpCraft.Commands
         /// eg: with the "/execute as [selector] run ..." command this would return the "as [selector]" part
         /// </remarks>
         protected abstract string GetExecutePart();
+
+        /// <summary>
+        /// Returns a shallow clone of this command
+        /// </summary>
+        /// <returns>A shallow clone of this command</returns>
+        public override BaseCommand ShallowClone()
+        {
+            BaseExecuteCommand clone = (BaseExecuteCommand)MemberwiseClone();
+            if (!(clone.ExecuteCommand is null))
+            {
+                clone.ExecuteCommand = clone.ExecuteCommand.ShallowClone();
+            }
+
+            return clone;
+        }
     }
 }

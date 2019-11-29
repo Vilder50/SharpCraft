@@ -501,23 +501,25 @@ namespace SharpCraft.FunctionWriters
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
             public void FullTitle(Selector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
             {
-                BaseExecuteCommand executeCommand = null;
+                BaseExecuteCommand executeCommand1 = null;
+                BaseExecuteCommand executeCommand2 = null;
                 if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
                 {
-                    executeCommand = (BaseExecuteCommand)execute.ShallowClone();
+                    executeCommand1 = (BaseExecuteCommand)execute.ShallowClone();
+                    executeCommand2 = (BaseExecuteCommand)execute.ShallowClone();
                 }
                 function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
                 if (!(bottomMessage is null))
                 {
-                    if (!(executeCommand is null))
+                    if (!(executeCommand1 is null))
                     {
-                        function.AddCommand(executeCommand);
+                        function.AddCommand(executeCommand1);
                     }
                     function.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
                 }
-                if (!(executeCommand is null))
+                if (!(executeCommand2 is null))
                 {
-                    function.AddCommand(executeCommand);
+                    function.AddCommand(executeCommand2);
                 }
                 if (topMessage is null)
                 {

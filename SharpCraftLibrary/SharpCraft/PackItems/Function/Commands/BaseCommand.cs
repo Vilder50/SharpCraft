@@ -39,7 +39,7 @@ namespace SharpCraft.Commands
         /// Returns a shallow clone of this command
         /// </summary>
         /// <returns>A shallow clone of this command</returns>
-        public BaseCommand ShallowClone()
+        public virtual BaseCommand ShallowClone()
         {
             return (BaseCommand)MemberwiseClone();
         }

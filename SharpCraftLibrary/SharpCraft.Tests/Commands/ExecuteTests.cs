@@ -103,5 +103,18 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("execute as @a at @p run say hello", new ExecuteAs(ID.Selector.a).AddCommand(new ExecuteAt(ID.Selector.p)).AddCommand(new SayCommand("hello")).GetCommandString(), "AddCommand doesn't work correctly");
         }
+
+        [TestMethod]
+        public void TestShallowClone()
+        {
+            //setup
+            BaseCommand command = new ExecuteAs(ID.Selector.s).AddCommand(new ExecuteAt(ID.Selector.a)).AddCommand(new ExecuteAlign());
+
+            //test
+            BaseCommand clonedCommand = command.ShallowClone();
+            Assert.AreEqual(command.GetCommandString(), clonedCommand.GetCommandString(), "Cloned command doesn't return correct command string");
+            ((BaseExecuteCommand)clonedCommand).AddCommand(new SayCommand("hello"));
+            Assert.AreNotEqual(command.GetCommandString(), clonedCommand.GetCommandString(), "Cloned command should return a different string since it was changed and old command shouldnt have been changed");
+        }
     }
 }
