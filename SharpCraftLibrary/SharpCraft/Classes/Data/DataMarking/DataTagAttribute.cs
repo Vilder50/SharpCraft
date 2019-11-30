@@ -46,6 +46,11 @@ namespace SharpCraft.Data
         public string DataTagName { get; private set; }
 
         /// <summary>
+        /// True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
+        /// </summary>
+        public bool JsonTag { get; set; }
+
+        /// <summary>
         /// The type this data actually is
         /// </summary>
         public ID.NBTTagType ForceType

@@ -163,7 +163,7 @@ namespace SharpCraft.Data
                         DataPartPath addToPath = pathAtLocation.GetValues().SingleOrDefault(p => p.PathName == pathParts[i]);
                         if (addToPath is null)
                         {
-                            //Path doesn't exists yet
+                            //Path doesn't exist yet
                             //Path can be an object, array or tag
                             ID.NBTTagType? forceType = dataTagInformation.UseForcedType ? dataTagInformation.ForceType : (ID.NBTTagType?)null;
                             object[] conversionData = dataTagInformation.ConversionParams;
@@ -183,7 +183,7 @@ namespace SharpCraft.Data
                                     }
                                     else
                                     {
-                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleObject.GetAsDataObject(conversionData)));
+                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleObject.GetAsDataObject(conversionData), dataTagInformation.JsonTag));
                                     }
                                 }
                                 else if (!(dataObject is null))
@@ -194,16 +194,16 @@ namespace SharpCraft.Data
                                     }
                                     else
                                     {
-                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], dataObject.GetDataTree()));
+                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], dataObject.GetDataTree(), dataTagInformation.JsonTag));
                                     }
                                 }
                                 else if(!(convertAbleTag is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
                                 }
                                 else
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType, dataTagInformation.JsonTag), dataTagInformation.JsonTag));
                                 }
                             }
                             else if ((property.PropertyType.IsArray && forceType is null && !(data is JSON[])) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
@@ -211,11 +211,11 @@ namespace SharpCraft.Data
                                 //if its an array
                                 if (!(convertAbleArray is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleArray.GetAsArray(forceType, conversionData)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleArray.GetAsArray(forceType, conversionData), dataTagInformation.JsonTag));
                                 }
                                 else if (data.GetType().IsArray)
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartArray(data, forceType, conversionData)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartArray(data, forceType, conversionData, dataTagInformation.JsonTag), dataTagInformation.JsonTag));
                                 }
                                 else
                                 {
@@ -227,11 +227,11 @@ namespace SharpCraft.Data
                                 //if its a data tag
                                 if (!(convertAbleTag is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
                                 }
                                 else
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType)));
+                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType, dataTagInformation.JsonTag), dataTagInformation.JsonTag));
                                 }
                             }
                         }
@@ -257,7 +257,7 @@ namespace SharpCraft.Data
                         {
                             //If the path doesn't exist yet
                             DataPartObject continueAt = new DataPartObject();
-                            pathAtLocation.AddValue(new DataPartPath(pathParts[i], continueAt));
+                            pathAtLocation.AddValue(new DataPartPath(pathParts[i], continueAt, dataTagInformation.JsonTag));
                             pathAtLocation = continueAt;
                         }
                         else

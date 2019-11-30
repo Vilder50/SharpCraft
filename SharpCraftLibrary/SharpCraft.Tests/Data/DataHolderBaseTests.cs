@@ -80,6 +80,36 @@ namespace SharpCraft.Tests.Data
             public DataHolderTestClass OtherObject { get; set; }
         }
 
+        private class JsonDataHolderTestClass : DataHolderBase
+        {
+            [DataTag(JsonTag = true)]
+            public double[] Array { get; set; }
+
+            [DataTag(JsonTag = true)]
+            public string String { get; set; }
+
+            [DataTag(JsonTag = true)]
+            public int? Int { get; set; }
+
+            [DataTag(JsonTag = true)]
+            public double? Double { get; set; }
+
+            [DataTag(JsonTag = true)]
+            public bool? Bool { get; set; }
+
+            [DataTag(JsonTag = false)]
+            public bool? NoJson { get; set; }
+
+            [DataTag(ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+            public DataHolderTestCompoundClass Object { get; set; }
+
+            [DataTag(JsonTag = true)]
+            public JsonDataHolderTestClass JsonObject { get; set; }
+
+            [DataTag(ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+            public JsonDataHolderTestClass StringObject { get; set; }
+        }
+
         #region custom tag classes
         private class CustomDataTag : IConvertableToDataTag
         {
@@ -270,6 +300,37 @@ namespace SharpCraft.Tests.Data
                 MergeObject = new CustomDataObject()
             };
             Assert.AreEqual("{CustomArray:[I;1,2,3],CustomObject:{test:1},CustomTag:10b,OtherCustomArray:[1.1d,2.2d,3.3d],OtherCustomObject:{other:5},OtherCustomTag:10L,test:1}",otherTestObject.GetDataString());
+        }
+
+        [TestMethod]
+        public void TestJsonTag()
+        {
+            //setup
+            JsonDataHolderTestClass object1 = new JsonDataHolderTestClass()
+            {
+                Array = new double[] { 1.1, 2.2, 3.3 },
+                String = "Something\"", 
+                Int = 100, 
+                Double = 14.154, 
+                Bool = true,
+                NoJson = false,
+                Object = new DataHolderTestCompoundClass 
+                {
+                    String = "Hel\"lo", 
+                    Number = 10 
+                },
+                JsonObject = new JsonDataHolderTestClass
+                {
+                    Double = 100.105
+                },
+                StringObject = new JsonDataHolderTestClass
+                {
+                    Double = 100.155
+                }
+            };
+
+            //test
+            Assert.AreEqual("{\"Array\":[1.1,2.2,3.3],\"Bool\":true,\"Double\":14.154,\"Int\":100,\"JsonObject\":{\"Double\":100.105},\"Object\":\"{Inside:{String:\\\"Hel\\\\\\\"lo\\\"},Number:10}\",\"String\":\"Something\\\"\",\"StringObject\":\"{\\\"Double\\\":100.155}\",NoJson:0b}", object1.GetDataString(), "JsonTag doesn't work correctly");
         }
     }
 }

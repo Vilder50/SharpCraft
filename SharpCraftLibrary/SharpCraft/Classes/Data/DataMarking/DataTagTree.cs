@@ -174,8 +174,10 @@ namespace SharpCraft.Data
         /// <param name="data">The thing which is inside the array</param>
         /// <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
         /// <param name="forceType">a type used for converting the thing in the array correctly</param>
-        public DataPartArray(object data, ID.NBTTagType? forceType, object[] conversionParams)
+        /// <param name="isJson">If the datatags in the array should be in json format</param>
+        public DataPartArray(object data, ID.NBTTagType? forceType, object[] conversionParams, bool isJson = false)
         {
+            IsJson = isJson;
             items = new List<IDataPartPathEnding>();
 
             if (data is null)
@@ -200,7 +202,7 @@ namespace SharpCraft.Data
                 }
                 if (value.GetType().IsArray && !(value is JSON[]))
                 {
-                    AddItem(new DataPartArray(value, forceType, conversionParams));
+                    AddItem(new DataPartArray(value, forceType, conversionParams, IsJson));
                 }
                 else
                 {
@@ -239,16 +241,21 @@ namespace SharpCraft.Data
                     {
                         if (forceType is null)
                         {
-                            AddItem(new DataPartTag(value, null));
+                            AddItem(new DataPartTag(value, null, IsJson));
                         }
                         else
                         {
-                            AddItem(new DataPartTag(value, (ID.NBTTagType)(int)forceType - 101));
+                            AddItem(new DataPartTag(value, (ID.NBTTagType)(int)forceType - 101, IsJson));
                         }
                     }
                 }
             }
         }
+
+        /// <summary>
+        /// If the datatags in the array should be in json format
+        /// </summary>
+        public bool IsJson { get; set; }
 
         /// <summary>
         /// Adds an item to this array
@@ -323,7 +330,7 @@ namespace SharpCraft.Data
             }
 
             string returnString = "[";
-            if (ArrayType == ID.NBTTagType.TagIntArray)
+            if (ArrayType == ID.NBTTagType.TagIntArray && !IsJson)
             {
                 returnString += "I;";
             }
@@ -382,10 +389,12 @@ namespace SharpCraft.Data
         /// </summary>
         /// <param name="value">The thing this <see cref="DataPartTag"/> should be</param>
         /// <param name="forceType">The type the object should be forced into. Used for enums and marking strings as objects</param>
-        public DataPartTag(object value, ID.NBTTagType? forceType = null)
+        /// <param name="isJson">If the tag is a json value</param>
+        public DataPartTag(object value, ID.NBTTagType? forceType = null, bool isJson = false)
         {
             TagType = forceType;
             Value = value;
+            IsJson = isJson;
         }
 
         /// <summary>
@@ -445,6 +454,11 @@ namespace SharpCraft.Data
                         TagType = ID.NBTTagType.TagString;
                     }
                 }
+                else if (value is SimpleDataHolder data && TagType == ID.NBTTagType.TagString)
+                {
+                    this.value = data.GetDataString();
+                    return;
+                }
                 else if (!(value.GetType().IsEnum))
                 {
                     throw new ArgumentException("The object cannot be saved in this tag.", nameof(Value));
@@ -457,6 +471,11 @@ namespace SharpCraft.Data
         /// The type of object saved in this tag
         /// </summary>
         public ID.NBTTagType? TagType { get; private set; }
+
+        /// <summary>
+        /// If the tag is a json value
+        /// </summary>
+        public bool IsJson { get; set; }
 
         /// <summary>
         /// Returns this data as a string Minecraft can use
@@ -478,31 +497,38 @@ namespace SharpCraft.Data
                 {
                     throw new ArgumentOutOfRangeException("Cannot get the data string since the byte is out of out of the -128 to 127 range.");
                 }
-                return realValue + "b";
+                return realValue + GetTypeEnding(ID.NBTTagType.TagByte);
             }
             else if (Value is sbyte)
             {
-                return (sbyte)Value + "b";
+                return (sbyte)Value + GetTypeEnding(ID.NBTTagType.TagByte);
             }
             else if (Value is bool)
             {
-                return ((bool)Value) ? "1b" : "0b";
+                if (IsJson)
+                {
+                    return ((bool)Value).ToMinecraftBool();
+                }
+                else
+                {
+                    return (((bool)Value) ? "1" : "0") + GetTypeEnding(ID.NBTTagType.TagByte);
+                }
             }
             else if (Value is short)
             {
-                return (short)Value + "s";
+                return (short)Value + GetTypeEnding(ID.NBTTagType.TagShort);
             }
             else if (Value is long)
             {
-                return (long)Value + "L";
+                return (long)Value + GetTypeEnding(ID.NBTTagType.TagLong);
             }
             else if (Value is float)
             {
-                return ((float)Value).ToMinecraftFloat() + "f";
+                return ((float)Value).ToMinecraftFloat() + GetTypeEnding(ID.NBTTagType.TagFloat);
             }
             else if (Value is double)
             {
-                return ((double)Value).ToMinecraftDouble() + "d";
+                return ((double)Value).ToMinecraftDouble() + GetTypeEnding(ID.NBTTagType.TagDouble);
             }
             else if (Value is string)
             {
@@ -539,15 +565,15 @@ namespace SharpCraft.Data
                         {
                             throw new InvalidCastException("Cannot convert the given Enum into a short.");
                         }
-                        return value + "s";
+                        return value + GetTypeEnding(ID.NBTTagType.TagShort);
                     case ID.NBTTagType.TagLong:
-                        return value + "L";
+                        return value + GetTypeEnding(ID.NBTTagType.TagLong);
                     case ID.NBTTagType.TagByte:
                         if (value > byte.MaxValue || value < byte.MinValue)
                         {
                             throw new InvalidCastException("Cannot convert the given Enum into a byte.");
                         }
-                        return value + "b";
+                        return value + GetTypeEnding(ID.NBTTagType.TagByte);
                     case ID.NBTTagType.TagString:
                         return "\"" + Value + "\"";
                     case ID.NBTTagType.TagNamespacedString:
@@ -566,6 +592,37 @@ namespace SharpCraft.Data
         {
             return Value is null;
         }
+
+        /// <summary>
+        /// Gets the letter there is at the end of the given datatype
+        /// </summary>
+        /// <param name="type">The type to get the ending letter for</param>
+        /// <returns>The ending letter</returns>
+        private string GetTypeEnding(ID.NBTTagType type)
+        {
+            if (IsJson)
+            {
+                return "";
+            }
+            else
+            {
+                switch (type)
+                {
+                    default:
+                        throw new ArgumentException("The given type doesn't have a special ending letter");
+                    case ID.NBTTagType.TagByte:
+                        return "b";
+                    case ID.NBTTagType.TagShort:
+                        return "s";
+                    case ID.NBTTagType.TagDouble:
+                        return "d";
+                    case ID.NBTTagType.TagFloat:
+                        return "f";
+                    case ID.NBTTagType.TagLong:
+                        return "L";
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -573,21 +630,47 @@ namespace SharpCraft.Data
     /// </summary>
     public class DataPartPath
     {
+        private string pathName;
+
         /// <summary>
         /// Intializes a new <see cref="DataPartPath"/>
         /// </summary>
         /// <param name="pathName">The name of the path of the value</param>
         /// <param name="pathValue">The value with the path</param>
-        public DataPartPath(string pathName, IDataPartPathEnding pathValue)
+        /// <param name="isJson">If the path is a json path</param>
+        public DataPartPath(string pathName, IDataPartPathEnding pathValue, bool isJson = false)
         {
             PathName = pathName;
             PathValue = pathValue;
+            IsJson = isJson;
         }
 
         /// <summary>
         /// The name of the path of the value
         /// </summary>
-        public string PathName { get; set; }
+        public string PathName 
+        { 
+            get
+            {
+                if (IsJson)
+                {
+                    return "\"" + pathName.Escape() + "\"";
+                }
+                else
+                {
+                    return pathName;
+                }
+            }
+            set
+            {
+                pathName = value ?? throw new ArgumentNullException("PathName may not be null");
+            }
+        }
+
+        /// <summary>
+        /// If the path is a json path
+        /// </summary>
+        public bool IsJson { get; set; }
 
         /// <summary>
         /// The value with the path
