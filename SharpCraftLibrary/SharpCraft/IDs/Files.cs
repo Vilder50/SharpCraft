@@ -11,7 +11,7 @@ namespace SharpCraft
         public static class Files
         {
             /// <summary>
-            /// Loot table file names used by Minecraft which then can be used in / as a <see cref="Loottable"/>
+            /// Loot table file names used by Minecraft which then can be used in / as a <see cref="LootTable"/>
             /// </summary>
             public static class LootTables
             {

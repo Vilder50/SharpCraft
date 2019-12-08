@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using SharpCraft.LootObjects;
 
 namespace SharpCraft
 {
@@ -48,7 +49,7 @@ namespace SharpCraft
         /// <param name="functionName">The function's name. If null will get random name</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(string functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(string functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {
@@ -73,9 +74,9 @@ namespace SharpCraft
         /// <param name="creater">a method creating the function</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(string functionName, Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(string functionName, Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Function function = NewFunction(functionName, setting);
+            Function function = Function(functionName, setting);
             creater(function);
 
             return function;
@@ -87,23 +88,23 @@ namespace SharpCraft
         /// <param name="creater">a method creating the function</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function NewFunction(Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Function function = NewFunction((string)null, setting);
+            Function function = Function((string)null, setting);
             creater(function);
 
             return function;
         }
 
         /// <summary>
-        /// Creates a new crafting table <see cref="Recipe"/> with the given parameters
+        /// Creates a new crafting table <see cref="SharpCraft.Recipe"/> with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="Recipe"/>'s name</param>
+        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
         /// <param name="recipe">A multidimensional array describing how the <see cref="Item"/>s should be layed out in the crafting table</param>
         /// <param name="output">The output <see cref="Item"/></param>
-        /// <param name="group">The string id of the group this <see cref="Recipe"/> is in</param>
+        /// <param name="group">The string id of the group this <see cref="SharpCraft.Recipe"/> is in</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe NewRecipe(string name, Item[,] recipe, Item output, string group = null)
+        public Recipe Recipe(string name, Item[,] recipe, Item output, string group = null)
         {
             Recipe returnRecipe = GetFile<Recipe>(name);
 
@@ -118,14 +119,14 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new crafting table shapeless <see cref="Recipe"/> with the given parameters
+        /// Creates a new crafting table shapeless <see cref="SharpCraft.Recipe"/> with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="Recipe"/>'s name</param>
-        /// <param name="recipe">The <see cref="Item"/>s needed to craft the <see cref="Recipe"/></param>
+        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
+        /// <param name="recipe">The <see cref="Item"/>s needed to craft the <see cref="SharpCraft.Recipe"/></param>
         /// <param name="output">The output <see cref="Item"/></param>
-        /// <param name="group">The string id of the group this <see cref="Recipe"/> is in</param>
+        /// <param name="group">The string id of the group this <see cref="SharpCraft.Recipe"/> is in</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe NewRecipe(string name, Item[] recipe, Item output, string group = null)
+        public Recipe Recipe(string name, Item[] recipe, Item output, string group = null)
         {
             Recipe returnRecipe = GetFile<Recipe>(name);
 
@@ -140,16 +141,16 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new furnace/a type of furnace <see cref="Recipe"/> with the given parameters
+        /// Creates a new furnace/a type of furnace <see cref="SharpCraft.Recipe"/> with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="Recipe"/>'s name</param>
+        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
         /// <param name="input">The input <see cref="Item"/></param>
         /// <param name="output">the output <see cref="Item"/></param>
-        /// <param name="xpDrop">the amount of xp the <see cref="Recipe"/> should output</param>
-        /// <param name="cookTime">the amount of time the <see cref="Recipe"/> takes</param>
+        /// <param name="xpDrop">the amount of xp the <see cref="SharpCraft.Recipe"/> should output</param>
+        /// <param name="cookTime">the amount of time the <see cref="SharpCraft.Recipe"/> takes</param>
         /// <param name="recipeType">The type of smelt recipe</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe NewRecipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
+        public Recipe Recipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
         {
             Recipe returnRecipe = GetFile<Recipe>(name);
 
@@ -164,13 +165,13 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new stonecutter <see cref="Recipe"/>
+        /// Creates a new stonecutter <see cref="SharpCraft.Recipe"/>
         /// </summary>
-        /// <param name="name">The <see cref="Recipe"/>'s name</param>
+        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
         /// <param name="input">The input <see cref="Item"/></param>
         /// <param name="output">the output <see cref="Item"/></param>
-        /// <returns>The newly created <see cref="Recipe"/></returns>
-        public Recipe NewRecipe(string name, Item input, Item output)
+        /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
+        public Recipe Recipe(string name, Item input, Item output)
         {
             Recipe returnRecipe = GetFile<Recipe>(name);
 
@@ -185,9 +186,9 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Overwrites the <see cref="Recipe"/> with that name with an invalid <see cref="Recipe"/>
+        /// Overwrites the <see cref="SharpCraft.Recipe"/> with that name with an invalid <see cref="SharpCraft.Recipe"/>
         /// </summary>
-        /// <param name="name">The <see cref="Recipe"/>'s name</param>
+        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
         public void HideRecipe(string name)
         {
             Recipe returnRecipe = GetFile<Recipe>(name);
@@ -203,41 +204,57 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new <see cref="Loottable"/> with the <paramref name="lootPools"/>
+        /// Creates a new <see cref="LootTable"/> with the <paramref name="lootPools"/>
         /// </summary>
-        /// <param name="tableName">The <see cref="Loottable"/>'s name</param>
-        /// <param name="lootPools">The <see cref="Loottable.Pool"/>s in the <see cref="Loottable"/></param>
-        /// <returns>The newly created <see cref="Recipe"/></returns>
-        public Loottable NewLoottable(string tableName, Loottable.Pool[] lootPools)
+        /// <param name="tableName">The <see cref="LootTable"/>'s name</param>
+        /// <param name="lootPools">The <see cref="LootPool"/>s in the <see cref="LootTable"/></param>
+        /// <param name="type">The type of loot table</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
+        public LootTable Loottable(string tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            Loottable returnTable = GetFile<Loottable>(tableName);
+            LootTable existingFile = GetFile<LootTable>(tableName);
 
-            if (returnTable is null)
+            if (!(existingFile is null))
             {
-                return new Loottable(this, tableName.ToLower(), lootPools);
+                if (existingFile.IsAuto())
+                {
+                    throw new ArgumentException("There already exists a table using the given name. That table is an auto table and cannot be changed.");
+                }
+                if (existingFile.Setting != writeSetting)
+                {
+                    throw new ArgumentException("There already exists a table using the given name. That table uses the write setting " + existingFile.Setting);
+                }
+                if (existingFile.Type != type)
+                {
+                    throw new ArgumentException("There already exists a table using the given name. That table is of the type " + existingFile.Type);
+                }
+
+                existingFile.Pools.AddRange(lootPools);
+                return existingFile;
             }
             else
             {
-                return returnTable;
+                return new LootTable(this, tableName, lootPools, type, writeSetting);
             }
         }
 
         /// <summary>
-        /// Creates a new <see cref="Advancement"/> with the given parameters
+        /// Creates a new <see cref="SharpCraft.Advancement"/> with the given parameters
         /// </summary>
-        /// <param name="advancementName">The <see cref="Advancement"/>'s name</param>
+        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
         /// <param name="ingameName">the shown ingame name</param>
         /// <param name="description">the shown ingame description</param>
-        /// <param name="icon">the icon for the <see cref="Advancement"/> - Leave empty to make advancement invisible</param>
-        /// <param name="parent">the <see cref="Advancement"/>'s parent <see cref="Advancement"/></param>
-        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="Advancement"/></param>
-        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="Advancement"/></param>
+        /// <param name="icon">the icon for the <see cref="SharpCraft.Advancement"/> - Leave empty to make advancement invisible</param>
+        /// <param name="parent">the <see cref="SharpCraft.Advancement"/>'s parent <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="SharpCraft.Advancement"/></param>
         /// <param name="frame">the frame</param>
-        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="Advancement"/></param>
-        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="Advancement"/></param>
-        /// <param name="hidden">if the <see cref="Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
-        /// <returns>the newly created <see cref="Advancement"/></returns>
-        public Advancement NewAdvancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, Advancement parent, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
+        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="hidden">if the <see cref="SharpCraft.Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
+        /// <returns>the newly created <see cref="SharpCraft.Advancement"/></returns>
+        public Advancement Advancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, Advancement parent, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
         {
             Advancement returnAdvancement = GetFile<Advancement>(advancementName);
 
@@ -252,21 +269,21 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new <see cref="Advancement"/> with the given parameters
+        /// Creates a new <see cref="SharpCraft.Advancement"/> with the given parameters
         /// </summary>
-        /// <param name="advancementName">The <see cref="Advancement"/>'s name</param>
+        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
         /// <param name="ingameName">the shown ingame name</param>
         /// <param name="description">the shown ingame description</param>
-        /// <param name="icon">the icon for the <see cref="Advancement"/> - Leave empty to make advancement invisible</param>
+        /// <param name="icon">the icon for the <see cref="SharpCraft.Advancement"/> - Leave empty to make advancement invisible</param>
         /// <param name="background">the background shown in the advancement menu</param>
-        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="Advancement"/></param>
-        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="Advancement"/></param>
+        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="SharpCraft.Advancement"/></param>
         /// <param name="frame">the frame</param>
-        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="Advancement"/></param>
-        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="Advancement"/></param>
-        /// <param name="hidden">if the <see cref="Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
-        /// <returns>the newly created <see cref="Advancement"/></returns>
-        public Advancement NewAdvancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
+        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="SharpCraft.Advancement"/></param>
+        /// <param name="hidden">if the <see cref="SharpCraft.Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
+        /// <returns>the newly created <see cref="SharpCraft.Advancement"/></returns>
+        public Advancement Advancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
         {
             Advancement returnAdvancement = GetFile<Advancement>(advancementName);
 
@@ -281,9 +298,9 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Overwrites the <see cref="Advancement"/> with that name with an invalid <see cref="Advancement"/>
+        /// Overwrites the <see cref="SharpCraft.Advancement"/> with that name with an invalid <see cref="SharpCraft.Advancement"/>
         /// </summary>
-        /// <param name="advancementName">The <see cref="Advancement"/>'s name</param>
+        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
         public void HideAdvancement(string advancementName)
         {
             Advancement returnAdvancement = GetFile<Advancement>(advancementName);
@@ -308,7 +325,7 @@ namespace SharpCraft
         /// <returns>The <see cref="FunctionGroup"/></returns>
         public FunctionGroup Group(string name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            FunctionGroup existingFile = GetFile<FunctionGroup>(name.Replace("/","\\"));
+            FunctionGroup existingFile = GetFile<FunctionGroup>(name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -332,7 +349,7 @@ namespace SharpCraft
         /// <returns>The <see cref="BlockGroup"/></returns>
         public BlockGroup Group(string name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            BlockGroup existingFile = GetFile<BlockGroup>(name.Replace("/", "\\"));
+            BlockGroup existingFile = GetFile<BlockGroup>(name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -356,7 +373,7 @@ namespace SharpCraft
         /// <returns>The <see cref="ItemGroup"/></returns>
         public ItemGroup Group(string name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            ItemGroup existingFile = GetFile<ItemGroup>(name.Replace("/", "\\"));
+            ItemGroup existingFile = GetFile<ItemGroup>(name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -380,7 +397,7 @@ namespace SharpCraft
         /// <returns>The <see cref="EntityGroup"/></returns>
         public EntityGroup Group(string name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            EntityGroup existingFile = GetFile<EntityGroup>(name.Replace("/", "\\"));
+            EntityGroup existingFile = GetFile<EntityGroup>(name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -404,7 +421,7 @@ namespace SharpCraft
         /// <returns>The <see cref="LiquidGroup"/></returns>
         public LiquidGroup Group(string name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LiquidGroup existingFile = GetFile<LiquidGroup>(name.Replace("/", "\\"));
+            LiquidGroup existingFile = GetFile<LiquidGroup>(name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);

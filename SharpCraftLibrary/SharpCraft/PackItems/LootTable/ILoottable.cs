@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for loot tables
     /// </summary>
-    public interface ILoottable
+    public interface ILootTable
     {
         /// <summary>
         /// The file name of the loot table

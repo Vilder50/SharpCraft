@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The hopper's loottable
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-            public Loottable LootTable { get; set; }
+            public LootTable LootTable { get; set; }
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>

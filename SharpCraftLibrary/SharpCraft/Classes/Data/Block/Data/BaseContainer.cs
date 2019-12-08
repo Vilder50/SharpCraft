@@ -27,7 +27,7 @@ namespace SharpCraft
             /// The loot table with items to put into the chest when opened
             /// </summary>
             [Data.DataTag("LootTable", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public Loottable DLootTable { get; set; }
+            public LootTable DLootTable { get; set; }
 
             /// <summary>
             /// The seed used to generate the loot

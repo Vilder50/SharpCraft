@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -7,57 +8,67 @@ namespace SharpCraft
         /// <summary>
         /// a <see cref="object"/> defining damage flags
         /// </summary>
-        public class DamageFlags
+        public class DamageFlags : DataHolderBase
         {
             /// <summary>
             /// if the damage by-passes armor or not
             /// </summary>
-            public bool? ByPassArmor;
+            [DataTag("bypasses_armor", JsonTag = true)]
+            public bool? ByPassArmor { get; set; }
 
             /// <summary>
             /// if the damage can be blocked or not
             /// </summary>
-            public bool? Unblockable;
+            [DataTag("bypasses_invulnerability", JsonTag = true)]
+            public bool? Unblockable { get; set; }
 
             /// <summary>
             /// if the damage is starvation damage or not
             /// </summary>
-            public bool? Starvation;
+            [DataTag("bypasses_magic", JsonTag = true)]
+            public bool? Starvation { get; set; }
 
             /// <summary>
             /// if the damage is explosion damage or not
             /// </summary>
-            public bool? Explosion;
+            [DataTag("is_explosion", JsonTag = true)]
+            public bool? Explosion { get; set; }
 
             /// <summary>
             /// if the damage if fire damage or not
             /// </summary>
-            public bool? Fire;
+            [DataTag("is_fire", JsonTag = true)]
+            public bool? Fire { get; set; }
 
             /// <summary>
             /// if the damage is magic damage or not
             /// </summary>
-            public bool? Magic;
+            [DataTag("is_magic", JsonTag = true)]
+            public bool? Magic { get; set; }
 
             /// <summary>
             /// if its a projectile or not
             /// </summary>
-            public bool? Projectile;
+            [DataTag("is_projectile", JsonTag = true)]
+            public bool? Projectile { get; set; }
 
             /// <summary>
             /// if its lightning or not
             /// </summary>
-            public bool? Lightning;
+            [DataTag("is_lightning", JsonTag = true)]
+            public bool? Lightning { get; set; }
 
             /// <summary>
             /// the <see cref="Entity"/> doing damage
             /// </summary>
-            public Entity DamagingEntity;
+            [DataTag("direct_entity", JsonTag = true)]
+            public Entity DamagingEntity { get; set; }
 
             /// <summary>
             /// the <see cref="Entity"/> which made the damage happen
             /// </summary>
-            public Entity SourceEntity;
+            [DataTag("source_entity", JsonTag = true)]
+            public Entity SourceEntity { get; set; }
 
             /// <summary>
             /// Outputs this <see cref="DamageFlags"/> data in string format

@@ -263,7 +263,7 @@ namespace SharpCraft
             /// </summary>
             /// <param name="effects">the effect(s) the player has</param>
             /// <returns>this <see cref="Trigger"/></returns>
-            public Trigger EffectsChanged(JSONObjects.Effect[] effects)
+            public Trigger EffectsChanged(JSONObjects.Effects[] effects)
             {
                 TriggerType = AdvancementTrigger.effects_changed;
                 this.Effects = effects;
@@ -652,7 +652,7 @@ namespace SharpCraft
             JSONObjects.Block Block;
             ID.Potion? Potion;
             JSONObjects.Damage Damage;
-            JSONObjects.Effect[] Effects;
+            JSONObjects.Effects[] Effects;
             JSONObjects.DamageFlags DamageFlags;
             JSONObjects.Distance Distance;
 
@@ -921,7 +921,7 @@ namespace SharpCraft
         public class Reward
         {
             private readonly Function[] FunctionRewards;
-            private readonly Loottable[] LoottableRewards;
+            private readonly LootTable[] LoottableRewards;
             private readonly Recipe[] RecipeRewards;
             private readonly int? XPReward;
 
@@ -944,12 +944,12 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Creates a new <see cref="Reward"/> which gives a <see cref="Loottable"/>
+            /// Creates a new <see cref="Reward"/> which gives a <see cref="LootTable"/>
             /// </summary>
-            /// <param name="GiveLoottable">the <see cref="Loottable"/> to give</param>
-            public Reward(Loottable GiveLoottable)
+            /// <param name="GiveLoottable">the <see cref="LootTable"/> to give</param>
+            public Reward(LootTable GiveLoottable)
             {
-                LoottableRewards = new Loottable[] { GiveLoottable };
+                LoottableRewards = new LootTable[] { GiveLoottable };
             }
 
             /// <summary>
@@ -1011,10 +1011,10 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Converts a <see cref="Loottable"/> into a reward
+            /// Converts a <see cref="LootTable"/> into a reward
             /// </summary>
-            /// <param name="loottable">the <see cref="Loottable"/> to convert</param>
-            public static implicit operator Reward(Loottable loottable)
+            /// <param name="loottable">the <see cref="LootTable"/> to convert</param>
+            public static implicit operator Reward(LootTable loottable)
             {
                 return new Reward(loottable);
             }

@@ -275,8 +275,8 @@ namespace SharpCraft.FunctionWriters
             /// Gives the loot from a loottable to the selected players
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
-            /// <param name="loot">the <see cref="Loottable"/> to give the player</param>
-            public void GiveItem(Selector player, ILoottable loot)
+            /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
+            public void GiveItem(Selector player, ILootTable loot)
             {
                 function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
             }
@@ -333,9 +333,9 @@ namespace SharpCraft.FunctionWriters
             /// Puts the item from the loot table into the players hotbar
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
-            /// <param name="loot">the <see cref="Loottable"/> to give the player</param>
+            /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, ILoottable loot, int slot)
+            public void GiveHotbar(Selector player, ILootTable loot, int slot)
             {
                 function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
             }

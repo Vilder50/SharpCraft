@@ -153,12 +153,14 @@ namespace SharpCraft
         /// <returns>The file with the name or null</returns>
         public TFileType GetFile<TFileType>(string fileName) where TFileType : BaseFile
         {
+            string name = fileName.ToLower().Replace("/", "\\");
+
             if (!IsSetup)
             {
                 throw new InvalidOperationException("Setup hasn't been run yet.");
             }
 
-            BaseFile file = (TFileType)files.SingleOrDefault(f => f.FileName == fileName && f is TFileType);
+            BaseFile file = (TFileType)files.SingleOrDefault(f => f.FileName == name && f is TFileType);
 
             if (file is null)
             {

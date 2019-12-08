@@ -4,13 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// Class for <see cref="IFunction"/> groups files
     /// </summary>
-    public class ItemGroup : BaseGroup<ItemType>, IItemType
+    public class ItemGroup : BaseGroup<ItemType>, IItemType, IConvertableToDataTag
     {
         /// <summary>
         /// Intializes a new Group with the given parameters
@@ -50,6 +51,34 @@ namespace SharpCraft
         public static implicit operator ItemType(ItemGroup group)
         {
             return new ItemType(group);
+        }
+
+        /// <summary>
+        /// Converts this <see cref="ItemType"/> into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
+        /// <param name="extraConversionData">0: If true returns the string without the #</param>
+        /// <returns>This <see cref="ItemType"/> as a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            if (extraConversionData.Length == 1)
+            {
+                bool? ignoreGroupChar = extraConversionData[0] as bool?;
+                if (ignoreGroupChar is null)
+                {
+                    throw new ArgumentException("Param 0 has to be bool");
+                }
+                if (ignoreGroupChar.Value)
+                {
+                    return new DataPartTag(Name.Replace("#",""));
+                }
+            }
+            if (!(asType is null) && asType != ID.NBTTagType.TagString)
+            {
+                throw new InvalidCastException("Cannot convert ItemType into the given type");
+            }
+
+            return new DataPartTag(Name);
         }
     }
 }

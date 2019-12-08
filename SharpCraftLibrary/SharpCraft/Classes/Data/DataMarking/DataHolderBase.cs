@@ -137,7 +137,7 @@ namespace SharpCraft.Data
         /// Returns a tree structure containing all the data tags for this object
         /// </summary>
         /// <returns>the bottom of the tree</returns>
-        public DataPartObject GetDataTree()
+        public virtual DataPartObject GetDataTree()
         {
             List<PropertyInfo> dataProperties = GetDataProperties().ToList();
             DataPartObject rootObject = new DataPartObject();

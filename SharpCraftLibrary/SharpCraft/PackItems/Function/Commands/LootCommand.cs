@@ -267,7 +267,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class FishHandSource : ILootSource
         {
-            private ILoottable loottable;
+            private ILootTable loottable;
             private Coords fishLocation;
 
             /// <summary>
@@ -276,7 +276,7 @@ namespace SharpCraft.Commands
             /// <param name="loottable">The loot table the "fish" is coming from</param>
             /// <param name="fishLocation">The location the fish was caught</param>
             /// <param name="mainHand">True if the fish was caught with the executing entity's mainhand. False if with off hand</param>
-            public FishHandSource(ILoottable loottable, Coords fishLocation, bool mainHand)
+            public FishHandSource(ILootTable loottable, Coords fishLocation, bool mainHand)
             {
                 Loottable = loottable;
                 FishLocation = fishLocation;
@@ -286,7 +286,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The loot table the "fish" is coming from
             /// </summary>
-            public ILoottable Loottable 
+            public ILootTable Loottable 
             { 
                 get => loottable; 
                 set => loottable = value ?? throw new ArgumentNullException(nameof(Loottable), "Loottable may not be null"); 
@@ -320,7 +320,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class FishItemSource : ILootSource
         {
-            private ILoottable loottable;
+            private ILootTable loottable;
             private Coords fishLocation;
             private Item usedItem;
 
@@ -330,7 +330,7 @@ namespace SharpCraft.Commands
             /// <param name="loottable">The loot table the "fish" is coming from</param>
             /// <param name="fishLocation">The location the fish was caught</param>
             /// <param name="usedItem">The item used to get the "fish"</param>
-            public FishItemSource(ILoottable loottable, Coords fishLocation, Item usedItem)
+            public FishItemSource(ILootTable loottable, Coords fishLocation, Item usedItem)
             {
                 Loottable = loottable;
                 FishLocation = fishLocation;
@@ -340,7 +340,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The loot table the "fish" is coming from
             /// </summary>
-            public ILoottable Loottable
+            public ILootTable Loottable
             {
                 get => loottable;
                 set => loottable = value ?? throw new ArgumentNullException(nameof(Loottable), "Loottable may not be null");
@@ -378,13 +378,13 @@ namespace SharpCraft.Commands
         /// </summary>
         public class LoottableSource : ILootSource
         {
-            private ILoottable loottable;
+            private ILootTable loottable;
 
             /// <summary>
             /// Intializes a new <see cref="LoottableSource"/>
             /// </summary>
             /// <param name="loottable">The loot table the get the loot from</param>
-            public LoottableSource(ILoottable loottable)
+            public LoottableSource(ILootTable loottable)
             {
                 Loottable = loottable;
             }
@@ -392,7 +392,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The loot table the get the loot from
             /// </summary>
-            public ILoottable Loottable
+            public ILootTable Loottable
             {
                 get => loottable;
                 set => loottable = value ?? throw new ArgumentNullException(nameof(Loottable), "Loottable may not be null");

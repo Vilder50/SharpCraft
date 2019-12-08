@@ -77,12 +77,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Inserts the given <see cref="ILoottable"/> into the <see cref="SharpCraft.Block"/>
+        /// Inserts the given <see cref="ILootTable"/> into the <see cref="SharpCraft.Block"/>
         /// </summary>
         /// <param name="block">the <see cref="SharpCraft.Block"/> to input into</param>
-        /// <param name="loot">the <see cref="ILoottable"/> to input</param>
-        /// <param name="slot">the slot to insert the <see cref="ILoottable"/> at</param>
-        public void Loot(Coords block, ILoottable loot, int? slot = null)
+        /// <param name="loot">the <see cref="ILootTable"/> to input</param>
+        /// <param name="slot">the slot to insert the <see cref="ILootTable"/> at</param>
+        public void Loot(Coords block, ILootTable loot, int? slot = null)
         {
             if (slot is null)
             {
@@ -95,11 +95,11 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Inserts the given <see cref="Entity"/>'s <see cref="Loottable"/> into the <see cref="SharpCraft.Block"/>
+        /// Inserts the given <see cref="Entity"/>'s <see cref="LootTable"/> into the <see cref="SharpCraft.Block"/>
         /// </summary>
         /// <param name="block">the <see cref="SharpCraft.Block"/> to input into</param>
-        /// <param name="kill">the <see cref="Entity"/>'s <see cref="Loottable"/> to input</param>
-        /// <param name="slot">the slot to insert the <see cref="Loottable"/> at</param>
+        /// <param name="kill">the <see cref="Entity"/>'s <see cref="LootTable"/> to input</param>
+        /// <param name="slot">the slot to insert the <see cref="LootTable"/> at</param>
         public void Loot(Coords block, Selector kill, int? slot = null)
         {
             if (slot is null)
@@ -113,12 +113,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Inserts the given <see cref="SharpCraft.Block"/>'s <see cref="Loottable"/> into the <see cref="SharpCraft.Block"/>
+        /// Inserts the given <see cref="SharpCraft.Block"/>'s <see cref="LootTable"/> into the <see cref="SharpCraft.Block"/>
         /// </summary>
         /// <param name="block">the <see cref="SharpCraft.Block"/> to input into</param>
-        /// <param name="breakBlock">the <see cref="SharpCraft.Block"/>'s <see cref="Loottable"/> to input</param>
+        /// <param name="breakBlock">the <see cref="SharpCraft.Block"/>'s <see cref="LootTable"/> to input</param>
         /// <param name="breakWith">the tool used to break the <see cref="SharpCraft.Block"/></param>
-        /// <param name="slot">the slot to insert the <see cref="Loottable"/> at</param>
+        /// <param name="slot">the slot to insert the <see cref="LootTable"/> at</param>
         public void Loot(Coords block, Coords breakBlock, Item breakWith = null, int? slot = null)
         {
             LootTargets.ILootTarget target;

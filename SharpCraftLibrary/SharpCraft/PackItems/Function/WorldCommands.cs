@@ -135,8 +135,8 @@ namespace SharpCraft.FunctionWriters
         /// Spawns loot into the world at the given location
         /// </summary>
         /// <param name="coords">The location to spawn the loot</param>
-        /// <param name="loot">the <see cref="Loottable"/> to spawn in</param>
-        public void Loot(Coords coords, ILoottable loot)
+        /// <param name="loot">the <see cref="LootTable"/> to spawn in</param>
+        public void Loot(Coords coords, ILootTable loot)
         {
             function.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.LoottableSource(loot)));
         }

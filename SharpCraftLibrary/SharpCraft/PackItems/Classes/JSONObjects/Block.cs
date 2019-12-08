@@ -3,7 +3,7 @@
 namespace SharpCraft
 {
     /// <summary>
-    /// <see cref="object"/>s used in <see cref="Loottable"/>s and <see cref="Advancement"/>s
+    /// <see cref="object"/>s used in <see cref="LootTable"/>s and <see cref="Advancement"/>s
     /// </summary>
     public static partial class JSONObjects
     {
@@ -67,15 +67,6 @@ namespace SharpCraft
             public static implicit operator Block(SharpCraft.Block block)
             {
                 return new Block(block);
-            }
-
-            /// <summary>
-            /// Converts a json block into a normal block
-            /// </summary>
-            /// <param name="block">The json blockto convert</param>
-            public static implicit operator SharpCraft.Block(Block block)
-            {
-                return block.TheBlock;
             }
         }
     }

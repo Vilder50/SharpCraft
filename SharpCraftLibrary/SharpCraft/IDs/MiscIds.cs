@@ -2974,6 +2974,27 @@
             block_entity,
         }
 
+        public enum LootBonusFormula
+        {
+            binomial_with_bonus_count,
+
+            uniform_bonus_count,
+
+            ore_drops
+        }
+
+        public enum LootEntryType
+        {
+            item,
+            tag,
+            loot_table,
+            group,
+            alternatives,
+            sequence,
+            dynamic,
+            empty
+        }
+
         public enum DataCopyWay
         {
             replace,

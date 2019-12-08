@@ -264,13 +264,19 @@ namespace SharpCraft
         /// <summary>
         /// Converts this block into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <param name="conversionData">0: the path to the block id, 1: the path to the state holding <see cref="DataPartObject"/></param>
+        /// <param name="conversionData">0: the path to the block id, 1: the path to the state holding <see cref="DataPartObject"/>, 2: if it should return in json format</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
         public DataPartObject GetAsDataObject(object[] conversionData)
         {
-            if (conversionData.Length != 2)
+            if (conversionData.Length < 2 || conversionData.Length > 3)
             {
-                throw new ArgumentException("There has to be exacly 2 conversion params to convert a block to a data object.");
+                throw new ArgumentException("There has to be exactly 2-3 conversion params to convert a block to a data object.");
+            }
+
+            bool isJson = false;
+            if (conversionData.Length == 3)
+            {
+                isJson = (bool)conversionData[2];
             }
 
             if (conversionData[0] is string idPath && conversionData[1] is string statePath)
@@ -278,19 +284,19 @@ namespace SharpCraft
                 DataPartObject dataObject = new DataPartObject();
                 if (!(ID is null))
                 {
-                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag(ID, SharpCraft.ID.NBTTagType.TagNamespacedString)));
+                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag(ID, SharpCraft.ID.NBTTagType.TagString, isJson), isJson));
                 }
                 if (HasState)
                 {
                     DataPartObject states = new DataPartObject();
-                    dataObject.AddValue(new DataPartPath(statePath, states));
+                    dataObject.AddValue(new DataPartPath(statePath, states, isJson));
 
                     //get state tags
                     PropertyInfo[] properties = GetStateProperties().ToArray();
                     foreach(PropertyInfo property in properties)
                     {
                         BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
-                        states.AddValue(new DataPartPath(attribute.DataName, new DataPartTag(GetStateValue(property))));
+                        states.AddValue(new DataPartPath(attribute.DataName, new DataPartTag(GetStateValue(property), isJson: true), isJson));
                     }
                 }
 

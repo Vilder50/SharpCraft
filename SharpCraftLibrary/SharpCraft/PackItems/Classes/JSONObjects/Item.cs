@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -7,52 +8,66 @@ namespace SharpCraft
         /// <summary>
         /// a <see cref="object"/> defining an <see cref="SharpCraft.Item"/>
         /// </summary>
-        public class Item
+        public class Item : DataHolderBase
         {
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s id
             /// </summary>
-            public ItemType Id;
+            [DataTag("item", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+            public ID.Item? Id { get; set; }
+
+            /// <summary>
+            /// the <see cref="SharpCraft.Item"/>'s id
+            /// </summary>
+            [DataTag("tag", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+            public ItemGroup Group { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s durability
             /// </summary>
-            public Range Durability;
+            [DataTag("durability", JsonTag = true)]
+            public Range Durability { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s count
             /// </summary>
-            public Range Count;
+            [DataTag("count", JsonTag = true)]
+            public Range Count { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s potion
             /// </summary>
-            public ID.Potion? Potion;
+            [DataTag("potion", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+            public ID.Potion? Potion { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s <see cref="Enchantment"/>s
             /// </summary>
-            public Enchantment[] Enchantments;
+            [DataTag("enchantments", JsonTag = true)]
+            public Enchantment[] Enchantments { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s nbt data
             /// </summary>
-            public SharpCraft.Item NBT;
+            [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+            public SharpCraft.Item NBT { get; set; }
 
             /// <summary>
             /// a <see cref="object"/> defining an enchantment
             /// </summary>
-            public class Enchantment
+            public class Enchantment : DataHolderBase
             {
                 /// <summary>
                 /// the enchantment id
                 /// </summary>
-                public ID.Enchant? Enchant;
+                [DataTag("enchantment", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+                public ID.Enchant? Enchant { get; set; }
 
                 /// <summary>
                 /// the level of the enchantment
                 /// </summary>
-                public Range Level;
+                [DataTag("levels","min","max",ID.NBTTagType.TagDouble,true, JsonTag = true, ForceType = ID.NBTTagType.TagInt)]
+                public Range Level { get; set; }
 
                 /// <summary>
                 /// Outputs this <see cref="Enchantment"/> data in string format
@@ -75,7 +90,7 @@ namespace SharpCraft
             {
                 List<string> TempList = new List<string>();
 
-                if (Id != null) { TempList.Add("\"item\": \"" + Id.Name + "\""); }
+                if (Id != null) { TempList.Add("\"item\":\"minecraft:" + Id.ToString() + "\""); }
                 if (Durability != null) { TempList.Add(Durability.JSONString("durability")); }
                 if (Count != null) { TempList.Add(Count.JSONString("count")); }
                 if (Potion != null) { TempList.Add("\"potion\": \"" + Potion + "\""); }
@@ -94,26 +109,21 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Converts an <see cref="SharpCraft.Item"/> object into a <see cref="Item"/> object
-            /// </summary>
-            /// <param name="item">The <see cref="SharpCraft.Item"/> to convert</param>
-            public static implicit operator Item(SharpCraft.Item item)
-            {
-                Item returnItem = new Item() {Id = item.ID, Count = item.Count };
-                if (string.IsNullOrEmpty(item.GetItemTagString()))
-                {
-                    returnItem.NBT = item;
-                }
-                return returnItem;
-            }
-
-            /// <summary>
-            /// Converts an item id ento a <see cref="Item"/> object
+            /// Converts an item id into a <see cref="Item"/> object
             /// </summary>
             /// <param name="item">the item id to convert</param>
             public static implicit operator Item(ID.Item item)
             {
                 return new Item { Id = item};
+            }
+
+            /// <summary>
+            /// Converts an item group into a <see cref="Item"/> object
+            /// </summary>
+            /// <param name="group">the item group to convert</param>
+            public static implicit operator Item(ItemGroup group)
+            {
+                return new Item { Group = group };
             }
         }
     }

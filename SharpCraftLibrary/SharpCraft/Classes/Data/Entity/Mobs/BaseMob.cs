@@ -50,7 +50,7 @@ namespace SharpCraft
             /// The loot table the mob drops on death
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-            public Loottable DeathLootTable { get; set; }
+            public LootTable DeathLootTable { get; set; }
             /// <summary>
             /// The seed to use when dropping the <see cref="DeathLootTable"/>
             /// </summary>

@@ -97,15 +97,21 @@ namespace SharpCraft
         /// <summary>
         /// Converts this range into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <param name="conversionData">0: min path name, 1: max path name, 2: type of the range values</param>
+        /// <param name="conversionData">0: min path name, 1: max path name, 2: type of the range values, 3: is json</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
         public DataPartObject GetAsDataObject(object[] conversionData)
         {
-            if (conversionData.Length != 3)
+            if (conversionData.Length < 3 || conversionData.Length > 4)
             {
-                throw new ArgumentException("There has to be exacly 3 conversion params to convert a range to a data object.");
+                throw new ArgumentException("There has to be exacly 3-4 conversion params to convert a range to a data object.");
             }
-            
+
+            bool isJson = false;
+            if (conversionData.Length == 4)
+            {
+                isJson = (bool)conversionData[3];
+            }
+
             if (conversionData[0] is string minName && conversionData[1] is string maxName && conversionData[2] is ID.NBTTagType forceType)
             {
                 DataPartObject dataObject = new DataPartObject();
@@ -113,11 +119,33 @@ namespace SharpCraft
                 {
                     if (!(Min is null))
                     {
-                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((short)Min)));
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((short?)Min, isJson: isJson), isJson));
                     }
                     if (!(Max is null))
                     {
-                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((short)Max)));
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((short?)Max, isJson: isJson), isJson));
+                    }
+                }
+                else if (forceType == ID.NBTTagType.TagDouble)
+                {
+                    if (!(Min is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag(Min, isJson: isJson), isJson));
+                    }
+                    if (!(Max is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag(Max, isJson: isJson), isJson));
+                    }
+                }
+                else if (forceType == ID.NBTTagType.TagInt)
+                {
+                    if (!(Min is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((int?)Min, isJson: isJson), isJson));
+                    }
+                    if (!(Max is null))
+                    {
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((int?)Max, isJson: isJson), isJson));
                     }
                 }
                 else

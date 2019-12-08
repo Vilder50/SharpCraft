@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -7,32 +8,37 @@ namespace SharpCraft
         /// <summary>
         /// A <see cref="object"/> defining a distance
         /// </summary>
-        public class Distance
+        public class Distance : DataHolderBase
         {
             /// <summary>
             /// The total distance between two things
             /// </summary>
-            public Range Absolute;
+            [DataTag("absolute", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public Range Absolute { get; set; }
 
             /// <summary>
             /// the total horizontal distance between two things
             /// </summary>
-            public Range Horizontal;
+            [DataTag("horizontal", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public Range Horizontal { get; set; }
 
             /// <summary>
             /// the x amount of distance between two things
             /// </summary>
-            public Range X;
+            [DataTag("x", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public Range X { get; set; }
 
             /// <summary>
             /// the y amount of distance between two things
             /// </summary>
-            public Range Y;
+            [DataTag("y", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public Range Y { get; set; }
 
             /// <summary>
             /// the z amount of distance between two things
             /// </summary>
-            public Range Z;
+            [DataTag("z", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public Range Z { get; set; }
 
             /// <summary>
             /// Outputs this <see cref="Distance"/> data in string format

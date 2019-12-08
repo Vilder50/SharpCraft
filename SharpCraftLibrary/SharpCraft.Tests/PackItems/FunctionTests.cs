@@ -21,11 +21,11 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                space.NewFunction("myfunction");
+                space.Function("myfunction");
                 Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\"), "Directory wasn't created");
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\myfunction.mcfunction"), "File wasn't created");
 
-                space.NewFunction("folder/otherFunction", BaseFile.WriteSetting.OnDispose);
+                space.Function("folder/otherFunction", BaseFile.WriteSetting.OnDispose);
                 Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't created for file with directory in name");
                 Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\otherfunction.mcfunction"), "File wasn't supposed to be created yet since its OnDispose");
 
@@ -41,9 +41,9 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function autoFunction = space.NewFunction("autofunction");
+                Function autoFunction = space.Function("autofunction");
                 TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction.mcfunction").writer;
-                Function onDisposeFunction = space.NewFunction("disposefunction", BaseFile.WriteSetting.OnDispose);
+                Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
 
                 //test
                 autoFunction.AddCommand(new SayCommand("hello world"));
@@ -52,7 +52,7 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("say hello world" + Environment.NewLine + "clear @s" + Environment.NewLine, autoFunctionWriter.ToString(), "AddCommand failed to write the commands correctly");
 
                 //text execute
-                autoFunction = space.NewFunction("autofunction2");
+                autoFunction = space.Function("autofunction2");
                 autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction2.mcfunction").writer;
                 autoFunction.AddCommand(new ExecuteAs(ID.Selector.s));
                 Assert.AreEqual("", autoFunctionWriter.ToString(), "Execute command with no end shouldn't write anything yet");
@@ -70,8 +70,8 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function onDisposeFunction = space.NewFunction("disposefunction", BaseFile.WriteSetting.OnDispose);
-                Function autoFunction = space.NewFunction("autofunction", BaseFile.WriteSetting.Auto);
+                Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
+                Function autoFunction = space.Function("autofunction", BaseFile.WriteSetting.Auto);
                 TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction.mcfunction").writer;
 
                 //test
@@ -96,7 +96,7 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function function = space.NewFunction("function", BaseFile.WriteSetting.Auto);
+                Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
                 //test
                 Function child = function.NewChild(null, f => 
@@ -118,7 +118,7 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function function = space.NewFunction("function", BaseFile.WriteSetting.Auto);
+                Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
                 //test
                 Function sibling = function.NewSibling("folder/file", f =>
@@ -140,7 +140,7 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function function = space.NewFunction("function", BaseFile.WriteSetting.Auto);
+                Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
                 //test
                 function.Custom.TreeSearch(
@@ -166,7 +166,7 @@ namespace SharpCraft.Tests.PackItems
             using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
             {
                 PackNamespace space = pack.Namespace("space");
-                Function function = space.NewFunction("function", BaseFile.WriteSetting.Auto);
+                Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
                 //test
                 function.Custom.SummonExecute(new Entity.Armorstand() { Tags = new Tag[] { "ATag" } }, new Coords(1,2,3), "execute", (f) => 
