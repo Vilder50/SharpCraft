@@ -13,7 +13,7 @@ namespace SharpCraft
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s id
             /// </summary>
-            [DataTag("item", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+            [DataTag("item", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
             public ID.Item? Id { get; set; }
 
             /// <summary>

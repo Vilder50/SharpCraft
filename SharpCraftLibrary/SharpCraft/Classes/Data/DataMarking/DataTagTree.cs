@@ -273,7 +273,7 @@ namespace SharpCraft.Data
             }
             else if (item is DataPartObject)
             {
-                ArrayType = ID.NBTTagType.TagObjectArray;
+                ArrayType = ID.NBTTagType.TagCompoundArray;
             }
             else if (item is DataPartTag tag)
             {
@@ -350,7 +350,7 @@ namespace SharpCraft.Data
                     }
                     returnString += item.GetDataString();
                 }
-                else if (ArrayType == ID.NBTTagType.TagObjectArray)
+                else if (ArrayType == ID.NBTTagType.TagCompoundArray)
                 {
                     if (!addedOne)
                     {
@@ -447,9 +447,16 @@ namespace SharpCraft.Data
                 {
                     TagType = ID.NBTTagType.TagDouble;
                 }
-                else if (value is string || value is JSON[] || value is JSON)
+                else if (value is string)
                 {
                     if (TagType != ID.NBTTagType.TagCompound && TagType != ID.NBTTagType.TagNamespacedString)
+                    {
+                        TagType = ID.NBTTagType.TagString;
+                    }
+                }
+                else if (value is JSON[] || value is JSON)
+                {
+                    if (TagType != ID.NBTTagType.TagCompound)
                     {
                         TagType = ID.NBTTagType.TagString;
                     }
@@ -547,11 +554,25 @@ namespace SharpCraft.Data
             }
             else if (Value is JSON[] jsonArray)
             {
-                return "\"" + jsonArray.GetString().Escape() + "\"";
+                if (TagType == ID.NBTTagType.TagCompound)
+                {
+                    return jsonArray.GetString();
+                }
+                else
+                {
+                    return "\"" + jsonArray.GetString().Escape() + "\"";
+                }
             }
             else if (Value is JSON jsonObject)
             {
-                return "\"" + jsonObject.ToString().Escape() + "\"";
+                if (TagType == ID.NBTTagType.TagCompound)
+                {
+                    return jsonObject.ToString();
+                }
+                else
+                {
+                    return "\"" + jsonObject.ToString().Escape() + "\"";
+                }
             }
             else if (Value.GetType().IsEnum)
             {
@@ -575,9 +596,23 @@ namespace SharpCraft.Data
                         }
                         return value + GetTypeEnding(ID.NBTTagType.TagByte);
                     case ID.NBTTagType.TagString:
-                        return "\"" + Value + "\"";
+                        if (IsJson)
+                        {
+                            return "\"" + Value.ToString().ToLower() + "\"";
+                        }
+                        else
+                        {
+                            return "\"" + Value + "\"";
+                        }
                     case ID.NBTTagType.TagNamespacedString:
-                        return "\"minecraft:" + Value + "\"";
+                        if (IsJson)
+                        {
+                            return "\"minecraft:" + Value.ToString().ToLower() + "\"";
+                        }
+                        else
+                        {
+                            return "\"minecraft:" + Value + "\"";
+                        }
                 }
             }
 

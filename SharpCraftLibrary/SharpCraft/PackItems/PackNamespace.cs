@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using SharpCraft.LootObjects;
+using SharpCraft.AdvancementObjects;
 
 namespace SharpCraft
 {
@@ -56,7 +57,7 @@ namespace SharpCraft
                 return new Function(this, null, setting);
             }
 
-            Function returnFunction = GetFile<Function>(functionName);
+            Function returnFunction = (Function)GetFile("function", functionName);
             if (returnFunction is null)
             {
                 return new Function(this, functionName, setting);
@@ -106,7 +107,7 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe Recipe(string name, Item[,] recipe, Item output, string group = null)
         {
-            Recipe returnRecipe = GetFile<Recipe>(name);
+            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
 
             if (returnRecipe is null)
             {
@@ -128,7 +129,7 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe Recipe(string name, Item[] recipe, Item output, string group = null)
         {
-            Recipe returnRecipe = GetFile<Recipe>(name);
+            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
 
             if (returnRecipe is null)
             {
@@ -152,7 +153,7 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public Recipe Recipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
         {
-            Recipe returnRecipe = GetFile<Recipe>(name);
+            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
 
             if (returnRecipe is null)
             {
@@ -173,7 +174,7 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
         public Recipe Recipe(string name, Item input, Item output)
         {
-            Recipe returnRecipe = GetFile<Recipe>(name);
+            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
 
             if (returnRecipe is null)
             {
@@ -191,7 +192,7 @@ namespace SharpCraft
         /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
         public void HideRecipe(string name)
         {
-            Recipe returnRecipe = GetFile<Recipe>(name);
+            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
 
             if (returnRecipe is null)
             {
@@ -213,7 +214,7 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
         public LootTable Loottable(string tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LootTable existingFile = GetFile<LootTable>(tableName);
+            LootTable existingFile = (LootTable)GetFile("loot_table", tableName);
 
             if (!(existingFile is null))
             {
@@ -240,79 +241,91 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new <see cref="SharpCraft.Advancement"/> with the given parameters
+        /// Creates a new parent advancement with the given parameters
         /// </summary>
-        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
-        /// <param name="ingameName">the shown ingame name</param>
-        /// <param name="description">the shown ingame description</param>
-        /// <param name="icon">the icon for the <see cref="SharpCraft.Advancement"/> - Leave empty to make advancement invisible</param>
-        /// <param name="parent">the <see cref="SharpCraft.Advancement"/>'s parent <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="frame">the frame</param>
-        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="hidden">if the <see cref="SharpCraft.Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
-        /// <returns>the newly created <see cref="SharpCraft.Advancement"/></returns>
-        public Advancement Advancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, Advancement parent, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
+        /// <param name="fileName">The name of the advancement file</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <param name="requirements">The requirements for getting the advancement</param>
+        /// <param name="reward">The rewards to get for getting the advancement</param>
+        /// <param name="announceInChat">True if when the advancement is unlocked it will be announced in chat. False if not</param>
+        /// <param name="description">The description on the advancement</param>
+        /// <param name="frame">The frame around the icon</param>
+        /// <param name="hidden">True if the advancement can't be seen unless it has been unlocked</param>
+        /// <param name="icon">The icon on the advancement</param>
+        /// <param name="name">The shown advancement name</param>
+        /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
+        /// <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
+        /// <returns>The advancement</returns>
+        public ParentAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\""+ existingFile.FileName + "\") to get it.");
+            }
 
-            if (returnAdvancement is null)
-            {
-                return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, parent, requirement, reward, frame, showToast, chatAnnounce, hidden);
-            }
-            else
-            {
-                return returnAdvancement;
-            }
+            return new ParentAdvancement(this, fileName, requirements, reward, name, description, icon, background, frame, announceInChat, showToast, hidden, writeSetting);
         }
 
         /// <summary>
-        /// Creates a new <see cref="SharpCraft.Advancement"/> with the given parameters
+        /// Creates a new child advancement with the given parameters
         /// </summary>
-        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
-        /// <param name="ingameName">the shown ingame name</param>
-        /// <param name="description">the shown ingame description</param>
-        /// <param name="icon">the icon for the <see cref="SharpCraft.Advancement"/> - Leave empty to make advancement invisible</param>
-        /// <param name="background">the background shown in the advancement menu</param>
-        /// <param name="requirement">the <see cref="Advancement.Requirement"/> needed to get the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="reward">the <see cref="Advancement.Reward"/> given by getting the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="frame">the frame</param>
-        /// <param name="showToast">if a toast should be shown when the player gets the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="chatAnnounce">if it should be announced to chat when the player gets the <see cref="SharpCraft.Advancement"/></param>
-        /// <param name="hidden">if the <see cref="SharpCraft.Advancement"/> shouldn't be shown in the advancement menu before you get it</param>
-        /// <returns>the newly created <see cref="SharpCraft.Advancement"/></returns>
-        public Advancement Advancement(string advancementName, JSON[] ingameName, JSON[] description, JSONObjects.Item icon, string background, Advancement.Requirement requirement, Advancement.Reward reward = null, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool showToast = true, bool chatAnnounce = true, bool hidden = false)
+        /// <param name="fileName">The name of the advancement file</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <param name="requirements">The requirements for getting the advancement</param>
+        /// <param name="reward">The rewards to get for getting the advancement</param>
+        /// <param name="announceInChat">True if when the advancement is unlocked it will be announced in chat. False if not</param>
+        /// <param name="description">The description on the advancement</param>
+        /// <param name="frame">The frame around the icon</param>
+        /// <param name="hidden">True if the advancement can't be seen unless it has been unlocked</param>
+        /// <param name="icon">The icon on the advancement</param>
+        /// <param name="name">The shown advancement name</param>
+        /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
+        /// <param name="parent">The parent advancement</param>
+        /// <returns>The advancement</returns>
+        public ChildAdvancement Advancement(string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
+            }
 
-            if (returnAdvancement is null)
-            {
-                return new Advancement(this, advancementName.ToLower(), ingameName, description, icon, background, requirement, reward, frame, showToast, chatAnnounce, hidden);
-            }
-            else
-            {
-                return returnAdvancement;
-            }
+            return new ChildAdvancement(this, fileName, parent, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting);
         }
 
         /// <summary>
-        /// Overwrites the <see cref="SharpCraft.Advancement"/> with that name with an invalid <see cref="SharpCraft.Advancement"/>
+        /// Creates a new hidden advancement (Advancement is not visible in the advancement gui)
         /// </summary>
-        /// <param name="advancementName">The <see cref="SharpCraft.Advancement"/>'s name</param>
-        public void HideAdvancement(string advancementName)
+        /// <param name="fileName">The name of the advancement file</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <param name="requirements">The requirements for getting the advancement</param>
+        /// <param name="reward">The rewards to get for getting the advancement</param>
+        /// <returns>The advancement</returns>
+        public HiddenAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            Advancement returnAdvancement = GetFile<Advancement>(advancementName);
+            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
+            }
 
-            if (returnAdvancement is null)
+            return new HiddenAdvancement(this, fileName, requirements, reward, writeSetting);
+        }
+
+        /// <summary>
+        /// Makes the advancement with the file name invalid... which also makes all its children invalid
+        /// </summary>
+        /// <param name="fileName">The name of the file to make invalid</param>
+        public void Advancement(string fileName)
+        {
+            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            if (!(existingFile is null))
             {
-                new Advancement(this, advancementName).Dispose();
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
             }
-            else
-            {
-                throw new InvalidOperationException("Cannot hide advancement since it's getting used inside the namespace");
-            }
+
+            new InvalidAdvancement(this, fileName).Dispose();
         }
 
         /// <summary>
@@ -325,7 +338,7 @@ namespace SharpCraft
         /// <returns>The <see cref="FunctionGroup"/></returns>
         public FunctionGroup Group(string name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            FunctionGroup existingFile = GetFile<FunctionGroup>(name);
+            FunctionGroup existingFile = (FunctionGroup)GetFile("group_function",name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -349,7 +362,7 @@ namespace SharpCraft
         /// <returns>The <see cref="BlockGroup"/></returns>
         public BlockGroup Group(string name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            BlockGroup existingFile = GetFile<BlockGroup>(name);
+            BlockGroup existingFile = (BlockGroup)GetFile("group_block",name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -373,7 +386,7 @@ namespace SharpCraft
         /// <returns>The <see cref="ItemGroup"/></returns>
         public ItemGroup Group(string name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            ItemGroup existingFile = GetFile<ItemGroup>(name);
+            ItemGroup existingFile = (ItemGroup)GetFile("group_item", name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -397,7 +410,7 @@ namespace SharpCraft
         /// <returns>The <see cref="EntityGroup"/></returns>
         public EntityGroup Group(string name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            EntityGroup existingFile = GetFile<EntityGroup>(name);
+            EntityGroup existingFile = (EntityGroup)GetFile("group_entity",name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -421,7 +434,7 @@ namespace SharpCraft
         /// <returns>The <see cref="LiquidGroup"/></returns>
         public LiquidGroup Group(string name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LiquidGroup existingFile = GetFile<LiquidGroup>(name);
+            LiquidGroup existingFile = (LiquidGroup)GetFile("group_liquid", name);
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);

@@ -148,19 +148,19 @@ namespace SharpCraft
         /// <summary>
         /// Returns the file with the name and of the type. If it doesn't exist it returns null
         /// </summary>
-        /// <typeparam name="TFileType">The type of file to get</typeparam>
+        /// <param name="fileType">The type of file to get</param>
         /// <param name="fileName">The name of the file</param>
         /// <returns>The file with the name or null</returns>
-        public TFileType GetFile<TFileType>(string fileName) where TFileType : BaseFile
+        public BaseFile GetFile(string fileType, string fileName)
         {
             string name = fileName.ToLower().Replace("/", "\\");
 
             if (!IsSetup)
             {
-                throw new InvalidOperationException("Setup hasn't been run yet.");
+                throw new InvalidOperationException("Namespace setup hasn't been run yet.");
             }
 
-            BaseFile file = (TFileType)files.SingleOrDefault(f => f.FileName == name && f is TFileType);
+            BaseFile file = files.SingleOrDefault(f => f.FileName == name && f.FileType == fileType);
 
             if (file is null)
             {
@@ -169,10 +169,10 @@ namespace SharpCraft
 
             if (file.Setting == BaseFile.WriteSetting.LockedAuto || file.Setting == BaseFile.WriteSetting.LockedOnDispose)
             {
-                throw new InvalidOperationException("Cannot get file since it's locked.");
+                throw new InvalidOperationException($"Cannot get file \"{name}\" since it's locked.");
             }
 
-            return (TFileType)file;
+            return file;
         }
 
         /// <summary>

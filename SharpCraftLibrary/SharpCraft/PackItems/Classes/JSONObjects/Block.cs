@@ -3,7 +3,7 @@
 namespace SharpCraft
 {
     /// <summary>
-    /// <see cref="object"/>s used in <see cref="LootTable"/>s and <see cref="Advancement"/>s
+    /// <see cref="object"/>s used in <see cref="LootTable"/>s and <see cref="IAdvancement"/>s
     /// </summary>
     public static partial class JSONObjects
     {

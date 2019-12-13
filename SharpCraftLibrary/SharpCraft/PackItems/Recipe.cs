@@ -17,7 +17,7 @@ namespace SharpCraft
         /// <param name="Recipe">The recipe (max 3x3)</param>
         /// <param name="Output">The output item from the recipe</param>
         /// <param name="Group">The group the recipe is in</param>
-        public Recipe(PackNamespace space, string fileName, Item[,] Recipe, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
+        public Recipe(PackNamespace space, string fileName, Item[,] Recipe, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto, "recipe")
         {
             MakeRecipePath();
             TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
@@ -118,7 +118,7 @@ namespace SharpCraft
         /// <param name="NeededItems">List of item's needed for the recipe</param>
         /// <param name="Output">The output item from the recipe</param>
         /// <param name="Group">The group the recipe is in</param>
-        public Recipe(PackNamespace space, string fileName, Item[] NeededItems, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto)
+        public Recipe(PackNamespace space, string fileName, Item[] NeededItems, Item Output, string Group) : base(space, fileName, WriteSetting.LockedAuto, "recipe")
         {
             MakeRecipePath();
             TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
@@ -157,7 +157,7 @@ namespace SharpCraft
         /// <param name="XpDrop"></param>
         /// <param name="CookTime">The amount of time it takes to smelt the item</param>
         /// <param name="type">The type of smelting recipe</param>
-        public Recipe(PackNamespace space, string fileName, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type) : base(space, fileName, WriteSetting.LockedAuto)
+        public Recipe(PackNamespace space, string fileName, Item Input, ID.Item Output, double XpDrop, int CookTime, ID.SmeltType type) : base(space, fileName, WriteSetting.LockedAuto, "recipe")
         {
             MakeRecipePath();
             TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
@@ -189,7 +189,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="space">The namespace the recipe is in</param>
         /// <param name="fileName">The name of the recipe</param>
-        public Recipe(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto)
+        public Recipe(PackNamespace space, string fileName) : base(space, fileName, WriteSetting.LockedAuto, "recipe")
         {
             MakeRecipePath();
             using (TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json"))
@@ -205,7 +205,7 @@ namespace SharpCraft
         /// <param name="fileName">The name of the recipe</param>
         /// <param name="Input">The item to cut</param>
         /// <param name="Output">The output item</param>
-        public Recipe(PackNamespace space, string fileName, Item Input, Item Output) : base(space, fileName, WriteSetting.LockedAuto)
+        public Recipe(PackNamespace space, string fileName, Item Input, Item Output) : base(space, fileName, WriteSetting.LockedAuto, "recipe")
         {
             MakeRecipePath();
             using (TextWriter recipeWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json"))

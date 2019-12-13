@@ -57,7 +57,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="pools">The loot pools in the loot table</param>
         /// <param name="type">The type of loot table</param>
-        public LootTable(BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting)
+        public LootTable(BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting, "loot_table")
         {
             Type = type;
             Pools = pools.ToList();

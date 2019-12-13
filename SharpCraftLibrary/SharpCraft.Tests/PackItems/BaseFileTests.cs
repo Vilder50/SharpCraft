@@ -33,7 +33,7 @@ namespace SharpCraft.Tests.PackItems
             public static TextWriter WriterToUse;
             public bool RandomValue = false;
 
-            public BaseFileTestClass(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting)
+            public BaseFileTestClass(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "filetest")
             {
 
             }
@@ -66,7 +66,7 @@ namespace SharpCraft.Tests.PackItems
                 //test
                 Assert.AreEqual("my\\file", file.FileName, "file name is not getting set by constructor");
                 Assert.AreEqual(packNamespace, file.PackNamespace, "Packnamespace is not getting set by the constructor");
-                Assert.AreEqual(file, packNamespace.GetFile<BaseFileTestClass>(file.FileName), "Constructor is not adding the file to the namespace");
+                Assert.AreEqual(file, packNamespace.GetFile("filetest", file.FileName), "Constructor is not adding the file to the namespace");
             }
         }
 

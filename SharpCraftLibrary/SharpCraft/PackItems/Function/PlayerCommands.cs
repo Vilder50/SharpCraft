@@ -649,7 +649,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(Selector player, IAdvancement advancement, bool revoke = false, Advancement.Trigger trigger = null)
+            public void Only(Selector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
             {
                 function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }

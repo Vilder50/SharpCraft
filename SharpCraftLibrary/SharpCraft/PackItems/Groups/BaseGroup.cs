@@ -22,7 +22,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting)
+        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting, "recipe")
         {
             Items = items;
             AppendGroup = appendGroup;

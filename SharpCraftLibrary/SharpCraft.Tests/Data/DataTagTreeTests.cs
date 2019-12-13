@@ -288,9 +288,9 @@ namespace SharpCraft.Tests.Data
             Assert.AreEqual("\"ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("{test:\"1\"}", ID.NBTTagType.TagCompound);
             Assert.AreEqual("{test:\"1\"}", dataTag.GetDataString());
-            dataTag = new DataPartTag(new JSON[] { new JSON() { Text = "hello" } }, ID.NBTTagType.TagCompound);
+            dataTag = new DataPartTag(new JSON[] { new JSON() { Text = "hello" } }, ID.NBTTagType.TagString);
             Assert.AreEqual("\"[{\\\"text\\\":\\\"hello\\\"}]\"", dataTag.GetDataString());
-            dataTag = new DataPartTag(new JSON() { Text = "hello" }, ID.NBTTagType.TagCompound);
+            dataTag = new DataPartTag(new JSON() { Text = "hello" }, ID.NBTTagType.TagString);
             Assert.AreEqual("\"{\\\"text\\\":\\\"hello\\\"}\"", dataTag.GetDataString());
             dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagNamespacedString);
             Assert.AreEqual("\"minecraft:ValueEight\"", dataTag.GetDataString());

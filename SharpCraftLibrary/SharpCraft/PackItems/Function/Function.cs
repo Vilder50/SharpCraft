@@ -24,7 +24,7 @@ namespace SharpCraft
         /// <param name="space">The namespace the function is in</param>
         /// <param name="fileName">The name of the function</param>
         /// <param name="writeSetting">The setting for writing the file</param>
-        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting)
+        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
         {
             CreateDirectory("functions");
             if (IsAuto())

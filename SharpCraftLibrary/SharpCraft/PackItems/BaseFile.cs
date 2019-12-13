@@ -18,7 +18,8 @@ namespace SharpCraft
         /// <summary>
         /// Settings for accessing this file
         /// </summary>
-        public enum WriteSetting {
+        public enum WriteSetting
+        {
             /// <summary>
             /// Writes the file automatically as the file gets new things to write. It's not possible to change things already written to the file.
             /// </summary>
@@ -42,6 +43,7 @@ namespace SharpCraft
 
         BasePackNamespace packNamespace;
         string fileName;
+        private string fileType;
 
         /// <summary>
         /// Intializes a new <see cref="BaseFile"/> with the given values
@@ -49,11 +51,13 @@ namespace SharpCraft
         /// <param name="packNamespace">The namespace this file is for</param>
         /// <param name="fileName">The name of the file</param>
         /// <param name="writeSetting">The setting for the file</param>
-        public BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting)
+        /// <param name="fileType">The type of file</param>
+        public BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
             FileName = fileName;
             Setting = writeSetting;
+            FileType = fileType;
 
             PackNamespace.AddFile(this);
         }
@@ -82,7 +86,7 @@ namespace SharpCraft
                 }
 
                 //fix name and validate
-                string fixedName = value.ToLower().Replace("/","\\");
+                string fixedName = value.ToLower().Replace("/", "\\");
 
                 if (!ValidateFileName(fixedName))
                 {
@@ -92,6 +96,11 @@ namespace SharpCraft
                 fileName = fixedName;
             }
         }
+
+        /// <summary>
+        /// The type of file
+        /// </summary>
+        public string FileType { get => fileType; private set => fileType = value ?? throw new ArgumentNullException(nameof(FileType), "FileType may not be null"); }
 
         /// <summary>
         /// The setting used for this file
@@ -142,7 +151,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName.Replace("\\","/");
+            return PackNamespace.Name + ":" + FileName.Replace("\\", "/");
         }
 
         /// <summary>

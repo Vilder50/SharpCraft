@@ -28,8 +28,8 @@ namespace SharpCraft.Tests.Commands
                 EmptyNamespace packNamespace = datapack.Namespace("space");
                 Assert.AreEqual("advancement grant @a only space:adv", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), null, true).GetCommandString());
                 Assert.AreEqual("advancement revoke @a only space:adv", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), null, false).GetCommandString());
-                Assert.AreEqual("advancement grant @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), new Advancement.Trigger("test").BredAnimals(), true).GetCommandString());
-                Assert.AreEqual("advancement revoke @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), new Advancement.Trigger("test").BredAnimals(), false).GetCommandString());
+                Assert.AreEqual("advancement grant @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), new AdvancementObjects.BredAnimalsTrigger() {Name = "test" }, true).GetCommandString());
+                Assert.AreEqual("advancement revoke @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new EmptyAdvancement(packNamespace, "adv"), new AdvancementObjects.BredAnimalsTrigger() { Name = "test" }, false).GetCommandString());
 
                 Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(null, new EmptyAdvancement(packNamespace, "adv"), null, true));
                 Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(ID.Selector.a, null, null, true));

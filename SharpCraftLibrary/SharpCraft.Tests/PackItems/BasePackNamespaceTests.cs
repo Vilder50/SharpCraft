@@ -49,7 +49,7 @@ namespace SharpCraft.Tests.PackItems
 
         class BaseFileTestClass1 : BaseFile
         {
-            public BaseFileTestClass1(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting)
+            public BaseFileTestClass1(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test1")
             {
 
             }
@@ -67,7 +67,7 @@ namespace SharpCraft.Tests.PackItems
 
         class BaseFileTestClass2 : BaseFile
         {
-            public BaseFileTestClass2(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting)
+            public BaseFileTestClass2(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test2")
             {
 
             }
@@ -120,14 +120,14 @@ namespace SharpCraft.Tests.PackItems
             using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
             {
                 //test
-                Assert.AreEqual("file1", pack.GetFile<BaseFileTestClass1>("file1").FileName, "GetFile failed to get the file with the correct name");
-                Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile<BaseFileTestClass1>("file1").Setting, "GetFile failed to get the file of the correct type");
-                Assert.AreEqual("file2", pack.GetFile<BaseFileTestClass1>("file2").FileName, "GetFile failed to get the other file with the other name");
-                Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile<BaseFileTestClass2>("file1").Setting, "GetFile failed to get the file of the other type");
+                Assert.AreEqual("file1", pack.GetFile("test1","file1").FileName, "GetFile failed to get the file with the correct name");
+                Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
+                Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileName, "GetFile failed to get the other file with the other name");
+                Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1").Setting, "GetFile failed to get the file of the other type");
 
                 //test exception on extra file with same name and same type
                 Assert.ThrowsException<ArgumentException>(() => new BaseFileTestClass1(pack, "file1", BaseFile.WriteSetting.Auto), "Adding 2 files with the same name and same type should cast an exception");
-                Assert.ThrowsException<InvalidOperationException>(() => pack.GetFile<BaseFileTestClass2>("file3"), "should not be able to get locked file");
+                Assert.ThrowsException<InvalidOperationException>(() => pack.GetFile("test2", "file3"), "should not be able to get locked file");
             }
         }
 
@@ -172,11 +172,11 @@ namespace SharpCraft.Tests.PackItems
             BasePackNamespace space = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
 
             Assert.IsFalse(space.Disposed, "namespace shouldn't have been disposed yet");
-            Assert.IsFalse(space.GetFile<BaseFileTestClass2>("file1").Disposed, "namespace isn't disposed yet and the file shouldn't be disposed yet");
+            Assert.IsFalse(space.GetFile("test2", "file1").Disposed, "namespace isn't disposed yet and the file shouldn't be disposed yet");
             space.Dispose();
             Assert.IsTrue(((NamespaceTestClass)space).RandomValue, "AfterDispose didn't run");
             Assert.IsTrue(space.Disposed, "namespace should have been disposed");
-            Assert.IsTrue(space.GetFile<BaseFileTestClass2>("file1").Disposed, "namespace is disposed and the file should be disposed");
+            Assert.IsTrue(space.GetFile("test2", "file1").Disposed, "namespace is disposed and the file should be disposed");
 
             Assert.ThrowsException<InvalidOperationException>(() => new BaseFileTestClass1(space, "afile", BaseFile.WriteSetting.Auto), "Shouldn't be able to add more files since namespace is disposed");
         }

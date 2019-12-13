@@ -66,7 +66,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="criterion">The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement</param>
-        public AdvancementSingleCommand(Selector selector, IAdvancement advancement, Advancement.Trigger criterion, bool grant = true)
+        public AdvancementSingleCommand(Selector selector, IAdvancement advancement, AdvancementObjects.ITrigger criterion, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement
         /// </summary>
-        public Advancement.Trigger Criterion { get; set; }
+        public AdvancementObjects.ITrigger Criterion { get; set; }
 
         /// <summary>
         /// True if the advancement should be granted. False if it should be revoked

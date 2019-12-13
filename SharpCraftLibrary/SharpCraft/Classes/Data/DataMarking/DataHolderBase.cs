@@ -252,7 +252,7 @@ namespace SharpCraft.Data
                     else
                     {
                         //path continues
-                        DataPartPath addToPath = pathAtLocation.GetValues().SingleOrDefault(p => p.PathName == pathParts[i]);
+                        DataPartPath addToPath = pathAtLocation.GetValues().SingleOrDefault(p => p.PathName == (dataTagInformation.JsonTag ? "\"" + pathParts[i] + "\"" : pathParts[i]));
                         if (addToPath is null)
                         {
                             //If the path doesn't exist yet

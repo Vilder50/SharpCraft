@@ -61,6 +61,9 @@ namespace SharpCraft.Tests.Data
             [DataTag]
             public JSON[] Name { get; set; }
 
+            [DataTag("JsonTag", ForceType = ID.NBTTagType.TagCompound)]
+            public JSON[] JsonTag { get; set; }
+
             [DataTag("Fake", ForceType = ID.NBTTagType.TagCompound)]
             public string Fake { get; set; }
         }
@@ -203,7 +206,7 @@ namespace SharpCraft.Tests.Data
         {
             DataHolderTestClass testObject = new DataHolderTestClass();
             List<PropertyInfo> properties = testObject.GetDataProperties().ToList();
-            Assert.AreEqual(15, properties.Count);
+            Assert.AreEqual(16, properties.Count);
             PropertyInfo boolProperty = properties.Single(p => p.Name == "Boolean");
             boolProperty.SetValue(testObject, true);
             Assert.IsTrue(testObject.Boolean.Value);
@@ -257,7 +260,8 @@ namespace SharpCraft.Tests.Data
                     Text = "hey",
                     TextArray = new string[] { "hello", "world" },
                     Name = new JSON[] { new JSON() { Text = "1" }, new JSON() { Text = "2" } },
-                    Fake = "{hey:1}"
+                    Fake = "{hey:1}",
+                    JsonTag = new JSON[] { new JSON() { Text = "1" }, new JSON() { Text = "2" } }
                 }
             };
             Assert.AreEqual("{Inside:{" +
@@ -265,6 +269,7 @@ namespace SharpCraft.Tests.Data
                 "Double:{Tag:\"hey\"}," +
                 "Fake:{hey:1}," +
                 "FloatPointNumber:0.1f," +
+                "JsonTag:[{\"text\":\"1\"},{\"text\":\"2\"}]," +
                 "LongNumber:999999999999999L," +
                 "LongNumberArray:[0L,1L,1L]," +
                 "Name:\"[{\\\"text\\\":\\\"1\\\"},{\\\"text\\\":\\\"2\\\"}]\"," +
