@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The new recipe
         /// </summary>
         [DataTag("conditions.recipe", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public Recipe Location { get; set; }
+        public IRecipe Recipe { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace SharpCraft.AdvancementObjects
         /// The recipes to reward
         /// </summary>
         [DataTag("recipes", ForceType = ID.NBTTagType.TagStringArray, JsonTag = true)]
-        public Recipe[] Recipes { get; set; }
+        public IRecipe[] Recipes { get; set; }
 
         /// <summary>
         /// The function to run as a reward

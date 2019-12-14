@@ -551,7 +551,7 @@ namespace SharpCraft.FunctionWriters
             /// Give a recipe to the selected players
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
-            /// <param name="giveRecipe">The <see cref="Recipe"/> to give</param>
+            /// <param name="giveRecipe">The recipe to give</param>
             public void Give(Selector player, IRecipe giveRecipe)
             {
                 function.AddCommand(new RecipeCommand(giveRecipe, player, true));
@@ -568,8 +568,8 @@ namespace SharpCraft.FunctionWriters
             /// Removes a recipe from the selected players
             /// </summary>
             /// <param name="player">the <see cref="Selector"/> to use</param>
-            /// <param name="giveRecipe">the <see cref="Recipe"/> to remove</param>
-            public void Remove(Selector player, Recipe giveRecipe)
+            /// <param name="giveRecipe">the recipe to remove</param>
+            public void Remove(Selector player, IRecipe giveRecipe)
             {
                 function.AddCommand(new RecipeCommand(giveRecipe, player, false));
             }

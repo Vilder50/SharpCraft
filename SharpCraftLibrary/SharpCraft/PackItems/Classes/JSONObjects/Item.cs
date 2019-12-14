@@ -83,32 +83,6 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Outputs this <see cref="Item"/> data in string format
-            /// </summary>
-            /// <returns>this <see cref="Item"/>'s data</returns>
-            public override string ToString()
-            {
-                List<string> TempList = new List<string>();
-
-                if (Id != null) { TempList.Add("\"item\":\"minecraft:" + Id.ToString() + "\""); }
-                if (Durability != null) { TempList.Add(Durability.JSONString("durability")); }
-                if (Count != null) { TempList.Add(Count.JSONString("count")); }
-                if (Potion != null) { TempList.Add("\"potion\": \"" + Potion + "\""); }
-                if (Enchantments != null)
-                {
-                    List<string> TempEnchantList = new List<string>();
-                    for (int i = 0; i < Enchantments.Length; i++)
-                    {
-                        TempEnchantList.Add(Enchantments[i].ToString());
-                    }
-                    TempList.Add("\"enchantments\": [" + string.Join(",", TempEnchantList) + "]");
-                }
-                if (NBT != null) { TempList.Add("\"nbt\":\"" + NBT.GetItemTagString().Escape() + "\""); }
-
-                return "{" + string.Join(",", TempList) + "}";
-            }
-
-            /// <summary>
             /// Converts an item id into a <see cref="Item"/> object
             /// </summary>
             /// <param name="item">the item id to convert</param>

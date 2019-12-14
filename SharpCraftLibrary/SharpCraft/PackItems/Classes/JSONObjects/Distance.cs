@@ -39,22 +39,6 @@ namespace SharpCraft
             /// </summary>
             [DataTag("z", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
             public Range Z { get; set; }
-
-            /// <summary>
-            /// Outputs this <see cref="Distance"/> data in string format
-            /// </summary>
-            /// <returns>this <see cref="Distance"/>'s data</returns>
-            public override string ToString()
-            {
-                List<string> TempList = new List<string>();
-                if (X != null) { TempList.Add(X.JSONString("x")); }
-                if (Y != null) { TempList.Add(X.JSONString("y")); }
-                if (Z != null) { TempList.Add(X.JSONString("z")); }
-                if (Absolute != null) { TempList.Add(Absolute.JSONString("absolute")); }
-                if (Horizontal != null) { TempList.Add(Horizontal.JSONString("horizontal")); }
-
-                return "{" + string.Join(",", TempList) + "}";
-            }
         }
     }
 }

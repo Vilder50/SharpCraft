@@ -39,22 +39,6 @@ namespace SharpCraft
             /// </summary>
             [DataTag("source_entity", JsonTag = true)]
             public Entity SourceEntity { get; set; }
-
-            /// <summary>
-            /// Outputs this <see cref="Damage"/> data in string format
-            /// </summary>
-            /// <returns>this <see cref="Damage"/>'s data</returns>
-            public override string ToString()
-            {
-                List<string> TempList = new List<string>();
-
-                if (Dealt != null) { TempList.Add(Dealt.JSONString("dealt")); }
-                if (Taken != null) { TempList.Add(Taken.JSONString("taken")); }
-                if (Blocked != null) { TempList.Add("\"blocked\":" + Blocked); }
-                if (Type != null) { TempList.Add("\"type\":" + Type); }
-
-                return "{" + string.Join(",", TempList) + "}";
-            }
         }
     }
 }

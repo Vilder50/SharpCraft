@@ -128,7 +128,7 @@ namespace SharpCraft
                         {
                             if (!(recipe.Recipe is null))
                             {
-                                returnObject.AddValue(new DataPartPath("RecipeLocation" + recipe.ID, new DataPartTag(recipe.Recipe.ToString())));
+                                returnObject.AddValue(new DataPartPath("RecipeLocation" + recipe.ID, new DataPartTag(recipe.Recipe.GetNamespacedName())));
                             }
                             if (!(recipe.TimesSmelted is null))
                             {
@@ -152,7 +152,7 @@ namespace SharpCraft
                 /// <param name="id">The recipe's unique ID</param>
                 /// <param name="recipe">the recipe</param>
                 /// <param name="timesSmelted">the amount of times the recipe has been smelted</param>
-                public SmeltedRecipe(int id, Recipe recipe, int? timesSmelted)
+                public SmeltedRecipe(int id, IRecipe recipe, int? timesSmelted)
                 {
                     Recipe = recipe;
                     TimesSmelted = timesSmelted;
@@ -162,7 +162,7 @@ namespace SharpCraft
                 /// <summary>
                 /// The recipe
                 /// </summary>
-                public Recipe Recipe { get; set; }
+                public IRecipe Recipe { get; set; }
                 /// <summary>
                 /// The amount of times the recipe has been smelted
                 /// </summary>

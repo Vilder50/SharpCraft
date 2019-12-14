@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for recipes
     /// </summary>
-    public interface IRecipe
+    public interface IRecipe : Data.IConvertableToDataTag
     {
         /// <summary>
         /// The file name of the recipe

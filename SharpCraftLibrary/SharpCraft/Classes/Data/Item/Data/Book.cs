@@ -56,7 +56,7 @@ namespace SharpCraft
             /// The recipes unlocked when right clicking a recipe book
             /// </summary>
             [Data.DataTag("tag.Recipes", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-            public Recipe[] UnlockRecipes { get; set; }
+            public IRecipe[] UnlockRecipes { get; set; }
 
             /// <summary>
             /// The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.

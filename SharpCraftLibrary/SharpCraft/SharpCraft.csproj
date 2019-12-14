@@ -272,7 +272,6 @@
     <Compile Include="PackItems\Advancement\Triggers\ChangedDimensionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BrewedPotionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BredAnimalsTrigger.cs" />
-    <Compile Include="PackItems\Classes\JSONObjects\Block.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Damage.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\DamageFlags.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Distance.cs" />
@@ -389,7 +388,11 @@
     <Compile Include="PackItems\Groups\FunctionGroup.cs" />
     <Compile Include="PackItems\Groups\BaseGroup.cs" />
     <Compile Include="PackItems\BaseDatapack.cs" />
-    <Compile Include="PackItems\IRecipe.cs" />
+    <Compile Include="PackItems\Recipe\BaseRecipe.cs" />
+    <Compile Include="PackItems\Recipe\CraftingRecipe.cs" />
+    <Compile Include="PackItems\Recipe\CuttingRecipe.cs" />
+    <Compile Include="PackItems\Recipe\InvalidRecipe.cs" />
+    <Compile Include="PackItems\Recipe\IRecipe.cs" />
     <Compile Include="PackItems\LootTable\Changes\BaseChange.cs" />
     <Compile Include="PackItems\LootTable\Changes\AttributeChange.cs" />
     <Compile Include="PackItems\LootTable\Changes\ContentChange.cs" />
@@ -427,7 +430,9 @@
     <Compile Include="PackItems\LootTable\LootPool.cs" />
     <Compile Include="PackItems\LootTable\Loottable.cs" />
     <Compile Include="PackItems\PackNamespace.cs" />
-    <Compile Include="PackItems\Recipe.cs" />
+    <Compile Include="PackItems\Recipe\ShapelessRecipe.cs" />
+    <Compile Include="PackItems\Recipe\SmeltRecipe.cs" />
+    <Compile Include="PackItems\Recipe\SpecialRecipe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

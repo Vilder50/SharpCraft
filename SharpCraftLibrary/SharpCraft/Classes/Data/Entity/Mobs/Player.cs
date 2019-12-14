@@ -180,12 +180,12 @@ namespace SharpCraft
             /// A list of recipes the player has unlocked
             /// </summary>
             [Data.DataTag("recipeBook.recipes")]
-            public Recipe[] UnlockedRecipes { get; set; }
+            public IRecipe[] UnlockedRecipes { get; set; }
             /// <summary>
             /// A list of recipes the player has unlocked, but still haven't seen in the recipe book.
             /// </summary>
             [Data.DataTag("recipeBook.toBeDisplayed")]
-            public Recipe[] NotSeenRecipes { get; set; }
+            public IRecipe[] NotSeenRecipes { get; set; }
         }
     }
 }

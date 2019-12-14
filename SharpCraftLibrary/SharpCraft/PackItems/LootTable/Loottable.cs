@@ -52,8 +52,8 @@ namespace SharpCraft
         /// <summary>
         /// Intializes a new <see cref="LootTable"/> with the given parameters
         /// </summary>
-        /// <param name="packNamespace">The namespace the group is in</param>
-        /// <param name="fileName">The name of the group file</param>
+        /// <param name="packNamespace">The namespace the loot table is in</param>
+        /// <param name="fileName">The name of the loot table file</param>
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="pools">The loot pools in the loot table</param>
         /// <param name="type">The type of loot table</param>

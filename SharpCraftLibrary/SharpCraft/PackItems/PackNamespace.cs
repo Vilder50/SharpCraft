@@ -98,109 +98,166 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new crafting table <see cref="SharpCraft.Recipe"/> with the given parameters
+        /// Creates a new crafting table recipe with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
-        /// <param name="recipe">A multidimensional array describing how the <see cref="Item"/>s should be layed out in the crafting table</param>
-        /// <param name="output">The output <see cref="Item"/></param>
-        /// <param name="group">The string id of the group this <see cref="SharpCraft.Recipe"/> is in</param>
+        /// <param name="name">The recipe's name</param>
+        /// <param name="recipe">A multidimensional array describing how the items should be layed out in the crafting table</param>
+        /// <param name="output">The output item</param>
+        /// <param name="group">The string id of the group the recipe is in</param>
+        /// <param name="outputCount">The amount of items to output</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe Recipe(string name, Item[,] recipe, Item output, string group = null)
+        public CraftingRecipe Recipe(string name, ItemType[,] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
 
-            if (returnRecipe is null)
+            if (!(existingFile is null))
             {
-                return new Recipe(this, name, recipe, output, group);
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
             }
             else
             {
-                return returnRecipe;
+                return new CraftingRecipe(this, name, recipe, output, outputCount, group, setting);
             }
         }
 
         /// <summary>
-        /// Creates a new crafting table shapeless <see cref="SharpCraft.Recipe"/> with the given parameters
+        /// Creates a new shapeless crafting table recipe with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
-        /// <param name="recipe">The <see cref="Item"/>s needed to craft the <see cref="SharpCraft.Recipe"/></param>
-        /// <param name="output">The output <see cref="Item"/></param>
-        /// <param name="group">The string id of the group this <see cref="SharpCraft.Recipe"/> is in</param>
+        /// <param name="name">The recipe's name</param>
+        /// <param name="recipe">The items needed to craft the recipe</param>
+        /// <param name="output">The output item</param>
+        /// <param name="group">The string id of the group this recipe is in</param>
+        /// <param name="outputCount">The amount of items to output</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe Recipe(string name, Item[] recipe, Item output, string group = null)
+        public ShapelessRecipe Recipe(string name, ItemType[] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
 
-            if (returnRecipe is null)
+            if (!(existingFile is null))
             {
-                return new Recipe(this, name, recipe, output, group);
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
             }
             else
             {
-                return returnRecipe;
+                return new ShapelessRecipe(this, name, recipe, output, outputCount, group, setting);
             }
         }
 
         /// <summary>
-        /// Creates a new furnace/a type of furnace <see cref="SharpCraft.Recipe"/> with the given parameters
+        /// Creates a new furnace/a type of furnace recipe with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
-        /// <param name="input">The input <see cref="Item"/></param>
-        /// <param name="output">the output <see cref="Item"/></param>
-        /// <param name="xpDrop">the amount of xp the <see cref="SharpCraft.Recipe"/> should output</param>
-        /// <param name="cookTime">the amount of time the <see cref="SharpCraft.Recipe"/> takes</param>
-        /// <param name="recipeType">The type of smelt recipe</param>
+        /// <param name="name">The recipe's name</param>
+        /// <param name="ingredients">A list of items which are smeltable into the output item</param>
+        /// <param name="output">the output item</param>
+        /// <param name="xpDrop">the amount of xp the recipe should output</param>
+        /// <param name="cookTime">the amount of time the recipe takes. Use null to use default time</param>
+        /// <param name="type">The type of smelt recipe</param>
+        /// <param name="group">The string id of the group this recipe is in</param>
+        /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public Recipe Recipe(string name, Item input, ID.Item output, double xpDrop, ID.SmeltType recipeType, int cookTime = 200)
+        public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, int? cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
 
-            if (returnRecipe is null)
+            if (!(existingFile is null))
             {
-                return new Recipe(this, name, input, output, xpDrop, cookTime, recipeType);
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
             }
             else
             {
-                return returnRecipe;
+                return new SmeltRecipe(this, name, type, ingredients, output, xpDrop, cookTime, group, setting);
             }
         }
 
         /// <summary>
-        /// Creates a new stonecutter <see cref="SharpCraft.Recipe"/>
+        /// Creates a new furnace/a type of furnace recipe with the given parameters
         /// </summary>
-        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
-        /// <param name="input">The input <see cref="Item"/></param>
-        /// <param name="output">the output <see cref="Item"/></param>
-        /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
-        public Recipe Recipe(string name, Item input, Item output)
+        /// <param name="name">The recipe's name</param>
+        /// <param name="ingredient">The item to smelt</param>
+        /// <param name="output">the output item</param>
+        /// <param name="xpDrop">the amount of xp the recipe should output</param>
+        /// <param name="cookTime">the amount of time the recipe takes. Use null to use default time</param>
+        /// <param name="type">The type of smelt recipe</param>
+        /// <param name="group">The string id of the group this recipe is in</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created recipe</returns>
+        public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, Time cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
 
-            if (returnRecipe is null)
+            if (!(existingFile is null))
             {
-                return new Recipe(this, name, input, output);
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
             }
             else
             {
-                return returnRecipe;
+                return new SmeltRecipe(this, name, type, ingredient, output, xpDrop, cookTime, group, setting);
             }
         }
 
         /// <summary>
-        /// Overwrites the <see cref="SharpCraft.Recipe"/> with that name with an invalid <see cref="SharpCraft.Recipe"/>
+        /// Creates a new stonecutter recipe
         /// </summary>
-        /// <param name="name">The <see cref="SharpCraft.Recipe"/>'s name</param>
-        public void HideRecipe(string name)
+        /// <param name="name">The recipe's name</param>
+        /// <param name="ingredients">A list of items which are cut-able into the output item</param>
+        /// <param name="output">the output item</param>
+        /// <param name="outputCount">The amount of items to output</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created recipe</returns>
+        public CuttingRecipe Recipe(string name, ItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Recipe returnRecipe = (Recipe)GetFile("recipe", name);
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
 
-            if (returnRecipe is null)
+            if (!(existingFile is null))
             {
-                new Recipe(this, name).Dispose();
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
             }
             else
             {
-                throw new InvalidOperationException("Cannot hide recipe since it is in use in this namespace");
+                return new CuttingRecipe(this, name, ingredients, output, outputCount, null, setting);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new stonecutter recipe
+        /// </summary>
+        /// <param name="name">The recipe's name</param>
+        /// <param name="ingredient">The cut-able which outputs the item</param>
+        /// <param name="output">the output item</param>
+        /// <param name="outputCount">The amount of items to output</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created recipe</returns>
+        public CuttingRecipe Recipe(string name, ItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+            }
+            else
+            {
+                return new CuttingRecipe(this, name, ingredient, output, outputCount, null, setting);
+            }
+        }
+
+        /// <summary>
+        /// Overwrites the recipe with the given name with an invalid recipe
+        /// </summary>
+        /// <param name="name">The recipe's name</param>
+        public void Recipe(string name)
+        {
+            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Don't generate the file if you don't need it anyways.");
+            }
+            else
+            {
+                new InvalidRecipe(this, name).Dispose();
             }
         }
 
@@ -211,7 +268,7 @@ namespace SharpCraft
         /// <param name="lootPools">The <see cref="LootPool"/>s in the <see cref="LootTable"/></param>
         /// <param name="type">The type of loot table</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
-        /// <returns>The newly created <see cref="SharpCraft.Recipe"/></returns>
+        /// <returns>The newly created <see cref="LootTable"/></returns>
         public LootTable Loottable(string tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
             LootTable existingFile = (LootTable)GetFile("loot_table", tableName);
