@@ -388,6 +388,8 @@
     <Compile Include="PackItems\Groups\FunctionGroup.cs" />
     <Compile Include="PackItems\Groups\BaseGroup.cs" />
     <Compile Include="PackItems\BaseDatapack.cs" />
+    <Compile Include="PackItems\Predicate\IPredicate.cs" />
+    <Compile Include="PackItems\Predicate\Predicate.cs" />
     <Compile Include="PackItems\Recipe\BaseRecipe.cs" />
     <Compile Include="PackItems\Recipe\CraftingRecipe.cs" />
     <Compile Include="PackItems\Recipe\CuttingRecipe.cs" />

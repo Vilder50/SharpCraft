@@ -83,6 +83,7 @@
     <Compile Include="PackItems\FunctionTests.cs" />
     <Compile Include="PackItems\GroupTests.cs" />
     <Compile Include="PackItems\LootTableTests.cs" />
+    <Compile Include="PackItems\PredicateTests.cs" />
     <Compile Include="PackItems\RecipeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

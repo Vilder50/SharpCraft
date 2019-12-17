@@ -45,6 +45,27 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Creates a new predicate with the given name and condition
+        /// </summary>
+        /// <param name="name">The name of the predicate</param>
+        /// <param name="condition">The condition</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created predicate</returns>
+        public Predicate Predicate(string name, Conditions.BaseCondition condition, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Predicate existingFile = (Predicate)GetFile("predicate", name);
+
+            if (existingFile is null)
+            {
+                return new Predicate(this, name, condition, setting);
+            }
+            else
+            {
+                throw new ArgumentException("There already exists a predicate with the name: " + existingFile.FileName + ". Use GetFile(\"predicate\",\"" + existingFile.FileName + "\") to get it.");
+            }
+        }
+
+        /// <summary>
         /// Creates a new function with the given name
         /// </summary>
         /// <param name="functionName">The function's name. If null will get random name</param>
