@@ -425,13 +425,19 @@ namespace SharpCraft
         /// <summary>
         /// Converts this coordinate into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <param name="conversionData">0: x path name, 1: y path name, 2: z path name, 3: type of the coord values</param>
+        /// <param name="conversionData">0: x path name, 1: y path name, 2: z path name, 3: type of the coord values, 4: if json</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
         public DataPartObject GetAsDataObject(object[] conversionData)
         {
-            if (conversionData.Length != 4)
+            if (!(conversionData.Length == 4 || conversionData.Length == 5))
             {
-                throw new ArgumentException("There has to be exacly 4 conversion params to convert a coordinate to a data object.");
+                throw new ArgumentException("There has to be 4-5 conversion params to convert a coordinate to a data object.");
+            }
+
+            bool json = false;
+            if (conversionData.Length == 4 && conversionData[4] is bool isJson)
+            {
+                json = isJson;
             }
 
             if (conversionData[0] is string xName && conversionData[1] is string yName && conversionData[2] is string zName && conversionData[3] is ID.NBTTagType forceType)
@@ -439,9 +445,9 @@ namespace SharpCraft
                 DataPartObject dataObject = new DataPartObject();
                 if (forceType == ID.NBTTagType.TagInt)
                 {
-                    dataObject.AddValue(new DataPartPath(xName, new DataPartTag((int)X)));
-                    dataObject.AddValue(new DataPartPath(yName, new DataPartTag((int)Y)));
-                    dataObject.AddValue(new DataPartPath(zName, new DataPartTag((int)Z)));
+                    dataObject.AddValue(new DataPartPath(xName, new DataPartTag((int)X, isJson: json), json));
+                    dataObject.AddValue(new DataPartPath(yName, new DataPartTag((int)Y, isJson: json), json));
+                    dataObject.AddValue(new DataPartPath(zName, new DataPartTag((int)Z, isJson: json), json));
                 }
                 else
                 {

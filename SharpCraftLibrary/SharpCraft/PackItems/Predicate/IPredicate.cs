@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for predicates
     /// </summary>
-    public interface IPredicate
+    public interface IPredicate : Data.IConvertableToDataTag
     {
         /// <summary>
         /// The file name of the predicate

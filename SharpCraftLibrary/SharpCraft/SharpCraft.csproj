@@ -272,6 +272,8 @@
     <Compile Include="PackItems\Advancement\Triggers\ChangedDimensionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BrewedPotionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BredAnimalsTrigger.cs" />
+    <Compile Include="PackItems\Classes\Conditions\PredicateCondition.cs" />
+    <Compile Include="PackItems\Classes\Conditions\TimeCondition.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Damage.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\DamageFlags.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Distance.cs" />

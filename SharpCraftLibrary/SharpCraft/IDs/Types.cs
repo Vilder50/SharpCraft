@@ -13,6 +13,11 @@ namespace SharpCraft
     public interface IBlockType
     {
         /// <summary>
+        /// The block
+        /// </summary>
+        object Value { get; }
+
+        /// <summary>
         /// The name of the block
         /// </summary>
         string Name { get; }
@@ -21,7 +26,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding a block id
     /// </summary>
-    public class BlockType : IGroupable, Data.IConvertableToDataTag
+    public class BlockType : IGroupable, IConvertableToDataTag, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="BlockType"/> from a <see cref="ID.Block"/>
@@ -30,6 +35,7 @@ namespace SharpCraft
         public BlockType(ID.Block block)
         {
             Name = "minecraft:" + block;
+            Value = block;
         }
 
         /// <summary>
@@ -39,7 +45,13 @@ namespace SharpCraft
         public BlockType(IBlockType block)
         {
             Name = block.Name;
+            Value = block.Value;
         }
+
+        /// <summary>
+        /// The block
+        /// </summary>
+        public object Value { get; protected set; }
 
         /// <summary>
         /// The id
@@ -93,6 +105,35 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(conversionData),"Need to get 3 conversion data.");
+            }
+            bool? json = conversionData[2] as bool?;
+            if (json is null)
+            {
+                throw new ArgumentException(nameof(conversionData), "3rd conversion object has to be a bool");
+            }
+
+            DataPartObject returnObject = new DataPartObject();
+            if (Value is BaseGroup<BlockType>)
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+            }
+            else
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+            }
+            return returnObject;
+        }
+
+        /// <summary>
         /// Implicit converts a <see cref="ID.Block"/> into a <see cref="BlockType"/> object
         /// </summary>
         /// <param name="block">The <see cref="ID.Block"/> to convert</param>
@@ -131,6 +172,11 @@ namespace SharpCraft
     public interface IItemType
     {
         /// <summary>
+        /// The item
+        /// </summary>
+        object Value { get; }
+
+        /// <summary>
         /// The name of the item
         /// </summary>
         string Name { get; }
@@ -139,7 +185,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding an item id
     /// </summary>
-    public class ItemType : IGroupable, IConvertableToDataTag
+    public class ItemType : IGroupable, IConvertableToDataTag, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="ItemType"/> from a <see cref="ID.Item"/>
@@ -147,7 +193,8 @@ namespace SharpCraft
         /// <param name="item">The id of this item</param>
         public ItemType(ID.Item item)
         {
-            Name = "minecraft:" + item.ToString().ToLower();
+            Name = "minecraft:" + item.MinecraftValue();
+            Value = item;
         }
 
         /// <summary>
@@ -157,7 +204,13 @@ namespace SharpCraft
         public ItemType(IItemType item)
         {
             Name = item.Name;
+            Value = item.Value;
         }
+
+        /// <summary>
+        /// The item
+        /// </summary>
+        public object Value { get; protected set; }
 
         /// <summary>
         /// The id
@@ -240,6 +293,35 @@ namespace SharpCraft
 
             return new DataPartTag(Name);
         }
+
+        /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
+            }
+            bool? json = conversionData[2] as bool?;
+            if (json is null)
+            {
+                throw new ArgumentException(nameof(conversionData), "3rd conversion object has to be a bool");
+            }
+
+            DataPartObject returnObject = new DataPartObject();
+            if (Value is BaseGroup<BlockType>)
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+            }
+            else
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+            }
+            return returnObject;
+        }
     }
 
     /// <summary>
@@ -247,6 +329,11 @@ namespace SharpCraft
     /// </summary>
     public interface IEntityType
     {
+        /// <summary>
+        /// The entity
+        /// </summary>
+        object Value { get; }
+
         /// <summary>
         /// The name of the entity
         /// </summary>
@@ -256,7 +343,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding an entity id
     /// </summary>
-    public class EntityType : IGroupable, IConvertableToDataTag
+    public class EntityType : IGroupable, IConvertableToDataTag, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="EntityType"/> from a <see cref="ID.Entity"/>
@@ -265,6 +352,7 @@ namespace SharpCraft
         public EntityType(ID.Entity entity)
         {
             Name = "minecraft:" + entity;
+            Value = entity;
         }
 
         /// <summary>
@@ -274,7 +362,13 @@ namespace SharpCraft
         public EntityType(IEntityType entity)
         {
             Name = entity.Name;
+            Value = entity.Value;
         }
+
+        /// <summary>
+        /// The entity
+        /// </summary>
+        public object Value { get; protected set; }
 
         /// <summary>
         /// The id
@@ -315,6 +409,35 @@ namespace SharpCraft
 
             return new DataPartTag(Name);
         }
+
+        /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
+            }
+            bool? json = conversionData[2] as bool?;
+            if (json is null)
+            {
+                throw new ArgumentException(nameof(conversionData), "3rd conversion object has to be a bool");
+            }
+
+            DataPartObject returnObject = new DataPartObject();
+            if (Value is BaseGroup<BlockType>)
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+            }
+            else
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+            }
+            return returnObject;
+        }
     }
 
     /// <summary>
@@ -322,6 +445,11 @@ namespace SharpCraft
     /// </summary>
     public interface ILiquidType
     {
+        /// <summary>
+        /// The liquid
+        /// </summary>
+        object Value { get; }
+
         /// <summary>
         /// The name of the liquid
         /// </summary>
@@ -331,7 +459,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for holding an liquid id
     /// </summary>
-    public class LiquidType : IGroupable
+    public class LiquidType : IGroupable, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="LiquidType"/> from a <see cref="ID.Liquid"/>
@@ -340,6 +468,7 @@ namespace SharpCraft
         public LiquidType(ID.Liquid liquid)
         {
             Name = "minecraft:" + liquid;
+            Value = liquid;
         }
 
         /// <summary>
@@ -349,7 +478,13 @@ namespace SharpCraft
         public LiquidType(ILiquidType liquid)
         {
             Name = liquid.Name;
+            Value = liquid.Value;
         }
+
+        /// <summary>
+        /// The liquid
+        /// </summary>
+        public object Value { get; protected set; }
 
         /// <summary>
         /// The id
@@ -373,6 +508,35 @@ namespace SharpCraft
         public static implicit operator LiquidType(ID.Liquid liquid)
         {
             return new LiquidType(liquid);
+        }
+
+        /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object[] conversionData)
+        {
+            if (conversionData.Length != 3)
+            {
+                throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
+            }
+            bool? json = conversionData[2] as bool?;
+            if (json is null)
+            {
+                throw new ArgumentException(nameof(conversionData), "3rd conversion object has to be a bool");
+            }
+
+            DataPartObject returnObject = new DataPartObject();
+            if (Value is BaseGroup<BlockType>)
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+            }
+            else
+            {
+                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+            }
+            return returnObject;
         }
     }
 }

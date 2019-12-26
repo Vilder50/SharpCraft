@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SharpCraft.Conditions;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -36,6 +37,17 @@ namespace SharpCraft
         /// The condition to test for
         /// </summary>
         public BaseCondition Condition { get => condition; set => condition = value ?? throw new ArgumentNullException(nameof(Condition), "Condition may not be null"); }
+
+        /// <summary>
+        /// Converts this predicate into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Unused</param>
+        /// <param name="extraConversionData">Unused</param>
+        /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
+        }
 
         /// <summary>
         /// Returns the stream this file is going to use for writing it's file
@@ -90,6 +102,17 @@ namespace SharpCraft
         public string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + FileName;
+        }
+
+        /// <summary>
+        /// Converts this predicate into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Unused</param>
+        /// <param name="extraConversionData">Unused</param>
+        /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
         }
     }
 }
