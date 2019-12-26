@@ -238,6 +238,9 @@
     <Compile Include="PackItems\Advancement\BaseVisibleAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ParentAdvancement.cs" />
     <Compile Include="PackItems\Advancement\EmptyAdvancement.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\SlideBlockTrigger.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\SafehoneyHarvestTrigger.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\NestDestroyedTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\TradedVillagerTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\CausedRaidTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\UsedEnderEyeTrigger.cs" />
@@ -390,6 +393,7 @@
     <Compile Include="PackItems\Groups\FunctionGroup.cs" />
     <Compile Include="PackItems\Groups\BaseGroup.cs" />
     <Compile Include="PackItems\BaseDatapack.cs" />
+    <Compile Include="PackItems\LootTable\Changes\CopyStateChange.cs" />
     <Compile Include="PackItems\Predicate\IPredicate.cs" />
     <Compile Include="PackItems\Predicate\Predicate.cs" />
     <Compile Include="PackItems\Recipe\BaseRecipe.cs" />

@@ -55,13 +55,13 @@ namespace SharpCraft
             /// <summary>
             /// The block at the location
             /// </summary>
-            [DataTag("block", "block", "tag", "nbt", "state", true, ID.NBTTagType.TagInt, true, JsonTag = true)]
+            [DataTag("block", "block", "tag", "nbt", "state", true, JsonTag = true)]
             public Block Block { get; set; }
 
             /// <summary>
             /// The liquid at the location
             /// </summary>
-            [DataTag("fluid", "fluid", "tag", "nbt", "state", true, ID.NBTTagType.TagInt, true, JsonTag = true)]
+            [DataTag("fluid", "fluid", "tag", "nbt", "state", true, JsonTag = true)]
             public Block Liquid { get; set; }
 
             /// <summary>
