@@ -173,8 +173,9 @@ namespace SharpCraft.FunctionWriters
         /// <param name="runFunction">the function to run</param>
         /// <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
         /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
+        /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
         /// <returns>The ran function</returns>
-        public IFunction Function(IFunction runFunction, Time delay = null)
+        public IFunction Function(IFunction runFunction, Time delay = null, bool append = true)
         {
             if (delay == null)
             {
@@ -182,10 +183,19 @@ namespace SharpCraft.FunctionWriters
             }
             else
             {
-                function.AddCommand(new ScheduleCommand(runFunction, delay));
+                function.AddCommand(new ScheduleAddCommand(runFunction, delay, append));
             }
 
             return runFunction;
+        }
+
+        /// <summary>
+        /// Clears the schedule for the given function
+        /// </summary>
+        /// <param name="function">The function to clear the schedule for</param>
+        public void StopSchedule(IFunction function)
+        {
+            this.function.AddCommand(new ScheduleClearCommand(function));
         }
 
         /// <summary>
@@ -216,6 +226,102 @@ namespace SharpCraft.FunctionWriters
         public void Gamerule(ID.IntGamerule gamerule, int? setValue)
         {
             function.AddCommand(new GameruleSetIntCommand(gamerule, setValue));
+        }
+
+        /// <summary>
+        /// The data commands
+        /// </summary>
+        public ClassData Data;
+
+        /// <summary>
+        /// The data commands
+        /// </summary>
+        public class ClassData
+        {
+            readonly Function function;
+            internal ClassData(Function function)
+            {
+                this.function = function;
+            }
+
+            /// <summary>
+            /// Adds the given data to the <see cref="Storage"/>
+            /// </summary>
+            /// <param name="data">The data to give to the <see cref="Storage"/></param>
+            /// <param name="storage">the <see cref="Storage"/> to give the data to</param>
+            public void Change(Storage storage, Data.SimpleDataHolder data)
+            {
+                function.AddCommand(new DataMergeStorageCommand(storage, data));
+            }
+
+            /// <summary>
+            /// Copies data into the <see cref="SharpCraft.Block"/>
+            /// </summary>
+            /// <param name="storage">the <see cref="Storage"/> to copy the data to</param>
+            /// <param name="toDataPath">the datapath to copy to</param>
+            /// <param name="modifierType">The way to data should be copied in</param>
+            /// <param name="copyData">The data to insert</param>
+            public void Change(Storage storage, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
+            {
+                function.AddCommand(new DataModifyWithDataCommand(new StorageDataLocation(storage, toDataPath), modifierType, copyData));
+            }
+
+            /// <summary>
+            /// Copies data into the <see cref="SharpCraft.Block"/>
+            /// </summary>
+            /// <param name="storage">the <see cref="Storage"/> to copy the data to</param>
+            /// <param name="toDataPath">the datapath to copy to</param>
+            /// <param name="index">The index to copy the data to</param>
+            /// <param name="copyData">The data to insert</param>
+            public void Change(Storage storage, string toDataPath, int index, Data.SimpleDataHolder copyData)
+            {
+                function.AddCommand(new DataModifyInsertDataCommand(new StorageDataLocation(storage, toDataPath), index, copyData));
+            }
+
+            /// <summary>
+            /// Removes the data from the <see cref="SharpCraft.Block"/> at the given datapath
+            /// </summary>
+            /// <param name="dataPath">The datapath</param>
+            /// <param name="storage">the <see cref="Storage"/> to remove the data from</param>
+            public void Remove(Storage storage, string dataPath)
+            {
+                function.AddCommand(new DataDeleteCommand(new StorageDataLocation(storage, dataPath)));
+            }
+
+            /// <summary>
+            /// Gets the numeric data from the datapath from the <see cref="SharpCraft.Block"/>
+            /// </summary>
+            /// <param name="storage">the <see cref="Storage"/> to get the data from</param>
+            /// <param name="dataPath">the datapath to the data</param>
+            /// <param name="scale">the number to multiply the numeric value with</param>
+            public void Get(Storage storage, string dataPath, double scale = 1)
+            {
+                function.AddCommand(new DataGetCommand(new StorageDataLocation(storage, dataPath), scale));
+            }
+
+            /// <summary>
+            /// Copies data into the block at given location
+            /// </summary>
+            /// <param name="storage">the <see cref="Storage"/> to copy the data to</param>
+            /// <param name="toDataPath">the datapath to copy to</param>
+            /// <param name="modifierType">The way to data should be copied in</param>
+            /// <param name="dataLocation">The place to copy the data from</param>
+            public void Copy(Storage storage, string toDataPath, ID.EntityDataModifierType modifierType, IDataLocation dataLocation)
+            {
+                function.AddCommand(new DataModifyWithLocationCommand(new StorageDataLocation(storage, toDataPath), modifierType, dataLocation));
+            }
+
+            /// <summary>
+            /// Copies data into the block at the given location
+            /// </summary>
+            /// <param name="storage">the <see cref="Storage"/> to copy the data to</param>
+            /// <param name="toDataPath">the datapath to copy to</param>
+            /// <param name="index">The index to copy the data to</param>
+            /// <param name="dataLocation">The place to copy the data from</param>
+            public void Copy(Storage storage, string toDataPath, int index, IDataLocation dataLocation)
+            {
+                function.AddCommand(new DataModifyInsertLocationCommand(new StorageDataLocation(storage, toDataPath), index, dataLocation));
+            }
         }
 
         /// <summary>

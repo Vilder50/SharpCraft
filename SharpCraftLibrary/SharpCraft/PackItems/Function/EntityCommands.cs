@@ -209,61 +209,29 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
-            /// Copies data from one entity to another entity
+            /// Copies data from a place to an entity
             /// </summary>
             /// <param name="toSelector">The entity to copy the data to</param>
             /// <param name="toDataPath">The data path to copy to</param>
-            /// <param name="fromSelector">The entity to copy from</param>
-            /// <param name="fromDataPath">The data path to copy from</param>
+            /// <param name="dataLocation">The place to copy the data from</param>
             /// <param name="modifierType">The way to add the data</param>
-            public void Copy(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Selector fromSelector, string fromDataPath)
+            public void Copy(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, IDataLocation dataLocation)
             {
                 toSelector.Limited();
-                fromSelector.Limited();
-                function.AddCommand(new DataModifyWithLocationCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, new EntityDataLocation(fromSelector, fromDataPath)));
+                function.AddCommand(new DataModifyWithLocationCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, dataLocation));
             }
 
             /// <summary>
-            /// Copies data from a block to an entity
+            /// Copies data from a place to an entity at the data path's specified index
             /// </summary>
             /// <param name="toSelector">The entity to copy the data to</param>
             /// <param name="toDataPath">The data path to copy to</param>
-            /// <param name="fromBlock">The block to copy from</param>
-            /// <param name="fromDataPath">The data path to copy from</param>
-            /// <param name="modifierType">The way to add the data</param>
-            public void Copy(Selector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Coords fromBlock, string fromDataPath)
-            {
-                toSelector.Limited();
-                function.AddCommand(new DataModifyWithLocationCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, new BlockDataLocation(fromBlock, fromDataPath)));
-            }
-
-            /// <summary>
-            /// Copies data from a block to an entity at the data path's specified index
-            /// </summary>
-            /// <param name="toSelector">The entity to copy the data to</param>
-            /// <param name="toDataPath">The data path to copy to</param>
-            /// <param name="fromBlock">The block to copy from</param>
-            /// <param name="fromDataPath">The data path to copy from</param>
+            /// <param name="dataLocation">The place to copy the data from</param>
             /// <param name="index">the index to copy to</param>
-            public void Copy(Selector toSelector, string toDataPath, Coords fromBlock, string fromDataPath, int index)
+            public void Copy(Selector toSelector, string toDataPath, IDataLocation dataLocation, int index)
             {
                 toSelector.Limited();
-                function.AddCommand(new DataModifyInsertLocationCommand(new EntityDataLocation(toSelector, toDataPath), index, new BlockDataLocation(fromBlock, fromDataPath)));
-            }
-
-            /// <summary>
-            /// Copies data from one entity to another entity at the data path's specified index
-            /// </summary>
-            /// <param name="toSelector">The entity to copy the data to</param>
-            /// <param name="toDataPath">The data path to copy to</param>
-            /// <param name="fromSelector">The entity to copy from</param>
-            /// <param name="fromDataPath">The data path to copy from</param>
-            /// <param name="index">the index to copy to</param>
-            public void Copy(Selector toSelector, string toDataPath, Selector fromSelector, string fromDataPath, int index)
-            {
-                toSelector.Limited();
-                fromSelector.Limited();
-                function.AddCommand(new DataModifyInsertLocationCommand(new EntityDataLocation(toSelector, toDataPath), index, new EntityDataLocation(fromSelector, fromDataPath)));
+                function.AddCommand(new DataModifyInsertLocationCommand(new EntityDataLocation(toSelector, toDataPath), index, dataLocation));
             }
         }
 

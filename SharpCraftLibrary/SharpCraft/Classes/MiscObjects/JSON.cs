@@ -114,6 +114,11 @@ namespace SharpCraft
         public string ClickCommand;
 
         /// <summary>
+        /// the text to copy when the text is clicked
+        /// </summary>
+        public string ClickCopy;
+
+        /// <summary>
         /// the text to input into a player's chat field if a player clicks the text
         /// </summary>
         public string ClickInsertion;
@@ -197,6 +202,7 @@ namespace SharpCraft
                 if (Reset != null) { TempList.Add("\"Reset\":" + Reset); }
                 if (ClickShiftInsertion != null) { TempList.Add("\"insertion\":\"" + ClickShiftInsertion.Escape() + "\""); }
                 if (ClickURL != null) { TempList.Add("\"clickEvent\":{ \"action\":\"open_url\",\"value\":\"" + ClickURL.Escape() + "\"}"); }
+                if (ClickCopy != null) { TempList.Add("\"clickEvent\":{ \"action\":\"copy_to_clipboard\",\"value\":\"" + ClickCopy.Escape() + "\"}"); }
                 if (ClickCommand != null) { TempList.Add("\"clickEvent\":{ \"action\":\"run_command\",\"value\":\"" + ClickCommand.Escape() + "\"}"); }
                 if (ClickInsertion != null) { TempList.Add("\"clickEvent\":{ \"action\":\"suggest_command\",\"value\":\"" + ClickInsertion.Escape() + "\"}"); }
                 if (ClickBookPageChange != null) { TempList.Add("\"clickEvent\":{ \"action\":\"change_page\",\"value\":\"" + ClickBookPageChange + "\"}"); }

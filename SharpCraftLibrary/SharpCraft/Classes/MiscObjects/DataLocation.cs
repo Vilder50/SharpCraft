@@ -140,4 +140,61 @@ namespace SharpCraft
             return $"entity {Selector.ToString()} {DataPath}";
         }
     }
+
+    /// <summary>
+    /// Used for holding a storage location and a datapath for getting data
+    /// </summary>
+    public class StorageDataLocation : IDataLocation
+    {
+        private Storage storage;
+        private string dataPath;
+
+        /// <summary>
+        /// Intializes a new <see cref="StorageDataLocation"/>
+        /// </summary>
+        /// <param name="storage">The storage holding the data</param>
+        /// <param name="dataPath">The path to the data to get</param>
+        public StorageDataLocation(Storage storage, string dataPath)
+        {
+            Storage = storage;
+            DataPath = dataPath;
+        }
+
+        /// <summary>
+        /// The storage holding the data
+        /// </summary>
+        public Storage Storage
+        {
+            get => storage;
+            set
+            {
+                storage = value ?? throw new ArgumentNullException(nameof(Storage), "Storage may not be null");
+            }
+        }
+
+        /// <summary>
+        /// The path to the data to get
+        /// </summary>
+        public string DataPath
+        {
+            get => dataPath;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("DataPath may not be null or whitespace", nameof(DataPath));
+                }
+                dataPath = value;
+            }
+        }
+
+        /// <summary>
+        /// Returns a string used in commands for getting the data
+        /// </summary>
+        /// <returns>A string used in commands for getting the data</returns>
+        public string GetLocationString()
+        {
+            return $"storage {Storage.ToString()} {DataPath}";
+        }
+    }
 }

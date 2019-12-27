@@ -58,6 +58,8 @@
     <Compile Include="Commands\ExecuteTests.cs" />
     <Compile Include="Commands\ExperienceCommandsTests.cs" />
     <Compile Include="Commands\FillCommandsTests.cs" />
+    <Compile Include="Commands\SpectateCommandsTests.cs" />
+    <Compile Include="Commands\ScheduleCommandsTests.cs" />
     <Compile Include="Commands\WorldborderCommandsTests.cs" />
     <Compile Include="Commands\TitleCommandsTests.cs" />
     <Compile Include="Commands\TimeCommandsTests.cs" />

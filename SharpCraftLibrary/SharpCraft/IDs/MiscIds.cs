@@ -2689,6 +2689,31 @@
             /// If spectators are able to generate new chunks
             /// </summary>
             spectatorsGenerateChunks,
+
+            /// <summary>
+            /// If phantoms should spawn when player havent slept for some time
+            /// </summary>
+            doInsomnia,
+
+            /// <summary>
+            /// If players should respawn immediatly
+            /// </summary>
+            doImmediateRespawn,
+
+            /// <summary>
+            /// If players should take damage from drowning
+            /// </summary>
+            drowningDamage,
+
+            /// <summary>
+            /// If players should take fall damage
+            /// </summary>
+            fallDamage,
+
+            /// <summary>
+            /// If players should take fire damage
+            /// </summary>
+            fireDamage
         }
         public enum IntGamerule
         {

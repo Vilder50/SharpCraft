@@ -547,59 +547,6 @@ namespace SharpCraft.Commands
     }
 
     /// <summary>
-    /// Command for scheduling a function
-    /// </summary>
-    public class ScheduleCommand : BaseCommand
-    {
-        private IFunction function;
-        private Time time;
-
-        /// <summary>
-        /// Intializes a new <see cref="ScheduleCommand"/>
-        /// </summary>
-        /// <param name="function">The function to schedule</param>
-        /// <param name="time">The amount of time before the function is run</param>
-        public ScheduleCommand(IFunction function, Time time)
-        {
-            Function = function;
-            Time = time;
-        }
-
-        /// <summary>
-        /// The function to schedule
-        /// </summary>
-        public IFunction Function
-        {
-            get => function;
-            set
-            {
-                function = value ?? throw new ArgumentNullException(nameof(Function), "Function may not be null.");
-            }
-        }
-
-        /// <summary>
-        /// The amount of time before the function is run
-        /// </summary>
-        public Time Time
-        {
-            get => time;
-            set
-            {
-                time = value ?? throw new ArgumentNullException(nameof(Time), "Time may not be null.");
-            }
-        }
-
-        /// <summary>
-        /// Returns the command as a string
-        /// </summary>
-        /// <returns>schedule function [Function] [Time]</returns>
-        public override string GetCommandString()
-        {
-            return $"schedule function {Function.GetNamespacedName()} {Time.ToString()}";
-        }
-    }
-
-    /// <summary>
     /// Command which places a block in the world
     /// </summary>
     public class SetblockCommand : BaseCommand

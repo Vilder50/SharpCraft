@@ -215,57 +215,27 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
-            /// Copies data into the <see cref="SharpCraft.Block"/>
+            /// Copies data into the block at given location
             /// </summary>
             /// <param name="toBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="modifierType">The way to data should be copied in</param>
-            /// <param name="fromSelector">the <see cref="Entity"/> to copy the data from</param>
-            /// <param name="fromDataPath">The datapath to copy from</param>
-            public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Selector fromSelector, string fromDataPath)
+            /// <param name="dataLocation">The place to copy the data from</param>
+            public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, IDataLocation dataLocation)
             {
-                fromSelector.Limited();
-                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, new EntityDataLocation(fromSelector, fromDataPath)));
+                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, dataLocation));
             }
 
             /// <summary>
-            /// Copies data into the <see cref="SharpCraft.Block"/>
-            /// </summary>
-            /// <param name="toBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
-            /// <param name="toDataPath">the datapath to copy to</param>
-            /// <param name="modifierType">The way to data should be copied in</param>
-            /// <param name="fromBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data from</param>
-            /// <param name="fromDataPath">The datapath to copy from</param>
-            public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Coords fromBlock, string fromDataPath)
-            {
-                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, new BlockDataLocation(fromBlock, fromDataPath)));
-            }
-
-            /// <summary>
-            /// Copies data into the <see cref="SharpCraft.Block"/>
+            /// Copies data into the block at the given location
             /// </summary>
             /// <param name="toBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="index">The index to copy the data to</param>
-            /// <param name="fromBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data from</param>
-            /// <param name="fromDataPath">The datapath to copy from</param>
-            public void Copy(Coords toBlock, string toDataPath, int index, Coords fromBlock, string fromDataPath)
+            /// <param name="dataLocation">The place to copy the data from</param>
+            public void Copy(Coords toBlock, string toDataPath, int index, IDataLocation dataLocation)
             {
-                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, new BlockDataLocation(fromBlock, fromDataPath)));
-            }
-
-            /// <summary>
-            /// Copies data into the <see cref="SharpCraft.Block"/>
-            /// </summary>
-            /// <param name="toBlock">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
-            /// <param name="toDataPath">the datapath to copy to</param>
-            /// <param name="index">The index to copy the data to</param>
-            /// <param name="fromSelector">the <see cref="Entity"/> to copy the data from</param>
-            /// <param name="fromDataPath">The datapath to copy from</param>
-            public void Copy(Coords toBlock, string toDataPath, int index, Selector fromSelector, string fromDataPath)
-            {
-                fromSelector.Limited();
-                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, new EntityDataLocation(fromSelector, fromDataPath)));
+                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, dataLocation));
             }
         }
     }

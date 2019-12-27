@@ -122,19 +122,6 @@ namespace SharpCraft.Tests.Commands
         }
 
         [TestMethod]
-        public void ScheduleCommandTest()
-        {
-            using (EmptyDatapack datapack = new EmptyDatapack("pack"))
-            {
-                EmptyFunction function = new EmptyFunction(datapack.Namespace("space"), "function");
-                Assert.AreEqual("schedule function space:function 100d", new ScheduleCommand(function, new Time(100, ID.TimeType.days)).GetCommandString());
-
-                Assert.ThrowsException<ArgumentNullException>(() => new ScheduleCommand(null, new Time(100, ID.TimeType.days)));
-                Assert.ThrowsException<ArgumentNullException>(() => new ScheduleCommand(function, null));
-            }
-        }
-
-        [TestMethod]
         public void SetblockCommandTest()
         {
             Assert.AreEqual("setblock ~1 ~2 ~3 minecraft:anvil[facing=east] destroy", new SetblockCommand(new Coords(1, 2, 3), new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy).GetCommandString());
