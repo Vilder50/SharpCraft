@@ -50,6 +50,7 @@
     <Compile Include="Classes\Data\Block\Data\BaseContainer.cs" />
     <Compile Include="Classes\Data\Block\Data\BaseInventory.cs" />
     <Compile Include="Classes\Data\Block\Data\Beacon.cs" />
+    <Compile Include="Classes\Data\Block\Data\BeeHive.cs" />
     <Compile Include="Classes\Data\Block\Data\BrewingStand.cs" />
     <Compile Include="Classes\Data\Block\Data\Campfire.cs" />
     <Compile Include="Classes\Data\Block\Data\Chest.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Classes\Data\Entity\Mobs\Fish.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Fox.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Ghast.cs" />
+    <Compile Include="Classes\Data\Entity\Mobs\Bee.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Horse.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\IronGolem.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\MagicIllager.cs" />
