@@ -1687,6 +1687,7 @@
         }
         public enum Liquid
         {
+            emtpty,
             lava,
             flowing_lava,
             water,
