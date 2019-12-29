@@ -145,10 +145,16 @@ namespace SharpCraft
         public ScoreObject Objective;
 
         /// <summary>
-        /// The coords of a block to show data for
+        /// The coords of a block to show data for.
         /// note that <see cref="DataPath"/> also has to be set
         /// </summary>
         public Coords BlockCoords;
+
+        /// <summary>
+        /// The storage to show data for.
+        /// note that <see cref="DataPath"/> also has to be set
+        /// </summary>
+        public Storage Storage;
 
         /// <summary>
         /// The datapath to the data to show
@@ -187,6 +193,10 @@ namespace SharpCraft
                     else if (BlockCoords != null)
                     {
                         TempList.Add("\"block\":\""+ BlockCoords.ToString() + "\",\"nbt\":\"" + DataPath + "\"");
+                    }
+                    else if (Storage != null)
+                    {
+                        TempList.Add("\"storage\":\"" + BlockCoords.ToString() + "\",\"nbt\":\"" + DataPath + "\"");
                     }
 
                     if (interpret != null) { TempList.Add("\"interpret\":" + interpret); }

@@ -221,11 +221,9 @@ namespace SharpCraft
                         doors,
                         flower_pots,
                         ice,
-                        jungle_logs,
                         leaves,
                         oak_logs,
                         planks,
-                        rails,
                         sand,
                         saplings,
                         slabs,
@@ -239,6 +237,11 @@ namespace SharpCraft
                         wooden_slabs,
                         wooden_stairs,
                         small_flowers,
+                        crops,
+                        tall_flowers,
+                        standing_signs,
+                        wall_signs,
+                        walls
                         #pragma warning restore 1591
                     }
 
@@ -264,9 +267,21 @@ namespace SharpCraft
                         banners,
 
                         /// <summary>
-                        /// Blocks in this groups does not allow water to drip through them
+                        /// Blocks cats can sit on.
+                        /// Blocks which can be slept in
+                        /// </summary>
+                        beds,
+
+                        /// <summary>
+                        /// Blocks in this groups does not allow water and honey to drip through them
                         /// </summary>
                         impermeable,
+
+                        /// <summary>
+                        /// Blocks leads can attach to
+                        /// Blocks which mobs see as fences while pathfinding
+                        /// </summary>
+                        fences,
 
                         /// <summary>
                         /// Leaves wont decay around these blocks
@@ -303,8 +318,44 @@ namespace SharpCraft
                         /// <summary>
                         /// Blocks the enderdragon wont destroy
                         /// </summary>
-                        dragon_immune
+                        dragon_immune,
 
+                        /// <summary>
+                        /// Blocks bees can make grow
+                        /// </summary>
+                        bee_growables,
+
+                        /// <summary>
+                        /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
+                        /// </summary>
+                        beehives,
+
+                        /// <summary>
+                        /// Blocks bees can pollinate and remember
+                        /// </summary>
+                        flowers,
+
+                        /// <summary>
+                        /// Blocks fences doesn't connect to
+                        /// </summary>
+                        shulker_boxes,
+
+                        /// <summary>
+                        /// Blocks cocoa beans can be placed on
+                        /// </summary>
+                        jungle_logs,
+
+                        /// <summary>
+                        /// Blocks mobs can't spawn on.
+                        /// Blocks minecarts can be dispenced on to.
+                        /// Blocks tnt minecarts doesn't destroy.
+                        /// </summary>
+                        rails,
+
+                        /// <summary>
+                        /// Water doesn't break these blocks
+                        /// </summary>
+                        signs
                     }
                 }
 
@@ -347,33 +398,22 @@ namespace SharpCraft
                     public enum Normal
                     {
                         #pragma warning disable 1591
-                        small_flowers,
                         acacia_logs,
                         anvil,
-                        banners,
                         birch_logs,
-                        boats,
                         buttons,
-                        carpets,
                         dark_oak_logs,
                         doors,
                         jungle_logs,
                         leaves,
-                        logs,
                         oak_logs,
                         rails,
                         sand,
-                        saplings,
                         slabs,
                         spruce_logs,
                         stairs,
                         stone_bricks,
-                        wooden_buttons,
-                        wooden_doors,
-                        wooden_pressure_plates,
-                        wooden_slabs,
-                        wooden_stairs,
-                        wool
+                        tall_flowers
                         #pragma warning restore 1591
                     }
 
@@ -383,25 +423,121 @@ namespace SharpCraft
                     public enum Special
                     {
                         /// <summary>
-                        /// Items in this group can be used to repeair wooden tools and shields
+                        /// Items in this group can be used to repeair wooden tools and shields.
+                        /// Items which burns in a furnace for 300 ticks
                         /// </summary>
                         planks,
                         /// <summary>
                         /// Dolphins swims to players with this item
                         /// Can be feet to dolphins
                         /// </summary>
-                        fishes
+                        fishes,
+                        /// <summary>
+                        /// Items which can be used to breed bees
+                        /// </summary>
+                        flowers,
+                        /// <summary>
+                        /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
+                        /// </summary>
+                        lectern_books,
+                        /// <summary>
+                        /// Items which can be shot from a bow/crossbow
+                        /// </summary>
+                        arrows,
+                        /// <summary>
+                        /// Items which burns in a furnace for 300 ticks
+                        /// </summary>
+                        banners,
+                        /// <summary>
+                        /// Items which burns in a furnace for 1200 ticks
+                        /// </summary>
+                        boats,
+                        /// <summary>
+                        /// Items which can be placed on llamas.
+                        /// Items which burns in a furnace for 67 ticks
+                        /// </summary>
+                        carpets,
+                        /// <summary>
+                        /// Items which burns in a furnace for 300 ticks
+                        /// </summary>
+                        logs,
+                        /// <summary>
+                        /// Items which burns in a furnace for 100 ticks
+                        /// </summary>
+                        saplings,
+                        /// <summary>
+                        /// Items which burns in a furnace for 200 ticks
+                        /// </summary>
+                        signs,
+                        /// <summary>
+                        /// Items used for crafting suspicious stew.
+                        /// Items which can be fed to brown mushrooms.
+                        /// Items which bees follows
+                        /// </summary>
+                        small_flowers,
+                        /// <summary>
+                        /// Items which burns in a furnace for 100 ticks
+                        /// </summary>
+                        wooden_buttons,
+                        /// <summary>
+                        /// Items which burns in a furnace for 200 ticks
+                        /// </summary>
+                        wooden_doors,
+                        /// <summary>
+                        /// Items which burns in a furnace for 300 ticks
+                        /// </summary>
+                        wooden_pressure_plates,
+                        /// <summary>
+                        /// Items which burns in a furnace for 150 ticks
+                        /// </summary>
+                        wooden_slabs,
+                        /// <summary>
+                        /// Items which burns in a furnace for 300 ticks
+                        /// </summary>
+                        wooden_stairs,
+                        /// <summary>
+                        /// Items which burns in a furnace for 300 ticks
+                        /// </summary>
+                        wooden_trapdoors,
+                        /// <summary>
+                        /// Items which burns in a furnace for 100 ticks
+                        /// </summary>
+                        wool,
                     }
                 }
 
                 /// <summary>
                 /// entity groups
                 /// </summary>
-                public enum Entities
+                public static class Entities
                 {
-                    #pragma warning disable 1591
-                    skeletons
-                    #pragma warning restore 1591
+                    /// <summary>
+                    /// Normal entity groups made by the game. These groups has no real uses other than grouping entities for advancements
+                    /// </summary>
+                    public enum Normal
+                    {
+#pragma warning disable 1591
+                        skeletons,
+                        arrows
+#pragma warning restore 1591
+                    }
+
+                    /// <summary>
+                    /// special entity groups which has special properties
+                    /// </summary>
+                    public enum Special
+                    {
+                        /// <summary>
+                        /// entities which can be in beehives
+                        /// </summary>
+                        beehive_inhabitors,
+
+                        /// <summary>
+                        /// Entities which glows when the bell rings.
+                        /// Entities which don't override ravager AI when riding on one
+                        /// </summary>
+                        raiders
+                    }
                 }
             }
         }
