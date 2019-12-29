@@ -39,6 +39,16 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Intializes a new <see cref="BlockType"/> from a <see cref="ID.Liquid"/>
+        /// </summary>
+        /// <param name="liquid">The id of this liquid</param>
+        public BlockType(ID.Liquid liquid)
+        {
+            Name = "minecraft:" + liquid;
+            Value = liquid;
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="BlockType"/>
         /// </summary>
         /// <param name="block">The id of this block</param>
@@ -141,6 +151,16 @@ namespace SharpCraft
         public static implicit operator BlockType(ID.Block block)
         {
             return new BlockType(block);
+        }
+
+        /// <summary>
+        /// Implicit converts a <see cref="ID.Liquid"/> into a <see cref="BlockType"/> object
+        /// </summary>
+        /// <param name="liquid">The <see cref="ID.Liquid"/> to convert</param>
+
+        public static implicit operator BlockType(ID.Liquid liquid)
+        {
+            return new BlockType(liquid);
         }
 
         /// <summary>
@@ -472,6 +492,16 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Intializes a new <see cref="LiquidType"/> from a <see cref="ID.Block"/>
+        /// </summary>
+        /// <param name="block">The id of this block</param>
+        public LiquidType(ID.Block block)
+        {
+            Name = "minecraft:" + block;
+            Value = block;
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="LiquidType"/>
         /// </summary>
         /// <param name="liquid">The id of this liquid</param>
@@ -508,6 +538,16 @@ namespace SharpCraft
         public static implicit operator LiquidType(ID.Liquid liquid)
         {
             return new LiquidType(liquid);
+        }
+
+        /// <summary>
+        /// Implicit converts a <see cref="ID.Block"/> into a <see cref="LiquidType"/> object
+        /// </summary>
+        /// <param name="block">The <see cref="ID.Block"/> to convert</param>
+
+        public static implicit operator LiquidType(ID.Block block)
+        {
+            return new LiquidType(block);
         }
 
         /// <summary>
