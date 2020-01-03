@@ -88,14 +88,14 @@ namespace SharpCraft.Commands
     public class TeamJoinCommand : BaseCommand
     {
         private Team team;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TeamJoinCommand"/>
         /// </summary>
         /// <param name="team">The team to join</param>
         /// <param name="selector">Selector selecting the entities to put into the team</param>
-        public TeamJoinCommand(Team team, Selector selector)
+        public TeamJoinCommand(Team team, BaseSelector selector)
         {
             Team = team;
             Selector = selector;
@@ -109,7 +109,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to put into the team
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -126,13 +126,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamLeaveCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TeamLeaveCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting entities to make leave their team</param>
-        public TeamLeaveCommand(Selector selector)
+        public TeamLeaveCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -140,7 +140,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting entities to make leave their team
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command

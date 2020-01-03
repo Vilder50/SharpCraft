@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteRotatedAs : BaseExecuteCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteRotatedAs"/> command
         /// </summary>
         /// <param name="selector">The selector for selecting the entity whose rotation to use for executing</param>
-        public ExecuteRotatedAs(Selector selector)
+        public ExecuteRotatedAs(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The selector for selecting the entity whose rotation to use for executing
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

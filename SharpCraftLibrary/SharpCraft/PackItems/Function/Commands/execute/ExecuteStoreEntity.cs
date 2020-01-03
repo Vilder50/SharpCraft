@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreEntity : BaseExecuteStoreCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private string dataPath;
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <param name="valueType">The type of number to store the result as</param>
         /// <param name="scale">A number to multiply the result by before storing it</param>
         /// <param name="storeResult">True if it should store the result. False if it should store success</param>
-        public ExecuteStoreEntity(Selector selector, string dataPath, ID.StoreTypes valueType, double scale, bool storeResult = true) : base(storeResult)
+        public ExecuteStoreEntity(BaseSelector selector, string dataPath, ID.StoreTypes valueType, double scale, bool storeResult = true) : base(storeResult)
         {
             Selector = selector;
             DataPath = dataPath;
@@ -34,7 +34,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// selector for selecting the entity to store the result on
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

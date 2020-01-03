@@ -275,7 +275,7 @@ namespace SharpCraft.Commands
     public class ScoreboardValueChangeCommand : BaseCommand
     {
         private ScoreObject scoreObject;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueChangeCommand"/>
@@ -284,7 +284,7 @@ namespace SharpCraft.Commands
         /// <param name="scoreObject">The objective to change score in</param>
         /// <param name="changeType">The way to change the score</param>
         /// <param name="changeNumber">The number to change the score with</param>
-        public ScoreboardValueChangeCommand(Selector selector, ScoreObject scoreObject, ID.ScoreChange changeType, int changeNumber)
+        public ScoreboardValueChangeCommand(BaseSelector selector, ScoreObject scoreObject, ID.ScoreChange changeType, int changeNumber)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -295,7 +295,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to change score in
@@ -339,14 +339,14 @@ namespace SharpCraft.Commands
     public class ScoreboardValueGetCommand : BaseCommand
     {
         private ScoreObject scoreObject;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueGetCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the score to get</param>
         /// <param name="scoreObject">The objective to get the score from</param>
-        public ScoreboardValueGetCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardValueGetCommand(BaseSelector selector, ScoreObject scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -355,7 +355,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the score to get
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -390,14 +390,14 @@ namespace SharpCraft.Commands
     public class ScoreboardEnableTriggerCommand : BaseCommand
     {
         private ScoreObject scoreObject;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardEnableTriggerCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the players to enable a trigger for</param>
         /// <param name="scoreObject">The objective to enable triggering</param>
-        public ScoreboardEnableTriggerCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardEnableTriggerCommand(BaseSelector selector, ScoreObject scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -406,7 +406,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the players to enable a trigger for
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to enable triggering
@@ -429,14 +429,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardResetCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardResetCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the scores to reset</param>
         /// <param name="scoreObject">The objective to reset scores in. Null to reset all scores for the selected scores</param>
-        public ScoreboardResetCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardResetCommand(BaseSelector selector, ScoreObject scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -445,7 +445,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to reset
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to reset scores in. Null to reset all scores for the selected scores
@@ -474,13 +474,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardListCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveListCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the entity to get a list of scores for</param>
-        public ScoreboardListCommand(Selector selector)
+        public ScoreboardListCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -488,7 +488,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the entity to get a list of scores for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -516,9 +516,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardOperationCommand : BaseCommand
     {
-        private Selector selector1;
+        private BaseSelector selector1;
         private ScoreObject objective1;
-        private Selector selector2;
+        private BaseSelector selector2;
         private ScoreObject objective2;
 
         /// <summary>
@@ -529,7 +529,7 @@ namespace SharpCraft.Commands
         /// <param name="operator">The operation use on the 2 scores</param>
         /// <param name="selector2">Selector for selecting the scores to change with</param>
         /// <param name="objective2">The objective the scores used for changing is in</param>
-        public ScoreboardOperationCommand(Selector selector1, ScoreObject objective1, ID.Operation @operator, Selector selector2, ScoreObject objective2)
+        public ScoreboardOperationCommand(BaseSelector selector1, ScoreObject objective1, ID.Operation @operator, BaseSelector selector2, ScoreObject objective2)
         {
             Selector1 = selector1;
             Objective1 = objective1;
@@ -541,7 +541,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change
         /// </summary>
-        public Selector Selector1 { get => selector1; set => selector1 = value ?? throw new ArgumentNullException(nameof(Selector1), "Selector1 may not be null"); }
+        public BaseSelector Selector1 { get => selector1; set => selector1 = value ?? throw new ArgumentNullException(nameof(Selector1), "Selector1 may not be null"); }
 
         /// <summary>
         /// The objective the scores to change is in
@@ -558,7 +558,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change with
         /// </summary>
-        public Selector Selector2 { get => selector2; set => selector2 = value ?? throw new ArgumentNullException(nameof(Selector2), "Selector2 may not be null"); }
+        public BaseSelector Selector2 { get => selector2; set => selector2 = value ?? throw new ArgumentNullException(nameof(Selector2), "Selector2 may not be null"); }
 
         /// <summary>
         /// The objective the scores used for changing is in

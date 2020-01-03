@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteFacingEntity : BaseExecuteCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteFacingEntity"/> command
         /// </summary>
         /// <param name="selector">Selector for selecting entities the command should execute in the direction of</param>
         /// <param name="facingPart">The part of the entities the command should face</param>
-        public ExecuteFacingEntity(Selector selector, ID.FacingAnchor facingPart)
+        public ExecuteFacingEntity(BaseSelector selector, ID.FacingAnchor facingPart)
         {
             Selector = selector;
             FacingPart = facingPart;
@@ -27,7 +27,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting entities the command should execute in the direction of
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

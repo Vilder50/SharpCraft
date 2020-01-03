@@ -50,16 +50,16 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes at the given <see cref="Selector"/>
+        /// Executes at the given <see cref="BaseSelector"/>
         /// </summary>
-        /// <param name="atEntity">The <see cref="Selector"/> to execute at</param>
-        public void At(Selector atEntity)
+        /// <param name="atEntity">The <see cref="BaseSelector"/> to execute at</param>
+        public void At(BaseSelector atEntity)
         {
             function.AddCommand(new ExecuteAt(atEntity));
         }
 
         /// <summary>
-        /// Executes at using the @s <see cref="Selector"/>
+        /// Executes at using the @s <see cref="BaseSelector"/>
         /// </summary>
         public void At()
         {
@@ -67,10 +67,10 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes as the given <see cref="Selector"/>
+        /// Executes as the given <see cref="BaseSelector"/>
         /// </summary>
-        /// <param name="asEntity">The <see cref="Selector"/> to execute as</param>
-        public void As(Selector asEntity)
+        /// <param name="asEntity">The <see cref="BaseSelector"/> to execute as</param>
+        public void As(BaseSelector asEntity)
         {
             function.AddCommand(new ExecuteAs(asEntity));
         }
@@ -102,9 +102,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Executes if the <paramref name="entitySelector"/> finds an <see cref="Entity"/>
         /// </summary>
-        /// <param name="entitySelector">The <see cref="Selector"/> used to search for entities</param>
+        /// <param name="entitySelector">The <see cref="BaseSelector"/> used to search for entities</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfEntity(Selector entitySelector, bool want = true)
+        public void IfEntity(BaseSelector entitySelector, bool want = true)
         {
             function.AddCommand(new ExecuteIfEntity(entitySelector, want));
         }
@@ -112,12 +112,12 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Executes if the <see cref="Entity"/> selected with <paramref name="dataPath"/> has the given datapath
         /// </summary>
-        /// <param name="entitySelector">The <see cref="Selector"/> which selects the entity</param>
+        /// <param name="entitySelector">The <see cref="BaseSelector"/> which selects the entity</param>
         /// <param name="dataPath">The datapath the entity should contain</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfData(Selector entitySelector, string dataPath, bool want = true)
+        public void IfData(BaseSelector entitySelector, string dataPath, bool want = true)
         {
-            entitySelector.Limited();
+            entitySelector.LimitSelector();
             function.AddCommand(new ExecuteIfData(new EntityDataLocation(entitySelector, dataPath), want));
         }
 
@@ -156,29 +156,29 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Executes if the <paramref name="mainSelector"/>'s score value is <paramref name="operation"/> than <paramref name="otherSelector"/>'s score value
         /// </summary>
-        /// <param name="mainSelector">The first <see cref="Selector"/></param>
-        /// <param name="mainObject">The first <see cref="Selector"/>'s <see cref="ScoreObject"/></param>
+        /// <param name="mainSelector">The first <see cref="BaseSelector"/></param>
+        /// <param name="mainObject">The first <see cref="BaseSelector"/>'s <see cref="ScoreObject"/></param>
         /// <param name="operation">The operation used to check the scores</param>
-        /// <param name="otherSelector">The second <see cref="Selector"/></param>
-        /// <param name="otherObject">The second <see cref="Selector"/>'s <see cref="ScoreObject"/></param>
+        /// <param name="otherSelector">The second <see cref="BaseSelector"/></param>
+        /// <param name="otherObject">The second <see cref="BaseSelector"/>'s <see cref="ScoreObject"/></param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfScore(Selector mainSelector, ScoreObject mainObject, ID.IfScoreOperation operation, Selector otherSelector, ScoreObject otherObject, bool want = true)
+        public void IfScore(BaseSelector mainSelector, ScoreObject mainObject, ID.IfScoreOperation operation, BaseSelector otherSelector, ScoreObject otherObject, bool want = true)
         {
-            mainSelector.Limited();
-            otherSelector.Limited();
+            mainSelector.LimitSelector();
+            otherSelector.LimitSelector();
             function.AddCommand(new ExecuteIfScoreRelative(mainSelector, mainObject, operation, otherSelector, otherObject, want));
         }
 
         /// <summary>
-        /// Executes if the given <see cref="Selector"/>'s score is in the given <see cref="Range"/>
+        /// Executes if the given <see cref="BaseSelector"/>'s score is in the given <see cref="Range"/>
         /// </summary>
-        /// <param name="selector">the <see cref="Selector"/>'s score to check</param>
+        /// <param name="selector">the <see cref="BaseSelector"/>'s score to check</param>
         /// <param name="scoreObject">the <see cref="ScoreObject"/> to containing the score</param>
         /// <param name="range">the <see cref="Range"/> the score should be in</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfScore(Selector selector, ScoreObject scoreObject, Range range, bool want = true)
+        public void IfScore(BaseSelector selector, ScoreObject scoreObject, Range range, bool want = true)
         {
-            selector.Limited();
+            selector.LimitSelector();
             function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
         }
 
@@ -192,10 +192,10 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes at the given <see cref="Selector"/>'s <see cref="Coords"/>
+        /// Executes at the given <see cref="BaseSelector"/>'s <see cref="Coords"/>
         /// </summary>
-        /// <param name="entity">The <see cref="Selector"/> to execute at</param>
-        public void Positioned(Selector entity)
+        /// <param name="entity">The <see cref="BaseSelector"/> to execute at</param>
+        public void Positioned(BaseSelector entity)
         {
             function.AddCommand(new ExecutePositionedAs(entity));
         }
@@ -203,14 +203,14 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Stores the command's success output inside the <see cref="Entity"/>
         /// </summary>
-        /// <param name="entity">the <see cref="Selector"/> which choses the <see cref="Entity"/></param>
+        /// <param name="entity">the <see cref="BaseSelector"/> which choses the <see cref="Entity"/></param>
         /// <param name="dataPath">the datapath to store the output in</param>
         /// <param name="dataType">the path to the place to store the score</param>
         /// <param name="scale">the number the output should be multiplied with before being inserted</param>
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
-        public void Store(Selector entity, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
+        public void Store(BaseSelector entity, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
-            entity.Limited();
+            entity.LimitSelector();
             function.AddCommand(new ExecuteStoreEntity(entity, dataPath, dataType, scale, !storeSucces));
         }
 
@@ -233,7 +233,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="entity">The <see cref="Entity"/> to store in</param>
         /// <param name="scoreObject">The <see cref="ScoreObject"/> to store in</param>
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
-        public void Store(Selector entity, ScoreObject scoreObject, bool storeSucces = false)
+        public void Store(BaseSelector entity, ScoreObject scoreObject, bool storeSucces = false)
         {
             function.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
         }
@@ -254,7 +254,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="entity">the <see cref="Entity"/> it should be rotated at</param>
         /// <param name="facing">the part of the <see cref="Entity"/> to be faced at</param>
-        public void Facing(Selector entity, ID.FacingAnchor facing = ID.FacingAnchor.feet)
+        public void Facing(BaseSelector entity, ID.FacingAnchor facing = ID.FacingAnchor.feet)
         {
             function.AddCommand(new ExecuteFacingEntity(entity, facing));
         }
@@ -281,7 +281,7 @@ namespace SharpCraft.FunctionWriters
         /// Executes rotated as the given <see cref="Entity"/>
         /// </summary>
         /// <param name="entity">the <see cref="Entity"/> to execute rotated as</param>
-        public void Rotated(Selector entity)
+        public void Rotated(BaseSelector entity)
         {
             function.AddCommand(new ExecuteRotatedAs(entity));
         }

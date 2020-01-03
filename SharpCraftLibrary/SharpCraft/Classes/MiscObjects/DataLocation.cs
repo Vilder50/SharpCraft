@@ -85,7 +85,7 @@ namespace SharpCraft
     /// </summary>
     public class EntityDataLocation : IDataLocation
     {
-        private Selector selector;
+        private BaseSelector selector;
         private string dataPath;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="selector">Selector selecting the entity holding the data</param>
         /// <param name="dataPath">The path to the data to get</param>
-        public EntityDataLocation(Selector selector, string dataPath)
+        public EntityDataLocation(BaseSelector selector, string dataPath)
         {
             Selector = selector;
             DataPath = dataPath;
@@ -102,7 +102,7 @@ namespace SharpCraft
         /// <summary>
         /// Selector selecting the entity holding the data
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

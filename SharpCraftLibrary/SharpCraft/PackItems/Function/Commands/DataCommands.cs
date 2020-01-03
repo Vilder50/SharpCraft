@@ -155,7 +155,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeEntityCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private SimpleDataHolder data;
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="selector">Selector selecting the entity holding the data</param>
         /// <param name="data">The data to merge</param>
-        public DataMergeEntityCommand(Selector selector, SimpleDataHolder data)
+        public DataMergeEntityCommand(BaseSelector selector, SimpleDataHolder data)
         {
             Selector = selector;
             Data = data;
@@ -172,7 +172,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entity holding the data
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

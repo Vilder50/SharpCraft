@@ -55,7 +55,7 @@ namespace SharpCraft
         /// The selector to show
         /// Note if <see cref="Objective"/> is set it will show a score instead. And if <see cref="DataPath"/> is set it will show data for the entity instead.
         /// </summary>
-        public Selector Selector;
+        public BaseSelector Selector;
 
         /// <summary>
         /// The minecraft keyboard key to show
@@ -188,7 +188,7 @@ namespace SharpCraft
                 {
                     if (Selector != null)
                     {
-                        TempList.Add("\"entity\":\"" + Selector + "\",\"nbt\":\"" + DataPath + "\"");
+                        TempList.Add((string)("\"entity\":\"" + Selector + "\",\"nbt\":\"" + DataPath + "\""));
                     }
                     else if (BlockCoords != null)
                     {
@@ -228,7 +228,7 @@ namespace SharpCraft
                     TempString += "]}";
                     TempList.Add(TempString);
                 }
-                if (Objective != null) { TempList.Add("\"score\":{\"name\":\"" + Selector + "\", \"objective\":\"" + Objective + "\"}"); }
+                if (Objective != null) { TempList.Add((string)("\"score\":{\"name\":\"" + Selector + "\", \"objective\":\"" + Objective + "\"}")); }
 
                 return "{" + string.Join(",", TempList) + "}";
             }

@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementAllCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementAllCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting players to grant/revoke all advancements for</param>
         /// <param name="grant">True if the advancements should be granted. False if they should be revoked</param>
-        public AdvancementAllCommand(Selector selector, bool grant = true)
+        public AdvancementAllCommand(BaseSelector selector, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -27,7 +27,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to grant/revoke all advancements for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -56,7 +56,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementSingleCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private IAdvancement advancement;
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="criterion">The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement</param>
-        public AdvancementSingleCommand(Selector selector, IAdvancement advancement, AdvancementObjects.ITrigger criterion, bool grant = true)
+        public AdvancementSingleCommand(BaseSelector selector, IAdvancement advancement, AdvancementObjects.ITrigger criterion, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to grant/revoke the advancement or advancement criterion for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -123,7 +123,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementSomeCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private IAdvancement advancement;
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="select">The advancements to grant/revoke</param>
-        public AdvancementSomeCommand(Selector selector, IAdvancement advancement, ID.RelativeAdvancement select, bool grant = true)
+        public AdvancementSomeCommand(BaseSelector selector, IAdvancement advancement, ID.RelativeAdvancement select, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -144,7 +144,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to grant/revoke the advancement or advancement criterion for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

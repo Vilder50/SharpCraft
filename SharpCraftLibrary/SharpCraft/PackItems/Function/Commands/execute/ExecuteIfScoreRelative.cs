@@ -11,9 +11,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfScoreRelative : BaseExecuteIfCommand
     {
-        private Selector selector1;
+        private BaseSelector selector1;
         private ScoreObject objective1;
-        private Selector selector2;
+        private BaseSelector selector2;
         private ScoreObject objective2;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <param name="objective2">The <see cref="ScoreObject"/> to get the score for <see cref="selector2"/> from</param>
         /// <param name="operator">How the scores should be relative to each other</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfScoreRelative(Selector selector1, ScoreObject objective1, ID.IfScoreOperation @operator, Selector selector2, ScoreObject objective2, bool executeIf = true) : base(executeIf)
+        public ExecuteIfScoreRelative(BaseSelector selector1, ScoreObject objective1, ID.IfScoreOperation @operator, BaseSelector selector2, ScoreObject objective2, bool executeIf = true) : base(executeIf)
         {
             Selector1 = selector1;
             Objective1 = objective1;
@@ -37,7 +37,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the thing to get a score from
         /// </summary>
-        public Selector Selector1
+        public BaseSelector Selector1
         {
             get => selector1;
             set
@@ -65,7 +65,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the thing to get a score from
         /// </summary>
-        public Selector Selector2
+        public BaseSelector Selector2
         {
             get => selector2;
             set

@@ -100,7 +100,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="block">the <see cref="SharpCraft.Block"/> to input into</param>
         /// <param name="kill">the <see cref="Entity"/>'s <see cref="LootTable"/> to input</param>
         /// <param name="slot">the slot to insert the <see cref="LootTable"/> at</param>
-        public void Loot(Coords block, Selector kill, int? slot = null)
+        public void Loot(Coords block, BaseSelector kill, int? slot = null)
         {
             if (slot is null)
             {

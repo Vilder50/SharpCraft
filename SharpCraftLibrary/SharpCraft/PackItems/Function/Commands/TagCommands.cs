@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TagCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private Tag tag;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector for selecting the entities to add/remove the tag from</param>
         /// <param name="tag">The tag to add/remove</param>
         /// <param name="addTag">True if the tag should be added. False if removed</param>
-        public TagCommand(Selector selector, Tag tag, bool addTag)
+        public TagCommand(BaseSelector selector, Tag tag, bool addTag)
         {
             Selector = selector;
             Tag = tag;
@@ -30,7 +30,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the entities to add/remove the tag from
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The tag to add/remove
@@ -57,13 +57,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TagListCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TagListCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the entities to get a list of tags from</param>
-        public TagListCommand(Selector selector)
+        public TagListCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -71,7 +71,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the entities to get a list of tags from
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command

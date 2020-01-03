@@ -145,7 +145,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="coords">The location to spawn the loot</param>
         /// <param name="kill">the entity whose "when killed loot" should be dropped</param>
-        public void Loot(Coords coords, Selector kill)
+        public void Loot(Coords coords, BaseSelector kill)
         {
             function.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.KillSource(kill)));
         }
@@ -858,8 +858,8 @@ namespace SharpCraft.FunctionWriters
             /// Makes the selected players see the specified <see cref="SharpCraft.BossBar"/>
             /// </summary>
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to show</param>
-            /// <param name="players">the <see cref="Selector"/> to use</param>
-            public void SetPlayers(BossBar bossBar, Selector players)
+            /// <param name="players">the <see cref="BaseSelector"/> to use</param>
+            public void SetPlayers(BossBar bossBar, BaseSelector players)
             {
                 function.AddCommand(new BossBarChangePlayersCommand(bossBar, players));
             }

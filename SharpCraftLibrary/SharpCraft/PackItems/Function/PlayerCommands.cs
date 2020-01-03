@@ -26,55 +26,55 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Adds the specified amount of levels to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="levels">The amount of levels to add. If this is negative levels will be removed</param>
-            public void LevelsAdd(Selector player, int levels)
+            public void LevelsAdd(BaseSelector player, int levels)
             {
                 function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
             }
             /// <summary>
             /// Sets the selected players' levels to the specified amount
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="levels">The amount to set the levels to</param>
-            public void LevelsSet(Selector player, int levels)
+            public void LevelsSet(BaseSelector player, int levels)
             {
                 function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
             }
             /// <summary>
             /// Outputs the amount of levels the selected player has
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void LevelsGet(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void LevelsGet(BaseSelector player)
             {
-                player.Limited();
+                player.LimitSelector();
                 function.AddCommand(new ExperienceGetCommand(player, true));
             }
             /// <summary>
             /// Adds the specified amount of points to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="points">The amount of points to add. If this is negative points will be removed</param>
-            public void PointsAdd(Selector player, int points)
+            public void PointsAdd(BaseSelector player, int points)
             {
                 function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
             }
             /// <summary>
             /// Sets the selected players' points to the specified amount
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="points">The amount to set the points to</param>
-            public void PointsSet(Selector player, int points)
+            public void PointsSet(BaseSelector player, int points)
             {
                 function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
             }
             /// <summary>
             /// Outputs the amount of points the selected player has
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void PointsGet(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void PointsGet(BaseSelector player)
             {
-                player.Limited();
+                player.LimitSelector();
                 function.AddCommand(new ExperienceGetCommand(player, false));
             }
         }
@@ -93,9 +93,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Changes the selected players gamemode
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="mode">the gamemode to change to</param>
-        public void Gamemode(Selector player, ID.Gamemode mode)
+        public void Gamemode(BaseSelector player, ID.Gamemode mode)
         {
             function.AddCommand(new GamemodeCommand(player, mode));
         }
@@ -105,7 +105,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="spectate">The entity to spectate</param>
         /// <param name="spectator">The spectating player</param>
-        public void Spectate(Selector spectate, Selector spectator)
+        public void Spectate(BaseSelector spectate, BaseSelector spectator)
         {
             if (spectate is null)
             {
@@ -113,8 +113,8 @@ namespace SharpCraft.FunctionWriters
             }
             else
             {
-                spectate.Limited();
-                spectator.Limited();
+                spectate.LimitSelector();
+                spectator.LimitSelector();
                 function.AddCommand(new SpectateCommand(spectate, spectator));
             }
         }
@@ -133,9 +133,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Whispers the specified message to the selected players
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the player</param>
-        public void Tell(Selector player, string message)
+        public void Tell(BaseSelector player, string message)
         {
             function.AddCommand(new MsgCommand(player, message));
         }
@@ -143,9 +143,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Changes the selected players' spawnpoint to the given location
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="spawn">The new spawnpoint location</param>
-        public void Spawnpoint(Selector player, Coords spawn = null)
+        public void Spawnpoint(BaseSelector player, Coords spawn = null)
         {
             function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
@@ -153,9 +153,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Enables a trigger for the selected players
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="objective">The trigger (<see cref="ScoreObject"/>) to enable</param>
-        public void EnableTrigger(Selector player, ScoreObject objective)
+        public void EnableTrigger(BaseSelector player, ScoreObject objective)
         {
             function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
         }
@@ -163,9 +163,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Tells the selected players a message in chat
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the players</param>
-        public void Tellraw(Selector player, JSON[] message)
+        public void Tellraw(BaseSelector player, JSON[] message)
         {
             function.AddCommand(new TellrawCommand(player, message));
         }
@@ -173,9 +173,9 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Shows a message in the selected players actionbar
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to show</param>
-        public void Actionbar(Selector player, JSON[] message)
+        public void Actionbar(BaseSelector player, JSON[] message)
         {
             function.AddCommand(new TitleActionbarCommand(player, message));
         }
@@ -205,7 +205,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
@@ -221,7 +221,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
@@ -237,7 +237,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dust">If it should be dust or squares</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Block(Block block, Coords displayCoords, Coords size, double speed, int count, bool dust = false, bool force = false, Selector player = null)
+            public void Block(Block block, Coords displayCoords, Coords size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
             {
                 function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
@@ -252,7 +252,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
@@ -276,9 +276,9 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Gives an item to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The <see cref="Item"/> to give to the players</param>
-            public void GiveItem(Selector player, Item giveItem)
+            public void GiveItem(BaseSelector player, Item giveItem)
             {
                 if (giveItem.Slot is null)
                 {
@@ -293,9 +293,9 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Gives the loot from a loottable to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
-            public void GiveItem(Selector player, ILootTable loot)
+            public void GiveItem(BaseSelector player, ILootTable loot)
             {
                 function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
             }
@@ -303,21 +303,21 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Gives the loot which the selected entity would drop if killed to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="kill">the selector selecting the entity whose loot should be dropped</param>
-            public void GiveItem(Selector player, Selector kill)
+            public void GiveItem(BaseSelector player, BaseSelector kill)
             {
-                kill.Limited();
+                kill.LimitSelector();
                 function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
             }
 
             /// <summary>
             /// Gives the loot which the block at the given coords would drop of broken to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
-            public void GiveItem(Selector player, Coords breakBlock, Item breakWith)
+            public void GiveItem(BaseSelector player, Coords breakBlock, Item breakWith)
             {
                 if (breakWith is null)
                 {
@@ -332,18 +332,18 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Puts an item into the selected players' enderchests
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert into the enderchest. <see cref="Item.Slot"/> choses the slot.</param>
-            public void GiveEnderChest(Selector player, Item giveItem)
+            public void GiveEnderChest(BaseSelector player, Item giveItem)
             {
                 function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Puts an item into the selected players' hotbars
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert into the hotbar. <see cref="Item.Slot"/> choses the slot.</param>
-            public void GiveHotbar(Selector player, Item giveItem)
+            public void GiveHotbar(BaseSelector player, Item giveItem)
             {
                 function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
@@ -351,10 +351,10 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Puts the item from the loot table into the players hotbar
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, ILootTable loot, int slot)
+            public void GiveHotbar(BaseSelector player, ILootTable loot, int slot)
             {
                 function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
             }
@@ -362,11 +362,11 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Puts the item from the loot table into the players hotbar
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, Coords breakBlock, Item breakWith, int slot)
+            public void GiveHotbar(BaseSelector player, Coords breakBlock, Item breakWith, int slot)
             {
                 if (breakWith is null)
                 {
@@ -381,20 +381,20 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Inserts an item into the selected players' selected slot
             /// </summary>
-            /// <param name="selector">the <see cref="Selector"/> to use</param>
+            /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert</param>
             /// <param name="offHand">If it should insert into the offhand instead</param>
-            public void GiveWeapon(Selector selector, Item giveItem, bool offHand = false)
+            public void GiveWeapon(BaseSelector selector, Item giveItem, bool offHand = false)
             {
                 function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Clears an item from the selected players' inventories
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="item">The item to clear</param>
             /// <param name="amount">The maximum amount of the item to clear. null clears all</param>
-            public void Clear(Selector player, Item item = null, int? amount = null)
+            public void Clear(BaseSelector player, Item item = null, int? amount = null)
             {
                 function.AddCommand(new ClearCommand(player, item, amount));
             }
@@ -418,14 +418,14 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Plays a sound for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="sound">the sound to play</param>
             /// <param name="source">the source to play the sound as</param>
             /// <param name="location">the location to play the sound at</param>
             /// <param name="volume">the maximum volume of the sound</param>
             /// <param name="speed">the speed of the sound (0-2)</param>
             /// <param name="minValue">the minimum volume of the sound (0-2)</param>
-            public void Play(Selector player, string sound, ID.SoundSource source, Coords location, double volume = 1, double speed = 1, double minValue = 0)
+            public void Play(BaseSelector player, string sound, ID.SoundSource source, Coords location, double volume = 1, double speed = 1, double minValue = 0)
             {
                 function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
             }
@@ -434,10 +434,10 @@ namespace SharpCraft.FunctionWriters
             /// Stops sounds for the selected players
             /// (If no source and sound is specified it will stop all sounds)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="source">the source to stop sounds at. Null will stop the sound from any source</param>
             /// <param name="sound">the sound to stop. Null will stop any sound in the given source</param>
-            public void Stop(Selector player, ID.SoundSource? source = null, string sound = null)
+            public void Stop(BaseSelector player, ID.SoundSource? source = null, string sound = null)
             {
                 function.AddCommand(new StopSoundCommand(player, sound, source));
             }
@@ -461,9 +461,9 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// displays a title for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void Title(Selector player, JSON[] message)
+            public void Title(BaseSelector player, JSON[] message)
             {
                 function.AddCommand(new TitleCommand(player, message));
             }
@@ -472,9 +472,9 @@ namespace SharpCraft.FunctionWriters
             /// displays a subtitle for the selected players
             /// Note: the subtitle is first shown when the title command is ran
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void SubTitle(Selector player, JSON[] message)
+            public void SubTitle(BaseSelector player, JSON[] message)
             {
                 function.AddCommand(new TitleSubtitleCommand(player, message));
             }
@@ -482,11 +482,11 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// choses how long the titles should be shown for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void Time(Selector player, Time startFade, Time stay, Time endFade)
+            public void Time(BaseSelector player, Time startFade, Time stay, Time endFade)
             {
                 function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
             }
@@ -494,8 +494,8 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// clears the shown title on the selected players' screens
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void Clear(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void Clear(BaseSelector player)
             {
                 function.AddCommand(new TitleClearCommand(player));
             }
@@ -503,8 +503,8 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// resets all the title values for the selected players' screens
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void Reset(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void Reset(BaseSelector player)
             {
                 function.AddCommand(new TitleResetCommand(player));
             }
@@ -512,13 +512,13 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Displays a whole title for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="topMessage">The main title message</param>
             /// <param name="bottomMessage">the bottom part of the title message</param>
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(Selector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
+            public void FullTitle(BaseSelector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
             {
                 BaseExecuteCommand executeCommand1 = null;
                 BaseExecuteCommand executeCommand2 = null;
@@ -569,34 +569,34 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Give a recipe to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveRecipe">The recipe to give</param>
-            public void Give(Selector player, IRecipe giveRecipe)
+            public void Give(BaseSelector player, IRecipe giveRecipe)
             {
                 function.AddCommand(new RecipeCommand(giveRecipe, player, true));
             }
             /// <summary>
             /// Gives all recipes to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void GiveAll(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void GiveAll(BaseSelector player)
             {
                 function.AddCommand(new RecipeAllCommand(player, true));
             }
             /// <summary>
             /// Removes a recipe from the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveRecipe">the recipe to remove</param>
-            public void Remove(Selector player, IRecipe giveRecipe)
+            public void Remove(BaseSelector player, IRecipe giveRecipe)
             {
                 function.AddCommand(new RecipeCommand(giveRecipe, player, false));
             }
             /// <summary>
             /// removes all recipes from the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void RemoveAll(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void RemoveAll(BaseSelector player)
             {
                 function.AddCommand(new RecipeAllCommand(player, false));
             }
@@ -619,9 +619,9 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// grants/evokes all advancements for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Everything(Selector player, bool revoke = false)
+            public void Everything(BaseSelector player, bool revoke = false)
             {
                 function.AddCommand(new AdvancementAllCommand(player, !revoke));
             }
@@ -629,10 +629,10 @@ namespace SharpCraft.FunctionWriters
             /// Grants/revokes all advancements up to the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke up to</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Until(Selector player, IAdvancement advancement, bool revoke = false)
+            public void Until(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
                 function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
             }
@@ -640,10 +640,10 @@ namespace SharpCraft.FunctionWriters
             /// grants/revokes all advancements after the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke from</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void From(Selector player, IAdvancement advancement, bool revoke = false)
+            public void From(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
                 function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
             }
@@ -652,10 +652,10 @@ namespace SharpCraft.FunctionWriters
             /// grants/revokes all advancements in the same branch as the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">an advancement in the branch to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Branch(Selector player, IAdvancement advancement, bool revoke = false)
+            public void Branch(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
                 function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
             }
@@ -664,11 +664,11 @@ namespace SharpCraft.FunctionWriters
             /// grants/revokes the specified the advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(Selector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
+            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
             {
                 function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }

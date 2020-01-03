@@ -1787,11 +1787,7 @@
             /// <summary>
             /// Selects the executing player
             /// </summary>
-            s,
-            /// <summary>
-            /// Selects everything, even things which aren't online. Not all commands support this selector
-            /// </summary>
-            All
+            s
         }
         public enum Sort { nearest, furthest, random, arbitrary }
         public enum Enchant

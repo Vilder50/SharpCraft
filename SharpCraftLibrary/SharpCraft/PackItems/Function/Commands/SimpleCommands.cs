@@ -96,14 +96,14 @@ namespace SharpCraft.Commands
     public class MsgCommand : BaseCommand
     {
         private string text;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// intializes a new <see cref="MsgCommand"/>
         /// </summary>
         /// <param name="text">The text it should display</param>
         /// <param name="selector">Selector for selecting players to private message</param>
-        public MsgCommand(Selector selector, string text)
+        public MsgCommand(BaseSelector selector, string text)
         {
             Text = text;
             Selector = selector;
@@ -128,7 +128,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to private message
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -365,7 +365,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EnchantCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private int level;
 
         /// <summary>
@@ -374,7 +374,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting the player's whose item to enchant</param>
         /// <param name="level">The level of the enchant</param>
         /// <param name="enchant">The enchant to enchant the player's selected item with</param>
-        public EnchantCommand(Selector selector, int level, ID.Enchant enchant)
+        public EnchantCommand(BaseSelector selector, int level, ID.Enchant enchant)
         {
             Selector = selector;
             Level = level;
@@ -385,7 +385,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the player's whose item to enchant
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -468,14 +468,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class GamemodeCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// intializes a new <see cref="GamemodeCommand"/>
         /// </summary>
         /// <param name="gamemode">The gamemode to change the players to</param>
         /// <param name="selector">Selector selecting the player's whose gamemode to change</param>
-        public GamemodeCommand(Selector selector, ID.Gamemode gamemode)
+        public GamemodeCommand(BaseSelector selector, ID.Gamemode gamemode)
         {
             Gamemode = gamemode;
             Selector = selector;
@@ -489,7 +489,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the player's whose gamemode to change
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -513,13 +513,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class KillCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// intializes a new <see cref="KillCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the entities to kill</param>
-        public KillCommand(Selector selector)
+        public KillCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -527,7 +527,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to kill
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -649,7 +649,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpreadPlayersCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private Coords coordinates;
         private double distance;
         private double maxRange;
@@ -663,7 +663,7 @@ namespace SharpCraft.Commands
         /// <param name="distance">The minimum distance between spreaded entities</param>
         /// <param name="maxRange">The max distance the entities can be spread</param>
         /// <param name="respectTeams">True if teams should be grouped together. False if they shouldn't</param>
-        public SpreadPlayersCommand(Coords coordinates, Selector selector, double distance, double maxRange, bool respectTeams)
+        public SpreadPlayersCommand(Coords coordinates, BaseSelector selector, double distance, double maxRange, bool respectTeams)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -703,7 +703,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to spread
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -841,14 +841,14 @@ namespace SharpCraft.Commands
     public class TellrawCommand : BaseCommand
     {
         private JSON[] text;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// intializes a new <see cref="TellrawCommand"/>
         /// </summary>
         /// <param name="text">The text it should display</param>
         /// <param name="selector">Selector for selecting players to private message</param>
-        public TellrawCommand(Selector selector, JSON[] text)
+        public TellrawCommand(BaseSelector selector, JSON[] text)
         {
             Text = text;
             Selector = selector;
@@ -873,7 +873,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to private message
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -898,7 +898,7 @@ namespace SharpCraft.Commands
     public class ClearCommand : BaseCommand
     {
         private Item item;
-        private Selector selector;
+        private BaseSelector selector;
         private int? maxCount;
 
         /// <summary>
@@ -907,7 +907,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector for selecting players to clear</param>
         /// <param name="item">The item to clear. Leave null to clear all items</param>
         /// <param name="maxCount">The maximum amount of items to clear. An item has to be set to use this</param>
-        public ClearCommand(Selector selector, Item item = null, int? maxCount = null)
+        public ClearCommand(BaseSelector selector, Item item = null, int? maxCount = null)
         {
             Selector = selector;
             Item = item;
@@ -933,7 +933,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to clear
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -989,7 +989,7 @@ namespace SharpCraft.Commands
     public class GiveCommand : BaseCommand
     {
         private Item item;
-        private Selector selector;
+        private BaseSelector selector;
         private int count;
 
         /// <summary>
@@ -998,7 +998,7 @@ namespace SharpCraft.Commands
         /// <param name="item">The item to give</param>
         /// <param name="selector">Selector for selecting players to give the item to</param>
         /// <param name="count">The amount of the item to give</param>
-        public GiveCommand(Selector selector, Item item, int count)
+        public GiveCommand(BaseSelector selector, Item item, int count)
         {
             Item = item;
             Selector = selector;
@@ -1020,7 +1020,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting players to give the item to
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -1071,7 +1071,7 @@ namespace SharpCraft.Commands
         private double volume;
         private double pitch;
         private double minimumVolume;
-        private Selector selector;
+        private BaseSelector selector;
         private Coords coordinates;
 
         /// <summary>
@@ -1084,7 +1084,7 @@ namespace SharpCraft.Commands
         /// <param name="pitch">The pitch of the sound</param>
         /// <param name="minimumVolume">The minimum value of the sound</param>
         /// <param name="coordinates">The coordinates to play the sound at</param>
-        public PlaySoundCommand(string sound, ID.SoundSource source, Selector selector, Coords coordinates, double volume, double pitch, double minimumVolume)
+        public PlaySoundCommand(string sound, ID.SoundSource source, BaseSelector selector, Coords coordinates, double volume, double pitch, double minimumVolume)
         {
             Sound = sound;
             Source = source;
@@ -1119,7 +1119,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to play the sound for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -1195,14 +1195,14 @@ namespace SharpCraft.Commands
     public class SpawnPointCommand : BaseCommand
     {
         private Coords coordinates;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="SpawnPointCommand"/>
         /// </summary>
         /// <param name="coordinates">The place to move the spawnpoint to</param>
         /// <param name="selector">Selector selecting the players whose spawn point to change</param>
-        public SpawnPointCommand(Coords coordinates, Selector selector)
+        public SpawnPointCommand(Coords coordinates, BaseSelector selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -1216,7 +1216,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players whose spawn point to change
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -1240,7 +1240,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class StopSoundCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="StopSoundCommand"/>
@@ -1248,7 +1248,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting the players to stop the sound for</param>
         /// <param name="sound">The sound to stop. Leave null to stop all sounds</param>
         /// <param name="source">The category to stop sounds in. Leave null to stop sound in all categories</param>
-        public StopSoundCommand(Selector selector, string sound, ID.SoundSource? source)
+        public StopSoundCommand(BaseSelector selector, string sound, ID.SoundSource? source)
         {
             Selector = selector;
             Sound = sound;
@@ -1258,7 +1258,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players to stop the sound for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

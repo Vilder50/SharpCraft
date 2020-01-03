@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteAt : BaseExecuteCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteAt"/> command
         /// </summary>
         /// <param name="selector">The selector for selecting entities to run the command at</param>
-        public ExecuteAt(Selector selector)
+        public ExecuteAt(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The selector for selecting entities to run the command as
         /// </summary>
-        public Selector Selector 
+        public BaseSelector Selector 
         {
             get => selector;
             set

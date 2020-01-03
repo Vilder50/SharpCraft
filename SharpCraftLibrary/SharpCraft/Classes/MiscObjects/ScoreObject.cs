@@ -31,9 +31,9 @@
         /// <param name="text">The text to display</param>
         /// <param name="selector">The selector's score to show</param>
         /// <param name="writeOn">The function to write the command on</param>
-        public void ScoreSayDebug(string text, Selector selector, Function writeOn)
+        public void ScoreSayDebug(string text, BaseSelector selector, Function writeOn)
         {
-            writeOn.Player.Tellraw(ID.Selector.a, new JSON[] { text + " ", new JSON { Selector = selector, Objective = this } });
+            writeOn.Player.Tellraw((SharpCraft.BaseSelector)ID.Selector.a, new JSON[] { text + " ", new JSON { Selector = selector, Objective = this } });
         }
     }
 }

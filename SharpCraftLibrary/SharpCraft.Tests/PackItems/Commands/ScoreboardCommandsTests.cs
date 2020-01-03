@@ -77,7 +77,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("scoreboard players set @s score -10", new ScoreboardValueChangeCommand(ID.Selector.s, new ScoreObject("score"), ID.ScoreChange.set, -10).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardValueChangeCommand(null, new ScoreObject("score"), ID.ScoreChange.remove, 10));
-            Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardValueChangeCommand(ID.Selector.s, null, ID.ScoreChange.remove, 10));
+            Assert.ThrowsException<ArgumentNullException>((Func<object>)(() => new ScoreboardValueChangeCommand((SharpCraft.BaseSelector)ID.Selector.s, (ScoreObject)null, (ID.ScoreChange)ID.ScoreChange.remove, (int)10)));
         }
 
         [TestMethod]
@@ -85,9 +85,9 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("scoreboard players get @s score", new ScoreboardValueGetCommand(ID.Selector.s, new ScoreObject("score")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentException>(() => new ScoreboardValueGetCommand(ID.Selector.a, new ScoreObject("score")));
+            Assert.ThrowsException<ArgumentException>((Func<object>)(() => new ScoreboardValueGetCommand((SharpCraft.BaseSelector)ID.Selector.a, (ScoreObject)new ScoreObject((string)"score"))));
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardValueGetCommand(null, new ScoreObject("score")));
-            Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardValueGetCommand(ID.Selector.s, null));
+            Assert.ThrowsException<ArgumentNullException>((Func<object>)(() => new ScoreboardValueGetCommand((SharpCraft.BaseSelector)ID.Selector.s, (ScoreObject)null)));
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("scoreboard players enable @a score", new ScoreboardEnableTriggerCommand(ID.Selector.a, new ScoreObject("score")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardEnableTriggerCommand(null, new ScoreObject("score")));
-            Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardEnableTriggerCommand(ID.Selector.a, null));
+            Assert.ThrowsException<ArgumentNullException>((Func<object>)(() => new ScoreboardEnableTriggerCommand((SharpCraft.BaseSelector)ID.Selector.a, (ScoreObject)null)));
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("scoreboard players list @s", new ScoreboardListCommand(ID.Selector.s).GetCommandString());
 
-            Assert.ThrowsException<ArgumentException>(() => new ScoreboardListCommand(ID.Selector.a));
+            Assert.ThrowsException<ArgumentException>((Func<object>)(() => new ScoreboardListCommand((SharpCraft.BaseSelector)ID.Selector.a)));
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardListCommand(null));
         }
 
@@ -122,8 +122,8 @@ namespace SharpCraft.Tests.Commands
         {
             ScoreObject scoreObject1 = new ScoreObject("score1");
             ScoreObject scoreObject2 = new ScoreObject("score2");
-            Selector selector1 = ID.Selector.s;
-            Selector selector2 = ID.Selector.a;
+            BaseSelector selector1 = ID.Selector.s;
+            BaseSelector selector2 = ID.Selector.a;
 
             Assert.AreEqual("scoreboard players operation @s score1 += @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Add, selector2, scoreObject2).GetCommandString());
             Assert.AreEqual("scoreboard players operation @s score1 /= @a score2", new ScoreboardOperationCommand(selector1, scoreObject1, ID.Operation.Divide, selector2, scoreObject2).GetCommandString());

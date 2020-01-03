@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectGiveCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private int seconds;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace SharpCraft.Commands
         /// <param name="seconds">The amount of seconds the entities will have the effect for</param>
         /// <param name="amplifier">The amplifier of the effect</param>
         /// <param name="hideParticles">If the effect shouldn't show particles</param>
-        public EffectGiveCommand(Selector selector, ID.Effect effect, int seconds, byte amplifier, bool hideParticles)
+        public EffectGiveCommand(BaseSelector selector, ID.Effect effect, int seconds, byte amplifier, bool hideParticles)
         {
             Selector = selector;
             Seconds = seconds;
@@ -34,7 +34,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting entities to give the effect to
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -110,14 +110,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectClearCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="EffectClearCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the entities whose effects to clear</param>
         /// <param name="effect">The effect to clear. Set to null to clear all effects</param>
-        public EffectClearCommand(Selector selector, ID.Effect? effect)
+        public EffectClearCommand(BaseSelector selector, ID.Effect? effect)
         {
             Selector = selector;
             Effect = effect;
@@ -126,7 +126,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities whose effects to clear
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

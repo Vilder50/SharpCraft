@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleClearCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TitleClearCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players whose title to clear</param>
-        public TitleClearCommand(Selector selector)
+        public TitleClearCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players whose title to clear
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -42,13 +42,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleResetCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TitleResetCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players whose title settings to reset</param>
-        public TitleResetCommand(Selector selector)
+        public TitleResetCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -56,7 +56,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players whose title settings to reset
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -73,7 +73,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private JSON[] text;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="selector">Selector selecting players to show the title for</param>
         /// <param name="text">The text to show</param>
-        public TitleCommand(Selector selector, JSON[] text)
+        public TitleCommand(BaseSelector selector, JSON[] text)
         {
             Selector = selector;
             Text = text;
@@ -90,7 +90,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to show the title for
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The text to show
@@ -112,7 +112,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleSubtitleCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private JSON[] text;
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="selector">Selector selecting the players whose sub title to change</param>
         /// <param name="text">The text to show</param>
-        public TitleSubtitleCommand(Selector selector, JSON[] text)
+        public TitleSubtitleCommand(BaseSelector selector, JSON[] text)
         {
             Selector = selector;
             Text = text;
@@ -129,7 +129,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players whose sub title to change
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The text to show
@@ -151,7 +151,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleActionbarCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private JSON[] text;
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="selector">Selector selecting the players to show the action bar text for</param>
         /// <param name="text">The text to show</param>
-        public TitleActionbarCommand(Selector selector, JSON[] text)
+        public TitleActionbarCommand(BaseSelector selector, JSON[] text)
         {
             Selector = selector;
             Text = text;
@@ -168,7 +168,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players to show the action bar text for
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The text to show
@@ -190,7 +190,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleTimesCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private Time fadeIn;
         private Time stay;
         private Time fadeOut;
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// <param name="fadeIn">How long it takes for the title to fade in</param>
         /// <param name="stay">How long the title stays</param>
         /// <param name="fadeOut">How long it takes for the title to fade out</param>
-        public TitleTimesCommand(Selector selector, Time fadeIn, Time stay, Time fadeOut)
+        public TitleTimesCommand(BaseSelector selector, Time fadeIn, Time stay, Time fadeOut)
         {
             Selector = selector;
             FadeIn = fadeIn;
@@ -213,7 +213,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players to change the title times for
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// How long it takes for the title to fade in

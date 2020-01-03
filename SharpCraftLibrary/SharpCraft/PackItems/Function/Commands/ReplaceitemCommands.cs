@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
     public class ReplaceitemEntityCommand : BaseCommand
     {
         private IItemSlot slot;
-        private Selector selector;
+        private BaseSelector selector;
         private Item item;
         private int count;
 
@@ -90,7 +90,7 @@ namespace SharpCraft.Commands
         /// <param name="slot">The slot to put the item into</param>
         /// <param name="item">The item to put into the block</param>
         /// <param name="count">The amount of the item</param>
-        public ReplaceitemEntityCommand(Selector selector, IItemSlot slot, Item item, int count)
+        public ReplaceitemEntityCommand(BaseSelector selector, IItemSlot slot, Item item, int count)
         {
             Selector = selector;
             Slot = slot;
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to replace the item on
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The slot to put the item into

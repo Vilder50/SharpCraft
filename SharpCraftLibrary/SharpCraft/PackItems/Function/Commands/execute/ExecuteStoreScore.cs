@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreScore : BaseExecuteStoreCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private ScoreObject objective;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">The selector selecting the place to store the value at</param>
         /// <param name="objective">The <see cref="ScoreObject"/> to store the value in</param>
         /// <param name="storeResult">True if it should store the result. False if it should store success</param>
-        public ExecuteStoreScore(Selector selector, ScoreObject objective, bool storeResult = true) : base(storeResult)
+        public ExecuteStoreScore(BaseSelector selector, ScoreObject objective, bool storeResult = true) : base(storeResult)
         {
             Selector = selector;
             Objective = objective;
@@ -29,7 +29,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The selector selecting the place to store the value at
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

@@ -67,7 +67,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class EntityTarget : ILootTarget
         {
-            private Selector selector;
+            private BaseSelector selector;
             private IItemSlot slot;
 
             /// <summary>
@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
             /// </summary>
             /// <param name="selector">Selector selecting the entities who should be given the loot</param>
             /// <param name="slot">The slot to insert the loot into</param>
-            public EntityTarget(Selector selector, IItemSlot slot)
+            public EntityTarget(BaseSelector selector, IItemSlot slot)
             {
                 Selector = selector;
                 Slot = slot;
@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// Selector selecting the entities who should be given the loot
             /// </summary>
-            public Selector Selector
+            public BaseSelector Selector
             {
                 get => selector;
                 set
@@ -173,13 +173,13 @@ namespace SharpCraft.Commands
         /// </summary>
         public class GiveTarget : ILootTarget
         {
-            private Selector selector;
+            private BaseSelector selector;
 
             /// <summary>
             /// Intializes a new <see cref="EntityTarget"/>
             /// </summary>
             /// <param name="selector">Selector selecting the players who should be given the loot</param>
-            public GiveTarget(Selector selector)
+            public GiveTarget(BaseSelector selector)
             {
                 Selector = selector;
             }
@@ -187,7 +187,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// Selector selecting the players who should be given the loot
             /// </summary>
-            public Selector Selector
+            public BaseSelector Selector
             {
                 get => selector;
                 set
@@ -413,13 +413,13 @@ namespace SharpCraft.Commands
         /// </summary>
         public class KillSource : ILootSource
         {
-            private Selector selector;
+            private BaseSelector selector;
 
             /// <summary>
             /// Intializes a new <see cref="KillSource"/>
             /// </summary>
             /// <param name="selector">Selector selecting the entity to get kill loot from</param>
-            public KillSource(Selector selector)
+            public KillSource(BaseSelector selector)
             {
                 Selector = selector;
             }
@@ -427,7 +427,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// Selector selecting the entity to get kill loot from
             /// </summary>
-            public Selector Selector
+            public BaseSelector Selector
             {
                 get => selector;
                 set

@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfEntity : BaseExecuteIfCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfEntity"/> command
         /// </summary>
         /// <param name="selector">Selector used to check if one or more entities exists</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfEntity(Selector selector, bool executeIf = true) : base(executeIf)
+        public ExecuteIfEntity(BaseSelector selector, bool executeIf = true) : base(executeIf)
         {
             Selector = selector;
         }
@@ -26,7 +26,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector used to check if one or more entities exists
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set

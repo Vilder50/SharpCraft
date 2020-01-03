@@ -375,14 +375,14 @@ namespace SharpCraft.Commands
     public class BossBarChangePlayersCommand : BaseCommand
     {
         private BossBar bossBar;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangePlayersCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change the name of</param>
         /// <param name="selector">Selector selecting players who should see the bar</param>
-        public BossBarChangePlayersCommand(BossBar bossBar, Selector selector)
+        public BossBarChangePlayersCommand(BossBar bossBar, BaseSelector selector)
         {
             BossBar = bossBar;
             Selector = selector;
@@ -403,7 +403,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players who should see the bar
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
