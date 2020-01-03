@@ -101,6 +101,25 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
+        /// Forces a player to spectate an entity. The player has to be in spectator mode. Leave both params empty to make the executing player stop spectating
+        /// </summary>
+        /// <param name="spectate">The entity to spectate</param>
+        /// <param name="spectator">The spectating player</param>
+        public void Spectate(Selector spectate, Selector spectator)
+        {
+            if (spectate is null)
+            {
+                function.AddCommand(new SpectateStopCommand());
+            }
+            else
+            {
+                spectate.Limited();
+                spectator.Limited();
+                function.AddCommand(new SpectateCommand(spectate, spectator));
+            }
+        }
+
+        /// <summary>
         /// Changes the executing player's score in the given <see cref="ScoreObject"/>
         /// </summary>
         /// <param name="scoreObject">the <see cref="ScoreObject"/> to change in</param>

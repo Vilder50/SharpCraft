@@ -58,6 +58,8 @@
     <Compile Include="Commands\ExecuteTests.cs" />
     <Compile Include="Commands\ExperienceCommandsTests.cs" />
     <Compile Include="Commands\FillCommandsTests.cs" />
+    <Compile Include="Commands\SpectateCommandsTests.cs" />
+    <Compile Include="Commands\ScheduleCommandsTests.cs" />
     <Compile Include="Commands\WorldborderCommandsTests.cs" />
     <Compile Include="Commands\TitleCommandsTests.cs" />
     <Compile Include="Commands\TimeCommandsTests.cs" />
@@ -83,6 +85,7 @@
     <Compile Include="PackItems\FunctionTests.cs" />
     <Compile Include="PackItems\GroupTests.cs" />
     <Compile Include="PackItems\LootTableTests.cs" />
+    <Compile Include="PackItems\PredicateTests.cs" />
     <Compile Include="PackItems\RecipeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

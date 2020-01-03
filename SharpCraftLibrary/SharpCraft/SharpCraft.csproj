@@ -50,6 +50,7 @@
     <Compile Include="Classes\Data\Block\Data\BaseContainer.cs" />
     <Compile Include="Classes\Data\Block\Data\BaseInventory.cs" />
     <Compile Include="Classes\Data\Block\Data\Beacon.cs" />
+    <Compile Include="Classes\Data\Block\Data\BeeHive.cs" />
     <Compile Include="Classes\Data\Block\Data\BrewingStand.cs" />
     <Compile Include="Classes\Data\Block\Data\Campfire.cs" />
     <Compile Include="Classes\Data\Block\Data\Chest.cs" />
@@ -184,6 +185,7 @@
     <Compile Include="Classes\Data\Entity\Mobs\Fish.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Fox.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Ghast.cs" />
+    <Compile Include="Classes\Data\Entity\Mobs\Bee.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\Horse.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\IronGolem.cs" />
     <Compile Include="Classes\Data\Entity\Mobs\MagicIllager.cs" />
@@ -228,6 +230,7 @@
     <Compile Include="Classes\Data\Item\Data\Map.cs" />
     <Compile Include="Classes\Data\Item\Data\Potion.cs" />
     <Compile Include="Classes\Data\Item\Item.cs" />
+    <Compile Include="Classes\MiscObjects\Storage.cs" />
     <Compile Include="PackItems\Advancement\BaseAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ChildAdvancement.cs" />
     <Compile Include="PackItems\Advancement\InvalidAdvancement.cs" />
@@ -238,6 +241,9 @@
     <Compile Include="PackItems\Advancement\BaseVisibleAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ParentAdvancement.cs" />
     <Compile Include="PackItems\Advancement\EmptyAdvancement.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\SlideBlockTrigger.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\SafehoneyHarvestTrigger.cs" />
+    <Compile Include="PackItems\Advancement\Triggers\NestDestroyedTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\TradedVillagerTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\CausedRaidTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\UsedEnderEyeTrigger.cs" />
@@ -272,6 +278,8 @@
     <Compile Include="PackItems\Advancement\Triggers\ChangedDimensionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BrewedPotionTrigger.cs" />
     <Compile Include="PackItems\Advancement\Triggers\BredAnimalsTrigger.cs" />
+    <Compile Include="PackItems\Classes\Conditions\PredicateCondition.cs" />
+    <Compile Include="PackItems\Classes\Conditions\TimeCondition.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Damage.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\DamageFlags.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Distance.cs" />
@@ -341,8 +349,8 @@
     <Compile Include="PackItems\Function\Commands\execute\ExecuteFacingCoord.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteFacingEntity.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteIfEntity.cs" />
-    <Compile Include="PackItems\Function\Commands\execute\ExecuteIfEntityData.cs" />
-    <Compile Include="PackItems\Function\Commands\execute\ExecuteIfBlockData.cs" />
+    <Compile Include="PackItems\Function\Commands\execute\ExecuteIfPredicate.cs" />
+    <Compile Include="PackItems\Function\Commands\execute\ExecuteIfData.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteIfBlocks.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteIfBlock.cs" />
     <Compile Include="PackItems\Function\Commands\execute\ExecuteIfScoreMatches.cs" />
@@ -365,11 +373,13 @@
     <Compile Include="PackItems\Function\Commands\BaseCommand.cs" />
     <Compile Include="PackItems\Function\Commands\ParticleCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ReplaceitemCommands.cs" />
+    <Compile Include="PackItems\Function\Commands\SpectateCommands.cs" />
     <Compile Include="PackItems\Function\Commands\ScoreboardCommands.cs" />
     <Compile Include="PackItems\Function\Commands\SimpleCommands.cs" />
     <Compile Include="PackItems\Function\Commands\TagCommands.cs" />
     <Compile Include="PackItems\Function\Commands\TeamCommands.cs" />
     <Compile Include="PackItems\Function\Commands\TeleportCommands.cs" />
+    <Compile Include="PackItems\Function\Commands\ScheduleCommands.cs" />
     <Compile Include="PackItems\Function\Commands\TimeCommands.cs" />
     <Compile Include="PackItems\Function\Commands\TitleCommands.cs" />
     <Compile Include="PackItems\Function\Commands\WorldborderCommands.cs" />
@@ -388,6 +398,9 @@
     <Compile Include="PackItems\Groups\FunctionGroup.cs" />
     <Compile Include="PackItems\Groups\BaseGroup.cs" />
     <Compile Include="PackItems\BaseDatapack.cs" />
+    <Compile Include="PackItems\LootTable\Changes\CopyStateChange.cs" />
+    <Compile Include="PackItems\Predicate\IPredicate.cs" />
+    <Compile Include="PackItems\Predicate\Predicate.cs" />
     <Compile Include="PackItems\Recipe\BaseRecipe.cs" />
     <Compile Include="PackItems\Recipe\CraftingRecipe.cs" />
     <Compile Include="PackItems\Recipe\CuttingRecipe.cs" />

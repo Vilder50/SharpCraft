@@ -34,6 +34,11 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// The value (Used for when converted into a block type)
+        /// </summary>
+        public object Value => this;
+
+        /// <summary>
         /// Returns the stream this file is going to use for writing it's file
         /// </summary>
         /// <returns>The stream for this file</returns>

@@ -43,6 +43,7 @@
         }
         public enum Entity
         {
+            bee,
             fox,
             trader_llama,
             wandering_trader,
@@ -147,6 +148,10 @@
         }
         public enum Block
         {
+            beehive,
+            bee_nest,
+            honey_block,
+            honeycomb_block,
             composter,
             campfire,
             sweet_berry_bush,
@@ -810,6 +815,13 @@
         }
         public enum Item
         {
+            beehive,
+            bee_nest,
+            honey_block,
+            honeycomb_block,
+            honey_bottle,
+            honeycomb,
+            bee_spawn_egg,
             red_dye,
             green_dye,
             fox_spawn_egg,
@@ -1675,6 +1687,7 @@
         }
         public enum Liquid
         {
+            emtpty,
             lava,
             flowing_lava,
             water,
@@ -1701,6 +1714,10 @@
         }
         public enum Particle
         {
+            dripping_honey,
+            falling_honey,
+            falling_nectar,
+            landing_honey,
             campfire_cosy_smoke,
             campfire_signal_smoke,
             ambient_entity_effect,
@@ -2689,6 +2706,31 @@
             /// If spectators are able to generate new chunks
             /// </summary>
             spectatorsGenerateChunks,
+
+            /// <summary>
+            /// If phantoms should spawn when player havent slept for some time
+            /// </summary>
+            doInsomnia,
+
+            /// <summary>
+            /// If players should respawn immediatly
+            /// </summary>
+            doImmediateRespawn,
+
+            /// <summary>
+            /// If players should take damage from drowning
+            /// </summary>
+            drowningDamage,
+
+            /// <summary>
+            /// If players should take fall damage
+            /// </summary>
+            fallDamage,
+
+            /// <summary>
+            /// If players should take fire damage
+            /// </summary>
+            fireDamage
         }
         public enum IntGamerule
         {

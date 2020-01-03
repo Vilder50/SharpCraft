@@ -45,7 +45,7 @@ namespace SharpCraft
         /// The item type
         /// If null the item isnt any item type
         /// </summary>
-        [DataTag("id")]
+        [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
         public ItemType ID { get; set; }
 
         /// <summary>

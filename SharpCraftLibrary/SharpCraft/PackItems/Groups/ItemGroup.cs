@@ -27,6 +27,11 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// The value (Used for when converted into an item type)
+        /// </summary>
+        public object Value => this;
+
+        /// <summary>
         /// Returns <see cref="BaseFile.GetNamespacedName()"/>
         /// </summary>
         public string Name

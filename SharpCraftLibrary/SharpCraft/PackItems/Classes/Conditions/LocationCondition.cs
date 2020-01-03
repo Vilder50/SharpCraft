@@ -28,5 +28,11 @@ namespace SharpCraft.Conditions
         /// </summary>
         [DataTag("predicate", JsonTag = true)]
         public JSONObjects.Location Location { get => location; set => location = value ?? throw new ArgumentNullException(nameof(Location), "Location may not be null"); }
+
+        /// <summary>
+        /// Offset to check at
+        /// </summary>
+        [DataTag((object)"offsetX", "offsetY", "offsetZ", ID.NBTTagType.TagInt,true, Merge = true, JsonTag = true)]
+        public Coords Offset { get; set; }
     }
 }

@@ -114,6 +114,11 @@ namespace SharpCraft
         public string ClickCommand;
 
         /// <summary>
+        /// the text to copy when the text is clicked
+        /// </summary>
+        public string ClickCopy;
+
+        /// <summary>
         /// the text to input into a player's chat field if a player clicks the text
         /// </summary>
         public string ClickInsertion;
@@ -140,10 +145,16 @@ namespace SharpCraft
         public ScoreObject Objective;
 
         /// <summary>
-        /// The coords of a block to show data for
+        /// The coords of a block to show data for.
         /// note that <see cref="DataPath"/> also has to be set
         /// </summary>
         public Coords BlockCoords;
+
+        /// <summary>
+        /// The storage to show data for.
+        /// note that <see cref="DataPath"/> also has to be set
+        /// </summary>
+        public Storage Storage;
 
         /// <summary>
         /// The datapath to the data to show
@@ -183,6 +194,10 @@ namespace SharpCraft
                     {
                         TempList.Add("\"block\":\""+ BlockCoords.ToString() + "\",\"nbt\":\"" + DataPath + "\"");
                     }
+                    else if (Storage != null)
+                    {
+                        TempList.Add("\"storage\":\"" + BlockCoords.ToString() + "\",\"nbt\":\"" + DataPath + "\"");
+                    }
 
                     if (interpret != null) { TempList.Add("\"interpret\":" + interpret); }
                 }
@@ -197,6 +212,7 @@ namespace SharpCraft
                 if (Reset != null) { TempList.Add("\"Reset\":" + Reset); }
                 if (ClickShiftInsertion != null) { TempList.Add("\"insertion\":\"" + ClickShiftInsertion.Escape() + "\""); }
                 if (ClickURL != null) { TempList.Add("\"clickEvent\":{ \"action\":\"open_url\",\"value\":\"" + ClickURL.Escape() + "\"}"); }
+                if (ClickCopy != null) { TempList.Add("\"clickEvent\":{ \"action\":\"copy_to_clipboard\",\"value\":\"" + ClickCopy.Escape() + "\"}"); }
                 if (ClickCommand != null) { TempList.Add("\"clickEvent\":{ \"action\":\"run_command\",\"value\":\"" + ClickCommand.Escape() + "\"}"); }
                 if (ClickInsertion != null) { TempList.Add("\"clickEvent\":{ \"action\":\"suggest_command\",\"value\":\"" + ClickInsertion.Escape() + "\"}"); }
                 if (ClickBookPageChange != null) { TempList.Add("\"clickEvent\":{ \"action\":\"change_page\",\"value\":\"" + ClickBookPageChange + "\"}"); }

@@ -77,7 +77,7 @@ namespace SharpCraft
                 }
                 if (!ValidateName(value))
                 {
-                    throw new ArgumentException("Name is not valid.", nameof(Name));
+                    throw new ArgumentException("Pack name is not valid.", nameof(Name));
                 }
                 name = value;
             }

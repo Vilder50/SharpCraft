@@ -36,6 +36,40 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
+                public static class BeeHive
+                {
+                    public static string Drip { get; } = "block.beehive.drip";
+                    public static string Enter { get; } = "block.beehive.enter";
+                    public static string Exit { get; } = "block.beehive.exit";
+                    public static string Shear { get; } = "block.beehive.shear";
+                    public static string Work { get; } = "block.beehive.work";
+                }
+                public static class HoneyBlock
+                {
+                    public static string Break { get; } = "block.honey_block.break";
+                    public static string Fall { get; } = "block.honey_block.fall";
+                    public static string Hit { get; } = "block.honey_block.hit";
+                    public static string Place { get; } = "block.honey_block.place";
+                    public static string Slide { get; } = "block.honey_block.slide";
+                    public static string Step { get; } = "block.honey_block.step";
+                }
+                public static string BreakNetherWart { get; } = "block.nether_wart.break";
+                public static string BreakCrop { get; } = "block.crop.break";
+                public static class Beacon
+                {
+                    public static string Activate { get; } = "block.beacon.activate";
+                    public static string Ambient { get; } = "block.beacon.ambient";
+                    public static string Deactivate { get; } = "block.beacon.deactivate";
+                    public static string PowerSelect { get; } = "block.beacon.power_select";
+                }
+                public static class Conduit
+                {
+                    public static string Activate { get; } = "block.conduit.activate";
+                    public static string Ambient { get; } = "block.conduit.ambient";
+                    public static string Deactivate { get; } = "block.conduit.deactivate";
+                    public static string ShortAmbient { get; } = "block.conduit.ambient.short";
+                    public static string Attack { get; } = "block.conduit.attack.target";
+                }
                 public static class Coral
                 {
                     public static string Break { get; } = "block.coral_block.break";
@@ -97,6 +131,7 @@ namespace SharpCraft
                     public static string Fill { get; } = "block.composter.fill";
                     public static string FillSuccess { get; } = "block.composter.fill_success";
                     public static string Ready { get; } = "block.composter.ready";
+                    public static string Click { get; } = "block.composter.click";
                 }
                 public static class Cloth
                 {
@@ -324,6 +359,15 @@ namespace SharpCraft
             /// </summary>
             public static class Entity
             {
+                public static class Bee
+                {
+                    public static string Death { get; } = "entity.bee.death";
+                    public static string Hurt { get; } = "entity.bee.hurt";
+                    public static string Loop { get; } = "entity.bee.loop";
+                    public static string LoopAggressive { get; } = "entity.bee.loop_aggressive";
+                    public static string Pollinate { get; } = "entity.bee.pollinate";
+                    public static string Sting { get; } = "entity.bee.sting";
+                }
                 public static string Fish { get; } = "entity.fish.swim";
                 public static class Armorstand
                 {
@@ -380,28 +424,28 @@ namespace SharpCraft
                 }
                 public static class Drowned
                 {
-                    public static string Ambient { get; } = "entity.Drowned.ambient";
-                    public static string AmbientWater { get; } = "entity.Drowned.ambient_water";
-                    public static string Death { get; } = "entity.Drowned.death";
-                    public static string DeathWater { get; } = "entity.Drowned.death_water";
-                    public static string Hurt { get; } = "entity.Drowned.hurt";
-                    public static string HurtWater { get; } = "entity.Drowned.hurt_water";
-                    public static string Shoot { get; } = "entity.Drowned.shoot";
-                    public static string Step { get; } = "entity.Drowned.step";
-                    public static string Swim { get; } = "entity.Drowned.swim";
+                    public static string Ambient { get; } = "entity.drowned.ambient";
+                    public static string AmbientWater { get; } = "entity.drowned.ambient_water";
+                    public static string Death { get; } = "entity.drowned.death";
+                    public static string DeathWater { get; } = "entity.drowned.death_water";
+                    public static string Hurt { get; } = "entity.drowned.hurt";
+                    public static string HurtWater { get; } = "entity.drowned.hurt_water";
+                    public static string Shoot { get; } = "entity.drowned.shoot";
+                    public static string Step { get; } = "entity.drowned.step";
+                    public static string Swim { get; } = "entity.drowned.swim";
                 }
                 public static class Dolphin
                 {
-                    public static string Ambient { get; } = "entity.Dolphin.ambient";
-                    public static string AmbientWater { get; } = "entity.Dolphin.ambient_water";
-                    public static string Attack { get; } = "entity.Dolphin.attack";
-                    public static string Death { get; } = "entity.Dolphin.death";
-                    public static string Eat { get; } = "entity.Dolphin.eat";
-                    public static string Hurt { get; } = "entity.Dolphin.hurt";
-                    public static string Jump { get; } = "entity.Dolphin.jump";
-                    public static string Play { get; } = "entity.Dolphin.play";
-                    public static string Splash { get; } = "entity.Dolphin.splash";
-                    public static string Swim { get; } = "entity.Dolphin.swim";
+                    public static string Ambient { get; } = "entity.dolphin.ambient";
+                    public static string AmbientWater { get; } = "entity.dolphin.ambient_water";
+                    public static string Attack { get; } = "entity.dolphin.attack";
+                    public static string Death { get; } = "entity.dolphin.death";
+                    public static string Eat { get; } = "entity.dolphin.eat";
+                    public static string Hurt { get; } = "entity.dolphin.hurt";
+                    public static string Jump { get; } = "entity.dolphin.jump";
+                    public static string Play { get; } = "entity.dolphin.play";
+                    public static string Splash { get; } = "entity.dolphin.splash";
+                    public static string Swim { get; } = "entity.dolphin.swim";
                 }
                 public static class Boat
                 {
@@ -458,8 +502,16 @@ namespace SharpCraft
                     public static string Ambient { get; } = "entity.cow.ambient";
                     public static string Death { get; } = "entity.cow.death";
                     public static string Hurt { get; } = "entity.cow.hurt";
-                    public static string Milk { get; } = "entity.cow.egg";
+                    public static string Milk { get; } = "entity.cow.milk";
                     public static string Step { get; } = "entity.cow.step";
+                }
+                public static class MooshroomCow
+                {
+                    public static string Convert { get; } = "entity.mooshroom.convert";
+                    public static string Eat { get; } = "entity.mooshroom.eat";
+                    public static string Milk { get; } = "entity.mooshroom.milk";
+                    public static string Shear { get; } = "entity.mooshroom.shear";
+                    public static string SuspiciousMilk { get; } = "entity.mooshroom.suspicious_milk";
                 }
                 public static class Creeper
                 {
@@ -709,10 +761,10 @@ namespace SharpCraft
                 {
                     public static string Ambient { get; } = "entity.parrot.ambient";
                     public static string Death { get; } = "entity.parrot.death";
-                    public static string Hurt { get; } = "entity.parrot.Hurt";
-                    public static string Eat { get; } = "entity.parrot.Eat";
+                    public static string Hurt { get; } = "entity.parrot.hurt";
+                    public static string Eat { get; } = "entity.parrot.eat";
                     public static string Step { get; } = "entity.parrot.step";
-                    public static string Fly { get; } = "entity.parrot.Fly";
+                    public static string Fly { get; } = "entity.parrot.fly";
                     public static class Imitate
                     {
                         public static string Blaze { get; } = "entity.parrot.imitate.blaze";
@@ -1011,6 +1063,7 @@ namespace SharpCraft
             /// </summary>
             public static class Item
             {
+                public static string DrinkHoneyBottle { get; } = "item.honey_bottle.drink";
                 public static class Armor
                 {
                     public static string Chain { get; } = "item.armor.equip_chain";

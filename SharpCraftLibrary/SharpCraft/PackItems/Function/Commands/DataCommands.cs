@@ -51,6 +51,56 @@ namespace SharpCraft.Commands
     }
 
     /// <summary>
+    /// Command for merging data in a storage
+    /// </summary>
+    public class DataMergeStorageCommand : BaseCommand
+    {
+        private Storage storage;
+        private SimpleDataHolder data;
+
+        /// <summary>
+        /// Intializes a new <see cref="DataMergeStorageCommand"/>
+        /// </summary>
+        /// <param name="storage">The storage to add the data to</param>
+        /// <param name="data">The data to merge</param>
+        public DataMergeStorageCommand(Storage storage, SimpleDataHolder data)
+        {
+            Storage = storage;
+            Data = data;
+        }
+
+        /// <summary>
+        /// The storage to add the data to
+        /// </summary>
+        public Storage Storage
+        {
+            get => storage;
+            set
+            {
+                storage = value ?? throw new ArgumentNullException(nameof(Storage), "Storage may not be null.");
+            }
+        }
+
+        /// <summary>
+        /// The data to merge
+        /// </summary>
+        public SimpleDataHolder Data
+        {
+            get => data;
+            set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null");
+        }
+
+        /// <summary>
+        /// Returns the command as a string
+        /// </summary>
+        /// <returns>data merge block [Coordinates] [Data]</returns>
+        public override string GetCommandString()
+        {
+            return $"data merge storage {Storage.ToString()} {Data.GetDataString()}";
+        }
+    }
+
+    /// <summary>
     /// Command for merging data on a block
     /// </summary>
     public class DataMergeBlockCommand : BaseCommand

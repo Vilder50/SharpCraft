@@ -31,11 +31,10 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute facing ~3 ~4 ~5", new ExecuteFacingCoord(new Coords(3,4,5)).GetCommandString(), "ExecuteFacingCoord does not return correct GetCommandString");
             Assert.AreEqual("execute facing entity @s[level=1..2] feet", new ExecuteFacingEntity(new Selector() { Level = new Range(1, 2) }, ID.FacingAnchor.feet).GetCommandString(), "ExecuteFacingEntity does not return correct GetCommandString");
             Assert.AreEqual("execute if block ~0 ~0 ~0 minecraft:anvil[facing=north]", new ExecuteIfBlock(new Coords(), new Block.Anvil(ID.Block.anvil) {SFacing = ID.Facing.north }).GetCommandString(), "ExecuteIfBlock does not return correct GetCommandString");
-            Assert.AreEqual("execute if data block ~0 ~0 ~0 test.data", new ExecuteIfBlockData(new Coords(), "test.data").GetCommandString(), "ExecuteIfBlockData does not return correct GetCommandString");
+            Assert.AreEqual("execute if data block ~0 ~0 ~0 test.data", new ExecuteIfData(new BlockDataLocation(new Coords(), "test.data")).GetCommandString(), "ExecuteIfData does not return correct GetCommandString");
             Assert.AreEqual("execute unless blocks ~1 ~1 ~1 ~2 ~2 ~2 3 3 3 masked", new ExecuteIfBlocks(new Coords(1,1,1), new Coords(2,2,2), new Coords(ID.CoordType.Normal, 3, 3, 3), true, false).GetCommandString(), "ExecuteIfBlocks does not return correct GetCommandString");
             Assert.AreEqual("execute if blocks ~1 ~1 ~1 ~2 ~2 ~2 3 3 3 all", new ExecuteIfBlocks(new Coords(1, 1, 1), new Coords(2, 2, 2), new Coords(ID.CoordType.Normal, 3, 3, 3), false, true).GetCommandString(), "ExecuteIfBlocks does not return correct GetCommandString");
             Assert.AreEqual("execute if entity @s[level=1..2]", new ExecuteIfEntity(new Selector() { Level = new Range(1, 2) }).GetCommandString(), "ExecuteIfEntity does not return correct GetCommandString");
-            Assert.AreEqual("execute if data entity @s[level=1..2] data.test", new ExecuteIfEntityData(new Selector() { Level = new Range(1, 2) }, "data.test").GetCommandString(), "Execute does not return correct GetCommandString");
             Assert.AreEqual("execute if score @s test matches 1..5", new ExecuteIfScoreMatches(new Selector(), new ScoreObject("test"), new Range(1,5)).GetCommandString(), "ExecuteIfScoreMatches does not return correct GetCommandString");
             Assert.AreEqual("execute if score @s test > @s test", new ExecuteIfScoreRelative(new Selector(), new ScoreObject("test"), ID.IfScoreOperation.Higher, new Selector(), new ScoreObject("test")).GetCommandString(), "ExecuteIfScoreRelative does not return correct GetCommandString");
             Assert.AreEqual("execute positioned ~0 ~0 ~0", new ExecutePosition(new Coords()).GetCommandString(), "ExecutePosition does not return correct GetCommandString");
@@ -47,6 +46,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute store result bossbar test:test max", new ExecuteStoreBossbar(new BossBar("test:test"), false, true).GetCommandString(), "ExecuteStoreBossbar does not return correct GetCommandString");
             Assert.AreEqual("execute store result entity @s cake long 10", new ExecuteStoreEntity(new Selector(), "cake", ID.StoreTypes.Long, 10).GetCommandString(), "ExecuteStoreEntity does not return correct GetCommandString");
             Assert.AreEqual("execute store result score @s test", new ExecuteStoreScore(new Selector(), new ScoreObject("test")).GetCommandString(), "ExecuteStoreScore does not return correct GetCommandString");
+            Assert.AreEqual("execute if predicate space:name", new ExecuteIfPredicate(new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name")).GetCommandString(), "ExecuteIfPredicate does not return correct GetCommandString");
             Assert.IsNull(new StopExecuteCommand().GetCommandString());
         }
 

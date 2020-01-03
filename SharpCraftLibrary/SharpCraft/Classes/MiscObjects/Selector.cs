@@ -107,6 +107,11 @@ namespace SharpCraft
         public EntityMode[] Mode;
 
         /// <summary>
+        /// The predicates the selected entity must turn successfull / not successfull
+        /// </summary>
+        public EntityPredicate[] Predicates;
+
+        /// <summary>
         /// The way the selected entities should be sorted in
         /// </summary>
         public ID.Sort? Sort;
@@ -419,6 +424,55 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// An object used to define a predicate an entity has to have / not have
+        /// </summary>
+        public class EntityPredicate
+        {
+            private IPredicate predicate;
+
+            /// <summary>
+            /// Intializes a new <see cref="EntityPredicate"/>
+            /// </summary>
+            /// <param name="predicate"></param>
+            /// <param name="wanted"></param>
+            public EntityPredicate(IPredicate predicate, bool wanted = false)
+            {
+                Predicate = predicate;
+                Wanted = wanted;
+            }
+
+            /// <summary>
+            /// The predicate to check
+            /// </summary>
+            public IPredicate Predicate { get => predicate; set => predicate = value ?? throw new System.ArgumentNullException(nameof(Predicate), "Predicate may not be null"); }
+
+            /// <summary>
+            /// If the predicate should be wanted successfull or not
+            /// </summary>
+            public bool Wanted { get; set; }
+
+            /// <summary>
+            /// The <see cref="EntityMode"/>'s raw data
+            /// </summary>
+            public override string ToString()
+            {
+                string TempString = "predicate=";
+                if (!Wanted) { TempString += "!"; }
+                TempString += Predicate.GetNamespacedName();
+                return TempString;
+            }
+
+            /// <summary>
+            /// Converts a single <see cref="EntityPredicate"/> into an array containing only that one <see cref="EntityPredicate"/>
+            /// </summary>
+            /// <param name="predicate">the <see cref="EntityPredicate"/> to convert into an array</param>
+            public static implicit operator EntityPredicate[](EntityPredicate predicate)
+            {
+                return new EntityPredicate[] { predicate };
+            }
+        }
+
+        /// <summary>
         /// The <see cref="Selector"/>'s raw data
         /// </summary>
         public override string ToString()
@@ -457,6 +511,13 @@ namespace SharpCraft
                     for (int i = 0; i < Tag.Length; i++)
                     {
                         TempList.Add(Tag[i].ToString());
+                    }
+                }
+                if (Predicates != null)
+                {
+                    for (int i = 0; i < Predicates.Length; i++)
+                    {
+                        TempList.Add(Predicates[i].ToString());
                     }
                 }
                 if (Score != null)

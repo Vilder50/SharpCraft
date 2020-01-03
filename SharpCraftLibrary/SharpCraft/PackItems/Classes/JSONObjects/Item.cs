@@ -13,14 +13,8 @@ namespace SharpCraft
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s id
             /// </summary>
-            [DataTag("item", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
-            public ID.Item? Id { get; set; }
-
-            /// <summary>
-            /// the <see cref="SharpCraft.Item"/>'s id
-            /// </summary>
-            [DataTag("tag", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public ItemGroup Group { get; set; }
+            [DataTag((object)"item", "tag", true, JsonTag = true, ForceType = ID.NBTTagType.TagCompound, Merge = true)]
+            public ItemType Id { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s durability
@@ -45,6 +39,12 @@ namespace SharpCraft
             /// </summary>
             [DataTag("enchantments", JsonTag = true)]
             public Enchantment[] Enchantments { get; set; }
+
+            /// <summary>
+            /// the <see cref="SharpCraft.Item"/>'s stored <see cref="Enchantment"/>s
+            /// </summary>
+            [DataTag("stored_enchantments", JsonTag = true)]
+            public Enchantment[] StoredEnchantments { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s nbt data
@@ -97,7 +97,16 @@ namespace SharpCraft
             /// <param name="group">the item group to convert</param>
             public static implicit operator Item(ItemGroup group)
             {
-                return new Item { Group = group };
+                return new Item { Id = group };
+            }
+
+            /// <summary>
+            /// Converts an item into a <see cref="Item"/> object
+            /// </summary>
+            /// <param name="item">The item to convert</param>
+            public static implicit operator Item(SharpCraft.Item item)
+            {
+                return new Item() { Id = item.ID, NBT = item };
             }
         }
     }

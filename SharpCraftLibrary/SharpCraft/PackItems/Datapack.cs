@@ -17,7 +17,7 @@ namespace SharpCraft
         /// <param name="packName">The datapack's name</param>
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
-        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 0) : this(path, packName, description, packFormat, new FileCreator())
+        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 5) : this(path, packName, description, packFormat, new FileCreator())
         {
 
         }

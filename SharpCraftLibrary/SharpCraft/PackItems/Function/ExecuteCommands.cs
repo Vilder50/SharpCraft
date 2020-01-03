@@ -118,7 +118,7 @@ namespace SharpCraft.FunctionWriters
         public void IfData(Selector entitySelector, string dataPath, bool want = true)
         {
             entitySelector.Limited();
-            function.AddCommand(new ExecuteIfEntityData(entitySelector, dataPath, want));
+            function.AddCommand(new ExecuteIfData(new EntityDataLocation(entitySelector, dataPath), want));
         }
 
         /// <summary>
@@ -129,7 +129,28 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfData(Coords block, string dataPath, bool want = true)
         {
-            function.AddCommand(new ExecuteIfBlockData(block, dataPath, want));
+            function.AddCommand(new ExecuteIfData(new BlockDataLocation(block, dataPath), want));
+        }
+
+        /// <summary>
+        /// Executes if the <see cref="Storage"/> has the given datapath
+        /// </summary>
+        /// <param name="storage">the storage to check if datapath exists in</param>
+        /// <param name="dataPath">The datapath the entity should contain</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        public void IfData(Storage storage, string dataPath, bool want = true)
+        {
+            function.AddCommand(new ExecuteIfData(new StorageDataLocation(storage, dataPath), want));
+        }
+
+        /// <summary>
+        /// Executes if the predicate returns true
+        /// </summary>
+        /// <param name="predicate">The predicate to check</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        public void IfPredicate(IPredicate predicate, bool want = true)
+        {
+            function.AddCommand(new ExecuteIfPredicate(predicate, want));
         }
 
         /// <summary>
