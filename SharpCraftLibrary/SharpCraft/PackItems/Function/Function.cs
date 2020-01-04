@@ -335,6 +335,18 @@ namespace SharpCraft
             get => GetNamespacedName();
         }
 
-        //TODO make way to convert from string into this
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:FUNCTION into an <see cref="EmptyFunction"/>
+        /// </summary>
+        /// <param name="function">The string to convert</param>
+        public static implicit operator EmptyFunction(string function)
+        {
+            string[] parts = function.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty function has to contain a single :");
+            }
+            return new EmptyFunction(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
     }
 }

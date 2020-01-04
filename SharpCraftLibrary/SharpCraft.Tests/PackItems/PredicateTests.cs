@@ -48,5 +48,12 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("{\"chance\":0.5,\"condition\":\"minecraft:random_chance\"}", predicateString, "file wasn't written correctly");
             }
         }
+
+        [TestMethod]
+        public void TestEmptyPredicate()
+        {
+            Assert.AreEqual("name:predicate", new EmptyPredicate(EmptyDatapack.GetPack().Namespace("name"), "predicate").GetNamespacedName(), "EmptyPredicate doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((EmptyPredicate)"space:name").GetNamespacedName(), "Implicit string to predicate conversion converts incorrectly");
+        }
     }
 }

@@ -40,5 +40,19 @@ namespace SharpCraft
         {
             return PackNamespace.Name + ":" + FileName;
         }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:ADVANCEMENT into an <see cref="EmptyAdvancement"/>
+        /// </summary>
+        /// <param name="advancement">The string to convert</param>
+        public static implicit operator EmptyAdvancement(string advancement)
+        {
+            string[] parts = advancement.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty advancement has to contain a single :");
+            }
+            return new EmptyAdvancement(EmptyDatapack.GetPack().Namespace(parts[0]),parts[1]);
+        }
     }
 }

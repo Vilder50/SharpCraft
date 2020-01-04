@@ -114,5 +114,19 @@ namespace SharpCraft
         {
             return new DataPartTag(GetNamespacedName());
         }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:PREDICATE into an <see cref="EmptyPredicate"/>
+        /// </summary>
+        /// <param name="predicate">The string to convert</param>
+        public static implicit operator EmptyPredicate(string predicate)
+        {
+            string[] parts = predicate.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty predicate has to contain a single :");
+            }
+            return new EmptyPredicate(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
     }
 }

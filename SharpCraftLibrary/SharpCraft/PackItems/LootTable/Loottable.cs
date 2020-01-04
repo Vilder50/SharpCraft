@@ -165,5 +165,19 @@ namespace SharpCraft
         {
             return PackNamespace.Name + ":" + FileName;
         }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:LOOTTABLE into an <see cref="EmptyLoottable"/>
+        /// </summary>
+        /// <param name="loottable">The string to convert</param>
+        public static implicit operator EmptyLoottable(string loottable)
+        {
+            string[] parts = loottable.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new System.InvalidCastException("String for creating empty loottable has to contain a single :");
+            }
+            return new EmptyLoottable(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
     }
 }

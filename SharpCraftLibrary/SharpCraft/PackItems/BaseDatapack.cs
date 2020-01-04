@@ -86,11 +86,11 @@ namespace SharpCraft
         /// <summary>
         /// The name of the datapack used for refering to the datapack in game
         /// </summary>
-        public string IngameName
+        public virtual string IngameName
         {
             get
             {
-                return Name;
+                return "\"file/" + Name + "\""; ;
             }
         }
 

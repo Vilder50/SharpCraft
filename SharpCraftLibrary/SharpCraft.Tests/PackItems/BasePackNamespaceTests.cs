@@ -180,6 +180,15 @@ namespace SharpCraft.Tests.PackItems
 
             Assert.ThrowsException<InvalidOperationException>(() => new BaseFileTestClass1(space, "afile", BaseFile.WriteSetting.Auto), "Shouldn't be able to add more files since namespace is disposed");
         }
+
+        [TestMethod]
+        public void TestEmptyNamespace()
+        {
+            Assert.AreEqual(EmptyNamespace.GetMinecraftNamespace(), EmptyNamespace.GetMinecraftNamespace(), "Getting minecraft namespace doesn't return the same object every time");
+            Assert.AreEqual("minecraft", EmptyNamespace.GetMinecraftNamespace().Name, "Getting minecraft namespace returns wrong namespace");
+            Assert.AreEqual(EmptyNamespace.GetNamespace("space"), EmptyNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
+            Assert.AreEqual("space", EmptyNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
+        }
     }
 }
 

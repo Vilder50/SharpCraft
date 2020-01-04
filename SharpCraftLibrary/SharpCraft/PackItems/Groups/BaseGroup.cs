@@ -5,10 +5,18 @@ using System.Collections.Generic;
 namespace SharpCraft
 {
     /// <summary>
+    /// Interface for groups of an item
+    /// </summary>
+    public interface IGroup<TItem> where TItem : IGroupable
+    {
+
+    }
+
+    /// <summary>
     /// Abstract class for Groups of an item.
     /// </summary>
     /// <typeparam name="TItem">The item the group is for</typeparam>
-    public abstract class BaseGroup<TItem> : BaseFile where TItem : IGroupable
+    public abstract class BaseGroup<TItem> : BaseFile, IGroup<TItem> where TItem : IGroupable
     {
         private List<TItem> items;
         private bool appendGroup;

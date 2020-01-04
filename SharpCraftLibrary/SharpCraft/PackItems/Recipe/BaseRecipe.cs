@@ -156,5 +156,19 @@ namespace SharpCraft
         {
             return new DataPartTag(GetNamespacedName());
         }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:RECIPE into an <see cref="EmptyRecipe"/>
+        /// </summary>
+        /// <param name="recipe">The string to convert</param>
+        public static implicit operator EmptyRecipe(string recipe)
+        {
+            string[] parts = recipe.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty recipe has to contain a single :");
+            }
+            return new EmptyRecipe(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
     }
 }

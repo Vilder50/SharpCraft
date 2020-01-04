@@ -180,5 +180,12 @@ namespace SharpCraft.Tests.PackItems
                     "say hello" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\execute.mcfunction").writer.ToString(), "executing file written correctly");
             }
         }
+
+        [TestMethod]
+        public void TestEmptyFunction()
+        {
+            Assert.AreEqual("name:func", new EmptyFunction(EmptyDatapack.GetPack().Namespace("name"), "func").GetNamespacedName(), "EmptyFunction doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((EmptyFunction)"space:name").GetNamespacedName(), "Implicit string to function conversion converts incorrectly");
+        }
     }
 }

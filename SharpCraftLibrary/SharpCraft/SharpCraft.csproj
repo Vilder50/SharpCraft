@@ -391,6 +391,7 @@
     <Compile Include="PackItems\Function\PlayerCommands.cs" />
     <Compile Include="PackItems\Function\Commands\RecipeCommands.cs" />
     <Compile Include="PackItems\Function\WorldCommands.cs" />
+    <Compile Include="PackItems\Groups\EmptyGroup.cs" />
     <Compile Include="PackItems\Groups\LiquidGroup.cs" />
     <Compile Include="PackItems\Groups\EntityGroup.cs" />
     <Compile Include="PackItems\Groups\ItemGroup.cs" />

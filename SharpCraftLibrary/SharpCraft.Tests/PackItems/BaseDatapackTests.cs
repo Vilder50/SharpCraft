@@ -107,5 +107,17 @@ namespace SharpCraft.Tests.PackItems
             Assert.IsTrue(space.Disposed, "namespace in pack was disposed and should be disposed since the pack is disposed");
             Assert.ThrowsException<InvalidOperationException>(() => pack.Namespace<NamespaceTestClass>("namespace"), "Shouldn't be able to get/create namespaces after pack has been disposed");
         }
+
+        [TestMethod]
+        public void TestEmptyDatapack()
+        {
+            Assert.AreEqual(EmptyDatapack.GetPack(), EmptyDatapack.GetPack(), "Empty Datapack doesn't return the same datapack");
+            using (BaseDatapack pack = new EmptyDatapack("pack"))
+            {
+                Assert.AreEqual("\"file/pack\"", pack.IngameName, "Empty datapack doesn't return correct name");
+                ((EmptyDatapack)pack).FileDatapack = false;
+                Assert.AreEqual("pack", pack.IngameName, "Empty datapack doesn't return correct name");
+            }
+        }
     }
 }

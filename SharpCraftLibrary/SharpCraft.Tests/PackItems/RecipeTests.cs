@@ -172,5 +172,12 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("{\"type\":\"minecraft:crafting_special_armordye\"}", recipeString, "recipe file wasn't written correctly");
             }
         }
+
+        [TestMethod]
+        public void TestEmptyRecipe()
+        {
+            Assert.AreEqual("name:reci", new EmptyRecipe(EmptyDatapack.GetPack().Namespace("name"), "reci").GetNamespacedName(), "EmptyRecipe doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((EmptyRecipe)"space:name").GetNamespacedName(), "Implicit string to recipe conversion converts incorrectly");
+        }
     }
 }

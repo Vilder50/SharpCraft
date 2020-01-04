@@ -560,7 +560,26 @@ namespace SharpCraft
     public class EmptyNamespace : BasePackNamespace
     {
         /// <summary>
-        /// Intializes a new empty namespace. Make sure to call <see cref="BasePackNamespace.Setup(BaseDatapack, string)"/> after using this
+        /// Returns a reference to the minecraft namespace
+        /// </summary>
+        /// <returns>A reference to the minecraft namespace</returns>
+        public static EmptyNamespace GetMinecraftNamespace()
+        {
+            return EmptyDatapack.GetPack().Namespace("minecraft");
+        }
+
+        /// <summary>
+        /// Returns a reference to the namespace
+        /// </summary>
+        /// <param name="namespace">The namespace to get</param>
+        /// <returns>The namespace</returns>
+        public static EmptyNamespace GetNamespace(string @namespace)
+        {
+            return EmptyDatapack.GetPack().Namespace(@namespace);
+        }
+
+        /// <summary>
+        /// Intializes a new empty namespace. Make sure to call <see cref="BasePackNamespace.Setup(BaseDatapack, string)"/> after using this. Suggested to use <see cref="EmptyNamespace.GetNamespace(string)"/> instead.
         /// </summary>
         public EmptyNamespace() : base()
         {
@@ -568,7 +587,7 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Creates a new namespace in a datapack
+        /// Creates a new namespace in a datapack. Suggested to use <see cref="EmptyNamespace.GetNamespace(string)"/> instead
         /// </summary>
         /// <param name="datapack">The datapack to add the namespace to</param>
         /// <param name="namespaceName">the name of the namespace</param>

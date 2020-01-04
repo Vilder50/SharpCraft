@@ -163,5 +163,12 @@ namespace SharpCraft.Tests.PackItems
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\childchild.json"), "File wasn't created");
             }
         }
+
+        [TestMethod]
+        public void TestEmptyAdvancement()
+        {
+            Assert.AreEqual("name:adv",new EmptyAdvancement(EmptyDatapack.GetPack().Namespace("name"),"adv").GetNamespacedName(), "EmptyAdvancement doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((EmptyAdvancement)"space:name").GetNamespacedName(), "Implicit string to advancement conversion converts incorrectly");
+        }
     }
 }
