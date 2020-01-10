@@ -63,7 +63,7 @@ namespace SharpCraft.Commands
         /// <returns>spectate [Spectate] [Spectator]</returns>
         public override string GetCommandString()
         {
-            return $"spectate {Spectate} {Spectator}";
+            return $"spectate {Spectate.GetSelectorString()} {Spectator.GetSelectorString()}";
         }
     }
 

@@ -28,7 +28,7 @@ namespace SharpCraft
         /// <summary>
         /// The namespace for the storage
         /// </summary>
-        public BasePackNamespace PackNamespace { get => packNamespace; set => packNamespace = value ?? throw new ArgumentNullException(nameof(PackNamespace), "PackNamespace may not be null"); }
+        public BasePackNamespace PackNamespace { get => packNamespace; protected set => packNamespace = value ?? throw new ArgumentNullException(nameof(PackNamespace), "PackNamespace may not be null"); }
 
         /// <summary>
         /// The name of the storage
@@ -36,7 +36,7 @@ namespace SharpCraft
         public string Name 
         { 
             get => name; 
-            set
+            protected set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
@@ -53,15 +53,6 @@ namespace SharpCraft
         public string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + Name.Replace("\\", "/");
-        }
-
-        /// <summary>
-        /// Returns the namespaced name of this storage
-        /// </summary>
-        /// <returns>The namespaced name of this storage</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
         }
     }
 }

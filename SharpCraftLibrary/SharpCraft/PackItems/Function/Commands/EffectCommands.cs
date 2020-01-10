@@ -86,21 +86,21 @@ namespace SharpCraft.Commands
                 {
                     if (Seconds == 30)
                     {
-                        return $"effect give {Selector} {Effect}";
+                        return $"effect give {Selector.GetSelectorString()} {Effect}";
                     }
                     else
                     {
-                        return $"effect give {Selector} {Effect} {Seconds}";
+                        return $"effect give {Selector.GetSelectorString()} {Effect} {Seconds}";
                     }
                 }
                 else
                 {
-                    return $"effect give {Selector} {Effect} {Seconds} {Amplifier}";
+                    return $"effect give {Selector.GetSelectorString()} {Effect} {Seconds} {Amplifier}";
                 }
             }
             else
             {
-                return $"effect give {Selector} {Effect} {Seconds} {Amplifier} {HideParticles.ToMinecraftBool()}";
+                return $"effect give {Selector.GetSelectorString()} {Effect} {Seconds} {Amplifier} {HideParticles.ToMinecraftBool()}";
             }
         }
     }
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// <returns>effect clear [Selector] [Effect]</returns>
         public override string GetCommandString()
         {
-            return $"effect clear {Selector.ToString()} {Effect}";
+            return $"effect clear {Selector.GetSelectorString()} {Effect}";
         }
     }
 }

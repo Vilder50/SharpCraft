@@ -50,11 +50,11 @@ namespace SharpCraft.Commands
         {
             if (DisplayName is null)
             {
-                return $"scoreboard objectives add {ScoreObject.ToString()} {Criterion}";
+                return $"scoreboard objectives add {ScoreObject.Name} {Criterion}";
             }
             else
             {
-                return $"scoreboard objectives add {ScoreObject.ToString()} {Criterion} {DisplayName.GetString(true)}";
+                return $"scoreboard objectives add {ScoreObject.Name} {Criterion} {DisplayName.GetString(true)}";
             }
         }
     }
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives modify [ScoreObject] displayname [DisplayName]</returns>
         public override string GetCommandString()
         {
-             return $"scoreboard objectives modify {ScoreObject.ToString()} displayname {DisplayName.GetString(true)}";
+             return $"scoreboard objectives modify {ScoreObject.Name} displayname {DisplayName.GetString(true)}";
         }
     }
 
@@ -148,7 +148,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives modify [ScoreObject] rendertype [Rendering]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard objectives modify {ScoreObject.ToString()} rendertype {Rendering}";
+            return $"scoreboard objectives modify {ScoreObject.Name} rendertype {Rendering}";
         }
     }
 
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives remove [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard objectives remove {ScoreObject.ToString()}";
+            return $"scoreboard objectives remove {ScoreObject.Name}";
         }
     }
 
@@ -221,7 +221,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"scoreboard objectives setdisplay {DisplaySlot} {ScoreObject.ToString()}";
+                return $"scoreboard objectives setdisplay {DisplaySlot} {ScoreObject.Name}";
             }
         }
     }
@@ -264,7 +264,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"scoreboard objectives setdisplay sidebar.team.{TeamColor} {ScoreObject.ToString()}";
+                return $"scoreboard objectives setdisplay sidebar.team.{TeamColor} {ScoreObject.Name}";
             }
         }
     }
@@ -322,14 +322,14 @@ namespace SharpCraft.Commands
             {
                 if (ChangeType == ID.ScoreChange.add)
                 {
-                    return $"scoreboard players remove {Selector} {ScoreObject} {Math.Abs(ChangeNumber)}";
+                    return $"scoreboard players remove {Selector.GetSelectorString()} {ScoreObject.Name} {Math.Abs(ChangeNumber)}";
                 }
                 else if (ChangeType == ID.ScoreChange.remove)
                 {
-                    return $"scoreboard players add {Selector} {ScoreObject} {Math.Abs(ChangeNumber)}";
+                    return $"scoreboard players add {Selector.GetSelectorString()} {ScoreObject.Name} {Math.Abs(ChangeNumber)}";
                 }
             }
-            return $"scoreboard players {ChangeType} {Selector} {ScoreObject} {ChangeNumber}";
+            return $"scoreboard players {ChangeType} {Selector.GetSelectorString()} {ScoreObject.Name} {ChangeNumber}";
         }
     }
 
@@ -380,7 +380,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players get [Selector] [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard players get {Selector} {ScoreObject}";
+            return $"scoreboard players get {Selector.GetSelectorString()} {ScoreObject.Name}";
         }
     }
 
@@ -420,7 +420,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players enable [Selector] [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard players enable {Selector} {ScoreObject}";
+            return $"scoreboard players enable {Selector.GetSelectorString()} {ScoreObject.Name}";
         }
     }
 
@@ -460,11 +460,11 @@ namespace SharpCraft.Commands
         {
             if (ScoreObject is null)
             {
-                return $"scoreboard players reset {Selector}";
+                return $"scoreboard players reset {Selector.GetSelectorString()}";
             }
             else
             {
-                return $"scoreboard players reset {Selector} {ScoreObject}";
+                return $"scoreboard players reset {Selector.GetSelectorString()} {ScoreObject.Name}";
             }
         }
     }
@@ -507,7 +507,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players list [Selector]</returns>
         public string GetCommandString()
         {
-             return $"scoreboard players list {Selector}";
+             return $"scoreboard players list {Selector.GetSelectorString()}";
         }
     }
 
@@ -615,7 +615,7 @@ namespace SharpCraft.Commands
                     break;
             }
 
-            return $"scoreboard players operation {Selector1} {Objective1} {operatorString} {Selector2} {Objective2}";
+            return $"scoreboard players operation {Selector1.GetSelectorString()} {Objective1.Name} {operatorString} {Selector2.GetSelectorString()} {Objective2.Name}";
         }
     }
 }

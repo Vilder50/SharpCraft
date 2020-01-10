@@ -5,7 +5,7 @@
     /// </summary>
     public class ScoreObject
     {
-        readonly string Name;
+        private string name;
         /// <summary>
         /// Creates a new scoreboard objective object.
         /// Note that this doesnt add the objective to the world
@@ -17,12 +17,19 @@
         }
 
         /// <summary>
-        /// Outputs the name of this score objective
+        /// The name of this score objective
         /// </summary>
-        /// <returns>the name of this score objective</returns>
-        public override string ToString()
+        public string Name
         {
-            return Name;
+            get => name;
+            protected set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new System.ArgumentException("ScoreObjective name may not be null or whitespace", nameof(Name));
+                }
+                name = value;
+            }
         }
 
         /// <summary>

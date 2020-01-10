@@ -48,7 +48,7 @@ namespace SharpCraft.Commands
         /// <returns>tag [Selector] [AddTag] [Tag]</returns>
         public override string GetCommandString()
         {
-            return $"tag {Selector} {(AddTag ? "add" : "remove")} {Tag.ToString()}";
+            return $"tag {Selector.GetSelectorString()} {(AddTag ? "add" : "remove")} {Tag.Name}";
         }
     }
 
@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
         /// <returns>tag [Selector] list</returns>
         public override string GetCommandString()
         {
-            return $"tag {Selector} list";
+            return $"tag {Selector.GetSelectorString()} list";
         }
     }
 }

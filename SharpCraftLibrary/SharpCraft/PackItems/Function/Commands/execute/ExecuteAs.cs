@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>as [selector]</returns>
         protected override string GetExecutePart()
         {
-            return "as " + Selector;
+            return "as " + Selector.GetSelectorString();
         }
     }
 }

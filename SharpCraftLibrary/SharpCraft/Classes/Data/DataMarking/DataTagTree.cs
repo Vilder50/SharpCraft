@@ -567,11 +567,11 @@ namespace SharpCraft.Data
             {
                 if (TagType == ID.NBTTagType.TagCompound)
                 {
-                    return jsonObject.ToString();
+                    return jsonObject.GetJsonString();
                 }
                 else
                 {
-                    return "\"" + jsonObject.ToString().Escape() + "\"";
+                    return "\"" + jsonObject.GetJsonString().Escape() + "\"";
                 }
             }
             else if (Value.GetType().IsEnum)

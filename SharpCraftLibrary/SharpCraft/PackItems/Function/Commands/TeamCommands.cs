@@ -42,11 +42,11 @@ namespace SharpCraft.Commands
         {
             if (DisplayName is null)
             {
-                return $"team add {Team}";
+                return $"team add {Team.Name}";
             }
             else
             {
-                return $"team add {Team} {DisplayName.GetString(true)}";
+                return $"team add {Team.Name} {DisplayName.GetString(true)}";
             }
         }
     }
@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// <returns>team empty [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team empty {Team}";
+            return $"team empty {Team.Name}";
         }
     }
 
@@ -117,7 +117,7 @@ namespace SharpCraft.Commands
         /// <returns>team join [Team] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"team join {Team} {Selector}";
+            return $"team join {Team.Name} {Selector.GetSelectorString()}";
         }
     }
 
@@ -148,7 +148,7 @@ namespace SharpCraft.Commands
         /// <returns>team leave [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"team leave {Selector}";
+            return $"team leave {Selector.GetSelectorString()}";
         }
     }
 
@@ -194,7 +194,7 @@ namespace SharpCraft.Commands
         /// <returns>team list [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team list {Team}";
+            return $"team list {Team.Name}";
         }
     }
 
@@ -225,7 +225,7 @@ namespace SharpCraft.Commands
         /// <returns>team remove [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team remove {Team}";
+            return $"team remove {Team.Name}";
         }
     }
 
@@ -271,7 +271,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] [DisplaySlot] [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} {DisplaySlot} {Value.GetString(true)}";
+            return $"team modify {Team.Name} {DisplaySlot} {Value.GetString(true)}";
         }
     }
 
@@ -309,7 +309,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] collisionRule [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} collisionRule {Value}";
+            return $"team modify {Team.Name} collisionRule {Value}";
         }
     }
 
@@ -347,7 +347,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] color [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} color {Value}";
+            return $"team modify {Team.Name} color {Value}";
         }
     }
 
@@ -385,7 +385,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] deathMessageVisibility [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} deathMessageVisibility {Value}";
+            return $"team modify {Team.Name} deathMessageVisibility {Value}";
         }
     }
 
@@ -423,7 +423,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] nametagVisibility [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} nametagVisibility {Value}";
+            return $"team modify {Team.Name} nametagVisibility {Value}";
         }
     }
 
@@ -461,7 +461,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] friendlyFire [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} friendlyFire {Value.ToMinecraftBool()}";
+            return $"team modify {Team.Name} friendlyFire {Value.ToMinecraftBool()}";
         }
     }
 
@@ -499,7 +499,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] seeFriendlyInvisibles [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
+            return $"team modify {Team.Name} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
         }
     }
 }

@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
         /// <returns>clone [Corner1] [Corner2] [Location] [Masked] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"clone {Corner1} {Corner2} {Location} {(Masked ? "masked" : "replace")} {Mode}";
+            return $"clone {Corner1.GetCoordString()} {Corner2.GetCoordString()} {Location.GetCoordString()} {(Masked ? "masked" : "replace")} {Mode}";
         }
     }
 
@@ -174,7 +174,7 @@ namespace SharpCraft.Commands
         /// <returns>clone [Corner1] [Corner2] [Location] filtered [FilterBlock] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"clone {Corner1} {Corner2} {Location} filtered {FilterBlock.ToString()} {Mode}";
+            return $"clone {Corner1.GetCoordString()} {Corner2.GetCoordString()} {Location.GetCoordString()} filtered {FilterBlock.GetBlockPlacementString()} {Mode}";
         }
     }
 }

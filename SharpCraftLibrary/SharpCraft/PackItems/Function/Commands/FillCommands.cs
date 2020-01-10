@@ -79,11 +79,11 @@ namespace SharpCraft.Commands
         {
             if (FillMode == ID.BlockFill.replace)
             {
-                return $"fill {Corner1} {Corner2} {Block.ToString()}";
+                return $"fill {Corner1.GetCoordString()} {Corner2.GetCoordString()} {Block.GetBlockPlacementString()}";
             }
             else
             {
-                return $"fill {Corner1} {Corner2} {Block.ToString()} {FillMode}";
+                return $"fill {Corner1.GetCoordString()} {Corner2.GetCoordString()} {Block.GetBlockPlacementString()} {FillMode}";
             }
         }
     }
@@ -167,7 +167,7 @@ namespace SharpCraft.Commands
         /// <returns>fill [Corner1] [Corner2] [Block] replace [ReplaceBlock]</returns>
         public override string GetCommandString()
         {
-            return $"fill {Corner1} {Corner2} {Block.ToString()} replace {ReplaceBlock.ToString()}";
+            return $"fill {Corner1.GetCoordString()} {Corner2.GetCoordString()} {Block.GetBlockPlacementString()} replace {ReplaceBlock.GetBlockPlacementString()}";
         }
     }
 }

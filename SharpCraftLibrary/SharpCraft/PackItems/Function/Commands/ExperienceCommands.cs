@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
         /// <returns>experience [Modifier] [Selector] [Value] [ChangeLevels]</returns>
         public override string GetCommandString()
         {
-            return $"xp {Modifier} {Selector} {Value} {(ChangeLevels ? "levels" : "points")}";
+            return $"xp {Modifier} {Selector.GetSelectorString()} {Value} {(ChangeLevels ? "levels" : "points")}";
         }
     }
 
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
         /// <returns>experience query [Selector] [ChangeLevels]</returns>
         public override string GetCommandString()
         {
-            return $"xp query {Selector} {(GetLevels ? "levels" : "points")}";
+            return $"xp query {Selector.GetSelectorString()} {(GetLevels ? "levels" : "points")}";
         }
     }
 }

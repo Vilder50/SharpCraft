@@ -143,7 +143,7 @@ namespace SharpCraft.Commands
         /// <returns>msg [Selector] [Text]</returns>
         public override string GetCommandString()
         {
-            return $"msg {Selector} {Text}";
+            return $"msg {Selector.GetSelectorString()} {Text}";
         }
     }
 
@@ -283,7 +283,7 @@ namespace SharpCraft.Commands
         /// <returns>trigger [Objective] [ShouldSet] [Score]</returns>
         public override string GetCommandString()
         {
-            return $"trigger {Objective} {(ShouldSet ? "set" : "add")} {Score}";
+            return $"trigger {Objective.Name} {(ShouldSet ? "set" : "add")} {Score}";
         }
     }
 
@@ -421,7 +421,7 @@ namespace SharpCraft.Commands
         /// <returns>enchant [Selector] [Enchant] [Level]</returns>
         public override string GetCommandString()
         {
-            return $"enchant {Selector} {Enchant} {Level}";
+            return $"enchant {Selector.GetSelectorString()} {Enchant} {Level}";
         }
     }
 
@@ -504,7 +504,7 @@ namespace SharpCraft.Commands
         /// <returns>gamemode [Gamemode] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"gamemode {Gamemode} {Selector}";
+            return $"gamemode {Gamemode} {Selector.GetSelectorString()}";
         }
     }
 
@@ -542,7 +542,7 @@ namespace SharpCraft.Commands
         /// <returns>kill [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"kill {Selector}";
+            return $"kill {Selector.GetSelectorString()}";
         }
     }
 
@@ -602,7 +602,7 @@ namespace SharpCraft.Commands
         /// <returns>setblock [Coordinates] [Block] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"setblock {Coordinates} {Block.ToString()} {Mode}";
+            return $"setblock {Coordinates.GetCoordString()} {Block.GetBlockPlacementString()} {Mode}";
         }
     }
 
@@ -640,7 +640,7 @@ namespace SharpCraft.Commands
         /// <returns>setworldspawn [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"setworldspawn {Coordinates}";
+            return $"setworldspawn {Coordinates.GetCoordString()}";
         }
     }
 
@@ -768,7 +768,7 @@ namespace SharpCraft.Commands
         /// <returns>spreadplayers [Coordinates] [Distance] [MaxRange] [RespectTeams] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector}";
+            return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector.GetSelectorString()}";
         }
     }
 
@@ -831,7 +831,7 @@ namespace SharpCraft.Commands
         /// <returns>summon [Entity(type)] [Coordinates] [Entity(data)]</returns>
         public override string GetCommandString()
         {
-            return $"summon {Entity.EntityType} {Coordinates} {Entity.GetDataWithoutID()}";
+            return $"summon {Entity.EntityType} {Coordinates.GetCoordString()} {Entity.GetDataWithoutID()}";
         }
     }
 
@@ -888,7 +888,7 @@ namespace SharpCraft.Commands
         /// <returns>tellraw [Selector] [Text]</returns>
         public override string GetCommandString()
         {
-            return $"tellraw {Selector} {Text.GetString(true)}";
+            return $"tellraw {Selector.GetSelectorString()} {Text.GetString(true)}";
         }
     }
 
@@ -970,15 +970,15 @@ namespace SharpCraft.Commands
         {
             if (Item is null)
             {
-                return $"clear {Selector}";
+                return $"clear {Selector.GetSelectorString()}";
             }
             else if (MaxCount is null)
             {
-                return $"clear {Selector} {Item.IDDataString}";
+                return $"clear {Selector.GetSelectorString()} {Item.IDDataString}";
             }
             else
             {
-                return $"clear {Selector} {Item.IDDataString} {MaxCount}";
+                return $"clear {Selector.GetSelectorString()} {Item.IDDataString} {MaxCount}";
             }
         }
     }
@@ -1053,11 +1053,11 @@ namespace SharpCraft.Commands
         {
             if (count == 1)
             {
-                return $"give {Selector} {Item.IDDataString}";
+                return $"give {Selector.GetSelectorString()} {Item.IDDataString}";
             }
             else
             {
-                return $"give {Selector} {Item.IDDataString} {Count}";
+                return $"give {Selector.GetSelectorString()} {Item.IDDataString} {Count}";
             }
         }
     }
@@ -1185,7 +1185,7 @@ namespace SharpCraft.Commands
         /// <returns>playsound [Sound] [Source] [Selector] [Coordinates] [Volume] [Pitch] [MinimumVolume]</returns>
         public override string GetCommandString()
         {
-            return $"playsound {Sound} {Source} {Selector} {Coordinates} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
+            return $"playsound {Sound} {Source} {Selector.GetSelectorString()} {Coordinates.GetCoordString()} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
         }
     }
 
@@ -1231,7 +1231,7 @@ namespace SharpCraft.Commands
         /// <returns>clear [Selector] ([Item]) ([MaxCount])</returns>
         public override string GetCommandString()
         {
-            return $"spawnpoint {Selector} {Coordinates}";
+            return $"spawnpoint {Selector.GetSelectorString()} {Coordinates.GetCoordString()}";
         }
     }
 
@@ -1287,22 +1287,22 @@ namespace SharpCraft.Commands
             {
                 if (Source is null)
                 {
-                    return $"stopsound {Selector}";
+                    return $"stopsound {Selector.GetSelectorString()}";
                 }
                 else
                 {
-                    return $"stopsound {Selector} {Source}";
+                    return $"stopsound {Selector.GetSelectorString()} {Source}";
                 }
             }
             else
             {
                 if (Source is null)
                 {
-                    return $"stopsound {Selector} * {Sound}";
+                    return $"stopsound {Selector.GetSelectorString()} * {Sound}";
                 }
                 else
                 {
-                    return $"stopsound {Selector} {Source} {Sound}";
+                    return $"stopsound {Selector.GetSelectorString()} {Source} {Sound}";
                 }
             }
         }

@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// <returns>blocks [Corner1] [Corner2] [Location] [IgnoreAir]</returns>
         protected override string GetCheckPart()
         {
-            return "blocks " + Corner1 + " " + Corner2 + " " + Location + " " + (IgnoreAir ? "masked" : "all");
+            return "blocks " + Corner1.GetCoordString() + " " + Corner2.GetCoordString() + " " + Location.GetCoordString() + " " + (IgnoreAir ? "masked" : "all");
         }
     }
 }

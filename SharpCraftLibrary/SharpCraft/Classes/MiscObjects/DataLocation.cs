@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"block {Coordinates.ToString()} {DataPath}";
+            return $"block {Coordinates.GetCoordString()} {DataPath}";
         }
     }
 
@@ -137,7 +137,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"entity {Selector.ToString()} {DataPath}";
+            return $"entity {Selector.GetSelectorString()} {DataPath}";
         }
     }
 
@@ -194,7 +194,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"storage {Storage.ToString()} {DataPath}";
+            return $"storage {Storage.GetNamespacedName()} {DataPath}";
         }
     }
 }

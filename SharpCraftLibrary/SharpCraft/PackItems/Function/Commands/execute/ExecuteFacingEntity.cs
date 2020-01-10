@@ -47,7 +47,7 @@ namespace SharpCraft.Commands
         /// <returns>facing entity [Selector] [FacingPart]</returns>
         protected override string GetExecutePart()
         {
-            return "facing entity " + Selector + " " + FacingPart;
+            return "facing entity " + Selector.GetSelectorString() + " " + FacingPart;
         }
     }
 }

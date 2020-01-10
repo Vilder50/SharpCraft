@@ -111,7 +111,7 @@ namespace SharpCraft
             /// <returns>The raw string specific for this class</returns>
             protected override string GetSpecificJsonString()
             {
-                return $"\"selector\":\"{NamesSelector.ToString().Escape()}\"";
+                return $"\"selector\":\"{NamesSelector.GetSelectorString().Escape()}\"";
             }
         }
 
@@ -182,11 +182,11 @@ namespace SharpCraft
 
                 if (DataLocation is BlockDataLocation block)
                 {
-                    outString += $",\"block\":\"{block.Coordinates.ToString()}\"";
+                    outString += $",\"block\":\"{block.Coordinates.GetCoordString()}\"";
                 }
                 else if (DataLocation is EntityDataLocation entity)
                 {
-                    outString += $",\"entity\":\"{entity.Selector.ToString().Escape()}\"";
+                    outString += $",\"entity\":\"{entity.Selector.GetSelectorString().Escape()}\"";
                 }
                 else if (DataLocation is StorageDataLocation storage)
                 {
@@ -243,7 +243,7 @@ namespace SharpCraft
             /// <returns>The raw string specific for this class</returns>
             protected override string GetSpecificJsonString()
             {
-                return $"\"score\":{{\"name\":\"{Selector.ToString().Escape()}\",\"objective\":\"{ScoreObject.ToString()}\"}}";
+                return $"\"score\":{{\"name\":\"{Selector.GetSelectorString().Escape()}\",\"objective\":\"{ScoreObject.Name}\"}}";
             }
         }
     }

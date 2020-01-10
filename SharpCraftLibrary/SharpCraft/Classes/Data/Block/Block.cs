@@ -158,7 +158,7 @@ namespace SharpCraft
         /// Gets the raw data used to set block this block
         /// </summary>
         /// <returns>Raw data used by Minecraft</returns>
-        public override string ToString()
+        public string GetBlockPlacementString()
         {
             if (ID == null)
             {

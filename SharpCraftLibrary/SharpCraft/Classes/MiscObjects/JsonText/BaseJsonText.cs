@@ -88,15 +88,6 @@ namespace SharpCraft
         protected abstract string GetSpecificJsonString();
 
         /// <summary>
-        /// Gets the raw JSON string
-        /// </summary>
-        /// <returns>the raw JSON string used by the game</returns>
-        public override string ToString()
-        {
-            return GetJsonString();
-        }
-
-        /// <summary>
         /// Converts a single <see cref="JsonText"/> into an array of <see cref="JsonText"/> only containing the <see cref="JsonText"/>
         /// </summary>
         /// <param name="jsonText">the <see cref="JsonText"/> to convert</param>

@@ -71,7 +71,7 @@ namespace SharpCraft.Commands
         /// <returns>block [Coordinates] [Path] [ValueType] [Scale]</returns>
         protected override string GetStorePart()
         {
-            return "block " + Coordinates + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
+            return "block " + Coordinates.GetCoordString() + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
         }
     }
 }

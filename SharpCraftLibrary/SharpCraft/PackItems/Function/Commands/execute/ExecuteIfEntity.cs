@@ -41,7 +41,7 @@ namespace SharpCraft.Commands
         /// <returns>entity [Selector]</returns>
         protected override string GetCheckPart()
         {
-            return "entity " + Selector;
+            return "entity " + Selector.GetSelectorString();
         }
     }
 }

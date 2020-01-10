@@ -56,7 +56,7 @@ namespace SharpCraft.Commands
         /// <returns>block [Coordinates] [Block]</returns>
         protected override string GetCheckPart()
         {
-            return "block " + Coordinates + " " + Block;
+            return "block " + Coordinates.GetCoordString() + " " + Block.GetBlockPlacementString();
         }
     }
 }

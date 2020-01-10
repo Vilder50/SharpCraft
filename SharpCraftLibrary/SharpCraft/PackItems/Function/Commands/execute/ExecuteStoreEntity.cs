@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
         /// <returns>entity [Selector] [Path] [ValueType] [Scale]</returns>
         protected override string GetStorePart()
         {
-            return "entity " + Selector + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
+            return "entity " + Selector.GetSelectorString() + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
         }
     }
 }

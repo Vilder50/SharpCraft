@@ -55,8 +55,7 @@ namespace SharpCraft
         /// <summary>
         /// Returns the uuid in string format
         /// </summary>
-        /// <returns>The uuid as a string</returns>
-        public override string ToString()
+        public string GetUUIDString()
         {
             return UUIDString;
         }

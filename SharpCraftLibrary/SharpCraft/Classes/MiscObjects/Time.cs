@@ -42,7 +42,7 @@ namespace SharpCraft
         /// Converts the time into raw data used by the game
         /// </summary>
         /// <returns>Raw data used by the game</returns>
-        public override string ToString()
+        public string GetTimeString()
         {
             switch(_timeType)
             {

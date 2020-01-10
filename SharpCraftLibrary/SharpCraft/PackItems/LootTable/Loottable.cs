@@ -79,15 +79,6 @@ namespace SharpCraft
         public List<LootPool> Pools { get => pools; set => pools = value ?? throw new System.ArgumentNullException(nameof(Pools), "Pools may not be null"); }
 
         /// <summary>
-        /// Returns the namespace path of this <see cref="LootTable"/>
-        /// </summary>
-        /// <returns>this <see cref="LootTable"/>'s name</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
-        }
-
-        /// <summary>
         /// Converts this loot table into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">Not in use</param>
@@ -95,7 +86,7 @@ namespace SharpCraft
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
-            return new DataPartTag(ToString());
+            return new DataPartTag(GetNamespacedName());
         }
 
         /// <summary>

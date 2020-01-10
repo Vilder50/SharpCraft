@@ -68,18 +68,6 @@ namespace SharpCraft
                 /// </summary>
                 [DataTag("levels","min","max",ID.NBTTagType.TagDouble,true, JsonTag = true, ForceType = ID.NBTTagType.TagInt)]
                 public Range Level { get; set; }
-
-                /// <summary>
-                /// Outputs this <see cref="Enchantment"/> data in string format
-                /// </summary>
-                /// <returns>this <see cref="Enchantment"/>'s data</returns>
-                public override string ToString()
-                {
-                    List<string> TempList = new List<string>();
-                    if (Enchant != null) { TempList.Add("\"enchantment\": \"" + Enchant + "\""); }
-                    if (Level != null) { TempList.Add(Level.JSONString("levels")); }
-                    return "{" + string.Join(",", TempList) + "}";
-                }
             }
 
             /// <summary>

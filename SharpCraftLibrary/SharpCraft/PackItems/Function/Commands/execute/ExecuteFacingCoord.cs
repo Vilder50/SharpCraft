@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>facing [Coordinates]</returns>
         protected override string GetExecutePart()
         {
-            return "facing " + Coordinates; 
+            return "facing " + Coordinates.GetCoordString(); 
         }
     }
 }

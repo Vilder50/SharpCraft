@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Team : IConvertableToDataTag
     {
-        readonly string Name;
+        private string name;
         /// <summary>
         /// Creates a new team object.
         /// Note that this doesnt add the team to the world
@@ -17,6 +17,22 @@ namespace SharpCraft
         public Team(string TeamName)
         {
             Name = TeamName;
+        }
+
+        /// <summary>
+        /// The name of the team
+        /// </summary>
+        public string Name
+        {
+            get => name;
+            protected set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Team name may not be null or whitespace", nameof(Name));
+                }
+                name = value;
+            }
         }
 
         /// <summary>
@@ -33,15 +49,6 @@ namespace SharpCraft
             }
 
             return new DataPartTag(Name);
-        }
-
-        /// <summary>
-        /// Outputs the name of this team
-        /// </summary>
-        /// <returns>the name of this team</returns>
-        public override string ToString()
-        {
-            return Name;
         }
     }
 }

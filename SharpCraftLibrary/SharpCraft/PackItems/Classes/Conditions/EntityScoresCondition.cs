@@ -79,14 +79,14 @@ namespace SharpCraft.Conditions
                 {
                     if (CheckScores[i].Range.Min == CheckScores[i].Range.Max)
                     {
-                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.ToString(), new DataPartTag((int)CheckScores[i].Range.Min, isJson: true), true));
+                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, new DataPartTag((int)CheckScores[i].Range.Min, isJson: true), true));
                     }
                     else
                     {
                         DataPartObject score = new DataPartObject();
                         score.AddValue(new DataPartPath("min", new DataPartTag((int)(CheckScores[i].Range.Min ?? int.MinValue), isJson: true), true));
                         score.AddValue(new DataPartPath("max", new DataPartTag((int)(CheckScores[i].Range.Max ?? int.MaxValue), isJson: true), true));
-                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.ToString(), score, true));
+                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, score, true));
                     }
                 }
 

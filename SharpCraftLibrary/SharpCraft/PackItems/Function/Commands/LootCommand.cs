@@ -58,7 +58,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"spawn {Coordinates}";
+                return $"spawn {Coordinates.GetCoordString()}";
             }
         }
 
@@ -111,7 +111,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"replace entity {Selector} {Slot.GetSlotString()}";
+                return $"replace entity {Selector.GetSelectorString()} {Slot.GetSlotString()}";
             }
         }
 
@@ -164,7 +164,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"replace block {Coordinates} {Slot.GetSlotString()}";
+                return $"replace block {Coordinates.GetCoordString()} {Slot.GetSlotString()}";
             }
         }
 
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"give {Selector}";
+                return $"give {Selector.GetSelectorString()}";
             }
         }
 
@@ -240,7 +240,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"insert {Coordinates}";
+                return $"insert {Coordinates.GetCoordString()}";
             }
         }
     }
@@ -311,7 +311,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"fish {Loottable.GetNamespacedName()} {FishLocation} {(MainHand ? "mainhand" : "offhand")}";
+                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetCoordString()} {(MainHand ? "mainhand" : "offhand")}";
             }
         }
 
@@ -369,7 +369,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"fish {Loottable.GetNamespacedName()} {FishLocation} {UsedItem.IDDataString}";
+                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetCoordString()} {UsedItem.IDDataString}";
             }
         }
 
@@ -446,7 +446,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"kill {Selector}";
+                return $"kill {Selector.GetSelectorString()}";
             }
         }
 
@@ -491,7 +491,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"mine {Coordinates} {(MainHand ? "mainhand" : "offhand")}";
+                return $"mine {Coordinates.GetCoordString()} {(MainHand ? "mainhand" : "offhand")}";
             }
         }
 
@@ -541,7 +541,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"mine {Coordinates} {UsedItem.IDDataString}";
+                return $"mine {Coordinates.GetCoordString()} {UsedItem.IDDataString}";
             }
         }
     }

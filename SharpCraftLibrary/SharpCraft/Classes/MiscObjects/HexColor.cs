@@ -111,15 +111,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Outputs the color as a string containing the <see cref="ColorInt"/>
-        /// </summary>
-        /// <returns>The raw data used by Minecraft</returns>
-        public override string ToString()
-        {
-            return ColorInt.ToString();
-        }
-
-        /// <summary>
         /// Converts this HexColor into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">Not in use</param>

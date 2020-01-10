@@ -47,7 +47,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] everything</returns>
         public override string GetCommandString()
         {
-            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} everything";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector.GetSelectorString()} everything";
         }
     }
 
@@ -114,7 +114,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] only [Advancement] (Criterion)</returns>
         public override string GetCommandString()
         {
-            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} only {Advancement.GetNamespacedName()}{(Criterion is null ? "" : " " + Criterion.Name)}";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector.GetSelectorString()} only {Advancement.GetNamespacedName()}{(Criterion is null ? "" : " " + Criterion.Name)}";
         }
     }
 
@@ -181,7 +181,7 @@ namespace SharpCraft.Commands
         /// <returns>advancement grant/revoke [Selector] [Select] [Advancement]</returns>
         public override string GetCommandString()
         {
-            return $"advancement {(Grant ? "grant" : "revoke")} {Selector} {Select} {Advancement.GetNamespacedName()}";
+            return $"advancement {(Grant ? "grant" : "revoke")} {Selector.GetSelectorString()} {Select} {Advancement.GetNamespacedName()}";
         }
     }
 }

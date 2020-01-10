@@ -41,7 +41,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"tp {Selector} {Coordinates}";
+            return $"tp {Selector.GetSelectorString()} {Coordinates.GetCoordString()}";
         }
     }
 
@@ -91,7 +91,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [ToSelector]</returns>
         public override string GetCommandString()
         {
-            return $"tp {Selector} {ToSelector}";
+            return $"tp {Selector.GetSelectorString()} {ToSelector.GetSelectorString()}";
         }
     }
 
@@ -126,7 +126,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] facing [FacingCoordinates]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} facing {FacingCoordinates}";
+            return $"{base.GetCommandString()} facing {FacingCoordinates.GetCoordString()}";
         }
     }
 
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] facing entity [FacingSelector] [Anchor]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} facing entity {FacingSelector} {Anchor}";
+            return $"{base.GetCommandString()} facing entity {FacingSelector.GetSelectorString()} {Anchor}";
         }
     }
 
@@ -214,7 +214,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] [Rotation]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} {Rotation}";
+            return $"{base.GetCommandString()} {Rotation.GetRotationString()}";
         }
     }
 }

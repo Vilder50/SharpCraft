@@ -23,15 +23,6 @@ namespace SharpCraft
         /// The selector string used by the game
         /// </summary>
         /// <returns>The selector string used by the game</returns>
-        public override string ToString()
-        {
-            return GetSelectorString();
-        }
-
-        /// <summary>
-        /// The selector string used by the game
-        /// </summary>
-        /// <returns>The selector string used by the game</returns>
         public abstract string GetSelectorString();
 
         /// <summary>
@@ -225,7 +216,7 @@ namespace SharpCraft
         /// <summary>
         /// The type of this selector
         /// </summary>
-        public ID.Selector? SelectorType { get; set; }
+        public ID.Selector SelectorType { get; set; }
 
         /// <summary>
         /// The amount of levels the selected entity must have to be selected
@@ -418,7 +409,7 @@ namespace SharpCraft
             /// Gets the argument string
             /// </summary>
             /// <returns>The argument string</returns>
-            string ToString();
+            string GetSelectionString();
         }
 
         /// <summary>
@@ -452,7 +443,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="SelectorType"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "type=";
                 if (!Wanted) { TempString += "!"; }
@@ -530,7 +521,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityName"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "name=";
                 if (!Wanted) { TempString += "!"; }
@@ -579,11 +570,11 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityTag"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "tag=";
                 if (!Wanted) { TempString += "!"; }
-                TempString += Tag;
+                TempString += Tag.Name;
                 return TempString;
             }
 
@@ -638,9 +629,9 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityScore"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
-                return Score.SelectorString(Objective.ToString());
+                return Score.SelectorString(Objective.Name);
             }
 
             /// <summary>
@@ -684,11 +675,11 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityTeam"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "team=";
                 if (!Wanted) { TempString += "!"; }
-                TempString += Team;
+                TempString += Team.Name;
                 return TempString;
             }
 
@@ -740,7 +731,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityMode"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "gamemode=";
                 if (!Wanted) { TempString += "!"; }
@@ -798,7 +789,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="EntityMode"/>'s raw data
             /// </summary>
-            public override string ToString()
+            public string GetSelectionString()
             {
                 string TempString = "predicate=";
                 if (!Wanted) { TempString += "!"; }
@@ -844,7 +835,7 @@ namespace SharpCraft
                 List<string> tempScoreList = new List<string>();
                 for (int i = 0; i < Scores.Length; i++)
                 {
-                    tempScoreList.Add(Scores[i].ToString());
+                    tempScoreList.Add(Scores[i].GetSelectionString());
                 }
                 tempList.Add("scores={" + string.Join(",", tempScoreList) + "}");
             }
@@ -892,7 +883,7 @@ namespace SharpCraft
         /// <returns>True if the selector is limited to only one entity</returns>
         public override bool IsLimited()
         {
-            if (SelectorType == ID.Selector.s || SelectorType == ID.Selector.p || SelectorType == ID.Selector.r || SelectorType is null)
+            if (SelectorType == ID.Selector.s || SelectorType == ID.Selector.p || SelectorType == ID.Selector.r)
             {
                 return true;
             }
@@ -919,7 +910,7 @@ namespace SharpCraft
             List<string> tempList = new List<string>();
             for (int i = 0; i < array.Length; i++)
             {
-                tempList.Add(array[i].ToString());
+                tempList.Add(array[i].GetSelectionString());
             }
             return string.Join(",", tempList);
         }

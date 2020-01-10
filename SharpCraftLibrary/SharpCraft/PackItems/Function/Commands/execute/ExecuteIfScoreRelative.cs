@@ -126,7 +126,7 @@ namespace SharpCraft.Commands
                     break;
             }
 
-            return "score " + Selector1 + " " + Objective1 + " " + OperationString + " " + Selector2 + " " + Objective2;
+            return "score " + Selector1.GetSelectorString() + " " + Objective1.Name + " " + OperationString + " " + Selector2.GetSelectorString() + " " + Objective2.Name;
         }
     }
 }

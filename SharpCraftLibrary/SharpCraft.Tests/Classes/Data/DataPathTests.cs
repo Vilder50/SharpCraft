@@ -85,15 +85,15 @@ namespace SharpCraft.Tests.Data
         {
             DataPathCondition condition = new DataPathCondition(1);
             Assert.AreEqual(DataPathCondition.ConditionType.Index, condition.Type);
-            Assert.AreEqual("1", condition.ToString());
+            Assert.AreEqual("1", condition.GetConditionString());
 
             condition = new DataPathCondition((int?)null);
             Assert.AreEqual(DataPathCondition.ConditionType.Index, condition.Type);
-            Assert.AreEqual(string.Empty, condition.ToString());
+            Assert.AreEqual(string.Empty, condition.GetConditionString());
 
             condition = new DataPathCondition("{data:1b}");
             Assert.AreEqual(DataPathCondition.ConditionType.RawData, condition.Type);
-            Assert.AreEqual("{data:1b}", condition.ToString());
+            Assert.AreEqual("{data:1b}", condition.GetConditionString());
 
             condition = new DataPathCondition(new NestedArraysTestClass());
             Assert.AreEqual(DataPathCondition.ConditionType.Data, condition.Type);

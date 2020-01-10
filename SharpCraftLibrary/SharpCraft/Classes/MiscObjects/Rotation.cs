@@ -50,7 +50,7 @@ namespace SharpCraft
         /// Gets the raw rotation
         /// </summary>
         /// <returns>the raw rotation used by the game</returns>
-        public override string ToString()
+        public string GetRotationString()
         {
             string TempString = "";
             if (RXRot) { TempString = "~"; }

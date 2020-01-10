@@ -133,7 +133,7 @@ namespace SharpCraft
         /// Gets the raw coordinate
         /// </summary>
         /// <returns>the raw coordinate used by the game</returns>
-        public override string ToString()
+        public string GetCoordString()
         {
             string TempString = "";
             if (RX) { TempString = "~"; }

@@ -119,15 +119,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns the namespace path of this <see cref="Function"/>
-        /// </summary>
-        /// <returns>this <see cref="Function"/>'s name</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
-        }
-
-        /// <summary>
         /// Commands run on blocks
         /// </summary>
         public FunctionWriters.BlockCommands Block;

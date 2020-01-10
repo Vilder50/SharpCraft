@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>positioned [rotation]</returns>
         protected override string GetExecutePart()
         {
-            return "positioned " + Coordinates;
+            return "positioned " + Coordinates.GetCoordString();
         }
     }
 }

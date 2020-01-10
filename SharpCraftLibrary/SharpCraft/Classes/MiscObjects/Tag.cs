@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Tag : IConvertableToDataTag
     {
-        readonly string Name;
+        private string name;
         /// <summary>
         /// Creates a new tag with the given name
         /// </summary>
@@ -16,6 +16,22 @@ namespace SharpCraft
         public Tag(string TagName)
         {
             Name = TagName;
+        }
+
+        /// <summary>
+        /// The name of the tag
+        /// </summary>
+        public string Name
+        {
+            get => name;
+            protected set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Tag name may not be null or whitespace", nameof(Name));
+                }
+                name = value;
+            }
         }
 
         /// <summary>
@@ -28,21 +44,12 @@ namespace SharpCraft
         {
             if (asType == ID.NBTTagType.TagString)
             {
-                return new DataPartTag(ToString());
+                return new DataPartTag(Name);
             }
             else
             {
                 throw new ArgumentException("Cannot convert the tag into a " + asType + " object");
             }
-        }
-
-        /// <summary>
-        /// Returns the name of the tag
-        /// </summary>
-        /// <returns>The name of the tag</returns>
-        public override string ToString()
-        {
-            return Name;
         }
 
         /// <summary>

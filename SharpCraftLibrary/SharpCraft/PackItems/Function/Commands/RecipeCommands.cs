@@ -48,7 +48,7 @@ namespace SharpCraft.Commands
         /// <returns>recipe [GiveRecipe] [Selector] [Recipe]</returns>
         public override string GetCommandString()
         {
-            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} {Recipe.GetNamespacedName()}";
+            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector.GetSelectorString()} {Recipe.GetNamespacedName()}";
         }
     }
 
@@ -86,7 +86,7 @@ namespace SharpCraft.Commands
         /// <returns>recipe [GiveRecipe] [Selector] *</returns>
         public override string GetCommandString()
         {
-            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} *";
+            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector.GetSelectorString()} *";
         }
     }
 }

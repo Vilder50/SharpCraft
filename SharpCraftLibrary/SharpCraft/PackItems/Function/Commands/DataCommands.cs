@@ -96,7 +96,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge block [Coordinates] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge storage {Storage.ToString()} {Data.GetDataString()}";
+            return $"data merge storage {Storage.GetNamespacedName()} {Data.GetDataString()}";
         }
     }
 
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge block [Coordinates] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge block {Coordinates.ToString()} {data.GetDataString()}";
+            return $"data merge block {Coordinates.GetCoordString()} {data.GetDataString()}";
         }
     }
 
@@ -200,7 +200,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge entity [Selector] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge entity {Selector.ToString()} {data.GetDataString()}";
+            return $"data merge entity {Selector.GetSelectorString()} {data.GetDataString()}";
         }
     }
 

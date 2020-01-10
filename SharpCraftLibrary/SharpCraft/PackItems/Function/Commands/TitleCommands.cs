@@ -33,7 +33,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] clear</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} clear";
+            return $"title {Selector.GetSelectorString()} clear";
         }
     }
 
@@ -64,7 +64,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] reset</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} reset";
+            return $"title {Selector.GetSelectorString()} reset";
         }
     }
 
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] title [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} title {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} title {Text.GetString(true)}";
         }
     }
 
@@ -142,7 +142,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] subtitle [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} subtitle {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} subtitle {Text.GetString(true)}";
         }
     }
 
@@ -181,7 +181,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] actionbar [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} actionbar {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} actionbar {Text.GetString(true)}";
         }
     }
 
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] times [FadeIn] [Stay] [FadeOut]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
+            return $"title {Selector.GetSelectorString()} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
         }
     }
 }

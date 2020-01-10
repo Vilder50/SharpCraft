@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
         /// <returns>score [Selector] [Objective] matches [Range]</returns>
         protected override string GetCheckPart()
         {
-            return "score " + Selector + " " + Objective + " matches " + Range.SelectorString();
+            return "score " + Selector.GetSelectorString() + " " + Objective.Name + " matches " + Range.SelectorString();
         }
     }
 }

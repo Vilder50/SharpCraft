@@ -60,7 +60,7 @@ namespace SharpCraft.Commands
         /// <returns>score [Selector] [Objective]</returns>
         protected override string GetStorePart()
         {
-            return "score " + Selector + " " + Objective;
+            return "score " + Selector.GetSelectorString() + " " + Objective.Name;
         }
     }
 }
