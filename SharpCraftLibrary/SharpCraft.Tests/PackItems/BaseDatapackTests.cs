@@ -119,5 +119,44 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("pack", pack.IngameName, "Empty datapack doesn't return correct name");
             }
         }
+
+        [TestMethod]
+        public void TestDatapackListener()
+        {
+            BaseDatapack disposedpack = new EmptyDatapack("disposedpack");
+            disposedpack.Dispose();
+
+            bool packCalled = false;
+            bool otherPackCalled = false;
+            bool running = true;
+            using (BaseDatapack pack = new EmptyDatapack("pack"))
+            {
+                BaseDatapack.AddDatapackListener((p) =>
+                {
+                    if (running)
+                    {
+                        if (p.Name == "pack")
+                        {
+                            packCalled = true;
+                        }
+                        else if (p.Name == "otherpack")
+                        {
+                            otherPackCalled = true;
+                        }
+                        else if (p.Name == "disposedpack")
+                        {
+                            Assert.Fail("disposed pack called datapack listeners (From "+nameof(TestDatapackListener) +")");
+                        }
+                    }
+                });
+                Assert.IsTrue(packCalled, "pack didn't call datapack listener");
+            }
+
+            using (BaseDatapack pack = new EmptyDatapack("otherpack"))
+            {
+                Assert.IsTrue(otherPackCalled, "new pack didn't call datapack listener");
+            }
+            running = false;
+        }
     }
 }

@@ -12,6 +12,31 @@ namespace SharpCraft
     /// </summary>
     public abstract class BaseDatapack : IDisposable
     {
+        #region DatapackListener
+        private readonly static List<BaseDatapack> datapacks = new List<BaseDatapack>();
+        private readonly static List<DatapackListener> datapackListeners = new List<DatapackListener>();
+
+        /// <summary>
+        /// Used for calling methods when a new datapack is added or when datapacks already has been added
+        /// </summary>
+        /// <param name="datapack">the added datapack</param>
+        public delegate void DatapackListener(BaseDatapack datapack);
+
+        /// <summary>
+        /// Makes the given <see cref="DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        public static void AddDatapackListener(DatapackListener listener)
+        {
+            foreach(BaseDatapack datapack in datapacks)
+            {
+                listener(datapack);
+            }
+            datapackListeners.Add(listener);
+        }
+        #endregion
+
+        #region BaseDatapack
         private const string pathPattern = @"^[\s\S]*[^\\/]{1}$";
         private const string namePattern = @"^[0-9a-zA-Z_]+$";
 
@@ -41,6 +66,12 @@ namespace SharpCraft
             Name = packName.ToLower();
             namespaces = new List<BasePackNamespace>();
             FileCreator = fileCreator;
+
+            datapacks.Add(this);
+            foreach (DatapackListener listener in datapackListeners)
+            {
+                listener(this);
+            }
         }
 
         /// <summary>
@@ -172,6 +203,7 @@ namespace SharpCraft
                     packNamespace.Dispose();
                 }
                 AfterDispose();
+                datapacks.Remove(this);
                 Disposed = true;
             }
         }
@@ -193,5 +225,6 @@ namespace SharpCraft
 
             namespaces.Add(space);
         }
+        #endregion
     }
 }
