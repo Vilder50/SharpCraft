@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\MiscObjects\JsonTextTests.cs" />
     <Compile Include="Classes\MiscObjects\SelectorTests.cs" />
     <Compile Include="PackItems\Commands\AdvancementCommandsTests.cs" />
     <Compile Include="PackItems\Commands\BossBarCommandsTests.cs" />

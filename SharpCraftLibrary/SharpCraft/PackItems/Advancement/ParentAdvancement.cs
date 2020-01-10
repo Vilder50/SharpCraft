@@ -31,7 +31,7 @@ namespace SharpCraft
         /// <param name="name">The shown advancement name</param>
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
-        public ParentAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
+        public ParentAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
         {
             Background = background;
             EndConstructor();

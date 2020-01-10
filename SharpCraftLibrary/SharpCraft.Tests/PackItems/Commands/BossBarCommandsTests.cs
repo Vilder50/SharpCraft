@@ -19,10 +19,10 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void BossBarAddCommandTest()
         {
-            Assert.AreEqual("bossbar add boss:name [{\"text\":\"hello\"}]", new BossBarAddCommand(GetBar(), new JSON() { Text = "hello" }).GetCommandString());
+            Assert.AreEqual("bossbar add boss:name [{\"text\":\"hello\"}]", new BossBarAddCommand(GetBar(), new JsonText.Text("hello")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(GetBar(), null));
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(null, new JSON() { Text = "hello" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(null, new JsonText.Text("hello")));
         }
 
         [TestMethod]
@@ -79,10 +79,10 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void BossBarChangeNameCommandTest()
         {
-            Assert.AreEqual("bossbar set boss:name name [{\"text\":\"hello\"}]", new BossBarChangeNameCommand(GetBar(), new JSON() { Text = "hello" }).GetCommandString());
+            Assert.AreEqual("bossbar set boss:name name [{\"text\":\"hello\"}]", new BossBarChangeNameCommand(GetBar(), new JsonText.Text("hello")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(GetBar(), null));
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(null, new JSON() { Text = "hello" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(null, new JsonText.Text("hello")));
         }
 
         [TestMethod]

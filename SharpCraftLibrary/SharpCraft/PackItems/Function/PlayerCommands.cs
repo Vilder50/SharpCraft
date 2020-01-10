@@ -165,7 +165,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the players</param>
-        public void Tellraw(BaseSelector player, JSON[] message)
+        public void Tellraw(BaseSelector player, JsonText[] message)
         {
             function.AddCommand(new TellrawCommand(player, message));
         }
@@ -175,7 +175,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to show</param>
-        public void Actionbar(BaseSelector player, JSON[] message)
+        public void Actionbar(BaseSelector player, JsonText[] message)
         {
             function.AddCommand(new TitleActionbarCommand(player, message));
         }
@@ -463,7 +463,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void Title(BaseSelector player, JSON[] message)
+            public void Title(BaseSelector player, JsonText[] message)
             {
                 function.AddCommand(new TitleCommand(player, message));
             }
@@ -474,7 +474,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void SubTitle(BaseSelector player, JSON[] message)
+            public void SubTitle(BaseSelector player, JsonText[] message)
             {
                 function.AddCommand(new TitleSubtitleCommand(player, message));
             }
@@ -518,7 +518,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(BaseSelector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
+            public void FullTitle(BaseSelector player, JsonText[] topMessage, JsonText[] bottomMessage, Time startFade, Time stay, Time endFade)
             {
                 BaseExecuteCommand executeCommand1 = null;
                 BaseExecuteCommand executeCommand2 = null;
@@ -542,7 +542,7 @@ namespace SharpCraft.FunctionWriters
                 }
                 if (topMessage is null)
                 {
-                    function.AddCommand(new TitleCommand(player, new JSON("")));
+                    function.AddCommand(new TitleCommand(player, new JsonText.Text("")));
                 }
                 else
                 {

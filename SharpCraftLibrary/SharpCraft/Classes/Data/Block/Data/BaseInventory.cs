@@ -34,7 +34,7 @@ namespace SharpCraft
             /// </summary>
 
             [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JSON[] DCustomName { get; set; }
+            public JsonText[] DCustomName { get; set; }
             /// <summary>
             /// The items in the inventory
             /// </summary>

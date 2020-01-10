@@ -345,7 +345,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="type">the type of the scoreboard. See <see cref="ID.Objective"/> for a list of types</param>
             /// <param name="displayName">The name to display when the scoreboard is viewed in the sidebar</param>
             /// <returns>the newly created <see cref="ScoreObject"/></returns>
-            public ScoreObject Add(string scoreName, string type = "dummy", JSON[] displayName = null)
+            public ScoreObject Add(string scoreName, string type = "dummy", JsonText[] displayName = null)
             {
                 ScoreObject newObject = new ScoreObject(scoreName);
                 function.AddCommand(new ScoreboardObjectiveAddCommand(newObject, type, displayName));
@@ -400,7 +400,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="objective">the <see cref="ScoreObject"/> to change</param>
             /// <param name="name">The new display name</param>
-            public void DisplayName(ScoreObject objective, JSON[] name)
+            public void DisplayName(ScoreObject objective, JsonText[] name)
             {
                 function.AddCommand(new ScoreboardObjectiveChangeNameCommand(objective, name));
             }
@@ -436,7 +436,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="displayName">the displayed name of the <see cref="Team"/></param>
             /// <param name="teamColor">the color of the <see cref="Team"/>. If null the <see cref="Team"/> will have the default color (white)</param>
             /// <returns>the newly created <see cref="Team"/></returns>
-            public Team Add(string teamName, JSON[] displayName, ID.MinecraftColor? teamColor = null)
+            public Team Add(string teamName, JsonText[] displayName, ID.MinecraftColor? teamColor = null)
             {
                 Team creating = new Team(teamName);
 
@@ -524,7 +524,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="name">The new name of the team</param>
-            public void DisplayName(Team changeTeam, JSON[] name)
+            public void DisplayName(Team changeTeam, JsonText[] name)
             {
                 function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.displayName, name));
             }
@@ -541,7 +541,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="preffixJson">The new prefix to show</param>
-            public void Prefix(Team changeTeam, JSON[] preffixJson)
+            public void Prefix(Team changeTeam, JsonText[] preffixJson)
             {
                 function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.prefix, preffixJson));
             }
@@ -550,7 +550,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="suffixJson">the new prefix to show</param>
-            public void Suffix(Team changeTeam, JSON[] suffixJson)
+            public void Suffix(Team changeTeam, JsonText[] suffixJson)
             {
                 function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.suffix, suffixJson));
             }
@@ -784,7 +784,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="name">the name of the <see cref="SharpCraft.BossBar"/></param>
             /// <param name="showName">The name to show ontop of the <see cref="SharpCraft.BossBar"/></param>
             /// <returns>the newly created <see cref="SharpCraft.BossBar"/></returns>
-            public BossBar Add(string name, JSON[] showName)
+            public BossBar Add(string name, JsonText[] showName)
             {
                 BossBar addBar = new BossBar(function.PackNamespace.Name + ":" + name.ToLower());
                 function.AddCommand(new BossBarAddCommand(addBar, showName));
@@ -823,7 +823,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to change</param>
             /// <param name="newName">the new display name for the bar</param>
-            public void SetName(BossBar bossBar, JSON[] newName)
+            public void SetName(BossBar bossBar, JsonText[] newName)
             {
                 function.AddCommand(new BossBarChangeNameCommand(bossBar, newName));
             }

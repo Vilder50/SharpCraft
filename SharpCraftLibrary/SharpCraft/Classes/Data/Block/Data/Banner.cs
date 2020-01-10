@@ -61,7 +61,7 @@ namespace SharpCraft
             /// This name is showed on maps which has clicked this banner.
             /// </summary>
             [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JSON[] DCustomName { get; set; }
+            public JsonText[] DCustomName { get; set; }
 
             /// <summary>
             /// The banner's patterns

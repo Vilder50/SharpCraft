@@ -200,7 +200,7 @@ namespace SharpCraft.Data
                 {
                     continue;
                 }
-                if (value.GetType().IsArray && !(value is JSON[]))
+                if (value.GetType().IsArray && !(value is JsonText[]))
                 {
                     AddItem(new DataPartArray(value, forceType, conversionParams, IsJson));
                 }
@@ -210,11 +210,11 @@ namespace SharpCraft.Data
                     {
                         AddItem(dataHolder.GetDataTree());
                     }
-                    else if (value is IConvertableToDataObject canBeObject)
+                    else if (value is IConvertableToDataObject canBeObject && (forceType is null || forceType == ID.NBTTagType.TagCompoundArray))
                     {
                         AddItem(canBeObject.GetAsDataObject(conversionParams));
                     }
-                    else if (value is IConvertableToDataArray canBeArray)
+                    else if (value is IConvertableToDataArray canBeArray && (forceType is null || forceType == ID.NBTTagType.TagArrayArray))
                     {
                         AddItem(canBeArray.GetAsArray(forceType, conversionParams));
                     }
@@ -454,7 +454,7 @@ namespace SharpCraft.Data
                         TagType = ID.NBTTagType.TagString;
                     }
                 }
-                else if (value is JSON[] || value is JSON)
+                else if (value is JsonText[] || value is JsonText)
                 {
                     if (TagType != ID.NBTTagType.TagCompound)
                     {
@@ -552,18 +552,18 @@ namespace SharpCraft.Data
                     return "\"" + ((string)Value).Escape() + "\"";
                 }
             }
-            else if (Value is JSON[] jsonArray)
+            else if (Value is JsonText[] jsonArray)
             {
                 if (TagType == ID.NBTTagType.TagCompound)
                 {
-                    return jsonArray.GetString();
+                    return jsonArray.GetString(true);
                 }
                 else
                 {
-                    return "\"" + jsonArray.GetString().Escape() + "\"";
+                    return "\"" + jsonArray.GetString(true).Escape() + "\"";
                 }
             }
-            else if (Value is JSON jsonObject)
+            else if (Value is JsonText jsonObject)
             {
                 if (TagType == ID.NBTTagType.TagCompound)
                 {

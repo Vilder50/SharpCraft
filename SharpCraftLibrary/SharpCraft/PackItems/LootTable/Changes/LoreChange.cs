@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LoreChange : BaseChange
     {
-        private JSON[][] lore;
+        private JsonText[][] lore;
 
         /// <summary>
         /// Intializes a new <see cref="LoreChange"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.LootObjects
         /// <param name="lore">The lore</param>
         /// <param name="replace">True replaces the old lore. False appends the lore.</param>
         /// <param name="target">The entity @s referes to in the lore</param>
-        public LoreChange(JSON[][] lore, ID.LootTarget? target = null, bool replace = true) : base("set_lore")
+        public LoreChange(JsonText[][] lore, ID.LootTarget? target = null, bool replace = true) : base("set_lore")
         {
             Lore = lore;
             Target = target;
@@ -37,7 +37,7 @@ namespace SharpCraft.LootObjects
         /// The lore
         /// </summary>
         [DataTag("lore", ForceType = ID.NBTTagType.TagCompoundArray, JsonTag = true)]
-        public JSON[][] Lore { get => lore; set => lore = value ?? throw new ArgumentNullException(nameof(Lore), "Lore may not be null"); }
+        public JsonText[][] Lore { get => lore; set => lore = value ?? throw new ArgumentNullException(nameof(Lore), "Lore may not be null"); }
 
         /// <summary>
         /// True replaces the old lore. False appends the lore.

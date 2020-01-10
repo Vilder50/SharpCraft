@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace SharpCraft
 {
@@ -15,7 +16,7 @@ namespace SharpCraft
         /// <returns>The escaped text</returns>
         public static string Escape(this string text, char escape = '"')
         {
-            return text.Replace(escape.ToString(), "?-SBackSlash-??-SStringThing-?").Replace("\\", "?-SBackSlash-??-SBackSlash-?").Replace("?-SBackSlash-?", "\\").Replace("?-SStringThing-?", escape.ToString());
+            return text.Replace(escape.ToString(), "?-SBackSlash-?" + escape.ToString()).Replace("\\", "\\\\").Replace("?-SBackSlash-?", "\\").Replace("\n", "\\n");
         }
 
         /// <summary>
@@ -159,33 +160,33 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts an array of JSON strings into raw data string
+        /// Converts an array of <see cref="JsonText"/> into a string
         /// </summary>
-        /// <param name="JSONArray">The array to convert</param>
+        /// <param name="jsonArray">The array to convert</param>
         /// <param name="forceArray">If the array should only should use extra</param>
-        /// <returns>Raw data string made out of the JSON array</returns>
-        public static string GetString(this JSON[] JSONArray, bool forceArray = true)
+        /// <returns>Raw string made out of the JSON array</returns>
+        public static string GetString(this JsonText[] jsonArray, bool forceArray)
         {
             if (!forceArray)
             {
-                string firstItemString = JSONArray[0].ToString();
-                if (JSONArray.Length == 1)
+                string firstItemString = jsonArray[0].GetJsonString();
+                if (jsonArray.Length == 1)
                 {
                     return firstItemString;
                 }
-                string[] TempArray = new string[JSONArray.Length - 1];
-                for (int i = 1; i < JSONArray.Length; i++)
+                string[] TempArray = new string[jsonArray.Length - 1];
+                for (int i = 1; i < jsonArray.Length; i++)
                 {
-                    TempArray[i] = JSONArray[i].ToString();
+                    TempArray[i] = jsonArray[i].GetJsonString();
                 }
                 return firstItemString.Substring(0, firstItemString.Length - 1) + ",extra:[" + string.Join(",", TempArray) + "]}";
             }
             else
             {
-                string[] TempArray = new string[JSONArray.Length];
-                for (int i = 0; i < JSONArray.Length; i++)
+                string[] TempArray = new string[jsonArray.Length];
+                for (int i = 0; i < jsonArray.Length; i++)
                 {
-                    TempArray[i] = JSONArray[i].ToString();
+                    TempArray[i] = jsonArray[i].GetJsonString();
                 }
                 return "[" + string.Join(",", TempArray) + "]";
             }

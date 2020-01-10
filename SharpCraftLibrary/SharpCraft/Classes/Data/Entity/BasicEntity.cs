@@ -94,7 +94,7 @@ namespace SharpCraft
             /// The entity's shown name
             /// </summary>
             [Data.DataTag]
-            public JSON[] CustomName { get; set; }
+            public JsonText[] CustomName { get; set; }
 
             /// <summary>
             /// If the entity's name should be shown always

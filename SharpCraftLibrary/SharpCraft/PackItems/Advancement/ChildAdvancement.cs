@@ -31,7 +31,7 @@ namespace SharpCraft
         /// <param name="name">The shown advancement name</param>
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="parent">The parent advancement</param>
-        public ChildAdvancement(BasePackNamespace packNamespace, string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
+        public ChildAdvancement(BasePackNamespace packNamespace, string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
         {
             Parent = parent;
             EndConstructor();
@@ -61,7 +61,7 @@ namespace SharpCraft
         /// Creates a new sibling advancement for this advancement
         /// </summary>
         /// <returns>The new sibling</returns>
-        public ChildAdvancement NewSibling(string fileName, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public ChildAdvancement NewSibling(string fileName, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             return new ChildAdvancement(PackNamespace, fileName, Parent, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting);
         }

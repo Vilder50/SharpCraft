@@ -30,27 +30,27 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TitleCommandTest()
         {
-            Assert.AreEqual("title @a title [{\"text\":\"Hello\"}]", new TitleCommand(ID.Selector.a, new JSON() { Text = "Hello" }).GetCommandString());
+            Assert.AreEqual("title @a title [{\"text\":\"Hello\"}]", new TitleCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(null, new JSON() { Text = "Hello" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(null, new JsonText.Text("hello")));
             Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(ID.Selector.a, null));
         }
 
         [TestMethod]
         public void TitleSubtitleCommandTest()
         {
-            Assert.AreEqual("title @a subtitle [{\"text\":\"Hello\"}]", new TitleSubtitleCommand(ID.Selector.a, new JSON() { Text = "Hello" }).GetCommandString());
+            Assert.AreEqual("title @a subtitle [{\"text\":\"Hello\"}]", new TitleSubtitleCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(null, new JSON() { Text = "Hello" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(null, new JsonText.Text("hello")));
             Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(ID.Selector.a, null));
         }
 
         [TestMethod]
         public void TitleActionbarCommandTest()
         {
-            Assert.AreEqual("title @a actionbar [{\"text\":\"Hello\"}]", new TitleActionbarCommand(ID.Selector.a, new JSON() { Text = "Hello" }).GetCommandString());
+            Assert.AreEqual("title @a actionbar [{\"text\":\"Hello\"}]", new TitleActionbarCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(null, new JSON() { Text = "Hello" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(null, new JsonText.Text("hello")));
             Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(ID.Selector.a, null));
         }
 

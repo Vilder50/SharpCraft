@@ -14,8 +14,8 @@ namespace SharpCraft.AdvancementObjects
     public abstract class BaseVisibleAdvancement : BaseAdvancement
     {
         private Item icon;
-        private JSON[] description;
-        private JSON[] name;
+        private JsonText[] description;
+        private JsonText[] name;
 
         /// <summary>
         /// Intializes a new <see cref="BaseVisibleAdvancement"/>
@@ -32,7 +32,7 @@ namespace SharpCraft.AdvancementObjects
         /// <param name="icon">The icon on the advancement</param>
         /// <param name="name">The shown advancement name</param>
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
-        protected BaseVisibleAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, writeSetting)
+        protected BaseVisibleAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, writeSetting)
         {
             Name = name;
             Description = description;
@@ -46,12 +46,12 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The shown advancement name
         /// </summary>
-        public JSON[] Name { get => name; set => name = value ?? throw new ArgumentNullException(nameof(Name), "Name may not be null"); }
+        public JsonText[] Name { get => name; set => name = value ?? throw new ArgumentNullException(nameof(Name), "Name may not be null"); }
 
         /// <summary>
         /// The description on the advancement
         /// </summary>
-        public JSON[] Description { get => description; set => description = value ?? throw new ArgumentNullException(nameof(Description), "Description may not be null"); }
+        public JsonText[] Description { get => description; set => description = value ?? throw new ArgumentNullException(nameof(Description), "Description may not be null"); }
 
         /// <summary>
         /// The icon on the advancement
@@ -96,8 +96,8 @@ namespace SharpCraft.AdvancementObjects
             stream.Write("}");
 
             //others
-            stream.Write(",\"title\":" + Name.GetString());
-            stream.Write(",\"description\":" + Description.GetString());
+            stream.Write(",\"title\":" + Name.GetString(true));
+            stream.Write(",\"description\":" + Description.GetString(true));
             stream.Write(",\"frame\":\"" + Frame + "\"");
             stream.Write(",\"show_toast\":" + ShowToast.ToMinecraftBool());
             stream.Write(",\"announce_to_chat\":" + AnnounceInChat.ToMinecraftBool());
@@ -117,7 +117,7 @@ namespace SharpCraft.AdvancementObjects
         /// Creates a new child advancement for this advancement
         /// </summary>
         /// <returns>The new child</returns>
-        public ChildAdvancement NewChild(string fileName, Requirement[] requirements, Reward reward, JSON[] name, JSON[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public ChildAdvancement NewChild(string fileName, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             return new ChildAdvancement(PackNamespace, fileName, this, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting);
         }

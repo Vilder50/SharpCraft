@@ -230,6 +230,10 @@
     <Compile Include="Classes\Data\Item\Data\Map.cs" />
     <Compile Include="Classes\Data\Item\Data\Potion.cs" />
     <Compile Include="Classes\Data\Item\Item.cs" />
+    <Compile Include="Classes\MiscObjects\JsonText\ClickEvents.cs" />
+    <Compile Include="Classes\MiscObjects\JsonText\HoverEvents.cs" />
+    <Compile Include="Classes\MiscObjects\JsonText\BaseJsonText.cs" />
+    <Compile Include="Classes\MiscObjects\JsonText\JsonTexts.cs" />
     <Compile Include="Classes\MiscObjects\Storage.cs" />
     <Compile Include="PackItems\Advancement\BaseAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ChildAdvancement.cs" />
@@ -295,7 +299,6 @@
     <Compile Include="Classes\MiscObjects\Helper.cs" />
     <Compile Include="Classes\MiscObjects\HexColor.cs" />
     <Compile Include="Classes\MiscObjects\ItemSlot.cs" />
-    <Compile Include="Classes\MiscObjects\JSON.cs" />
     <Compile Include="Classes\Data\MiscData\MCAttribute.cs" />
     <Compile Include="Classes\MiscObjects\Range.cs" />
     <Compile Include="Classes\MiscObjects\Rotation.cs" />

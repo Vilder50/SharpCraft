@@ -33,7 +33,7 @@
         /// <param name="writeOn">The function to write the command on</param>
         public void ScoreSayDebug(string text, BaseSelector selector, Function writeOn)
         {
-            writeOn.Player.Tellraw((SharpCraft.BaseSelector)ID.Selector.a, new JSON[] { text + " ", new JSON { Selector = selector, Objective = this } });
+            writeOn.Player.Tellraw(ID.Selector.a, new JsonText[] { text + " ", new JsonText.Score(selector,this) });
         }
     }
 }

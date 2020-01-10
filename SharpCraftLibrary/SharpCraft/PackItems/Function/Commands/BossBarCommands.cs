@@ -12,14 +12,14 @@ namespace SharpCraft.Commands
     public class BossBarAddCommand : BaseCommand
     {
         private BossBar bossBar;
-        private JSON[] name;
+        private JsonText[] name;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarAddCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to add</param>
         /// <param name="name">The shown name of the boss bar</param>
-        public BossBarAddCommand(BossBar bossBar, JSON[] name)
+        public BossBarAddCommand(BossBar bossBar, JsonText[] name)
         {
             BossBar = bossBar;
             Name = name;
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The shown name of the boss bar
         /// </summary>
-        public JSON[] Name
+        public JsonText[] Name
         {
             get => name;
             set
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar add [Bossbar] [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar add {BossBar.ToString()} {Name.GetString()}";
+            return $"bossbar add {BossBar.ToString()} {Name.GetString(true)}";
         }
     }
 
@@ -322,14 +322,14 @@ namespace SharpCraft.Commands
     public class BossBarChangeNameCommand : BaseCommand
     {
         private BossBar bossBar;
-        private JSON[] name;
+        private JsonText[] name;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangeNameCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change the name of</param>
         /// <param name="name">The name the bar should change to</param>
-        public BossBarChangeNameCommand(BossBar bossBar, JSON[] name)
+        public BossBarChangeNameCommand(BossBar bossBar, JsonText[] name)
         {
             BossBar = bossBar;
             Name = name;
@@ -350,7 +350,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The name the bar should change to
         /// </summary>
-        public JSON[] Name
+        public JsonText[] Name
         {
             get => name;
             set
@@ -365,7 +365,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] name [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} name {Name.GetString()}";
+            return $"bossbar set {BossBar.ToString()} name {Name.GetString(true)}";
         }
     }
 

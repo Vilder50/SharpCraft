@@ -59,10 +59,10 @@ namespace SharpCraft.Tests.Data
             public bool? Boolean { get; set; }
 
             [DataTag]
-            public JSON[] Name { get; set; }
+            public JsonText[] Name { get; set; }
 
             [DataTag("JsonTag", ForceType = ID.NBTTagType.TagCompound)]
-            public JSON[] JsonTag { get; set; }
+            public JsonText[] JsonTag { get; set; }
 
             [DataTag("Fake", ForceType = ID.NBTTagType.TagCompound)]
             public string Fake { get; set; }
@@ -259,9 +259,9 @@ namespace SharpCraft.Tests.Data
                     SmallNumberArray = new byte[] { 10, 5 },
                     Text = "hey",
                     TextArray = new string[] { "hello", "world" },
-                    Name = new JSON[] { new JSON() { Text = "1" }, new JSON() { Text = "2" } },
+                    Name = new JsonText[] { "1", "2" },
                     Fake = "{hey:1}",
-                    JsonTag = new JSON[] { new JSON() { Text = "1" }, new JSON() { Text = "2" } }
+                    JsonTag = new JsonText[] { "1", "2" }
                 }
             };
             Assert.AreEqual("{Inside:{" +

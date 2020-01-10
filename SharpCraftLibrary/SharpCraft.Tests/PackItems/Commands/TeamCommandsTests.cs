@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TeamAddCommandTest()
         {
-            Assert.AreEqual("team add name [{\"text\":\"Name\"}]", new TeamAddCommand(new Team("name"), new JSON() { Text = "Name" }).GetCommandString());
+            Assert.AreEqual("team add name [{\"text\":\"Name\"}]", new TeamAddCommand(new Team("name"), new JsonText.Text("Name")).GetCommandString());
             Assert.AreEqual("team add name", new TeamAddCommand(new Team("name"), null).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new TeamAddCommand(null, null));
@@ -70,10 +70,10 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TeamModifyDisplayCommandTest()
         {
-            Assert.AreEqual("team modify name displayName [{\"text\":\"Name\"}]", new TeamModifyDisplayCommand(new Team("name"), ID.TeamDisplayName.displayName, new JSON() { Text = "Name" }).GetCommandString());
+            Assert.AreEqual("team modify name displayName [{\"text\":\"Name\"}]", new TeamModifyDisplayCommand(new Team("name"), ID.TeamDisplayName.displayName, new JsonText.Text("Name")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new TeamModifyDisplayCommand(new Team("name"), ID.TeamDisplayName.displayName, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new TeamModifyDisplayCommand(null, ID.TeamDisplayName.displayName, new JSON() { Text = "Name" }));
+            Assert.ThrowsException<ArgumentNullException>(() => new TeamModifyDisplayCommand(null, ID.TeamDisplayName.displayName, new JsonText.Text("Name")));
         }
 
         [TestMethod]

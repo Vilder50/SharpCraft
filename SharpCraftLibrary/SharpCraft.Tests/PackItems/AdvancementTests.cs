@@ -36,7 +36,7 @@ namespace SharpCraft.Tests.PackItems
 
         private ChildAdvancement GetChildAdvancement(PackNamespace space)
         {
-            return space.Advancement("child", GetParentAdvancement(space), new EnchantedItemTrigger() { Levels = 5, Item = ID.Item.wooden_sword }, null, new JSON() { Text = "Name" }, new JSON() { Text = "Description" }, ID.Item.stone, ID.AdvancementFrame.goal, true, false, true);
+            return space.Advancement("child", GetParentAdvancement(space), new EnchantedItemTrigger() { Levels = 5, Item = ID.Item.wooden_sword }, null, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.stone, ID.AdvancementFrame.goal, true, false, true);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace SharpCraft.Tests.PackItems
 
         private ParentAdvancement GetParentAdvancement(PackNamespace space)
         {
-            return space.Advancement("parent", new EnchantedItemTrigger() { Levels = 5 }, new Reward() {Experience = 5 }, new JSON() { Text = "Name" }, new JSON() { Text = "Description" }, ID.Item.String, "background");
+            return space.Advancement("parent", new EnchantedItemTrigger() { Levels = 5 }, new Reward() {Experience = 5 }, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.String, "background");
         }
 
         [TestMethod]
@@ -142,7 +142,7 @@ namespace SharpCraft.Tests.PackItems
 
                 //test
                 ChildAdvancement advancement = GetChildAdvancement(space);
-                advancement.NewSibling("sibling", new EnchantedItemTrigger() { Levels = 5 }, null, new JSON() { Text = "Name" }, new JSON() { Text = "Description" }, ID.Item.stone);
+                advancement.NewSibling("sibling", new EnchantedItemTrigger() { Levels = 5 }, null, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.stone);
                 Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\"), "Directory wasn't created");
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\sibling.json"), "File wasn't created");
             }
@@ -158,7 +158,7 @@ namespace SharpCraft.Tests.PackItems
 
                 //test
                 ChildAdvancement advancement = GetChildAdvancement(space);
-                advancement.NewChild("childchild", new EnchantedItemTrigger() { Levels = 5 }, null, new JSON() { Text = "Name" }, new JSON() { Text = "Description" }, ID.Item.stone);
+                advancement.NewChild("childchild", new EnchantedItemTrigger() { Levels = 5 }, null, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.stone);
                 Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\"), "Directory wasn't created");
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\childchild.json"), "File wasn't created");
             }
