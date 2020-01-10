@@ -212,21 +212,42 @@ namespace SharpCraft.Data
                     }
                     else if (value is IConvertableToDataObject canBeObject && (forceType is null || forceType == ID.NBTTagType.TagCompoundArray))
                     {
-                        AddItem(canBeObject.GetAsDataObject(conversionParams));
+                        try
+                        {
+                            AddItem(canBeObject.GetAsDataObject(conversionParams));
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag object (See inner exception)", ex);
+                        }
                     }
-                    else if (value is IConvertableToDataArray canBeArray && (forceType is null || forceType == ID.NBTTagType.TagArrayArray))
+                    else if (value is IConvertableToDataArray canBeArray && (forceType is null || forceType >= ID.NBTTagType.TagArrayArray))
                     {
-                        AddItem(canBeArray.GetAsArray(forceType, conversionParams));
+                        try
+                        {
+                            AddItem(canBeArray.GetAsArray(forceType, conversionParams));
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag array (See inner exception)", ex);
+                        }
                     }
                     else if (value is IConvertableToDataTag canBeTag)
                     {
-                        if (forceType is null)
-                        {
-                            AddItem(canBeTag.GetAsTag(null, conversionParams));
+                        try
+                        { 
+                            if (forceType is null)
+                            {
+                                AddItem(canBeTag.GetAsTag(null, conversionParams));
+                            }
+                            else
+                            {
+                                AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag (See inner exception)", ex);
                         }
                     }
                     else if (value is DataPartTag dataTag)

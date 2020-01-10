@@ -116,8 +116,15 @@ namespace SharpCraft.Tests.Data
         #region custom tag classes
         private class CustomDataTag : IConvertableToDataTag
         {
+            public bool Bad = false;
+
             public DataPartTag GetAsTag(ID.NBTTagType? asType = null, object[] extraConversionData = null)
             {
+                if (Bad)
+                {
+                    throw new Exception();
+                }
+
                 if (asType == ID.NBTTagType.TagByte && extraConversionData.Length == 0)
                 {
                     return new DataPartTag((sbyte)10);
@@ -180,6 +187,9 @@ namespace SharpCraft.Tests.Data
             [DataTag(ForceType = ID.NBTTagType.TagByte)]
             public CustomDataTag CustomTag { get; set; }
 
+            [DataTag(ForceType = ID.NBTTagType.TagInt)]
+            public CustomDataTag InvalidCustomTag { get; set; }
+
             [DataTag(ForceType = ID.NBTTagType.TagDouble, ConversionParams = new object[] { 1 })]
             public CustomDataTag OtherCustomTag { get; set; }
 
@@ -189,14 +199,23 @@ namespace SharpCraft.Tests.Data
             [DataTag(ForceType = ID.NBTTagType.TagDoubleArray, ConversionParams = new object[] { 2 })]
             public CustomDataArray OtherCustomArray { get; set; }
 
+            [DataTag(ForceType = ID.NBTTagType.TagByteArray)]
+            public CustomDataArray InvalidCustomArray { get; set; }
+
             [DataTag]
             public CustomDataObject CustomObject { get; set; }
 
             [DataTag(ConversionParams = new object[] { 3 })]
             public CustomDataObject OtherCustomObject { get; set; }
 
+            [DataTag(ConversionParams = new object[] { 2 })]
+            public CustomDataObject InvalidCustomObject { get; set; }
+
             [DataTag(Merge = true)]
             public CustomDataObject MergeObject { get; set; }
+
+            [DataTag(ForceType = ID.NBTTagType.TagByteArray)]
+            public CustomDataTag[] CustomTagArray { get; set; }
         }
         #endregion
         #endregion
@@ -336,6 +355,83 @@ namespace SharpCraft.Tests.Data
 
             //test
             Assert.AreEqual("{\"Array\":[1.1,2.2,3.3],\"Bool\":true,\"Double\":14.154,\"Int\":100,\"JsonObject\":{\"Double\":100.105},\"Object\":\"{Inside:{String:\\\"Hel\\\\\\\"lo\\\"},Number:10}\",\"String\":\"Something\\\"\",\"StringObject\":\"{\\\"Double\\\":100.155}\",NoJson:0b}", object1.GetDataString(), "JsonTag doesn't work correctly");
+        }
+
+        [TestMethod]
+        public void TestIConvertException()
+        {
+            bool threwException = false;
+            try
+            {
+                new CustomTagTestClass() { InvalidCustomArray = new CustomDataArray() }.GetDataString();
+            }
+            catch (InvalidCastException ex)
+            {
+                threwException = true;
+                if (!(ex.InnerException is Exception))
+                {
+                    Assert.Fail("No inner exception for array conversion fail");
+                }
+            }
+            if (!threwException)
+            {
+                Assert.Fail("No exception was thrown for array even though the property conversion is invalid");
+            }
+
+            threwException = false;
+            try
+            {
+                new CustomTagTestClass() { InvalidCustomObject = new CustomDataObject() }.GetDataString();
+            }
+            catch (InvalidCastException ex)
+            {
+                threwException = true;
+                if (!(ex.InnerException is Exception))
+                {
+                    Assert.Fail("No inner exception for object conversion fail");
+                }
+            }
+            if (!threwException)
+            {
+                Assert.Fail("No exception was thrown for object even though the property conversion is invalid");
+            }
+
+            threwException = false;
+            try
+            {
+                new CustomTagTestClass() { InvalidCustomTag = new CustomDataTag() }.GetDataString();
+            }
+            catch (InvalidCastException ex)
+            {
+                threwException = true;
+                if (!(ex.InnerException is Exception))
+                {
+                    Assert.Fail("No inner exception for tag conversion fail");
+                }
+            }
+            if (!threwException)
+            {
+                Assert.Fail("No exception was thrown for tag even though the property conversion is invalid");
+            }
+
+            threwException = false;
+            try
+            {
+                new CustomTagTestClass() { CustomTagArray = new CustomDataTag[] { new CustomDataTag(), new CustomDataTag() { Bad = true } } }.GetDataString();
+            }
+            catch (InvalidCastException ex)
+            {
+                threwException = true;
+                if (!(ex.InnerException is Exception))
+                {
+                    Assert.Fail("No inner exception for tag array conversion fail");
+                }
+                Assert.AreEqual("Failed to convert object at index 1 into a data tag (See inner exception)", ex.Message, "Tag array exception message is incorrect");
+            }
+            if (!threwException)
+            {
+                Assert.Fail("No exception was thrown for tag array even though the property conversion is invalid");
+            }
         }
     }
 }
