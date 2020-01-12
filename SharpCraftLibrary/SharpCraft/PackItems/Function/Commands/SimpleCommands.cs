@@ -49,6 +49,37 @@ namespace SharpCraft.Commands
     }
 
     /// <summary>
+    /// A # comment
+    /// </summary>
+    public class Comment : BaseCommand
+    {
+        private string text;
+
+        /// <summary>
+        /// intializes a new <see cref="Comment"/>
+        /// </summary>
+        /// <param name="text">The comment</param>
+        public Comment(string text)
+        {
+            Text = text;
+        }
+
+        /// <summary>
+        /// The comment
+        /// </summary>
+        public string Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Comment text may not be null"); }
+
+        /// <summary>
+        /// Returns the comment as a string
+        /// </summary>
+        /// <returns>#[Text]</returns>
+        public override string GetCommandString()
+        {
+            return $"#{Text}";
+        }
+    }
+
+    /// <summary>
     /// Says some text with the executing entity's name in [] at the beginning
     /// </summary>
     public class SayCommand : BaseCommand

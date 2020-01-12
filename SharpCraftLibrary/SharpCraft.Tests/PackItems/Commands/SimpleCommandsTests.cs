@@ -20,6 +20,14 @@ namespace SharpCraft.Tests.Commands
         }
 
         [TestMethod]
+        public void CommentTest()
+        {
+            Assert.AreEqual("#hello", new Comment("hello").GetCommandString());
+
+            Assert.ThrowsException<ArgumentNullException>(() => new Comment(null));
+        }
+
+        [TestMethod]
         public void SayCommandTest()
         {
             Assert.AreEqual("say hello", new SayCommand("hello").GetCommandString());
