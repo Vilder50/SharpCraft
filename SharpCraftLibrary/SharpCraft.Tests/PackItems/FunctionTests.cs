@@ -188,5 +188,47 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("name:func", new EmptyFunction(EmptyDatapack.GetPack().Namespace("name"), "func").GetNamespacedName(), "EmptyFunction doesn't reutrn correct string");
             Assert.AreEqual("space:name", ((EmptyFunction)"space:name").GetNamespacedName(), "Implicit string to function conversion converts incorrectly");
         }
+
+        [TestMethod]
+        public void TestConstantScores()
+        {
+            //setup
+            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
+            {
+                PackNamespace space = pack.Namespace("space");
+                Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
+                FunctionGroup functionGroup = null;
+                Function constantFunction = null;
+                BaseDatapack.AddDatapackListener(d =>
+                {
+                    if (d == pack)
+                    {
+                        pack.AddNewFileListener(f =>
+                        {
+                            if (f.PackNamespace == pack.Namespace("minecraft") && f is FunctionGroup group)
+                            {
+                                functionGroup = group;
+                            }
+                            if (f.PackNamespace == pack.Namespace("sharpgen") && f is Function addedFunction)
+                            {
+                                constantFunction = addedFunction;
+                            }
+                        });
+                    }
+                });
+
+                //test
+                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.Divide, 3);
+                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.Multiply, 5);
+                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.GetHigher, 3);
+
+                Assert.IsNotNull(functionGroup, "Load group wasn't created");
+                Assert.IsNotNull(constantFunction, "constant function wasn't created");
+                Assert.AreSame((function.Commands[0] as ScoreboardOperationCommand).Selector2, (function.Commands[2] as ScoreboardOperationCommand).Selector2, "Constant value giver doesn't return same selector for same number");
+                Assert.IsTrue(constantFunction.Commands.Any(c => c is ScoreboardValueChangeCommand changeCommand && changeCommand.ChangeNumber == 5), "Constant function didn't add constant value");
+                Assert.IsTrue(functionGroup.Items.Any(i => i == constantFunction), "Constant function wasn't added to load group");
+                Assert.AreEqual(3, constantFunction.Commands.Count, "ConstantFunction didn't add the correct amount of commands");
+            }
+        }
     }
 }

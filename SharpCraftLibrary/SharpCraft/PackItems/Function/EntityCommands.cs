@@ -1,4 +1,6 @@
 ﻿using SharpCraft.Commands;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SharpCraft.FunctionWriters
 {
@@ -310,6 +312,19 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
+            /// Does math with a score and a number and saves the result in the entity's score
+            /// </summary>
+            /// <param name="mainSelector">The entity score to do math on (Result will be saved in here)</param>
+            /// <param name="mainObjective">The <see cref="ScoreObject"/> to get the value from to do math on</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="number">The number to do math with</param>
+            public void Operation(BaseSelector mainSelector, ScoreObject mainObjective, ID.Operation operationType, int number)
+            {
+                mainSelector.LimitSelector();
+                function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, AddConstantNumber(number), constantObjective));
+            }
+
+            /// <summary>
             /// Does math with two scores and saves the result in one of the entities' score
             /// </summary>
             /// <param name="mainSelector">The first entity (The result will be stored in this entity's score)</param>
@@ -344,6 +359,53 @@ namespace SharpCraft.FunctionWriters
                 selector.LimitSelector();
                 function.AddCommand(new ScoreboardValueGetCommand(selector, objective));
             }
+
+            #region make constants
+            private const string constantFileName = "constants";
+            private static readonly ScoreObject constantObjective = new ScoreObject("constants");
+            private static Function constantNumberFile;
+            private BaseSelector AddConstantNumber(int number)
+            {
+                try
+                {
+                    //Get constant making function file
+                    if (constantNumberFile is null)
+                    {
+                        PackNamespace minecraftSpace = function.PackNamespace.Datapack.Namespace<PackNamespace>("minecraft");
+                        PackNamespace sharpSpace = function.PackNamespace.Datapack.Namespace<PackNamespace>("sharpgen");
+                        #pragma warning disable IDE0067
+                        FunctionGroup loadGroup = minecraftSpace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
+                        #pragma warning restore IDE0067
+                        if (loadGroup.Items.SingleOrDefault(f => f.PackNamespace == sharpSpace && f.Name == constantFileName) is Function constantFile)
+                        {
+                            constantNumberFile = constantFile;
+                        }
+                        else
+                        {
+                            constantNumberFile = sharpSpace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                            constantNumberFile.AddCommand(new ScoreboardObjectiveAddCommand(constantObjective, "dummy", null));
+                            loadGroup.Items.Add(constantNumberFile);
+                        }
+                    }
+
+                    //Check if constant already is added. If not add it to the constant function file.
+                    if (!(constantNumberFile.Commands.SingleOrDefault(c => c is ScoreboardValueChangeCommand command && command.ChangeNumber == number) is ScoreboardValueChangeCommand existingCommand))
+                    {
+                        NameSelector selector = new NameSelector(number.ToString(), true);
+                        constantNumberFile.AddCommand(new ScoreboardValueChangeCommand(selector, constantObjective, ID.ScoreChange.set, number));
+                        return selector;
+                    }
+                    else
+                    {
+                        return existingCommand.Selector;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new System.Exception("Failed to create constant value. See inner exception.", ex);
+                }
+            }
+            #endregion
         }
 
         /// <summary>
