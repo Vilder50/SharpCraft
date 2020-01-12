@@ -366,44 +366,30 @@ namespace SharpCraft.FunctionWriters
             private static Function constantNumberFile;
             private BaseSelector AddConstantNumber(int number)
             {
-                try
-                {
-                    //Get constant making function file
-                    if (constantNumberFile is null)
-                    {
-                        PackNamespace minecraftSpace = function.PackNamespace.Datapack.Namespace<PackNamespace>("minecraft");
-                        PackNamespace sharpSpace = function.PackNamespace.Datapack.Namespace<PackNamespace>("sharpgen");
-                        #pragma warning disable IDE0067
-                        FunctionGroup loadGroup = minecraftSpace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-                        #pragma warning restore IDE0067
-                        if (loadGroup.Items.SingleOrDefault(f => f.PackNamespace == sharpSpace && f.Name == constantFileName) is Function constantFile)
-                        {
-                            constantNumberFile = constantFile;
-                        }
-                        else
-                        {
-                            constantNumberFile = sharpSpace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
-                            constantNumberFile.AddCommand(new ScoreboardObjectiveAddCommand(constantObjective, "dummy", null));
-                            loadGroup.Items.Add(constantNumberFile);
-                        }
-                    }
-
-                    //Check if constant already is added. If not add it to the constant function file.
-                    if (!(constantNumberFile.Commands.SingleOrDefault(c => c is ScoreboardValueChangeCommand command && command.ChangeNumber == number) is ScoreboardValueChangeCommand existingCommand))
-                    {
-                        NameSelector selector = new NameSelector(number.ToString(), true);
-                        constantNumberFile.AddCommand(new ScoreboardValueChangeCommand(selector, constantObjective, ID.ScoreChange.set, number));
-                        return selector;
-                    }
-                    else
-                    {
-                        return existingCommand.Selector;
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    throw new System.Exception("Failed to create constant value. See inner exception.", ex);
-                }
+                 //Get constant making function file
+                 if (constantNumberFile is null)
+                 {
+                     constantNumberFile = (SharpCraftFiles.SetupFunction.Commands.SingleOrDefault(c => c is RunFunctionCommand functionCommand && functionCommand.Function.Name == constantFileName) as RunFunctionCommand)?.Function as Function;
+                     
+                     if (constantNumberFile is null)
+                     {
+                         constantNumberFile = SharpCraftFiles.SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                         constantNumberFile.AddCommand(new ScoreboardObjectiveAddCommand(constantObjective, "dummy", null));
+                         SharpCraftFiles.SetupFunction.AddCommand(new RunFunctionCommand(constantNumberFile));
+                     }
+                 }
+                 
+                 //Check if constant already is added. If not add it to the constant function file.
+                 if (!(constantNumberFile.Commands.SingleOrDefault(c => c is ScoreboardValueChangeCommand command && command.ChangeNumber == number) is ScoreboardValueChangeCommand existingCommand))
+                 {
+                     NameSelector selector = new NameSelector(number.ToString(), true);
+                     constantNumberFile.AddCommand(new ScoreboardValueChangeCommand(selector, constantObjective, ID.ScoreChange.set, number));
+                     return selector;
+                 }
+                 else
+                 {
+                     return existingCommand.Selector;
+                 }
             }
             #endregion
         }

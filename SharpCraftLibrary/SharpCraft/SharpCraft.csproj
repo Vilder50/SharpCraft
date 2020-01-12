@@ -450,6 +450,7 @@
     <Compile Include="PackItems\Recipe\ShapelessRecipe.cs" />
     <Compile Include="PackItems\Recipe\SmeltRecipe.cs" />
     <Compile Include="PackItems\Recipe\SpecialRecipe.cs" />
+    <Compile Include="PackItems\SharpCraftFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
