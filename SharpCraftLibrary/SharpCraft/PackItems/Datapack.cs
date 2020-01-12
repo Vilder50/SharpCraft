@@ -30,15 +30,26 @@ namespace SharpCraft
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : base(path, packName, fileCreator)
+        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : this(path, packName, description, packFormat, fileCreator, true)
         {
-            if (!File.Exists(Path + "\\" + Name + "\\pack.mcmeta"))
+            FinishedConstructing();
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Datapack"/> with the given parameters. Inherite from this constructor.
+        /// </summary>
+        /// <param name="path">The path to the folder to create this datapack in</param>
+        /// <param name="packName">The datapack's name</param>
+        /// <param name="description">The datapack's description</param>
+        /// <param name="packFormat">The datapack's format</param>
+        /// <param name="fileCreator">Class for creating files and directories</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, bool _) : base(path, packName, fileCreator)
+        {
+            FileCreator.CreateDirectory(Path + "\\" + Name);
+            using (TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta"))
             {
-                FileCreator.CreateDirectory(Path + "\\" + Name);
-                using (TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta"))
-                {
-                    metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
-                }
+                metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
             }
         }
 

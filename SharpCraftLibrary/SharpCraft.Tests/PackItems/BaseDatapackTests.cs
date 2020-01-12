@@ -17,7 +17,7 @@ namespace SharpCraft.Tests.PackItems
 
             public DatapackTestClass(string path, string name) : base(path, name)
             {
-
+                FinishedConstructing();
             }
 
             protected override void AfterDispose()
@@ -123,13 +123,13 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestDatapackListener()
         {
-            BaseDatapack disposedpack = new EmptyDatapack("disposedpack");
+            BaseDatapack disposedpack = new DatapackTestClass("path","disposedpack");
             disposedpack.Dispose();
 
             bool packCalled = false;
             bool otherPackCalled = false;
             bool running = true;
-            using (BaseDatapack pack = new EmptyDatapack("pack"))
+            using (BaseDatapack pack = new DatapackTestClass("path", "pack"))
             {
                 BaseDatapack.AddDatapackListener((p) =>
                 {
@@ -152,7 +152,7 @@ namespace SharpCraft.Tests.PackItems
                 Assert.IsTrue(packCalled, "pack didn't call datapack listener");
             }
 
-            using (BaseDatapack pack = new EmptyDatapack("otherpack"))
+            using (BaseDatapack pack = new DatapackTestClass("path", "otherpack"))
             {
                 Assert.IsTrue(otherPackCalled, "new pack didn't call datapack listener");
             }

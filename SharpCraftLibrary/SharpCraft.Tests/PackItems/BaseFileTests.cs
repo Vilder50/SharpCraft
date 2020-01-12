@@ -16,7 +16,7 @@ namespace SharpCraft.Tests.PackItems
         {
             public DatapackTestClass(string path, string name) : base(path, name)
             {
-                
+                FinishedConstructing();
             }
         }
 

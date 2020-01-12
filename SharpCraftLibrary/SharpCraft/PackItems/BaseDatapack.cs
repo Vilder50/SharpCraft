@@ -49,7 +49,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
-        public BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
+        protected BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
         {
             
         }
@@ -60,13 +60,19 @@ namespace SharpCraft
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        public BaseDatapack(string path, string packName, IFileCreator fileCreator)
+        protected BaseDatapack(string path, string packName, IFileCreator fileCreator)
         {
             Path = path;
             Name = packName.ToLower();
             namespaces = new List<BasePackNamespace>();
             FileCreator = fileCreator;
+        }
 
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected virtual void FinishedConstructing()
+        {
             datapacks.Add(this);
             foreach (DatapackListener listener in datapackListeners)
             {
