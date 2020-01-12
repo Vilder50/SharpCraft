@@ -16,6 +16,28 @@ namespace SharpCraft
         private IAdvancement parent;
 
         /// <summary>
+        /// Intializes a new <see cref="ChildAdvancement"/>. Inherite from this constructor
+        /// </summary>
+        /// <param name="packNamespace">The namespace the advancement is in</param>
+        /// <param name="fileName">The name of the advancement file</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <param name="requirements">The requirements for getting the advancement</param>
+        /// <param name="reward">The rewards to get for getting the advancement</param>
+        /// <param name="announceInChat">True if when the advancement is unlocked it will be announced in chat. False if not</param>
+        /// <param name="description">The description on the advancement</param>
+        /// <param name="frame">The frame around the icon</param>
+        /// <param name="hidden">True if the advancement can't be seen unless it has been unlocked</param>
+        /// <param name="icon">The icon on the advancement</param>
+        /// <param name="name">The shown advancement name</param>
+        /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
+        /// <param name="parent">The parent advancement</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected ChildAdvancement(bool _, BasePackNamespace packNamespace, string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
+        {
+            Parent = parent;
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="ChildAdvancement"/>
         /// </summary>
         /// <param name="packNamespace">The namespace the advancement is in</param>
@@ -31,10 +53,9 @@ namespace SharpCraft
         /// <param name="name">The shown advancement name</param>
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="parent">The parent advancement</param>
-        public ChildAdvancement(BasePackNamespace packNamespace, string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
+        public ChildAdvancement(BasePackNamespace packNamespace, string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, parent, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting)
         {
-            Parent = parent;
-            EndConstructor();
+            FinishedConstructing();
         }
 
         /// <summary>

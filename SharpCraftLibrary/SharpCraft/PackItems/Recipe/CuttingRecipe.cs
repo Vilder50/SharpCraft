@@ -17,6 +17,24 @@ namespace SharpCraft
         private ItemType[] ingredients;
 
         /// <summary>
+        /// Intializes a new <see cref="CuttingRecipe"/>. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="group">The name of the recipe group the recipe is in. Leave null for no group.</param>
+        /// <param name="ingredients">The different types of items which can be used in the recipe</param>
+        /// <param name="count">The amount of the result item the recipe should output</param>
+        /// <param name="result">The item to craft</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        public CuttingRecipe(bool _, BasePackNamespace packNamespace, string fileName, ItemType[] ingredients, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "stonecutting")
+        {
+            Ingredients = ingredients;
+            Result = result;
+            Count = count;
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="CuttingRecipe"/>
         /// </summary>
         /// <param name="packNamespace">The namespace the recipe is in</param>
@@ -26,12 +44,9 @@ namespace SharpCraft
         /// <param name="ingredients">The different types of items which can be used in the recipe</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public CuttingRecipe(BasePackNamespace packNamespace, string fileName, ItemType[] ingredients, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "stonecutting")
+        public CuttingRecipe(BasePackNamespace packNamespace, string fileName, ItemType[] ingredients, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, ingredients, result, count, group, writeSetting)
         {
-            Ingredients = ingredients;
-            Result = result;
-            Count = count;
-            EndConstructor();
+            FinishedConstructing();
         }
 
         /// <summary>
@@ -44,12 +59,9 @@ namespace SharpCraft
         /// <param name="ingredient">The item used in the recipe</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public CuttingRecipe(BasePackNamespace packNamespace, string fileName, ItemType ingredient, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "stonecutting")
+        public CuttingRecipe(BasePackNamespace packNamespace, string fileName, ItemType ingredient, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, new ItemType[] { ingredient }, result, count, group, writeSetting)
         {
-            Ingredients = new ItemType[] { ingredient };
-            Result = result;
-            Count = count;
-            EndConstructor();
+            FinishedConstructing();
         }
 
         /// <summary>

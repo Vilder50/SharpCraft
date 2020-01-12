@@ -38,9 +38,9 @@ namespace SharpCraft.Tests.PackItems
     class TestGroupClass : BaseGroup<GroupItemClass>
     {
         public static TextWriter WriterToUse;
-        public TestGroupClass(BasePackNamespace packNamespace, string fileName, List<GroupItemClass> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting)
+        public TestGroupClass(BasePackNamespace packNamespace, string fileName, List<GroupItemClass> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "test")
         {
-
+            FinishedConstructing();
         }
 
         protected override TextWriter GetStream()

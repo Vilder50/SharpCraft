@@ -51,7 +51,12 @@ namespace SharpCraft.Tests.PackItems
         {
             public BaseFileTestClass1(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test1")
             {
+                FinishedConstructing();
+            }
 
+            protected override void FinishedConstructing()
+            {
+                PackNamespace.AddFile(this);
             }
 
             protected override void WriteFile(TextWriter stream)
@@ -69,7 +74,12 @@ namespace SharpCraft.Tests.PackItems
         {
             public BaseFileTestClass2(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test2")
             {
+                FinishedConstructing();
+            }
 
+            protected override void FinishedConstructing()
+            {
+                PackNamespace.AddFile(this);
             }
 
             protected override void WriteFile(TextWriter stream)

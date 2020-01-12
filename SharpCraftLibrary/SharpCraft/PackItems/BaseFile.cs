@@ -59,14 +59,25 @@ namespace SharpCraft
         /// <param name="fileName">The name of the file</param>
         /// <param name="writeSetting">The setting for the file</param>
         /// <param name="fileType">The type of file</param>
-        public BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
+        protected BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
             FileName = fileName;
             Setting = writeSetting;
             FileType = fileType;
+        }
 
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected virtual void FinishedConstructing()
+        {
             PackNamespace.AddFile(this);
+            if (IsAuto())
+            {
+                WriteFile(GetStream());
+                Dispose();
+            }
         }
 
         /// <summary>

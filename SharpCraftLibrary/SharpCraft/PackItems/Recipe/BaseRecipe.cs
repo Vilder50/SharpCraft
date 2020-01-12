@@ -28,18 +28,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Call when the constructor is done. It writes the file if auto is on
-        /// </summary>
-        protected void EndConstructor()
-        {
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
-        }
-
-        /// <summary>
         /// The type of recipe
         /// </summary>
         public string Type { get; private set; }

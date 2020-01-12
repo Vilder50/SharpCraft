@@ -189,8 +189,17 @@ namespace SharpCraft
             return settings.Any(s => s.GetType() == setting.GetType());
         }
 
-        internal void AddFile(BaseFile file)
+        /// <summary>
+        /// Adds the given file to this namespace
+        /// </summary>
+        /// <param name="file">The file to add</param>
+        public void AddFile(BaseFile file)
         {
+            if (file is null)
+            {
+                throw new ArgumentNullException(nameof(file), "Cannot add null as a file to a namespace");
+            }
+
             if (!IsSetup)
             {
                 throw new InvalidOperationException("Setup hasn't been run yet.");
@@ -201,9 +210,14 @@ namespace SharpCraft
                 throw new InvalidOperationException("Cannot add files to a disposed namespace.");
             }
 
+            if (file.PackNamespace != this)
+            {
+                throw new ArgumentException("Cannot add file which isn't made for this namespace", nameof(file));
+            }
+
             if (files.Any(f => f.FileName == file.FileName && f.GetType() == file.GetType()))
             {
-                throw new ArgumentException("The namespace already contains a file with the given name");
+                throw new ArgumentException("The namespace already contains a file with the given name", nameof(file));
             }
 
             files.Add(file);

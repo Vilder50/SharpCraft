@@ -19,14 +19,14 @@ namespace SharpCraft
         private List<ICommand> commands;
 
         /// <summary>
-        /// Intializes a new <see cref="Function"/> with the given values
+        /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
         /// </summary>
         /// <param name="space">The namespace the function is in</param>
         /// <param name="fileName">The name of the function</param>
         /// <param name="writeSetting">The setting for writing the file</param>
-        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected Function(bool _, BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
         {
-            CreateDirectory("functions");
             if (IsAuto())
             {
                 StreamWriter = GetStream();
@@ -40,6 +40,25 @@ namespace SharpCraft
             Custom = new FunctionWriters.CustomCommands(this);
 
             Commands = new List<ICommand>();
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="Function"/> with the given values
+        /// </summary>
+        /// <param name="space">The namespace the function is in</param>
+        /// <param name="fileName">The name of the function</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, space, fileName, writeSetting)
+        {
+            FinishedConstructing();
+        }
+
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected override void FinishedConstructing()
+        {
+            PackNamespace.AddFile(this);
         }
 
         /// <summary>
@@ -111,6 +130,7 @@ namespace SharpCraft
         /// <returns>the streamwriter to use</returns>
         protected override TextWriter GetStream()
         {
+            CreateDirectory("functions");
             if (StreamWriter is null)
             {
                 StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + FileName + ".mcfunction");

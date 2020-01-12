@@ -14,6 +14,20 @@ namespace SharpCraft
     public class ItemGroup : BaseGroup<ItemType>, IItemType, IConvertableToDataTag
     {
         /// <summary>
+        /// Intializes a new Group with the given parameters. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the group is in</param>
+        /// <param name="fileName">The name of the group file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="items">The items in this group</param>
+        /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected ItemGroup(bool _, BasePackNamespace packNamespace, string fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "item")
+        {
+            
+        }
+
+        /// <summary>
         /// Intializes a new Group with the given parameters
         /// </summary>
         /// <param name="packNamespace">The namespace the group is in</param>
@@ -21,9 +35,9 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public ItemGroup(BasePackNamespace packNamespace, string fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting)
+        public ItemGroup(BasePackNamespace packNamespace, string fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
-            
+            FinishedConstructing();
         }
 
         /// <summary>

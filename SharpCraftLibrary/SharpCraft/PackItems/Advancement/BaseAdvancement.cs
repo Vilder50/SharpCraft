@@ -29,18 +29,6 @@ namespace SharpCraft.AdvancementObjects
         }
 
         /// <summary>
-        /// Call when the constructor is done. It writes the file if auto is on
-        /// </summary>
-        protected void EndConstructor()
-        {
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
-        }
-
-        /// <summary>
         /// The requirements for getting the advancement
         /// </summary>
         public Requirement[] Requirements { get => requirements; set => requirements = value ?? throw new ArgumentNullException(nameof(Requirements), "Requirements may not be null"); }

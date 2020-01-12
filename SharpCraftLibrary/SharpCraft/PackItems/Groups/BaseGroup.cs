@@ -30,15 +30,11 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting, "recipe")
+        /// <param name="fileType">The type of group file</param>
+        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, fileType + "_group")
         {
             Items = items;
             AppendGroup = appendGroup;
-            if (writeSetting == WriteSetting.Auto || writeSetting == WriteSetting.LockedAuto)
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
             halfLockProperties = true;
         }
 

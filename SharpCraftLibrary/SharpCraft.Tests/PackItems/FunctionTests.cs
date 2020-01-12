@@ -26,10 +26,11 @@ namespace SharpCraft.Tests.PackItems
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\myfunction.mcfunction"), "File wasn't created");
 
                 space.Function("folder/otherFunction", BaseFile.WriteSetting.OnDispose);
-                Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't created for file with directory in name");
+                Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't supposed to be created yet since its OnDispose");
                 Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\otherfunction.mcfunction"), "File wasn't supposed to be created yet since its OnDispose");
 
                 pack.Dispose();
+                Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't created for file with directory in name");
                 Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\otherfunction.mcfunction"), "File is supposed to have been created now since Dispose was ran");
             }
         }

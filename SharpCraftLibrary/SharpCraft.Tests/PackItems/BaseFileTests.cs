@@ -35,7 +35,12 @@ namespace SharpCraft.Tests.PackItems
 
             public BaseFileTestClass(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "filetest")
             {
+                FinishedConstructing();
+            }
 
+            protected override void FinishedConstructing()
+            {
+                PackNamespace.AddFile(this);
             }
 
             protected override void WriteFile(TextWriter stream)
