@@ -119,6 +119,40 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Creates a function which runs on a player when all the given triggers gets triggered.
+        /// </summary>
+        /// <param name="triggers">The triggers to trigger</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="advancementName">The name of the advancement</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(BaseTrigger[] triggers, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function function = Function(functionName, setting);
+            HiddenAdvancement trigger = Advancement(advancementName, triggers.Select(t => (Requirement)t).ToArray(), new Reward { Function = function }, setting);
+            function.AddCommand(new Commands.AdvancementSingleCommand(ID.Selector.s, trigger, null, false));
+
+            return function;
+        }
+
+        /// <summary>
+        /// Creates a function which runs on a player when all the given triggers gets triggered.
+        /// </summary>
+        /// <param name="triggers">The triggers to trigger</param>
+        /// <param name="creater">The function writer</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="advancementName">The name of the advancement</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(BaseTrigger[] triggers, Function.FunctionCreater creater, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function outFunction = EventFunction(triggers, functionName, advancementName, setting);
+            creater(outFunction);
+
+            return outFunction;
+        }
+
+        /// <summary>
         /// Creates a new crafting table recipe with the given parameters
         /// </summary>
         /// <param name="name">The recipe's name</param>
