@@ -19,6 +19,7 @@ namespace SharpCraft
 
         private string name;
         private BaseDatapack datapack;
+        private BaseFile.FileListener fileListeners;
 
         /// <summary>
         /// The files inside this namespace
@@ -220,6 +221,7 @@ namespace SharpCraft
                 throw new ArgumentException("The namespace already contains a file with the given name", nameof(file));
             }
 
+            fileListeners?.Invoke(file);
             files.Add(file);
         }
 
@@ -241,6 +243,15 @@ namespace SharpCraft
                 AfterDispose();
                 Disposed = true;
             }
+        }
+
+        /// <summary>
+        /// Calls the given method when a new file is added to this namespace
+        /// </summary>
+        /// <param name="listener">The method to call</param>
+        public void AddNewFileListener(BaseFile.FileListener listener)
+        {
+            fileListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given file listener may not be null");
         }
 
         /// <summary>

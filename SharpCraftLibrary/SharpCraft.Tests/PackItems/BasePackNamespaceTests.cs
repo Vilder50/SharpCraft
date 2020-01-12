@@ -199,6 +199,24 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual(EmptyNamespace.GetNamespace("space"), EmptyNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
             Assert.AreEqual("space", EmptyNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
         }
+
+        [TestMethod]
+        public void TestFileAddListener()
+        {
+            using (Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator()))
+            {
+                bool fileAdded = false;
+                PackNamespace space = pack.Namespace("space");
+                space.Function("test1");
+                space.AddNewFileListener((file) =>
+                {
+                    fileAdded = true;
+                });
+                Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
+                space.Function("test2");
+                Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
+            }
+        }
     }
 }
 

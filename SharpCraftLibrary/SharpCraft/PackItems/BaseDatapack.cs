@@ -43,6 +43,7 @@ namespace SharpCraft
         private string name;
         private string path;
         private readonly List<BasePackNamespace> namespaces;
+        private BaseFile.FileListener fileListeners;
 
         /// <summary>
         /// Creates a new <see cref="BaseDatapack"/> with the given parameters
@@ -193,8 +194,23 @@ namespace SharpCraft
             {
                 TNamespace space = new TNamespace();
                 space.Setup(this, name);
+                space.AddNewFileListener(NewFileAdded);
                 return space;
             }
+        }
+
+        private void NewFileAdded(BaseFile file)
+        {
+            fileListeners?.Invoke(file);
+        }
+
+        /// <summary>
+        /// Calls the given method when a new file is added to a namespace in this datapack
+        /// </summary>
+        /// <param name="listener">The method to call</param>
+        public void AddNewFileListener(BaseFile.FileListener listener)
+        {
+            fileListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given file listener may not be null");
         }
 
         /// <summary>

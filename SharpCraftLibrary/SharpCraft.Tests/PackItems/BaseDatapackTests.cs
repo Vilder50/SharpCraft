@@ -158,5 +158,23 @@ namespace SharpCraft.Tests.PackItems
             }
             running = false;
         }
+
+        [TestMethod]
+        public void TestFileAddListener()
+        {
+            using (Datapack pack = new Datapack("a path","name", ".", 4, new NoneFileCreator()))
+            {
+                bool fileAdded = false;
+                PackNamespace space = pack.Namespace("space");
+                space.Function("test1");
+                pack.AddNewFileListener((file) => 
+                {
+                    fileAdded = true;
+                });
+                Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
+                space.Function("test2");
+                Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
+            }
+        }
     }
 }
