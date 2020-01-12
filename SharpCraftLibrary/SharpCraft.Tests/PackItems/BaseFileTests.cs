@@ -106,5 +106,23 @@ namespace SharpCraft.Tests.PackItems
             auto.Dispose();
             Assert.AreEqual("", ((StringWriter)BaseFileTestClass.WriterToUse).GetStringBuilder().ToString(), "File is an Auto file and shouldn't write after being disposed");
         }
+
+        [TestMethod]
+        public void TestDisposeListener()
+        {
+            //test
+            bool disposed = false;
+            BaseFile onDispose = new BaseFileTestClass(new NamespaceTestClass(new DatapackTestClass("pack", "path"), "namespace"), "MyFile", BaseFile.WriteSetting.OnDispose);
+            onDispose.AddDisposeListener(f => 
+            {
+                disposed = true;
+            });
+            Assert.IsFalse(disposed, "Dispose listener was called too early");
+            onDispose.Dispose();
+            Assert.IsTrue(disposed, "Dispose listener wasn't called when the file got disposed");
+
+            //test exception
+            Assert.ThrowsException<ArgumentNullException>(() => onDispose.AddDisposeListener(null));
+        }
     }
 }

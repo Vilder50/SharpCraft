@@ -16,6 +16,12 @@ namespace SharpCraft
         private const string FileLocationPattern = @"^(([a-zA-Z0-9_-]+)([\\/]{1}[a-zA-Z0-9_-])*)*$";
 
         /// <summary>
+        /// Used for running things on new files and soon to be disposed files
+        /// </summary>
+        /// <param name="file">the file</param>
+        public delegate void FileListener(BaseFile file);
+
+        /// <summary>
         /// Settings for accessing this file
         /// </summary>
         public enum WriteSetting
@@ -44,6 +50,7 @@ namespace SharpCraft
         BasePackNamespace packNamespace;
         string fileName;
         private string fileType;
+        private FileListener disposeListener;
 
         /// <summary>
         /// Intializes a new <see cref="BaseFile"/> with the given values
@@ -167,6 +174,7 @@ namespace SharpCraft
         {
             if (!Disposed)
             {
+                disposeListener?.Invoke(this);
                 if (IsAuto())
                 {
                     StreamWriter?.Dispose();
@@ -215,6 +223,15 @@ namespace SharpCraft
         public bool CanDoChanges()
         {
             return !(Setting == WriteSetting.Auto || Setting == WriteSetting.LockedAuto || Disposed);
+        }
+
+        /// <summary>
+        /// Adds a listener to this file which will be called right before the file is disposed
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        public void AddDisposeListener(FileListener listener)
+        {
+            disposeListener += listener ?? throw new ArgumentNullException(nameof(listener), "File dispose listener may not be null.");
         }
 
         /// <summary>
