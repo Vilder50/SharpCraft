@@ -234,6 +234,7 @@
     <Compile Include="Classes\MiscObjects\JsonText\HoverEvents.cs" />
     <Compile Include="Classes\MiscObjects\JsonText\BaseJsonText.cs" />
     <Compile Include="Classes\MiscObjects\JsonText\JsonTexts.cs" />
+    <Compile Include="Classes\MiscObjects\ScoreValue.cs" />
     <Compile Include="Classes\MiscObjects\Storage.cs" />
     <Compile Include="PackItems\Advancement\BaseAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ChildAdvancement.cs" />
