@@ -17,6 +17,7 @@ namespace SharpCraft.FunctionWriters
             function = parentFunction;
         }
 
+        #region tree search
         /// <summary>
         /// Used by binary search. The command to run when the number is found
         /// </summary>
@@ -100,7 +101,9 @@ namespace SharpCraft.FunctionWriters
             function.Dispose();
             return function;
         }
+        #endregion
 
+        #region summon execute
         /// <summary>
         /// Summons a new entity and runs the given commands as the entity
         /// </summary>
@@ -165,5 +168,132 @@ namespace SharpCraft.FunctionWriters
 
             return executeAs;
         }
+        #endregion
+
+        #region math
+        /// <summary>
+        /// Holds a math operation between two scores
+        /// </summary>
+        public class ScoreOperation : ScoreValue
+        {
+            private ScoreValue score1;
+            private ScoreValue score2;
+
+            /// <summary>
+            /// Intializes a new <see cref="ScoreOperation"/>
+            /// </summary>
+            /// <param name="score1">First score to do math on</param>
+            /// <param name="operation">The math operation to do</param>
+            /// <param name="score2">Second score to do math on</param>
+            public ScoreOperation(ScoreValue score1, ID.Operation operation, ScoreValue score2) : base(new NameSelector("undefined",true), new ScoreObject("undefined"))
+            {
+                Score1 = score1;
+                Score2 = score2;
+                Operation = operation;
+            }
+
+            /// <summary>
+            /// First score to do math on
+            /// </summary>
+            public ScoreValue Score1 { get => score1; private set => score1 = value; }
+
+            /// <summary>
+            /// The math operation to do
+            /// </summary>
+            public ScoreValue Score2 { get => score2; private set => score2 = value; }
+
+            /// <summary>
+            /// Second score to do math on
+            /// </summary>
+            public ID.Operation Operation { get; private set; }
+
+            /// <summary>
+            /// Writes the commands needed to perform the operation to the given function
+            /// </summary>
+            /// <param name="function">The function to write the commands to</param>
+            /// <param name="endingValue">The <see cref="ScoreValue"/> the result should end up in</param>
+            public void WriteCommands(Function function, ScoreValue endingValue)
+            {
+                if (function is null)
+                {
+                    throw new ArgumentNullException(nameof(function), "Cannot write operation commands to null");
+                }
+                if (endingValue is null)
+                {
+                    throw new ArgumentNullException(nameof(endingValue), "Cannot give the final operation score to null");
+                }
+
+                int usedNumbers = -1;
+                WriteCommands(function, endingValue, SharpCraftFiles.GetMathScoreObject(), ref usedNumbers);
+            }
+
+            private ScoreValue WriteCommands(Function function, ScoreValue endingValue, ScoreObject mathObjective, ref int usedNumbers)
+            {
+                bool makeLastCommand = false;
+                if (usedNumbers == -1)
+                {
+                    makeLastCommand = true;
+                    usedNumbers = 0;
+                }
+
+                ScoreObject = mathObjective;
+                ScoreValue firstScoreValue;
+                ScoreValue secondScoreValue;
+
+                //Calculate value of child operations
+                if (Score1 is ScoreOperation operation1)
+                {
+                    firstScoreValue = operation1.WriteCommands(function, endingValue, mathObjective, ref usedNumbers);
+                    Selector = firstScoreValue;
+                }
+                else
+                {
+                    firstScoreValue = score1;
+                }
+                if (Score2 is ScoreOperation operation2)
+                {
+                    secondScoreValue = operation2.WriteCommands(function, endingValue, mathObjective, ref usedNumbers);
+                    if (Operation == ID.Operation.Add || Operation == ID.Operation.Multiply)
+                    {
+                        Selector = secondScoreValue;
+                        (firstScoreValue, secondScoreValue) = (secondScoreValue, firstScoreValue);
+                    }
+                }
+                else
+                {
+                    secondScoreValue = score2;
+                }
+
+                //Calculate value of this operation
+                if (makeLastCommand)
+                {
+                    function.AddCommand(new ScoreboardOperationCommand(endingValue, endingValue, ID.Operation.Equel, firstScoreValue, firstScoreValue));
+                    function.AddCommand(new ScoreboardOperationCommand(endingValue, endingValue, Operation, secondScoreValue, secondScoreValue));
+                }
+                else
+                {
+                    if (Selector is NameSelector nameSelector && nameSelector.Name == "undefined")
+                    {
+                        (Selector as NameSelector).Name = "Value" + usedNumbers;
+                        usedNumbers++;
+                        function.AddCommand(new ScoreboardOperationCommand(Selector, mathObjective, ID.Operation.Equel, firstScoreValue, firstScoreValue));
+                    }
+                    function.AddCommand(new ScoreboardOperationCommand(Selector, mathObjective, Operation, secondScoreValue, secondScoreValue));
+                }
+                return this;
+            }
+        }
+
+        /// <summary>
+        /// Sets a score value to the value made by a calculation
+        /// </summary>
+        /// <param name="selector">The selector for selecting the score</param>
+        /// <param name="objective">The objective the score to change is in</param>
+        /// <param name="operation">The operation calculating the value the score should be set to</param>
+        public void SetToScoreOperation(Selector selector, ScoreObject objective, ScoreOperation operation)
+        {
+            operation.WriteCommands(function, new ScoreValue(selector, objective));
+        }
+        #endregion
     }
 }

@@ -48,5 +48,65 @@ namespace SharpCraft
                 loadGroup.Items.Insert(0, SetupFunction);
             }
         }
+
+        #region constants
+        private const string constantFileName = "constants";
+        public static ScoreObject ConstantObjective { get; private set; }
+        private static Function constantNumberFile;
+        public static ScoreValue AddConstantNumber(int number)
+        {
+            //Get constant making function file
+            if (constantNumberFile is null)
+            {
+                constantNumberFile = (SetupFunction.Commands.SingleOrDefault(c => c is Commands.RunFunctionCommand functionCommand && functionCommand.Function.Name == constantFileName) as Commands.RunFunctionCommand)?.Function as Function;
+
+                if (constantNumberFile is null)
+                {
+                    constantNumberFile = SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                    ConstantObjective = new ScoreObject("constants");
+                    constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
+                    SetupFunction.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
+                }
+                else
+                {
+                    ConstantObjective = (constantNumberFile.Commands[0] as Commands.ScoreboardObjectiveAddCommand).ScoreObject;
+                }
+            }
+
+            //Check if constant already is added. If not add it to the constant function file.
+            if (!(constantNumberFile.Commands.SingleOrDefault(c => c is Commands.ScoreboardValueChangeCommand command && command.ChangeNumber == number) is Commands.ScoreboardValueChangeCommand existingCommand))
+            {
+                NameSelector selector = new NameSelector(number.ToString(), true);
+                constantNumberFile.AddCommand(new Commands.ScoreboardValueChangeCommand(selector, ConstantObjective, ID.ScoreChange.set, number));
+                return new ScoreValue(selector, ConstantObjective);
+            }
+            else
+            {
+                return new ScoreValue(existingCommand.Selector, ConstantObjective);
+            }
+        }
+        #endregion
+
+        #region
+        private static ScoreObject mathObjective;
+        private const string mathObjectiveName = "math";
+        public static ScoreObject GetMathScoreObject()
+        {
+            if (mathObjective is null)
+            {
+                if (SetupFunction.Commands.SingleOrDefault(c => c is Commands.ScoreboardObjectiveAddCommand scoreCommand && scoreCommand.ScoreObject.Name == mathObjectiveName) is Commands.ScoreboardObjectiveAddCommand addCommand)
+                {
+                    mathObjective = addCommand.ScoreObject;
+                }
+                else
+                {
+                    mathObjective = new ScoreObject(mathObjectiveName);
+                    SetupFunction.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective, "dummy", null));
+                }
+            }
+
+            return mathObjective;
+        }
+        #endregion
     }
 }

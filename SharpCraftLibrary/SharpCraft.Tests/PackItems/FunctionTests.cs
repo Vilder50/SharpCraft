@@ -207,5 +207,30 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("5",((function.Commands[1] as ScoreboardOperationCommand).Selector2 as NameSelector).Name, "Name selector for selecting constant values are incorrect.");
             }
         }
+
+        [TestMethod]
+        public void TestCustomSetToScoreOperation()
+        {
+            //setup
+            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
+            {
+                PackNamespace space = pack.Namespace("space");
+                Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
+
+                ScoreValue value1 = new ScoreValue(new Selector(ID.Selector.a) { Limit = 1 }, new ScoreObject("Cakes"));
+                ScoreValue value2 = new ScoreValue(new Selector(ID.Selector.e) { Limit = 1 }, new ScoreObject("Tests"));
+
+                //test
+                function.Custom.SetToScoreOperation(ID.Selector.s, new ScoreObject("Score"), (value1 + 5) * (value2 + 10));
+                Assert.AreEqual(6, function.Commands.Count, "Operation didn't add the correct amount of commands to the function");
+                Assert.AreEqual("Score", (function.Commands[5] as ScoreboardOperationCommand).Objective1.Name, "Operation didn't end up setting the correct score");
+
+                function.Custom.SetToScoreOperation(ID.Selector.s, new ScoreObject("Score"), value1 + 5);
+                Assert.AreEqual("Score", (function.Commands[6] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't set correct score");
+                Assert.AreEqual("Cakes", (function.Commands[6] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't get the correct score");
+                Assert.AreEqual("Score", (function.Commands[7] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't add to the correct score");
+                Assert.AreEqual("constants", (function.Commands[7] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't add with correct number");
+            }
+        }
     }
 }
