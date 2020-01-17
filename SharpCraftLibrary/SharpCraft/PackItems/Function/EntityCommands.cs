@@ -293,9 +293,9 @@ namespace SharpCraft.FunctionWriters
             /// adds the <paramref name="amount"/> to the selected entities' score in <paramref name="objective"/>
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
-            /// <param name="objective">the <see cref="ScoreObject"/> to change the score in</param>
+            /// <param name="objective">the <see cref="Objective"/> to change the score in</param>
             /// <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
-            public void Add(BaseSelector selector, ScoreObject objective, int amount)
+            public void Add(BaseSelector selector, Objective objective, int amount)
             {
                 function.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.add, amount));
             }
@@ -304,9 +304,9 @@ namespace SharpCraft.FunctionWriters
             /// sets the selected entities' score in <paramref name="objective"/> to the specified <paramref name="amount"/>
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
-            /// <param name="objective">the <see cref="ScoreObject"/> to change the score in</param>
+            /// <param name="objective">the <see cref="Objective"/> to change the score in</param>
             /// <param name="amount">the amount to set the score to</param>
-            public void Set(BaseSelector selector, ScoreObject objective, int amount)
+            public void Set(BaseSelector selector, Objective objective, int amount)
             {
                 function.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.set, amount));
             }
@@ -315,10 +315,10 @@ namespace SharpCraft.FunctionWriters
             /// Does math with a score and a number and saves the result in the entity's score
             /// </summary>
             /// <param name="mainSelector">The entity score to do math on (Result will be saved in here)</param>
-            /// <param name="mainObjective">The <see cref="ScoreObject"/> to get the value from to do math on</param>
+            /// <param name="mainObjective">The <see cref="Objective"/> to get the value from to do math on</param>
             /// <param name="operationType">The operation to do between the numbers</param>
             /// <param name="number">The number to do math with</param>
-            public void Operation(BaseSelector mainSelector, ScoreObject mainObjective, ID.Operation operationType, int number)
+            public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, int number)
             {
                 mainSelector.LimitSelector();
                 function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, AddConstantNumber(number), constantObjective));
@@ -328,11 +328,11 @@ namespace SharpCraft.FunctionWriters
             /// Does math with two scores and saves the result in one of the entities' score
             /// </summary>
             /// <param name="mainSelector">The first entity (The result will be stored in this entity's score)</param>
-            /// <param name="mainObjective">The first entity's <see cref="ScoreObject"/> (The result will be stored in here)</param>
+            /// <param name="mainObjective">The first entity's <see cref="Objective"/> (The result will be stored in here)</param>
             /// <param name="operationType">The operation to do between the numbers</param>
             /// <param name="otherSelector">The other entity</param>
-            /// <param name="otherObjective">The other entity's <see cref="ScoreObject"/></param>
-            public void Operation(BaseSelector mainSelector, ScoreObject mainObjective, ID.Operation operationType, BaseSelector otherSelector, ScoreObject otherObjective)
+            /// <param name="otherObjective">The other entity's <see cref="Objective"/></param>
+            public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, BaseSelector otherSelector, Objective otherObjective)
             {
                 mainSelector.LimitSelector();
                 otherSelector.LimitSelector();
@@ -343,8 +343,8 @@ namespace SharpCraft.FunctionWriters
             /// Resets the selected entities scores
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
-            /// <param name="objective">if a <see cref="ScoreObject"/> is specified only the score in the specified <see cref="ScoreObject"/> will be reseted</param>
-            public void Reset(BaseSelector selector, ScoreObject objective = null)
+            /// <param name="objective">if a <see cref="Objective"/> is specified only the score in the specified <see cref="Objective"/> will be reseted</param>
+            public void Reset(BaseSelector selector, Objective objective = null)
             {
                 function.AddCommand(new ScoreboardResetCommand(selector, objective));
             }
@@ -353,8 +353,8 @@ namespace SharpCraft.FunctionWriters
             /// Gets the selected entity's score and outputs it
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
-            /// <param name="objective">the <see cref="ScoreObject"/> to take the score from</param>
-            public void Get(BaseSelector selector, ScoreObject objective)
+            /// <param name="objective">the <see cref="Objective"/> to take the score from</param>
+            public void Get(BaseSelector selector, Objective objective)
             {
                 selector.LimitSelector();
                 function.AddCommand(new ScoreboardValueGetCommand(selector, objective));
@@ -362,7 +362,7 @@ namespace SharpCraft.FunctionWriters
 
             #region make constants
             private const string constantFileName = "constants";
-            private static readonly ScoreObject constantObjective = new ScoreObject("constants");
+            private static readonly Objective constantObjective = new Objective("constants");
             private static Function constantNumberFile;
             private BaseSelector AddConstantNumber(int number)
             {

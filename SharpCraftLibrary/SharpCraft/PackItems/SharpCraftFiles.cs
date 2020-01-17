@@ -51,7 +51,7 @@ namespace SharpCraft
 
         #region constants
         private const string constantFileName = "constants";
-        public static ScoreObject ConstantObjective { get; private set; }
+        public static Objective ConstantObjective { get; private set; }
         private static Function constantNumberFile;
         public static ScoreValue AddConstantNumber(int number)
         {
@@ -63,7 +63,7 @@ namespace SharpCraft
                 if (constantNumberFile is null)
                 {
                     constantNumberFile = SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
-                    ConstantObjective = new ScoreObject("constants");
+                    ConstantObjective = new Objective("constants");
                     constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
                     SetupFunction.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
                 }
@@ -88,9 +88,9 @@ namespace SharpCraft
         #endregion
 
         #region
-        private static ScoreObject mathObjective;
+        private static Objective mathObjective;
         private const string mathObjectiveName = "math";
-        public static ScoreObject GetMathScoreObject()
+        public static Objective GetMathScoreObject()
         {
             if (mathObjective is null)
             {
@@ -100,7 +100,7 @@ namespace SharpCraft
                 }
                 else
                 {
-                    mathObjective = new ScoreObject(mathObjectiveName);
+                    mathObjective = new Objective(mathObjectiveName);
                     SetupFunction.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective, "dummy", null));
                 }
             }

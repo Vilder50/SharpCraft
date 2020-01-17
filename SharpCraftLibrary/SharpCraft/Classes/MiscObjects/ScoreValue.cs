@@ -11,7 +11,7 @@ namespace SharpCraft
     /// </summary>
     public class ScoreValue
     {
-        private ScoreObject scoreObject;
+        private Objective scoreObject;
         private BaseSelector selector;
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="selector">Selector for selecting the score</param>
         /// <param name="scoreObject">The objective the score is in</param>
-        public ScoreValue(BaseSelector selector, ScoreObject scoreObject)
+        public ScoreValue(BaseSelector selector, Objective scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <summary>
         /// The objective the score is in
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; protected set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; protected set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// returns the <see cref="ScoreValue"/>'s selector
@@ -59,7 +59,7 @@ namespace SharpCraft
         /// returns the <see cref="ScoreValue"/>'s scoreObject
         /// </summary>
         /// <param name="score">The <see cref="ScoreValue"/>'s scoreObject</param>
-        public static implicit operator ScoreObject(ScoreValue score)
+        public static implicit operator Objective(ScoreValue score)
         {
             return score.ScoreObject;
         }

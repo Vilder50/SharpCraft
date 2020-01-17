@@ -157,12 +157,12 @@ namespace SharpCraft.FunctionWriters
         /// Executes if the <paramref name="mainSelector"/>'s score value is <paramref name="operation"/> than <paramref name="otherSelector"/>'s score value
         /// </summary>
         /// <param name="mainSelector">The first <see cref="BaseSelector"/></param>
-        /// <param name="mainObject">The first <see cref="BaseSelector"/>'s <see cref="ScoreObject"/></param>
+        /// <param name="mainObject">The first <see cref="BaseSelector"/>'s <see cref="Objective"/></param>
         /// <param name="operation">The operation used to check the scores</param>
         /// <param name="otherSelector">The second <see cref="BaseSelector"/></param>
-        /// <param name="otherObject">The second <see cref="BaseSelector"/>'s <see cref="ScoreObject"/></param>
+        /// <param name="otherObject">The second <see cref="BaseSelector"/>'s <see cref="Objective"/></param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfScore(BaseSelector mainSelector, ScoreObject mainObject, ID.IfScoreOperation operation, BaseSelector otherSelector, ScoreObject otherObject, bool want = true)
+        public void IfScore(BaseSelector mainSelector, Objective mainObject, ID.IfScoreOperation operation, BaseSelector otherSelector, Objective otherObject, bool want = true)
         {
             mainSelector.LimitSelector();
             otherSelector.LimitSelector();
@@ -173,10 +173,10 @@ namespace SharpCraft.FunctionWriters
         /// Executes if the given <see cref="BaseSelector"/>'s score is in the given <see cref="Range"/>
         /// </summary>
         /// <param name="selector">the <see cref="BaseSelector"/>'s score to check</param>
-        /// <param name="scoreObject">the <see cref="ScoreObject"/> to containing the score</param>
+        /// <param name="scoreObject">the <see cref="Objective"/> to containing the score</param>
         /// <param name="range">the <see cref="Range"/> the score should be in</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfScore(BaseSelector selector, ScoreObject scoreObject, Range range, bool want = true)
+        public void IfScore(BaseSelector selector, Objective scoreObject, Range range, bool want = true)
         {
             selector.LimitSelector();
             function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
@@ -228,12 +228,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Stores the command's success output inside the given <see cref="Entity"/>'s <see cref="ScoreObject"/>
+        /// Stores the command's success output inside the given <see cref="Entity"/>'s <see cref="Objective"/>
         /// </summary>
         /// <param name="entity">The <see cref="Entity"/> to store in</param>
-        /// <param name="scoreObject">The <see cref="ScoreObject"/> to store in</param>
+        /// <param name="scoreObject">The <see cref="Objective"/> to store in</param>
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
-        public void Store(BaseSelector entity, ScoreObject scoreObject, bool storeSucces = false)
+        public void Store(BaseSelector entity, Objective scoreObject, bool storeSucces = false)
         {
             function.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
         }

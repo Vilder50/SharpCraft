@@ -120,12 +120,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Changes the executing player's score in the given <see cref="ScoreObject"/>
+        /// Changes the executing player's score in the given <see cref="Objective"/>
         /// </summary>
-        /// <param name="scoreObject">the <see cref="ScoreObject"/> to change in</param>
+        /// <param name="scoreObject">the <see cref="Objective"/> to change in</param>
         /// <param name="number">The number to add/set it to</param>
         /// <param name="set">If the score should be set to the given number. If false it will be added instead</param>
-        public void Trigger(ScoreObject scoreObject, int number, bool set = true)
+        public void Trigger(Objective scoreObject, int number, bool set = true)
         {
             function.AddCommand(new TriggerCommand(scoreObject, set, number));
         }
@@ -154,8 +154,8 @@ namespace SharpCraft.FunctionWriters
         /// Enables a trigger for the selected players
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
-        /// <param name="objective">The trigger (<see cref="ScoreObject"/>) to enable</param>
-        public void EnableTrigger(BaseSelector player, ScoreObject objective)
+        /// <param name="objective">The trigger (<see cref="Objective"/>) to enable</param>
+        public void EnableTrigger(BaseSelector player, Objective objective)
         {
             function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
         }

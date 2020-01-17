@@ -67,8 +67,8 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TriggerCommandTest()
         {
-            Assert.AreEqual("trigger test set 10", new TriggerCommand(new ScoreObject("test"), true, 10).GetCommandString());
-            Assert.AreEqual("trigger test add -10", new TriggerCommand(new ScoreObject("test"), false, -10).GetCommandString());
+            Assert.AreEqual("trigger test set 10", new TriggerCommand(new Objective("test"), true, 10).GetCommandString());
+            Assert.AreEqual("trigger test add -10", new TriggerCommand(new Objective("test"), false, -10).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new TriggerCommand(null, true, 10));
         }

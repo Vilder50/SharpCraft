@@ -270,7 +270,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TriggerCommand : BaseCommand
     {
-        private ScoreObject objective;
+        private Objective objective;
 
         /// <summary>
         /// intializes a new <see cref="TriggerCommand"/>
@@ -278,7 +278,7 @@ namespace SharpCraft.Commands
         /// <param name="objective">The objective to change</param>
         /// <param name="score">The number to modify it with</param>
         /// <param name="shouldSet">True if it should set the objective to the score. False if it should add the score to the objective</param>
-        public TriggerCommand(ScoreObject objective, bool shouldSet, int score)
+        public TriggerCommand(Objective objective, bool shouldSet, int score)
         {
             Objective = objective;
             ShouldSet = shouldSet;
@@ -289,7 +289,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to change
         /// </summary>
-        public ScoreObject Objective
+        public Objective Objective
         {
             get => objective;
             set

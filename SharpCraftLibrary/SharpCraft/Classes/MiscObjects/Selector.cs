@@ -602,7 +602,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityScore : ISelectorArgument
         {
-            private ScoreObject objective;
+            private Objective objective;
             private Range score;
 
             /// <summary>
@@ -610,7 +610,7 @@ namespace SharpCraft
             /// </summary>
             /// <param name="objective">The score objective to look in</param>
             /// <param name="score">The range the score has to be inside</param>
-            public EntityScore(ScoreObject objective, Range score)
+            public EntityScore(Objective objective, Range score)
             {
                 Objective = objective;
                 Score = score;
@@ -619,7 +619,7 @@ namespace SharpCraft
             /// <summary>
             /// The score objective to look in
             /// </summary>
-            public ScoreObject Objective { get => objective; set => objective = value ?? throw new ArgumentNullException(nameof(Objective), "Objective may not be null"); }
+            public Objective Objective { get => objective; set => objective = value ?? throw new ArgumentNullException(nameof(Objective), "Objective may not be null"); }
 
             /// <summary>
             /// The range the score has to be inside

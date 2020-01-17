@@ -12,20 +12,20 @@ namespace SharpCraft.Commands
     public class ExecuteIfScoreRelative : BaseExecuteIfCommand
     {
         private BaseSelector selector1;
-        private ScoreObject objective1;
+        private Objective objective1;
         private BaseSelector selector2;
-        private ScoreObject objective2;
+        private Objective objective2;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfScoreRelative"/> command
         /// </summary>
         /// <param name="selector1">Selector selecting the thing to get a score from</param>
-        /// <param name="objective1">The <see cref="ScoreObject"/> to get the score for <see cref="selector1"/> from</param>
+        /// <param name="objective1">The <see cref="Objective"/> to get the score for <see cref="selector1"/> from</param>
         /// <param name="selector2">Selector selecting the thing to get a score from</param>
-        /// <param name="objective2">The <see cref="ScoreObject"/> to get the score for <see cref="selector2"/> from</param>
+        /// <param name="objective2">The <see cref="Objective"/> to get the score for <see cref="selector2"/> from</param>
         /// <param name="operator">How the scores should be relative to each other</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfScoreRelative(BaseSelector selector1, ScoreObject objective1, ID.IfScoreOperation @operator, BaseSelector selector2, ScoreObject objective2, bool executeIf = true) : base(executeIf)
+        public ExecuteIfScoreRelative(BaseSelector selector1, Objective objective1, ID.IfScoreOperation @operator, BaseSelector selector2, Objective objective2, bool executeIf = true) : base(executeIf)
         {
             Selector1 = selector1;
             Objective1 = objective1;
@@ -51,9 +51,9 @@ namespace SharpCraft.Commands
         }
 
         /// <summary>
-        /// The <see cref="ScoreObject"/> to get the score for <see cref="Selector1"/> from
+        /// The <see cref="Objective"/> to get the score for <see cref="Selector1"/> from
         /// </summary>
-        public ScoreObject Objective1
+        public Objective Objective1
         {
             get => objective1;
             set
@@ -79,9 +79,9 @@ namespace SharpCraft.Commands
         }
 
         /// <summary>
-        /// The <see cref="ScoreObject"/> to get the score for <see cref="Selector2"/> from
+        /// The <see cref="Objective"/> to get the score for <see cref="Selector2"/> from
         /// </summary>
-        public ScoreObject Objective2
+        public Objective Objective2
         {
             get => objective2;
             set

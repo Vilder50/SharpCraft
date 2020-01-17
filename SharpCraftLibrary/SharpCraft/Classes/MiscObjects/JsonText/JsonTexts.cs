@@ -203,14 +203,14 @@ namespace SharpCraft
         public class Score : JsonText
         {
             private BaseSelector selector;
-            private ScoreObject scoreObject;
+            private Objective scoreObject;
 
             /// <summary>
             /// Intializes a new <see cref="Score"/>
             /// </summary>
             /// <param name="selector">Selects the entity to show the score for</param>
             /// <param name="scoreObject">The objective to get the score from</param>
-            public Score(BaseSelector selector, ScoreObject scoreObject)
+            public Score(BaseSelector selector, Objective scoreObject)
             {
                 Selector = selector;
                 ScoreObject = scoreObject;
@@ -235,7 +235,7 @@ namespace SharpCraft
             /// <summary>
             /// The objective to get the score from
             /// </summary>
-            public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "JsonText ScoreObject may not be null"); }
+            public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "JsonText ScoreObject may not be null"); }
 
             /// <summary>
             /// returns the raw string specific for this class

@@ -175,7 +175,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="score1">First score to do math on</param>
             /// <param name="operation">The math operation to do</param>
             /// <param name="score2">Second score to do math on</param>
-            public ScoreOperation(ScoreValue score1, ID.Operation operation, ScoreValue score2) : base(new NameSelector("undefined",true), new ScoreObject("undefined"))
+            public ScoreOperation(ScoreValue score1, ID.Operation operation, ScoreValue score2) : base(new NameSelector("undefined",true), new Objective("undefined"))
             {
                 Score1 = score1;
                 Score2 = score2;
@@ -217,7 +217,7 @@ namespace SharpCraft.FunctionWriters
                 WriteCommands(function, endingValue, SharpCraftFiles.GetMathScoreObject(), ref usedNumbers);
             }
 
-            private ScoreValue WriteCommands(Function function, ScoreValue endingValue, ScoreObject mathObjective, ref int usedNumbers)
+            private ScoreValue WriteCommands(Function function, ScoreValue endingValue, Objective mathObjective, ref int usedNumbers)
             {
                 bool makeLastCommand = false;
                 if (usedNumbers == -1)
@@ -280,7 +280,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The selector for selecting the score</param>
         /// <param name="objective">The objective the score to change is in</param>
         /// <param name="operation">The operation calculating the value the score should be set to</param>
-        public void SetToScoreOperation(Selector selector, ScoreObject objective, ScoreOperation operation)
+        public void SetToScoreOperation(Selector selector, Objective objective, ScoreOperation operation)
         {
             GroupCommands(f =>
             {

@@ -339,36 +339,36 @@ namespace SharpCraft.FunctionWriters
                 this.function = function;
             }
             /// <summary>
-            /// Adds the specified <see cref="ScoreObject"/> to the world
+            /// Adds the specified <see cref="SharpCraft.Objective"/> to the world
             /// </summary>
-            /// <param name="scoreName">The name of the <see cref="ScoreObject"/></param>
+            /// <param name="scoreName">The name of the <see cref="SharpCraft.Objective"/></param>
             /// <param name="type">the type of the scoreboard. See <see cref="ID.Objective"/> for a list of types</param>
             /// <param name="displayName">The name to display when the scoreboard is viewed in the sidebar</param>
-            /// <returns>the newly created <see cref="ScoreObject"/></returns>
-            public ScoreObject Add(string scoreName, string type = "dummy", JsonText[] displayName = null)
+            /// <returns>the newly created <see cref="SharpCraft.Objective"/></returns>
+            public Objective Add(string scoreName, string type = "dummy", JsonText[] displayName = null)
             {
-                ScoreObject newObject = new ScoreObject(scoreName);
+                Objective newObject = new Objective(scoreName);
                 function.AddCommand(new ScoreboardObjectiveAddCommand(newObject, type, displayName));
                 return newObject;
             }
 
             /// <summary>
-            /// Removes the specified <see cref="ScoreObject"/> from the world
+            /// Removes the specified <see cref="SharpCraft.Objective"/> from the world
             /// </summary>
-            /// <param name="objective">the <see cref="ScoreObject"/> to remove</param>
-            public void Remove(ScoreObject objective)
+            /// <param name="objective">the <see cref="SharpCraft.Objective"/> to remove</param>
+            public void Remove(Objective objective)
             {
                 function.AddCommand(new ScoreboardObjectiveRemoveCommand(objective));
             }
 
             /// <summary>
-            /// Displays the specified <see cref="ScoreObject"/> in the specified display slot
-            /// Note: each slot can only display one <see cref="ScoreObject"/>
+            /// Displays the specified <see cref="SharpCraft.Objective"/> in the specified display slot
+            /// Note: each slot can only display one <see cref="SharpCraft.Objective"/>
             /// </summary>
-            /// <param name="objective">the <see cref="ScoreObject"/> to display</param>
+            /// <param name="objective">the <see cref="SharpCraft.Objective"/> to display</param>
             /// <param name="display">the display slot to display it in</param>
             /// <param name="teamColor">only teams with this color can see it. Null makes everyone see it. Note: this only works with <see cref="ID.ScoreDisplay.sidebar"/> as the <paramref name="display"/></param>
-            public void Display(ScoreObject objective, ID.ScoreDisplay display, ID.MinecraftColor? teamColor = null)
+            public void Display(Objective objective, ID.ScoreDisplay display, ID.MinecraftColor? teamColor = null)
             {
                 if (display == ID.ScoreDisplay.sidebar && !(teamColor is null))
                 {
@@ -396,20 +396,20 @@ namespace SharpCraft.FunctionWriters
                 }
             }
             /// <summary>
-            /// Changes the <see cref="ScoreObject"/>'s displayed name
+            /// Changes the <see cref="SharpCraft.Objective"/>'s displayed name
             /// </summary>
-            /// <param name="objective">the <see cref="ScoreObject"/> to change</param>
+            /// <param name="objective">the <see cref="SharpCraft.Objective"/> to change</param>
             /// <param name="name">The new display name</param>
-            public void DisplayName(ScoreObject objective, JsonText[] name)
+            public void DisplayName(Objective objective, JsonText[] name)
             {
                 function.AddCommand(new ScoreboardObjectiveChangeNameCommand(objective, name));
             }
             /// <summary>
-            /// Changes the way the <see cref="ScoreObject"/> is rendered in the <see cref="ID.ScoreDisplay.list"/> display slot
+            /// Changes the way the <see cref="SharpCraft.Objective"/> is rendered in the <see cref="ID.ScoreDisplay.list"/> display slot
             /// </summary>
-            /// <param name="objective">the <see cref="ScoreObject"/> to change</param>
+            /// <param name="objective">the <see cref="SharpCraft.Objective"/> to change</param>
             /// <param name="render">The way it should be rendered</param>
-            public void Render(ScoreObject objective, ID.ObjectiveRender render)
+            public void Render(Objective objective, ID.ObjectiveRender render)
             {
                 function.AddCommand(new ScoreboardObjectiveChangeRenderCommand(objective, render));
             }

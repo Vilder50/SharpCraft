@@ -145,7 +145,7 @@ namespace SharpCraft.Tests.PackItems
 
                 //test
                 function.Custom.TreeSearch(
-                    (min, max) => new ExecuteIfScoreMatches("#s", new ScoreObject("scores"), new Range(min, max)),
+                    (min, max) => new ExecuteIfScoreMatches("#s", new Objective("scores"), new Range(min, max)),
                     (number) => new SayCommand(number.ToString()),
                     5,
                     9
@@ -199,9 +199,9 @@ namespace SharpCraft.Tests.PackItems
                 Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
 
                 //test
-                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.Divide, 3);
-                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.Multiply, 5);
-                function.Entity.Score.Operation(ID.Selector.s, new ScoreObject("scores"), ID.Operation.GetHigher, 3);
+                function.Entity.Score.Operation(ID.Selector.s, new Objective("scores"), ID.Operation.Divide, 3);
+                function.Entity.Score.Operation(ID.Selector.s, new Objective("scores"), ID.Operation.Multiply, 5);
+                function.Entity.Score.Operation(ID.Selector.s, new Objective("scores"), ID.Operation.GetHigher, 3);
 
                 Assert.AreSame((function.Commands[0] as ScoreboardOperationCommand).Selector2, (function.Commands[2] as ScoreboardOperationCommand).Selector2, "Constant value giver doesn't return same selector for same number");
                 Assert.AreEqual("5",((function.Commands[1] as ScoreboardOperationCommand).Selector2 as NameSelector).Name, "Name selector for selecting constant values are incorrect.");
@@ -217,15 +217,15 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
                 Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
 
-                ScoreValue value1 = new ScoreValue(new Selector(ID.Selector.a) { Limit = 1 }, new ScoreObject("Cakes"));
-                ScoreValue value2 = new ScoreValue(new Selector(ID.Selector.e) { Limit = 1 }, new ScoreObject("Tests"));
+                ScoreValue value1 = new ScoreValue(new Selector(ID.Selector.a) { Limit = 1 }, new Objective("Cakes"));
+                ScoreValue value2 = new ScoreValue(new Selector(ID.Selector.e) { Limit = 1 }, new Objective("Tests"));
 
                 //test
-                function.Custom.SetToScoreOperation(ID.Selector.s, new ScoreObject("Score"), (value1 + 5) * (value2 + 10));
+                function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), (value1 + 5) * (value2 + 10));
                 Assert.AreEqual(6, function.Commands.Count, "Operation didn't add the correct amount of commands to the function");
                 Assert.AreEqual("Score", (function.Commands[5] as ScoreboardOperationCommand).Objective1.Name, "Operation didn't end up setting the correct score");
 
-                function.Custom.SetToScoreOperation(ID.Selector.s, new ScoreObject("Score"), value1 + 5);
+                function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), value1 + 5);
                 Assert.AreEqual("Score", (function.Commands[6] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't set correct score");
                 Assert.AreEqual("Cakes", (function.Commands[6] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't get the correct score");
                 Assert.AreEqual("Score", (function.Commands[7] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't add to the correct score");

@@ -86,10 +86,10 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Data(null, true), "Data should throw exception if location is null");
 
             //score
-            Assert.AreEqual("{\"score\":{\"name\":\"@s[name=\\\"Name\\\"]\",\"objective\":\"test\"}}", new JsonText.Score(new Selector(ID.Selector.s) { SingleName = "Name" }, new ScoreObject("test")).GetJsonString(), "Score doesn't return correct string");
-            Assert.ThrowsException<ArgumentException>(() => new JsonText.Score(ID.Selector.e, new ScoreObject("something")), "Score should throw exception is selector selects too many things");
-            _ = new JsonText.Score(AllSelector.GetSelector(), new ScoreObject("something"));
-            Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Score(null, new ScoreObject("something")), "Score should throw exception if selector is null");
+            Assert.AreEqual("{\"score\":{\"name\":\"@s[name=\\\"Name\\\"]\",\"objective\":\"test\"}}", new JsonText.Score(new Selector(ID.Selector.s) { SingleName = "Name" }, new Objective("test")).GetJsonString(), "Score doesn't return correct string");
+            Assert.ThrowsException<ArgumentException>(() => new JsonText.Score(ID.Selector.e, new Objective("something")), "Score should throw exception is selector selects too many things");
+            _ = new JsonText.Score(AllSelector.GetSelector(), new Objective("something"));
+            Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Score(null, new Objective("something")), "Score should throw exception if selector is null");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Score(ID.Selector.s, null), "Score should throw exception if objective is null");
         }
     }

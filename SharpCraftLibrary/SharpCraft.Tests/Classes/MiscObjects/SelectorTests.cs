@@ -63,7 +63,7 @@ namespace SharpCraft.Tests.MiscObjects
                 SingleTag = "tagtag",
                 SinglePredicate = new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name"),
                 SingleMode = ID.Gamemode.creative,
-                SingleScore = new SharpCraft.Selector.EntityScore(new ScoreObject("objective"), new Range(1,2)),
+                SingleScore = new SharpCraft.Selector.EntityScore(new Objective("objective"), new Range(1,2)),
                 SingleTeam = new Team("myteam")
             }.GetSelectorString(), "Selector multiple doesn't return correct string");
 
@@ -103,8 +103,8 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestScoreSelectorClass()
         {
-            Assert.AreEqual("objective=1..2", new SharpCraft.Selector.EntityScore(new ScoreObject("objective"), new Range(1, 2)).GetSelectionString(), "EntityScore doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(new ScoreObject("objective"), null), "Score may not be null");
+            Assert.AreEqual("objective=1..2", new SharpCraft.Selector.EntityScore(new Objective("objective"), new Range(1, 2)).GetSelectionString(), "EntityScore doesn't return correct string");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(new Objective("objective"), null), "Score may not be null");
             Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(null, new Range(1, 2)), "Objective may not be null");
         }
 
