@@ -145,19 +145,34 @@ namespace SharpCraft.Tests.PackItems
                 Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
                 //test
+                //2 branches
                 function.Custom.TreeSearch(
                     (min, max) => new ExecuteIfScoreMatches("#s", new Objective("scores"), new Range(min, max)),
                     (number) => new SayCommand(number.ToString()),
                     5,
                     9
-                    ); ;
+                    );
 
                 var treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks\\pack\\data\\space\\functions\\")).ToList();
                 Assert.AreEqual(4, treeWriters.Count, "The correct amount of writers wasn't created");
-                Assert.AreEqual("execute if score #s scores matches 5..7 run function space:function/5-7" + Environment.NewLine +
-                    "execute if score #s scores matches 8..9 run function space:function/8-9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("function.mcfunction")).writer.ToString(), "Tree base wasn't written correctly");
                 Assert.AreEqual("execute if score #s scores matches 5..6 run function space:function/5-6" + Environment.NewLine +
-                    "execute if score #s scores matches 7 run say 7" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("5-7.mcfunction")).writer.ToString(), "Tree branch wasn't written correctly");
+                    "execute if score #s scores matches 7..9 run function space:function/7-9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("function.mcfunction")).writer.ToString(), "Tree base wasn't written correctly");
+                Assert.AreEqual("execute if score #s scores matches 7 run say 7" + Environment.NewLine +
+                    "execute if score #s scores matches 8..9 run function space:function/8-9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("7-9.mcfunction")).writer.ToString(), "Tree branch wasn't written correctly");
+
+                //4 branches
+                Function fourBranches = space.Function("four\\function", BaseFile.WriteSetting.Auto);
+                fourBranches.Custom.TreeSearch(
+                    (min, max) => new ExecuteIfScoreMatches("#s", new Objective("scores"), new Range(min, max)),
+                    (number) => new SayCommand(number.ToString()),
+                    5,
+                    9,
+                    4
+                    );
+                treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks\\pack\\data\\space\\functions\\four")).ToList();
+                Assert.AreEqual(2, treeWriters.Count, "The correct amount of writers wasn't created for a 4 tree search");
+                Assert.AreEqual("execute if score #s scores matches 8 run say 8" + Environment.NewLine +
+                    "execute if score #s scores matches 9 run say 9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("8-9.mcfunction")).writer.ToString(), "4 Tree branch wasn't written correctly");
             }
         }
 

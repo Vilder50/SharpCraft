@@ -44,16 +44,13 @@ namespace SharpCraft.FunctionWriters
         /// <param name="command">The command to run when the number has been found</param>
         /// <param name="minimum">The smallest number to search for</param>
         /// <param name="maximum">The highest number to search for</param>
-        public Function TreeSearch(TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum)
+        /// <param name="branches">The amount of branches to check at a time (Low number = fast, but many files. High number = slow, but less files)</param>
+        public void TreeSearch(TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum, int branches = 2)
         {
             //Check parameters
             if (maximum <= minimum)
             {
                 throw new ArgumentException("maximum cannot be less than or equal to minimum");
-            }
-            if (Function is null)
-            {
-                throw new ArgumentNullException(nameof(Function), "function cannot be null");
             }
             if (method is null)
             {
@@ -63,41 +60,48 @@ namespace SharpCraft.FunctionWriters
             {
                 throw new ArgumentNullException(nameof(command), "command cannot be null");
             }
+            if (branches < 2)
+            {
+                throw new ArgumentOutOfRangeException(nameof(branches), "Branches cannot be less than 2");
+            }
 
-            Function outFunction = null;
             GroupCommands(f => 
             { 
-                outFunction = WriteTreeSearch(Function, method, command, minimum, maximum, true);
+                WriteTreeSearch(Function, method, command, minimum, maximum, branches, true);
             });
-            return outFunction;
         }
 
-        private Function WriteTreeSearch(Function function, TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum, bool first = false)
+        private Function WriteTreeSearch(Function function, TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum, int branches, bool first = false)
         {
-            int halfSize = ((maximum - minimum) / 2) + minimum;
-            int numbersLeft = maximum - minimum;
+            int partSize = Math.Max((maximum - minimum + 1) / branches, 1);
+            for (int i = 0; i < branches; i++)
+            {
+                int start = partSize * i + minimum;
+                int end = Math.Min(partSize * (i + 1) + minimum - 1,maximum);
+                if (i == branches - 1)
+                {
+                    end = maximum;
+                }
 
-            function.AddCommand(method(minimum, halfSize));
-            if (minimum != halfSize)
-            {
-                function.World.Function(WriteTreeSearch(first ? function.NewChild(minimum + "-" + halfSize) : function.NewSibling(minimum + "-" + halfSize), method, command, minimum, halfSize));
-            }
-            else
-            {
-                function.AddCommand(command(halfSize));
-            }
+                function.AddCommand(method(start, end));
+                if (start == end)
+                {
+                    function.AddCommand(command(start));
+                }
+                else
+                {
+                    function.World.Function(WriteTreeSearch(first ? function.NewChild(start + "-" + end) : function.NewSibling(start + "-" + end), method, command, start, end, branches));
+                }
 
-            function.AddCommand(method(halfSize + 1, maximum));
-            if (halfSize + 1 != maximum)
-            {
-                function.World.Function(WriteTreeSearch(first ? function.NewChild((halfSize + 1) + "-" + maximum) : function.NewSibling((halfSize + 1) + "-" + maximum), method, command, halfSize + 1, maximum));
+                if (end == maximum)
+                {
+                    break;
+                }
             }
-            else
+            if (!first)
             {
-                function.AddCommand(command(halfSize + 1));
+                function.Dispose();
             }
-
-            function.Dispose();
             return function;
         }
         #endregion
