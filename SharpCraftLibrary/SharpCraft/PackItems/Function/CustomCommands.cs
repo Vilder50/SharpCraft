@@ -61,7 +61,12 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException(nameof(command), "command cannot be null");
             }
 
-            return WriteTreeSearch(function, method, command, minimum, maximum, true);
+            Function outFunction = null;
+            GroupCommands(f => 
+            { 
+                outFunction = WriteTreeSearch(function, method, command, minimum, maximum, true);
+            });
+            return outFunction;
         }
 
         private Function WriteTreeSearch(Function function, TreeSearchMethod method, TreeSearchCommand command, int minimum, int maximum, bool first = false)
@@ -69,11 +74,6 @@ namespace SharpCraft.FunctionWriters
             int halfSize = ((maximum - minimum) / 2) + minimum;
             int numbersLeft = maximum - minimum;
 
-            BaseCommand executeCommand = null;
-            if (first && function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
-            {
-                executeCommand = function.Commands.Last().ShallowClone();
-            }
             function.AddCommand(method(minimum, halfSize));
             if (minimum != halfSize)
             {
@@ -84,10 +84,6 @@ namespace SharpCraft.FunctionWriters
                 function.AddCommand(command(halfSize));
             }
 
-            if (first && !(executeCommand is null))
-            {
-                function.AddCommand(executeCommand);
-            }
             function.AddCommand(method(halfSize + 1, maximum));
             if (halfSize + 1 != maximum)
             {
@@ -147,25 +143,19 @@ namespace SharpCraft.FunctionWriters
             createEntity.Tags = tags.ToArray();
 
             //summon entity and execute as it
-            BaseCommand executeCommand = null;
-            if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            Function executeAs = null;
+            GroupCommands(f =>
             {
-                executeCommand = function.Commands.Last().ShallowClone();
-            }
-            function.Entity.Add(createEntity, spawnCoords);
-            if (!(executeCommand is null))
-            {
-                function.AddCommand(executeCommand);
-            }
-            function.Execute.As(new Selector(ID.Selector.e, findTag));
-            if (executeAt)
-            {
-                function.Execute.At();
-            }
-            Function executeAs = (Function)function.World.Function(function.NewSibling(functionName, writeSetting));
-            executeAs.Entity.Tag.Remove(new Selector(), findTag);
-            runCommands(executeAs);
-
+                f.Entity.Add(createEntity, spawnCoords);
+                f.Execute.As(new Selector(ID.Selector.e, findTag));
+                if (executeAt)
+                {
+                    f.Execute.At();
+                }
+                executeAs = (Function)f.World.Function(f.NewSibling(functionName, writeSetting));
+                executeAs.Entity.Tag.Remove(new Selector(), findTag);
+                runCommands(executeAs);
+            });
             return executeAs;
         }
         #endregion
@@ -292,7 +282,86 @@ namespace SharpCraft.FunctionWriters
         /// <param name="operation">The operation calculating the value the score should be set to</param>
         public void SetToScoreOperation(Selector selector, ScoreObject objective, ScoreOperation operation)
         {
-            operation.WriteCommands(function, new ScoreValue(selector, objective));
+            GroupCommands(f =>
+            {
+                operation.WriteCommands(function, new ScoreValue(selector, objective));
+            });
+        }
+        #endregion
+
+        #region command grouping
+        private class ExecutePrefixer : ICommandChanger
+        {
+            private readonly BaseExecuteCommand prefixCommand;
+            private readonly Function writeToFunction;
+
+            public ExecutePrefixer(BaseExecuteCommand prefixCommand, Function writeToFunction)
+            {
+                this.prefixCommand = prefixCommand;
+                this.writeToFunction = writeToFunction;
+            }
+
+            public bool DoneChanging { get; set; }
+
+            public ICommand ChangeCommand(ICommand command)
+            {
+                bool foundThis = false;
+                foreach (ICommand functionCommand in writeToFunction.Commands)
+                {
+                    if (functionCommand == this)
+                    {
+                        foundThis = true;
+                    }
+                    else if (foundThis && functionCommand is BaseExecuteCommand execute && !execute.DoneChanging)
+                    {
+                        return command;
+                    }
+                }
+                BaseExecuteCommand prefixer = (BaseExecuteCommand)prefixCommand.ShallowClone();
+                prefixer.ExecuteCommand = null;
+                return prefixer.AddCommand(command);
+            }
+
+            public string GetCommandString()
+            {
+                return null;
+            }
+
+            public BaseCommand ShallowClone()
+            {
+                return prefixCommand.ShallowClone();
+            }
+        }
+
+        /// <summary>
+        /// If the last command is an unfinished execute command, every given command will be executed with a clone of the execute command. (All the given commands will only run if the execute command runs)
+        /// </summary>
+        /// <param name="writer">Writer for writing the commands</param>
+        /// <param name="forceFunction">Use a function instead of multiple execute commands</param>
+        public void GroupCommands(Function.FunctionCreater writer, bool forceFunction = false)
+        {
+            if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            {
+                if (forceFunction || function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands()))
+                {
+                    function.World.Function(function.NewSibling(writer, function.Setting));
+                }
+                else
+                {
+                    BaseExecuteCommand executeCommand = (BaseExecuteCommand)execute.ShallowClone();
+                    int prefixLocation = function.Commands.Count - 1;
+                    function.Commands.RemoveAt(prefixLocation);
+                    ExecutePrefixer prefixer = new ExecutePrefixer(executeCommand, function);
+                    function.AddCommand(new ExecutePrefixer(executeCommand, function));
+                    writer(function);
+                    prefixer.DoneChanging = true;
+                    function.Commands.RemoveAt(prefixLocation);
+                }
+            }
+            else
+            {
+                writer(function);
+            }
         }
         #endregion
     }

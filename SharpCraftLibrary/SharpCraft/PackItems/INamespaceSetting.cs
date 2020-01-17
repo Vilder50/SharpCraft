@@ -24,7 +24,7 @@ namespace SharpCraft
         /// <returns>The setting</returns>
         public INamespaceSetting WriteFunctionCalls()
         {
-            return (INamespaceSetting)new WriteFunctionCalls();
+            return new WriteFunctionCalls();
         }
 
         /// <summary>
@@ -33,16 +33,30 @@ namespace SharpCraft
         /// <returns>The setting</returns>
         public INamespaceSetting ShortNames()
         {
-            return (INamespaceSetting)new ShortNames();
+            return new ShortNames();
+        }
+
+        /// <summary>
+        /// Settting used for making the custom command group method make a function instead of using execute commands.
+        /// </summary>
+        /// <returns>The setting</returns>
+        public INamespaceSetting FunctionGroupedCommands()
+        {
+            return new FunctionGroupedCommands();
         }
     }
 
-    internal class WriteFunctionCalls : INamespaceSetting
+    class WriteFunctionCalls : INamespaceSetting
     {
 
     }
 
-    internal class ShortNames : INamespaceSetting
+    class ShortNames : INamespaceSetting
+    {
+
+    }
+
+    class FunctionGroupedCommands : INamespaceSetting
     {
 
     }

@@ -232,5 +232,70 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("constants", (function.Commands[7] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't add with correct number");
             }
         }
+
+        [TestMethod]
+        public void TestCustomGroupCommands()
+        {
+            //setup
+            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
+            {
+                PackNamespace space = pack.Namespace("space");
+                Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
+
+                BaseCommand command1 = new ExecuteAt(ID.Selector.s);
+                BaseCommand command2 = new SayCommand("123");
+                BaseCommand command3 = new SayMeCommand("123");
+                BaseCommand command4 = new ExecuteAs(ID.Selector.s);
+
+                //test
+                //without execute at start
+                function.Custom.GroupCommands((f) =>
+                {
+                    f.AddCommand(command1.ShallowClone());
+                    f.AddCommand(command2);
+                    f.AddCommand(command3);
+                });
+                Assert.AreEqual("execute at @s run say 123", function.Commands[0].GetCommandString(), "Get first grouped command string returned wrong string");
+                Assert.AreEqual("me 123", function.Commands[1].GetCommandString(), "Get second grouped command string returned wrong string");
+
+                //with execute at start
+                function.Commands.Clear();
+                function.AddCommand(command1.ShallowClone());
+                function.Custom.GroupCommands((f) =>
+                {
+                    f.AddCommand(command2);
+                    f.AddCommand(command4.ShallowClone());
+                    f.AddCommand(command3);
+                });
+                Assert.AreEqual("execute at @s run say 123", function.Commands[0].GetCommandString(), "Get first executed grouped command string returned wrong string");
+                Assert.AreEqual("execute at @s as @s run me 123", function.Commands[1].GetCommandString(), "Get second executed grouped command string returned wrong string");
+
+                //using function
+                function.Commands.Clear();
+                function.AddCommand(command1.ShallowClone());
+                function.Custom.GroupCommands((f) =>
+                {
+                    f.AddCommand(command2);
+                    f.AddCommand(command1.ShallowClone());
+                    f.AddCommand(command3);
+                }, true);
+                Function addedFunction = ((function.Commands[0] as BaseExecuteCommand).ExecuteCommand as RunFunctionCommand).Function as Function;
+                Assert.AreEqual("say 123", addedFunction.Commands[0].GetCommandString(), "Get first function grouped command string returned wrong string");
+                Assert.AreEqual("execute at @s run me 123", addedFunction.Commands[1].GetCommandString(), "Get second function grouped command string returned wrong string");
+                Assert.AreEqual(2, addedFunction.Commands.Count, "function grouped command doesn't contain the correct amount of commands");
+
+                space.AddSetting(new NamespaceSettings().FunctionGroupedCommands());
+                function.Commands.Clear();
+                function.AddCommand(command1.ShallowClone());
+                function.Custom.GroupCommands((f) =>
+                {
+                    f.AddCommand(command2);
+                    f.AddCommand(command1.ShallowClone());
+                    f.AddCommand(command3);
+                });
+                addedFunction = ((function.Commands[0] as BaseExecuteCommand).ExecuteCommand as RunFunctionCommand).Function as Function;
+                Assert.AreEqual(2, addedFunction.Commands.Count, "automatic function grouped command doesn't get the correct commands");
+            }
+        }
     }
 }
