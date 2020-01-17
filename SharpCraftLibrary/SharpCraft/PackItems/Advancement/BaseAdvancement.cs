@@ -45,7 +45,7 @@ namespace SharpCraft.AdvancementObjects
         protected override TextWriter GetStream()
         {
             CreateDirectory("advancements");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + WritePath + ".json");
         }
 
         /// <summary>

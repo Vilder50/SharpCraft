@@ -106,8 +106,8 @@ namespace SharpCraft.Tests.PackItems
                     f.AddCommand(new SayCommand("hello"));
                 }, BaseFile.WriteSetting.Auto);
 
-                Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\function\\"), "Child directory wasn't created correctly");
-                TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks\\pack\\data\\space\\functions\\function\\1.mcfunction").writer;
+                Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\"), "Child directory wasn't created correctly");
+                TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks\\pack\\data\\space\\functions\\1.mcfunction").writer;
                 Assert.IsNotNull(writer, "Child file wasn't created");
                 Assert.AreEqual("say hello" + Environment.NewLine, writer.ToString(), "FunctionCreator didn't run correctly");
             }

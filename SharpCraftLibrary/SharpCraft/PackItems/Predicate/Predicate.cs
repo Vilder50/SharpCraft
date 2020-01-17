@@ -64,7 +64,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("predicates");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -98,13 +98,13 @@ namespace SharpCraft
         public EmptyPredicate(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the predicate
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the predicate is in
@@ -117,7 +117,7 @@ namespace SharpCraft
         /// <returns>The string used for checking the predicate</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>

@@ -161,7 +161,7 @@ namespace SharpCraft
                 throw new InvalidOperationException("Namespace setup hasn't been run yet.");
             }
 
-            BaseFile file = files.SingleOrDefault(f => f.FileName == name && f.FileType == fileType);
+            BaseFile file = files.SingleOrDefault(f => f.FileId == name && f.FileType == fileType);
 
             if (file is null)
             {
@@ -216,9 +216,14 @@ namespace SharpCraft
                 throw new ArgumentException("Cannot add file which isn't made for this namespace", nameof(file));
             }
 
-            if (files.Any(f => f.FileName == file.FileName && f.GetType() == file.GetType()))
+            if (files.Any(f => f.FileId == file.FileId && f.FileType == file.FileType))
             {
                 throw new ArgumentException("The namespace already contains a file with the given name", nameof(file));
+            }
+
+            if (files.Any(f => f.WritePath == file.WritePath && f.FileType == file.FileType))
+            {
+                throw new ArgumentException("The namespace already contains a file which writes to the given path", nameof(file));
             }
 
             fileListeners?.Invoke(file);
@@ -261,5 +266,10 @@ namespace SharpCraft
         {
 
         }
+
+        /// <summary>
+        /// A random name for a nameless file
+        /// </summary>
+        public abstract string GetFileID();
     }
 }

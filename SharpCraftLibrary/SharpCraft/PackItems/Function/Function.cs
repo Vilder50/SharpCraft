@@ -133,7 +133,7 @@ namespace SharpCraft
             CreateDirectory("functions");
             if (StreamWriter is null)
             {
-                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + FileName + ".mcfunction");
+                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + WritePath + ".mcfunction");
             }
             return StreamWriter;
         }
@@ -177,18 +177,14 @@ namespace SharpCraft
         public Function NewChild(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             string functionName = name;
-            if (string.IsNullOrWhiteSpace(functionName))
+            if (name is null)
             {
-                if (PackNamespace is PackNamespace space)
-                {
-                    functionName = space.NextFileID.ToString();
-                }
-                else
-                {
-                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
-                }
+                return new Function(PackNamespace, null, writeSetting);
             }
-            return new Function(PackNamespace, FileName + "\\" + functionName.ToLower(), writeSetting);
+            else
+            {
+                return new Function(PackNamespace, WritePath + "\\" + functionName.ToLower(), writeSetting);
+            }
         }
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name and commands
@@ -224,25 +220,20 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            string functionName = name;
-            if (string.IsNullOrWhiteSpace(functionName))
+            if (WritePath.Contains("\\"))
             {
-                if (PackNamespace is PackNamespace space)
+                if (name is null)
                 {
-                    functionName = space.NextFileID.ToString();
+                    return new Function(PackNamespace, null, writeSetting);
                 }
                 else
                 {
-                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
+                    return new Function(PackNamespace, WritePath.Substring(0, WritePath.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
                 }
-            }
-            if (FileName.Contains("\\"))
-            {
-                return new Function(PackNamespace, FileName.Substring(0, FileName.LastIndexOf("\\") + 1) + functionName.ToLower(), writeSetting);
             }
             else
             {
-                return new Function(PackNamespace, functionName.ToLower(), writeSetting);
+                return new Function(PackNamespace, name?.ToLower(), writeSetting);
             }
         }
         /// <summary>
@@ -329,14 +320,14 @@ namespace SharpCraft
         /// <param name="name">The name of the function</param>
         public EmptyFunction(BasePackNamespace packNamespace, string name)
         {
-            FileName = name;
+            FileId = name;
             PackNamespace = packNamespace;
         }
 
         /// <summary>
         /// The name of the function
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the function is in
@@ -349,7 +340,7 @@ namespace SharpCraft
         /// <returns>The string used for running this function</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>

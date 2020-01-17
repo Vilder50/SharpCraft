@@ -33,15 +33,12 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// The name the next unamed file will get
+        /// A random name for a nameless file
         /// </summary>
-        public int NextFileID
+        public override string GetFileID()
         {
-            get
-            {
-                _nextFileID++;
-                return _nextFileID;
-            }
+            _nextFileID++;
+            return _nextFileID.ToString();
         }
 
         /// <summary>
@@ -61,7 +58,7 @@ namespace SharpCraft
             }
             else
             {
-                throw new ArgumentException("There already exists a predicate with the name: " + existingFile.FileName + ". Use GetFile(\"predicate\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a predicate with the name: " + existingFile.FileId + ". Use GetFile(\"predicate\",\"" + existingFile.FileId + "\") to get it.");
             }
         }
 
@@ -168,7 +165,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -192,7 +189,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -218,7 +215,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -244,7 +241,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -267,7 +264,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -290,7 +287,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Use GetFile(\"recipe\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
             }
             else
             {
@@ -308,7 +305,7 @@ namespace SharpCraft
 
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileName + ". Don't generate the file if you don't need it anyways.");
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Don't generate the file if you don't need it anyways.");
             }
             else
             {
@@ -373,7 +370,7 @@ namespace SharpCraft
             BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\""+ existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\""+ existingFile.FileId + "\") to get it.");
             }
 
             return new ParentAdvancement(this, fileName, requirements, reward, name, description, icon, background, frame, announceInChat, showToast, hidden, writeSetting);
@@ -400,7 +397,7 @@ namespace SharpCraft
             BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
             }
 
             return new ChildAdvancement(this, fileName, parent, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting);
@@ -419,7 +416,7 @@ namespace SharpCraft
             BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
             }
 
             return new HiddenAdvancement(this, fileName, requirements, reward, writeSetting);
@@ -434,7 +431,7 @@ namespace SharpCraft
             BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
             if (!(existingFile is null))
             {
-                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileName + ". Use GetFile(\"advancement\",\"" + existingFile.FileName + "\") to get it.");
+                throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
             }
 
             new InvalidAdvancement(this, fileName).Dispose();
@@ -628,6 +625,14 @@ namespace SharpCraft
         public EmptyNamespace(BaseDatapack datapack, string namespaceName) : base(datapack, namespaceName)
         {
             
+        }
+
+        /// <summary>
+        /// A random name for a nameless file
+        /// </summary>
+        public override string GetFileID()
+        {
+            throw new InvalidOperationException("Empty namespace shouldn't generate file names");
         }
     }
 }

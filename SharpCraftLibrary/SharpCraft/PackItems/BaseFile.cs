@@ -48,7 +48,8 @@ namespace SharpCraft
         }
 
         BasePackNamespace packNamespace;
-        string fileName;
+        string fileId;
+        string writePath;
         private string fileType;
         private FileListener disposeListener;
 
@@ -62,9 +63,24 @@ namespace SharpCraft
         protected BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
             Setting = writeSetting;
             FileType = fileType;
+
+            string useName = fileName;
+            if (string.IsNullOrWhiteSpace(useName))
+            {
+                useName = PackNamespace.GetFileID();
+            }
+
+            FileId = useName;
+            if (PackNamespace.IsSettingSet(new NamespaceSettings().GenerateNames()) && useName == fileName)
+            {
+                WritePath = PackNamespace.GetFileID();
+            }
+            else
+            {
+                WritePath = useName;
+            }
         }
 
         /// <summary>
@@ -92,15 +108,15 @@ namespace SharpCraft
         /// <summary>
         /// The name of this file
         /// </summary>
-        public string FileName
+        public string FileId
         {
-            get => fileName;
+            get => fileId;
             private set
             {
                 //validate file
                 if (value is null)
                 {
-                    throw new ArgumentNullException(nameof(FileName), "FileName may not be null");
+                    throw new ArgumentNullException(nameof(FileId), "FileId may not be null");
                 }
 
                 //fix name and validate
@@ -108,10 +124,36 @@ namespace SharpCraft
 
                 if (!ValidateFileName(fixedName))
                 {
-                    throw new ArgumentException("Name is an invalid file name. Make sure it only contains letters, numbers - and / or \\", nameof(FileName));
+                    throw new ArgumentException("FileId is an invalid file name. Make sure it only contains letters, numbers - and / or \\", nameof(fileId));
                 }
 
-                fileName = fixedName;
+                fileId = fixedName;
+            }
+        }
+
+        /// <summary>
+        /// The place the file will be written to
+        /// </summary>
+        public string WritePath
+        {
+            get => writePath;
+            private set
+            {
+                //validate file
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(WritePath), "WritePath may not be null");
+                }
+
+                //fix name and validate
+                string fixedName = value.ToLower().Replace("/", "\\");
+
+                if (!ValidateFileName(fixedName))
+                {
+                    throw new ArgumentException("WritePath is an invalid file path and name. Make sure it only contains letters, numbers - and / or \\", nameof(WritePath));
+                }
+
+                writePath = fixedName;
             }
         }
 
@@ -169,7 +211,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName.Replace("\\", "/");
+            return PackNamespace.Name + ":" + WritePath.Replace("\\", "/");
         }
 
         /// <summary>
@@ -263,9 +305,9 @@ namespace SharpCraft
         /// <param name="folderPath">The base folder the file should be in</param>
         protected void CreateDirectory(string folderPath)
         {
-            if (FileName.Contains("\\"))
+            if (WritePath.Contains("\\"))
             {
-                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\" + FileName.Substring(0, FileName.LastIndexOf("\\")) + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\" + WritePath.Substring(0, WritePath.LastIndexOf("\\")) + "\\");
             }
             else
             {

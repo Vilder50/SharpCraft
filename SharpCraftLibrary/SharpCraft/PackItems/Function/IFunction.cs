@@ -14,7 +14,7 @@ namespace SharpCraft
         /// <summary>
         /// The file name of the function
         /// </summary>
-        string FileName { get; }
+        string FileId { get; }
 
         /// <summary>
         /// The namespace the function is in

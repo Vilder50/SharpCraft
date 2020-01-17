@@ -59,7 +59,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("tags\\entity_types");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\entity_types\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\entity_types\\" + WritePath + ".json");
         }
 
         /// <summary>

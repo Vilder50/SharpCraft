@@ -105,7 +105,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("loot_tables");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -152,13 +152,13 @@ namespace SharpCraft
         public EmptyLoottable(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the loot table
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the loot table is in
@@ -171,7 +171,7 @@ namespace SharpCraft
         /// <returns>The string used for evoking this loot table</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>

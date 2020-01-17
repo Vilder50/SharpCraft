@@ -19,19 +19,10 @@ namespace SharpCraft
     public class NamespaceSettings
     {
         /// <summary>
-        /// Setting used for making functions write a comment on where they were called from and how.
+        /// Use this setting to force files to get a generated name
         /// </summary>
         /// <returns>The setting</returns>
-        public INamespaceSetting WriteFunctionCalls()
-        {
-            return new WriteFunctionCalls();
-        }
-
-        /// <summary>
-        /// Settting used for making file names only be numbers.
-        /// </summary>
-        /// <returns>The setting</returns>
-        public INamespaceSetting ShortNames()
+        public INamespaceSetting GenerateNames()
         {
             return new ShortNames();
         }

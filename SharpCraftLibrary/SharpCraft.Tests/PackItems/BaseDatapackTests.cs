@@ -37,6 +37,11 @@ namespace SharpCraft.Tests.PackItems
             {
                 
             }
+
+            public override string GetFileID()
+            {
+                return "A name";
+            }
         }
         #endregion
 

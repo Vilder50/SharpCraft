@@ -30,7 +30,7 @@ namespace SharpCraft.Tests.PackItems
 
             public NamespaceTestClass(BaseDatapack datapack, string name) : base(datapack, name)
             {
-                settings.Add(Settings.WriteFunctionCalls());
+                settings.Add(Settings.FunctionGroupedCommands());
 
                 #pragma warning disable IDE0067
                 new BaseFileTestClass1(this, "file1", BaseFile.WriteSetting.OnDispose);
@@ -44,6 +44,11 @@ namespace SharpCraft.Tests.PackItems
             protected override void AfterDispose()
             {
                 RandomValue = true;
+            }
+
+            public override string GetFileID()
+            {
+                return "A-name";
             }
         }
 
@@ -130,9 +135,9 @@ namespace SharpCraft.Tests.PackItems
             using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
             {
                 //test
-                Assert.AreEqual("file1", pack.GetFile("test1","file1").FileName, "GetFile failed to get the file with the correct name");
+                Assert.AreEqual("file1", pack.GetFile("test1","file1").FileId, "GetFile failed to get the file with the correct name");
                 Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
-                Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileName, "GetFile failed to get the other file with the other name");
+                Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileId, "GetFile failed to get the other file with the other name");
                 Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1").Setting, "GetFile failed to get the file of the other type");
 
                 //test exception on extra file with same name and same type
@@ -159,8 +164,8 @@ namespace SharpCraft.Tests.PackItems
             using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
             {
                 //test
-                Assert.IsTrue(pack.IsSettingSet(BasePackNamespace.Settings.WriteFunctionCalls()), "Failed to detect that the setting is set");
-                Assert.IsFalse(pack.IsSettingSet(BasePackNamespace.Settings.ShortNames()), "Failed to detect that the setting isn't set");
+                Assert.IsTrue(pack.IsSettingSet(BasePackNamespace.Settings.FunctionGroupedCommands()), "Failed to detect that the setting is set");
+                Assert.IsFalse(pack.IsSettingSet(BasePackNamespace.Settings.GenerateNames()), "Failed to detect that the setting isn't set");
             }
         }
 
