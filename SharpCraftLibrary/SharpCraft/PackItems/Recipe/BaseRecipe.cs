@@ -97,6 +97,15 @@ namespace SharpCraft
         {
             return new DataPartTag(GetNamespacedName());
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            Type = null;
+            Group = null;
+        }
     }
 
     /// <summary>

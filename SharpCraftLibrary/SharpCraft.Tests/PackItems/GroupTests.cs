@@ -71,7 +71,7 @@ namespace SharpCraft.Tests.PackItems
                     bool append = true;
 
                     //test
-                    using (TestGroupClass group = new TestGroupClass(packNamespace, "name", items, append, BaseFile.WriteSetting.LockedAuto))
+                    using (TestGroupClass group = new TestGroupClass(packNamespace, "name", items, append, BaseFile.WriteSetting.LockedOnDispose))
                     {
                         Assert.AreEqual(items, group.Items, "Items were not set correctly by the constructor");
                         Assert.AreEqual(append, group.AppendGroup, "AppendGroup was not set correctly by the constructor");
@@ -152,6 +152,7 @@ namespace SharpCraft.Tests.PackItems
                     {
                         Assert.IsTrue(group.Disposed);
                         Assert.AreEqual("{\"replace\":true,\"values\":[\"test\"]}", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group didn't write AppendFile correctly");
+                        Assert.IsNull(group.Items, "Items wasn't cleared");
                     }
                 }
             }

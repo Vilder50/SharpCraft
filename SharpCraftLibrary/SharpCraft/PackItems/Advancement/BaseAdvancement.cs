@@ -97,5 +97,14 @@ namespace SharpCraft.AdvancementObjects
         {
             stream.Write("}");
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            requirements = null;
+            Reward = null;
+        }
     }
 }

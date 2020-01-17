@@ -129,6 +129,14 @@ namespace SharpCraft
             }
             stream.Write("\"pools\":[" + string.Join(",", StringPools) + "]}");
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            pools = null;
+        }
     }
 
     /// <summary>

@@ -82,6 +82,7 @@ namespace SharpCraft.Tests.PackItems
                 onDisposeFunction.Dispose();
                 TextWriter onDisposeFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\disposefunction.mcfunction").writer;
                 Assert.AreEqual("say hello world" + Environment.NewLine + "execute as @a" + Environment.NewLine, onDisposeFunctionWriter.ToString(), "Dispose function isn't writing commands correctly on dispose");
+                Assert.IsNull(onDisposeFunction.Commands, "Commands wasn't cleared");
 
                 autoFunction.AddCommand(new SayCommand("hello world"));
                 autoFunction.AddCommand(new ExecuteAs(ID.Selector.a));

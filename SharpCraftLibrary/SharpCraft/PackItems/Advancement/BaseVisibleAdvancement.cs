@@ -121,5 +121,16 @@ namespace SharpCraft.AdvancementObjects
         {
             return new ChildAdvancement(PackNamespace, fileName, this, requirements, reward, name, description, icon, frame, announceInChat, showToast, hidden, writeSetting);
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            base.AfterDispose();
+            name = null;
+            description = null;
+            icon = null;
+        }
     }
 }

@@ -203,7 +203,7 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Extra things to do after dispose was ran
+        /// Extra things to do after dispose was ran. (Clear the file for none needed things)
         /// </summary>
         protected virtual void AfterDispose()
         {

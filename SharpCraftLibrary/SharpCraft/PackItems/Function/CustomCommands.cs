@@ -10,11 +10,14 @@ namespace SharpCraft.FunctionWriters
     /// </summary>
     public class CustomCommands
     {
-        readonly Function function;
+        /// <summary>
+        /// The function to write onto
+        /// </summary>
+        public Function Function { get; private set; }
 
         internal CustomCommands(Function parentFunction)
         {
-            function = parentFunction;
+            Function = parentFunction;
         }
 
         #region tree search
@@ -48,9 +51,9 @@ namespace SharpCraft.FunctionWriters
             {
                 throw new ArgumentException("maximum cannot be less than or equal to minimum");
             }
-            if (function is null)
+            if (Function is null)
             {
-                throw new ArgumentNullException(nameof(function), "function cannot be null");
+                throw new ArgumentNullException(nameof(Function), "function cannot be null");
             }
             if (method is null)
             {
@@ -64,7 +67,7 @@ namespace SharpCraft.FunctionWriters
             Function outFunction = null;
             GroupCommands(f => 
             { 
-                outFunction = WriteTreeSearch(function, method, command, minimum, maximum, true);
+                outFunction = WriteTreeSearch(Function, method, command, minimum, maximum, true);
             });
             return outFunction;
         }
@@ -284,7 +287,7 @@ namespace SharpCraft.FunctionWriters
         {
             GroupCommands(f =>
             {
-                operation.WriteCommands(function, new ScoreValue(selector, objective));
+                operation.WriteCommands(Function, new ScoreValue(selector, objective));
             });
         }
         #endregion
@@ -340,27 +343,27 @@ namespace SharpCraft.FunctionWriters
         /// <param name="forceFunction">Use a function instead of multiple execute commands</param>
         public void GroupCommands(Function.FunctionWriter writer, bool forceFunction = false)
         {
-            if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                if (forceFunction || function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands()))
+                if (forceFunction || Function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands()))
                 {
-                    function.World.Function(function.NewSibling(writer, function.Setting));
+                    Function.World.Function(Function.NewSibling(writer, Function.Setting));
                 }
                 else
                 {
                     BaseExecuteCommand executeCommand = (BaseExecuteCommand)execute.ShallowClone();
-                    int prefixLocation = function.Commands.Count - 1;
-                    function.Commands.RemoveAt(prefixLocation);
-                    ExecutePrefixer prefixer = new ExecutePrefixer(executeCommand, function);
-                    function.AddCommand(new ExecutePrefixer(executeCommand, function));
-                    writer(function);
+                    int prefixLocation = Function.Commands.Count - 1;
+                    Function.Commands.RemoveAt(prefixLocation);
+                    ExecutePrefixer prefixer = new ExecutePrefixer(executeCommand, Function);
+                    Function.AddCommand(new ExecutePrefixer(executeCommand, Function));
+                    writer(Function);
                     prefixer.DoneChanging = true;
-                    function.Commands.RemoveAt(prefixLocation);
+                    Function.Commands.RemoveAt(prefixLocation);
                 }
             }
             else
             {
-                writer(function);
+                writer(Function);
             }
         }
         #endregion

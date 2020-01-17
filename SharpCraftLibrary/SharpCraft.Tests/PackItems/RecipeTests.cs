@@ -44,7 +44,7 @@ namespace SharpCraft.Tests.PackItems
                 ItemGroup woolGroup = space.Group("wool", new List<ItemType>() { ID.Item.white_wool, ID.Item.light_gray_wool });
 
                 //test
-                space.Recipe("recipe", new ItemType[,] 
+                CraftingRecipe recipe = space.Recipe("recipe", new ItemType[,] 
                 {
                     { ID.Item.String, null },
                     { ID.Item.slime_ball, woolGroup },
@@ -52,6 +52,7 @@ namespace SharpCraft.Tests.PackItems
                 }, ID.Item.cobweb, 8, "web");
                 string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
                 Assert.AreEqual("{\"type\":\"minecraft:crafting_shaped\",\"group\":\"web\",\"pattern\":[\"0 \",\"12\",\"0 \"],\"key\":{\"0\":{\"item\":\"minecraft:string\"},\"1\":{\"item\":\"minecraft:slime_ball\"},\"2\":{\"tag\":\"space:wool\"}},\"result\":{\"item\":\"minecraft:cobweb\",\"count\":8}}", recipeString, "recipe file wasn't written correctly");
+                Assert.IsNull(recipe.Recipe, "Recipe wasn't cleared");
 
                 //exceptions
                 Assert.ThrowsException<ArgumentException>(() => space.Recipe("testrecipe1", new ItemType[,] { { ID.Item.stone } }, ID.Item.air, 1), "Recipe may not output air");
@@ -73,9 +74,10 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                space.Recipe("recipe",new ItemType[] { ID.Item.dirt, ID.Item.gravel }, ID.Item.coarse_dirt, 1, null);
+                ShapelessRecipe recipe = space.Recipe("recipe",new ItemType[] { ID.Item.dirt, ID.Item.gravel }, ID.Item.coarse_dirt, 1, null);
                 string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
                 Assert.AreEqual("{\"type\":\"minecraft:crafting_shapeless\",\"ingredient\":[{\"item\":\"minecraft:dirt\"},{\"item\":\"minecraft:gravel\"}],\"result\":{\"item\":\"minecraft:coarse_dirt\"}}", recipeString, "recipe file wasn't written correctly");
+                Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
                 //exceptions
                 Assert.ThrowsException<ArgumentException>(() => space.Recipe("testrecipe1", new ItemType[] { ID.Item.dirt, ID.Item.gravel }, ID.Item.air, 1, null), "Recipe may not output air");
@@ -98,9 +100,10 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                space.Recipe("recipe1", new ItemType[] { ID.Item.oak_planks, ID.Item.oak_door }, ID.Item.oak_slab, 2, BaseFile.WriteSetting.LockedAuto);
+                CuttingRecipe recipe = space.Recipe("recipe1", new ItemType[] { ID.Item.oak_planks, ID.Item.oak_door }, ID.Item.oak_slab, 2, BaseFile.WriteSetting.LockedAuto);
                 string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe1.json").writer.ToString();
                 Assert.AreEqual("{\"type\":\"minecraft:stonecutting\",\"ingredient\":[{\"item\":\"minecraft:oak_planks\"},{\"item\":\"minecraft:oak_door\"}],\"result\":\"minecraft:oak_slab\",\"count\":2}", recipeString, "recipe file with multiple choises wasn't written correctly");
+                Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
                 space.Recipe("recipe2", ID.Item.oak_planks, ID.Item.oak_trapdoor, 1, BaseFile.WriteSetting.LockedAuto);
                 recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe2.json").writer.ToString();
@@ -140,9 +143,10 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                space.Recipe("recipe1", SmeltRecipe.SmeltType.smelting, new ItemType[] { ID.Item.oak_sapling, ID.Item.spruce_sapling }, ID.Item.stick, 10);
+                SmeltRecipe recipe = space.Recipe("recipe1", SmeltRecipe.SmeltType.smelting, new ItemType[] { ID.Item.oak_sapling, ID.Item.spruce_sapling }, ID.Item.stick, 10);
                 string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe1.json").writer.ToString();
                 Assert.AreEqual("{\"type\":\"minecraft:smelting\",\"ingredient\":[{\"item\":\"minecraft:oak_sapling\"},{\"item\":\"minecraft:spruce_sapling\"}],\"result\":\"minecraft:stick\",\"experience\":10}", recipeString, "recipe file with multiple choises wasn't written correctly");
+                Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
                 space.Recipe("recipe2", SmeltRecipe.SmeltType.smoking, ID.Item.obsidian, ID.Item.black_stained_glass, 5.4, 100);
                 recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe2.json").writer.ToString();

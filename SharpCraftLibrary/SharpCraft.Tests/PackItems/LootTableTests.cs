@@ -45,7 +45,7 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                space.Loottable("mytable", new LootPool(new ItemEntry(ID.Item.cobblestone)
+                LootTable lootTable = space.Loottable("mytable", new LootPool(new ItemEntry(ID.Item.cobblestone)
                 {
                     Weight = 5,
                     Changes = new BaseChange[]
@@ -66,6 +66,7 @@ namespace SharpCraft.Tests.PackItems
                             "],\"name\":\"minecraft:cobblestone\",\"type\":\"minecraft:item\",\"weight\":5}" +
                         "],\"rolls\":{\"max\":3,\"min\":1}}" +
                     "]}", writer.ToString());
+                Assert.IsNull(lootTable.Pools, "Pools wasn't cleared");
             }
         }
 

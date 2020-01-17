@@ -75,6 +75,14 @@ namespace SharpCraft
         {
             stream.Write(condition.GetDataString());
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            condition = null;
+        }
     }
 
     /// <summary>

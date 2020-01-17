@@ -104,6 +104,14 @@ namespace SharpCraft
         {
             return "#" + PackNamespace.Name + ":" + FileName.Replace("\\", "/");
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            items = null;
+        }
     }
 
     /// <summary>

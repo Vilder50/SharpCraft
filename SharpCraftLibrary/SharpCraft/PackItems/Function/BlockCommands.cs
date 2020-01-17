@@ -7,10 +7,13 @@ namespace SharpCraft.FunctionWriters
     /// </summary>
     public class BlockCommands
     {
-        readonly Function function;
+        /// <summary>
+        /// The function to write onto
+        /// </summary>
+        public Function Function { get; private set; }
         internal BlockCommands(Function function)
         {
-            this.function = function;
+            this.Function = function;
             Data = new ClassData(function);
         }
 
@@ -22,7 +25,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="type">how to place the block</param>
         public void Add(Block addBlock, Coords blockCoords, ID.BlockAdd type = ID.BlockAdd.replace)
         {
-            function.AddCommand(new SetblockCommand(blockCoords, addBlock, type));
+            Function.AddCommand(new SetblockCommand(blockCoords, addBlock, type));
         }
 
         /// <summary>
@@ -37,11 +40,11 @@ namespace SharpCraft.FunctionWriters
         {
             if (replaceBlock is null)
             {
-                function.AddCommand(new FillCommand(corner1, corner2, fillBlock, type));
+                Function.AddCommand(new FillCommand(corner1, corner2, fillBlock, type));
             }
             else
             {
-                function.AddCommand(new FillReplaceCommand(corner1, corner2, fillBlock, replaceBlock));
+                Function.AddCommand(new FillReplaceCommand(corner1, corner2, fillBlock, replaceBlock));
             }
         }
 
@@ -58,11 +61,11 @@ namespace SharpCraft.FunctionWriters
         {
             if (filteredBlock is null)
             {
-                function.AddCommand(new CloneCommand(corner1, corner2, copyTo, (type == ID.BlockClone.masked), way));
+                Function.AddCommand(new CloneCommand(corner1, corner2, copyTo, (type == ID.BlockClone.masked), way));
             }
             else
             {
-                function.AddCommand(new FilteredCloneCommand(corner1, corner2, copyTo, filteredBlock, way));
+                Function.AddCommand(new FilteredCloneCommand(corner1, corner2, copyTo, filteredBlock, way));
             }
         }
 
@@ -73,7 +76,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="AddItem">The <see cref="Item"/> to insert (<see cref="Item.Slot"/> choses the slot)</param>
         public void AddItem(Coords BlockCoords, Item AddItem)
         {
-            function.AddCommand(new ReplaceitemBlockCommand(BlockCoords, new Slots.ContainerSlot(AddItem.Slot ?? 0), AddItem, AddItem.Count ?? 1));
+            Function.AddCommand(new ReplaceitemBlockCommand(BlockCoords, new Slots.ContainerSlot(AddItem.Slot ?? 0), AddItem, AddItem.Count ?? 1));
         }
 
         /// <summary>
@@ -86,11 +89,11 @@ namespace SharpCraft.FunctionWriters
         {
             if (slot is null)
             {
-                function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.LoottableSource(loot)));
+                Function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.LoottableSource(loot)));
             }
             else
             {
-                function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.LoottableSource(loot)));
+                Function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.LoottableSource(loot)));
             }
         }
 
@@ -104,11 +107,11 @@ namespace SharpCraft.FunctionWriters
         {
             if (slot is null)
             {
-                function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.KillSource(kill)));
+                Function.AddCommand(new LootCommand(new LootTargets.InsertTarget(block), new LootSources.KillSource(kill)));
             }
             else
             {
-                function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.KillSource(kill)));
+                Function.AddCommand(new LootCommand(new LootTargets.BlockTarget(block, new Slots.ContainerSlot(slot.Value)), new LootSources.KillSource(kill)));
             }
         }
 
@@ -140,7 +143,7 @@ namespace SharpCraft.FunctionWriters
                 source = new LootSources.MineHandSource(breakBlock, true);
             }
 
-            function.AddCommand(new LootCommand(target, source));
+            Function.AddCommand(new LootCommand(target, source));
         }
 
         /// <summary>
@@ -153,10 +156,13 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassData
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassData(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
@@ -166,7 +172,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="place">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to give the data to</param>
             public void Change(Coords place, Data.SimpleDataHolder data)
             {
-                function.AddCommand(new DataMergeBlockCommand(place, data));
+                Function.AddCommand(new DataMergeBlockCommand(place, data));
             }
 
             /// <summary>
@@ -178,7 +184,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="copyData">The data to insert</param>
             public void Change(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
             {
-                function.AddCommand(new DataModifyWithDataCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, copyData));
+                Function.AddCommand(new DataModifyWithDataCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, copyData));
             }
 
             /// <summary>
@@ -190,7 +196,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="copyData">The data to insert</param>
             public void Change(Coords toBlock, string toDataPath, int index, Data.SimpleDataHolder copyData)
             {
-                function.AddCommand(new DataModifyInsertDataCommand(new BlockDataLocation(toBlock, toDataPath), index, copyData));
+                Function.AddCommand(new DataModifyInsertDataCommand(new BlockDataLocation(toBlock, toDataPath), index, copyData));
             }
 
             /// <summary>
@@ -200,7 +206,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="place">the <see cref="Coords"/> of the <see cref="SharpCraft.Block"/> to remove the data from</param>
             public void Remove(Coords place, string dataPath)
             {
-                function.AddCommand(new DataDeleteCommand(new BlockDataLocation(place, dataPath)));
+                Function.AddCommand(new DataDeleteCommand(new BlockDataLocation(place, dataPath)));
             }
 
             /// <summary>
@@ -211,7 +217,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="scale">the number to multiply the numeric value with</param>
             public void Get(Coords place, string dataPath, double scale = 1)
             {
-                function.AddCommand(new DataGetCommand(new BlockDataLocation(place, dataPath), scale));
+                Function.AddCommand(new DataGetCommand(new BlockDataLocation(place, dataPath), scale));
             }
 
             /// <summary>
@@ -223,7 +229,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dataLocation">The place to copy the data from</param>
             public void Copy(Coords toBlock, string toDataPath, ID.EntityDataModifierType modifierType, IDataLocation dataLocation)
             {
-                function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, dataLocation));
+                Function.AddCommand(new DataModifyWithLocationCommand(new BlockDataLocation(toBlock, toDataPath), modifierType, dataLocation));
             }
 
             /// <summary>
@@ -235,7 +241,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dataLocation">The place to copy the data from</param>
             public void Copy(Coords toBlock, string toDataPath, int index, IDataLocation dataLocation)
             {
-                function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, dataLocation));
+                Function.AddCommand(new DataModifyInsertLocationCommand(new BlockDataLocation(toBlock, toDataPath), index, dataLocation));
             }
         }
     }

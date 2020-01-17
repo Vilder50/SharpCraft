@@ -171,5 +171,14 @@ namespace SharpCraft
 
             WriteFileEnd(stream);
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            base.AfterDispose();
+            recipe = null;
+        }
     }
 }

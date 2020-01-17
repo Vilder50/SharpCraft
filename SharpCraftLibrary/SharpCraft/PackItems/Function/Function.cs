@@ -141,32 +141,32 @@ namespace SharpCraft
         /// <summary>
         /// Commands run on blocks
         /// </summary>
-        public FunctionWriters.BlockCommands Block;
+        public FunctionWriters.BlockCommands Block { get; private set; }
 
         /// <summary>
         /// Commands run on entities
         /// </summary>
-        public FunctionWriters.EntityCommands Entity;
+        public FunctionWriters.EntityCommands Entity { get; private set; }
 
         /// <summary>
         /// Execute commands
         /// </summary>
-        public FunctionWriters.ExecuteCommands Execute;
+        public FunctionWriters.ExecuteCommands Execute { get; private set; }
 
         /// <summary>
         /// Commands run on players
         /// </summary>
-        public FunctionWriters.PlayerCommands Player;
+        public FunctionWriters.PlayerCommands Player { get; private set; }
 
         /// <summary>
         /// Commands run on the world
         /// </summary>
-        public FunctionWriters.WorldCommands World;
+        public FunctionWriters.WorldCommands World { get; private set; }
 
         /// <summary>
         /// Custom commands to make life easier
         /// </summary>
-        public FunctionWriters.CustomCommands Custom;
+        public FunctionWriters.CustomCommands Custom { get; private set; }
 
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
@@ -300,6 +300,20 @@ namespace SharpCraft
                     stream.WriteLine(command);
                 }
             }
+        }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            commands = null;
+            Block = null;
+            Entity = null;
+            Custom = null;
+            Execute = null;
+            World = null;
+            Player = null;
         }
     }
 

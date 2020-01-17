@@ -10,11 +10,14 @@ namespace SharpCraft.FunctionWriters
     /// </summary>
     public class ExecuteCommands
     {
-        readonly Function function;
+        /// <summary>
+        /// The function to write onto
+        /// </summary>
+        public Function Function { get; private set; }
 
         internal ExecuteCommands(Function function)
         {
-            this.function = function;
+            this.Function = function;
         }
 
         /// <summary>
@@ -22,7 +25,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public void Stop()
         {
-            function.AddCommand(new StopExecuteCommand());   
+            Function.AddCommand(new StopExecuteCommand());   
         }
 
         /// <summary>
@@ -33,7 +36,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="alignZ">If it should align on the z axis</param>
         public void Align(bool alignX, bool alignY, bool alignZ)
         {
-            function.AddCommand(new ExecuteAlign(alignX, alignY, alignZ));
+            Function.AddCommand(new ExecuteAlign(alignX, alignY, alignZ));
         }
 
         /// <summary>
@@ -42,10 +45,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="center">True if it should center to the block</param>
         public void Align(bool center = false)
         {
-            function.AddCommand(new ExecuteAlign());
+            Function.AddCommand(new ExecuteAlign());
             if (center)
             {
-                function.AddCommand(new ExecutePosition(new Coords(0.5, 0.5, 0.5)));
+                Function.AddCommand(new ExecutePosition(new Coords(0.5, 0.5, 0.5)));
             }
         }
 
@@ -55,7 +58,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="atEntity">The <see cref="BaseSelector"/> to execute at</param>
         public void At(BaseSelector atEntity)
         {
-            function.AddCommand(new ExecuteAt(atEntity));
+            Function.AddCommand(new ExecuteAt(atEntity));
         }
 
         /// <summary>
@@ -63,7 +66,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public void At()
         {
-            function.AddCommand(new ExecuteAt(ID.Selector.s));
+            Function.AddCommand(new ExecuteAt(ID.Selector.s));
         }
 
         /// <summary>
@@ -72,7 +75,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="asEntity">The <see cref="BaseSelector"/> to execute as</param>
         public void As(BaseSelector asEntity)
         {
-            function.AddCommand(new ExecuteAs(asEntity));
+            Function.AddCommand(new ExecuteAs(asEntity));
         }
 
         /// <summary>
@@ -83,7 +86,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfBlock(Block findBlock, Coords blockCoords, bool want = true)
         {
-            function.AddCommand(new ExecuteIfBlock(blockCoords, findBlock, want));
+            Function.AddCommand(new ExecuteIfBlock(blockCoords, findBlock, want));
         }
 
         /// <summary>
@@ -96,7 +99,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfBlocks(Coords corner1, Coords corner2, Coords testCoords, bool masked = false, bool want = true)
         {
-            function.AddCommand(new ExecuteIfBlocks(corner1, corner2, testCoords, masked, want));
+            Function.AddCommand(new ExecuteIfBlocks(corner1, corner2, testCoords, masked, want));
         }
 
         /// <summary>
@@ -106,7 +109,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfEntity(BaseSelector entitySelector, bool want = true)
         {
-            function.AddCommand(new ExecuteIfEntity(entitySelector, want));
+            Function.AddCommand(new ExecuteIfEntity(entitySelector, want));
         }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace SharpCraft.FunctionWriters
         public void IfData(BaseSelector entitySelector, string dataPath, bool want = true)
         {
             entitySelector.LimitSelector();
-            function.AddCommand(new ExecuteIfData(new EntityDataLocation(entitySelector, dataPath), want));
+            Function.AddCommand(new ExecuteIfData(new EntityDataLocation(entitySelector, dataPath), want));
         }
 
         /// <summary>
@@ -129,7 +132,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfData(Coords block, string dataPath, bool want = true)
         {
-            function.AddCommand(new ExecuteIfData(new BlockDataLocation(block, dataPath), want));
+            Function.AddCommand(new ExecuteIfData(new BlockDataLocation(block, dataPath), want));
         }
 
         /// <summary>
@@ -140,7 +143,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfData(Storage storage, string dataPath, bool want = true)
         {
-            function.AddCommand(new ExecuteIfData(new StorageDataLocation(storage, dataPath), want));
+            Function.AddCommand(new ExecuteIfData(new StorageDataLocation(storage, dataPath), want));
         }
 
         /// <summary>
@@ -150,7 +153,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="want">false if it should execute when it's false</param>
         public void IfPredicate(IPredicate predicate, bool want = true)
         {
-            function.AddCommand(new ExecuteIfPredicate(predicate, want));
+            Function.AddCommand(new ExecuteIfPredicate(predicate, want));
         }
 
         /// <summary>
@@ -166,7 +169,7 @@ namespace SharpCraft.FunctionWriters
         {
             mainSelector.LimitSelector();
             otherSelector.LimitSelector();
-            function.AddCommand(new ExecuteIfScoreRelative(mainSelector, mainObject, operation, otherSelector, otherObject, want));
+            Function.AddCommand(new ExecuteIfScoreRelative(mainSelector, mainObject, operation, otherSelector, otherObject, want));
         }
 
         /// <summary>
@@ -179,7 +182,7 @@ namespace SharpCraft.FunctionWriters
         public void IfScore(BaseSelector selector, Objective scoreObject, Range range, bool want = true)
         {
             selector.LimitSelector();
-            function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
+            Function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
         }
 
         /// <summary>
@@ -188,7 +191,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="position">the <see cref="Coords"/> to execute at</param>
         public void Positioned(Coords position)
         {
-            function.AddCommand(new ExecutePosition(position));
+            Function.AddCommand(new ExecutePosition(position));
         }
 
         /// <summary>
@@ -197,7 +200,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="entity">The <see cref="BaseSelector"/> to execute at</param>
         public void Positioned(BaseSelector entity)
         {
-            function.AddCommand(new ExecutePositionedAs(entity));
+            Function.AddCommand(new ExecutePositionedAs(entity));
         }
 
         /// <summary>
@@ -211,7 +214,7 @@ namespace SharpCraft.FunctionWriters
         public void Store(BaseSelector entity, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
             entity.LimitSelector();
-            function.AddCommand(new ExecuteStoreEntity(entity, dataPath, dataType, scale, !storeSucces));
+            Function.AddCommand(new ExecuteStoreEntity(entity, dataPath, dataType, scale, !storeSucces));
         }
 
         /// <summary>
@@ -224,7 +227,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(Coords blockCoords, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
-            function.AddCommand(new ExecuteStoreBlock(blockCoords, dataPath, dataType, scale, !storeSucces));
+            Function.AddCommand(new ExecuteStoreBlock(blockCoords, dataPath, dataType, scale, !storeSucces));
         }
 
         /// <summary>
@@ -235,7 +238,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(BaseSelector entity, Objective scoreObject, bool storeSucces = false)
         {
-            function.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
+            Function.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
         }
 
         /// <summary>
@@ -246,7 +249,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         public void Store(BossBar bossBar, bool value = true, bool storeSucces = false)
         {
-            function.AddCommand(new ExecuteStoreBossbar(bossBar, value, !storeSucces));
+            Function.AddCommand(new ExecuteStoreBossbar(bossBar, value, !storeSucces));
         }
 
         /// <summary>
@@ -256,7 +259,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="facing">the part of the <see cref="Entity"/> to be faced at</param>
         public void Facing(BaseSelector entity, ID.FacingAnchor facing = ID.FacingAnchor.feet)
         {
-            function.AddCommand(new ExecuteFacingEntity(entity, facing));
+            Function.AddCommand(new ExecuteFacingEntity(entity, facing));
         }
 
         /// <summary>
@@ -265,7 +268,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="coords">the <see cref="Coords"/> to be rotated at</param>
         public void Facing(Coords coords)
         {
-            function.AddCommand(new ExecuteFacingCoord(coords));
+            Function.AddCommand(new ExecuteFacingCoord(coords));
         }
 
         /// <summary>
@@ -274,7 +277,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="rotation">the <see cref="Rotation"/> to execute with</param>
         public void Rotated(Rotation rotation)
         {
-            function.AddCommand(new ExecuteRotated(rotation));
+            Function.AddCommand(new ExecuteRotated(rotation));
         }
 
         /// <summary>
@@ -283,7 +286,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="entity">the <see cref="Entity"/> to execute rotated as</param>
         public void Rotated(BaseSelector entity)
         {
-            function.AddCommand(new ExecuteRotatedAs(entity));
+            Function.AddCommand(new ExecuteRotatedAs(entity));
         }
 
         /// <summary>
@@ -292,7 +295,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="dimension">The dimension</param>
         public void Dimension(ID.Dimension dimension)
         {
-            function.AddCommand(new ExecuteDimension(dimension));
+            Function.AddCommand(new ExecuteDimension(dimension));
         }
 
         /// <summary>
@@ -301,7 +304,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="anchor">The origin</param>
         public void Anchored(ID.FacingAnchor anchor)
         {
-            function.AddCommand(new ExecuteAnchored(anchor));
+            Function.AddCommand(new ExecuteAnchored(anchor));
         }
     }
 }

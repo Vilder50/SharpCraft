@@ -78,5 +78,14 @@ namespace SharpCraft
             WriteDisplayEnd(stream);
             WriteEnd(stream);
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            base.AfterDispose();
+            background = null;
+        }
     }
 }

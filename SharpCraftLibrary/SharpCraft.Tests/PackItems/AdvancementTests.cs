@@ -48,11 +48,15 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                _ = GetChildAdvancement(space);
+                ChildAdvancement childAdvancement = GetChildAdvancement(space);
                 string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\child.json").writer.ToString();
                 Assert.AreEqual("{\"requirements\":[[\"trigger_0\"]],\"criteria\":" +
                                     "{\"trigger_0\":{\"conditions\":{\"item\":{\"item\":\"minecraft:wooden_sword\"},\"levels\":{\"max\":5,\"min\":5}},\"trigger\":\"minecraft:enchanted_item\"}}" +
                                 ",\"display\":{\"icon\":{\"item\":\"minecraft:stone\"},\"title\":[{\"text\":\"Name\"}],\"description\":[{\"text\":\"Description\"}],\"frame\":\"goal\",\"show_toast\":false,\"announce_to_chat\":true,\"hidden\":true},\"parent\":\"space:parent\"}", advancementString, "Child file wasn't written correctly");
+                Assert.IsNull(childAdvancement.Requirements, "requirements weren't cleared");
+                Assert.IsNull(childAdvancement.Reward, "reward wasn't cleared");
+                Assert.IsNull(childAdvancement.Description, "description wasn't cleared");
+                Assert.IsNull(childAdvancement.Name, "name wasn't cleared");
             }
         }
 
@@ -70,11 +74,16 @@ namespace SharpCraft.Tests.PackItems
                 PackNamespace space = pack.Namespace("space");
 
                 //test
-                _ = GetParentAdvancement(space);
+                ParentAdvancement parentAdvancement = GetParentAdvancement(space);
                 string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\parent.json").writer.ToString();
                 Assert.AreEqual("{\"requirements\":[[\"trigger_0\"]],\"criteria\":" +
                                     "{\"trigger_0\":{\"conditions\":{\"levels\":{\"max\":5,\"min\":5}},\"trigger\":\"minecraft:enchanted_item\"}}" +
                                 ",\"rewards\":{\"experience\":5},\"display\":{\"icon\":{\"item\":\"minecraft:string\"},\"title\":[{\"text\":\"Name\"}],\"description\":[{\"text\":\"Description\"}],\"frame\":\"task\",\"show_toast\":true,\"announce_to_chat\":false,\"hidden\":false,\"background\":\"background\"}}", advancementString, "parent file wasn't written correctly");
+                Assert.IsNull(parentAdvancement.Requirements, "requirements weren't cleared");
+                Assert.IsNull(parentAdvancement.Reward, "reward wasn't cleared");
+                Assert.IsNull(parentAdvancement.Description, "description wasn't cleared");
+                Assert.IsNull(parentAdvancement.Name, "name wasn't cleared");
+                Assert.IsNull(parentAdvancement.Background, "background wasn't cleared");
             }
         }
 
