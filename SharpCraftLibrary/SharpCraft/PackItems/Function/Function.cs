@@ -14,7 +14,7 @@ namespace SharpCraft
         /// Used to add commands to the given function
         /// </summary>
         /// <param name="function">the function to give the commands to</param>
-        public delegate void FunctionCreater(Function function);
+        public delegate void FunctionWriter(Function function);
 
         private List<ICommand> commands;
 
@@ -197,7 +197,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string name, FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewChild(name, writeSetting);
             creater(function);
@@ -209,7 +209,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewChild((string)null, writeSetting);
             creater(function);
@@ -252,7 +252,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(string name, FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewSibling(name, writeSetting);
             creater(function);
@@ -264,7 +264,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewSibling((string)null, writeSetting);
             creater(function);

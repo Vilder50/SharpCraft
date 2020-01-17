@@ -109,7 +109,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="executeAt">True if it should run the commands at the entity's location</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionCreater runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt, writeSetting);
         }
@@ -124,7 +124,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="spawnCoords">The place to spawn the entity at</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, Function.FunctionCreater runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {
@@ -338,7 +338,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="writer">Writer for writing the commands</param>
         /// <param name="forceFunction">Use a function instead of multiple execute commands</param>
-        public void GroupCommands(Function.FunctionCreater writer, bool forceFunction = false)
+        public void GroupCommands(Function.FunctionWriter writer, bool forceFunction = false)
         {
             if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {

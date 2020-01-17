@@ -96,7 +96,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the function</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function Function(string functionName, Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(string functionName, Function.FunctionWriter creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function function = Function(functionName, setting);
             creater(function);
@@ -110,7 +110,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the function</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function Function(Function.FunctionCreater creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(Function.FunctionWriter creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function function = Function((string)null, setting);
             creater(function);
@@ -144,7 +144,7 @@ namespace SharpCraft
         /// <param name="advancementName">The name of the advancement</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function EventFunction(BaseTrigger[] triggers, Function.FunctionCreater creater, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function EventFunction(BaseTrigger[] triggers, Function.FunctionWriter creater, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function outFunction = EventFunction(triggers, functionName, advancementName, setting);
             creater(outFunction);
