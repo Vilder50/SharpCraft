@@ -455,6 +455,8 @@
     <Compile Include="PackItems\Recipe\SpecialRecipe.cs" />
     <Compile Include="PackItems\SharpCraftFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Writer\ISharpWriter.cs" />
+    <Compile Include="Writer\SharpWriter.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
