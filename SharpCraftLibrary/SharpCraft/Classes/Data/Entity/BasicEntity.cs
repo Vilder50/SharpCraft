@@ -19,8 +19,8 @@ namespace SharpCraft
             /// <summary>
             /// The entity's motion
             /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Coords Motion { get; set; }
+            [Data.DataTag]
+            public Vector Motion { get; set; }
 
             /// <summary>
             /// The entity's rotation
@@ -31,8 +31,8 @@ namespace SharpCraft
             /// <summary>
             /// The entity's location
             /// </summary>
-            [Data.DataTag("Pos", ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Coords Coords { get; set; }
+            [Data.DataTag("Pos")]
+            public Vector Coords { get; set; }
 
             /// <summary>
             /// The distance the entity has fallen

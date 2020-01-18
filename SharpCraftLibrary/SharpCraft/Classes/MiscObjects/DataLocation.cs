@@ -28,7 +28,7 @@ namespace SharpCraft
     /// </summary>
     public class BlockDataLocation : IDataLocation
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private string dataPath;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="coordinates">The location of the block holding the data</param>
         /// <param name="dataPath">The path to the data to get</param>
-        public BlockDataLocation(Coords coordinates, string dataPath)
+        public BlockDataLocation(Vector coordinates, string dataPath)
         {
             Coordinates = coordinates;
             DataPath = dataPath;
@@ -45,7 +45,7 @@ namespace SharpCraft
         /// <summary>
         /// The location of the block holding the data
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"block {Coordinates.GetCoordString()} {DataPath}";
+            return $"block {Coordinates.GetVectorString()} {DataPath}";
         }
     }
 

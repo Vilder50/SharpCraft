@@ -15,7 +15,7 @@ namespace SharpCraft.Tests.Commands
         public void ForceloadChunkCommandTest()
         {
             Assert.AreEqual("forceload add ~1 ~3", new ForceloadChunkCommand(new Coords(1, 2, 3), true).GetCommandString());
-            Assert.AreEqual("forceload remove ^1 ^3", new ForceloadChunkCommand(new Coords(ID.CoordType.Local, 1, 2, 3), false).GetCommandString());
+            Assert.AreEqual("forceload remove ^1 ^3", new ForceloadChunkCommand(new LocalCoords(1, 2, 3), false).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunkCommand(null, true));
         }

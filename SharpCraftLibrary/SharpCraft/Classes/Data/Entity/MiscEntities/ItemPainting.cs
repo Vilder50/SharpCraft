@@ -18,8 +18,8 @@ namespace SharpCraft
             /// <summary>
             /// The block the entity is inside
             /// </summary>
-            [Data.DataTag((object)"TileX","TileY","TileZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords InTile { get; set; }
+            [Data.DataTag((object)"TileX","TileY","TileZ", Merge = true)]
+            public IntVector InTile { get; set; }
             /// <summary>
             /// The direction the entity is facing
             /// </summary>

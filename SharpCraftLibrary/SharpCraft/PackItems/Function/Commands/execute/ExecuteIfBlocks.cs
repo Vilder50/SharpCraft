@@ -11,9 +11,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfBlocks : BaseExecuteIfCommand
     {
-        private Coords corner1;
-        private Coords corner2;
-        private Coords location;
+        private Vector corner1;
+        private Vector corner2;
+        private Vector location;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfBlocks"/>
@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <param name="location">The location to look for the structure</param>
         /// <param name="ignoreAir">If air blocks should be ignored when checking</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfBlocks(Coords corner1, Coords corner2, Coords location, bool ignoreAir, bool executeIf = true) : base(executeIf)
+        public ExecuteIfBlocks(Vector corner1, Vector corner2, Vector location, bool ignoreAir, bool executeIf = true) : base(executeIf)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -34,7 +34,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the structure to check for
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -46,7 +46,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corners of the structure to check for
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -58,7 +58,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location to look for the structure
         /// </summary>
-        public Coords Location
+        public Vector Location
         {
             get => location;
             set
@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// <returns>blocks [Corner1] [Corner2] [Location] [IgnoreAir]</returns>
         protected override string GetCheckPart()
         {
-            return "blocks " + Corner1.GetCoordString() + " " + Corner2.GetCoordString() + " " + Location.GetCoordString() + " " + (IgnoreAir ? "masked" : "all");
+            return "blocks " + Corner1.GetVectorString() + " " + Corner2.GetVectorString() + " " + Location.GetVectorString() + " " + (IgnoreAir ? "masked" : "all");
         }
     }
 }

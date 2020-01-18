@@ -48,7 +48,7 @@ namespace SharpCraft.FunctionWriters
             Function.AddCommand(new ExecuteAlign());
             if (center)
             {
-                Function.AddCommand(new ExecutePosition(new Coords(0.5, 0.5, 0.5)));
+                Function.AddCommand(new ExecutePosition(new Vector(0.5, 0.5, 0.5)));
             }
         }
 
@@ -79,12 +79,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes if the given <see cref="Block"/> is at the <see cref="Coords"/>
+        /// Executes if the given <see cref="Block"/> is at the <see cref="Vector"/>
         /// </summary>
-        /// <param name="blockCoords">the <see cref="Coords"/> of the block</param>
+        /// <param name="blockCoords">the <see cref="Vector"/> of the block</param>
         /// <param name="findBlock">the <see cref="Block"/> to find</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfBlock(Block findBlock, Coords blockCoords, bool want = true)
+        public void IfBlock(Block findBlock, Vector blockCoords, bool want = true)
         {
             Function.AddCommand(new ExecuteIfBlock(blockCoords, findBlock, want));
         }
@@ -97,7 +97,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="testCoords">The coordinate to check at</param>
         /// <param name="masked">true if it should ignore air blocks</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfBlocks(Coords corner1, Coords corner2, Coords testCoords, bool masked = false, bool want = true)
+        public void IfBlocks(Vector corner1, Vector corner2, Vector testCoords, bool masked = false, bool want = true)
         {
             Function.AddCommand(new ExecuteIfBlocks(corner1, corner2, testCoords, masked, want));
         }
@@ -125,12 +125,12 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes if the <see cref="Block"/> at the <see cref="Coords"/> has the given datapath
+        /// Executes if the <see cref="Block"/> at the <see cref="Vector"/> has the given datapath
         /// </summary>
-        /// <param name="block">the <see cref="Coords"/> of the <see cref="Block"/></param>
+        /// <param name="block">the <see cref="Vector"/> of the <see cref="Block"/></param>
         /// <param name="dataPath">The datapath the entity should contain</param>
         /// <param name="want">false if it should execute when it's false</param>
-        public void IfData(Coords block, string dataPath, bool want = true)
+        public void IfData(Vector block, string dataPath, bool want = true)
         {
             Function.AddCommand(new ExecuteIfData(new BlockDataLocation(block, dataPath), want));
         }
@@ -188,14 +188,14 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Executes at the given position
         /// </summary>
-        /// <param name="position">the <see cref="Coords"/> to execute at</param>
-        public void Positioned(Coords position)
+        /// <param name="position">the <see cref="Vector"/> to execute at</param>
+        public void Positioned(Vector position)
         {
             Function.AddCommand(new ExecutePosition(position));
         }
 
         /// <summary>
-        /// Executes at the given <see cref="BaseSelector"/>'s <see cref="Coords"/>
+        /// Executes at the given <see cref="BaseSelector"/>'s <see cref="Vector"/>
         /// </summary>
         /// <param name="entity">The <see cref="BaseSelector"/> to execute at</param>
         public void Positioned(BaseSelector entity)
@@ -220,12 +220,12 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Stores the command's success output inside the <see cref="Block"/>
         /// </summary>
-        /// <param name="blockCoords">the <see cref="Coords"/> of the <see cref="Block"/> to store the output in</param>
+        /// <param name="blockCoords">the <see cref="Vector"/> of the <see cref="Block"/> to store the output in</param>
         /// <param name="dataPath">the datapath to store the output in</param>
         /// <param name="dataType">the path to the place to store the score</param>
         /// <param name="scale">the number the output should be multiplied with before being inserted</param>
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
-        public void Store(Coords blockCoords, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
+        public void Store(Vector blockCoords, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
             Function.AddCommand(new ExecuteStoreBlock(blockCoords, dataPath, dataType, scale, !storeSucces));
         }
@@ -263,10 +263,10 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes rotated in the direction of the given <see cref="Coords"/>
+        /// Executes rotated in the direction of the given <see cref="Vector"/>
         /// </summary>
-        /// <param name="coords">the <see cref="Coords"/> to be rotated at</param>
-        public void Facing(Coords coords)
+        /// <param name="coords">the <see cref="Vector"/> to be rotated at</param>
+        public void Facing(Vector coords)
         {
             Function.AddCommand(new ExecuteFacingCoord(coords));
         }

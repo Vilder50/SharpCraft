@@ -236,6 +236,9 @@
     <Compile Include="Classes\MiscObjects\JsonText\JsonTexts.cs" />
     <Compile Include="Classes\MiscObjects\ScoreValue.cs" />
     <Compile Include="Classes\MiscObjects\Storage.cs" />
+    <Compile Include="Classes\MiscObjects\Vector\LocalCoords.cs" />
+    <Compile Include="Classes\MiscObjects\Vector\Coords.cs" />
+    <Compile Include="Classes\MiscObjects\Vector\Vector.cs" />
     <Compile Include="PackItems\Advancement\BaseAdvancement.cs" />
     <Compile Include="PackItems\Advancement\ChildAdvancement.cs" />
     <Compile Include="PackItems\Advancement\InvalidAdvancement.cs" />
@@ -293,7 +296,6 @@
     <Compile Include="PackItems\Classes\JSONObjects\Item.cs" />
     <Compile Include="PackItems\Classes\JSONObjects\Location.cs" />
     <Compile Include="Classes\MiscObjects\BossBar.cs" />
-    <Compile Include="Classes\MiscObjects\Coords.cs" />
     <Compile Include="Classes\Data\MiscData\Effect.cs" />
     <Compile Include="Classes\Data\MiscData\Firework.cs" />
     <Compile Include="Classes\MiscObjects\DataLocation.cs" />

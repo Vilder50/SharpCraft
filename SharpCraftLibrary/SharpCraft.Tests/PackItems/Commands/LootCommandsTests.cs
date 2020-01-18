@@ -19,7 +19,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("loot replace block ~1 ~2 ~3 container.20 kill @s", new LootCommand(new LootTargets.BlockTarget(new Coords(1,2,3), new Slots.ContainerSlot(20)), new LootSources.KillSource(ID.Selector.s)).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new LootCommand(null, new LootSources.KillSource(ID.Selector.s)));
-            Assert.ThrowsException<ArgumentNullException>(() => new LootCommand(new LootTargets.BlockTarget(new Coords(1, 2, 3), new Slots.ContainerSlot(20)), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new LootCommand(new LootTargets.BlockTarget(new Vector(1, 2, 3), new Slots.ContainerSlot(20)), null));
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("replace block ~1 ~2 ~3 container.2", new LootTargets.BlockTarget(new Coords(1,2,3), new Slots.ContainerSlot(2)).GetTargetString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new LootTargets.BlockTarget(null, new Slots.ContainerSlot(2)));
-            Assert.ThrowsException<ArgumentNullException>(() => new LootTargets.BlockTarget(new Coords(1, 2, 3), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new LootTargets.BlockTarget(new Vector(1, 2, 3), null));
         }
 
         [TestMethod]
@@ -86,9 +86,9 @@ namespace SharpCraft.Tests.Commands
                 EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
                 Assert.AreEqual("fish test:loot ~1 ~2 ~3 minecraft:dirt", new LootSources.FishItemSource(table, new Coords(1, 2, 3), ID.Item.dirt).GetSourceString());
 
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(null, new Coords(1, 2, 3), ID.Item.dirt));
+                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(null, new Vector(1, 2, 3), ID.Item.dirt));
                 Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, null, ID.Item.dirt));
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, new Coords(1, 2, 3), null));
+                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, new Vector(1, 2, 3), null));
             }
         }
 

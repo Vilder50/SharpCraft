@@ -29,7 +29,7 @@ namespace SharpCraft.FunctionWriters
         /// Changes the world's spawnpoint to the specified location
         /// </summary>
         /// <param name="coords">The new location of the world spawnpoint</param>
-        public void Spawn(Coords coords)
+        public void Spawn(Vector coords)
         {
             ToFunction.AddCommand(new SetWorldSpawnCommand(coords));
         }
@@ -55,7 +55,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="corner">One of the corners of the square to load</param>
             /// <param name="oppesiteCorner">The oppesite corner in the square to load</param>
-            public void ForceLoad(Coords corner, Coords oppesiteCorner)
+            public void ForceLoad(Vector corner, Vector oppesiteCorner)
             {
                 function.AddCommand(new ForceloadChunksCommand(corner, oppesiteCorner, true));
             }
@@ -64,7 +64,7 @@ namespace SharpCraft.FunctionWriters
             /// Loads the chunk containing the coordinate
             /// </summary>
             /// <param name="coordinate">Coordinate in the chunk to load</param>
-            public void ForceLoad(Coords coordinate)
+            public void ForceLoad(Vector coordinate)
             {
                 function.AddCommand(new ForceloadChunkCommand(coordinate, true));
             }
@@ -74,7 +74,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="corner">One of the corners of the square to stop loading</param>
             /// <param name="oppesiteCorner">The oppesite corner in the square to stop loading</param>
-            public void StopLoad(Coords corner, Coords oppesiteCorner)
+            public void StopLoad(Vector corner, Vector oppesiteCorner)
             {
                 function.AddCommand(new ForceloadChunksCommand(corner, oppesiteCorner, false));
             }
@@ -83,7 +83,7 @@ namespace SharpCraft.FunctionWriters
             /// Stops the chunk at the coordinate from being forcedloaded
             /// </summary>
             /// <param name="coordinate">Coordinate in the chunk to stop loading</param>
-            public void StopLoad(Coords coordinate)
+            public void StopLoad(Vector coordinate)
             {
                 function.AddCommand(new ForceloadChunkCommand(coordinate, false));
             }
@@ -100,7 +100,7 @@ namespace SharpCraft.FunctionWriters
             /// Checks if the given coords are loaded
             /// </summary>
             /// <param name="coordinate">The coordinate to check if loaded</param>
-            public void IsLoaded(Coords coordinate)
+            public void IsLoaded(Vector coordinate)
             {
                 function.AddCommand(new ForceloadQueryChunkCommand(coordinate));
             }
@@ -139,7 +139,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="coords">The location to spawn the loot</param>
         /// <param name="loot">the <see cref="LootTable"/> to spawn in</param>
-        public void Loot(Coords coords, ILootTable loot)
+        public void Loot(Vector coords, ILootTable loot)
         {
             ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.LoottableSource(loot)));
         }
@@ -148,7 +148,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="coords">The location to spawn the loot</param>
         /// <param name="kill">the entity whose "when killed loot" should be dropped</param>
-        public void Loot(Coords coords, BaseSelector kill)
+        public void Loot(Vector coords, BaseSelector kill)
         {
             ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.KillSource(kill)));
         }
@@ -158,7 +158,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="coords">The location to spawn the loot</param>
         /// <param name="breakBlock">the block whose "when mined loot" should be dropped</param>
         /// <param name="breakWith">the tool used to break the block</param>
-        public void Loot(Coords coords, Coords breakBlock, Item breakWith)
+        public void Loot(Vector coords, Vector breakBlock, Item breakWith)
         {
             if (breakWith is null)
             {
@@ -699,7 +699,7 @@ namespace SharpCraft.FunctionWriters
             /// Changes the center of the world border
             /// </summary>
             /// <param name="coords">the location of the new center</param>
-            public void Center(Coords coords)
+            public void Center(Vector coords)
             {
                 Function.AddCommand(new WorldborderCenterCommand(coords));
             }

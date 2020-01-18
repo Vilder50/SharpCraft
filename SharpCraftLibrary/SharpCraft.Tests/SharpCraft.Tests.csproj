@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Classes\MiscObjects\JsonTextTests.cs" />
     <Compile Include="Classes\MiscObjects\SelectorTests.cs" />
+    <Compile Include="Classes\MiscObjects\VectorTests.cs" />
     <Compile Include="PackItems\Commands\AdvancementCommandsTests.cs" />
     <Compile Include="PackItems\Commands\BossBarCommandsTests.cs" />
     <Compile Include="PackItems\Commands\CloneCommandsTests.cs" />

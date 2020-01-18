@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleNormalCommand : BaseCommand
     {
-        private Coords displayCoords;
-        private Coords size;
+        private Vector displayCoords;
+        private Vector size;
         private double speed;
         private int count;
 
@@ -26,7 +26,7 @@ namespace SharpCraft.Commands
         /// <param name="count">The amount of particles</param>
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
-        public ParticleNormalCommand(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleNormalCommand(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
         {
             Particle = particle;
             DisplayCoords = displayCoords;
@@ -45,12 +45,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to display the particles at
         /// </summary>
-        public Coords DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
+        public Vector DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
 
         /// <summary>
         /// The size to each side the particles can spawn in
         /// </summary>
-        public Coords Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
+        public Vector Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
 
         /// <summary>
         /// The speed of the particles
@@ -104,16 +104,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle {Particle} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle {Particle} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle {Particle} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle {Particle} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle {Particle} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle {Particle} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }
@@ -123,8 +123,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleColoredDustCommand : BaseCommand
     {
-        private Coords displayCoords;
-        private Coords size;
+        private Vector displayCoords;
+        private Vector size;
         private double speed;
         private int count;
         private HexColor color;
@@ -141,7 +141,7 @@ namespace SharpCraft.Commands
         /// <param name="count">The amount of particles</param>
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
-        public ParticleColoredDustCommand(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleColoredDustCommand(HexColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
         {
             Color = color;
             ParticleSize = particleSize;
@@ -177,12 +177,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to display the particles at
         /// </summary>
-        public Coords DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
+        public Vector DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
 
         /// <summary>
         /// The size to each side the particles can spawn in
         /// </summary>
-        public Coords Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
+        public Vector Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
 
         /// <summary>
         /// The speed of the particles
@@ -239,16 +239,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }
@@ -258,8 +258,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleBlockCommand : BaseCommand
     {
-        private Coords displayCoords;
-        private Coords size;
+        private Vector displayCoords;
+        private Vector size;
         private double speed;
         private int count;
         private Block block;
@@ -275,7 +275,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
         /// <param name="asBlockDust">True if the particles should be in dust form. False if they should be squares</param>
         /// <param name="block">The block the particles should look like</param>
-        public ParticleBlockCommand(Block block, Coords displayCoords, Coords size, double speed, int count, bool asBlockDust, bool force, BaseSelector selector)
+        public ParticleBlockCommand(Block block, Vector displayCoords, Vector size, double speed, int count, bool asBlockDust, bool force, BaseSelector selector)
         {
             Block = block;
             AsBlockDust = asBlockDust;
@@ -295,12 +295,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to display the particles at
         /// </summary>
-        public Coords DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
+        public Vector DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
 
         /// <summary>
         /// The size to each side the particles can spawn in
         /// </summary>
-        public Coords Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
+        public Vector Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
 
         /// <summary>
         /// The speed of the particles
@@ -360,16 +360,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle {particleType} {Block.GetBlockPlacementString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }
@@ -379,8 +379,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleItemCommand : BaseCommand
     {
-        private Coords displayCoords;
-        private Coords size;
+        private Vector displayCoords;
+        private Vector size;
         private double speed;
         private int count;
         private Item item;
@@ -395,7 +395,7 @@ namespace SharpCraft.Commands
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
         /// <param name="item">The item the particles should look like</param>
-        public ParticleItemCommand(Item item, Coords displayCoords, Coords size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleItemCommand(Item item, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
         {
             Item = item;
             DisplayCoords = displayCoords;
@@ -414,12 +414,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to display the particles at
         /// </summary>
-        public Coords DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
+        public Vector DisplayCoords { get => displayCoords; set => displayCoords = value ?? throw new ArgumentNullException(nameof(DisplayCoords), "DisplayCoords may not be null."); }
 
         /// <summary>
         /// The size to each side the particles can spawn in
         /// </summary>
-        public Coords Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
+        public Vector Size { get => size; set => size = value ?? throw new ArgumentNullException(nameof(Size), "Size may not be null."); }
 
         /// <summary>
         /// The speed of the particles
@@ -473,16 +473,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle item {item.IDDataString} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle item {item.IDDataString} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle item {item.IDDataString} {DisplayCoords.GetCoordString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }

@@ -105,7 +105,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeBlockCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private SimpleDataHolder data;
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="coordinates">The location of the block holding the data</param>
         /// <param name="data">The data to merge</param>
-        public DataMergeBlockCommand(Coords coordinates, SimpleDataHolder data)
+        public DataMergeBlockCommand(Vector coordinates, SimpleDataHolder data)
         {
             Coordinates = coordinates;
             Data = data;
@@ -122,7 +122,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location of the block holding the data
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge block [Coordinates] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge block {Coordinates.GetCoordString()} {data.GetDataString()}";
+            return $"data merge block {Coordinates.GetVectorString()} {data.GetDataString()}";
         }
     }
 

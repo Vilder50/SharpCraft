@@ -582,7 +582,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SetblockCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private Block block;
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace SharpCraft.Commands
         /// <param name="coordinates">The coords to place the block at</param>
         /// <param name="block">The block to place</param>
         /// <param name="mode">The way to place the block</param>
-        public SetblockCommand(Coords coordinates, Block block, ID.BlockAdd mode)
+        public SetblockCommand(Vector coordinates, Block block, ID.BlockAdd mode)
         {
             Coordinates = coordinates;
             Block = block;
@@ -601,7 +601,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coords to place the block at
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -633,7 +633,7 @@ namespace SharpCraft.Commands
         /// <returns>setblock [Coordinates] [Block] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"setblock {Coordinates.GetCoordString()} {Block.GetBlockPlacementString()} {Mode}";
+            return $"setblock {Coordinates.GetVectorString()} {Block.GetBlockPlacementString()} {Mode}";
         }
     }
 
@@ -642,13 +642,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SetWorldSpawnCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// intializes a new <see cref="SetWorldSpawnCommand"/>
         /// </summary>
         /// <param name="coordinates">The coordinates to place the world spawn at</param>
-        public SetWorldSpawnCommand(Coords coordinates)
+        public SetWorldSpawnCommand(Vector coordinates)
         {
             Coordinates = coordinates;
         }
@@ -656,7 +656,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to place the world spawn at
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -671,7 +671,7 @@ namespace SharpCraft.Commands
         /// <returns>setworldspawn [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"setworldspawn {Coordinates.GetCoordString()}";
+            return $"setworldspawn {Coordinates.GetVectorString()}";
         }
     }
 
@@ -681,7 +681,7 @@ namespace SharpCraft.Commands
     public class SpreadPlayersCommand : BaseCommand
     {
         private BaseSelector selector;
-        private Coords coordinates;
+        private Vector coordinates;
         private double distance;
         private double maxRange;
         private bool doTogetherCheck;
@@ -694,7 +694,7 @@ namespace SharpCraft.Commands
         /// <param name="distance">The minimum distance between spreaded entities</param>
         /// <param name="maxRange">The max distance the entities can be spread</param>
         /// <param name="respectTeams">True if teams should be grouped together. False if they shouldn't</param>
-        public SpreadPlayersCommand(Coords coordinates, BaseSelector selector, double distance, double maxRange, bool respectTeams)
+        public SpreadPlayersCommand(Vector coordinates, BaseSelector selector, double distance, double maxRange, bool respectTeams)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -722,7 +722,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to spread the entities around
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -799,7 +799,7 @@ namespace SharpCraft.Commands
         /// <returns>spreadplayers [Coordinates] [Distance] [MaxRange] [RespectTeams] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"spreadplayers {Coordinates.StringX} {Coordinates.StringZ} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector.GetSelectorString()}";
+            return $"spreadplayers {Coordinates.GetXString()} {Coordinates.GetZString()} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector.GetSelectorString()}";
         }
     }
 
@@ -809,14 +809,14 @@ namespace SharpCraft.Commands
     public class SummonCommand : BaseCommand
     {
         private Entity.BaseEntity entity;
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// intializes a new <see cref="SummonCommand"/>
         /// </summary>
         /// <param name="entity">The entity to summon</param>
         /// <param name="coordinates">The coordinates the summon the entity at</param>
-        public SummonCommand(Entity.BaseEntity entity, Coords coordinates)
+        public SummonCommand(Entity.BaseEntity entity, Vector coordinates)
         {
             Entity = entity;
             Coordinates = coordinates;
@@ -847,7 +847,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates the summon the entity at
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -862,7 +862,7 @@ namespace SharpCraft.Commands
         /// <returns>summon [Entity(type)] [Coordinates] [Entity(data)]</returns>
         public override string GetCommandString()
         {
-            return $"summon {Entity.EntityType} {Coordinates.GetCoordString()} {Entity.GetDataWithoutID()}";
+            return $"summon {Entity.EntityType} {Coordinates.GetVectorString()} {Entity.GetDataWithoutID()}";
         }
     }
 
@@ -1103,7 +1103,7 @@ namespace SharpCraft.Commands
         private double pitch;
         private double minimumVolume;
         private BaseSelector selector;
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="PlaySoundCommand"/>
@@ -1115,7 +1115,7 @@ namespace SharpCraft.Commands
         /// <param name="pitch">The pitch of the sound</param>
         /// <param name="minimumVolume">The minimum value of the sound</param>
         /// <param name="coordinates">The coordinates to play the sound at</param>
-        public PlaySoundCommand(string sound, ID.SoundSource source, BaseSelector selector, Coords coordinates, double volume, double pitch, double minimumVolume)
+        public PlaySoundCommand(string sound, ID.SoundSource source, BaseSelector selector, Vector coordinates, double volume, double pitch, double minimumVolume)
         {
             Sound = sound;
             Source = source;
@@ -1162,7 +1162,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates to play the sound at
         /// </summary>
-        public Coords Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
+        public Vector Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
 
         /// <summary>
         /// The volume of the sound. Everything above 2 won't sound louder, but will make the sound hearable from further away
@@ -1216,7 +1216,7 @@ namespace SharpCraft.Commands
         /// <returns>playsound [Sound] [Source] [Selector] [Coordinates] [Volume] [Pitch] [MinimumVolume]</returns>
         public override string GetCommandString()
         {
-            return $"playsound {Sound} {Source} {Selector.GetSelectorString()} {Coordinates.GetCoordString()} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
+            return $"playsound {Sound} {Source} {Selector.GetSelectorString()} {Coordinates.GetVectorString()} {Volume.ToMinecraftDouble()} {Pitch.ToMinecraftDouble()} {MinimumVolume.ToMinecraftDouble()}";
         }
     }
 
@@ -1225,7 +1225,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpawnPointCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private BaseSelector selector;
 
         /// <summary>
@@ -1233,7 +1233,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="coordinates">The place to move the spawnpoint to</param>
         /// <param name="selector">Selector selecting the players whose spawn point to change</param>
-        public SpawnPointCommand(Coords coordinates, BaseSelector selector)
+        public SpawnPointCommand(Vector coordinates, BaseSelector selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -1242,7 +1242,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The place to move the spawnpoint to
         /// </summary>
-        public Coords Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
+        public Vector Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
 
         /// <summary>
         /// Selector selecting the players whose spawn point to change
@@ -1262,7 +1262,7 @@ namespace SharpCraft.Commands
         /// <returns>clear [Selector] ([Item]) ([MaxCount])</returns>
         public override string GetCommandString()
         {
-            return $"spawnpoint {Selector.GetSelectorString()} {Coordinates.GetCoordString()}";
+            return $"spawnpoint {Selector.GetSelectorString()} {Coordinates.GetVectorString()}";
         }
     }
 

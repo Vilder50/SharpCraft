@@ -135,7 +135,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("setblock ~1 ~2 ~3 minecraft:anvil[facing=east] destroy", new SetblockCommand(new Coords(1, 2, 3), new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(null, new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy));
-            Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(new Coords(1, 2, 3), null, ID.BlockAdd.destroy));
+            Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(new Vector(1, 2, 3), null, ID.BlockAdd.destroy));
         }
 
         [TestMethod]
@@ -151,10 +151,10 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("spreadplayers ~1 ~3 3 10 true @a", new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true).GetCommandString());
 
-            Assert.ThrowsException<ArgumentException>(() => new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 10.1, 10, true));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, -0.1, 10, true));
+            Assert.ThrowsException<ArgumentException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, 10.1, 10, true));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, -0.1, 10, true));
             Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(null, ID.Selector.a, 3, 10, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(new Coords(1, 2, 3), null, 3, 10, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), null, 3, 10, true));
         }
 
         [TestMethod]
@@ -163,7 +163,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("summon armor_stand ~1 ~2 ~3 {Invisible:1b}", new SummonCommand(new Entity.Armorstand() { Invisible = true }, new Coords(1,2,3)).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(new Entity.Armorstand() { Invisible = true }, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(null, new Coords(1, 2, 3)));
+            Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(null, new Vector(1, 2, 3)));
         }
 
         [TestMethod]
@@ -204,13 +204,13 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("playsound block.bell.use ambient @a ~1 ~2 ~3 10.1 1.1 0.1", new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, 1.1, 0.1).GetCommandString());
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), -0.1, 1.1, 0.1));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, -0.1, 0.1));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, 2.1, 0.1));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, 1, -0.1));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, 1, 1.1));
-            Assert.ThrowsException<ArgumentException>(() => new PlaySoundCommand(null, ID.SoundSource.ambient, ID.Selector.a, new Coords(1, 2, 3), 10.1, 1.1, 0.1));
-            Assert.ThrowsException<ArgumentNullException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, null, new Coords(1, 2, 3), 10.1, 1.1, 0.1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), -0.1, 1.1, 0.1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), 10.1, -0.1, 0.1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), 10.1, 2.1, 0.1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), 10.1, 1, -0.1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), 10.1, 1, 1.1));
+            Assert.ThrowsException<ArgumentException>(() => new PlaySoundCommand(null, ID.SoundSource.ambient, ID.Selector.a, new Vector(1, 2, 3), 10.1, 1.1, 0.1));
+            Assert.ThrowsException<ArgumentNullException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, null, new Vector(1, 2, 3), 10.1, 1.1, 0.1));
             Assert.ThrowsException<ArgumentNullException>(() => new PlaySoundCommand(ID.Sounds.Block.Bell, ID.SoundSource.ambient, ID.Selector.a, null, 10.1, 1.1, 0.1));
         }
 
@@ -220,7 +220,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("spawnpoint @a ~1 ~2 ~3", new SpawnPointCommand(new Coords(1,2,3), ID.Selector.a).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new SpawnPointCommand(null, ID.Selector.a));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpawnPointCommand(new Coords(1, 2, 3), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpawnPointCommand(new Vector(1, 2, 3), null));
         }
 
         [TestMethod]

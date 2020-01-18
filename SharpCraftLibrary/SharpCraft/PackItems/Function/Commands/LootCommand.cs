@@ -29,13 +29,13 @@ namespace SharpCraft.Commands
         /// </summary>
         public class SpawnTarget : ILootTarget
         {
-            private Coords coordinates;
+            private Vector coordinates;
 
             /// <summary>
             /// Intializes a new <see cref="SpawnTarget"/>
             /// </summary>
             /// <param name="coordinates">The coordinates to spawn the loot at</param>
-            public SpawnTarget(Coords coordinates)
+            public SpawnTarget(Vector coordinates)
             {
                 Coordinates = coordinates;
             }
@@ -43,7 +43,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The coordinates to spawn the loot at
             /// </summary>
-            public Coords Coordinates
+            public Vector Coordinates
             {
                 get => coordinates;
                 set
@@ -58,7 +58,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"spawn {Coordinates.GetCoordString()}";
+                return $"spawn {Coordinates.GetVectorString()}";
             }
         }
 
@@ -120,7 +120,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class BlockTarget : ILootTarget
         {
-            private Coords coordinates;
+            private Vector coordinates;
             private IItemSlot slot;
 
             /// <summary>
@@ -128,7 +128,7 @@ namespace SharpCraft.Commands
             /// </summary>
             /// <param name="coordinates">The coordinates to spawn the loot at</param>
             /// <param name="slot">The slot to insert the loot into</param>
-            public BlockTarget(Coords coordinates, IItemSlot slot)
+            public BlockTarget(Vector coordinates, IItemSlot slot)
             {
                 Coordinates = coordinates;
                 Slot = slot;
@@ -137,7 +137,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The coordinates to spawn the loot at
             /// </summary>
-            public Coords Coordinates
+            public Vector Coordinates
             {
                 get => coordinates;
                 set
@@ -164,7 +164,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"replace block {Coordinates.GetCoordString()} {Slot.GetSlotString()}";
+                return $"replace block {Coordinates.GetVectorString()} {Slot.GetSlotString()}";
             }
         }
 
@@ -211,13 +211,13 @@ namespace SharpCraft.Commands
         /// </summary>
         public class InsertTarget : ILootTarget
         {
-            private Coords coordinates;
+            private Vector coordinates;
 
             /// <summary>
             /// Intializes a new <see cref="InsertTarget"/>
             /// </summary>
             /// <param name="coordinates">The coordinates to spawn the loot in</param>
-            public InsertTarget(Coords coordinates)
+            public InsertTarget(Vector coordinates)
             {
                 Coordinates = coordinates;
             }
@@ -225,7 +225,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The coordinates to spawn the loot in
             /// </summary>
-            public Coords Coordinates
+            public Vector Coordinates
             {
                 get => coordinates;
                 set
@@ -240,7 +240,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the target</returns>
             public string GetTargetString()
             {
-                return $"insert {Coordinates.GetCoordString()}";
+                return $"insert {Coordinates.GetVectorString()}";
             }
         }
     }
@@ -268,7 +268,7 @@ namespace SharpCraft.Commands
         public class FishHandSource : ILootSource
         {
             private ILootTable loottable;
-            private Coords fishLocation;
+            private Vector fishLocation;
 
             /// <summary>
             /// Intailizes a new <see cref="FishHandSource"/>
@@ -276,7 +276,7 @@ namespace SharpCraft.Commands
             /// <param name="loottable">The loot table the "fish" is coming from</param>
             /// <param name="fishLocation">The location the fish was caught</param>
             /// <param name="mainHand">True if the fish was caught with the executing entity's mainhand. False if with off hand</param>
-            public FishHandSource(ILootTable loottable, Coords fishLocation, bool mainHand)
+            public FishHandSource(ILootTable loottable, Vector fishLocation, bool mainHand)
             {
                 Loottable = loottable;
                 FishLocation = fishLocation;
@@ -294,7 +294,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The location the fish was caught
             /// </summary>
-            public Coords FishLocation 
+            public Vector FishLocation 
             { 
                 get => fishLocation; 
                 set => fishLocation = value ?? throw new ArgumentNullException(nameof(FishLocation), "FishLocation may not be null"); 
@@ -311,7 +311,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetCoordString()} {(MainHand ? "mainhand" : "offhand")}";
+                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetVectorString()} {(MainHand ? "mainhand" : "offhand")}";
             }
         }
 
@@ -321,7 +321,7 @@ namespace SharpCraft.Commands
         public class FishItemSource : ILootSource
         {
             private ILootTable loottable;
-            private Coords fishLocation;
+            private Vector fishLocation;
             private Item usedItem;
 
             /// <summary>
@@ -330,7 +330,7 @@ namespace SharpCraft.Commands
             /// <param name="loottable">The loot table the "fish" is coming from</param>
             /// <param name="fishLocation">The location the fish was caught</param>
             /// <param name="usedItem">The item used to get the "fish"</param>
-            public FishItemSource(ILootTable loottable, Coords fishLocation, Item usedItem)
+            public FishItemSource(ILootTable loottable, Vector fishLocation, Item usedItem)
             {
                 Loottable = loottable;
                 FishLocation = fishLocation;
@@ -348,7 +348,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The location the fish was caught
             /// </summary>
-            public Coords FishLocation
+            public Vector FishLocation
             {
                 get => fishLocation;
                 set => fishLocation = value ?? throw new ArgumentNullException(nameof(FishLocation), "FishLocation may not be null");
@@ -369,7 +369,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetCoordString()} {UsedItem.IDDataString}";
+                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetVectorString()} {UsedItem.IDDataString}";
             }
         }
 
@@ -455,14 +455,14 @@ namespace SharpCraft.Commands
         /// </summary>
         public class MineHandSource : ILootSource
         {
-            private Coords coordinates;
+            private Vector coordinates;
 
             /// <summary>
             /// Intializes a new <see cref="MineHandSource"/>
             /// </summary>
             /// <param name="coordinates">The coordinates of the block get the loot from</param>
             /// <param name="mainHand">True if the block was mined with the main hand. False if with off hand</param>
-            public MineHandSource(Coords coordinates, bool mainHand)
+            public MineHandSource(Vector coordinates, bool mainHand)
             {
                 Coordinates = coordinates;
                 MainHand = mainHand;
@@ -471,7 +471,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The coordinates of the block get the loot from
             /// </summary>
-            public Coords Coordinates
+            public Vector Coordinates
             {
                 get => coordinates;
                 set
@@ -491,7 +491,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"mine {Coordinates.GetCoordString()} {(MainHand ? "mainhand" : "offhand")}";
+                return $"mine {Coordinates.GetVectorString()} {(MainHand ? "mainhand" : "offhand")}";
             }
         }
 
@@ -500,7 +500,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class MineItemSource : ILootSource
         {
-            private Coords coordinates;
+            private Vector coordinates;
             private Item usedItem;
 
             /// <summary>
@@ -508,7 +508,7 @@ namespace SharpCraft.Commands
             /// </summary>
             /// <param name="coordinates">The coordinates of the block get the loot from</param>
             /// <param name="usedItem">The item used for mining</param>
-            public MineItemSource(Coords coordinates, Item usedItem)
+            public MineItemSource(Vector coordinates, Item usedItem)
             {
                 Coordinates = coordinates;
                 UsedItem = usedItem;
@@ -517,7 +517,7 @@ namespace SharpCraft.Commands
             /// <summary>
             /// The coordinates of the block get the loot from
             /// </summary>
-            public Coords Coordinates
+            public Vector Coordinates
             {
                 get => coordinates;
                 set
@@ -541,7 +541,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"mine {Coordinates.GetCoordString()} {UsedItem.IDDataString}";
+                return $"mine {Coordinates.GetVectorString()} {UsedItem.IDDataString}";
             }
         }
     }

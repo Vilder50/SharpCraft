@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void DataGetCommandTest()
         {
-            Assert.AreEqual("data get block ~0 ~0 ~0 test.pineapple 10.5", new DataGetCommand(new BlockDataLocation(new Coords(), "test.pineapple"), 10.50).GetCommandString());
+            Assert.AreEqual("data get block ~ ~ ~ test.pineapple 10.5", new DataGetCommand(new BlockDataLocation(new Coords(), "test.pineapple"), 10.50).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new DataGetCommand(null, 10));
         }
@@ -35,7 +35,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("data merge block ~1 ~1 ~1 {test:1}", new DataMergeBlockCommand(new Coords(1,1,1), "{test:1}").GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new DataMergeBlockCommand(null, "{test:1}"));
-            Assert.ThrowsException<ArgumentNullException>(() => new DataMergeBlockCommand(new Coords(1, 1, 1), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new DataMergeBlockCommand(new Vector(1, 1, 1), null));
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void DataModifyWithLocationCommandTest()
         {
-            Assert.AreEqual("data modify entity @s test[0].cake merge from block ~0 ~0 ~0 test", new DataModifyWithLocationCommand(new EntityDataLocation(ID.Selector.s, "test[0].cake"), ID.EntityDataModifierType.merge, new BlockDataLocation(new Coords(), "test")).GetCommandString());
+            Assert.AreEqual("data modify entity @s test[0].cake merge from block ~ ~ ~ test", new DataModifyWithLocationCommand(new EntityDataLocation(ID.Selector.s, "test[0].cake"), ID.EntityDataModifierType.merge, new BlockDataLocation(new Coords(), "test")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new DataModifyWithLocationCommand(null, ID.EntityDataModifierType.merge, new BlockDataLocation(new Coords(), "test")));
             Assert.ThrowsException<ArgumentNullException>(() => new DataModifyWithLocationCommand(new BlockDataLocation(new Coords(), "test"), ID.EntityDataModifierType.merge, null));
@@ -69,7 +69,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void DataModifyInsertLocationCommandTest()
         {
-            Assert.AreEqual("data modify entity @s test[0].cake insert 10 from block ~0 ~0 ~0 test", new DataModifyInsertLocationCommand(new EntityDataLocation(ID.Selector.s, "test[0].cake"), 10, new BlockDataLocation(new Coords(), "test")).GetCommandString());
+            Assert.AreEqual("data modify entity @s test[0].cake insert 10 from block ~ ~ ~ test", new DataModifyInsertLocationCommand(new EntityDataLocation(ID.Selector.s, "test[0].cake"), 10, new BlockDataLocation(new Coords(), "test")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new DataModifyInsertLocationCommand(null, 10, new BlockDataLocation(new Coords(), "test")));
             Assert.ThrowsException<ArgumentNullException>(() => new DataModifyInsertLocationCommand(new BlockDataLocation(new Coords(), "test"), 10, null));

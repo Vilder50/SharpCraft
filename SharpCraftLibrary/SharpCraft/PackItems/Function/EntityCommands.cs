@@ -29,7 +29,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="addEntity">The entity to add to the world</param>
         /// <param name="coords">The coords to add the entity at</param>
-        public void Add(Entity.BaseEntity addEntity, Coords coords = null)
+        public void Add(Entity.BaseEntity addEntity, Vector coords = null)
         {
             Function.AddCommand(new SummonCommand(addEntity, coords ?? new Coords()));
         }
@@ -51,7 +51,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="minDistance">the minimum distance the player can be spreaded away from each other</param>
         /// <param name="spreadDistanceMax">the maximum distance the player can be spreaded from the <paramref name="center"/></param>
         /// <param name="spreadTeams">If teams should be placed close to each other</param>
-        public void Spread(BaseSelector selector, Coords center, int minDistance, int spreadDistanceMax, bool spreadTeams = false)
+        public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false)
         {
             Function.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams));
         }
@@ -89,7 +89,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to. Leave null to teleport to executed position</param>
-        public void Teleport(BaseSelector selector, Coords tpTo = null)
+        public void Teleport(BaseSelector selector, Vector tpTo = null)
         {
             Function.AddCommand(new TeleportToCommand(tpTo ?? new Coords(), selector));
         }
@@ -100,7 +100,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="rotation">The rotation to teleport the selected entities to</param>
-        public void Teleport(BaseSelector selector, Coords tpTo, Rotation rotation)
+        public void Teleport(BaseSelector selector, Vector tpTo, Rotation rotation)
         {
             Function.AddCommand(new TeleportToRotationCommand(tpTo ?? new Coords(), selector, rotation ?? new Rotation(true, 0, 0)));
         }
@@ -111,7 +111,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The selector the entities should look at</param>
         /// <param name="facingPart">The part of the entity to look at</param>
-        public void Teleport(BaseSelector selector, Coords tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
+        public void Teleport(BaseSelector selector, Vector tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
         {
             facing.LimitSelector();
             Function.AddCommand(new TeleportToFacingEntityCommand(tpTo ?? new Coords(), selector, facing, facingPart));
@@ -123,7 +123,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The block to look at</param>
-        public void Teleport(BaseSelector selector, Coords tpTo, Coords facing)
+        public void Teleport(BaseSelector selector, Vector tpTo, Vector facing)
         {
             Function.AddCommand(new TeleportToFacingCommand(tpTo ?? new Coords(), selector, facing ?? new Coords()));
         }

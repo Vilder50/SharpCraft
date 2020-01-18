@@ -18,8 +18,8 @@ namespace SharpCraft
             /// <summary>
             /// The phantom will circle around this location when not attacking
             /// </summary>
-            [Data.DataTag((object)"AX","AY","AZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords Area { get; set; }
+            [Data.DataTag((object)"AX","AY","AZ", Merge = true)]
+            public IntVector Area { get; set; }
             /// <summary>
             /// The size of the phantom.
             /// (0-64) Damage = 6+size

@@ -24,8 +24,8 @@ namespace SharpCraft
             /// The location the vex should fly around in
             /// (It flies to random location in a 15x11x15 around this spot)
             /// </summary>
-            [Data.DataTag((object)"BoundX", "BoundY", "BoundZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords Bound { get; set; }
+            [Data.DataTag((object)"BoundX", "BoundY", "BoundZ", Merge = true)]
+            public IntVector Bound { get; set; }
         }
     }
 }

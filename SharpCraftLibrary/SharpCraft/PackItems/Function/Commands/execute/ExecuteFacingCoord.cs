@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteFacingCoord : BaseExecuteCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteFacingCoord"/> command
         /// </summary>
         /// <param name="coordinates">The coordinates the command should execute in the direction of</param>
-        public ExecuteFacingCoord(Coords coordinates)
+        public ExecuteFacingCoord(Vector coordinates)
         {
             Coordinates = coordinates;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates the command should execute in the direction of
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>facing [Coordinates]</returns>
         protected override string GetExecutePart()
         {
-            return "facing " + Coordinates.GetCoordString(); 
+            return "facing " + Coordinates.GetVectorString(); 
         }
     }
 }

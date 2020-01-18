@@ -131,7 +131,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="spawnCoords">The place to spawn the entity at</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, Coords spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity.EntityBasic entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {

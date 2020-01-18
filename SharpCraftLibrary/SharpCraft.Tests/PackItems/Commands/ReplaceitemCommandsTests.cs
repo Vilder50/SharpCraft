@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ReplaceitemBlockCommandTest()
         {
-            Assert.AreEqual("replaceitem block ~0 ~0 ~0 container.5 minecraft:dirt{CustomModelData:1} 10", new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10).GetCommandString());
+            Assert.AreEqual("replaceitem block ~ ~ ~ container.5 minecraft:dirt{CustomModelData:1} 10", new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10).GetCommandString());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 65));

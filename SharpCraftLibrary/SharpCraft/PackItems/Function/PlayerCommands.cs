@@ -151,7 +151,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="spawn">The new spawnpoint location</param>
-        public void Spawnpoint(BaseSelector player, Coords spawn = null)
+        public void Spawnpoint(BaseSelector player, Vector spawn = null)
         {
             Function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
@@ -214,7 +214,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 Function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
@@ -230,7 +230,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void ColoredDust(HexColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 Function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
@@ -246,7 +246,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dust">If it should be dust or squares</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Block(Block block, Coords displayCoords, Coords size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
+            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
             {
                 Function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
@@ -261,7 +261,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 Function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
@@ -329,7 +329,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
-            public void GiveItem(BaseSelector player, Coords breakBlock, Item breakWith)
+            public void GiveItem(BaseSelector player, Vector breakBlock, Item breakWith)
             {
                 if (breakWith is null)
                 {
@@ -378,7 +378,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(BaseSelector player, Coords breakBlock, Item breakWith, int slot)
+            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item breakWith, int slot)
             {
                 if (breakWith is null)
                 {
@@ -440,7 +440,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="volume">the maximum volume of the sound</param>
             /// <param name="speed">the speed of the sound (0-2)</param>
             /// <param name="minValue">the minimum volume of the sound (0-2)</param>
-            public void Play(BaseSelector player, string sound, ID.SoundSource source, Coords location, double volume = 1, double speed = 1, double minValue = 0)
+            public void Play(BaseSelector player, string sound, ID.SoundSource source, Vector location, double volume = 1, double speed = 1, double minValue = 0)
             {
                 Function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
             }

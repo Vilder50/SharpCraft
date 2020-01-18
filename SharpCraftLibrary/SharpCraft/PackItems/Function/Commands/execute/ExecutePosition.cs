@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecutePosition : BaseExecuteCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="ExecutePosition"/> command
         /// </summary>
         /// <param name="coordinates">The position the command should be executed at</param>
-        public ExecutePosition(Coords coordinates)
+        public ExecutePosition(Vector coordinates)
         {
             Coordinates = coordinates;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The position the command should be executed at
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>positioned [rotation]</returns>
         protected override string GetExecutePart()
         {
-            return "positioned " + Coordinates.GetCoordString();
+            return "positioned " + Coordinates.GetVectorString();
         }
     }
 }

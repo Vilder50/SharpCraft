@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreBlock : BaseExecuteStoreCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private string dataPath;
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <param name="valueType">The type of number to store the result as</param>
         /// <param name="scale">A number to multiply the result by before storing it</param>
         /// <param name="storeResult">True if it should store the result. False if it should store success</param>
-        public ExecuteStoreBlock(Coords coordinates, string dataPath, ID.StoreTypes valueType, double scale, bool storeResult = true) : base(storeResult)
+        public ExecuteStoreBlock(Vector coordinates, string dataPath, ID.StoreTypes valueType, double scale, bool storeResult = true) : base(storeResult)
         {
             Coordinates = coordinates;
             DataPath = dataPath;
@@ -34,7 +34,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The position of the block to store the result in
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -71,7 +71,7 @@ namespace SharpCraft.Commands
         /// <returns>block [Coordinates] [Path] [ValueType] [Scale]</returns>
         protected override string GetStorePart()
         {
-            return "block " + Coordinates.GetCoordString() + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
+            return "block " + Coordinates.GetVectorString() + " " + DataPath + " " + ValueType.ToString().ToLower() + " " + Scale.ToMinecraftDouble();
         }
     }
 }

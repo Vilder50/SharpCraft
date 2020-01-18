@@ -13,7 +13,7 @@ namespace SharpCraft.Commands
     public class ReplaceitemBlockCommand : BaseCommand
     {
         private IItemSlot slot;
-        private Coords coordinates;
+        private Vector coordinates;
         private Item item;
         private int count;
 
@@ -24,7 +24,7 @@ namespace SharpCraft.Commands
         /// <param name="slot">The slot to put the item into</param>
         /// <param name="item">The item to put into the block</param>
         /// <param name="count">The amount of the item</param>
-        public ReplaceitemBlockCommand(Coords coordinates, IItemSlot slot, Item item, int count)
+        public ReplaceitemBlockCommand(Vector coordinates, IItemSlot slot, Item item, int count)
         {
             Coordinates = coordinates;
             Slot = slot;
@@ -35,7 +35,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates of the block to put the item into
         /// </summary>
-        public Coords Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
+        public Vector Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
 
         /// <summary>
         /// The slot to put the item into
@@ -69,7 +69,7 @@ namespace SharpCraft.Commands
         /// <returns>replaceitem block [Coordinates] [Slot] [Item] [Count]</returns>
         public override string GetCommandString()
         {
-            return $"replaceitem block {Coordinates.GetCoordString()} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
+            return $"replaceitem block {Coordinates.GetVectorString()} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
         }
     }
 

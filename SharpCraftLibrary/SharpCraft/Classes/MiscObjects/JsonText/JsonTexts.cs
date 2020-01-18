@@ -182,7 +182,7 @@ namespace SharpCraft
 
                 if (DataLocation is BlockDataLocation block)
                 {
-                    outString += $",\"block\":\"{block.Coordinates.GetCoordString()}\"";
+                    outString += $",\"block\":\"{block.Coordinates.GetVectorString()}\"";
                 }
                 else if (DataLocation is EntityDataLocation entity)
                 {

@@ -50,8 +50,8 @@ namespace SharpCraft
             /// <summary>
             /// The player's spawnpoint
             /// </summary>
-            [Data.DataTag((object)"SpawnX","SpawnY","SpawnZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords Spawn { get; set; }
+            [Data.DataTag((object)"SpawnX","SpawnY","SpawnZ", Merge = true)]
+            public IntVector Spawn { get; set; }
 
             /// <summary>
             /// If the player should spawn at the given <see cref="Spawn"/> even if there is no bed

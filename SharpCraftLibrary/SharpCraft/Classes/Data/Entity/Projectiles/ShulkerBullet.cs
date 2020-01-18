@@ -23,8 +23,8 @@ namespace SharpCraft
             /// <summary>
             /// The owner's location
             /// </summary>
-            [Data.DataTag("Owner","X", "Y", "Z", ID.NBTTagType.TagInt)]
-            public Coords OwnerCoords { get; set; }
+            [Data.DataTag("Owner","X", "Y", "Z")]
+            public IntVector OwnerCoords { get; set; }
             /// <summary>
             /// The bullet's target
             /// </summary>
@@ -33,8 +33,8 @@ namespace SharpCraft
             /// <summary>
             /// The target's location
             /// </summary>
-            [Data.DataTag("Target", "X", "Y", "Z", ID.NBTTagType.TagInt)]
-            public Coords TargetCoords { get; set; }
+            [Data.DataTag("Target", "X", "Y", "Z")]
+            public IntVector TargetCoords { get; set; }
             /// <summary>
             /// The amount of steps it takes to get to the target
             /// </summary>
@@ -43,8 +43,8 @@ namespace SharpCraft
             /// <summary>
             /// The offset distance from the bullet to the target
             /// </summary>
-            [Data.DataTag((object)"TXD", "TYD", "TZD", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords OffsetTarget { get; set; }
+            [Data.DataTag((object)"TXD", "TYD", "TZD", Merge = true)]
+            public IntVector OffsetTarget { get; set; }
         }
     }
 }

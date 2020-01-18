@@ -18,8 +18,8 @@ namespace SharpCraft
             /// <summary>
             /// The location of the treasure the dolphin will lead the player to
             /// </summary>
-            [Data.DataTag((object)"TreasurePosX", "TreasurePosY", "TreasurePosZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords TreasureLocation { get; set; }
+            [Data.DataTag((object)"TreasurePosX", "TreasurePosY", "TreasurePosZ", Merge = true)]
+            public IntVector TreasureLocation { get; set; }
 
             /// <summary>
             /// If the dolphin has gotten any fish from the player
