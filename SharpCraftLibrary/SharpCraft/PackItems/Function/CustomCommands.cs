@@ -287,7 +287,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The selector for selecting the score</param>
         /// <param name="objective">The objective the score to change is in</param>
         /// <param name="operation">The operation calculating the value the score should be set to</param>
-        public void SetToScoreOperation(Selector selector, Objective objective, ScoreOperation operation)
+        public void SetToScoreOperation(BaseSelector selector, Objective objective, ScoreOperation operation)
         {
             GroupCommands(f =>
             {
@@ -373,7 +373,7 @@ namespace SharpCraft.FunctionWriters
         #endregion
 
         #region if else
-        private static readonly NameSelector ifElseSelector = new NameSelector("ifelse");
+        private static readonly NameSelector ifElseSelector = new NameSelector("ifelse",true);
 
         /// <summary>
         /// Runs the if commands if the testCommand successfully runs. Runs else if it doesn't
@@ -406,6 +406,154 @@ namespace SharpCraft.FunctionWriters
                 f.AddCommand(new ExecuteIfScoreMatches(ifElseSelector, math, 0));
                 Function elseFunction = f.World.Function(Function.NewSibling(elseFunctionName, elseWriter)) as Function;
                 elseFunction.Dispose();
+            });
+        }
+        #endregion
+
+        #region loops
+        /// <summary>
+        /// Keeps on running the given commands for as long as the test command runs successfully
+        /// </summary>
+        /// <param name="testCommand">The command which has to run successfully for the loop to continue</param>
+        /// <param name="loopWriter">The commands the loop should run</param>
+        /// <param name="loopName">The name of the loop file</param>
+        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string loopName = null)
+        {
+            if (testCommand.HasEndCommand())
+            {
+                throw new ArgumentException("TestCommand may not have an ending command.", nameof(testCommand));
+            }
+            if (loopWriter is null)
+            {
+                throw new ArgumentNullException(nameof(loopWriter), "LoopWriter may not be null");
+            }
+
+            Function.AddCommand(testCommand.ShallowClone());
+            Function loopFunction = Function.World.Function(Function.NewSibling(loopName, loopWriter)) as Function;
+            loopFunction.Commands.Add(testCommand.AddCommand(new RunFunctionCommand(loopFunction)));
+        }
+
+        /// <summary>
+        /// Delegate for making for loops
+        /// </summary>
+        /// <param name="writeTo">The function to write the loop commands to</param>
+        /// <param name="loopValue">The loop's value</param>
+        public delegate void ForLoopDelegate(Function writeTo, ScoreValue loopValue);
+
+        /// <summary>
+        /// Loops through every value from "from" to and with "to"
+        /// </summary>
+        /// <param name="from">The start value</param>
+        /// <param name="to">The ending value</param>
+        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
+        /// <param name="writer">Writer for writing commands to loop over</param>
+        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer)
+        {
+            if (from == to)
+            {
+                throw new ArgumentException("From and To has the same value so a loop isn't needed.");
+            }
+            CreateForLoop(from, null, to, null, loopName, writer, from < to);
+        }
+
+        /// <summary>
+        /// Loops through every value from "from" to and with "to"
+        /// </summary>
+        /// <param name="from">The start value</param>
+        /// <param name="to">The ending value</param>
+        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
+        /// <param name="writer">Writer for writing commands to loop over</param>
+        /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
+        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true)
+        {
+            CreateForLoop(0, from, to, null, loopName, writer, positive);
+        }
+
+
+        /// <summary>
+        /// Loops through every value from "from" to and with "to"
+        /// </summary>
+        /// <param name="from">The start value</param>
+        /// <param name="to">The ending value</param>
+        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
+        /// <param name="writer">Writer for writing commands to loop over</param>
+        /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
+        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true)
+        {
+            CreateForLoop(from, null, 0, to, loopName, writer, positive);
+        }
+
+        /// <summary>
+        /// Loops through every value from "from" to and with "to"
+        /// </summary>
+        /// <param name="from">The start value</param>
+        /// <param name="to">The ending value</param>
+        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
+        /// <param name="writer">Writer for writing commands to loop over</param>
+        /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
+        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true)
+        {
+            CreateForLoop(0, from, 0, to, loopName, writer, positive);
+        }
+
+        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive)
+        {
+            Objective math = SharpCraftFiles.GetMathScoreObject();
+            NameSelector loopSelector = new NameSelector("l_" + loopName);
+            GroupCommands((f) =>
+            {
+                //start loop
+                if (fromValue is null)
+                {
+                    f.Entity.Score.Set(loopSelector, math, from);
+                }
+                else
+                {
+                    f.Entity.Score.Operation(loopSelector, math, ID.Operation.Equel, fromValue, fromValue);
+                }
+                BaseCommand testCommand;
+                if (toValue is null)
+                {
+                    if (positive)
+                    {
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new Range(null, to));
+                    }
+                    else
+                    {
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new Range(to, null));
+                    }
+                }
+                else
+                {
+                    if (positive)
+                    {
+                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.SmallerOrEquel, toValue, toValue);
+                    }
+                    else
+                    {
+                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.HigherOrEquel, toValue, toValue);
+                    }
+                }
+                if (!(fromValue is null && toValue is null))
+                {
+                    f.AddCommand(testCommand.ShallowClone());
+                }
+                f.World.Function(f.NewSibling(loopName, (loop) =>
+                {
+                    //run loop
+                    writer(loop, new ScoreValue(loopSelector, math));
+
+                    if (positive)
+                    {
+                        loop.Entity.Score.Add(loopSelector, math, 1);
+                    }
+                    else
+                    {
+                        loop.Entity.Score.Add(loopSelector, math, -1);
+                    }
+                    loop.AddCommand(testCommand);
+                    loop.World.Function(loop);
+                }));
             });
         }
         #endregion

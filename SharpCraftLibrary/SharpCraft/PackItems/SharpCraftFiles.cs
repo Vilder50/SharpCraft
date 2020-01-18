@@ -87,7 +87,7 @@ namespace SharpCraft
         }
         #endregion
 
-        #region
+        #region math
         private static Objective mathObjective;
         private const string mathObjectiveName = "math";
         public static Objective GetMathScoreObject()

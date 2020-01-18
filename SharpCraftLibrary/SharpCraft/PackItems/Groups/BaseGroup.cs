@@ -31,7 +31,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="fileType">The type of group file</param>
-        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, fileType + "_group")
+        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, "group_" + fileType)
         {
             Items = items;
             AppendGroup = appendGroup;

@@ -332,12 +332,12 @@ namespace SharpCraft.Tests.PackItems
                     elseFunction.World.Say("no block!");
                 }, "if", "else");
 
-                Assert.AreEqual("scoreboard players set ifelse math 0", function.Commands[0].GetCommandString(), "Base function commands aren't generated correctly");
+                Assert.AreEqual("scoreboard players set #ifelse math 0", function.Commands[0].GetCommandString(), "Base function commands aren't generated correctly");
                 Assert.AreEqual("execute if block ~ ~ ~ minecraft:stone run function space:if", function.Commands[1].GetCommandString(), "Base function commands aren't generated correctly");
-                Assert.AreEqual("execute if score ifelse math matches 0 run function space:else", function.Commands[2].GetCommandString(), "Base function commands aren't generated correctly");
+                Assert.AreEqual("execute if score #ifelse math matches 0 run function space:else", function.Commands[2].GetCommandString(), "Base function commands aren't generated correctly");
 
                 Assert.AreEqual("say block!" + Environment.NewLine 
-                    + "scoreboard players set ifelse math 1" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\if.mcfunction").writer.ToString());
+                    + "scoreboard players set #ifelse math 1" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\if.mcfunction").writer.ToString());
                 Assert.AreEqual("say no block!" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\else.mcfunction").writer.ToString());
             }
         }
