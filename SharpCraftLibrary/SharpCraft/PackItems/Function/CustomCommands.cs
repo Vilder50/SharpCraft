@@ -371,5 +371,43 @@ namespace SharpCraft.FunctionWriters
             }
         }
         #endregion
+
+        #region if else
+        private static readonly NameSelector ifElseSelector = new NameSelector("ifelse");
+
+        /// <summary>
+        /// Runs the if commands if the testCommand successfully runs. Runs else if it doesn't
+        /// </summary>
+        /// <param name="testCommand">The command to test</param>
+        /// <param name="ifWriter">The commands to run if the test is successfully</param>
+        /// <param name="elseWriter">The commands to run if the test isn't successfully</param>
+        /// <param name="ifFunctionName">The name of the function for running the if commands</param>
+        /// <param name="elseFunctionName">The name of the function for running the else commands</param>
+        public void IfElse(BaseExecuteCommand testCommand, Function.FunctionWriter ifWriter, Function.FunctionWriter elseWriter, string ifFunctionName = null, string elseFunctionName = null)
+        {
+            if (testCommand.HasEndCommand())
+            {
+                throw new ArgumentException("TestCommand may not have an ending command.", nameof(testCommand));
+            }
+            if (ifWriter is null || elseWriter is null)
+            {
+                throw new ArgumentNullException("IfWriter and elseWriter may not be null");
+            }
+
+            Objective math = SharpCraftFiles.GetMathScoreObject();
+            GroupCommands((f) =>
+            {
+                f.AddCommand(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 0));
+                f.AddCommand(testCommand);
+                Function ifFunction = f.World.Function(Function.NewSibling(ifFunctionName, ifWriter)) as Function;
+                ifFunction.Commands.Add(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 1));
+                ifFunction.Dispose();
+
+                f.AddCommand(new ExecuteIfScoreMatches(ifElseSelector, math, 0));
+                Function elseFunction = f.World.Function(Function.NewSibling(elseFunctionName, elseWriter)) as Function;
+                elseFunction.Dispose();
+            });
+        }
+        #endregion
     }
 }

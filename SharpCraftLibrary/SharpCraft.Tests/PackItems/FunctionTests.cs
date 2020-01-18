@@ -313,5 +313,33 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual(2, addedFunction.Commands.Count, "automatic function grouped command doesn't get the correct commands");
             }
         }
+
+        [TestMethod]
+        public void TestCustomIfElseCommand()
+        {
+            //setup
+            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
+            {
+                PackNamespace space = pack.Namespace("space");
+                Function function = space.Function("function", BaseFile.WriteSetting.OnDispose);
+
+                //test
+                function.Custom.IfElse(new ExecuteIfBlock(new Coords(), ID.Block.stone), (ifFunction) => 
+                {
+                    ifFunction.World.Say("block!");
+                }, (elseFunction) => 
+                {
+                    elseFunction.World.Say("no block!");
+                }, "if", "else");
+
+                Assert.AreEqual("scoreboard players set ifelse math 0", function.Commands[0].GetCommandString(), "Base function commands aren't generated correctly");
+                Assert.AreEqual("execute if block ~ ~ ~ minecraft:stone run function space:if", function.Commands[1].GetCommandString(), "Base function commands aren't generated correctly");
+                Assert.AreEqual("execute if score ifelse math matches 0 run function space:else", function.Commands[2].GetCommandString(), "Base function commands aren't generated correctly");
+
+                Assert.AreEqual("say block!" + Environment.NewLine 
+                    + "scoreboard players set ifelse math 1" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\if.mcfunction").writer.ToString());
+                Assert.AreEqual("say no block!" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\else.mcfunction").writer.ToString());
+            }
+        }
     }
 }
