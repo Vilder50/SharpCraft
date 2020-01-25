@@ -26,6 +26,15 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Intializes a new <see cref="Vector"/>
+        /// </summary>
+        /// <param name="number">The number in the x,y and z direction</param>
+        public Vector(double number) : this(number, number, number)
+        {
+
+        }
+
+        /// <summary>
         /// The X part of the vector
         /// </summary>
         public double X { get; protected set; }
@@ -285,7 +294,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for int vectors
     /// </summary>
-    public class IntVector : Vector
+    public class IntVector : Vector, IConvertableToDataArray, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="IntVector"/>
@@ -294,6 +303,15 @@ namespace SharpCraft
         /// <param name="y">The Y part of the vector</param>
         /// <param name="z">The Z part of the vector</param>
         public IntVector(int x, int y, int z) : base(x, y, z)
+        {
+
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="IntVector"/>
+        /// </summary>
+        /// <param name="number">The number in the x,y and z direction</param>
+        public IntVector(int number) : base(number)
         {
 
         }

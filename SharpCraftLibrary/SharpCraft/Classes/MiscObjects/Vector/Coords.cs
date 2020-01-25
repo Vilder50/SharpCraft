@@ -30,11 +30,19 @@ namespace SharpCraft
         /// <summary>
         /// Intializes a new relative <see cref="Coords"/> (same as ~ ~ ~)
         /// </summary>
-        public Coords() : base(0, 0, 0)
+        public Coords() : this(0, 0, 0, true, true, true)
         {
-            RelativeX = true;
-            RelativeY = true;
-            RelativeZ = true;
+
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="Coords"/>
+        /// </summary>
+        /// <param name="number">The number in the x,y and z direction</param>
+        /// <param name="relative">If the coordinates should be relative</param>
+        public Coords(double number, bool relative = true) : this(number,number,number,relative,relative,relative)
+        {
+
         }
 
         /// <summary>

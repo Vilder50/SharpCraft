@@ -34,7 +34,7 @@ namespace SharpCraft.Conditions
         /// <summary>
         /// The entity to check for data on
         /// </summary>
-        [DataTag("entity", JsonTag = true)]
+        [DataTag("entity", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
         public ID.LootTarget Target { get; set; }
     }
 }

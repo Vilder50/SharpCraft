@@ -14,9 +14,9 @@ namespace SharpCraft
         /// <summary>
         /// Intializes a new <see cref="LocalCoords"/>
         /// </summary>
-        /// <param name="x">The X local coordinate</param>
-        /// <param name="y">The Y local coordinate</param>
-        /// <param name="z">The Z local coordinate</param>
+        /// <param name="x">The X local coordinate (left)</param>
+        /// <param name="y">The Y local coordinate (up)</param>
+        /// <param name="z">The Z local coordinate (forward)</param>
         public LocalCoords(double x, double y, double z) : base(x, y, z)
         {
 
@@ -26,6 +26,15 @@ namespace SharpCraft
         /// Intializes a new <see cref="LocalCoords"/> (same as ^ ^ ^)
         /// </summary>
         public LocalCoords() : base(0,0,0)
+        {
+
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="LocalCoords"/>
+        /// </summary>
+        /// <param name="number">The number in the x,y and z direction</param>
+        public LocalCoords(double number) : base(number)
         {
 
         }

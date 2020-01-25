@@ -48,7 +48,7 @@ namespace SharpCraft.FunctionWriters
             Function.AddCommand(new ExecuteAlign());
             if (center)
             {
-                Function.AddCommand(new ExecutePosition(new Vector(0.5, 0.5, 0.5)));
+                Function.AddCommand(new ExecutePosition(new Coords(0.5, 0.5, 0.5)));
             }
         }
 

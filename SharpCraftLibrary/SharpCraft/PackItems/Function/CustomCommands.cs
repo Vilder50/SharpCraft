@@ -133,10 +133,6 @@ namespace SharpCraft.FunctionWriters
         /// <returns>The function the entity runs</returns>
         public Function SummonExecute(Entity.EntityBasic entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            if (string.IsNullOrWhiteSpace(functionName))
-            {
-                throw new ArgumentException("function name cannot be null or empty", nameof(functionName));
-            }
             if (runCommands is null)
             {
                 throw new ArgumentNullException(nameof(runCommands), "value may not be null");
@@ -145,7 +141,7 @@ namespace SharpCraft.FunctionWriters
             //add tag to find the summoned entity
             Tag findTag = new Tag("SharpSummon");
             Entity.EntityBasic createEntity = (Entity.EntityBasic)entity.Clone();
-            List<Tag> tags = createEntity.Tags.ToList() ?? new List<Tag>();
+            List<Tag> tags = createEntity.Tags?.ToList() ?? new List<Tag>();
             tags.Add(findTag);
             createEntity.Tags = tags.ToArray();
 
@@ -325,7 +321,6 @@ namespace SharpCraft.FunctionWriters
                     }
                 }
                 BaseExecuteCommand prefixer = (BaseExecuteCommand)prefixCommand.ShallowClone();
-                prefixer.ExecuteCommand = null;
                 return prefixer.AddCommand(command);
             }
 
@@ -417,11 +412,16 @@ namespace SharpCraft.FunctionWriters
         /// <param name="testCommand">The command which has to run successfully for the loop to continue</param>
         /// <param name="loopWriter">The commands the loop should run</param>
         /// <param name="loopName">The name of the loop file</param>
-        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string loopName = null)
+        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string loopName = null, BaseExecuteCommand nextExecute = null)
         {
             if (testCommand.HasEndCommand())
             {
                 throw new ArgumentException("TestCommand may not have an ending command.", nameof(testCommand));
+            }
+            if (!(nextExecute is null) && nextExecute.HasEndCommand())
+            {
+                throw new ArgumentException("NextExecute may not have an ending command.", nameof(nextExecute));
             }
             if (loopWriter is null)
             {
@@ -447,13 +447,14 @@ namespace SharpCraft.FunctionWriters
         /// <param name="to">The ending value</param>
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
-        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer)
+        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand nextExecute = null)
         {
             if (from == to)
             {
                 throw new ArgumentException("From and To has the same value so a loop isn't needed.");
             }
-            CreateForLoop(from, null, to, null, loopName, writer, from < to);
+            CreateForLoop(from, null, to, null, loopName, writer, from < to, nextExecute);
         }
 
         /// <summary>
@@ -464,9 +465,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true)
+        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
         {
-            CreateForLoop(0, from, to, null, loopName, writer, positive);
+            CreateForLoop(0, from, to, null, loopName, writer, positive, nextExecute);
         }
 
 
@@ -478,9 +480,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true)
+        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
         {
-            CreateForLoop(from, null, 0, to, loopName, writer, positive);
+            CreateForLoop(from, null, 0, to, loopName, writer, positive, nextExecute);
         }
 
         /// <summary>
@@ -491,13 +494,18 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true)
+        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
         {
-            CreateForLoop(0, from, 0, to, loopName, writer, positive);
+            CreateForLoop(0, from, 0, to, loopName, writer, positive, nextExecute);
         }
 
-        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive)
+        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand nextExecute)
         {
+            if (!(nextExecute is null) && nextExecute.HasEndCommand())
+            {
+                throw new ArgumentException("NextExecute may not have an ending command.", nameof(nextExecute));
+            }
             Objective math = SharpCraftFiles.GetMathScoreObject();
             NameSelector loopSelector = new NameSelector("l_" + loopName);
             GroupCommands((f) =>
@@ -552,6 +560,10 @@ namespace SharpCraft.FunctionWriters
                         loop.Entity.Score.Add(loopSelector, math, -1);
                     }
                     loop.AddCommand(testCommand);
+                    if (!(nextExecute is null))
+                    {
+                        loop.AddCommand(nextExecute);
+                    }
                     loop.World.Function(loop);
                 }));
             });

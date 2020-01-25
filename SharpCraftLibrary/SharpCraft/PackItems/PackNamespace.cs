@@ -50,7 +50,11 @@ namespace SharpCraft
         /// <returns>The newly created predicate</returns>
         public Predicate Predicate(string name, Conditions.BaseCondition condition, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Predicate existingFile = (Predicate)GetFile("predicate", name);
+            Predicate existingFile = null;
+            if (!(name is null)) 
+            {
+                existingFile = (Predicate)GetFile("predicate", name); 
+            }
 
             if (existingFile is null)
             {

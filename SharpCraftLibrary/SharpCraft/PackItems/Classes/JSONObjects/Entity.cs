@@ -55,7 +55,7 @@ namespace SharpCraft
             /// The gamemode the player is in
             /// </summary>
             [DataTag("player.gamemode", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public ID.Gamemode Gamemode { get; set; }
+            public ID.Gamemode? Gamemode { get; set; }
 
             /// <summary>
             /// Player recipes to check for

@@ -122,6 +122,15 @@ namespace SharpCraft.Conditions
                 /// </summary>
                 public Range Range { get => range; set => range = value ?? throw new ArgumentNullException(nameof(Range), "Range may not be null"); }
             }
+
+            /// <summary>
+            /// Converts a single score into a list of scores
+            /// </summary>
+            /// <param name="score">The score to convert</param>
+            public static implicit operator Scores (Score score)
+            {
+                return new Scores(score);
+            }
         }
     }
 }
