@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SharpCraft.Commands;
+using SharpCraft.Conditions;
 
 namespace SharpCraft.FunctionWriters
 {
@@ -567,6 +568,171 @@ namespace SharpCraft.FunctionWriters
                     loop.World.Function(loop);
                 }));
             });
+        }
+        #endregion
+
+        #region ray cast
+        /// <summary>
+        /// Shots a ray which stops and run commands when it hits a block.
+        /// </summary>
+        /// <param name="rayName">The name of the ray</param>
+        /// <param name="hit">Block type the ray should be able to hit. Leave null to make the ray hit everything.</param>
+        /// <param name="ignore">Block type the ray shouldn't be able to hit. Leave null for no ignored blocks.</param>
+        /// <param name="length">The amount of blocks the ray should travel</param>
+        /// <param name="onHit">The commands to run when the ray hits a block.</param>
+        /// <param name="stepCommands">Commands to run for every block the ray moves.</param>
+        /// <remarks>
+        /// Running ray cast from within a ray cast might lead to unexpected results.
+        /// </remarks>
+        public void RayCast(string rayName, Block hit, Block ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter stepCommands = null)
+        {
+            if (string.IsNullOrWhiteSpace(rayName))
+            {
+                throw new ArgumentException("RayName may not be null or whitespace.", nameof(rayName));
+            }
+            if (rayName.IndexOf("/") != -1 || rayName.IndexOf("\\") != -1)
+            {
+                throw new ArgumentException("RayName may not contain / or \\.", nameof(rayName));
+            }
+            if (onHit is null)
+            {
+                throw new ArgumentNullException(nameof(onHit), "Ray cast onHit may not be null");
+            }
+            if (length <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(length), "Ray length may not be smaller or equal to 0");
+            }
+
+            Objective math = SharpCraftFiles.GetMathScoreObject();
+            var (raySetup, xRotation, yRotation, rayState, predicates) = SharpCraftFiles.GetRayFiles();
+
+            //execute as ray entity
+            Function.Execute.As(SharpCraftFiles.GetDummySelector());
+            Function.World.Function(Function.NewSibling(rayName + "\\start", startRay => 
+            {
+                startRay.World.Function(raySetup);
+                startRay.Custom.ForLoop(0, length - 1, "rStep", (step, stepValue) =>
+                {
+                    //setup step
+                    step.Entity.Score.Set(rayState, rayState, 0);
+                    step.Execute.Align();
+                    step.Execute.Positioned(new Coords(0.1));
+                    step.Entity.Teleport(ID.Selector.s, new Coords());
+
+                    if (!(stepCommands is null))
+                    {
+                        stepCommands(step);
+                    }
+
+                    //check if small step should start
+                    step.Execute.Positioned(new LocalCoords(0, 0, 1));
+                    step.Execute.IfBlocks(new Coords(), new Coords(), new Coords()); //out of world check
+
+                    #region check predicate
+                    BaseCondition getIfBlockCondition(IntVector location)
+                    {
+                        BaseCondition blockCondition = null;
+                        if (!(ignore is null))
+                        {
+                            blockCondition = !new LocationCondition(new JSONObjects.Location() { Block = ignore }) { Offset = location };
+                        }
+                        if (!(hit is null))
+                        {
+                            BaseCondition hitCondition = new LocationCondition(new JSONObjects.Location() { Block = hit }) { Offset = location };
+                            if (blockCondition is null)
+                            {
+                                blockCondition = hitCondition;
+                            }
+                            else
+                            {
+                                blockCondition &= hitCondition;
+                            }
+                        }
+                        return blockCondition;
+                    }
+                    BaseCondition checkCondition = getIfBlockCondition(new IntVector(0));
+                    checkCondition |= !(predicates[2].GetCondition() | !getIfBlockCondition(new IntVector(0, 0, -1)));
+                    checkCondition |= !(predicates[3].GetCondition() | !getIfBlockCondition(new IntVector(1, 0, 0)));
+                    checkCondition |= !(predicates[4].GetCondition() | !getIfBlockCondition(new IntVector(0, 0, 1)));
+                    checkCondition |= !(predicates[5].GetCondition() | !getIfBlockCondition(new IntVector(-1, 0, 0)));
+                    checkCondition |= !(predicates[6].GetCondition() | !getIfBlockCondition(new IntVector(0, -1, 0)));
+                    checkCondition |= !(predicates[7].GetCondition() | !getIfBlockCondition(new IntVector(0, 1, 0)));
+
+                    BaseCondition cornerConditions = predicates[8].GetCondition();
+                    BaseCondition positiveCorners = !(predicates[9].GetCondition() | !(getIfBlockCondition(new IntVector(-1, 0, -1)) | getIfBlockCondition(new IntVector(0, 1, -1)) | getIfBlockCondition(new IntVector(-1, 1, 0))));
+                    positiveCorners |= !(predicates[10].GetCondition() | !(getIfBlockCondition(new IntVector(-1, 0, 1)) | getIfBlockCondition(new IntVector(0, 1, 1)) | getIfBlockCondition(new IntVector(-1, 1, 0))));
+                    positiveCorners |= !(predicates[11].GetCondition() | !(getIfBlockCondition(new IntVector(1, 0, 1)) | getIfBlockCondition(new IntVector(0, 1, 1)) | getIfBlockCondition(new IntVector(1, 1, 0))));
+                    positiveCorners |= !(predicates[12].GetCondition() | !(getIfBlockCondition(new IntVector(1, 0, -1)) | getIfBlockCondition(new IntVector(0, 1, -1)) | getIfBlockCondition(new IntVector(1, 1, 0))));
+                    positiveCorners = !predicates[1].GetCondition() | !positiveCorners;
+                    BaseCondition negativeCorners = !(predicates[9].GetCondition() | !(getIfBlockCondition(new IntVector(-1, 0, -1)) | getIfBlockCondition(new IntVector(0, -1, -1)) | getIfBlockCondition(new IntVector(-1, -1, 0))));
+                    negativeCorners |= !(predicates[10].GetCondition() | !(getIfBlockCondition(new IntVector(-1, 0, 1)) | getIfBlockCondition(new IntVector(0, -1, 1)) | getIfBlockCondition(new IntVector(-1, -1, 0))));
+                    negativeCorners |= !(predicates[11].GetCondition() | !(getIfBlockCondition(new IntVector(1, 0, 1)) | getIfBlockCondition(new IntVector(0, -1, 1)) | getIfBlockCondition(new IntVector(1, -1, 0))));
+                    negativeCorners |= !(predicates[12].GetCondition() | !(getIfBlockCondition(new IntVector(1, 0, -1)) | getIfBlockCondition(new IntVector(0, -1, -1)) | getIfBlockCondition(new IntVector(1, -1, 0))));
+                    negativeCorners = !predicates[0].GetCondition() | !negativeCorners;
+                    cornerConditions |= !(!positiveCorners | !negativeCorners);
+
+                    checkCondition |= !cornerConditions;
+
+                    using (Predicate checkPredicate = new Predicate(step.PackNamespace, "ray\\" + rayName + "\\check", checkCondition))
+                    {
+                        step.Execute.IfPredicate(checkPredicate);
+                    }
+                    #endregion
+
+                    step.Execute.Positioned(new LocalCoords(0, 0, -1));
+                    step.World.Function(step.NewSibling("rStartSmall", startSmall => 
+                    {
+                        //begin small steps
+                        startSmall.Custom.ForLoop(0, 49, "rsStep", (smallStep, smallValue) => 
+                        {
+                            //Function to run when block is hit
+                            Function onHitBlock = smallStep.NewSibling("hitBlock", hitBlock =>
+                            {
+                                hitBlock.Entity.Score.Set(rayState, rayState, 1);
+                                onHit(hitBlock);
+                            });
+
+                            BaseCommand hitCheck = new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new RunFunctionCommand(onHitBlock));
+                            if (!(ignore is null))
+                            {
+                                hitCheck = new ExecuteIfBlock(new Coords(), ignore, false).AddCommand(hitCheck);
+                            }
+                            if (!(hit is null))
+                            {
+                                hitCheck = new ExecuteIfBlock(new Coords(), hit).AddCommand(hitCheck);
+                            }
+
+                            //check if small step hits block
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new Range(0, 90));
+                            smallStep.Execute.Positioned(new Coords(0, -0.02, 0));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new Range(-90, 0));
+                            smallStep.Execute.Positioned(new Coords(0, 0.02, 0));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(0, 180));
+                            smallStep.Execute.Positioned(new Coords(-0.02, 0, 0));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(0, 180), false);
+                            smallStep.Execute.Positioned(new Coords(0.02, 0, 0));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(-90, 90));
+                            smallStep.Execute.Positioned(new Coords(0, 0, 0.02));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(-90, 90), false);
+                            smallStep.Execute.Positioned(new Coords(0, 0, -0.02));
+                            smallStep.AddCommand(hitCheck.ShallowClone());
+
+                        }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 0.02))));
+                    }));
+                }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
+            }));
         }
         #endregion
     }

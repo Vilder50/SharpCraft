@@ -26,5 +26,11 @@ namespace SharpCraft
         /// </summary>
         /// <returns>string for using the predicate</returns>
         string GetNamespacedName();
+
+        /// <summary>
+        /// Should return a <see cref="Conditions.PredicateCondition"/> which checks for this predicate
+        /// </summary>
+        /// <returns>A condition checking this predicate</returns>
+        Conditions.PredicateCondition GetCondition();
     }
 }

@@ -14,6 +14,7 @@ namespace SharpCraft
     /// </summary>
     public class Predicate : BaseFile, IPredicate
     {
+        private PredicateCondition thisCondition;
         private BaseCondition condition;
 
         /// <summary>
@@ -83,6 +84,16 @@ namespace SharpCraft
         {
             condition = null;
         }
+
+        /// <summary>
+        /// Returns a condition checking this predicate
+        /// </summary>
+        /// <returns>A condition checking this predicate</returns>
+        public PredicateCondition GetCondition()
+        {
+            thisCondition = thisCondition ?? new PredicateCondition(this);
+            return thisCondition;
+        }
     }
 
     /// <summary>
@@ -90,6 +101,8 @@ namespace SharpCraft
     /// </summary>
     public class EmptyPredicate : IPredicate
     {
+        private PredicateCondition thisCondition;
+
         /// <summary>
         /// Intializes a new <see cref="EmptyPredicate"/>
         /// </summary>
@@ -143,6 +156,16 @@ namespace SharpCraft
                 throw new InvalidCastException("String for creating empty predicate has to contain a single :");
             }
             return new EmptyPredicate(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
+
+        /// <summary>
+        /// Returns a condition checking this predicate
+        /// </summary>
+        /// <returns>A condition checking this predicate</returns>
+        public PredicateCondition GetCondition()
+        {
+            thisCondition = thisCondition ?? new PredicateCondition(this);
+            return thisCondition;
         }
     }
 }

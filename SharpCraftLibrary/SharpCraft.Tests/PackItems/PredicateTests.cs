@@ -56,5 +56,21 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("name:predicate", new EmptyPredicate(EmptyDatapack.GetPack().Namespace("name"), "predicate").GetNamespacedName(), "EmptyPredicate doesn't reutrn correct string");
             Assert.AreEqual("space:name", ((EmptyPredicate)"space:name").GetNamespacedName(), "Implicit string to predicate conversion converts incorrectly");
         }
+
+        [TestMethod]
+        public void TestGetCondition()
+        {
+            //setup
+            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
+            {
+                PackNamespace space = pack.Namespace("space");
+
+                //test
+                Predicate predicate = space.Predicate("predicate", new Conditions.RandomCondition(0.5));
+                Conditions.PredicateCondition condition = predicate.GetCondition();
+                Assert.AreSame(condition, predicate.GetCondition(), "Predicate doesn't return the same condition every time");
+                Assert.AreSame(predicate, condition.Predicate, "Condition isn't checking for the correct predicate");
+            }
+        }
     }
 }
