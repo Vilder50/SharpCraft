@@ -20,13 +20,13 @@ namespace SharpCraft
             /// the <see cref="SharpCraft.Item"/>'s durability
             /// </summary>
             [DataTag("durability", JsonTag = true)]
-            public Range Durability { get; set; }
+            public MCRange Durability { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s count
             /// </summary>
             [DataTag("count", JsonTag = true)]
-            public Range Count { get; set; }
+            public MCRange Count { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s potion
@@ -67,7 +67,7 @@ namespace SharpCraft
                 /// the level of the enchantment
                 /// </summary>
                 [DataTag("levels","min","max",ID.NBTTagType.TagDouble,true, JsonTag = true, ForceType = ID.NBTTagType.TagInt)]
-                public Range Level { get; set; }
+                public MCRange Level { get; set; }
             }
 
             /// <summary>

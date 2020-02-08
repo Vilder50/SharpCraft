@@ -14,13 +14,13 @@ namespace SharpCraft
             /// The amount of damage actually dealt
             /// </summary>
             [DataTag("dealt", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public Range Dealt { get; set; }
+            public MCRange Dealt { get; set; }
 
             /// <summary>
             /// The amount of damage taken
             /// </summary>
             [DataTag("taken", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public Range Taken { get; set; }
+            public MCRange Taken { get; set; }
 
             /// <summary>
             /// if the damage was blocked or not

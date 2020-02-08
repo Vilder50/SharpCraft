@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The amount of levels used for enchanting
         /// </summary>
         [DataTag("conditions.levels", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Levels { get; set; }
+        public MCRange Levels { get; set; }
     }
 }

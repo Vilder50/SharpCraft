@@ -132,41 +132,35 @@ namespace SharpCraft.Tests.PackItems
         public void TestGetFile()
         {
             //setup
-            using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
-            {
-                //test
-                Assert.AreEqual("file1", pack.GetFile("test1","file1").FileId, "GetFile failed to get the file with the correct name");
-                Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
-                Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileId, "GetFile failed to get the other file with the other name");
-                Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1").Setting, "GetFile failed to get the file of the other type");
+            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            //test
+            Assert.AreEqual("file1", pack.GetFile("test1", "file1").FileId, "GetFile failed to get the file with the correct name");
+            Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
+            Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileId, "GetFile failed to get the other file with the other name");
+            Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1").Setting, "GetFile failed to get the file of the other type");
 
-                //test exception on extra file with same name and same type
-                Assert.ThrowsException<ArgumentException>(() => new BaseFileTestClass1(pack, "file1", BaseFile.WriteSetting.Auto), "Adding 2 files with the same name and same type should cast an exception");
-                Assert.ThrowsException<InvalidOperationException>(() => pack.GetFile("test2", "file3"), "should not be able to get locked file");
-            }
+            //test exception on extra file with same name and same type
+            Assert.ThrowsException<ArgumentException>(() => new BaseFileTestClass1(pack, "file1", BaseFile.WriteSetting.Auto), "Adding 2 files with the same name and same type should cast an exception");
+            Assert.ThrowsException<InvalidOperationException>(() => pack.GetFile("test2", "file3"), "should not be able to get locked file");
         }
 
         [TestMethod]
         public void TestGetPath()
         {
             //setup
-            using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
-            {
-                //test
-                Assert.AreEqual("a folder path\\pack\\data\\namespace\\", pack.GetPath());
-            }
+            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            //test
+            Assert.AreEqual("a folder path\\pack\\data\\namespace\\", pack.GetPath());
         }
 
         [TestMethod]
         public void TestIsSettingSet()
         {
             //setup
-            using (BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace"))
-            {
-                //test
-                Assert.IsTrue(pack.IsSettingSet(BasePackNamespace.Settings.FunctionGroupedCommands()), "Failed to detect that the setting is set");
-                Assert.IsFalse(pack.IsSettingSet(BasePackNamespace.Settings.GenerateNames()), "Failed to detect that the setting isn't set");
-            }
+            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            //test
+            Assert.IsTrue(pack.IsSettingSet(BasePackNamespace.Settings.FunctionGroupedCommands()), "Failed to detect that the setting is set");
+            Assert.IsFalse(pack.IsSettingSet(BasePackNamespace.Settings.GenerateNames()), "Failed to detect that the setting isn't set");
         }
 
         [TestMethod]
@@ -208,19 +202,17 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestFileAddListener()
         {
-            using (Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator()))
+            using Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator());
+            bool fileAdded = false;
+            PackNamespace space = pack.Namespace("space");
+            space.Function("test1");
+            space.AddNewFileListener((file) =>
             {
-                bool fileAdded = false;
-                PackNamespace space = pack.Namespace("space");
-                space.Function("test1");
-                space.AddNewFileListener((file) =>
-                {
-                    fileAdded = true;
-                });
-                Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
-                space.Function("test2");
-                Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
-            }
+                fileAdded = true;
+            });
+            Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
+            space.Function("test2");
+            Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
         }
     }
 }

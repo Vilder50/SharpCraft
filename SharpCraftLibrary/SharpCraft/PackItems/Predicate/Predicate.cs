@@ -91,7 +91,7 @@ namespace SharpCraft
         /// <returns>A condition checking this predicate</returns>
         public PredicateCondition GetCondition()
         {
-            thisCondition = thisCondition ?? new PredicateCondition(this);
+            thisCondition ??= new PredicateCondition(this);
             return thisCondition;
         }
     }
@@ -164,7 +164,7 @@ namespace SharpCraft
         /// <returns>A condition checking this predicate</returns>
         public PredicateCondition GetCondition()
         {
-            thisCondition = thisCondition ?? new PredicateCondition(this);
+            thisCondition ??= new PredicateCondition(this);
             return thisCondition;
         }
     }

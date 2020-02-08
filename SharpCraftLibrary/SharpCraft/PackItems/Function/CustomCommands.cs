@@ -525,11 +525,11 @@ namespace SharpCraft.FunctionWriters
                 {
                     if (positive)
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new Range(null, to));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(null, to));
                     }
                     else
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new Range(to, null));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(to, null));
                     }
                 }
                 else
@@ -710,27 +710,27 @@ namespace SharpCraft.FunctionWriters
                             //check if small step hits block
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new Range(0, 90));
+                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new MCRange(0, 90));
                             smallStep.Execute.Positioned(new Coords(0, -0.02, 0));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new Range(-90, 0));
+                            smallStep.Execute.IfScore(ID.Selector.s, xRotation, new MCRange(-90, 0));
                             smallStep.Execute.Positioned(new Coords(0, 0.02, 0));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(0, 180));
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new MCRange(0, 180));
                             smallStep.Execute.Positioned(new Coords(-0.02, 0, 0));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(0, 180), false);
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new MCRange(0, 180), false);
                             smallStep.Execute.Positioned(new Coords(0.02, 0, 0));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(-90, 90));
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new MCRange(-90, 90));
                             smallStep.Execute.Positioned(new Coords(0, 0, 0.02));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new Range(-90, 90), false);
+                            smallStep.Execute.IfScore(ID.Selector.s, yRotation, new MCRange(-90, 90), false);
                             smallStep.Execute.Positioned(new Coords(0, 0, -0.02));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
@@ -839,7 +839,7 @@ namespace SharpCraft.FunctionWriters
                         {
                             Selector.EntityTag[] newTags = new Selector.EntityTag[selector.Tags.Length + 1];
                             Array.Copy(selector.Tags, newTags, selector.Tags.Length);
-                            newTags[newTags.Length - 1] = ignoreTag;
+                            newTags[^1] = ignoreTag;
                             selector.Tags = newTags;
                         }
                         else

@@ -110,13 +110,13 @@ namespace SharpCraft
                 /// the <see cref="Effect"/>'s amplifer
                 /// </summary>
                 [DataTag("amplifier","min","max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-                public Range Amplifier { get; set; }
+                public MCRange Amplifier { get; set; }
 
                 /// <summary>
                 /// the <see cref="Effect"/>'s duration
                 /// </summary>
                 [DataTag("duration", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-                public Range Duration { get; set; }
+                public MCRange Duration { get; set; }
 
                 /// <summary>
                 /// if the <see cref="Effect"/> is ambient or not

@@ -99,14 +99,14 @@ namespace SharpCraft.Conditions
             public class Score
             {
                 Objective scoreObject;
-                Range range;
+                MCRange range;
 
                 /// <summary>
                 /// Intializes a new <see cref="Score"/>
                 /// </summary>
                 /// <param name="scoreObject">The objective to get the score from</param>
                 /// <param name="range">The range the score has to be inside</param>
-                public Score(Objective scoreObject, Range range)
+                public Score(Objective scoreObject, MCRange range)
                 {
                     ScoreObject = scoreObject;
                     Range = range;
@@ -120,7 +120,7 @@ namespace SharpCraft.Conditions
                 /// <summary>
                 /// The range the score has to be inside
                 /// </summary>
-                public Range Range { get => range; set => range = value ?? throw new ArgumentNullException(nameof(Range), "Range may not be null"); }
+                public MCRange Range { get => range; set => range = value ?? throw new ArgumentNullException(nameof(Range), "Range may not be null"); }
             }
 
             /// <summary>

@@ -662,21 +662,15 @@ namespace SharpCraft.Data
             }
             else
             {
-                switch (type)
+                return type switch
                 {
-                    default:
-                        throw new ArgumentException("The given type doesn't have a special ending letter");
-                    case ID.NBTTagType.TagByte:
-                        return "b";
-                    case ID.NBTTagType.TagShort:
-                        return "s";
-                    case ID.NBTTagType.TagDouble:
-                        return "d";
-                    case ID.NBTTagType.TagFloat:
-                        return "f";
-                    case ID.NBTTagType.TagLong:
-                        return "L";
-                }
+                    ID.NBTTagType.TagByte => "b",
+                    ID.NBTTagType.TagShort => "s",
+                    ID.NBTTagType.TagDouble => "d",
+                    ID.NBTTagType.TagFloat => "f",
+                    ID.NBTTagType.TagLong => "L",
+                    _ => throw new ArgumentException("The given type doesn't have a special ending letter"),
+                };
             }
         }
     }

@@ -67,41 +67,35 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void FishHandSourcePartTest()
         {
-            using (EmptyDatapack datapack = new EmptyDatapack("pack"))
-            {
-                EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"),"loot");
-                Assert.AreEqual("fish test:loot ~1 ~2 ~3 mainhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), true).GetSourceString());
-                Assert.AreEqual("fish test:loot ~1 ~2 ~3 offhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), false).GetSourceString());
+            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            Assert.AreEqual("fish test:loot ~1 ~2 ~3 mainhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), true).GetSourceString());
+            Assert.AreEqual("fish test:loot ~1 ~2 ~3 offhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), false).GetSourceString());
 
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishHandSource(null, new Coords(1, 2, 3), true));
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishHandSource(table, null, true));
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishHandSource(null, new Coords(1, 2, 3), true));
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishHandSource(table, null, true));
         }
 
         [TestMethod]
         public void FishItemSourcePartTest()
         {
-            using (EmptyDatapack datapack = new EmptyDatapack("pack"))
-            {
-                EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
-                Assert.AreEqual("fish test:loot ~1 ~2 ~3 minecraft:dirt", new LootSources.FishItemSource(table, new Coords(1, 2, 3), ID.Item.dirt).GetSourceString());
+            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            Assert.AreEqual("fish test:loot ~1 ~2 ~3 minecraft:dirt", new LootSources.FishItemSource(table, new Coords(1, 2, 3), ID.Item.dirt).GetSourceString());
 
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(null, new Vector(1, 2, 3), ID.Item.dirt));
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, null, ID.Item.dirt));
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, new Vector(1, 2, 3), null));
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(null, new Vector(1, 2, 3), ID.Item.dirt));
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, null, ID.Item.dirt));
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(table, new Vector(1, 2, 3), null));
         }
 
         [TestMethod]
         public void LoottableSourcePartTest()
         {
-            using (EmptyDatapack datapack = new EmptyDatapack("pack"))
-            {
-                EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
-                Assert.AreEqual("loot test:loot", new LootSources.LoottableSource(table).GetSourceString());
+            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            Assert.AreEqual("loot test:loot", new LootSources.LoottableSource(table).GetSourceString());
 
-                Assert.ThrowsException<ArgumentNullException>(() => new LootSources.LoottableSource(null));
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => new LootSources.LoottableSource(null));
         }
 
         [TestMethod]

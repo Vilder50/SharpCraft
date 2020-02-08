@@ -7,7 +7,7 @@ namespace SharpCraft
     /// <summary>
     /// An object for ranges
     /// </summary>
-    public class Range : IConvertableToDataObject
+    public class MCRange : IConvertableToDataObject
     {
         /// <summary>
         /// The smallest number in the range
@@ -24,7 +24,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="Minimum">The smallest number in the range</param>
         /// <param name="Maximum">The highest number in the range</param>
-        public Range(double? Minimum, double? Maximum)
+        public MCRange(double? Minimum, double? Maximum)
         {
             Min = Minimum;
             Max = Maximum;
@@ -34,7 +34,7 @@ namespace SharpCraft
         /// Creates a range which only contains one number
         /// </summary>
         /// <param name="Equals">The only number the range contains</param>
-        public Range(double Equals)
+        public MCRange(double Equals)
         {
             Min = Equals;
             Max = Equals;
@@ -165,9 +165,63 @@ namespace SharpCraft
         /// Converts a single number into a range only containing that number
         /// </summary>
         /// <param name="exactNumber">The number the range contains</param>
-        public static implicit operator Range(double exactNumber)
+        public static implicit operator MCRange(double exactNumber)
         {
-            return new Range(exactNumber);
+            return new MCRange(exactNumber);
+        }
+
+        /// <summary>
+        /// Implicit converts a <see cref="Range"/> into a <see cref="MCRange"/>
+        /// </summary>
+        /// <param name="range">The range to convert</param>
+        public static implicit operator MCRange(Range range)
+        {
+            int val1 = range.Start.IsFromEnd ? -range.Start.Value : range.Start.Value;
+            int val2 = range.End.IsFromEnd ? -range.End.Value : range.End.Value;
+            
+            if (val1 > val2 && val1 != 0 && val2 != 0)
+            {
+                throw new InvalidCastException("Failed to convert Range to MCRange. Value1 has to be lower than value2.");
+            }
+
+            if (val1 == 0)
+            {
+                if (val1 > val2)
+                {
+                    return new MCRange(null, val2);
+                }
+                else
+                {
+                    throw new InvalidCastException("Failed to convert Range to MCRange. Failed to convert range starting position: Couldn't see if position doesn't exist or is 0. Use MCRange instead.");
+                }
+            }
+            if (val2 == 0)
+            {
+                if (val1 > val2)
+                {
+                    return new MCRange(val1, null);
+                }
+                else
+                {
+                    throw new InvalidCastException("Failed to convert Range to MCRange. Failed to convert range ending position: Couldn't see if position doesn't exist or is 0. Use MCRange instead.");
+                }
+            }
+            return new MCRange(val1,val2);
+        }
+
+        /// <summary>
+        /// Converts a <see cref="Index"/> into a <see cref="Range"/>
+        /// </summary>
+        /// <param name="index">The index to convert</param>
+        public static implicit operator MCRange(Index index)
+        {
+            int value = index.Value;
+            if (index.IsFromEnd)
+            {
+                value = -Math.Abs(value);
+            }
+
+            return new MCRange(value);
         }
     }
 }

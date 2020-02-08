@@ -49,7 +49,7 @@ namespace SharpCraft
             /// the amount of levels the player has
             /// </summary>
             [DataTag("player.level", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-            public Range Levels { get; set; }
+            public MCRange Levels { get; set; }
 
             /// <summary>
             /// The gamemode the player is in

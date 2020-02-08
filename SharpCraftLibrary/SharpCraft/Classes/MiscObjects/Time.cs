@@ -44,15 +44,12 @@ namespace SharpCraft
         /// <returns>Raw data used by the game</returns>
         public string GetTimeString()
         {
-            switch(_timeType)
+            return _timeType switch
             {
-                case ID.TimeType.days:
-                    return _time + "d";
-                case ID.TimeType.seconds:
-                    return _time + "s";
-                default:
-                    return _time + "t";
-            }
+                ID.TimeType.days => _time + "d",
+                ID.TimeType.seconds => _time + "s",
+                _ => _time + "t",
+            };
         }
 
         /// <summary>
@@ -86,15 +83,12 @@ namespace SharpCraft
                 {
                     try
                     {
-                        switch (_timeType)
+                        return _timeType switch
                         {
-                            case ID.TimeType.days:
-                                return _time * 24000;
-                            case ID.TimeType.seconds:
-                                return _time * 20;
-                            default:
-                                return _time;
-                        }
+                            ID.TimeType.days => _time * 24000,
+                            ID.TimeType.seconds => _time * 20,
+                            _ => _time,
+                        };
                     }
                     catch (OverflowException)
                     {
@@ -105,15 +99,12 @@ namespace SharpCraft
                 {
                     try
                     {
-                        switch (_timeType)
+                        return _timeType switch
                         {
-                            case ID.TimeType.days:
-                                return (short)(_time * 24000);
-                            case ID.TimeType.seconds:
-                                return (short)(_time * 20);
-                            default:
-                                return (short)_time;
-                        }
+                            ID.TimeType.days => (short)(_time * 24000),
+                            ID.TimeType.seconds => (short)(_time * 20),
+                            _ => (short)_time,
+                        };
                     }
                     catch (OverflowException)
                     {
@@ -131,30 +122,19 @@ namespace SharpCraft
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
-            long savedTime;
-            switch (_timeType)
+            var savedTime = _timeType switch
             {
-                case ID.TimeType.days:
-                    savedTime =  _time * 24000;
-                    break;
-                case ID.TimeType.seconds:
-                    savedTime = _time * 20;
-                    break;
-                default:
-                    savedTime = _time;
-                    break;
-            }
-            switch (asType)
+                ID.TimeType.days => _time * 24000,
+                ID.TimeType.seconds => _time * 20,
+                _ => _time,
+            };
+            return asType switch
             {
-                case ID.NBTTagType.TagInt:
-                    return new DataPartTag((int)savedTime);
-                case ID.NBTTagType.TagShort:
-                    return new DataPartTag((short)savedTime);
-                case ID.NBTTagType.TagLong:
-                    return new DataPartTag(savedTime);
-                default:
-                    throw new ArgumentException("Cannot convert time into a " + asType + " object");
-            }
+                ID.NBTTagType.TagInt => new DataPartTag((int)savedTime),
+                ID.NBTTagType.TagShort => new DataPartTag((short)savedTime),
+                ID.NBTTagType.TagLong => new DataPartTag(savedTime),
+                _ => throw new ArgumentException("Cannot convert time into a " + asType + " object"),
+            };
         }
     }
 }

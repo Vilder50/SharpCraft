@@ -49,12 +49,10 @@ namespace SharpCraft.Tests.PackItems
         public void TestBaseDatapack()
         {
             //setup
-            using (BaseDatapack pack = new DatapackTestClass("a path", "nAme"))
-            {
-                //test
-                Assert.AreEqual("a path", pack.Path, "Path is not getting set by the constructor");
-                Assert.AreEqual("name", pack.Name, "Name is not getting set by the constructor");
-            }
+            using BaseDatapack pack = new DatapackTestClass("a path", "nAme");
+            //test
+            Assert.AreEqual("a path", pack.Path, "Path is not getting set by the constructor");
+            Assert.AreEqual("name", pack.Name, "Name is not getting set by the constructor");
         }
 
         [TestMethod]
@@ -80,21 +78,19 @@ namespace SharpCraft.Tests.PackItems
         public void TestNamespace()
         {
             //setup
-            using (BaseDatapack pack = new DatapackTestClass("a path", "name"))
-            {
-                //test
-                BasePackNamespace space1 = pack.Namespace<NamespaceTestClass>("namespace");
-                BasePackNamespace space2 = pack.Namespace<NamespaceTestClass>("namespace");
-                BasePackNamespace space3 = pack.Namespace<NamespaceTestClass>("potato");
+            using BaseDatapack pack = new DatapackTestClass("a path", "name");
+            //test
+            BasePackNamespace space1 = pack.Namespace<NamespaceTestClass>("namespace");
+            BasePackNamespace space2 = pack.Namespace<NamespaceTestClass>("namespace");
+            BasePackNamespace space3 = pack.Namespace<NamespaceTestClass>("potato");
 
-                Assert.IsTrue(space1.IsSetup, "namespace was not setup");
-                Assert.AreEqual("namespace", space1.Name, "Namespace did not get correct name");
-                Assert.AreEqual(space1, space2, "namespace failed to find and return existing namespace");
-                Assert.AreEqual("potato", space3.Name, "Namespace failed to add extra namespace");
-                Assert.AreNotEqual(space1, space3, "Namespace failed to output correct namespace");
+            Assert.IsTrue(space1.IsSetup, "namespace was not setup");
+            Assert.AreEqual("namespace", space1.Name, "Namespace did not get correct name");
+            Assert.AreEqual(space1, space2, "namespace failed to find and return existing namespace");
+            Assert.AreEqual("potato", space3.Name, "Namespace failed to add extra namespace");
+            Assert.AreNotEqual(space1, space3, "Namespace failed to output correct namespace");
 
-                Assert.ThrowsException<ArgumentException>(() => new NamespaceTestClass(pack, "namespace"), "Cannot have 2 namespaces with the same name");
-            }
+            Assert.ThrowsException<ArgumentException>(() => new NamespaceTestClass(pack, "namespace"), "Cannot have 2 namespaces with the same name");
         }
 
         [TestMethod]
@@ -117,12 +113,10 @@ namespace SharpCraft.Tests.PackItems
         public void TestEmptyDatapack()
         {
             Assert.AreEqual(EmptyDatapack.GetPack(), EmptyDatapack.GetPack(), "Empty Datapack doesn't return the same datapack");
-            using (BaseDatapack pack = new EmptyDatapack("pack"))
-            {
-                Assert.AreEqual("\"file/pack\"", pack.IngameName, "Empty datapack doesn't return correct name");
-                ((EmptyDatapack)pack).FileDatapack = false;
-                Assert.AreEqual("pack", pack.IngameName, "Empty datapack doesn't return correct name");
-            }
+            using BaseDatapack pack = new EmptyDatapack("pack");
+            Assert.AreEqual("\"file/pack\"", pack.IngameName, "Empty datapack doesn't return correct name");
+            ((EmptyDatapack)pack).FileDatapack = false;
+            Assert.AreEqual("pack", pack.IngameName, "Empty datapack doesn't return correct name");
         }
 
         [TestMethod]
@@ -167,19 +161,17 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestFileAddListener()
         {
-            using (Datapack pack = new Datapack("a path","name", ".", 4, new NoneFileCreator()))
+            using Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator());
+            bool fileAdded = false;
+            PackNamespace space = pack.Namespace("space");
+            space.Function("test1");
+            pack.AddNewFileListener((file) =>
             {
-                bool fileAdded = false;
-                PackNamespace space = pack.Namespace("space");
-                space.Function("test1");
-                pack.AddNewFileListener((file) => 
-                {
-                    fileAdded = true;
-                });
-                Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
-                space.Function("test2");
-                Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
-            }
+                fileAdded = true;
+            });
+            Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
+            space.Function("test2");
+            Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
         }
     }
 }

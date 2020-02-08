@@ -12,14 +12,14 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class TimeCondition : BaseCondition
     {
-        private Range time;
+        private MCRange time;
 
         /// <summary>
         /// Intializes a new <see cref="TimeCondition"/>
         /// </summary>
         /// <param name="modulo">the value of time to check for</param>
         /// <param name="time">The number to modulo the real time with</param>
-        public TimeCondition(Range time, int? modulo) : base("minecraft:time_check")
+        public TimeCondition(MCRange time, int? modulo) : base("minecraft:time_check")
         {
             Time = time;
             Modulo = modulo;
@@ -29,7 +29,7 @@ namespace SharpCraft.Conditions
         /// the value of time to check for
         /// </summary>
         [DataTag("value", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Time { get => time; set => time = value ?? throw new ArgumentNullException(nameof(Time),"Time may not be null"); }
+        public MCRange Time { get => time; set => time = value ?? throw new ArgumentNullException(nameof(Time),"Time may not be null"); }
 
         /// <summary>
         /// The number to modulo the real time with

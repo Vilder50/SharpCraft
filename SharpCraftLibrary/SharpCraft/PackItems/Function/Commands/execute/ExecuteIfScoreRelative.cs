@@ -101,31 +101,16 @@ namespace SharpCraft.Commands
         /// <returns>score [Selector1] [Objective1] [Operator] [Selector2] [Objective2]</returns>
         protected override string GetCheckPart()
         {
-            string OperationString;
-
-            switch (Operator)
+            string OperationString = Operator switch
             {
-                case ID.IfScoreOperation.Equel:
-                    OperationString = "=";
-                    break;
-                case ID.IfScoreOperation.Higher:
-                    OperationString = ">";
-                    break;
-                case ID.IfScoreOperation.HigherOrEquel:
-                    OperationString = ">=";
-                    break;
-                case ID.IfScoreOperation.Smaller:
-                    OperationString = "<";
-                    break;
-                case ID.IfScoreOperation.SmallerOrEquel:
-                    OperationString = "<=";
-                    break;
+                ID.IfScoreOperation.Equel => "=",
+                ID.IfScoreOperation.Higher => ">",
+                ID.IfScoreOperation.HigherOrEquel => ">=",
+                ID.IfScoreOperation.Smaller => "<",
+                ID.IfScoreOperation.SmallerOrEquel => "<=",
 
-                default:
-                    OperationString = "=";
-                    break;
-            }
-
+                _ => "=",
+            };
             return "score " + Selector1.GetSelectorString() + " " + Objective1.Name + " " + OperationString + " " + Selector2.GetSelectorString() + " " + Objective2.Name;
         }
     }

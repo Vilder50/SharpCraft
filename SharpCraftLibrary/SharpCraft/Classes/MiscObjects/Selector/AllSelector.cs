@@ -15,7 +15,7 @@ namespace SharpCraft
         /// <returns>A singleton <see cref="AllSelector"/></returns>
         public static BaseSelector GetSelector()
         {
-            singleton = singleton ?? new AllSelector();
+            singleton ??= new AllSelector();
             return singleton;
         }
 

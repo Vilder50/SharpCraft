@@ -12,13 +12,13 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class CountChange : BaseChange
     {
-        private Range count;
+        private MCRange count;
 
         /// <summary>
         /// Intializes a new <see cref="CountChange"/>
         /// </summary>
         /// <param name="count">The amount of items</param>
-        public CountChange(Range count) : base("set_count")
+        public CountChange(MCRange count) : base("set_count")
         {
             Count = count;
         }
@@ -27,6 +27,6 @@ namespace SharpCraft.LootObjects
         /// The amount of items in each stack
         /// </summary>
         [DataTag("count", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Count { get => count; set => count = value ?? throw new ArgumentNullException(nameof(count), "Count may not be null"); }
+        public MCRange Count { get => count; set => count = value ?? throw new ArgumentNullException(nameof(count), "Count may not be null"); }
     }
 }

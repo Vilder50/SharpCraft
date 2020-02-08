@@ -27,18 +27,18 @@ namespace SharpCraft.AdvancementObjects
         /// The amount of empty slots
         /// </summary>
         [DataTag("conditions.slots.empty","min","max",ID.NBTTagType.TagInt,true, JsonTag = true)]
-        public Range EmptySlots { get; set; }
+        public MCRange EmptySlots { get; set; }
 
         /// <summary>
         /// The amount of full slots
         /// </summary>
         [DataTag("conditions.slots.full", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range FullSlots { get; set; }
+        public MCRange FullSlots { get; set; }
 
         /// <summary>
         /// The amount of occupied slots
         /// </summary>
         [DataTag("conditions.slots.occupied", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range OccupiedSlots { get; set; }
+        public MCRange OccupiedSlots { get; set; }
     }
 }

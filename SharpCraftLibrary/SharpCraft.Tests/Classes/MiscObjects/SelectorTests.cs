@@ -43,15 +43,15 @@ namespace SharpCraft.Tests.MiscObjects
             {
                 BoxX = 1,
                 Y = 2,
-                Level = new Range(1,5)
+                Level = new MCRange(1,5)
             }.GetSelectorString(), "Selector doesn't add parts together correctly");
             Assert.AreEqual("@s", new SharpCraft.Selector().GetSelectorString(), "Simple selector doesn't return correct string");
 
             Assert.AreEqual("@s[x=1.3,y=2.2,z=3.1]", new SharpCraft.Selector() { X = 1.3, Y = 2.2, Z = 3.1 }.GetSelectorString(), "Selector coordinates doesn't return correct string");
             Assert.AreEqual("@s[dx=1.3,dy=2.2,dz=3.1]", new SharpCraft.Selector() { BoxX = 1.3, BoxY = 2.2, BoxZ = 3.1 }.GetSelectorString(), "Selector box coordinates doesn't return correct string");
-            Assert.AreEqual("@s[x_rotation=1.1..3.3,y_rotation=4..6]", new SharpCraft.Selector() { XRotation = new Range(1.1,3.3), YRotation = new Range(4,6) }.GetSelectorString(), "Selector rotation doesn't return correct string");
-            Assert.AreEqual("@s[distance=..1]", new SharpCraft.Selector() { Distance = new Range(null, 1) }.GetSelectorString(), "Selector distance doesn't return correct string");
-            Assert.AreEqual("@s[level=..1]", new SharpCraft.Selector() { Level = new Range(null, 1) }.GetSelectorString(), "Selector level doesn't return correct string");
+            Assert.AreEqual("@s[x_rotation=1.1..3.3,y_rotation=4..6]", new SharpCraft.Selector() { XRotation = new MCRange(1.1,3.3), YRotation = new MCRange(4,6) }.GetSelectorString(), "Selector rotation doesn't return correct string");
+            Assert.AreEqual("@s[distance=..1]", new SharpCraft.Selector() { Distance = new MCRange(null, 1) }.GetSelectorString(), "Selector distance doesn't return correct string");
+            Assert.AreEqual("@s[level=..1]", new SharpCraft.Selector() { Level = new MCRange(null, 1) }.GetSelectorString(), "Selector level doesn't return correct string");
             Assert.AreEqual("@s[sort=random]", new SharpCraft.Selector() { Sort = ID.Sort.random }.GetSelectorString(), "Selector sort doesn't return correct string");
             Assert.AreEqual("@s[nbt={Size:1}]", new SharpCraft.Selector() { NBT = new Entity.Slime(null) { Size = 1 } }.GetSelectorString(), "Selector nbt doesn't return correct string");
             Assert.AreEqual("@s[nbt=!{Size:1}]", new SharpCraft.Selector() { NBT = new Entity.Slime(null) { Size = 1 }, NotNBT = true }.GetSelectorString(), "Selector nbt not doesn't return correct string");
@@ -63,7 +63,7 @@ namespace SharpCraft.Tests.MiscObjects
                 SingleTag = "tagtag",
                 SinglePredicate = new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name"),
                 SingleMode = ID.Gamemode.creative,
-                SingleScore = new SharpCraft.Selector.EntityScore(new Objective("objective"), new Range(1,2)),
+                SingleScore = new SharpCraft.Selector.EntityScore(new Objective("objective"), new MCRange(1,2)),
                 SingleTeam = new Team("myteam")
             }.GetSelectorString(), "Selector multiple doesn't return correct string");
 
@@ -103,9 +103,9 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestScoreSelectorClass()
         {
-            Assert.AreEqual("objective=1..2", new SharpCraft.Selector.EntityScore(new Objective("objective"), new Range(1, 2)).GetSelectionString(), "EntityScore doesn't return correct string");
+            Assert.AreEqual("objective=1..2", new SharpCraft.Selector.EntityScore(new Objective("objective"), new MCRange(1, 2)).GetSelectionString(), "EntityScore doesn't return correct string");
             Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(new Objective("objective"), null), "Score may not be null");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(null, new Range(1, 2)), "Objective may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(null, new MCRange(1, 2)), "Objective may not be null");
         }
 
         [TestMethod]

@@ -104,13 +104,11 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void RunFunctionCommandTest()
         {
-            using (EmptyDatapack datapack = new EmptyDatapack("pack"))
-            {
-                EmptyFunction function = new EmptyFunction(datapack.Namespace("space"), "function");
-                Assert.AreEqual("function space:function", new RunFunctionCommand(function).GetCommandString());
+            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            EmptyFunction function = new EmptyFunction(datapack.Namespace("space"), "function");
+            Assert.AreEqual("function space:function", new RunFunctionCommand(function).GetCommandString());
 
-                Assert.ThrowsException<ArgumentNullException>(() => new RunFunctionCommand(null));
-            }
+            Assert.ThrowsException<ArgumentNullException>(() => new RunFunctionCommand(null));
         }
 
         [TestMethod]

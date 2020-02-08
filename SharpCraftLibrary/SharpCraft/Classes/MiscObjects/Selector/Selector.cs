@@ -36,22 +36,22 @@ namespace SharpCraft
         /// <summary>
         /// The amount of levels the selected entity must have to be selected
         /// </summary>
-        public Range Level { get; set; }
+        public MCRange Level { get; set; }
 
         /// <summary>
         /// The distance there has to be to the selected entity
         /// </summary>
-        public Range Distance { get; set; }
+        public MCRange Distance { get; set; }
 
         /// <summary>
         /// The x-rotation the selected entity must have (Vertical rotation. 90 = down, -90 = up)
         /// </summary>
-        public Range XRotation { get; set; }
+        public MCRange XRotation { get; set; }
 
         /// <summary>
         /// The y-rotation the selected entity must have (Horizontal rotation. 0 = +z, 90 = -x)
         /// </summary>
-        public Range YRotation { get; set; }
+        public MCRange YRotation { get; set; }
 
         /// <summary>
         /// The maximum amount of entities this selector can select
@@ -418,14 +418,14 @@ namespace SharpCraft
         public class EntityScore : ISelectorArgument
         {
             private Objective objective;
-            private Range score;
+            private MCRange score;
 
             /// <summary>
             /// Creates an object defining a score an entity has to have
             /// </summary>
             /// <param name="objective">The score objective to look in</param>
             /// <param name="score">The range the score has to be inside</param>
-            public EntityScore(Objective objective, Range score)
+            public EntityScore(Objective objective, MCRange score)
             {
                 Objective = objective;
                 Score = score;
@@ -439,7 +439,7 @@ namespace SharpCraft
             /// <summary>
             /// The range the score has to be inside
             /// </summary>
-            public Range Score { get => score; set => score = value ?? throw new ArgumentNullException(nameof(Score), "Score may not be null"); }
+            public MCRange Score { get => score; set => score = value ?? throw new ArgumentNullException(nameof(Score), "Score may not be null"); }
 
             /// <summary>
             /// The <see cref="EntityScore"/>'s raw data

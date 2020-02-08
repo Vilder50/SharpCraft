@@ -234,10 +234,8 @@ namespace SharpCraft
                 }
                 else
                 {
-                    using (TextWriter writer = GetStream())
-                    {
-                        WriteFile(writer);
-                    }
+                    using TextWriter writer = GetStream();
+                    WriteFile(writer);
                 }
                 AfterDispose();
                 Disposed = true;

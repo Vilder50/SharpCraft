@@ -47,10 +47,8 @@ namespace SharpCraft
         protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, bool _) : base(path, packName, fileCreator)
         {
             FileCreator.CreateDirectory(Path + "\\" + Name);
-            using (TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta"))
-            {
-                metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
-            }
+            using TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta");
+            metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
         }
 
         /// <summary>
@@ -85,7 +83,7 @@ namespace SharpCraft
         /// <returns>An empty datapack</returns>
         public static EmptyDatapack GetPack()
         {
-            emptyPack = emptyPack ?? new EmptyDatapack("vanilla", false);
+            emptyPack ??= new EmptyDatapack("vanilla", false);
             return emptyPack;
         }
 

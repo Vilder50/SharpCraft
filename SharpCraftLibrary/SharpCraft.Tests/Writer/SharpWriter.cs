@@ -78,14 +78,13 @@ namespace SharpCraft.Tests.Writer
         {
             //setup
             Writer1.Calls = "";
-            using (Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator()))
-            {
-                //test
-                SharpWriter.RunNamespaceWriters<ISharpWriterNamespace>(pack);
-                Assert.AreEqual("", Writer1.Calls, "Namespace shouldn't have been called since it's in a different assembly");
-                SharpWriter.RunNamespaceWriters<ISharpWriterNamespace>(pack, true);
-                Assert.AreEqual("namespace", Writer1.Calls, "Writers doesn't get namespaces correctly");
-            }
+            using Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator());
+
+            //test
+            SharpWriter.RunNamespaceWriters<ISharpWriterNamespace>(pack);
+            Assert.AreEqual("", Writer1.Calls, "Namespace shouldn't have been called since it's in a different assembly");
+            SharpWriter.RunNamespaceWriters<ISharpWriterNamespace>(pack, true);
+            Assert.AreEqual("namespace", Writer1.Calls, "Writers doesn't get namespaces correctly");
         }
     }
 }

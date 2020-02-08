@@ -26,7 +26,7 @@ namespace SharpCraft
         /// <returns>The converted double</returns>
         public static string ToMinecraftDouble(this double Double)
         {
-            return Double.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+            return Double.ToString().Replace(",", ".");
         }
         /// <summary>
         /// Converts the given double into a double Minecraft can use
@@ -35,7 +35,7 @@ namespace SharpCraft
         /// <returns>The converted double</returns>
         public static string ToMinecraftDouble(this double? Double)
         {
-            return Double.Value.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+            return Double.Value.ToString().Replace(",", ".");
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace SharpCraft
         /// <returns>The converted float</returns>
         public static string ToMinecraftFloat(this float Float)
         {
-            return Float.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+            return Float.ToString().Replace(",", ".");
         }
         /// <summary>
         /// Converts the given float into a float Minecraft can use
@@ -54,7 +54,7 @@ namespace SharpCraft
         /// <returns>The converted float</returns>
         public static string ToMinecraftFloat(this float? Float)
         {
-            return Float.Value.ToString("F16").TrimEnd('0').TrimEnd(',').Replace(",", ".");
+            return Float.Value.ToString().Replace(",", ".");
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace SharpCraft
                 {
                     TempArray[i] = jsonArray[i].GetJsonString();
                 }
-                return firstItemString.Substring(0, firstItemString.Length - 1) + ",extra:[" + string.Join(",", TempArray) + "]}";
+                return firstItemString[0..^1] + ",extra:[" + string.Join(",", TempArray) + "]}";
             }
             else
             {

@@ -149,15 +149,15 @@ namespace SharpCraft
                     setup.Entity.Data.Get(new Selector(), "Rotation[1]");
                 });
 
-                Range checkRange = new Range(-0.3, 0.3);
+                MCRange checkRange = new MCRange(-0.3, 0.3);
 #pragma warning disable IDE0067
                 Predicate checkXBlock = SharpCraftNamespace.Predicate("raycast\\block\\x", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { X = checkRange } }));
                 Predicate checkYBlock = SharpCraftNamespace.Predicate("raycast\\block\\y", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Y = checkRange } }));
                 Predicate checkZBlock = SharpCraftNamespace.Predicate("raycast\\block\\z", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Z = checkRange } }));
-                Predicate lookNegativeY = SharpCraftNamespace.Predicate("raycast\\block\\py", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new Range(-90, 0))));
-                Predicate lookPositiveY = SharpCraftNamespace.Predicate("raycast\\block\\ny", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new Range(0, 90))));
-                Predicate lookPositiveZ = SharpCraftNamespace.Predicate("raycast\\block\\pz", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(-90, 90))));
-                Predicate lookNegativeX = SharpCraftNamespace.Predicate("raycast\\block\\nx", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(0, 180))));
+                Predicate lookNegativeY = SharpCraftNamespace.Predicate("raycast\\block\\py", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(-90, 0))));
+                Predicate lookPositiveY = SharpCraftNamespace.Predicate("raycast\\block\\ny", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(0, 90))));
+                Predicate lookPositiveZ = SharpCraftNamespace.Predicate("raycast\\block\\pz", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 90))));
+                Predicate lookNegativeX = SharpCraftNamespace.Predicate("raycast\\block\\nx", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 180))));
 #pragma warning restore IDE0067
                 predicates.Add(lookNegativeY);
                 predicates.Add(lookPositiveY);
@@ -170,10 +170,10 @@ namespace SharpCraft
                 predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpy", checkYBlock.GetCondition() | !lookPositiveY.GetCondition()));
 
                 predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\xyz", checkXBlock.GetCondition() | checkYBlock.GetCondition() | checkZBlock.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d0", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(-90, 0)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d1", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(0, 90)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d2", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(90, 180)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d3", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new Range(-180, -90)))));
+                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d0", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 0)))));
+                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d1", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 90)))));
+                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d2", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(90, 180)))));
+                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d3", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-180, -90)))));
             }
             else
             {

@@ -27,12 +27,12 @@ namespace SharpCraft.AdvancementObjects
         /// The amount of durability used
         /// </summary>
         [DataTag("conditions.delta","min","max",ID.NBTTagType.TagInt,true, JsonTag = true)]
-        public Range DurabilityUsed { get; set; }
+        public MCRange DurabilityUsed { get; set; }
 
         /// <summary>
         /// The amount of durability left on the item
         /// </summary>
         [DataTag("conditions.durability", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range DurabilityLeft { get; set; }
+        public MCRange DurabilityLeft { get; set; }
     }
 }

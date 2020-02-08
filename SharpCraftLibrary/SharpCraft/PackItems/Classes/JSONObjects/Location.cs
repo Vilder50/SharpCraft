@@ -32,25 +32,25 @@ namespace SharpCraft
             /// the x coordinate to detect
             /// </summary>
             [DataTag("position.x","min","max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public Range X { get; set; }
+            public MCRange X { get; set; }
 
             /// <summary>
             /// the y coordinate to detect
             /// </summary>
             [DataTag("position.y", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public Range Y { get; set; }
+            public MCRange Y { get; set; }
 
             /// <summary>
             /// the z coordinate to detect
             /// </summary>
             [DataTag("position.z", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public Range Z { get; set; }
+            public MCRange Z { get; set; }
 
             /// <summary>
             /// the light level to check for
             /// </summary>
             [DataTag("light.light", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-            public Range Light { get; set; }
+            public MCRange Light { get; set; }
 
             /// <summary>
             /// The block at the location

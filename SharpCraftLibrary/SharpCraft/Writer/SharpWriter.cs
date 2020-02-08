@@ -63,12 +63,19 @@ namespace SharpCraft.Writer
 
             foreach (Assembly assembly in assemblies)
             {
-                foreach (Type type in assembly.GetTypes())
+                try
                 {
-                    if (type.IsClass && !type.IsAbstract && tWriterType.IsAssignableFrom(type))
+                    foreach (Type type in assembly.GetTypes())
                     {
-                        writers.Add((TWriter)Activator.CreateInstance(type));
+                        if (type.IsClass && !type.IsAbstract && tWriterType.IsAssignableFrom(type))
+                        {
+                            writers.Add((TWriter)Activator.CreateInstance(type));
+                        }
                     }
+                }
+                catch
+                {
+
                 }
             }
 

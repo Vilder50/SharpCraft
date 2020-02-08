@@ -13,7 +13,7 @@ namespace SharpCraft.Commands
     {
         private BaseSelector selector;
         private Objective objective;
-        private Range range;
+        private MCRange range;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfScoreMatches"/> command
@@ -22,7 +22,7 @@ namespace SharpCraft.Commands
         /// <param name="objective">The <see cref="SharpCraft.Objective"/> to get the score for <see cref="Selector"/> from</param>
         /// <param name="range">The range the score should be inside</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfScoreMatches(BaseSelector selector, Objective objective, Range range, bool executeIf = true) : base(executeIf)
+        public ExecuteIfScoreMatches(BaseSelector selector, Objective objective, MCRange range, bool executeIf = true) : base(executeIf)
         {
             Selector = selector;
             Objective = objective;
@@ -60,7 +60,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The range the score should be inside
         /// </summary>
-        public Range Range
+        public MCRange Range
         {
             get => range;
             set

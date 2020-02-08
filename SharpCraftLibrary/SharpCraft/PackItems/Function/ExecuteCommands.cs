@@ -199,14 +199,14 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes if the given <see cref="BaseSelector"/>'s score is in the given <see cref="Range"/>
+        /// Executes if the given <see cref="BaseSelector"/>'s score is in the given <see cref="MCRange"/>
         /// </summary>
         /// <param name="selector">the <see cref="BaseSelector"/>'s score to check</param>
         /// <param name="scoreObject">the <see cref="Objective"/> to containing the score</param>
-        /// <param name="range">the <see cref="Range"/> the score should be in</param>
+        /// <param name="range">the <see cref="MCRange"/> the score should be in</param>
         /// <param name="want">false if it should execute when it's false</param>
         /// <returns>The function running the command</returns>
-        public Function IfScore(BaseSelector selector, Objective scoreObject, Range range, bool want = true)
+        public Function IfScore(BaseSelector selector, Objective scoreObject, MCRange range, bool want = true)
         {
             selector.LimitSelector();
             Function.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
