@@ -572,19 +572,7 @@ namespace SharpCraft.FunctionWriters
         #endregion
 
         #region ray cast
-        /// <summary>
-        /// Shots a ray which stops and run commands when it hits a block.
-        /// </summary>
-        /// <param name="rayName">The name of the ray</param>
-        /// <param name="hit">Block type the ray should be able to hit. Leave null to make the ray hit everything.</param>
-        /// <param name="ignore">Block type the ray shouldn't be able to hit. Leave null for no ignored blocks.</param>
-        /// <param name="length">The amount of blocks the ray should travel</param>
-        /// <param name="onHit">The commands to run when the ray hits a block.</param>
-        /// <param name="stepCommands">Commands to run for every block the ray moves.</param>
-        /// <remarks>
-        /// Running ray cast from within a ray cast might lead to unexpected results.
-        /// </remarks>
-        public void RayCast(string rayName, Block hit, Block ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter stepCommands = null)
+        private static void ValidateRayParams(string rayName, double length, Function.FunctionWriter onHit)
         {
             if (string.IsNullOrWhiteSpace(rayName))
             {
@@ -602,6 +590,23 @@ namespace SharpCraft.FunctionWriters
             {
                 throw new ArgumentOutOfRangeException(nameof(length), "Ray length may not be smaller or equal to 0");
             }
+        }
+
+        /// <summary>
+        /// Shots a ray which stops and run commands when it hits a block.
+        /// </summary>
+        /// <param name="rayName">The name of the ray</param>
+        /// <param name="hit">Block type the ray should be able to hit. Leave null to make the ray hit everything.</param>
+        /// <param name="ignore">Block type the ray shouldn't be able to hit. Leave null for no ignored blocks.</param>
+        /// <param name="length">The amount of blocks the ray should travel</param>
+        /// <param name="onHit">The commands to run when the ray hits a block.</param>
+        /// <param name="stepCommands">Commands to run for every block the ray moves.</param>
+        /// <remarks>
+        /// Running ray cast from within a ray cast might lead to unexpected behavior.
+        /// </remarks>
+        public void RayCast(string rayName, Block hit, Block ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter stepCommands = null)
+        {
+            ValidateRayParams(rayName, length, onHit);
 
             Objective math = SharpCraftFiles.GetMathScoreObject();
             var (raySetup, xRotation, yRotation, rayState, predicates) = SharpCraftFiles.GetRayFiles();
@@ -733,6 +738,130 @@ namespace SharpCraft.FunctionWriters
                     }));
                 }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
             }));
+        }
+
+        /// <summary>
+        /// Shots a ray which runs commands for every entity it hits
+        /// </summary>
+        /// <param name="rayName">The name of the ray</param>
+        /// <param name="hit">Selector selecting entities the ray should be able to hit. Leave null for all entities</param>
+        /// <param name="ignore">Selector selecting entities the ray shouldn't be able to hit. Leave null for no ignored entities</param>
+        /// <param name="length">The amount of blocks he ray should travel.</param>
+        /// <param name="onHit">The commands to run when the ray hits an entity</param>
+        /// <param name="hitSelfAble">If the ray should be able to hit the executor</param>
+        public void RayCast(string rayName, Selector hit, Selector ignore, double length, Function.FunctionWriter onHit, bool hitSelfAble = false)
+        {
+            ValidateRayParams(rayName, length, onHit);
+
+            Tag rayShooterTag = "SharpRayShooter";
+            Selector.EntityTag ignoreTag = new Selector.EntityTag(rayShooterTag, false);
+
+            int boxes = 2;
+            Function getStep(double number, int depth)
+            {
+                Function outFunction = Function.NewSibling(rayName + "\\r" + depth);
+
+                if (number > boxes)
+                {
+                    Function nextStep = getStep(number / boxes, depth + 1);
+
+                    double boxSize = number / boxes;
+                    double realBoxSize = boxSize - 1;
+                    for (int i = 0; i < boxes; i++)
+                    {
+                        double offset = boxSize * i + boxSize / 2;
+                        outFunction.Execute.Positioned(new LocalCoords(0, 0, offset));
+                        outFunction.Execute.Positioned(new Coords(boxSize / -2));
+                        outFunction.Execute.IfEntity(new Selector(ID.Selector.s) { BoxX = realBoxSize, BoxY = realBoxSize, BoxZ = realBoxSize });
+                        outFunction.Execute.Positioned(new Coords(boxSize / 2));
+                        outFunction.Execute.Positioned(new LocalCoords(0, 0, boxSize / -2));
+                        outFunction.World.Function(nextStep);
+                    }
+                }
+                else if (number > 0.1)
+                {
+                    Function nextStep = getStep(number / boxes, depth + 1);
+
+                    double boxSize = number / boxes;
+                    double realBoxSize = boxSize - 1;
+                    for (int i = 0; i < boxes; i++)
+                    {
+                        double offset = boxSize * i + boxSize / 2;
+                        outFunction.Execute.Positioned(new LocalCoords(0, 0, offset));
+                        outFunction.Execute.Positioned(new Coords(boxSize / -2));
+                        outFunction.Execute.IfEntity(new Selector(ID.Selector.s) { BoxX = 0, BoxY = 0, BoxZ = 0 });
+                        outFunction.Execute.Positioned(new Coords(boxSize - 1));
+                        outFunction.Execute.IfEntity(new Selector(ID.Selector.s) { BoxX = 0, BoxY = 0, BoxZ = 0 });
+                        outFunction.Execute.Positioned(new Coords(boxSize / 2) + new Coords(boxSize - 1) * -1);
+                        outFunction.Execute.Positioned(new LocalCoords(0, 0, boxSize / -2));
+                        outFunction.World.Function(nextStep);
+                    }
+                }
+                else
+                {
+                    outFunction.Execute.IfEntity(new Selector(ID.Selector.s) { BoxX = 0, BoxY = 0, BoxZ = 0 });
+                    outFunction.Execute.Positioned(new Coords(-1));
+                    outFunction.Execute.IfEntity(new Selector(ID.Selector.s) { BoxX = 0, BoxY = 0, BoxZ = 0 });
+                    outFunction.Execute.Positioned(new Coords(1));
+                    outFunction.World.Function(outFunction.NewSibling("hit", onHit));
+                }
+
+                return outFunction;
+            }
+
+            if (hitSelfAble)
+            {
+                if (!(hit is null))
+                {
+                    Function.Execute.As(hit);
+                }
+                else
+                {
+                    Function.Execute.As(ID.Selector.e);
+                }
+                if (!(ignore is null))
+                {
+                    Selector selector = ignore.ShallowClone();
+                    selector.SelectorType = ID.Selector.s;
+                    Function.Execute.IfEntity(selector, false);
+                }
+                Function.World.Function(getStep(length, 0));
+            }
+            else
+            {
+                Function.World.Function(Function.NewSibling(rayName + "\\start", start =>
+                {
+                    start.Entity.Tag.Add(ID.Selector.s, rayShooterTag);
+                    if (!(hit is null))
+                    {
+                        Selector selector = hit.ShallowClone();
+                        if (!(selector.Tags is null))
+                        {
+                            Selector.EntityTag[] newTags = new Selector.EntityTag[selector.Tags.Length + 1];
+                            Array.Copy(selector.Tags, newTags, selector.Tags.Length);
+                            newTags[newTags.Length - 1] = ignoreTag;
+                            selector.Tags = newTags;
+                        }
+                        else
+                        {
+                            selector.Tags = ignoreTag;
+                        }
+                        start.Execute.As(selector);
+                    }
+                    else
+                    {
+                        start.Execute.IfEntity(new Selector(ID.Selector.e) { Tags = ignoreTag });
+                    }
+                    if (!(ignore is null))
+                    {
+                        Selector selector = ignore.ShallowClone();
+                        selector.SelectorType = ID.Selector.s;
+                        start.Execute.IfEntity(selector, false);
+                    }
+                    start.World.Function(getStep(length, 0));
+                    start.Entity.Tag.Remove(ID.Selector.s, rayShooterTag);
+                }));
+            }
         }
         #endregion
     }

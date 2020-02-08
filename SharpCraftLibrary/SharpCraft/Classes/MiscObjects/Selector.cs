@@ -914,5 +914,14 @@ namespace SharpCraft
             }
             return string.Join(",", tempList);
         }
+
+        /// <summary>
+        /// Returns a shallow clone of this selector
+        /// </summary>
+        /// <returns>A shallow clone of this selector</returns>
+        public virtual Selector ShallowClone()
+        {
+            return (Selector)MemberwiseClone();
+        }
     }
 }
