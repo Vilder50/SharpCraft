@@ -89,9 +89,9 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes if the given <see cref="Block"/> is at the <see cref="Vector"/>
+        /// Executes if the given <see cref="Block"/> is at the coords
         /// </summary>
-        /// <param name="blockCoords">the <see cref="Vector"/> of the block</param>
+        /// <param name="blockCoords">the coords of the block</param>
         /// <param name="findBlock">the <see cref="Block"/> to find</param>
         /// <param name="want">false if it should execute when it's false</param>
         /// <returns>The function running the command</returns>
@@ -143,9 +143,9 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes if the <see cref="Block"/> at the <see cref="Vector"/> has the given datapath
+        /// Executes if the <see cref="Block"/> at the coords has the given datapath
         /// </summary>
-        /// <param name="block">the <see cref="Vector"/> of the <see cref="Block"/></param>
+        /// <param name="block">the coords of the <see cref="Block"/></param>
         /// <param name="dataPath">The datapath the entity should contain</param>
         /// <param name="want">false if it should execute when it's false</param>
         /// <returns>The function running the command</returns>
@@ -216,7 +216,7 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Executes at the given position
         /// </summary>
-        /// <param name="position">the <see cref="Vector"/> to execute at</param>
+        /// <param name="position">the coords to execute at</param>
         /// <returns>The function running the command</returns>
         public Function Positioned(Vector position)
         {
@@ -225,7 +225,7 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes at the given <see cref="BaseSelector"/>'s <see cref="Vector"/>
+        /// Executes at the given <see cref="BaseSelector"/>'s coords
         /// </summary>
         /// <param name="entity">The <see cref="BaseSelector"/> to execute at</param>
         /// <returns>The function running the command</returns>
@@ -254,7 +254,7 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Stores the command's success output inside the <see cref="Block"/>
         /// </summary>
-        /// <param name="blockCoords">the <see cref="Vector"/> of the <see cref="Block"/> to store the output in</param>
+        /// <param name="blockCoords">the coords of the <see cref="Block"/> to store the output in</param>
         /// <param name="dataPath">the datapath to store the output in</param>
         /// <param name="dataType">the path to the place to store the score</param>
         /// <param name="scale">the number the output should be multiplied with before being inserted</param>
@@ -305,9 +305,9 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Executes rotated in the direction of the given <see cref="Vector"/>
+        /// Executes rotated in the direction of the given coords
         /// </summary>
-        /// <param name="coords">the <see cref="Vector"/> to be rotated at</param>
+        /// <param name="coords">the coords to be rotated to</param>
         /// <returns>The function running the command</returns>
         public Function Facing(Vector coords)
         {

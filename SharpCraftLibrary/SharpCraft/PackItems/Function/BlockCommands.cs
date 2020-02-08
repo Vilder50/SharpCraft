@@ -18,10 +18,10 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Adds a <see cref="SharpCraft.Block"/> at the given <see cref="Vector"/>
+        /// Adds a <see cref="SharpCraft.Block"/> at the given coords
         /// </summary>
         /// <param name="addBlock">the <see cref="SharpCraft.Block"/> to add</param>
-        /// <param name="blockCoords">the <see cref="Vector"/> to add it at</param>
+        /// <param name="blockCoords">the coords to add it at</param>
         /// <param name="type">how to place the block</param>
         public void Add(Block addBlock, Vector blockCoords, ID.BlockAdd type = ID.BlockAdd.replace)
         {
@@ -29,11 +29,11 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Fills in the <see cref="SharpCraft.Block"/> between the two corner <see cref="Vector"/>
+        /// Fills in the <see cref="SharpCraft.Block"/> between the two corner coords
         /// </summary>
         /// <param name="fillBlock">the <see cref="SharpCraft.Block"/> to fill with</param>
-        /// <param name="corner1">the first corner <see cref="Vector"/></param>
-        /// <param name="corner2">the second corner <see cref="Vector"/></param>
+        /// <param name="corner1">the first corner coords</param>
+        /// <param name="corner2">the second corner coords</param>
         /// <param name="type">how to fill the <see cref="SharpCraft.Block"/>s</param>
         /// <param name="replaceBlock">the <see cref="SharpCraft.Block"/>s to replace</param>
         public void Fill(Block fillBlock, Vector corner1, Vector corner2, ID.BlockFill type = ID.BlockFill.replace, Block replaceBlock = null)
@@ -49,10 +49,10 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
-        /// Copies the <see cref="SharpCraft.Block"/>s between the two corner <see cref="Vector"/> to another <see cref="Vector"/>
+        /// Copies the <see cref="SharpCraft.Block"/>s between the two corner coords to another coords
         /// </summary>
-        /// <param name="corner1">the first corner <see cref="Vector"/></param>
-        /// <param name="corner2">the second corner <see cref="Vector"/></param>
+        /// <param name="corner1">the first corner coords</param>
+        /// <param name="corner2">the second corner coords</param>
         /// <param name="copyTo">the place to copy to</param>
         /// <param name="type">how to copy the <see cref="SharpCraft.Block"/>s</param>
         /// <param name="way">copy rules</param>
@@ -169,7 +169,7 @@ namespace SharpCraft.FunctionWriters
             /// Adds the given data to the <see cref="SharpCraft.Block"/>
             /// </summary>
             /// <param name="data">The data to give to the <see cref="SharpCraft.Block"/></param>
-            /// <param name="place">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to give the data to</param>
+            /// <param name="place">the coords of the <see cref="SharpCraft.Block"/> to give the data to</param>
             public void Change(Vector place, Data.SimpleDataHolder data)
             {
                 Function.AddCommand(new DataMergeBlockCommand(place, data));
@@ -178,7 +178,7 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Copies data into the <see cref="SharpCraft.Block"/>
             /// </summary>
-            /// <param name="toBlock">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
+            /// <param name="toBlock">the coords of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="modifierType">The way to data should be copied in</param>
             /// <param name="copyData">The data to insert</param>
@@ -190,7 +190,7 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Copies data into the <see cref="SharpCraft.Block"/>
             /// </summary>
-            /// <param name="toBlock">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
+            /// <param name="toBlock">the coords of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="index">The index to copy the data to</param>
             /// <param name="copyData">The data to insert</param>
@@ -203,7 +203,7 @@ namespace SharpCraft.FunctionWriters
             /// Removes the data from the <see cref="SharpCraft.Block"/> at the given datapath
             /// </summary>
             /// <param name="dataPath">The datapath</param>
-            /// <param name="place">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to remove the data from</param>
+            /// <param name="place">the coords of the <see cref="SharpCraft.Block"/> to remove the data from</param>
             public void Remove(Vector place, string dataPath)
             {
                 Function.AddCommand(new DataDeleteCommand(new BlockDataLocation(place, dataPath)));
@@ -212,7 +212,7 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Gets the numeric data from the datapath from the <see cref="SharpCraft.Block"/>
             /// </summary>
-            /// <param name="place">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to get the data from</param>
+            /// <param name="place">the coords of the <see cref="SharpCraft.Block"/> to get the data from</param>
             /// <param name="dataPath">the datapath to the data</param>
             /// <param name="scale">the number to multiply the numeric value with</param>
             public void Get(Vector place, string dataPath, double scale = 1)
@@ -223,7 +223,7 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Copies data into the block at given location
             /// </summary>
-            /// <param name="toBlock">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
+            /// <param name="toBlock">the coords of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="modifierType">The way to data should be copied in</param>
             /// <param name="dataLocation">The place to copy the data from</param>
@@ -235,7 +235,7 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// Copies data into the block at the given location
             /// </summary>
-            /// <param name="toBlock">the <see cref="Vector"/> of the <see cref="SharpCraft.Block"/> to copy the data to</param>
+            /// <param name="toBlock">the coords of the <see cref="SharpCraft.Block"/> to copy the data to</param>
             /// <param name="toDataPath">the datapath to copy to</param>
             /// <param name="index">The index to copy the data to</param>
             /// <param name="dataLocation">The place to copy the data from</param>

@@ -235,6 +235,9 @@
     <Compile Include="Classes\MiscObjects\JsonText\BaseJsonText.cs" />
     <Compile Include="Classes\MiscObjects\JsonText\JsonTexts.cs" />
     <Compile Include="Classes\MiscObjects\ScoreValue.cs" />
+    <Compile Include="Classes\MiscObjects\Selector\AllSelector.cs" />
+    <Compile Include="Classes\MiscObjects\Selector\BaseSelector.cs" />
+    <Compile Include="Classes\MiscObjects\Selector\NameSelector.cs" />
     <Compile Include="Classes\MiscObjects\Storage.cs" />
     <Compile Include="Classes\MiscObjects\Vector\LocalCoords.cs" />
     <Compile Include="Classes\MiscObjects\Vector\Coords.cs" />
@@ -306,7 +309,7 @@
     <Compile Include="Classes\MiscObjects\Range.cs" />
     <Compile Include="Classes\MiscObjects\Rotation.cs" />
     <Compile Include="Classes\MiscObjects\ScoreObject.cs" />
-    <Compile Include="Classes\MiscObjects\Selector.cs" />
+    <Compile Include="Classes\MiscObjects\Selector\Selector.cs" />
     <Compile Include="Classes\Data\MiscData\SpawnerPotential.cs" />
     <Compile Include="Classes\MiscObjects\Tag.cs" />
     <Compile Include="Classes\MiscObjects\Team.cs" />
