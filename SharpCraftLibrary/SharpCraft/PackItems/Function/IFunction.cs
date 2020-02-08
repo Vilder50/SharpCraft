@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for functions
     /// </summary>
-    public interface IFunction : IGroupable
+    public interface IFunction : IGroupable, Data.IConvertableToDataTag
     {
         /// <summary>
         /// The file name of the function

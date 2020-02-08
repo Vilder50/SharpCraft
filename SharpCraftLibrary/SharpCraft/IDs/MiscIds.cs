@@ -2743,7 +2743,12 @@
             /// <summary>
             /// The max distance players can spawn away from the world spawn center
             /// </summary>
-            spawnRadius
+            spawnRadius,
+
+            /// <summary>
+            /// The maximum amount of commands which can run at once
+            /// </summary>
+            maxCommandChainLength
         }
         public enum HorseSlot
         {

@@ -306,6 +306,17 @@ namespace SharpCraft
             World = null;
             Player = null;
         }
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new Data.DataPartTag(GetNamespacedName());
+        }
     }
 
     /// <summary>
@@ -363,6 +374,17 @@ namespace SharpCraft
                 throw new InvalidCastException("String for creating empty function has to contain a single :");
             }
             return new EmptyFunction(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new Data.DataPartTag(GetNamespacedName());
         }
     }
 }

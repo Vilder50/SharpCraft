@@ -165,7 +165,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public CraftingRecipe Recipe(string name, ItemType[,] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -189,7 +193,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public ShapelessRecipe Recipe(string name, ItemType[] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -215,7 +223,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, int? cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -241,7 +253,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, Time cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -264,7 +280,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public CuttingRecipe Recipe(string name, ItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -287,7 +307,11 @@ namespace SharpCraft
         /// <returns>The newly created recipe</returns>
         public CuttingRecipe Recipe(string name, ItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -305,7 +329,11 @@ namespace SharpCraft
         /// <param name="name">The recipe's name</param>
         public void Recipe(string name)
         {
-            BaseRecipe existingFile = (BaseRecipe)GetFile("recipe", name);
+            BaseRecipe existingFile = null;
+            if (name is null)
+            {
+                existingFile = (BaseRecipe)GetFile("recipe", name);
+            }
 
             if (!(existingFile is null))
             {
@@ -327,7 +355,11 @@ namespace SharpCraft
         /// <returns>The newly created <see cref="LootTable"/></returns>
         public LootTable Loottable(string tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LootTable existingFile = (LootTable)GetFile("loot_table", tableName);
+            LootTable existingFile = null;
+            if (!(tableName is null))
+            {
+                existingFile = (LootTable)GetFile("loot_table", tableName);
+            }
 
             if (!(existingFile is null))
             {
@@ -371,7 +403,11 @@ namespace SharpCraft
         /// <returns>The advancement</returns>
         public ParentAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            BaseAdvancement existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            }
             if (!(existingFile is null))
             {
                 throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\""+ existingFile.FileId + "\") to get it.");
@@ -398,7 +434,11 @@ namespace SharpCraft
         /// <returns>The advancement</returns>
         public ChildAdvancement Advancement(string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText[] name, JsonText[] description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            BaseAdvancement existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            }
             if (!(existingFile is null))
             {
                 throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
@@ -417,7 +457,11 @@ namespace SharpCraft
         /// <returns>The advancement</returns>
         public HiddenAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            BaseAdvancement existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            }
             if (!(existingFile is null))
             {
                 throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
@@ -432,7 +476,11 @@ namespace SharpCraft
         /// <param name="fileName">The name of the file to make invalid</param>
         public void Advancement(string fileName)
         {
-            BaseAdvancement existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            BaseAdvancement existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+            }
             if (!(existingFile is null))
             {
                 throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
@@ -451,7 +499,11 @@ namespace SharpCraft
         /// <returns>The <see cref="FunctionGroup"/></returns>
         public FunctionGroup Group(string name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            FunctionGroup existingFile = (FunctionGroup)GetFile("group_function",name);
+            FunctionGroup existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (FunctionGroup)GetFile("group_function", name);
+            }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -475,7 +527,11 @@ namespace SharpCraft
         /// <returns>The <see cref="BlockGroup"/></returns>
         public BlockGroup Group(string name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            BlockGroup existingFile = (BlockGroup)GetFile("group_block",name);
+            BlockGroup existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BlockGroup)GetFile("group_block", name);
+            }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -499,7 +555,11 @@ namespace SharpCraft
         /// <returns>The <see cref="ItemGroup"/></returns>
         public ItemGroup Group(string name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            ItemGroup existingFile = (ItemGroup)GetFile("group_item", name);
+            ItemGroup existingFile = null;
+            if (!(existingFile is null))
+            {
+                existingFile = (ItemGroup)GetFile("group_item", name);
+            }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -523,7 +583,11 @@ namespace SharpCraft
         /// <returns>The <see cref="EntityGroup"/></returns>
         public EntityGroup Group(string name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            EntityGroup existingFile = (EntityGroup)GetFile("group_entity",name);
+            EntityGroup existingFile = null;
+            if (!(existingFile is null))
+            {
+                existingFile = (EntityGroup)GetFile("group_entity", name);
+            }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
@@ -547,7 +611,11 @@ namespace SharpCraft
         /// <returns>The <see cref="LiquidGroup"/></returns>
         public LiquidGroup Group(string name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LiquidGroup existingFile = (LiquidGroup)GetFile("group_liquid", name);
+            LiquidGroup existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (LiquidGroup)GetFile("group_liquid", name);
+            }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
