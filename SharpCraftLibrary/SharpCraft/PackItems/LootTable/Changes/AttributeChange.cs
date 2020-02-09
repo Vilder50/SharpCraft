@@ -87,7 +87,7 @@ namespace SharpCraft.LootObjects
             /// <summary>
             /// The value to use in the operation
             /// </summary>
-            [DataTag("amount", "min", "max", ID.NBTTagType.TagFloat, true, JsonTag = true)]
+            [DataTag("amount", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
             public MCRange Value { get => valueRange; set => valueRange = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
 
             /// <summary>

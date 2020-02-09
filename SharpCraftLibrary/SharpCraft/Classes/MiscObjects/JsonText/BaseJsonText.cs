@@ -104,5 +104,14 @@ namespace SharpCraft
         {
             return new Text(text);
         }
+
+        /// <summary>
+        /// Converts a <see cref="ScoreValue"/> into a <see cref="JsonText"/> object
+        /// </summary>
+        /// <param name="score">the <see cref="ScoreValue"/> to convert</param>
+        public static implicit operator JsonText(ScoreValue score)
+        {
+            return new Score(score, score);
+        }
     }
 }

@@ -9,13 +9,13 @@ namespace SharpCraft
     static class SharpCraftFiles
     {
         private const string setupFunctionName = "setup";
-        private const string tickFunctionName = "tick";
+        //private const string tickFunctionName = "tick";
 
         public static BaseDatapack Datapack { get; private set; }
         public static PackNamespace MinecraftNamespace { get; private set; }
         public static PackNamespace SharpCraftNamespace { get; private set; }
         public static Function SetupFunction { get; private set; }
-        public static Function TickFunction { get; private set; }
+        //public static Function TickFunction { get; private set; }
 
         static SharpCraftFiles()
         {
@@ -38,25 +38,27 @@ namespace SharpCraft
 
         private static void SetupFiles(BaseDatapack pack)
         {
+            SharpCraftSettings.LockSettings();
             MinecraftNamespace = pack.Namespace<PackNamespace>("minecraft");
             SharpCraftNamespace = pack.Namespace<PackNamespace>("sharpcraft");
             #pragma warning disable IDE0067
             FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-            FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
+            //FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
             #pragma warning restore IDE0067
 
             SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
+            SetupFunction.World.LoadSquare.ForceLoad(SharpCraftSettings.OwnedChunk * 16);
             loadGroup.Items.Insert(0, SetupFunction);
 
-            TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
-            tickGroup.Items.Insert(0, TickFunction);
+            //TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
+            //tickGroup.Items.Insert(0, TickFunction);
         }
 
         #region constants
         private const string constantFileName = "constants";
         public static Objective ConstantObjective { get; private set; }
         private static Function constantNumberFile;
-        private static List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
+        private static readonly List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
         public static ScoreValue AddConstantNumber(int number)
         {
             //Get constant making function file
@@ -172,13 +174,121 @@ namespace SharpCraft
             dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
             SetupFunction.Entity.Kill(dummyEntitySelector);
             Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags[0].Tag } };
-            SetupFunction.Entity.Add(dummyEntity);
-
-            //keep entity at all time
-            TickFunction.Execute.IfEntity(dummyEntitySelector, false);
-            TickFunction.Entity.Add(dummyEntity);
+            SetupFunction.Entity.Add(dummyEntity, SharpCraftSettings.OwnedChunk * 16);
 
             return dummyEntitySelector;
+        }
+        #endregion
+
+        #region random
+        private static readonly Dictionary<double, Predicate> randomnessPredicates = new Dictionary<double, Predicate>();
+        public static Predicate GetRandomPredicate(double chance)
+        {
+            if (randomnessPredicates.ContainsKey(chance))
+            {
+                return randomnessPredicates[chance];
+            }
+            else
+            {
+                //create randomness predicate
+                Predicate newPredicate = SharpCraftNamespace.Predicate("random\\chances\\" + chance.ToMinecraftDouble().Replace(".","_"), new Conditions.RandomCondition(chance));
+                randomnessPredicates.Add(chance, newPredicate);
+                return newPredicate;
+            }
+        }
+
+        private static ScoreValue randomNumberHolder;
+        public static ScoreValue GetRandomHolder()
+        {
+            randomNumberHolder ??= new ScoreValue("#random", GetMathScoreObject());
+            return randomNumberHolder;
+        }
+
+        private static Function randomNumberFunction;
+        public static Function GetRandomNumberFunction()
+        {
+            if (!(randomNumberFunction is null))
+            {
+                return randomNumberFunction;
+            }
+
+            randomNumberFunction = SharpCraftNamespace.Function("random\\generate", (f) => 
+            {
+                f.Entity.Score.Set(GetRandomHolder(), GetRandomHolder(), 0);
+                Predicate halfChance = GetRandomPredicate(0.5);
+                for (int i = 0; i < 31; i++)
+                {
+                    f.Execute.IfPredicate(halfChance);
+                    f.Entity.Score.Add(GetRandomHolder(), GetRandomHolder(), (int)Math.Pow(2,i));
+                }
+            });
+            return randomNumberFunction;
+        }
+
+        private static LootTable hashLoottable;
+        public static LootTable GetHashLoottable()
+        {
+            if (!(hashLoottable is null))
+            {
+                return hashLoottable;
+            }
+
+            hashLoottable = SharpCraftNamespace.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
+            {
+                Changes = new LootObjects.BaseChange[]
+                    {
+                        new LootObjects.AttributeChange(new LootObjects.AttributeChange.Attribute[]
+                        {
+                            new LootObjects.AttributeChange.Attribute(ID.AttributeType.generic_luck, ID.AttributeOperation.addition, new MCRange(int.MinValue, int.MaxValue), ID.AttributeSlot.head)
+                        }),
+                        new LootObjects.CountChange(1)
+                    }
+            }, 1), LootTable.TableType.chest);
+            return hashLoottable;
+        }
+
+        private static (Function, Vector) hashFunction;
+        public static (Function function, Vector location) GetHashFunction()
+        {
+            if (!(hashFunction.Item1 is null))
+            {
+                return hashFunction;
+            }
+            Vector hashBlockLocation = SharpCraftSettings.OwnedChunk * 16;
+
+            LootTable hashLoottable = SharpCraftNamespace.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
+            {
+                Changes = new LootObjects.BaseChange[]
+                    {
+                        new LootObjects.AttributeChange(new LootObjects.AttributeChange.Attribute[]
+                        {
+                            new LootObjects.AttributeChange.Attribute(ID.AttributeType.generic_luck, ID.AttributeOperation.addition, new MCRange(int.MinValue, int.MaxValue), ID.AttributeSlot.head)
+                        }),
+                        new LootObjects.CountChange(1)
+                    }
+            }, 1), LootTable.TableType.chest);
+
+            SetupFunction.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
+            SetupFunction.Block.Add(new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable }, hashBlockLocation);
+            Function hash = SharpCraftNamespace.Function("random\\hashing", h => 
+            {
+                h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
+
+                Data.DataPath slotpath = Data.DataPath.GetDataPath<Block.ShulkerBox>(b => b.DItems);
+                slotpath.Condition(0);
+                Data.DataPath attributePath = Data.DataPath.GetDataPath<Item>(i => i.Attributes);
+                attributePath.Condition(0);
+                slotpath.SetNextPath(attributePath);
+
+                h.Execute.Store(GetRandomHolder(), GetRandomHolder());
+                h.Block.Data.Get(hashBlockLocation, slotpath.ToString() + ".Amount");
+
+                h.Block.Add(ID.Block.air, hashBlockLocation);
+                h.Block.Add(new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable }, hashBlockLocation);
+            });
+
+            hashFunction = (hash, hashBlockLocation);
+            return hashFunction;
         }
         #endregion
     }

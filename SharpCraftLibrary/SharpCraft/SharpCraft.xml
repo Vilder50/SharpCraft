@@ -8221,6 +8221,12 @@
             </summary>
             <param name="text">the string to convert</param>
         </member>
+        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.ScoreValue)~SharpCraft.JsonText">
+            <summary>
+            Converts a <see cref="T:SharpCraft.ScoreValue"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            </summary>
+            <param name="score">the <see cref="T:SharpCraft.ScoreValue"/> to convert</param>
+        </member>
         <member name="T:SharpCraft.JsonText.BaseClickEvent">
             <summary>
             Base class for click events in json text
@@ -15175,13 +15181,18 @@
             Commands for randomness
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.ExecuteIfRandom(System.Int32,System.Int32,System.Boolean)">
+        <member name="P:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.Function">
             <summary>
-            Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="amount"/> divided by <paramref name="outOf"/>
+            The function to write onto
             </summary>
-            <param name="amount">The chance</param>
-            <param name="outOf">Number the chance is divided by</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.ExecuteIfRandom(System.Double,System.Boolean)">
+            <summary>
+            Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
+            </summary>
+            <param name="chance">The chance for the command to execute</param>
             <param name="want">false if it should execute when it's false</param>
+            <returns>The function running the command</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.NextRandom(System.Int32,System.Int32)">
             <summary>
@@ -15191,12 +15202,12 @@
             <param name="to">The highest the number can be</param>
             <returns>A <see cref="T:SharpCraft.ScoreValue"/> holding the random number</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.HashScore(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.HashScore(SharpCraft.ScoreValue)">
             <summary>
             Hashes the given <see cref="T:SharpCraft.ScoreValue"/>
             </summary>
             <param name="value">The <see cref="T:SharpCraft.ScoreValue"/> to hash</param>
-            <param name="seed">The seed used for hashing</param>
+            <returns>The <see cref="T:SharpCraft.ScoreValue"/> holding the hash</returns>
         </member>
         <member name="T:SharpCraft.FunctionWriters.EntityCommands">
             <summary>
@@ -24266,6 +24277,16 @@
             Writes the file
             </summary>
             <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="T:SharpCraft.SharpCraftSettings">
+            <summary>
+            Settings for SharpCraft
+            </summary>
+        </member>
+        <member name="P:SharpCraft.SharpCraftSettings.OwnedChunk">
+            <summary>
+            A chunk SharpCraft freely can use. Note that the value has to be for a chunk and not for a block.
+            </summary>
         </member>
         <member name="T:SharpCraft.Writer.ISharpWriter">
             <summary>

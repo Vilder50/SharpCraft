@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using SharpCraft.Commands;
 using SharpCraft.Conditions;
@@ -19,6 +20,7 @@ namespace SharpCraft.FunctionWriters
         internal CustomCommands(Function parentFunction)
         {
             Function = parentFunction;
+            Random = new ClassRandom(Function);
         }
 
         #region tree search
@@ -738,6 +740,7 @@ namespace SharpCraft.FunctionWriters
                     }));
                 }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
             }));
+            Function.Entity.Teleport(SharpCraftFiles.GetDummySelector(), SharpCraftSettings.OwnedChunk * 16);
         }
 
         /// <summary>
@@ -861,6 +864,97 @@ namespace SharpCraft.FunctionWriters
                     start.World.Function(getStep(length, 0));
                     start.Entity.Tag.Remove(ID.Selector.s, rayShooterTag);
                 }));
+            }
+        }
+        #endregion
+
+        #region random
+        /// <summary>
+        /// Commands for randomness
+        /// </summary>
+        public ClassRandom Random { get; set; }
+
+        /// <summary>
+        /// Commands for randomness
+        /// </summary>
+        public class ClassRandom
+        {
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
+            internal ClassRandom(Function function)
+            {
+                this.Function = function;
+            }
+
+            /// <summary>
+            /// Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
+            /// </summary>
+            /// <param name="chance">The chance for the command to execute</param>
+            /// <param name="want">false if it should execute when it's false</param>
+            /// <returns>The function running the command</returns>
+            public Function ExecuteIfRandom(double chance, bool want = true)
+            {
+                if (chance < 0 || chance > 1)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
+                }
+                Function.Execute.IfPredicate(SharpCraftFiles.GetRandomPredicate(chance), want);
+                return Function;
+            }
+
+            /// <summary>
+            /// Generates a random number from <paramref name="from"/> to <paramref name="to"/>
+            /// </summary>
+            /// <param name="from">The smallest the number can be</param>
+            /// <param name="to">The highest the number can be</param>
+            /// <returns>A <see cref="ScoreValue"/> holding the random number</returns>
+            public ScoreValue NextRandom(int from = 0, int to = int.MaxValue)
+            {
+                if (from >= to)
+                {
+                    throw new ArgumentException("From has be smaller than To to generate a random number.");
+                }
+                long difference = (long)to - from + 1;
+                if (difference > int.MaxValue)
+                {
+                    throw new ArgumentOutOfRangeException("To generate a number the difference between From and To may not be higher than int max value.");
+                }
+                ScoreValue randomHolder = null;
+                Function.Custom.GroupCommands((g) =>
+                {
+                    g.World.Function(SharpCraftFiles.GetRandomNumberFunction());
+                    randomHolder = SharpCraftFiles.GetRandomHolder();
+                    g.Entity.Score.Operation(randomHolder, randomHolder, ID.Operation.Remainder, (int)difference);
+                    g.Entity.Score.Add(randomHolder, randomHolder, from);
+                });
+                return randomHolder;
+            }
+
+            /// <summary>
+            /// Hashes the given <see cref="ScoreValue"/>
+            /// </summary>
+            /// <param name="value">The <see cref="ScoreValue"/> to hash</param>
+            /// <returns>The <see cref="ScoreValue"/> holding the hash</returns>
+            public ScoreValue HashScore(ScoreValue value)
+            {
+                if (value is null)
+                {
+                    throw new ArgumentNullException(nameof(value), "Value may not be null");
+                }
+
+                var (function, location) = SharpCraftFiles.GetHashFunction();
+                Function.Custom.GroupCommands(g =>
+                {
+                    g.Execute.Store(location, Data.DataPath.GetDataPath<Block.ShulkerBox>(b => b.DLootTableSeed).ToString(), ID.StoreTypes.Int);
+                    g.Entity.Score.Get(value, value);
+                    g.World.Function(function);
+                    g.Execute.IfScore(value, value, 0);
+                    g.Entity.Score.Set(SharpCraftFiles.GetRandomHolder(), SharpCraftFiles.GetRandomHolder(), 3631387);
+                });
+
+                return SharpCraftFiles.GetRandomHolder();
             }
         }
         #endregion
