@@ -152,7 +152,7 @@ namespace SharpCraft.FunctionWriters
             Function executeAs = null;
             GroupCommands(f =>
             {
-                f.Entity.Add(createEntity, spawnCoords);
+                f.Entity.Add(spawnCoords, createEntity);
                 f.Execute.As(new Selector(ID.Selector.e, findTag));
                 if (executeAt)
                 {

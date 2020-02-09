@@ -174,7 +174,7 @@ namespace SharpCraft
             dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
             SetupFunction.Entity.Kill(dummyEntitySelector);
             Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags[0].Tag } };
-            SetupFunction.Entity.Add(dummyEntity, SharpCraftSettings.OwnedChunk * 16);
+            SetupFunction.Entity.Add(SharpCraftSettings.OwnedChunk * 16, dummyEntity);
 
             return dummyEntitySelector;
         }
@@ -269,7 +269,7 @@ namespace SharpCraft
             }, 1), LootTable.TableType.chest);
 
             SetupFunction.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
-            SetupFunction.Block.Add(new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable }, hashBlockLocation);
+            SetupFunction.Block.Add(hashBlockLocation, new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
             Function hash = SharpCraftNamespace.Function("random\\hashing", h => 
             {
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
@@ -283,8 +283,8 @@ namespace SharpCraft
                 h.Execute.Store(GetRandomHolder(), GetRandomHolder());
                 h.Block.Data.Get(hashBlockLocation, slotpath.ToString() + ".Amount");
 
-                h.Block.Add(ID.Block.air, hashBlockLocation);
-                h.Block.Add(new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable }, hashBlockLocation);
+                h.Block.Add(hashBlockLocation, ID.Block.air);
+                h.Block.Add(hashBlockLocation, new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
             });
 
             hashFunction = (hash, hashBlockLocation);

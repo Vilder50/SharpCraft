@@ -14836,7 +14836,7 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.BlockCommands.Add(SharpCraft.Block,SharpCraft.Vector,SharpCraft.ID.BlockAdd)">
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.Add(SharpCraft.Vector,SharpCraft.Block,SharpCraft.ID.BlockAdd)">
             <summary>
             Adds a <see cref="T:SharpCraft.Block"/> at the given coords
             </summary>
@@ -14844,7 +14844,7 @@
             <param name="blockCoords">the coords to add it at</param>
             <param name="type">how to place the block</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.BlockCommands.Fill(SharpCraft.Block,SharpCraft.Vector,SharpCraft.Vector,SharpCraft.ID.BlockFill,SharpCraft.Block)">
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.Fill(SharpCraft.Vector,SharpCraft.Vector,SharpCraft.Block,SharpCraft.ID.BlockFill,SharpCraft.Block)">
             <summary>
             Fills in the <see cref="T:SharpCraft.Block"/> between the two corner coords
             </summary>
@@ -15221,7 +15221,7 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Add(SharpCraft.Entity.BaseEntity,SharpCraft.Vector)">
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Add(SharpCraft.Vector,SharpCraft.Entity.BaseEntity)">
             <summary>
             Adds the specified entity to the world at the specified location
             </summary>
@@ -15630,7 +15630,7 @@
             <param name="asEntity">The <see cref="T:SharpCraft.BaseSelector"/> to execute as</param>
             <returns>The function running the command</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfBlock(SharpCraft.Block,SharpCraft.Vector,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfBlock(SharpCraft.Vector,SharpCraft.Block,System.Boolean)">
             <summary>
             Executes if the given <see cref="T:SharpCraft.Block"/> is at the coords
             </summary>

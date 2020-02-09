@@ -23,7 +23,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="addBlock">the <see cref="SharpCraft.Block"/> to add</param>
         /// <param name="blockCoords">the coords to add it at</param>
         /// <param name="type">how to place the block</param>
-        public void Add(Block addBlock, Vector blockCoords, ID.BlockAdd type = ID.BlockAdd.replace)
+        public void Add(Vector blockCoords, Block addBlock, ID.BlockAdd type = ID.BlockAdd.replace)
         {
             Function.AddCommand(new SetblockCommand(blockCoords, addBlock, type));
         }
@@ -36,7 +36,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="corner2">the second corner coords</param>
         /// <param name="type">how to fill the <see cref="SharpCraft.Block"/>s</param>
         /// <param name="replaceBlock">the <see cref="SharpCraft.Block"/>s to replace</param>
-        public void Fill(Block fillBlock, Vector corner1, Vector corner2, ID.BlockFill type = ID.BlockFill.replace, Block replaceBlock = null)
+        public void Fill(Vector corner1, Vector corner2, Block fillBlock, ID.BlockFill type = ID.BlockFill.replace, Block replaceBlock = null)
         {
             if (replaceBlock is null)
             {

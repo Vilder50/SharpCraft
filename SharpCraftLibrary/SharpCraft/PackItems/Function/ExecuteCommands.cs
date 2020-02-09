@@ -95,7 +95,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="findBlock">the <see cref="Block"/> to find</param>
         /// <param name="want">false if it should execute when it's false</param>
         /// <returns>The function running the command</returns>
-        public Function IfBlock(Block findBlock, Vector blockCoords, bool want = true)
+        public Function IfBlock(Vector blockCoords, Block findBlock, bool want = true)
         {
             Function.AddCommand(new ExecuteIfBlock(blockCoords, findBlock, want));
             return Function;
