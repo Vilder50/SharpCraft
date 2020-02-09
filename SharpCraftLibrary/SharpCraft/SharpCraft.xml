@@ -13651,10 +13651,12 @@
             Extra things to do after dispose is ran
             </summary>
         </member>
-        <member name="M:SharpCraft.BasePackNamespace.GetFileID">
+        <member name="M:SharpCraft.BasePackNamespace.GetID(System.Object)">
             <summary>
-            A random name for a nameless file
+            Generates a random id for the given <see cref="T:System.Object"/>
             </summary>
+            <param name="getIdFor">The object to id</param>
+            <returns>The id for the object</returns>
         </member>
         <member name="T:SharpCraft.Conditions.AllCondition">
             <summary>
@@ -23317,10 +23319,12 @@
             <param name="datapack">The datapack to add the namespace to</param>
             <param name="namespaceName">the name of the namespace</param>
         </member>
-        <member name="M:SharpCraft.PackNamespace.GetFileID">
+        <member name="M:SharpCraft.PackNamespace.GetID(System.Object)">
             <summary>
-            A random name for a nameless file
+            Generates a random id for the given <see cref="T:System.Object"/>
             </summary>
+            <param name="getIdFor">The object to id</param>
+            <returns>The id for the object</returns>
         </member>
         <member name="M:SharpCraft.PackNamespace.Predicate(System.String,SharpCraft.Conditions.BaseCondition,SharpCraft.BaseFile.WriteSetting)">
             <summary>
@@ -23605,10 +23609,12 @@
             <param name="datapack">The datapack to add the namespace to</param>
             <param name="namespaceName">the name of the namespace</param>
         </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetFileID">
+        <member name="M:SharpCraft.EmptyNamespace.GetID(System.Object)">
             <summary>
-            A random name for a nameless file
+            Not used. Makes no sense to generate names for empty namespace.
             </summary>
+            <param name="getIdFor">Not used</param>
+            <returns>Not used</returns>
         </member>
         <member name="T:SharpCraft.IPredicate">
             <summary>

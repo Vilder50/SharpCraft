@@ -73,13 +73,13 @@ namespace SharpCraft
             string useName = fileName;
             if (string.IsNullOrWhiteSpace(useName))
             {
-                useName = PackNamespace.GetFileID();
+                useName = PackNamespace.GetID(this);
             }
 
             FileId = useName;
             if (PackNamespace.IsSettingSet(new NamespaceSettings().GenerateNames()) && useName == fileName)
             {
-                WritePath = PackNamespace.GetFileID();
+                WritePath = PackNamespace.GetID(this);
             }
             else
             {

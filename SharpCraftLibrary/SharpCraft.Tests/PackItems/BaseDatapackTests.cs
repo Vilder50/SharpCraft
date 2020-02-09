@@ -38,7 +38,7 @@ namespace SharpCraft.Tests.PackItems
                 
             }
 
-            public override string GetFileID()
+            public override string GetID(object getIdFor)
             {
                 return "A name";
             }

@@ -268,8 +268,10 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// A random name for a nameless file
+        /// Generates a random id for the given <see cref="object"/>
         /// </summary>
-        public abstract string GetFileID();
+        /// <param name="getIdFor">The object to id</param>
+        /// <returns>The id for the object</returns>
+        public abstract string GetID(object getIdFor);
     }
 }

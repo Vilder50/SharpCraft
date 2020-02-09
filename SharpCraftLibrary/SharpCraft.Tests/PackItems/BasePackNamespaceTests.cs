@@ -46,7 +46,7 @@ namespace SharpCraft.Tests.PackItems
                 RandomValue = true;
             }
 
-            public override string GetFileID()
+            public override string GetID(object getIdFor)
             {
                 return "A-name";
             }

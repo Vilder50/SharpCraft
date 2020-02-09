@@ -33,9 +33,11 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// A random name for a nameless file
+        /// Generates a random id for the given <see cref="object"/>
         /// </summary>
-        public override string GetFileID()
+        /// <param name="getIdFor">The object to id</param>
+        /// <returns>The id for the object</returns>
+        public override string GetID(object getIdFor)
         {
             _nextFileID++;
             return _nextFileID.ToString();
@@ -700,9 +702,11 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// A random name for a nameless file
+        /// Not used. Makes no sense to generate names for empty namespace.
         /// </summary>
-        public override string GetFileID()
+        /// <param name="getIdFor">Not used</param>
+        /// <returns>Not used</returns>
+        public override string GetID(object getIdFor)
         {
             throw new InvalidOperationException("Empty namespace shouldn't generate file names");
         }
