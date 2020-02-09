@@ -333,7 +333,7 @@ namespace SharpCraft.FunctionWriters
             public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, int number)
             {
                 mainSelector.LimitSelector();
-                Function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, AddConstantNumber(number), constantObjective));
+                Function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, SharpCraftFiles.AddConstantNumber(number), SharpCraftFiles.ConstantObjective));
             }
 
             /// <summary>
@@ -371,39 +371,6 @@ namespace SharpCraft.FunctionWriters
                 selector.LimitSelector();
                 Function.AddCommand(new ScoreboardValueGetCommand(selector, objective));
             }
-
-            #region make constants
-            private const string constantFileName = "constants";
-            private static readonly Objective constantObjective = new Objective("constants");
-            private static Function constantNumberFile;
-            private BaseSelector AddConstantNumber(int number)
-            {
-                 //Get constant making function file
-                 if (constantNumberFile is null)
-                 {
-                     constantNumberFile = (SharpCraftFiles.SetupFunction.Commands.SingleOrDefault(c => c is RunFunctionCommand functionCommand && functionCommand.Function.Name == constantFileName) as RunFunctionCommand)?.Function as Function;
-                     
-                     if (constantNumberFile is null)
-                     {
-                         constantNumberFile = SharpCraftFiles.SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
-                         constantNumberFile.AddCommand(new ScoreboardObjectiveAddCommand(constantObjective, "dummy", null));
-                         SharpCraftFiles.SetupFunction.AddCommand(new RunFunctionCommand(constantNumberFile));
-                     }
-                 }
-                 
-                 //Check if constant already is added. If not add it to the constant function file.
-                 if (!(constantNumberFile.Commands.SingleOrDefault(c => c is ScoreboardValueChangeCommand command && command.ChangeNumber == number) is ScoreboardValueChangeCommand existingCommand))
-                 {
-                     NameSelector selector = new NameSelector(number.ToString(), true);
-                     constantNumberFile.AddCommand(new ScoreboardValueChangeCommand(selector, constantObjective, ID.ScoreChange.set, number));
-                     return selector;
-                 }
-                 else
-                 {
-                     return existingCommand.Selector;
-                 }
-            }
-            #endregion
         }
 
         /// <summary>

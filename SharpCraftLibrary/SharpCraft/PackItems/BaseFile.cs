@@ -51,7 +51,11 @@ namespace SharpCraft
         string fileId;
         string writePath;
         private string fileType;
-        private FileListener disposeListener;
+
+        /// <summary>
+        /// Listeners to call when the file gets disposed
+        /// </summary>
+        protected FileListener disposeListener;
 
         /// <summary>
         /// Intializes a new <see cref="BaseFile"/> with the given values

@@ -16,7 +16,16 @@ namespace SharpCraft
         /// <param name="function">the function to give the commands to</param>
         public delegate void FunctionWriter(Function function);
 
+        /// <summary>
+        /// Used for running things on a function when it writes a command
+        /// </summary>
+        /// <param name="file">the function file which is writing the command</param>
+        /// <param name="command">The command its writing</param>
+        public delegate void CommandWriteListener(Function file, ICommand command);
+
         private List<ICommand> commands;
+
+        private CommandWriteListener writeCommandListener;
 
         /// <summary>
         /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
@@ -105,6 +114,8 @@ namespace SharpCraft
                     {
                         break;
                     }
+
+                    writeCommandListener?.Invoke(this, commands[i]);
                     string commandString = commands[i].GetCommandString();
                     if (!(commandString is null))
                     {
@@ -263,12 +274,22 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Adds a listener to this file which will be called when the file writes a new command
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        public void AddCommandListener(CommandWriteListener listener)
+        {
+            writeCommandListener += listener ?? throw new ArgumentNullException(nameof(listener), "File dispose listener may not be null.");
+        }
+
+        /// <summary>
         /// Disposes this file. If the write setting is OnDispose it will write the file
         /// </summary>
         public override void Dispose()
         {
             if (!Disposed)
             {
+                disposeListener?.Invoke(this);
                 GetStream();
                 WriteFile(StreamWriter);
                 AfterDispose();
@@ -285,6 +306,7 @@ namespace SharpCraft
         {
             for (int i = 0; i < commands.Count; i++)
             {
+                writeCommandListener?.Invoke(this, commands[i]);
                 string command = commands[i].GetCommandString();
                 if (!(command is null))
                 {

@@ -13413,6 +13413,11 @@
             Writes the file when gets disposed. Changes can be made to the file since is it's first get written when it isn't in use. The namespace the file is in will cast an exception if another source tries to access a file at the same location as this file.
             </summary>
         </member>
+        <member name="F:SharpCraft.BaseFile.disposeListener">
+            <summary>
+            Listeners to call when the file gets disposed
+            </summary>
+        </member>
         <member name="M:SharpCraft.BaseFile.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.BaseFile.WriteSetting,System.String)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.BaseFile"/> with the given values
@@ -15159,6 +15164,39 @@
             <param name="length">The amount of blocks he ray should travel.</param>
             <param name="onHit">The commands to run when the ray hits an entity</param>
             <param name="hitSelfAble">If the ray should be able to hit the executor</param>
+        </member>
+        <member name="P:SharpCraft.FunctionWriters.CustomCommands.Random">
+            <summary>
+            Commands for randomness
+            </summary>
+        </member>
+        <member name="T:SharpCraft.FunctionWriters.CustomCommands.ClassRandom">
+            <summary>
+            Commands for randomness
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.ExecuteIfRandom(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="amount"/> divided by <paramref name="outOf"/>
+            </summary>
+            <param name="amount">The chance</param>
+            <param name="outOf">Number the chance is divided by</param>
+            <param name="want">false if it should execute when it's false</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.NextRandom(System.Int32,System.Int32)">
+            <summary>
+            Generates a random number from <paramref name="from"/> to <paramref name="to"/>
+            </summary>
+            <param name="from">The smallest the number can be</param>
+            <param name="to">The highest the number can be</param>
+            <returns>A <see cref="T:SharpCraft.ScoreValue"/> holding the random number</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.HashScore(SharpCraft.ScoreValue,System.Int32)">
+            <summary>
+            Hashes the given <see cref="T:SharpCraft.ScoreValue"/>
+            </summary>
+            <param name="value">The <see cref="T:SharpCraft.ScoreValue"/> to hash</param>
+            <param name="seed">The seed used for hashing</param>
         </member>
         <member name="T:SharpCraft.FunctionWriters.EntityCommands">
             <summary>
@@ -21752,6 +21790,13 @@
             </summary>
             <param name="function">the function to give the commands to</param>
         </member>
+        <member name="T:SharpCraft.Function.CommandWriteListener">
+            <summary>
+            Used for running things on a function when it writes a command
+            </summary>
+            <param name="file">the function file which is writing the command</param>
+            <param name="command">The command its writing</param>
+        </member>
         <member name="M:SharpCraft.Function.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Function"/> with the given values. Inherite from this constructor.
@@ -21875,6 +21920,12 @@
             <param name="creater">a method creating the new <see cref="T:SharpCraft.Function"/></param>
             <param name="writeSetting">The setting for writing the file</param>
             <returns>The new <see cref="T:SharpCraft.Function"/></returns>
+        </member>
+        <member name="M:SharpCraft.Function.AddCommandListener(SharpCraft.Function.CommandWriteListener)">
+            <summary>
+            Adds a listener to this file which will be called when the file writes a new command
+            </summary>
+            <param name="listener">The listener to add</param>
         </member>
         <member name="M:SharpCraft.Function.Dispose">
             <summary>

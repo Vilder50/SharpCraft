@@ -165,6 +165,43 @@ namespace SharpCraft.Tests.PackItems
         }
 
         [TestMethod]
+        public void TestCommandListener()
+        {
+            //setup
+            using Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator());
+            PackNamespace space = pack.Namespace("space");
+            Function function = space.Function("function", BaseFile.WriteSetting.Auto);
+            Function otherfunction = space.Function("function2", BaseFile.WriteSetting.OnDispose);
+            bool commandWritten = false;
+            function.AddCommandListener((f, c) => 
+            {
+                if (c is SayCommand sayCommand)
+                {
+                    sayCommand.Text = "2";
+                }
+                commandWritten = true;
+            });
+            otherfunction.AddCommandListener((f,c) => commandWritten = true);
+
+            //test
+            function.World.Say("1");
+            Assert.IsTrue(commandWritten, "Command listener wasn't called");
+            Assert.AreEqual("say 2" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path.EndsWith("function.mcfunction")).writer.ToString(), "Command wasn't changed by command listener");
+
+            commandWritten = false;
+            function.Execute.As(ID.Selector.s);
+            Assert.IsFalse(commandWritten, "Command listener shouldn't have been called (no command was written yet)");
+            function.World.Say("123");
+            Assert.IsTrue(commandWritten, "Command listener should have been called since execute listener is done");
+
+            commandWritten = false;
+            otherfunction.World.Say("123");
+            Assert.IsFalse(commandWritten, "Command listener shouldn't have been called (dispose isn't called yet)");
+            otherfunction.Dispose();
+            Assert.IsTrue(commandWritten, "Command listener should have been called (dispose was called)");
+        }
+
+        [TestMethod]
         public void TestCustomSummonExecute()
         {
             //setup
