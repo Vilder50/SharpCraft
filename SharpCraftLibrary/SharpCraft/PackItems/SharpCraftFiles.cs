@@ -44,54 +44,43 @@ namespace SharpCraft
             FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
             FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
             #pragma warning restore IDE0067
-            SetupFunction = loadGroup.Items.SingleOrDefault(i => i is Function && i.PackNamespace == SharpCraftNamespace && i.Name == setupFunctionName) as Function;
-            SetupFunction = tickGroup.Items.SingleOrDefault(i => i is Function && i.PackNamespace == SharpCraftNamespace && i.Name == tickFunctionName) as Function;
-            if (SetupFunction is null)
-            {
-                SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
-                loadGroup.Items.Insert(0, SetupFunction);
-            }
-            if (TickFunction is null)
-            {
-                TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
-                tickGroup.Items.Insert(0, TickFunction);
-            }
+
+            SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
+            loadGroup.Items.Insert(0, SetupFunction);
+
+            TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
+            tickGroup.Items.Insert(0, TickFunction);
         }
 
         #region constants
         private const string constantFileName = "constants";
         public static Objective ConstantObjective { get; private set; }
         private static Function constantNumberFile;
+        private static List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
         public static ScoreValue AddConstantNumber(int number)
         {
             //Get constant making function file
             if (constantNumberFile is null)
             {
-                constantNumberFile = (SetupFunction.Commands.SingleOrDefault(c => c is Commands.RunFunctionCommand functionCommand && functionCommand.Function.Name == constantFileName) as Commands.RunFunctionCommand)?.Function as Function;
-
-                if (constantNumberFile is null)
-                {
-                    constantNumberFile = SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
-                    ConstantObjective = new Objective("constants");
-                    constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
-                    SetupFunction.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
-                }
-                else
-                {
-                    ConstantObjective = (constantNumberFile.Commands[0] as Commands.ScoreboardObjectiveAddCommand).ScoreObject;
-                }
+                constantNumberFile = SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                ConstantObjective = new Objective("constants");
+                constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
+                SetupFunction.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
             }
 
             //Check if constant already is added. If not add it to the constant function file.
-            if (!(constantNumberFile.Commands.SingleOrDefault(c => c is Commands.ScoreboardValueChangeCommand command && command.ChangeNumber == number) is Commands.ScoreboardValueChangeCommand existingCommand))
+            Commands.ScoreboardValueChangeCommand command = addedNumbers.SingleOrDefault(c => c.ChangeNumber == number);
+            if (command is null)
             {
                 NameSelector selector = new NameSelector(number.ToString(), true);
-                constantNumberFile.AddCommand(new Commands.ScoreboardValueChangeCommand(selector, ConstantObjective, ID.ScoreChange.set, number));
+                Commands.ScoreboardValueChangeCommand addCommand = new Commands.ScoreboardValueChangeCommand(selector, ConstantObjective, ID.ScoreChange.set, number);
+                constantNumberFile.AddCommand(addCommand);
+                addedNumbers.Add(addCommand);
                 return new ScoreValue(selector, ConstantObjective);
             }
             else
             {
-                return new ScoreValue(existingCommand.Selector, ConstantObjective);
+                return new ScoreValue(command.Selector, ConstantObjective);
             }
         }
         #endregion
@@ -103,15 +92,8 @@ namespace SharpCraft
         {
             if (mathObjective is null)
             {
-                if (SetupFunction.Commands.SingleOrDefault(c => c is Commands.ScoreboardObjectiveAddCommand scoreCommand && scoreCommand.ScoreObject.Name == mathObjectiveName) is Commands.ScoreboardObjectiveAddCommand addCommand)
-                {
-                    mathObjective = addCommand.ScoreObject;
-                }
-                else
-                {
-                    mathObjective = new Objective(mathObjectiveName);
-                    SetupFunction.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective, "dummy", null));
-                }
+                mathObjective = new Objective(mathObjectiveName);
+                SetupFunction.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective, "dummy", null));
             }
 
             return mathObjective;
@@ -128,75 +110,49 @@ namespace SharpCraft
                 return rayFiles;
             }
 
-            Function raySetup = (Function)SharpCraftNamespace.GetFile("function", "raycast\\block\\setup");
             Objective xRotation;
             Objective yRotation;
             List<Predicate> predicates = new List<Predicate>();
             ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
 
-            if (raySetup is null)
+            //ray casting files hasn't been set up
+            xRotation = SetupFunction.World.Objective.Add("x" + rotationObjectiveString);
+            yRotation = SetupFunction.World.Objective.Add("y" + rotationObjectiveString);
+
+            Function raySetup = SharpCraftNamespace.Function("raycast\\block\\setup", setup =>
             {
-                //ray casting files hasn't been set up
-                xRotation = SetupFunction.World.Objective.Add("x" + rotationObjectiveString);
-                yRotation = SetupFunction.World.Objective.Add("y" + rotationObjectiveString);
+                setup.Entity.Teleport(new Selector(), new Coords(), new Rotation(true, 0, 0));
+                setup.Execute.Store(new Selector(), yRotation);
+                setup.Entity.Data.Get(new Selector(), "Rotation[0]");
+                setup.Execute.Store(new Selector(), xRotation);
+                setup.Entity.Data.Get(new Selector(), "Rotation[1]");
+            });
 
-                raySetup = SharpCraftNamespace.Function("raycast\\block\\setup", setup =>
-                {
-                    setup.Entity.Teleport(new Selector(), new Coords(), new Rotation(true, 0, 0));
-                    setup.Execute.Store(new Selector(), yRotation);
-                    setup.Entity.Data.Get(new Selector(), "Rotation[0]");
-                    setup.Execute.Store(new Selector(), xRotation);
-                    setup.Entity.Data.Get(new Selector(), "Rotation[1]");
-                });
+            MCRange checkRange = new MCRange(-0.3, 0.3);
+            #pragma warning disable IDE0067
+            Predicate checkXBlock = SharpCraftNamespace.Predicate("raycast\\block\\x", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { X = checkRange } }));
+            Predicate checkYBlock = SharpCraftNamespace.Predicate("raycast\\block\\y", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Y = checkRange } }));
+            Predicate checkZBlock = SharpCraftNamespace.Predicate("raycast\\block\\z", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Z = checkRange } }));
+            Predicate lookNegativeY = SharpCraftNamespace.Predicate("raycast\\block\\py", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(-90, 0))));
+            Predicate lookPositiveY = SharpCraftNamespace.Predicate("raycast\\block\\ny", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(0, 90))));
+            Predicate lookPositiveZ = SharpCraftNamespace.Predicate("raycast\\block\\pz", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 90))));
+            Predicate lookNegativeX = SharpCraftNamespace.Predicate("raycast\\block\\nx", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 180))));
+            #pragma warning restore IDE0067
+            predicates.Add(lookNegativeY);
+            predicates.Add(lookPositiveY);
 
-                MCRange checkRange = new MCRange(-0.3, 0.3);
-#pragma warning disable IDE0067
-                Predicate checkXBlock = SharpCraftNamespace.Predicate("raycast\\block\\x", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { X = checkRange } }));
-                Predicate checkYBlock = SharpCraftNamespace.Predicate("raycast\\block\\y", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Y = checkRange } }));
-                Predicate checkZBlock = SharpCraftNamespace.Predicate("raycast\\block\\z", new Conditions.EntityCondition(ID.LootTarget.This, new JSONObjects.Entity() { Distance = new JSONObjects.Distance() { Z = checkRange } }));
-                Predicate lookNegativeY = SharpCraftNamespace.Predicate("raycast\\block\\py", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(-90, 0))));
-                Predicate lookPositiveY = SharpCraftNamespace.Predicate("raycast\\block\\ny", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(xRotation, new MCRange(0, 90))));
-                Predicate lookPositiveZ = SharpCraftNamespace.Predicate("raycast\\block\\pz", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 90))));
-                Predicate lookNegativeX = SharpCraftNamespace.Predicate("raycast\\block\\nx", new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 180))));
-#pragma warning restore IDE0067
-                predicates.Add(lookNegativeY);
-                predicates.Add(lookPositiveY);
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cnz", checkZBlock.GetCondition() | !lookPositiveZ.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpx", checkXBlock.GetCondition() | !lookNegativeX.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpz", checkZBlock.GetCondition() | lookPositiveZ.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cnx", checkXBlock.GetCondition() | lookNegativeX.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cny", checkYBlock.GetCondition() | !lookNegativeY.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpy", checkYBlock.GetCondition() | !lookPositiveY.GetCondition()));
 
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cnz", checkZBlock.GetCondition() | !lookPositiveZ.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpx", checkXBlock.GetCondition() | !lookNegativeX.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpz", checkZBlock.GetCondition() | lookPositiveZ.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cnx", checkXBlock.GetCondition() | lookNegativeX.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cny", checkYBlock.GetCondition() | !lookNegativeY.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\cpy", checkYBlock.GetCondition() | !lookPositiveY.GetCondition()));
-
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\xyz", checkXBlock.GetCondition() | checkYBlock.GetCondition() | checkZBlock.GetCondition()));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d0", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 0)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d1", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 90)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d2", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(90, 180)))));
-                predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d3", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-180, -90)))));
-            }
-            else
-            {
-                //ray casting files exists
-                xRotation = ((Commands.ScoreboardObjectiveAddCommand)SetupFunction.Commands.Single((c) => c is Commands.ScoreboardObjectiveAddCommand addCommand && addCommand.ScoreObject.Name == "x" + rotationObjectiveString)).ScoreObject;
-                yRotation = ((Commands.ScoreboardObjectiveAddCommand)SetupFunction.Commands.Single((c) => c is Commands.ScoreboardObjectiveAddCommand addCommand && addCommand.ScoreObject.Name == "y" + rotationObjectiveString)).ScoreObject;
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\x"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\y"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\z"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\ny"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\py"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cnz"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cpx"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cpz"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cnx"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cny"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\cpy"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\xyz"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\d0"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\d1"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\d2"));
-                predicates.Add((Predicate)SharpCraftNamespace.GetFile("predicate", "raycast\\block\\d3"));
-            }
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\xyz", checkXBlock.GetCondition() | checkYBlock.GetCondition() | checkZBlock.GetCondition()));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d0", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-90, 0)))));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d1", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(0, 90)))));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d2", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(90, 180)))));
+            predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d3", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-180, -90)))));
 
             rayFiles = (raySetup, xRotation, yRotation, rayState, predicates.ToArray());
             return rayFiles;
@@ -213,18 +169,14 @@ namespace SharpCraft
                 return dummyEntitySelector;
             }
 
-            dummyEntitySelector = (Selector)((Commands.KillCommand)SetupFunction.Commands.SingleOrDefault(c => c is Commands.KillCommand killCommand && killCommand.Selector is Selector selector && selector.Tags.Any(t => t.Tag.Name == dummyEntityTag)))?.Selector;
-            if (dummyEntitySelector is null)
-            {
-                dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
-                SetupFunction.Entity.Kill(dummyEntitySelector);
-                Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags[0].Tag } };
-                SetupFunction.Entity.Add(dummyEntity);
+            dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
+            SetupFunction.Entity.Kill(dummyEntitySelector);
+            Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags[0].Tag } };
+            SetupFunction.Entity.Add(dummyEntity);
 
-                //keep entity at all time
-                TickFunction.Execute.IfEntity(dummyEntitySelector, false);
-                TickFunction.Entity.Add(dummyEntity);
-            }
+            //keep entity at all time
+            TickFunction.Execute.IfEntity(dummyEntitySelector, false);
+            TickFunction.Entity.Add(dummyEntity);
 
             return dummyEntitySelector;
         }
