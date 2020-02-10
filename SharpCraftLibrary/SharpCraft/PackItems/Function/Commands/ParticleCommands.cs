@@ -127,7 +127,7 @@ namespace SharpCraft.Commands
         private Vector size;
         private double speed;
         private int count;
-        private HexColor color;
+        private RGBColor color;
         private double particleSize;
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace SharpCraft.Commands
         /// <param name="count">The amount of particles</param>
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
-        public ParticleColoredDustCommand(HexColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleColoredDustCommand(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
         {
             Color = color;
             ParticleSize = particleSize;
@@ -156,7 +156,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The color of the particles
         /// </summary>
-        public HexColor Color { get => color; set => color = value ?? throw new ArgumentNullException(nameof(Color), "Color may not be null."); }
+        public RGBColor Color { get => color; set => color = value ?? throw new ArgumentNullException(nameof(Color), "Color may not be null."); }
 
         /// <summary>
         /// The size of the particles

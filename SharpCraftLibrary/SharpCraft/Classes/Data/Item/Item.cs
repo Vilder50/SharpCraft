@@ -179,13 +179,13 @@ namespace SharpCraft
         /// The color of the leather armor
         /// </summary>
         [DataTag("tag.display.color")]
-        public HexColor LeatherColor { get; set; }
+        public RGBColor LeatherColor { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)
         /// </summary>
         [DataTag("tag.display.MapColor")]
-        public HexColor MapColor { get; set; }
+        public RGBColor MapColor { get; set; }
         /// <summary>
         /// The item's shown name
         /// </summary>

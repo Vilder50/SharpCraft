@@ -7800,60 +7800,6 @@
             </summary>
             <returns>A string used in commands for getting the data</returns>
         </member>
-        <member name="T:SharpCraft.HexColor">
-            <summary>
-            An object for rgb colors
-            </summary>
-        </member>
-        <member name="P:SharpCraft.HexColor.Red">
-            <summary>
-            The amount of red this color is (goes from 0-255)
-            </summary>
-        </member>
-        <member name="P:SharpCraft.HexColor.Green">
-            <summary>
-            The amount of green this color is (goes from 0-255)
-            </summary>
-        </member>
-        <member name="P:SharpCraft.HexColor.Blue">
-            <summary>
-            The amount of blue this color is (goes from 0-255)
-            </summary>
-        </member>
-        <member name="M:SharpCraft.HexColor.#ctor(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Makes a rgb color with the specified colors
-            </summary>
-            <param name="RedColor">the amount of red</param>
-            <param name="GreenColor">the amount of green</param>
-            <param name="BlueColor">the amount of blue</param>
-        </member>
-        <member name="M:SharpCraft.HexColor.#ctor(System.String)">
-            <summary>
-            Makes an rgb color out of a string with a hex color value.
-            (Like #56a5fd)
-            </summary>
-            <param name="hexColor">the string to convert</param>
-        </member>
-        <member name="P:SharpCraft.HexColor.ColorInt">
-            <summary>
-            Outputs the color as an int
-            </summary>
-        </member>
-        <member name="M:SharpCraft.HexColor.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this HexColor into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
-        <member name="M:SharpCraft.HexColor.op_Implicit(System.String)~SharpCraft.HexColor">
-            <summary>
-            Converts a string with a hex color value into an <see cref="T:SharpCraft.HexColor"/> object
-            </summary>
-            <param name="hexColor">the string to convert</param>
-        </member>
         <member name="T:SharpCraft.Slots.IItemSlot">
             <summary>
             Interface for slots which can hold items
@@ -8633,6 +8579,60 @@
             Converts a <see cref="T:System.Index"/> into a <see cref="T:System.Range"/>
             </summary>
             <param name="index">The index to convert</param>
+        </member>
+        <member name="T:SharpCraft.RGBColor">
+            <summary>
+            An object for rgb colors
+            </summary>
+        </member>
+        <member name="M:SharpCraft.RGBColor.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Makes a rgb color with the specified colors
+            </summary>
+            <param name="RedColor">the amount of red</param>
+            <param name="GreenColor">the amount of green</param>
+            <param name="BlueColor">the amount of blue</param>
+        </member>
+        <member name="M:SharpCraft.RGBColor.#ctor(System.String)">
+            <summary>
+            Makes an rgb color out of a string with a hex color value.
+            (Like #56a5fd)
+            </summary>
+            <param name="hexColor">the string to convert</param>
+        </member>
+        <member name="P:SharpCraft.RGBColor.Red">
+            <summary>
+            The amount of red this color is (goes from 0-255)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.RGBColor.Green">
+            <summary>
+            The amount of green this color is (goes from 0-255)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.RGBColor.Blue">
+            <summary>
+            The amount of blue this color is (goes from 0-255)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.RGBColor.ColorInt">
+            <summary>
+            Outputs the color as an int
+            </summary>
+        </member>
+        <member name="M:SharpCraft.RGBColor.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this HexColor into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="M:SharpCraft.RGBColor.op_Implicit(System.String)~SharpCraft.RGBColor">
+            <summary>
+            Converts a string with a hex color value into an <see cref="T:SharpCraft.RGBColor"/> object
+            </summary>
+            <param name="hexColor">the string to convert</param>
         </member>
         <member name="T:SharpCraft.Rotation">
             <summary>
@@ -16011,7 +16011,7 @@
             <param name="force">If the particles should be shown no mater what</param>
             <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassParticle.ColoredDust(SharpCraft.HexColor,System.Double,SharpCraft.Vector,SharpCraft.Vector,System.Double,System.Int32,System.Boolean,SharpCraft.BaseSelector)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassParticle.ColoredDust(SharpCraft.RGBColor,System.Double,SharpCraft.Vector,SharpCraft.Vector,System.Double,System.Int32,System.Boolean,SharpCraft.BaseSelector)">
             <summary>
             Makes dust particles appear in the world
             </summary>
@@ -19407,7 +19407,7 @@
             Command which makes colored dust particles appear
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ParticleColoredDustCommand.#ctor(SharpCraft.HexColor,System.Double,SharpCraft.Vector,SharpCraft.Vector,System.Double,System.Int32,System.Boolean,SharpCraft.BaseSelector)">
+        <member name="M:SharpCraft.Commands.ParticleColoredDustCommand.#ctor(SharpCraft.RGBColor,System.Double,SharpCraft.Vector,SharpCraft.Vector,System.Double,System.Int32,System.Boolean,SharpCraft.BaseSelector)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ParticleColoredDustCommand"/>
             </summary>

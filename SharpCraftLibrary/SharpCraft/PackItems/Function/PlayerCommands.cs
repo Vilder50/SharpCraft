@@ -230,7 +230,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(HexColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
                 Function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }

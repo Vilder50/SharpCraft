@@ -27,15 +27,15 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ParticleColoredDustTest()
         {
-            Assert.AreEqual("particle dust 0.4980392156862745098039215686 1 0.4980392156862745098039215686 3.2 ~ ~ ~ 2 3 4 1.2 5 force @s", new ParticleColoredDustCommand(new HexColor(127, 255, 127), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, 5, true, ID.Selector.s).GetCommandString());
-            Assert.AreEqual("particle dust 1 1 1 3.2 ~ ~ ~ 2 3 4 1.2 5 force", new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, 5, true, null).GetCommandString());
-            Assert.AreEqual("particle dust 1 1 1 3.2 ~ ~ ~ 2.1 3.1 4.1 1.2 5", new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2.1, 3.1, 4.1), 1.2, 5, false, null).GetCommandString());
+            Assert.AreEqual("particle dust 0.4980392156862745098039215686 1 0.4980392156862745098039215686 3.2 ~ ~ ~ 2 3 4 1.2 5 force @s", new ParticleColoredDustCommand(new RGBColor(127, 255, 127), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, 5, true, ID.Selector.s).GetCommandString());
+            Assert.AreEqual("particle dust 1 1 1 3.2 ~ ~ ~ 2 3 4 1.2 5 force", new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, 5, true, null).GetCommandString());
+            Assert.AreEqual("particle dust 1 1 1 3.2 ~ ~ ~ 2.1 3.1 4.1 1.2 5", new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2.1, 3.1, 4.1), 1.2, 5, false, null).GetCommandString());
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), -1, 5, false, null));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), -1, 5, false, null));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
             Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(null, 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, null, new Coords(2, 3, 4), 1.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new HexColor(255, 255, 255), 3.2, new Coords(0, 0, 0), null, 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, null, new Coords(2, 3, 4), 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), null, 1.2, -1, false, null));
         }
 
         [TestMethod]
