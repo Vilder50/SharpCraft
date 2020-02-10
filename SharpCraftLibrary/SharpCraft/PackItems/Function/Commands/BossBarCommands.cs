@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar add [Bossbar] [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar add {BossBar.Name} {Name.GetJsonString()}";
+            return $"bossbar add {BossBar.GetFullName()} {Name.GetJsonString()}";
         }
     }
 
@@ -100,7 +100,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar add [Bossbar] [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar get {BossBar.Name} {GetValue}";
+            return $"bossbar get {BossBar.GetFullName()} {GetValue}";
         }
     }
 
@@ -153,7 +153,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar remove [Bossbar]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar remove {BossBar.Name}";
+            return $"bossbar remove {BossBar.GetFullName()}";
         }
     }
 
@@ -198,7 +198,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] color [Color]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} color {Color}";
+            return $"bossbar set {BossBar.GetFullName()} color {Color}";
         }
     }
 
@@ -255,7 +255,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] max [MaxValue]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} max {MaxValue}";
+            return $"bossbar set {BossBar.GetFullName()} max {MaxValue}";
         }
     }
 
@@ -312,7 +312,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] value [Value]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} value {Value}";
+            return $"bossbar set {BossBar.GetFullName()} value {Value}";
         }
     }
 
@@ -365,7 +365,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] name [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} name {Name.GetJsonString()}";
+            return $"bossbar set {BossBar.GetFullName()} name {Name.GetJsonString()}";
         }
     }
 
@@ -418,7 +418,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] players [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} players {Selector.GetSelectorString()}";
+            return $"bossbar set {BossBar.GetFullName()} players {Selector.GetSelectorString()}";
         }
     }
 
@@ -463,7 +463,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] style [Style]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} style {Style}";
+            return $"bossbar set {BossBar.GetFullName()} style {Style}";
         }
     }
 
@@ -508,7 +508,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] visible [Visible]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.Name} visible {Visible.ToMinecraftBool()}";
+            return $"bossbar set {BossBar.GetFullName()} visible {Visible.ToMinecraftBool()}";
         }
     }
 }

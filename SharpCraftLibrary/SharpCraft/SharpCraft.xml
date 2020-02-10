@@ -7667,12 +7667,38 @@
             Creates a new boss bar object.
             Note that this doesnt add the boss bar to the world
             </summary>
-            <param name="BossBarName">The name of the bossbar</param>
+            <param name="bossBarName">The name of the bossbar</param>
+        </member>
+        <member name="M:SharpCraft.BossBar.#ctor(System.String,SharpCraft.BasePackNamespace)">
+            <summary>
+            Creates a new boss bar object.
+            Note that this doesnt add the boss bar to the world
+            </summary>
+            <param name="bossBarName">The name of the bossbar</param>
+            <param name="namespace">The namespace the bossbar is in. Null = minecraft namespace.</param>
         </member>
         <member name="P:SharpCraft.BossBar.Name">
             <summary>
             The name of the bossbar
             </summary>
+        </member>
+        <member name="P:SharpCraft.BossBar.Namespace">
+            <summary>
+            The namespace the bossbar is in. Null = minecraft namespace.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BossBar.GetFullName">
+            <summary>
+            Get string used for refering this bossbar
+            </summary>
+            <returns>String used for refering this bossbar</returns>
+        </member>
+        <member name="M:SharpCraft.BossBar.ValidateName(System.String)">
+            <summary>
+            Checks if the given name is valid or not for a bossbar
+            </summary>
+            <param name="name">The name to check</param>
+            <returns>True if the name is valid</returns>
         </member>
         <member name="T:SharpCraft.IDataLocation">
             <summary>
