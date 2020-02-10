@@ -61,7 +61,7 @@ namespace SharpCraft.Tests.Data
             [DataTag]
             public JsonText[] Name { get; set; }
 
-            [DataTag("JsonTag", ForceType = ID.NBTTagType.TagCompound)]
+            [DataTag("JsonTag")]
             public JsonText[] JsonTag { get; set; }
 
             [DataTag("Fake", ForceType = ID.NBTTagType.TagCompound)]
@@ -288,10 +288,10 @@ namespace SharpCraft.Tests.Data
                 "Double:{Tag:\"hey\"}," +
                 "Fake:{hey:1}," +
                 "FloatPointNumber:0.1f," +
-                "JsonTag:[{\"text\":\"1\"},{\"text\":\"2\"}]," +
+                "JsonTag:[\"{\\\"text\\\":\\\"1\\\"}\",\"{\\\"text\\\":\\\"2\\\"}\"]," +
                 "LongNumber:999999999999999L," +
                 "LongNumberArray:[0L,1L,1L]," +
-                "Name:\"[{\\\"text\\\":\\\"1\\\"},{\\\"text\\\":\\\"2\\\"}]\"," +
+                "Name:[\"{\\\"text\\\":\\\"1\\\"}\",\"{\\\"text\\\":\\\"2\\\"}\"]," +
                 "NumberArray:[I;1,2]," +
                 "PointNumber:11.1d," +
                 "PointNumberArray:[32.3d,22.44d]," +

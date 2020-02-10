@@ -14,9 +14,10 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestJsonText()
         {
             Assert.AreEqual("{\"color\":\"red\",\"text\":\"hello\"}", new JsonText.Text("hello") { Color = ID.MinecraftColor.red }.GetJsonString(), "JsonText color doesn't output correct string");
+            Assert.AreEqual("{\"extra\":[{\"text\":\"extra text\"}],\"text\":\"hello\"}", new JsonText.Text("hello") { Extra = new JsonText.Text("extra text") }.GetJsonString(), "JsonText with extra doesn't output correct string");
             Assert.AreEqual("{\"insertion\":\"Ins\\\"erted\",\"text\":\"hello\"}", new JsonText.Text("hello") { ShiftClickInsertion = "Ins\"erted" }.GetJsonString(), "JsonText ShiftClickInsertion doesn't output correct string");
             Assert.AreEqual("{\"obfuscated\":false,\"bold\":true,\"italic\":true,\"strikethrough\":false,\"underlined\":false,\"reset\":false,\"text\":\"hello\"}", new JsonText.Text("hello") { Bold = true, Italic = true, Underline = false, Strikethrough = false, Obfuscated = false, Reset = false }.GetJsonString(), "JsonText formatting doesn't output correct string");
-            Assert.AreEqual("{\"clickEvent\":{\"action\":\"open_url\",\"value\":\"www\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":[{\"text\":\"hovered\"}]},\"text\":\"hello\"}", new JsonText.Text("hello") { ClickEvent = new JsonText.OpenUrlClickEvent("www"), HoverEvent = new JsonText.TextHoverEvent(new JsonText.Text("hovered")) }.GetJsonString(), "Click and hover events doesn't output correct string");
+            Assert.AreEqual("{\"clickEvent\":{\"action\":\"open_url\",\"value\":\"www\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"hovered\"}},\"text\":\"hello\"}", new JsonText.Text("hello") { ClickEvent = new JsonText.OpenUrlClickEvent("www"), HoverEvent = new JsonText.TextHoverEvent(new JsonText.Text("hovered")) }.GetJsonString(), "Click and hover events doesn't output correct string");
         }
 
         [TestMethod]
@@ -46,7 +47,7 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestHoverEvents()
         {
             //text
-            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_text\",\"value\":[{\"text\":\"hove\\\"red\"}]}", new JsonText.TextHoverEvent(new JsonText.Text("hove\"red")).GetEventString(), "TextHoverEvent doesn't return correct string");
+            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"hove\\\"red\"}}", new JsonText.TextHoverEvent(new JsonText.Text("hove\"red")).GetEventString(), "TextHoverEvent doesn't return correct string");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.TextHoverEvent(null), "TextHoverEvent should throw exception if json text is null");
 
             //item
@@ -55,7 +56,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.ItemHoverEvent(new Item()), "ItemHoverEvent should throw exception if item id is null");
 
             //entity
-            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:player\\\",name:[{\\\"text\\\":\\\"vilder\\\\\\\"50\\\"}],id:\\\"f6b1914d-b176-4850-b50380412b85\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.player,new JsonText.Text("vilder\"50"),new UUID("f6b1914d-b176-4850-b50380412b85")).GetEventString(), "EntityHoverEvent doesn't return correct string");
+            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:player\\\",name:{\\\"text\\\":\\\"vilder\\\\\\\"50\\\"},id:\\\"f6b1914d-b176-4850-b50380412b85\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.player,new JsonText.Text("vilder\"50"),new UUID("f6b1914d-b176-4850-b50380412b85")).GetEventString(), "EntityHoverEvent doesn't return correct string");
             Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:pig\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.pig).GetEventString(), "EntityHoverEvent doesn't return correct string when only type is specified");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.EntityHoverEvent(null), "EntityHoverEvent should throw exception if entity type is null");
         }
@@ -68,7 +69,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Text(null), "Text should throw exception when null");
 
             //translate
-            Assert.AreEqual("{\"translate\":\"hel\\\"lo\",with:[[{\"text\":\"insert1\"}],[{\"text\":\"insert2\"}]]}", new JsonText.Translate("hel\"lo",new JsonText[][] {new JsonText.Text("insert1"), new JsonText.Text("insert2") }).GetJsonString(), "Translate doesn't return correct string");
+            Assert.AreEqual("{\"translate\":\"hel\\\"lo\",with:[{\"text\":\"insert1\"},{\"text\":\"insert2\"}]}", new JsonText.Translate("hel\"lo",new JsonText[] {new JsonText.Text("insert1"), new JsonText.Text("insert2") }).GetJsonString(), "Translate doesn't return correct string");
             Assert.AreEqual("{\"translate\":\"hello\"}", new JsonText.Translate("hello").GetJsonString(), "Translate doesn't return correct string when only translate is specified");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Translate(null), "Translate should throw exception if translate is null");
 
@@ -91,6 +92,19 @@ namespace SharpCraft.Tests.MiscObjects
             _ = new JsonText.Score(AllSelector.GetSelector(), new Objective("something"));
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Score(null, new Objective("something")), "Score should throw exception if selector is null");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Score(ID.Selector.s, null), "Score should throw exception if objective is null");
+        }
+
+        [TestMethod]
+        public void TestAdding()
+        {
+            //setup
+            JsonText text1 = "hello";
+            JsonText text2 = " ";
+            JsonText text3 = " world";
+
+            //test
+            Assert.AreEqual("{\"extra\":[{\"text\":\" \"},{\"text\":\" world\"}],\"text\":\"hello\"}", (text1+text2+text3).GetJsonString(), "text isn't added together correctly");
+            Assert.AreEqual("{\"text\":\"hello\"}", text1.GetJsonString(), "Text was changed when being added together with other text");
         }
     }
 }

@@ -7871,14 +7871,6 @@
             <param name="block">The block to convert</param>
             <returns>The item</returns>
         </member>
-        <member name="M:SharpCraft.Helper.GetString(SharpCraft.JsonText[],System.Boolean)">
-            <summary>
-            Converts an array of <see cref="T:SharpCraft.JsonText"/> into a string
-            </summary>
-            <param name="jsonArray">The array to convert</param>
-            <param name="forceArray">If the array should only should use extra</param>
-            <returns>Raw string made out of the JSON array</returns>
-        </member>
         <member name="T:SharpCraft.HexColor">
             <summary>
             An object for rgb colors
@@ -8197,6 +8189,11 @@
             The the which shows up when the text is hovered over
             </summary>
         </member>
+        <member name="P:SharpCraft.JsonText.Extra">
+            <summary>
+            Extra text
+            </summary>
+        </member>
         <member name="M:SharpCraft.JsonText.GetJsonString">
             <summary>
             Gets the raw JSON string
@@ -8209,11 +8206,39 @@
             </summary>
             <returns>The special part of the json string gotten from the inheriting class</returns>
         </member>
+        <member name="M:SharpCraft.JsonText.ShallowClone">
+            <summary>
+            Returns a shallow clone of this <see cref="T:SharpCraft.JsonText"/>
+            </summary>
+            <returns>A shallow clone of this <see cref="T:SharpCraft.JsonText"/></returns>
+        </member>
+        <member name="M:SharpCraft.JsonText.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this <see cref="T:SharpCraft.JsonText"/> into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not used</param>
+            <param name="extraConversionData">Not used</param>
+            <returns>This <see cref="T:SharpCraft.JsonText"/> as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
         <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.JsonText)~SharpCraft.JsonText[]">
             <summary>
             Converts a single <see cref="T:SharpCraft.JsonText"/> into an array of <see cref="T:SharpCraft.JsonText"/> only containing the <see cref="T:SharpCraft.JsonText"/>
             </summary>
             <param name="jsonText">the <see cref="T:SharpCraft.JsonText"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.JsonText[])~SharpCraft.JsonText">
+            <summary>
+            Converts an array of <see cref="T:SharpCraft.JsonText"/> into a single <see cref="T:SharpCraft.JsonText"/> object
+            </summary>
+            <param name="array">the array of <see cref="T:SharpCraft.JsonText"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.JsonText.op_Addition(SharpCraft.JsonText,SharpCraft.JsonText)">
+            <summary>
+            Adds 2 <see cref="T:SharpCraft.JsonText"/>s together into one object
+            </summary>
+            <param name="text1">The parent <see cref="T:SharpCraft.JsonText"/></param>
+            <param name="text2">The <see cref="T:SharpCraft.JsonText"/> to add to the parent</param>
+            <returns>The <see cref="T:SharpCraft.JsonText"/>s added together</returns>
         </member>
         <member name="M:SharpCraft.JsonText.op_Implicit(System.String)~SharpCraft.JsonText">
             <summary>
@@ -8388,7 +8413,7 @@
             Shows text when the text is being hovered
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.TextHoverEvent.#ctor(SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.JsonText.TextHoverEvent.#ctor(SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.TextHoverEvent"/>
             </summary>
@@ -8432,7 +8457,7 @@
             Shows some information about an entity when the text is hovered
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.EntityHoverEvent.#ctor(SharpCraft.EntityType,SharpCraft.JsonText[],SharpCraft.UUID)">
+        <member name="M:SharpCraft.JsonText.EntityHoverEvent.#ctor(SharpCraft.EntityType,SharpCraft.JsonText,SharpCraft.UUID)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.EntityHoverEvent"/>
             </summary>
@@ -8488,7 +8513,7 @@
             Class for displaying translated json text
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.Translate.#ctor(System.String,SharpCraft.JsonText[][])">
+        <member name="M:SharpCraft.JsonText.Translate.#ctor(System.String,SharpCraft.JsonText[])">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.Translate"/>
             </summary>
@@ -12179,7 +12204,7 @@
             Base class for visible advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.BaseVisibleAdvancement"/>
             </summary>
@@ -12243,7 +12268,7 @@
             </summary>
             <param name="stream">The stream used for writing the file</param>
         </member>
-        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.NewChild(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.NewChild(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new child advancement for this advancement
             </summary>
@@ -13058,7 +13083,7 @@
             Class for child advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ChildAdvancement"/>. Inherite from this constructor
             </summary>
@@ -13077,7 +13102,7 @@
             <param name="parent">The parent advancement</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ChildAdvancement"/>
             </summary>
@@ -13106,7 +13131,7 @@
             </summary>
             <param name="stream">The stream used for writing the file</param>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.NewSibling(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.NewSibling(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new sibling advancement for this advancement
             </summary>
@@ -13224,7 +13249,7 @@
             Class for parent advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.ParentAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ParentAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ParentAdvancement"/>. Inherite from this constructor.
             </summary>
@@ -13243,7 +13268,7 @@
             <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
         </member>
-        <member name="M:SharpCraft.ParentAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ParentAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ParentAdvancement"/>
             </summary>
@@ -15920,14 +15945,14 @@
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="objective">The trigger (<see cref="T:SharpCraft.Objective"/>) to enable</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Tellraw(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Tellraw(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             Tells the selected players a message in chat
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="message">The message to tell the players</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Actionbar(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Actionbar(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             Shows a message in the selected players actionbar
             </summary>
@@ -16141,14 +16166,14 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Title(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Title(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             displays a title for the selected players
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="message">The message to show the players</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.SubTitle(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.SubTitle(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             displays a subtitle for the selected players
             Note: the subtitle is first shown when the title command is ran
@@ -16177,7 +16202,7 @@
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
             <summary>
             Displays a whole title for the selected players
             </summary>
@@ -16511,7 +16536,7 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Add(System.String,System.String,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Add(System.String,System.String,SharpCraft.JsonText)">
             <summary>
             Adds the specified <see cref="T:SharpCraft.Objective"/> to the world
             </summary>
@@ -16542,7 +16567,7 @@
             <param name="display">the display slot to clear</param>
             <param name="teamColor">the team's sidebar slot to clear. Note: this only works with <see cref="F:SharpCraft.ID.ScoreDisplay.sidebar"/> as the <paramref name="display"/></param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.DisplayName(SharpCraft.Objective,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.DisplayName(SharpCraft.Objective,SharpCraft.JsonText)">
             <summary>
             Changes the <see cref="T:SharpCraft.Objective"/>'s displayed name
             </summary>
@@ -16571,7 +16596,7 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Add(System.String,SharpCraft.JsonText[],System.Nullable{SharpCraft.ID.MinecraftColor})">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Add(System.String,SharpCraft.JsonText,System.Nullable{SharpCraft.ID.MinecraftColor})">
             <summary>
             Adds the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to the world
             </summary>
@@ -16628,7 +16653,7 @@
             <param name="changeTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to change</param>
             <param name="visible">the visibility tule</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.DisplayName(SharpCraft.Team,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.DisplayName(SharpCraft.Team,SharpCraft.JsonText)">
             <summary>
             Changes the display name of the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
@@ -16641,14 +16666,14 @@
             </summary>
             <param name="clearTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to remove players from</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Prefix(SharpCraft.Team,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Prefix(SharpCraft.Team,SharpCraft.JsonText)">
             <summary>
             Changes the prefix shown before the name of players in the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
             <param name="changeTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to change</param>
             <param name="preffixJson">The new prefix to show</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Suffix(SharpCraft.Team,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Suffix(SharpCraft.Team,SharpCraft.JsonText)">
             <summary>
             Changes the suffix shown after the name of players in the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
@@ -16800,7 +16825,7 @@
             The function to write onto
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Add(System.String,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Add(System.String,SharpCraft.JsonText)">
             <summary>
             Adds a <see cref="T:SharpCraft.BossBar"/> with the specified name to the world
             </summary>
@@ -16828,7 +16853,7 @@
             <param name="bossBar">the <see cref="T:SharpCraft.BossBar"/> to change</param>
             <param name="setTo">the new max value</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.SetName(SharpCraft.BossBar,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.SetName(SharpCraft.BossBar,SharpCraft.JsonText)">
             <summary>
             Changes the specified <see cref="T:SharpCraft.BossBar"/>'s display name
             </summary>
@@ -17034,7 +17059,7 @@
             Command which adds the given boss bar to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.BossBarAddCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.BossBarAddCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.BossBarAddCommand"/>
             </summary>
@@ -17207,7 +17232,7 @@
             Command which changes a boss bar's name
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.BossBarChangeNameCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.BossBarChangeNameCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.BossBarChangeNameCommand"/>
             </summary>
@@ -19741,7 +19766,7 @@
             Command which adds a new scoreboard objective to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ScoreboardObjectiveAddCommand.#ctor(SharpCraft.Objective,System.String,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.ScoreboardObjectiveAddCommand.#ctor(SharpCraft.Objective,System.String,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ScoreboardObjectiveAddCommand"/>
             </summary>
@@ -19786,7 +19811,7 @@
             Command which changes the display name of an objective
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand.#ctor(SharpCraft.Objective,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand.#ctor(SharpCraft.Objective,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand"/>
             </summary>
@@ -20594,7 +20619,7 @@
             Sends a private message to one or more players
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TellrawCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TellrawCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             intializes a new <see cref="T:SharpCraft.Commands.TellrawCommand"/>
             </summary>
@@ -20933,7 +20958,7 @@
             Command which adds a team to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TeamAddCommand.#ctor(SharpCraft.Team,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TeamAddCommand.#ctor(SharpCraft.Team,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TeamAddCommand"/>
             </summary>
@@ -21088,7 +21113,7 @@
             Command which changes how a team is displayed
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TeamModifyDisplayCommand.#ctor(SharpCraft.Team,SharpCraft.ID.TeamDisplayName,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TeamModifyDisplayCommand.#ctor(SharpCraft.Team,SharpCraft.ID.TeamDisplayName,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TeamModifyDisplayCommand"/>
             </summary>
@@ -21518,7 +21543,7 @@
             Command which displayes a title
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleCommand"/>
             </summary>
@@ -21546,7 +21571,7 @@
             Command which sets the sub title to display next
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleSubtitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TitleSubtitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleSubtitleCommand"/>
             </summary>
@@ -21574,7 +21599,7 @@
             Command which sets the text shown in the selected players' action bars
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleActionbarCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.Commands.TitleActionbarCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleActionbarCommand"/>
             </summary>
@@ -22766,7 +22791,7 @@
             Changes the loot lore
             </summary>
         </member>
-        <member name="M:SharpCraft.LootObjects.LoreChange.#ctor(SharpCraft.JsonText[][],System.Nullable{SharpCraft.ID.LootTarget},System.Boolean)">
+        <member name="M:SharpCraft.LootObjects.LoreChange.#ctor(SharpCraft.JsonText[],System.Nullable{SharpCraft.ID.LootTarget},System.Boolean)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.LootObjects.LoreChange"/>
             </summary>
@@ -22829,7 +22854,7 @@
             Changes the loot name
             </summary>
         </member>
-        <member name="M:SharpCraft.LootObjects.NameChange.#ctor(SharpCraft.JsonText[],System.Nullable{SharpCraft.ID.LootTarget})">
+        <member name="M:SharpCraft.LootObjects.NameChange.#ctor(SharpCraft.JsonText,System.Nullable{SharpCraft.ID.LootTarget})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.LootObjects.NameChange"/>
             </summary>
@@ -23471,7 +23496,7 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The newly created <see cref="T:SharpCraft.LootTable"/></returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new parent advancement with the given parameters
             </summary>
@@ -23489,7 +23514,7 @@
             <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
             <returns>The advancement</returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText[],SharpCraft.JsonText[],SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new child advancement with the given parameters
             </summary>

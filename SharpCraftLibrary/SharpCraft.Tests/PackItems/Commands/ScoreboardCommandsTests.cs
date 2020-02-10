@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ScoreboardObjectiveAddCommandTest()
         {
-            Assert.AreEqual("scoreboard objectives add score dummy [{\"text\":\"name\"}]", new ScoreboardObjectiveAddCommand(new Objective("score"), "dummy", new JsonText.Text("name")).GetCommandString());
+            Assert.AreEqual("scoreboard objectives add score dummy {\"text\":\"name\"}", new ScoreboardObjectiveAddCommand(new Objective("score"), "dummy", new JsonText.Text("name")).GetCommandString());
             Assert.AreEqual("scoreboard objectives add score dummy", new ScoreboardObjectiveAddCommand(new Objective("score"), "dummy", null).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardObjectiveAddCommand(null, "dummy", null));
@@ -30,7 +30,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ScoreboardObjectiveChangeNameCommandTest()
         {
-            Assert.AreEqual("scoreboard objectives modify score displayname [{\"text\":\"name\"}]", new ScoreboardObjectiveChangeNameCommand(new Objective("score"), new JsonText.Text("name")).GetCommandString());
+            Assert.AreEqual("scoreboard objectives modify score displayname {\"text\":\"name\"}", new ScoreboardObjectiveChangeNameCommand(new Objective("score"), new JsonText.Text("name")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardObjectiveChangeNameCommand(null, new JsonText.Text("Name")));
             Assert.ThrowsException<ArgumentNullException>(() => new ScoreboardObjectiveChangeNameCommand(new Objective("score"), null));

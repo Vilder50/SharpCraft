@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// Base class for json text
     /// </summary>
-    public abstract partial class JsonText
+    public abstract partial class JsonText : IConvertableToDataTag
     {
         /// <summary>
         /// The color of the text
@@ -59,6 +61,11 @@ namespace SharpCraft
         public BaseHoverEvent HoverEvent { get; set; }
 
         /// <summary>
+        /// Extra text
+        /// </summary>
+        public JsonText[] Extra { get; set; }
+
+        /// <summary>
         /// Gets the raw JSON string
         /// </summary>
         /// <returns>the raw JSON string used by the game</returns>
@@ -76,6 +83,7 @@ namespace SharpCraft
             if (!(ShiftClickInsertion is null)) { outString.Add("\"insertion\":\"" + ShiftClickInsertion.Escape() + "\""); }
             if (!(ClickEvent is null)) { outString.Add(ClickEvent.GetEventString()); }
             if (!(HoverEvent is null)) { outString.Add(HoverEvent.GetEventString()); }
+            if (!(Extra is null))  { outString.Add("\"extra\":[" + string.Join(",",Extra.Select(j => j.GetJsonString())) + "]"); }
             outString.Add(GetSpecificJsonString());
 
             return "{" + string.Join(",", outString) + "}";
@@ -88,12 +96,64 @@ namespace SharpCraft
         protected abstract string GetSpecificJsonString();
 
         /// <summary>
+        /// Returns a shallow clone of this <see cref="JsonText"/>
+        /// </summary>
+        /// <returns>A shallow clone of this <see cref="JsonText"/></returns>
+        public virtual JsonText ShallowClone()
+        {
+            return (JsonText)MemberwiseClone();
+        }
+
+        /// <summary>
+        /// Converts this <see cref="JsonText"/> into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not used</param>
+        /// <param name="extraConversionData">Not used</param>
+        /// <returns>This <see cref="JsonText"/> as a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(GetJsonString());
+        }
+
+        /// <summary>
         /// Converts a single <see cref="JsonText"/> into an array of <see cref="JsonText"/> only containing the <see cref="JsonText"/>
         /// </summary>
         /// <param name="jsonText">the <see cref="JsonText"/> to convert</param>
         public static implicit operator JsonText[](JsonText jsonText)
         {
             return new JsonText[] { jsonText };
+        }
+
+        /// <summary>
+        /// Converts an array of <see cref="JsonText"/> into a single <see cref="JsonText"/> object
+        /// </summary>
+        /// <param name="array">the array of <see cref="JsonText"/> to convert</param>
+        public static implicit operator JsonText(JsonText[] array)
+        {
+            JsonText parent = array[0].ShallowClone();
+
+            List<JsonText> extraText = parent.Extra?.ToList() ?? new List<JsonText>();
+            extraText.AddRange(array[1..]);
+            parent.Extra = extraText.ToArray();
+
+            return parent;
+        }
+
+        /// <summary>
+        /// Adds 2 <see cref="JsonText"/>s together into one object
+        /// </summary>
+        /// <param name="text1">The parent <see cref="JsonText"/></param>
+        /// <param name="text2">The <see cref="JsonText"/> to add to the parent</param>
+        /// <returns>The <see cref="JsonText"/>s added together</returns>
+        public static JsonText operator +(JsonText text1, JsonText text2)
+        {
+            JsonText parent = text1.ShallowClone();
+
+            List<JsonText> extraText = parent.Extra?.ToList() ?? new List<JsonText>();
+            extraText.Add(text2);
+            parent.Extra = extraText.ToArray();
+
+            return parent;
         }
 
         /// <summary>

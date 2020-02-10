@@ -51,7 +51,7 @@ namespace SharpCraft
             /// </summary>
             /// <param name="translateString">The translation string to translate</param>
             /// <param name="insert">Values to insert into the translation string (at places with %s)</param>
-            public Translate(string translateString, JsonText[][] insert = null)
+            public Translate(string translateString, JsonText[] insert = null)
             {
                 TranslateString = translateString;
                 Insert = insert;
@@ -65,7 +65,7 @@ namespace SharpCraft
             /// <summary>
             /// Values to insert into the translation string (at places with %s)
             /// </summary>
-            public JsonText[][] Insert { get; set; }
+            public JsonText[] Insert { get; set; }
 
             /// <summary>
             /// returns the raw string specific for this class
@@ -76,7 +76,7 @@ namespace SharpCraft
                 string outText = $"\"translate\":\"{TranslateString.Escape()}\"";
                 if (!(Insert is null))
                 {
-                    IEnumerable<string> array = Insert.Select(k => k.GetString(true)).ToArray();
+                    IEnumerable<string> array = Insert.Select(k => k.GetJsonString()).ToArray();
                     outText += ",with:[" + string.Join(",", array) + "]";
                 }
 

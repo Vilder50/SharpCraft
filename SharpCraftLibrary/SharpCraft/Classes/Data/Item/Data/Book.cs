@@ -50,7 +50,7 @@ namespace SharpCraft
             /// Each index in the first array means a new page.
             /// </summary>
             [Data.DataTag("tag.Pages", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-            public JsonText[][] Pages { get; set; }
+            public JsonText[] Pages { get; set; }
 
             /// <summary>
             /// The recipes unlocked when right clicking a recipe book

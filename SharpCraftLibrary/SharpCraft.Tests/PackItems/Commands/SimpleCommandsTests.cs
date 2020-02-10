@@ -167,7 +167,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TellrawCommandTest()
         {
-            Assert.AreEqual("tellraw @a [{\"text\":\"hello\"}]", new TellrawCommand(ID.Selector.a, new JsonText.Text("hello")).GetCommandString());
+            Assert.AreEqual("tellraw @a {\"text\":\"hello\"}", new TellrawCommand(ID.Selector.a, new JsonText.Text("hello")).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new TellrawCommand(null, new JsonText.Text("hello")));
             Assert.ThrowsException<ArgumentNullException>(() => new TellrawCommand(ID.Selector.a, null));

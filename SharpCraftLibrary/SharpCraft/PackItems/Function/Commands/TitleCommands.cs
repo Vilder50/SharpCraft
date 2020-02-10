@@ -74,14 +74,14 @@ namespace SharpCraft.Commands
     public class TitleCommand : BaseCommand
     {
         private BaseSelector selector;
-        private JsonText[] text;
+        private JsonText text;
 
         /// <summary>
         /// Intializes a new <see cref="TitleCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting players to show the title for</param>
         /// <param name="text">The text to show</param>
-        public TitleCommand(BaseSelector selector, JsonText[] text)
+        public TitleCommand(BaseSelector selector, JsonText text)
         {
             Selector = selector;
             Text = text;
@@ -95,7 +95,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText[] Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] title [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector.GetSelectorString()} title {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} title {Text.GetJsonString()}";
         }
     }
 
@@ -113,14 +113,14 @@ namespace SharpCraft.Commands
     public class TitleSubtitleCommand : BaseCommand
     {
         private BaseSelector selector;
-        private JsonText[] text;
+        private JsonText text;
 
         /// <summary>
         /// Intializes a new <see cref="TitleSubtitleCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players whose sub title to change</param>
         /// <param name="text">The text to show</param>
-        public TitleSubtitleCommand(BaseSelector selector, JsonText[] text)
+        public TitleSubtitleCommand(BaseSelector selector, JsonText text)
         {
             Selector = selector;
             Text = text;
@@ -134,7 +134,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText[] Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -142,7 +142,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] subtitle [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector.GetSelectorString()} subtitle {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} subtitle {Text.GetJsonString()}";
         }
     }
 
@@ -152,14 +152,14 @@ namespace SharpCraft.Commands
     public class TitleActionbarCommand : BaseCommand
     {
         private BaseSelector selector;
-        private JsonText[] text;
+        private JsonText text;
 
         /// <summary>
         /// Intializes a new <see cref="TitleActionbarCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players to show the action bar text for</param>
         /// <param name="text">The text to show</param>
-        public TitleActionbarCommand(BaseSelector selector, JsonText[] text)
+        public TitleActionbarCommand(BaseSelector selector, JsonText text)
         {
             Selector = selector;
             Text = text;
@@ -173,7 +173,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText[] Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -181,7 +181,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] actionbar [Text]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector.GetSelectorString()} actionbar {Text.GetString(true)}";
+            return $"title {Selector.GetSelectorString()} actionbar {Text.GetJsonString()}";
         }
     }
 

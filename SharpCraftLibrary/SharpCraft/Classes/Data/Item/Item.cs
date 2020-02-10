@@ -190,13 +190,13 @@ namespace SharpCraft
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText[] Name { get; set; }
+        public JsonText Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public JsonText[][] Lore { get; set; }
+        public JsonText[] Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>

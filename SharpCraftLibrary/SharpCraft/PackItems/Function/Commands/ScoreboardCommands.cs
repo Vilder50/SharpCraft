@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="displayName">The displayed name of the objective</param>
         /// <param name="scoreObject">The objective</param>
         /// <param name="criterion">The criterion for the objective</param>
-        public ScoreboardObjectiveAddCommand(Objective scoreObject, string criterion, JsonText[] displayName)
+        public ScoreboardObjectiveAddCommand(Objective scoreObject, string criterion, JsonText displayName)
         {
             DisplayName = displayName;
             ScoreObject = scoreObject;
@@ -30,7 +30,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The displayed name of the objective
         /// </summary>
-        public JsonText[] DisplayName { get; set; }
+        public JsonText DisplayName { get; set; }
 
         /// <summary>
         /// The objective
@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"scoreboard objectives add {ScoreObject.Name} {Criterion} {DisplayName.GetString(true)}";
+                return $"scoreboard objectives add {ScoreObject.Name} {Criterion} {DisplayName.GetJsonString()}";
             }
         }
     }
@@ -80,14 +80,14 @@ namespace SharpCraft.Commands
     public class ScoreboardObjectiveChangeNameCommand : BaseCommand
     {
         private Objective scoreObject;
-        private JsonText[] displayName;
+        private JsonText displayName;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveChangeNameCommand"/>
         /// </summary>
         /// <param name="displayName">The new display name for the objective</param>
         /// <param name="scoreObject">The objective to change</param>
-        public ScoreboardObjectiveChangeNameCommand(Objective scoreObject, JsonText[] displayName)
+        public ScoreboardObjectiveChangeNameCommand(Objective scoreObject, JsonText displayName)
         {
             DisplayName = displayName;
             ScoreObject = scoreObject;
@@ -96,7 +96,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The new display name for the objective
         /// </summary>
-        public JsonText[] DisplayName { get => displayName; set => displayName = value ?? throw new ArgumentNullException(nameof(DisplayName), "DisplayName may not be null"); }
+        public JsonText DisplayName { get => displayName; set => displayName = value ?? throw new ArgumentNullException(nameof(DisplayName), "DisplayName may not be null"); }
 
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives modify [ScoreObject] displayname [DisplayName]</returns>
         public override string GetCommandString()
         {
-             return $"scoreboard objectives modify {ScoreObject.Name} displayname {DisplayName.GetString(true)}";
+             return $"scoreboard objectives modify {ScoreObject.Name} displayname {DisplayName.GetJsonString()}";
         }
     }
 

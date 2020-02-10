@@ -200,7 +200,7 @@ namespace SharpCraft.Data
                 {
                     continue;
                 }
-                if (value.GetType().IsArray && !(value is JsonText[]))
+                if (value.GetType().IsArray)
                 {
                     AddItem(new DataPartArray(value, forceType, conversionParams, IsJson));
                 }
@@ -475,13 +475,6 @@ namespace SharpCraft.Data
                         TagType = ID.NBTTagType.TagString;
                     }
                 }
-                else if (value is JsonText[] || value is JsonText)
-                {
-                    if (TagType != ID.NBTTagType.TagCompound)
-                    {
-                        TagType = ID.NBTTagType.TagString;
-                    }
-                }
                 else if (value is SimpleDataHolder data && TagType == ID.NBTTagType.TagString)
                 {
                     this.value = data.GetDataString();
@@ -571,28 +564,6 @@ namespace SharpCraft.Data
                 else
                 {
                     return "\"" + ((string)Value).Escape() + "\"";
-                }
-            }
-            else if (Value is JsonText[] jsonArray)
-            {
-                if (TagType == ID.NBTTagType.TagCompound)
-                {
-                    return jsonArray.GetString(true);
-                }
-                else
-                {
-                    return "\"" + jsonArray.GetString(true).Escape() + "\"";
-                }
-            }
-            else if (Value is JsonText jsonObject)
-            {
-                if (TagType == ID.NBTTagType.TagCompound)
-                {
-                    return jsonObject.GetJsonString();
-                }
-                else
-                {
-                    return "\"" + jsonObject.GetJsonString().Escape() + "\"";
                 }
             }
             else if (Value.GetType().IsEnum)

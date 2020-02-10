@@ -188,12 +188,6 @@ namespace SharpCraft.Tests.Data
                 new long[] { 4,5,6 }
             }, null, null);
             Assert.AreEqual("[[1L,2L,3L],[4L,5L,6L]]", array.GetDataString());
-            array = new DataPartArray(new JsonText[][]
-            {
-                new JsonText.Text("Hey"),
-                new JsonText.Text("Hey2")
-            }, null, null);
-            Assert.AreEqual("[\"[{\\\"text\\\":\\\"Hey\\\"}]\",\"[{\\\"text\\\":\\\"Hey2\\\"}]\"]", array.GetDataString());
             array = new DataPartArray(new int[]
             {
             }, null, null);
@@ -288,10 +282,6 @@ namespace SharpCraft.Tests.Data
             Assert.AreEqual("\"ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("{test:\"1\"}", ID.NBTTagType.TagCompound);
             Assert.AreEqual("{test:\"1\"}", dataTag.GetDataString());
-            dataTag = new DataPartTag(new JsonText[] { new JsonText.Text("hello") }, ID.NBTTagType.TagString);
-            Assert.AreEqual("\"[{\\\"text\\\":\\\"hello\\\"}]\"", dataTag.GetDataString());
-            dataTag = new DataPartTag(new JsonText.Text("hello"), ID.NBTTagType.TagString);
-            Assert.AreEqual("\"{\\\"text\\\":\\\"hello\\\"}\"", dataTag.GetDataString());
             dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagNamespacedString);
             Assert.AreEqual("\"minecraft:ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("stone", ID.NBTTagType.TagNamespacedString);

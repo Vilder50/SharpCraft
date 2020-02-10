@@ -220,7 +220,7 @@ namespace SharpCraft.Data
                                     pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType, dataTagInformation.JsonTag), dataTagInformation.JsonTag));
                                 }
                             }
-                            else if ((property.PropertyType.IsArray && forceType is null && !(data is JsonText[])) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
+                            else if ((property.PropertyType.IsArray && forceType is null) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
                             {
                                 //if its an array
                                 if (!(convertAbleArray is null))

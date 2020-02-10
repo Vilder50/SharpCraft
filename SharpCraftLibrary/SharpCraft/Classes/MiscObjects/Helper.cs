@@ -158,38 +158,5 @@ namespace SharpCraft
             }
             return ConvertToItem(block.Value);
         }
-
-        /// <summary>
-        /// Converts an array of <see cref="JsonText"/> into a string
-        /// </summary>
-        /// <param name="jsonArray">The array to convert</param>
-        /// <param name="forceArray">If the array should only should use extra</param>
-        /// <returns>Raw string made out of the JSON array</returns>
-        public static string GetString(this JsonText[] jsonArray, bool forceArray)
-        {
-            if (!forceArray)
-            {
-                string firstItemString = jsonArray[0].GetJsonString();
-                if (jsonArray.Length == 1)
-                {
-                    return firstItemString;
-                }
-                string[] TempArray = new string[jsonArray.Length - 1];
-                for (int i = 1; i < jsonArray.Length; i++)
-                {
-                    TempArray[i] = jsonArray[i].GetJsonString();
-                }
-                return firstItemString[0..^1] + ",extra:[" + string.Join(",", TempArray) + "]}";
-            }
-            else
-            {
-                string[] TempArray = new string[jsonArray.Length];
-                for (int i = 0; i < jsonArray.Length; i++)
-                {
-                    TempArray[i] = jsonArray[i].GetJsonString();
-                }
-                return "[" + string.Join(",", TempArray) + "]";
-            }
-        }
     }
 }

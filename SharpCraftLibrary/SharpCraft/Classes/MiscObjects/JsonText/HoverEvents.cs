@@ -45,13 +45,13 @@ namespace SharpCraft
         /// </summary>
         public class TextHoverEvent : BaseHoverEvent
         {
-            private JsonText[] text;
+            private JsonText text;
 
             /// <summary>
             /// Intializes a new <see cref="TextHoverEvent"/>
             /// </summary>
             /// <param name="text">The text to show when the text gets hovered</param>
-            public TextHoverEvent(JsonText[] text) : base("show_text")
+            public TextHoverEvent(JsonText text) : base("show_text")
             {
                 Text = text;
             }
@@ -59,7 +59,7 @@ namespace SharpCraft
             /// <summary>
             /// The text to show when the text gets hovered
             /// </summary>
-            public JsonText[] Text
+            public JsonText Text
             {
                 get => text;
                 set 
@@ -67,10 +67,6 @@ namespace SharpCraft
                     if (value is null)
                     {
                         throw new ArgumentNullException(nameof(Text), "Hover text may not be null");
-                    }
-                    if (value.Length == 0)
-                    {
-                        throw new ArgumentOutOfRangeException(nameof(Text), "Hover text may not be empty");
                     }
                     text = value;
                 }
@@ -82,7 +78,7 @@ namespace SharpCraft
             /// <returns>The value of the event</returns>
             public override string GetEventValue()
             {
-                return Text.GetString(true);
+                return Text.GetJsonString();
             }
         }
 
@@ -145,7 +141,7 @@ namespace SharpCraft
             /// <param name="type">The type of entity</param>
             /// <param name="name">The entity's name (Not really used)</param>
             /// <param name="uuid">The entity's uuid</param>
-            public EntityHoverEvent(EntityType type, JsonText[] name = null, UUID uuid = null) : base("show_entity")
+            public EntityHoverEvent(EntityType type, JsonText name = null, UUID uuid = null) : base("show_entity")
             {
                 Type = type;
                 Name = name;
@@ -160,7 +156,7 @@ namespace SharpCraft
             /// <summary>
             /// The entity's name (Not really used)
             /// </summary>
-            public JsonText[] Name { get; set; }
+            public JsonText Name { get; set; }
 
             /// <summary>
             /// The entity's uuid
@@ -176,7 +172,7 @@ namespace SharpCraft
                 string output = $"type:\"{Type.Name}\"";
                 if (!(Name is null))
                 {
-                    output += ",name:" + Name.GetString(true);
+                    output += ",name:" + Name.GetJsonString();
                 }
                 if (!(UUID is null))
                 {
