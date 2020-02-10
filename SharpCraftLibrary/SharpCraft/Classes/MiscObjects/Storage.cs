@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace SharpCraft
 {
@@ -11,6 +12,7 @@ namespace SharpCraft
     /// </summary>
     public class Storage
     {
+        private const string namePattern = @"^[a-z\-_\./0-9]+$";
         private BasePackNamespace packNamespace;
         private string name;
 
@@ -42,7 +44,12 @@ namespace SharpCraft
                 {
                     throw new ArgumentException(nameof(Name), "Name may not be null or whitespace");
                 }
-                name = value;
+                string loweredString = value.ToLower();
+                if (!ValidateName(loweredString))
+                {
+                    throw new ArgumentException("Storage name is invalid. Only accepts: \"" + namePattern + "\"", nameof(Name));
+                }
+                name = loweredString;
             }
         }
 
@@ -53,6 +60,16 @@ namespace SharpCraft
         public string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + Name.Replace("\\", "/");
+        }
+
+        /// <summary>
+        /// Checks if the given name is valid or not for storage
+        /// </summary>
+        /// <param name="name">The name to check</param>
+        /// <returns>True if the name is valid</returns>
+        public static bool ValidateName(string name)
+        {
+            return Regex.IsMatch(name, namePattern);
         }
     }
 }

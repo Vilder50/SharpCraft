@@ -9476,6 +9476,13 @@
             </summary>
             <returns>The namespaced name of this storage</returns>
         </member>
+        <member name="M:SharpCraft.Storage.ValidateName(System.String)">
+            <summary>
+            Checks if the given name is valid or not for storage
+            </summary>
+            <param name="name">The name to check</param>
+            <returns>True if the name is valid</returns>
+        </member>
         <member name="T:SharpCraft.Tag">
             <summary>
             An object used for tags
