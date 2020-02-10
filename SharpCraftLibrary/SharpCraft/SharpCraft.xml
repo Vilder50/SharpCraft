@@ -9566,7 +9566,7 @@
             <summary>
             Returns true if the time in this time object is negative
             </summary>
-            <returns></returns>
+            <returns>True if the time in this time object is negative</returns>
         </member>
         <member name="M:SharpCraft.Time.AsTicks(SharpCraft.Time.TimerType)">
             <summary>
@@ -9693,32 +9693,32 @@
             An object used for UUID's
             </summary>
         </member>
-        <member name="F:SharpCraft.UUID.Least">
-            <summary>
-            the UUIDLeast
-            </summary>
-        </member>
-        <member name="F:SharpCraft.UUID.Most">
-            <summary>
-            the UUIDMost
-            </summary>
-        </member>
         <member name="M:SharpCraft.UUID.#ctor(System.Int64,System.Int64)">
             <summary>
             Creates a UUID Out of a UUIDLeast and a UUIDMost
             </summary>
-            <param name="Least">the UUIDLeast</param>
-            <param name="Most">the UUIDMost</param>
+            <param name="least">the UUIDLeast</param>
+            <param name="most">the UUIDMost</param>
         </member>
         <member name="M:SharpCraft.UUID.#ctor(System.String)">
             <summary>
             Creates a uuid object out of a UUID in a string format
             </summary>
-            <param name="UUID">the string to convert</param>
+            <param name="uuid">the string to convert</param>
         </member>
-        <member name="M:SharpCraft.UUID.GetUUIDString">
+        <member name="P:SharpCraft.UUID.Least">
             <summary>
-            Returns the uuid in string format
+            the UUIDLeast
+            </summary>
+        </member>
+        <member name="P:SharpCraft.UUID.Most">
+            <summary>
+            the UUIDMost
+            </summary>
+        </member>
+        <member name="P:SharpCraft.UUID.UUIDString">
+            <summary>
+            The UUID string
             </summary>
         </member>
         <member name="M:SharpCraft.UUID.GetAsDataObject(System.Object[])">

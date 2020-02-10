@@ -24,8 +24,8 @@ namespace SharpCraft
             Short
         };
 
-        readonly int _time;
-        readonly ID.TimeType _timeType;
+        readonly int time;
+        readonly ID.TimeType timeType;
 
         /// <summary>
         /// Creates a new time object with the specified time
@@ -34,8 +34,8 @@ namespace SharpCraft
         /// <param name="timeType">the time measuring type</param>
         public Time(int time, ID.TimeType timeType)
         {
-            _time = Convert.ToInt32(time);
-            _timeType = timeType;
+            this.time = Convert.ToInt32(time);
+            this.timeType = timeType;
         }
 
         /// <summary>
@@ -44,11 +44,11 @@ namespace SharpCraft
         /// <returns>Raw data used by the game</returns>
         public string GetTimeString()
         {
-            return _timeType switch
+            return timeType switch
             {
-                ID.TimeType.days => _time + "d",
-                ID.TimeType.seconds => _time + "s",
-                _ => _time + "t",
+                ID.TimeType.days => time + "d",
+                ID.TimeType.seconds => time + "s",
+                _ => time + "t",
             };
         }
 
@@ -64,10 +64,10 @@ namespace SharpCraft
         /// <summary>
         /// Returns true if the time in this time object is negative
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the time in this time object is negative</returns>
         public bool IsNegative()
         {
-            return _time < 0;
+            return time < 0;
         }
 
         /// <summary>
@@ -83,11 +83,11 @@ namespace SharpCraft
                 {
                     try
                     {
-                        return _timeType switch
+                        return timeType switch
                         {
-                            ID.TimeType.days => _time * 24000,
-                            ID.TimeType.seconds => _time * 20,
-                            _ => _time,
+                            ID.TimeType.days => time * 24000,
+                            ID.TimeType.seconds => time * 20,
+                            _ => time,
                         };
                     }
                     catch (OverflowException)
@@ -99,11 +99,11 @@ namespace SharpCraft
                 {
                     try
                     {
-                        return _timeType switch
+                        return timeType switch
                         {
-                            ID.TimeType.days => (short)(_time * 24000),
-                            ID.TimeType.seconds => (short)(_time * 20),
-                            _ => (short)_time,
+                            ID.TimeType.days => (short)(time * 24000),
+                            ID.TimeType.seconds => (short)(time * 20),
+                            _ => (short)time,
                         };
                     }
                     catch (OverflowException)
@@ -122,17 +122,17 @@ namespace SharpCraft
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
-            var savedTime = _timeType switch
+            int savedTime = timeType switch
             {
-                ID.TimeType.days => _time * 24000,
-                ID.TimeType.seconds => _time * 20,
-                _ => _time,
+                ID.TimeType.days => time * 24000,
+                ID.TimeType.seconds => time * 20,
+                _ => time,
             };
             return asType switch
             {
-                ID.NBTTagType.TagInt => new DataPartTag((int)savedTime),
+                ID.NBTTagType.TagInt => new DataPartTag(savedTime),
                 ID.NBTTagType.TagShort => new DataPartTag((short)savedTime),
-                ID.NBTTagType.TagLong => new DataPartTag(savedTime),
+                ID.NBTTagType.TagLong => new DataPartTag((long)savedTime),
                 _ => throw new ArgumentException("Cannot convert time into a " + asType + " object"),
             };
         }

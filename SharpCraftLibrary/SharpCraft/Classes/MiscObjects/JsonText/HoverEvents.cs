@@ -176,7 +176,7 @@ namespace SharpCraft
                 }
                 if (!(UUID is null))
                 {
-                    output += ",id:\"" + UUID.GetUUIDString() + "\"";
+                    output += ",id:\"" + UUID.UUIDString + "\"";
                 }
 
                 return "\"{" + output.Escape() + "}\"";

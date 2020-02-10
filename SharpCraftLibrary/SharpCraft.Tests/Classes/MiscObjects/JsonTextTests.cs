@@ -56,7 +56,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.ItemHoverEvent(new Item()), "ItemHoverEvent should throw exception if item id is null");
 
             //entity
-            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:player\\\",name:{\\\"text\\\":\\\"vilder\\\\\\\"50\\\"},id:\\\"f6b1914d-b176-4850-b50380412b85\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.player,new JsonText.Text("vilder\"50"),new UUID("f6b1914d-b176-4850-b50380412b85")).GetEventString(), "EntityHoverEvent doesn't return correct string");
+            Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:player\\\",name:{\\\"text\\\":\\\"vilder\\\\\\\"50\\\"},id:\\\"f6b1914d-b176-4850-8a06-b50380412b85\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.player,new JsonText.Text("vilder\"50"),new UUID("f6b1914d-b176-4850-8a06-b50380412b85")).GetEventString(), "EntityHoverEvent doesn't return correct string");
             Assert.AreEqual("\"hoverEvent\":{\"action\":\"show_entity\",\"value\":\"{type:\\\"minecraft:pig\\\"}\"}", new JsonText.EntityHoverEvent(ID.Entity.pig).GetEventString(), "EntityHoverEvent doesn't return correct string when only type is specified");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.EntityHoverEvent(null), "EntityHoverEvent should throw exception if entity type is null");
         }
