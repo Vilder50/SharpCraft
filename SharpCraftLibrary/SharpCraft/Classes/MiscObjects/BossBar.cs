@@ -7,7 +7,7 @@ namespace SharpCraft
     /// </summary>
     public class BossBar
     {
-        private const string namePattern = @"^[a-z\-\./0-9]+$";
+        private const string namePattern = @"^[a-z\-_\./0-9]+$";
         private string name;
 
         /// <summary>

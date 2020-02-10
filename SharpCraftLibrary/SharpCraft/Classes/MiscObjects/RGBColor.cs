@@ -15,14 +15,14 @@ namespace SharpCraft
         /// <summary>
         /// Makes a rgb color with the specified colors
         /// </summary>
-        /// <param name="RedColor">the amount of red</param>
-        /// <param name="GreenColor">the amount of green</param>
-        /// <param name="BlueColor">the amount of blue</param>
-        public RGBColor(int RedColor, int GreenColor, int BlueColor)
+        /// <param name="redColor">the amount of red</param>
+        /// <param name="greenColor">the amount of green</param>
+        /// <param name="blueColor">the amount of blue</param>
+        public RGBColor(int redColor, int greenColor, int blueColor)
         {
-            Red = RedColor;
-            Green = GreenColor;
-            Blue = BlueColor;
+            Red = redColor;
+            Green = greenColor;
+            Blue = blueColor;
         }
 
         /// <summary>

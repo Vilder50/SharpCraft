@@ -36,7 +36,7 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestValidateName()
         {
-            Assert.IsTrue(BossBar.ValidateName("///...---"),"BossBar name should accept / . and -");
+            Assert.IsTrue(BossBar.ValidateName("///...__---"),"BossBar name should accept / . _ and -");
             Assert.IsTrue(BossBar.ValidateName("as0ds9az564xxcy12"), "BossBar name should accept letters and numbers");
             Assert.IsFalse(BossBar.ValidateName("test:test"), "BossBar name should not accept :");
             Assert.IsFalse(BossBar.ValidateName(""), "BossBar name may not be empty");

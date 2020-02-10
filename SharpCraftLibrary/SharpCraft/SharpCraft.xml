@@ -8580,6 +8580,30 @@
             </summary>
             <param name="index">The index to convert</param>
         </member>
+        <member name="T:SharpCraft.Objective">
+            <summary>
+            An object used for scoreboard objectives
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Objective.#ctor(System.String)">
+            <summary>
+            Creates a new scoreboard objective object.
+            Note that this doesnt add the objective to the world
+            </summary>
+            <param name="scoreName">The name of the score</param>
+        </member>
+        <member name="P:SharpCraft.Objective.Name">
+            <summary>
+            The name of this score objective
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Objective.ValidateName(System.String)">
+            <summary>
+            Checks if the given name is valid or not for a <see cref="T:SharpCraft.Objective"/>
+            </summary>
+            <param name="name">The name to check</param>
+            <returns>True if the name is valid</returns>
+        </member>
         <member name="T:SharpCraft.RGBColor">
             <summary>
             An object for rgb colors
@@ -8589,9 +8613,9 @@
             <summary>
             Makes a rgb color with the specified colors
             </summary>
-            <param name="RedColor">the amount of red</param>
-            <param name="GreenColor">the amount of green</param>
-            <param name="BlueColor">the amount of blue</param>
+            <param name="redColor">the amount of red</param>
+            <param name="greenColor">the amount of green</param>
+            <param name="blueColor">the amount of blue</param>
         </member>
         <member name="M:SharpCraft.RGBColor.#ctor(System.String)">
             <summary>
@@ -8694,23 +8718,6 @@
             <param name="extraConversionData">Not used</param>
             <param name="asType">The type of array</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartArray"/></returns>
-        </member>
-        <member name="T:SharpCraft.Objective">
-            <summary>
-            An object used for scoreboard objectives
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Objective.#ctor(System.String)">
-            <summary>
-            Creates a new scoreboard objective object.
-            Note that this doesnt add the objective to the world
-            </summary>
-            <param name="ScoreName">The name of the score</param>
-        </member>
-        <member name="P:SharpCraft.Objective.Name">
-            <summary>
-            The name of this score objective
-            </summary>
         </member>
         <member name="T:SharpCraft.ScoreValue">
             <summary>
