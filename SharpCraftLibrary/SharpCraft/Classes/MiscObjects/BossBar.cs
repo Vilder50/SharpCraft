@@ -26,7 +26,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="bossBarName">The name of the bossbar</param>
         /// <param name="namespace">The namespace the bossbar is in. Null = minecraft namespace.</param>
-        public BossBar(string bossBarName, BasePackNamespace @namespace) : this(bossBarName)
+        public BossBar(BasePackNamespace @namespace, string bossBarName) : this(bossBarName)
         {
             Namespace = @namespace;
         }

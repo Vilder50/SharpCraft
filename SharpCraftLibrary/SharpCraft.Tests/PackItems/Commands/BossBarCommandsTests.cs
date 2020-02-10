@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         private BossBar GetBar()
         {
             EmptyNamespace space = EmptyNamespace.GetNamespace("boss");
-            return new BossBar("name",space);
+            return new BossBar(space, "name");
         }
 
         [TestMethod]

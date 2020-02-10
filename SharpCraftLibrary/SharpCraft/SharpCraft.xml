@@ -7669,7 +7669,7 @@
             </summary>
             <param name="bossBarName">The name of the bossbar</param>
         </member>
-        <member name="M:SharpCraft.BossBar.#ctor(System.String,SharpCraft.BasePackNamespace)">
+        <member name="M:SharpCraft.BossBar.#ctor(SharpCraft.BasePackNamespace,System.String)">
             <summary>
             Creates a new boss bar object.
             Note that this doesnt add the boss bar to the world

@@ -15,7 +15,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.IsNull(bar1.Namespace, "Constructor should have set namespace to null");
         
             EmptyNamespace space = EmptyNamespace.GetNamespace("myspace");
-            BossBar bar2 = new BossBar("otherbar", space);
+            BossBar bar2 = new BossBar(space, "otherbar");
             Assert.AreEqual("otherbar", bar2.Name, "Namespace constructor didn't set name");
             Assert.AreSame(space, bar2.Namespace, "Namespace constructor should have set namespace to null");
         
@@ -29,7 +29,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual("minecraft:mybar",bar1.GetFullName(), "GetFullName without namespace returns wrong value");
         
             EmptyNamespace space = EmptyNamespace.GetNamespace("myspace");
-            BossBar bar2 = new BossBar("otherbar", space);
+            BossBar bar2 = new BossBar(space, "otherbar");
             Assert.AreEqual("myspace:otherbar", bar2.GetFullName(), "GetFullName with namespace returns wrong value");
         }
         
