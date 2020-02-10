@@ -8639,42 +8639,47 @@
             An object for rotations
             </summary>
         </member>
-        <member name="F:SharpCraft.Rotation.XRot">
+        <member name="F:SharpCraft.Rotation.y">
             <summary>
             The rotation
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Rotation.YRot">
-            <summary>
-            The rotation
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Rotation.RXRot">
-            <summary>
-            If the rotation is relative or not
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Rotation.RYRot">
-            <summary>
-            If the rotation is relative or not
             </summary>
         </member>
         <member name="M:SharpCraft.Rotation.#ctor(System.Double,System.Double,System.Boolean,System.Boolean)">
             <summary>
             Creates a new rotation object with the specified rotation
             </summary>
-            <param name="xrot">the x rotation</param>
-            <param name="yrot">the y rotation (goes from -90 (up) to 90 (down))</param>
-            <param name="RelativeXRot">if the x rotation is relative or not</param>
-            <param name="RelativeYRot">if the y rotation is relative or not</param>
+            <param name="xRotation">The vertical rotation</param>
+            <param name="yRotation">The horizontal rotation</param>
+            <param name="xRelative">if the vertical rotation is relative or not</param>
+            <param name="yRelative">if the horizontal rotation is relative or not</param>
         </member>
         <member name="M:SharpCraft.Rotation.#ctor(System.Boolean,System.Double,System.Double)">
             <summary>
             Creates a new rotation of the specified type
             </summary>
-            <param name="Relative">If the whole rotation is relative or not</param>
-            <param name="xrot">the x rotation</param>
-            <param name="yrot">the y rotation (goes from -90 (up) to 90 (down))</param>
+            <param name="relative">If the whole rotation is relative or not</param>
+            <param name="xRotation">The vertical rotation</param>
+            <param name="yRotation">The horizontal rotation</param>
+        </member>
+        <member name="P:SharpCraft.Rotation.X">
+            <summary>
+            The vertical rotation
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Rotation.Y">
+            <summary>
+            The horizontal rotation
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Rotation.XRelative">
+            <summary>
+            If the Horizontal rotation is relative or not
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Rotation.YRelative">
+            <summary>
+            If the Vertical rotation is relative or not
+            </summary>
         </member>
         <member name="M:SharpCraft.Rotation.GetRotationString">
             <summary>
