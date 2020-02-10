@@ -6,17 +6,16 @@ namespace SharpCraft
     /// <summary>
     /// A class containing helpful method extensions
     /// </summary>
-    public static class Helper
+    public static class Utils
     {
         /// <summary>
         /// Adds escape characters to the given text
         /// </summary>
         /// <param name="text">The text to escape</param>
-        /// <param name="escape">The letter to escape</param>
         /// <returns>The escaped text</returns>
-        public static string Escape(this string text, char escape = '"')
+        public static string Escape(this string text)
         {
-            return text.Replace(escape.ToString(), "?-SBackSlash-?" + escape.ToString()).Replace("\\", "\\\\").Replace("?-SBackSlash-?", "\\").Replace("\n", "\\n");
+            return text.Replace("\"", "?-SBackSlash-?" + "\"").Replace("\\", "\\\\").Replace("?-SBackSlash-?", "\\").Replace("\n", "\\n");
         }
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace SharpCraft
             }
             catch
             {
-                throw new ArgumentException("item doesn't have a block type", nameof(item));
+                throw new InvalidCastException("item doesn't have a block type");
             }
         }
 
@@ -119,11 +118,11 @@ namespace SharpCraft
         /// </summary>
         /// <param name="item">The item to convert</param>
         /// <returns>The block</returns>
-        public static ID.Block ConvertToBlock(this ID.Item? item)
+        public static ID.Block? ConvertToBlock(this ID.Item? item)
         {
             if (item is null)
             {
-                throw new ArgumentNullException(nameof(item), "item may not be null");
+                return null;
             }
             return ConvertToBlock(item.Value);
         }
@@ -141,7 +140,7 @@ namespace SharpCraft
             }
             catch
             {
-                throw new ArgumentException("block doesn't have a item type", nameof(block));
+                throw new InvalidCastException("block doesn't have a item type");
             }
         }
 
@@ -150,11 +149,11 @@ namespace SharpCraft
         /// </summary>
         /// <param name="block">The block to convert</param>
         /// <returns>The item</returns>
-        public static ID.Item ConvertToItem(this ID.Block? block)
+        public static ID.Item? ConvertToItem(this ID.Block? block)
         {
             if (block is null)
             {
-                throw new ArgumentNullException(nameof(block), "block may not be null");
+                return null;
             }
             return ConvertToItem(block.Value);
         }

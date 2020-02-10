@@ -7800,103 +7800,6 @@
             </summary>
             <returns>A string used in commands for getting the data</returns>
         </member>
-        <member name="T:SharpCraft.Helper">
-            <summary>
-            A class containing helpful method extensions
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Helper.Escape(System.String,System.Char)">
-            <summary>
-            Adds escape characters to the given text
-            </summary>
-            <param name="text">The text to escape</param>
-            <param name="escape">The letter to escape</param>
-            <returns>The escaped text</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftDouble(System.Double)">
-            <summary>
-            Converts the given double into a double Minecraft can use
-            </summary>
-            <param name="Double">The double to convert</param>
-            <returns>The converted double</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftDouble(System.Nullable{System.Double})">
-            <summary>
-            Converts the given double into a double Minecraft can use
-            </summary>
-            <param name="Double">The double to convert</param>
-            <returns>The converted double</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftFloat(System.Single)">
-            <summary>
-            Converts the given float into a double Minecraft can use
-            </summary>
-            <param name="Float">The float to convert</param>
-            <returns>The converted float</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftFloat(System.Nullable{System.Single})">
-            <summary>
-            Converts the given float into a float Minecraft can use
-            </summary>
-            <param name="Float">The float to convert</param>
-            <returns>The converted float</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.MinecraftValue(SharpCraft.ID.Item)">
-            <summary>
-            Takes the item and converts it into an value Minecraft can use
-            </summary>
-            <param name="item">The item to convert</param>
-            <returns>The converted item</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.MinecraftValue(System.Nullable{SharpCraft.ID.Item})">
-            <summary>
-            Takes the item and converts it into an value Minecraft can use
-            </summary>
-            <param name="item">The item to convert</param>
-            <returns>The converted item</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftBool(System.Boolean)">
-            <summary>
-            Takes a bool and converts it into a value Minecraft can use
-            </summary>
-            <param name="Bool">The bool to convert</param>
-            <returns>The converted bool</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ToMinecraftBool(System.Nullable{System.Boolean})">
-            <summary>
-            Takes a bool and converts it into a value Minecraft can use
-            </summary>
-            <param name="Bool">The bool to convert</param>
-            <returns>The converted bool</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ConvertToBlock(SharpCraft.ID.Item)">
-            <summary>
-            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
-            </summary>
-            <param name="item">The item to convert</param>
-            <returns>The block</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ConvertToBlock(System.Nullable{SharpCraft.ID.Item})">
-            <summary>
-            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
-            </summary>
-            <param name="item">The item to convert</param>
-            <returns>The block</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ConvertToItem(SharpCraft.ID.Block)">
-            <summary>
-            Converts the given <see cref="T:SharpCraft.ID.Block"/> into an <see cref="T:SharpCraft.ID.Item"/>
-            </summary>
-            <param name="block">The block to convert</param>
-            <returns>The item</returns>
-        </member>
-        <member name="M:SharpCraft.Helper.ConvertToItem(System.Nullable{SharpCraft.ID.Block})">
-            <summary>
-            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
-            </summary>
-            <param name="block">The block to convert</param>
-            <returns>The item</returns>
-        </member>
         <member name="T:SharpCraft.HexColor">
             <summary>
             An object for rgb colors
@@ -9689,6 +9592,102 @@
             <param name="extraConversionData">Not used</param>
             <param name="asType">The type of tag</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.Utils">
+            <summary>
+            A class containing helpful method extensions
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Utils.Escape(System.String)">
+            <summary>
+            Adds escape characters to the given text
+            </summary>
+            <param name="text">The text to escape</param>
+            <returns>The escaped text</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftDouble(System.Double)">
+            <summary>
+            Converts the given double into a double Minecraft can use
+            </summary>
+            <param name="Double">The double to convert</param>
+            <returns>The converted double</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftDouble(System.Nullable{System.Double})">
+            <summary>
+            Converts the given double into a double Minecraft can use
+            </summary>
+            <param name="Double">The double to convert</param>
+            <returns>The converted double</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftFloat(System.Single)">
+            <summary>
+            Converts the given float into a double Minecraft can use
+            </summary>
+            <param name="Float">The float to convert</param>
+            <returns>The converted float</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftFloat(System.Nullable{System.Single})">
+            <summary>
+            Converts the given float into a float Minecraft can use
+            </summary>
+            <param name="Float">The float to convert</param>
+            <returns>The converted float</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.MinecraftValue(SharpCraft.ID.Item)">
+            <summary>
+            Takes the item and converts it into an value Minecraft can use
+            </summary>
+            <param name="item">The item to convert</param>
+            <returns>The converted item</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.MinecraftValue(System.Nullable{SharpCraft.ID.Item})">
+            <summary>
+            Takes the item and converts it into an value Minecraft can use
+            </summary>
+            <param name="item">The item to convert</param>
+            <returns>The converted item</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftBool(System.Boolean)">
+            <summary>
+            Takes a bool and converts it into a value Minecraft can use
+            </summary>
+            <param name="Bool">The bool to convert</param>
+            <returns>The converted bool</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ToMinecraftBool(System.Nullable{System.Boolean})">
+            <summary>
+            Takes a bool and converts it into a value Minecraft can use
+            </summary>
+            <param name="Bool">The bool to convert</param>
+            <returns>The converted bool</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ConvertToBlock(SharpCraft.ID.Item)">
+            <summary>
+            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
+            </summary>
+            <param name="item">The item to convert</param>
+            <returns>The block</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ConvertToBlock(System.Nullable{SharpCraft.ID.Item})">
+            <summary>
+            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
+            </summary>
+            <param name="item">The item to convert</param>
+            <returns>The block</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ConvertToItem(SharpCraft.ID.Block)">
+            <summary>
+            Converts the given <see cref="T:SharpCraft.ID.Block"/> into an <see cref="T:SharpCraft.ID.Item"/>
+            </summary>
+            <param name="block">The block to convert</param>
+            <returns>The item</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ConvertToItem(System.Nullable{SharpCraft.ID.Block})">
+            <summary>
+            Converts the given <see cref="T:SharpCraft.ID.Item"/> into an <see cref="T:SharpCraft.ID.Block"/>
+            </summary>
+            <param name="block">The block to convert</param>
+            <returns>The item</returns>
         </member>
         <member name="T:SharpCraft.UUID">
             <summary>
