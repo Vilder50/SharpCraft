@@ -157,5 +157,32 @@ namespace SharpCraft
             }
             return ConvertToItem(block.Value);
         }
+
+        private const string namePattern = @"^[a-z\-_\./0-9]+$";
+        /// <summary>
+        /// Checks if the given name is valid or not
+        /// </summary>
+        /// <param name="name">The name to check</param>
+        /// <param name="allowCapitialized">If capitialized letters are allowed</param>
+        /// <param name="allowSlash">If / is allowed</param>
+        /// <returns>True if the name is valid</returns>
+        public static bool ValidateName(string name, bool allowCapitialized, bool allowSlash)
+        {
+            if (name is null)
+            {
+                return false;
+            }
+
+            string checkString = name;
+            if (allowCapitialized)
+            {
+                checkString = checkString.ToLower();
+            }
+            if (!allowSlash && name.Contains("/"))
+            {
+                return false;
+            }
+            return Regex.IsMatch(checkString, namePattern);
+        }
     }
 }

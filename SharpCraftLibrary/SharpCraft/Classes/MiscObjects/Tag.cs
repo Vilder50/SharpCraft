@@ -30,6 +30,10 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Tag name may not be null or whitespace", nameof(Name));
                 }
+                if (!Utils.ValidateName(value, true, false))
+                {
+                    throw new ArgumentException("Tag name is invalid. Only accepts letters, numbers and -._");
+                }
                 name = value;
             }
         }
@@ -37,7 +41,7 @@ namespace SharpCraft
         /// <summary>
         /// Converts this tag into a <see cref="DataPartTag"/>
         /// </summary>
-        /// <param name="extraConversionData">Not used</param>
+        /// <param name="extraConversionData">set to <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="asType">The type of tag</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)

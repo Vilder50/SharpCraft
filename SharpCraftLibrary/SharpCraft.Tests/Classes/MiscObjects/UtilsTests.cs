@@ -84,5 +84,19 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.IsNull(isNull.ConvertToItem(), "Null wasn't converted");
             Assert.ThrowsException<InvalidCastException>(() => noneConvertable.ConvertToItem(), "Unconvertable block should throw exception");
         }
+
+        [TestMethod]
+        public void TestValidateName()
+        {
+            Assert.IsFalse(Utils.ValidateName(null,true,true), "Null is not a valid name");
+            Assert.IsTrue(Utils.ValidateName("...__---",false,false), "Name should accept / . _ and -");
+            Assert.IsTrue(Utils.ValidateName("as0ds9az564xxcy12", false, false), "Name should accept letters and numbers");
+            Assert.IsFalse(Utils.ValidateName("test:test", false, false), "Name should not accept :");
+            Assert.IsFalse(Utils.ValidateName("", false, false), "Name may not be empty");
+            Assert.IsFalse(Utils.ValidateName("ASD", false, false), "Name may not contain capitialized letters");
+            Assert.IsTrue(Utils.ValidateName("ASD", true, false), "Name may contain capitialized letters if specified");
+            Assert.IsFalse(Utils.ValidateName("/", false, false), "Name may not /");
+            Assert.IsTrue(Utils.ValidateName("/", true, true), "Name may contain / if specified");
+        }
     }
 }

@@ -7,7 +7,6 @@ namespace SharpCraft
     /// </summary>
     public class Objective
     {
-        private const string namePattern = @"^[a-zA-Z\-_\./0-9]+$";
         private string name;
 
         /// <summary>
@@ -32,22 +31,12 @@ namespace SharpCraft
                 {
                     throw new System.ArgumentException("Objective name may not be null or whitespace", nameof(Name));
                 }
-                if (!ValidateName(value))
+                if (!Utils.ValidateName(value,true,false))
                 {
-                    throw new System.ArgumentException("Objective name is invalid. Only accepts: \"" + namePattern + "\"", nameof(Name));
+                    throw new System.ArgumentException("Objective name is invalid. Only accepts letters, numbers and -._");
                 }
                 name = value;
             }
-        }
-
-        /// <summary>
-        /// Checks if the given name is valid or not for a <see cref="Objective"/>
-        /// </summary>
-        /// <param name="name">The name to check</param>
-        /// <returns>True if the name is valid</returns>
-        public static bool ValidateName(string name)
-        {
-            return Regex.IsMatch(name, namePattern);
         }
     }
 }

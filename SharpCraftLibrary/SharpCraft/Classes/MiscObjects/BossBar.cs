@@ -7,7 +7,6 @@ namespace SharpCraft
     /// </summary>
     public class BossBar
     {
-        private const string namePattern = @"^[a-z\-_\./0-9]+$";
         private string name;
 
         /// <summary>
@@ -44,9 +43,9 @@ namespace SharpCraft
                     throw new System.ArgumentException("BossBar name may not be null or whitespace", nameof(Name));
                 }
                 string loweredString = value.ToLower();
-                if (!ValidateName(loweredString))
+                if (!Utils.ValidateName(loweredString,false,true))
                 {
-                    throw new System.ArgumentException("BossBar name is invalid. Only accepts: \"" + namePattern + "\"", nameof(Name));
+                    throw new System.ArgumentException("BossBar name is invalid. Name only accepts letters, numbers and /-._");
                 }
                 name = loweredString;
             }
@@ -64,16 +63,6 @@ namespace SharpCraft
         public string GetFullName()
         {
             return (Namespace?.Name ?? "minecraft") + ":" + Name;
-        }
-
-        /// <summary>
-        /// Checks if the given name is valid or not for a bossbar
-        /// </summary>
-        /// <param name="name">The name to check</param>
-        /// <returns>True if the name is valid</returns>
-        public static bool ValidateName(string name)
-        {
-            return Regex.IsMatch(name, namePattern);
         }
     }
 }

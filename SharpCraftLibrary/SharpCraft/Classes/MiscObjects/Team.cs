@@ -31,6 +31,10 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Team name may not be null or whitespace", nameof(Name));
                 }
+                if (!Utils.ValidateName(value, true, false))
+                {
+                    throw new ArgumentException("Tag name is invalid. Only accepts letters, numbers and -._");
+                }
                 name = value;
             }
         }

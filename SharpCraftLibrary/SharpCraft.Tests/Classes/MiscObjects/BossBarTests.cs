@@ -32,15 +32,5 @@ namespace SharpCraft.Tests.MiscObjects
             BossBar bar2 = new BossBar(space, "otherbar");
             Assert.AreEqual("myspace:otherbar", bar2.GetFullName(), "GetFullName with namespace returns wrong value");
         }
-
-        [TestMethod]
-        public void TestValidateName()
-        {
-            Assert.IsTrue(BossBar.ValidateName("///...__---"), "BossBar name should accept / . _ and -");
-            Assert.IsTrue(BossBar.ValidateName("as0ds9az564xxcy12"), "BossBar name should accept letters and numbers");
-            Assert.IsFalse(BossBar.ValidateName("test:test"), "BossBar name should not accept :");
-            Assert.IsFalse(BossBar.ValidateName(""), "BossBar name may not be empty");
-            Assert.IsFalse(BossBar.ValidateName("ASD"), "BossBar name may not contain capitialized letters");
-        }
     }
 }

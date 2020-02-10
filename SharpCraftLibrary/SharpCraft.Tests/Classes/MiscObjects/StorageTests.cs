@@ -26,16 +26,6 @@ namespace SharpCraft.Tests.MiscObjects
             Storage storage = new Storage(space, "storage");
             Assert.AreEqual("myspace:storage", storage.GetNamespacedName(), "GetNamespacedName with namespace returns wrong value");
         }
-
-        [TestMethod]
-        public void TestValidateName()
-        {
-            Assert.IsTrue(Storage.ValidateName("///...__---"), "Storage name should accept / . _ and -");
-            Assert.IsTrue(Storage.ValidateName("as0ds9az564xxcy12"), "Storage name should accept letters and numbers");
-            Assert.IsFalse(Storage.ValidateName("test:test"), "Storage name should not accept :");
-            Assert.IsFalse(Storage.ValidateName(""), "Storage name may not be empty");
-            Assert.IsFalse(Storage.ValidateName("ASD"), "Storage name may not contain capitialized letters");
-        }
     }
 }
 

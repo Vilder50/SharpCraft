@@ -7693,13 +7693,6 @@
             </summary>
             <returns>String used for refering this bossbar</returns>
         </member>
-        <member name="M:SharpCraft.BossBar.ValidateName(System.String)">
-            <summary>
-            Checks if the given name is valid or not for a bossbar
-            </summary>
-            <param name="name">The name to check</param>
-            <returns>True if the name is valid</returns>
-        </member>
         <member name="T:SharpCraft.IDataLocation">
             <summary>
             Interface for classes which marks a place there is data
@@ -8589,13 +8582,6 @@
             The name of this score objective
             </summary>
         </member>
-        <member name="M:SharpCraft.Objective.ValidateName(System.String)">
-            <summary>
-            Checks if the given name is valid or not for a <see cref="T:SharpCraft.Objective"/>
-            </summary>
-            <param name="name">The name to check</param>
-            <returns>True if the name is valid</returns>
-        </member>
         <member name="T:SharpCraft.RGBColor">
             <summary>
             An object for rgb colors
@@ -9476,13 +9462,6 @@
             </summary>
             <returns>The namespaced name of this storage</returns>
         </member>
-        <member name="M:SharpCraft.Storage.ValidateName(System.String)">
-            <summary>
-            Checks if the given name is valid or not for storage
-            </summary>
-            <param name="name">The name to check</param>
-            <returns>True if the name is valid</returns>
-        </member>
         <member name="T:SharpCraft.Tag">
             <summary>
             An object used for tags
@@ -9503,7 +9482,7 @@
             <summary>
             Converts this tag into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
-            <param name="extraConversionData">Not used</param>
+            <param name="extraConversionData">set to <see cref="F:SharpCraft.ID.NBTTagType.TagString"/></param>
             <param name="asType">The type of tag</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
@@ -9699,6 +9678,15 @@
             </summary>
             <param name="block">The block to convert</param>
             <returns>The item</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ValidateName(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Checks if the given name is valid or not
+            </summary>
+            <param name="name">The name to check</param>
+            <param name="allowCapitialized">If capitialized letters are allowed</param>
+            <param name="allowSlash">If / is allowed</param>
+            <returns>True if the name is valid</returns>
         </member>
         <member name="T:SharpCraft.UUID">
             <summary>
