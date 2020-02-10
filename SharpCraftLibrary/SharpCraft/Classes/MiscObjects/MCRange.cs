@@ -10,56 +10,44 @@ namespace SharpCraft
     public class MCRange : IConvertableToDataObject
     {
         /// <summary>
-        /// The smallest number in the range
-        /// </summary>
-        public double? Min;
-
-        /// <summary>
-        /// The highest number in the range
-        /// </summary>
-        public double? Max;
-
-        /// <summary>
         /// Creates a range.
         /// </summary>
-        /// <param name="Minimum">The smallest number in the range</param>
-        /// <param name="Maximum">The highest number in the range</param>
-        public MCRange(double? Minimum, double? Maximum)
+        /// <param name="minimum">The smallest number in the range</param>
+        /// <param name="maximum">The highest number in the range</param>
+        public MCRange(double? minimum, double? maximum)
         {
-            Min = Minimum;
-            Max = Maximum;
+            if (minimum is null && maximum is null)
+            {
+                throw new ArgumentNullException("Both minimum and maximum may not both be null");
+            }
+            if (!(minimum is null || maximum is null) && maximum < minimum)
+            {
+                throw new ArgumentException("Maximum may not be less than minimum");
+            }
+
+            Minimum = minimum;
+            Maximum = maximum;
         }
 
         /// <summary>
         /// Creates a range which only contains one number
         /// </summary>
-        /// <param name="Equals">The only number the range contains</param>
-        public MCRange(double Equals)
+        /// <param name="equals">The only number the range contains</param>
+        public MCRange(double equals) : this(equals, equals)
         {
-            Min = Equals;
-            Max = Equals;
+            
         }
 
         /// <summary>
-        /// Gets the raw data used in JSON files
-        /// "name":{"min":x,"max":y}
+        /// The smallest number in the range
         /// </summary>
-        /// <param name="Name">the name the object should have in the file</param>
-        /// <returns>Raw data used in JSON files</returns>
-        public string JSONString(string Name)
-        {
-            if (Min != Max)
-            {
-                List<string> TempList = new List<string>();
-                if (Min != null) { TempList.Add("\"min\":" + Min.ToMinecraftDouble()); }
-                if (Max != null) { TempList.Add("\"max\":" + Max.ToMinecraftDouble()); }
-                return "\"" + Name + "\": {" + string.Join(",", TempList) + "}";
-            }
-            else
-            {
-                return "\"" + Name + "\":" + Min.ToMinecraftDouble();
-            }
-        }
+        public double? Minimum { get; protected set; }
+
+        /// <summary>
+        /// The highest number in the range
+        /// </summary>
+        public double? Maximum { get; protected set; }
+
         /// <summary>
         /// Gets the raw data used in commands
         /// x..y or name=x..y
@@ -69,27 +57,27 @@ namespace SharpCraft
         public string SelectorString(string Name = null)
         {
             
-            if (Min != Max)
+            if (Minimum != Maximum)
             {
                 string TempString = "";
                 if (Name != null)
                 {
                     TempString = Name + "=";
                 }
-                if (Min != null) { TempString += Min.ToMinecraftDouble(); }
+                if (Minimum != null) { TempString += Minimum.ToMinecraftDouble(); }
                 TempString += "..";
-                if (Max != null) { TempString += Max.ToMinecraftDouble(); }
+                if (Maximum != null) { TempString += Maximum.ToMinecraftDouble(); }
                 return TempString;
             }
             else
             {
                 if (Name != null)
                 {
-                    return Name + "=" + Min;
+                    return Name + "=" + Minimum;
                 }
                 else
                 {
-                    return Min.ToString();
+                    return Minimum.ToString();
                 }
             }
         }
@@ -117,35 +105,35 @@ namespace SharpCraft
                 DataPartObject dataObject = new DataPartObject();
                 if (forceType == ID.NBTTagType.TagShort)
                 {
-                    if (!(Min is null))
+                    if (!(Minimum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((short?)Min, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((short?)Minimum, isJson: isJson), isJson));
                     }
-                    if (!(Max is null))
+                    if (!(Maximum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((short?)Max, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((short?)Maximum, isJson: isJson), isJson));
                     }
                 }
                 else if (forceType == ID.NBTTagType.TagDouble)
                 {
-                    if (!(Min is null))
+                    if (!(Minimum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag(Min, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag(Minimum, isJson: isJson), isJson));
                     }
-                    if (!(Max is null))
+                    if (!(Maximum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag(Max, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag(Maximum, isJson: isJson), isJson));
                     }
                 }
                 else if (forceType == ID.NBTTagType.TagInt)
                 {
-                    if (!(Min is null))
+                    if (!(Minimum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((int?)Min, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(minName, new DataPartTag((int?)Minimum, isJson: isJson), isJson));
                     }
-                    if (!(Max is null))
+                    if (!(Maximum is null))
                     {
-                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((int?)Max, isJson: isJson), isJson));
+                        dataObject.AddValue(new DataPartPath(maxName, new DataPartTag((int?)Maximum, isJson: isJson), isJson));
                     }
                 }
                 else

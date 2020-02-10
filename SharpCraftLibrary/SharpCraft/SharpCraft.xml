@@ -8516,36 +8516,28 @@
             An object for ranges
             </summary>
         </member>
-        <member name="F:SharpCraft.MCRange.Min">
-            <summary>
-            The smallest number in the range
-            </summary>
-        </member>
-        <member name="F:SharpCraft.MCRange.Max">
-            <summary>
-            The highest number in the range
-            </summary>
-        </member>
         <member name="M:SharpCraft.MCRange.#ctor(System.Nullable{System.Double},System.Nullable{System.Double})">
             <summary>
             Creates a range.
             </summary>
-            <param name="Minimum">The smallest number in the range</param>
-            <param name="Maximum">The highest number in the range</param>
+            <param name="minimum">The smallest number in the range</param>
+            <param name="maximum">The highest number in the range</param>
         </member>
         <member name="M:SharpCraft.MCRange.#ctor(System.Double)">
             <summary>
             Creates a range which only contains one number
             </summary>
-            <param name="Equals">The only number the range contains</param>
+            <param name="equals">The only number the range contains</param>
         </member>
-        <member name="M:SharpCraft.MCRange.JSONString(System.String)">
+        <member name="P:SharpCraft.MCRange.Minimum">
             <summary>
-            Gets the raw data used in JSON files
-            "name":{"min":x,"max":y}
+            The smallest number in the range
             </summary>
-            <param name="Name">the name the object should have in the file</param>
-            <returns>Raw data used in JSON files</returns>
+        </member>
+        <member name="P:SharpCraft.MCRange.Maximum">
+            <summary>
+            The highest number in the range
+            </summary>
         </member>
         <member name="M:SharpCraft.MCRange.SelectorString(System.String)">
             <summary>
