@@ -8,6 +8,26 @@ namespace SharpCraft
     public class Effect : Data.DataHolderBase
     {
         /// <summary>
+        /// Creates an empty effect
+        /// </summary>
+        public Effect() { }
+
+        /// <summary>
+        /// Creates an effect with the specified parameters
+        /// </summary>
+        /// <param name="type">the type of effect</param>
+        /// <param name="duration">the duration of the effect (in ticks)</param>
+        /// <param name="amplifier">the amplifier of the effect (0 = level 1)</param>
+        /// <param name="showParticles">if the effect should show particles or not</param>
+        public Effect(ID.Effect type, Time duration, sbyte amplifier, bool? showParticles = null)
+        {
+            Duration = duration;
+            Amplifier = amplifier;
+            Type = type;
+            ShowParticles = showParticles;
+        }
+
+        /// <summary>
         /// The duration of the effect (in ticks)
         /// </summary>
         [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
@@ -37,26 +57,12 @@ namespace SharpCraft
         /// (comes from a beacon / conduit)
         /// </summary>
         [Data.DataTag]
-        public bool? Ambiant { get; set; }
+        public bool? Ambient { get; set; }
 
         /// <summary>
-        /// Creates an empty effect
+        /// Replaces the other effect when it runs out. (Duration also decreases for this effect)
         /// </summary>
-        public Effect() { }
-
-        /// <summary>
-        /// Creates an effect with the specified parameters
-        /// </summary>
-        /// <param name="EffectType">the type of effect</param>
-        /// <param name="EffectDuration">the duration of the effect (in ticks)</param>
-        /// <param name="EffectAmplifier">the amplifier of the effect (0 = level 1)</param>
-        /// <param name="ShowParticles">if the effect should show particles or not</param>
-        public Effect(ID.Effect EffectType, int EffectDuration, sbyte EffectAmplifier, bool? ShowParticles = null)
-        {
-            Duration = EffectDuration;
-            Amplifier = EffectAmplifier;
-            Type = EffectType;
-            this.ShowParticles = ShowParticles;
-        }
+        [Data.DataTag]
+        public Effect HiddenEffect { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace SharpCraft
         /// <summary>
         /// The basic entity data
         /// </summary>
-        public abstract class EntityBasic : BaseEntity
+        public class EntityBasic : BaseEntity
         {
             /// <summary>
             /// Creates a new entity

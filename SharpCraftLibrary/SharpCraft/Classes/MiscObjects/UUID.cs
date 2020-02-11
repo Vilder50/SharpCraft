@@ -8,6 +8,28 @@ namespace SharpCraft
     /// </summary>
     public class UUID : IConvertableToDataObject, IConvertableToDataTag
     {
+        #region random
+        private static Random random = new Random(0);
+
+        /// <summary>
+        /// Sets the seed for the randomiser whcih generates random UUID's
+        /// </summary>
+        public static void SetRandomSeed(int seed)
+        {
+            random = new Random(seed);
+        }
+
+        /// <summary>
+        /// Intializes a new random <see cref="UUID"/>
+        /// </summary>
+        public UUID()
+        {
+            Least = random.Next();
+            Most = random.Next();
+            UUIDString = CreateUUIDString(Most, Least);
+        }
+        #endregion
+
         /// <summary>
         /// Creates a UUID Out of a UUIDLeast and a UUIDMost
         /// </summary>

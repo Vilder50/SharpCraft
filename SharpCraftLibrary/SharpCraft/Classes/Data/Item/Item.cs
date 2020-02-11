@@ -206,7 +206,7 @@ namespace SharpCraft
         /// The attributes the item has
         /// </summary>
         [DataTag("tag.AttributeModifiers")]
-        public MCAttribute[] Attributes { get; set; }
+        public ItemAttribute[] Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>

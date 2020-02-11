@@ -37,5 +37,22 @@ namespace SharpCraft.Tests.MiscObjects
 
             Assert.ThrowsException<ArgumentException>(() => convertable.GetAsTag(ID.NBTTagType.TagLong, null), "UUID cannot be long");
         }
+
+        [TestMethod]
+        public void TestRandom()
+        {
+            UUID.SetRandomSeed(1);
+            UUID uuid1 = new UUID();
+            UUID.SetRandomSeed(1);
+            UUID uuid2 = new UUID();
+            Assert.AreEqual(uuid1.UUIDString, uuid2.UUIDString);
+
+            uuid1 = new UUID();
+            uuid2 = new UUID();
+            if (uuid1.UUIDString == uuid2.UUIDString)
+            {
+                Assert.Inconclusive();
+            }
+        }
     }
 }

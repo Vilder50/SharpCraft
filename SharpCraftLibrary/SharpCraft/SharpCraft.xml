@@ -5383,7 +5383,7 @@
         </member>
         <member name="P:SharpCraft.Entity.BaseMob.Attributes">
             <summary>
-            The <see cref="T:SharpCraft.MCAttribute"/>s the mob has
+            The attributes the mob has
             </summary>
         </member>
         <member name="T:SharpCraft.Entity.Mob">
@@ -7496,6 +7496,20 @@
             An object for effects
             </summary>
         </member>
+        <member name="M:SharpCraft.Effect.#ctor">
+            <summary>
+            Creates an empty effect
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,SharpCraft.Time,System.SByte,System.Nullable{System.Boolean})">
+            <summary>
+            Creates an effect with the specified parameters
+            </summary>
+            <param name="type">the type of effect</param>
+            <param name="duration">the duration of the effect (in ticks)</param>
+            <param name="amplifier">the amplifier of the effect (0 = level 1)</param>
+            <param name="showParticles">if the effect should show particles or not</param>
+        </member>
         <member name="P:SharpCraft.Effect.Duration">
             <summary>
             The duration of the effect (in ticks)
@@ -7517,25 +7531,16 @@
             If the effect should show particles or not
             </summary>
         </member>
-        <member name="P:SharpCraft.Effect.Ambiant">
+        <member name="P:SharpCraft.Effect.Ambient">
             <summary>
             If the effect is an ambiant effect
             (comes from a beacon / conduit)
             </summary>
         </member>
-        <member name="M:SharpCraft.Effect.#ctor">
+        <member name="P:SharpCraft.Effect.HiddenEffect">
             <summary>
-            Creates an empty effect
+            Replaces the other effect when it runs out. (Duration also decreases for this effect)
             </summary>
-        </member>
-        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,System.Int32,System.SByte,System.Nullable{System.Boolean})">
-            <summary>
-            Creates an effect with the specified parameters
-            </summary>
-            <param name="EffectType">the type of effect</param>
-            <param name="EffectDuration">the duration of the effect (in ticks)</param>
-            <param name="EffectAmplifier">the amplifier of the effect (0 = level 1)</param>
-            <param name="ShowParticles">if the effect should show particles or not</param>
         </member>
         <member name="T:SharpCraft.Firework">
             <summary>
@@ -7567,68 +7572,108 @@
             the colors the explosion fades into
             </summary>
         </member>
-        <member name="T:SharpCraft.MCAttribute">
+        <member name="T:SharpCraft.AttributeModifier">
             <summary>
-            An object used for minecraft attributes
+            Used for modifying an attribute
             </summary>
         </member>
-        <member name="M:SharpCraft.MCAttribute.#ctor">
+        <member name="M:SharpCraft.AttributeModifier.#ctor(System.Double,SharpCraft.ID.AttributeOperation,System.String,SharpCraft.UUID)">
             <summary>
-            Creates a new attribute
+            Intializes a new <see cref="T:SharpCraft.AttributeModifier"/>
+            </summary>
+            <param name="name">The name of the modifier. Leave null to use UUID as name</param>
+            <param name="amount">The amount to modify with</param>
+            <param name="operation">The way to modify</param>
+            <param name="uuid">The UUID of the modifier. Leave null to generate a UUID.</param>
+        </member>
+        <member name="M:SharpCraft.AttributeModifier.#ctor">
+            <summary>
+            Intializes a new empty <see cref="T:SharpCraft.AttributeModifier"/>
             </summary>
         </member>
-        <member name="M:SharpCraft.MCAttribute.#ctor(SharpCraft.ID.AttributeType,System.Double,SharpCraft.ID.AttributeOperation,SharpCraft.UUID)">
+        <member name="P:SharpCraft.AttributeModifier.Name">
             <summary>
-            Creates a new attribute for an item
-            </summary>
-            <param name="ID">The attribute type</param>
-            <param name="ChangeAmount">The amount to change the attribute with</param>
-            <param name="Operation">The operation used to change</param>
-            <param name="UUID">The UUID of the attribute</param>
-        </member>
-        <member name="M:SharpCraft.MCAttribute.#ctor(SharpCraft.ID.AttributeType,System.Double)">
-            <summary>
-            Creates a new attribute for an entity
-            </summary>
-            <param name="ID">the attribute type</param>
-            <param name="Base">the base value of the attribute</param>
-        </member>
-        <member name="P:SharpCraft.MCAttribute.ID">
-            <summary>
-            The type of attribute
+            The name of the modifier
             </summary>
         </member>
-        <member name="P:SharpCraft.MCAttribute.Base">
+        <member name="P:SharpCraft.AttributeModifier.Amount">
             <summary>
-            The base amount of the attribute
+            The amount to modify with
             </summary>
         </member>
-        <member name="P:SharpCraft.MCAttribute.Slot">
+        <member name="P:SharpCraft.AttributeModifier.Operation">
             <summary>
-            The slot the attribute affects
+            The operation used for modifying
             </summary>
         </member>
-        <member name="P:SharpCraft.MCAttribute.Operation">
+        <member name="P:SharpCraft.AttributeModifier.UUID">
             <summary>
-            The operation used to add the <see cref="P:SharpCraft.MCAttribute.ChangeAmount"/> with
+            The UUID of the modifier
             </summary>
         </member>
-        <member name="P:SharpCraft.MCAttribute.ChangeAmount">
+        <member name="T:SharpCraft.EntityAttribute">
             <summary>
-            The amount to change the atttribute with
+            Used for attributes for entities
             </summary>
         </member>
-        <member name="P:SharpCraft.MCAttribute.UUID">
+        <member name="M:SharpCraft.EntityAttribute.#ctor(SharpCraft.ID.AttributeType,System.Double,SharpCraft.AttributeModifier[])">
             <summary>
-            The UUID of the attribute
+            Intializes a new <see cref="T:SharpCraft.EntityAttribute"/>
+            </summary>
+            <param name="attribute">The attribute</param>
+            <param name="value">The value of the attribute</param>
+            <param name="modifiers">Modifiers for the attribute</param>
+        </member>
+        <member name="M:SharpCraft.EntityAttribute.#ctor">
+            <summary>
+            Intializes a new empty <see cref="T:SharpCraft.EntityAttribute"/>
             </summary>
         </member>
-        <member name="M:SharpCraft.MCAttribute.GetAsDataObject(System.Object[])">
+        <member name="P:SharpCraft.EntityAttribute.Attribute">
             <summary>
-            Converts this <see cref="T:SharpCraft.MCAttribute"/> into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            The name of the attribute
             </summary>
-            <param name="conversionData">0: "Entity" for entity tag and "Item" for item tag</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
+        </member>
+        <member name="P:SharpCraft.EntityAttribute.Base">
+            <summary>
+            The base value of the attribute
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EntityAttribute.Modifiers">
+            <summary>
+            Modifiers for modifying the attribute
+            </summary>
+        </member>
+        <member name="T:SharpCraft.ItemAttribute">
+            <summary>
+            Used for attributes for items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ItemAttribute.#ctor(SharpCraft.ID.AttributeType,SharpCraft.ID.AttributeSlot,System.Double,SharpCraft.ID.AttributeOperation,System.String,SharpCraft.UUID)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.ItemAttribute"/>
+            </summary>
+            <param name="attribute">The attribute the item should modify</param>
+            <param name="slot">The slot the item has to be in for the modifier to work</param>
+            <param name="name">The name of the modifier. Leave null to use UUID as name</param>
+            <param name="amount">The amount to modify with</param>
+            <param name="operation">The way to modify</param>
+            <param name="uuid">The UUID of the modifier. Leave null to generate a UUID.</param>
+        </member>
+        <member name="M:SharpCraft.ItemAttribute.#ctor">
+            <summary>
+            Intializes a new empty <see cref="T:SharpCraft.ItemAttribute"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.ItemAttribute.Attribute">
+            <summary>
+            The attribute the item should modify
+            </summary>
+        </member>
+        <member name="P:SharpCraft.ItemAttribute.Slot">
+            <summary>
+            The slot the item has to be in for the modifier to work
+            </summary>
         </member>
         <member name="T:SharpCraft.SpawnerPotential">
             <summary>
@@ -9691,6 +9736,16 @@
         <member name="T:SharpCraft.UUID">
             <summary>
             An object used for UUID's
+            </summary>
+        </member>
+        <member name="M:SharpCraft.UUID.SetRandomSeed(System.Int32)">
+            <summary>
+            Sets the seed for the randomiser whcih generates random UUID's
+            </summary>
+        </member>
+        <member name="M:SharpCraft.UUID.#ctor">
+            <summary>
+            Intializes a new random <see cref="T:SharpCraft.UUID"/>
             </summary>
         </member>
         <member name="M:SharpCraft.UUID.#ctor(System.Int64,System.Int64)">

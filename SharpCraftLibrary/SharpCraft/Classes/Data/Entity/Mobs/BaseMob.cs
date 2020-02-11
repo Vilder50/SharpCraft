@@ -121,10 +121,10 @@ namespace SharpCraft
             [Data.DataTag]
             public Effect[] ActiveEffects { get; set; }
             /// <summary>
-            /// The <see cref="MCAttribute"/>s the mob has
+            /// The attributes the mob has
             /// </summary>
             [Data.DataTag]
-            public MCAttribute[] Attributes { get; set; }
+            public EntityAttribute[] Attributes { get; set; }
         }
 
         /// <summary>
