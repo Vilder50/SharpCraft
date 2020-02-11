@@ -20,13 +20,13 @@ namespace SharpCraft
             /// the <see cref="SharpCraft.Item"/>'s durability
             /// </summary>
             [DataTag("durability", JsonTag = true)]
-            public Range Durability { get; set; }
+            public MCRange Durability { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s count
             /// </summary>
             [DataTag("count", JsonTag = true)]
-            public Range Count { get; set; }
+            public MCRange Count { get; set; }
 
             /// <summary>
             /// the <see cref="SharpCraft.Item"/>'s potion
@@ -67,19 +67,7 @@ namespace SharpCraft
                 /// the level of the enchantment
                 /// </summary>
                 [DataTag("levels","min","max",ID.NBTTagType.TagDouble,true, JsonTag = true, ForceType = ID.NBTTagType.TagInt)]
-                public Range Level { get; set; }
-
-                /// <summary>
-                /// Outputs this <see cref="Enchantment"/> data in string format
-                /// </summary>
-                /// <returns>this <see cref="Enchantment"/>'s data</returns>
-                public override string ToString()
-                {
-                    List<string> TempList = new List<string>();
-                    if (Enchant != null) { TempList.Add("\"enchantment\": \"" + Enchant + "\""); }
-                    if (Level != null) { TempList.Add(Level.JSONString("levels")); }
-                    return "{" + string.Join(",", TempList) + "}";
-                }
+                public MCRange Level { get; set; }
             }
 
             /// <summary>

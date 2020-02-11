@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteAs : BaseExecuteCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteAs"/> command
         /// </summary>
         /// <param name="selector">The selector for selecting entities to run the command as</param>
-        public ExecuteAs(Selector selector)
+        public ExecuteAs(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The selector for selecting entities to run the command as
         /// </summary>
-        public Selector Selector 
+        public BaseSelector Selector 
         {
             get => selector;
             set
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>as [selector]</returns>
         protected override string GetExecutePart()
         {
-            return "as " + Selector;
+            return "as " + Selector.GetSelectorString();
         }
     }
 }

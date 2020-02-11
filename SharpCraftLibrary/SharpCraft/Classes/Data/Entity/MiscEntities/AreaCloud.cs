@@ -25,7 +25,7 @@ namespace SharpCraft
             /// The color of the particles it displays
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public HexColor Color { get; set; }
+            public RGBColor Color { get; set; }
 
             /// <summary>
             /// The amount of time the cloud has existed.

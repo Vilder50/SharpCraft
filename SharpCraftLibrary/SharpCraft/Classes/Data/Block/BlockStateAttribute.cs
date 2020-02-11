@@ -38,7 +38,7 @@ namespace SharpCraft
         /// Intializes a new <see cref="BlockIntStateRange"/> for defining the range of the state
         /// </summary>
         /// <param name="intRange">the range the int can be in</param>
-        public BlockIntStateRange(Range intRange)
+        public BlockIntStateRange(MCRange intRange)
         {
             IntRange = intRange;
         }
@@ -50,12 +50,12 @@ namespace SharpCraft
         /// <param name="max">the maximum the number can be</param>
         public BlockIntStateRange(int min, int max)
         {
-            IntRange = new Range(min, max);
+            IntRange = new MCRange(min, max);
         }
 
         /// <summary>
         /// the range the int can be in
         /// </summary>
-        public Range IntRange { get; set; }
+        public MCRange IntRange { get; set; }
     }
 }

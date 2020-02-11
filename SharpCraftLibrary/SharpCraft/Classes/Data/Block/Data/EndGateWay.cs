@@ -36,8 +36,8 @@ namespace SharpCraft
             /// <summary>
             /// The location the entity gets teleported to when entering
             /// </summary>
-            [Data.DataTag("ExitPortal","X","Y","Z", SharpCraft.ID.NBTTagType.TagInt)]
-            public Coords DExit { get; set; }
+            [Data.DataTag("ExitPortal","X","Y","Z")]
+            public IntVector DExit { get; set; }
             /// <summary>
             /// If the entity should be teleported to this exact location
             /// </summary>

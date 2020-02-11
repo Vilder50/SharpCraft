@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadChunkCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadChunkCommand"/>
         /// </summary>
         /// <param name="coordinates">A coordinate in the chunk to force load</param>
         /// <param name="addChunk">True if the chunk should be force loaded. False if the chunk shouldn't</param>
-        public ForceloadChunkCommand(Coords coordinates, bool addChunk)
+        public ForceloadChunkCommand(Vector coordinates, bool addChunk)
         {
             Coordinates = coordinates;
             AddChunk = addChunk;
@@ -27,7 +27,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// A coordinate in the chunk to force load
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -47,7 +47,7 @@ namespace SharpCraft.Commands
         /// <returns>forceload [AddChunk] [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"forceload {(AddChunk ? "add" : "remove")} {Coordinates.StringX} {Coordinates.StringZ}";
+            return $"forceload {(AddChunk ? "add" : "remove")} {Coordinates.GetXString()} {Coordinates.GetZString()}";
         }
     }
 
@@ -56,8 +56,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadChunksCommand : BaseCommand
     {
-        private Coords corner1;
-        private Coords corner2;
+        private Vector corner1;
+        private Vector corner2;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadChunksCommand"/>
@@ -65,7 +65,7 @@ namespace SharpCraft.Commands
         /// <param name="corner1">One of the corners of the square of chunks to forceload</param>
         /// <param name="corner2">The oppesite corner of the square of chunks to forceload</param>
         /// <param name="addChunk">True if the chunks should be force loaded. False if the chunks shouldn't</param>
-        public ForceloadChunksCommand(Coords corner1, Coords corner2, bool addChunk)
+        public ForceloadChunksCommand(Vector corner1, Vector corner2, bool addChunk)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the square of chunks to forceload
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -87,7 +87,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corner of the square of chunks to forceload
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -107,7 +107,7 @@ namespace SharpCraft.Commands
         /// <returns>forceload [AddChunk] [Corner1] [Corner2]</returns>
         public override string GetCommandString()
         {
-            return $"forceload {(AddChunk ? "add" : "remove")} {Corner1.StringX} {Corner1.StringZ} {Corner2.StringX} {Corner2.StringZ}";
+            return $"forceload {(AddChunk ? "add" : "remove")} {Corner1.GetXString()} {Corner1.GetZString()} {Corner2.GetXString()} {Corner2.GetZString()}";
         }
     }
 
@@ -146,13 +146,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadQueryChunkCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadQueryChunkCommand"/>
         /// </summary>
         /// <param name="coordinates">A coordinate in the chunk to check if loaded</param>
-        public ForceloadQueryChunkCommand(Coords coordinates)
+        public ForceloadQueryChunkCommand(Vector coordinates)
         {
             Coordinates = coordinates;
         }
@@ -162,7 +162,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// A coordinate in the chunk to check if loaded
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -177,7 +177,7 @@ namespace SharpCraft.Commands
         /// <returns>forceload query [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"forceload query {Coordinates.StringX} {Coordinates.StringZ}";
+            return $"forceload query {Coordinates.GetXString()} {Coordinates.GetZString()}";
         }
     }
 }

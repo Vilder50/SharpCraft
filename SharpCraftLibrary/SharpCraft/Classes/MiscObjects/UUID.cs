@@ -8,43 +8,55 @@ namespace SharpCraft
     /// </summary>
     public class UUID : IConvertableToDataObject, IConvertableToDataTag
     {
-        /// <summary>
-        /// the UUIDLeast
-        /// </summary>
-        public readonly long Least;
+        #region random
+        private static Random random = new Random(0);
 
         /// <summary>
-        /// the UUIDMost
+        /// Sets the seed for the randomiser whcih generates random UUID's
         /// </summary>
-        public readonly long Most;
-        private readonly string UUIDString;
+        public static void SetRandomSeed(int seed)
+        {
+            random = new Random(seed);
+        }
+
+        /// <summary>
+        /// Intializes a new random <see cref="UUID"/>
+        /// </summary>
+        public UUID()
+        {
+            Least = random.Next();
+            Most = random.Next();
+            UUIDString = CreateUUIDString(Most, Least);
+        }
+        #endregion
 
         /// <summary>
         /// Creates a UUID Out of a UUIDLeast and a UUIDMost
         /// </summary>
-        /// <param name="Least">the UUIDLeast</param>
-        /// <param name="Most">the UUIDMost</param>
-        public UUID(long Least, long Most)
+        /// <param name="least">the UUIDLeast</param>
+        /// <param name="most">the UUIDMost</param>
+        public UUID(long most, long least)
         {
-            this.Least = Least;
-            this.Most = Most;
-            string MostString = ("0000000000000000" + Most.ToString("x"));
-            string LeastString = ("0000000000000000" + Least.ToString("x"));
-            UUIDString = MostString.Substring(MostString.Length - 16, 16) + LeastString.Substring(MostString.Length - 16, 16);
-            UUIDString = UUIDString.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+            Least = least;
+            Most = most;
+            UUIDString = CreateUUIDString(most, least);
         }
 
         /// <summary>
         /// Creates a uuid object out of a UUID in a string format
         /// </summary>
-        /// <param name="UUID">the string to convert</param>
-        public UUID(string UUID)
+        /// <param name="uuid">the string to convert</param>
+        public UUID(string uuid)
         {
+            if (uuid is null)
+            {
+                throw new ArgumentNullException("uuid may not be null", nameof(uuid));
+            }
             try
             {
-                Least = long.Parse(UUID.Substring(19).Replace("-", ""), System.Globalization.NumberStyles.HexNumber);
-                Most = long.Parse(UUID.Substring(0, 18).Replace("-", ""), System.Globalization.NumberStyles.HexNumber);
-                UUIDString = UUID;
+                Most = long.Parse(uuid.Replace("-", "").Substring(0, 16), System.Globalization.NumberStyles.HexNumber);
+                Least = long.Parse(uuid.Replace("-", "").Substring(16,16), System.Globalization.NumberStyles.HexNumber);
+                UUIDString = CreateUUIDString(Most, Least);
             }
             catch
             {
@@ -53,12 +65,29 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns the uuid in string format
+        /// the UUIDLeast
         /// </summary>
-        /// <returns>The uuid as a string</returns>
-        public override string ToString()
+        public long Least { get; protected set; }
+
+        /// <summary>
+        /// the UUIDMost
+        /// </summary>
+        public long Most { get; protected set; }
+
+        /// <summary>
+        /// The UUID string
+        /// </summary>
+        public string UUIDString { get; protected set; }
+
+        private string CreateUUIDString(long most, long least)
         {
-            return UUIDString;
+            string mostString = ("0000000000000000" + most.ToString("x"))[^16..];
+            string leastString = ("0000000000000000" + least.ToString("x"))[^16..];
+
+            string uuid = mostString + leastString;
+            uuid = uuid.Insert(8, "-").Insert(13, "-").Insert(18, "-").Insert(23, "-");
+
+            return uuid;
         }
 
         /// <summary>

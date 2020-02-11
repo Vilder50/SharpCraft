@@ -12,12 +12,12 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class EnchantRandomlyChange : BaseChange
     {
-        private Range levels;
+        private MCRange levels;
 
         /// <summary>
         /// Intializes a new <see cref="EnchantRandomlyChange"/>
         /// </summary>
-        public EnchantRandomlyChange(Range levels, bool treasure) : base("enchant_with_levels")
+        public EnchantRandomlyChange(MCRange levels, bool treasure) : base("enchant_with_levels")
         {
             Treasure = treasure;
             Levels = levels;
@@ -33,6 +33,6 @@ namespace SharpCraft.LootObjects
         /// The amount of levels to enchant with
         /// </summary>
         [DataTag("levels", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-        public Range Levels { get => levels; set => levels = value ?? throw new ArgumentNullException(nameof(Levels), "Levels may not be null"); }
+        public MCRange Levels { get => levels; set => levels = value ?? throw new ArgumentNullException(nameof(Levels), "Levels may not be null"); }
     }
 }

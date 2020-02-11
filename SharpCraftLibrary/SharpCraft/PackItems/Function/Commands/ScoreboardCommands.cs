@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveAddCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
+        private Objective scoreObject;
         private string criterion;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="displayName">The displayed name of the objective</param>
         /// <param name="scoreObject">The objective</param>
         /// <param name="criterion">The criterion for the objective</param>
-        public ScoreboardObjectiveAddCommand(ScoreObject scoreObject, string criterion, JSON[] displayName)
+        public ScoreboardObjectiveAddCommand(Objective scoreObject, string criterion, JsonText displayName)
         {
             DisplayName = displayName;
             ScoreObject = scoreObject;
@@ -30,12 +30,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The displayed name of the objective
         /// </summary>
-        public JSON[] DisplayName { get; set; }
+        public JsonText DisplayName { get; set; }
 
         /// <summary>
         /// The objective
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// The criterion for the objective
@@ -50,11 +50,11 @@ namespace SharpCraft.Commands
         {
             if (DisplayName is null)
             {
-                return $"scoreboard objectives add {ScoreObject.ToString()} {Criterion}";
+                return $"scoreboard objectives add {ScoreObject.Name} {Criterion}";
             }
             else
             {
-                return $"scoreboard objectives add {ScoreObject.ToString()} {Criterion} {DisplayName.GetString()}";
+                return $"scoreboard objectives add {ScoreObject.Name} {Criterion} {DisplayName.GetJsonString()}";
             }
         }
     }
@@ -79,15 +79,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveChangeNameCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
-        private JSON[] displayName;
+        private Objective scoreObject;
+        private JsonText displayName;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveChangeNameCommand"/>
         /// </summary>
         /// <param name="displayName">The new display name for the objective</param>
         /// <param name="scoreObject">The objective to change</param>
-        public ScoreboardObjectiveChangeNameCommand(ScoreObject scoreObject, JSON[] displayName)
+        public ScoreboardObjectiveChangeNameCommand(Objective scoreObject, JsonText displayName)
         {
             DisplayName = displayName;
             ScoreObject = scoreObject;
@@ -96,13 +96,13 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The new display name for the objective
         /// </summary>
-        public JSON[] DisplayName { get => displayName; set => displayName = value ?? throw new ArgumentNullException(nameof(DisplayName), "DisplayName may not be null"); }
+        public JsonText DisplayName { get => displayName; set => displayName = value ?? throw new ArgumentNullException(nameof(DisplayName), "DisplayName may not be null"); }
 
 
         /// <summary>
         /// The objective to change
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives modify [ScoreObject] displayname [DisplayName]</returns>
         public override string GetCommandString()
         {
-             return $"scoreboard objectives modify {ScoreObject.ToString()} displayname {DisplayName.GetString()}";
+             return $"scoreboard objectives modify {ScoreObject.Name} displayname {DisplayName.GetJsonString()}";
         }
     }
 
@@ -119,14 +119,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveChangeRenderCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
+        private Objective scoreObject;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveChangeRenderCommand"/>
         /// </summary>
         /// <param name="scoreObject">The objective to change</param>
         /// <param name="rendering">The new way to render the objective in tab</param>
-        public ScoreboardObjectiveChangeRenderCommand(ScoreObject scoreObject, ID.ObjectiveRender rendering)
+        public ScoreboardObjectiveChangeRenderCommand(Objective scoreObject, ID.ObjectiveRender rendering)
         {
             ScoreObject = scoreObject;
             Rendering = rendering;
@@ -135,7 +135,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to change
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// The new way to render the objective in tab
@@ -148,7 +148,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives modify [ScoreObject] rendertype [Rendering]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard objectives modify {ScoreObject.ToString()} rendertype {Rendering}";
+            return $"scoreboard objectives modify {ScoreObject.Name} rendertype {Rendering}";
         }
     }
 
@@ -157,13 +157,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveRemoveCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
+        private Objective scoreObject;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveRemoveCommand"/>
         /// </summary>
         /// <param name="scoreObject">The objective to remove</param>
-        public ScoreboardObjectiveRemoveCommand(ScoreObject scoreObject)
+        public ScoreboardObjectiveRemoveCommand(Objective scoreObject)
         {
             ScoreObject = scoreObject;
         }
@@ -171,7 +171,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to remove
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard objectives remove [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard objectives remove {ScoreObject.ToString()}";
+            return $"scoreboard objectives remove {ScoreObject.Name}";
         }
     }
 
@@ -193,7 +193,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="scoreObject">The objective to display. Null to display nothing</param>
         /// <param name="displaySlot">The slot to change displayed objective</param>
-        public ScoreboardSetDisplayCommand(ScoreObject scoreObject, ID.ScoreDisplay displaySlot)
+        public ScoreboardSetDisplayCommand(Objective scoreObject, ID.ScoreDisplay displaySlot)
         {
             ScoreObject = scoreObject;
             DisplaySlot = displaySlot;
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to display. Null to display nothing
         /// </summary>
-        public ScoreObject ScoreObject { get; set; }
+        public Objective ScoreObject { get; set; }
 
         /// <summary>
         /// The slot to change displayed objective
@@ -221,7 +221,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"scoreboard objectives setdisplay {DisplaySlot} {ScoreObject.ToString()}";
+                return $"scoreboard objectives setdisplay {DisplaySlot} {ScoreObject.Name}";
             }
         }
     }
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="scoreObject">The objective to display. Null to display nothing</param>
         /// <param name="teamColor">The slot color to change</param>
-        public ScoreboardSetTeamDisplayCommand(ScoreObject scoreObject, ID.MinecraftColor teamColor)
+        public ScoreboardSetTeamDisplayCommand(Objective scoreObject, ID.MinecraftColor teamColor)
         {
             ScoreObject = scoreObject;
             TeamColor = teamColor;
@@ -245,7 +245,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to display. Null to display nothing
         /// </summary>
-        public ScoreObject ScoreObject { get; set; }
+        public Objective ScoreObject { get; set; }
 
         /// <summary>
         /// The slot color to change
@@ -264,7 +264,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"scoreboard objectives setdisplay sidebar.team.{TeamColor} {ScoreObject.ToString()}";
+                return $"scoreboard objectives setdisplay sidebar.team.{TeamColor} {ScoreObject.Name}";
             }
         }
     }
@@ -274,8 +274,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardValueChangeCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
-        private Selector selector;
+        private Objective scoreObject;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueChangeCommand"/>
@@ -284,7 +284,7 @@ namespace SharpCraft.Commands
         /// <param name="scoreObject">The objective to change score in</param>
         /// <param name="changeType">The way to change the score</param>
         /// <param name="changeNumber">The number to change the score with</param>
-        public ScoreboardValueChangeCommand(Selector selector, ScoreObject scoreObject, ID.ScoreChange changeType, int changeNumber)
+        public ScoreboardValueChangeCommand(BaseSelector selector, Objective scoreObject, ID.ScoreChange changeType, int changeNumber)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -295,12 +295,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to change score in
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
         /// <summary>
         /// The way to change the score
@@ -322,14 +322,14 @@ namespace SharpCraft.Commands
             {
                 if (ChangeType == ID.ScoreChange.add)
                 {
-                    return $"scoreboard players remove {Selector} {ScoreObject} {Math.Abs(ChangeNumber)}";
+                    return $"scoreboard players remove {Selector.GetSelectorString()} {ScoreObject.Name} {Math.Abs(ChangeNumber)}";
                 }
                 else if (ChangeType == ID.ScoreChange.remove)
                 {
-                    return $"scoreboard players add {Selector} {ScoreObject} {Math.Abs(ChangeNumber)}";
+                    return $"scoreboard players add {Selector.GetSelectorString()} {ScoreObject.Name} {Math.Abs(ChangeNumber)}";
                 }
             }
-            return $"scoreboard players {ChangeType} {Selector} {ScoreObject} {ChangeNumber}";
+            return $"scoreboard players {ChangeType} {Selector.GetSelectorString()} {ScoreObject.Name} {ChangeNumber}";
         }
     }
 
@@ -338,15 +338,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardValueGetCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
-        private Selector selector;
+        private Objective scoreObject;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueGetCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the score to get</param>
         /// <param name="scoreObject">The objective to get the score from</param>
-        public ScoreboardValueGetCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardValueGetCommand(BaseSelector selector, Objective scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -355,7 +355,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the score to get
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -371,7 +371,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to get the score from
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players get [Selector] [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard players get {Selector} {ScoreObject}";
+            return $"scoreboard players get {Selector.GetSelectorString()} {ScoreObject.Name}";
         }
     }
 
@@ -389,15 +389,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardEnableTriggerCommand : BaseCommand
     {
-        private ScoreObject scoreObject;
-        private Selector selector;
+        private Objective scoreObject;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardEnableTriggerCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the players to enable a trigger for</param>
         /// <param name="scoreObject">The objective to enable triggering</param>
-        public ScoreboardEnableTriggerCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardEnableTriggerCommand(BaseSelector selector, Objective scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -406,12 +406,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the players to enable a trigger for
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to enable triggering
         /// </summary>
-        public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+        public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
 
         /// <summary>
@@ -420,7 +420,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players enable [Selector] [ScoreObject]</returns>
         public override string GetCommandString()
         {
-            return $"scoreboard players enable {Selector} {ScoreObject}";
+            return $"scoreboard players enable {Selector.GetSelectorString()} {ScoreObject.Name}";
         }
     }
 
@@ -429,14 +429,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardResetCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardResetCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the scores to reset</param>
         /// <param name="scoreObject">The objective to reset scores in. Null to reset all scores for the selected scores</param>
-        public ScoreboardResetCommand(Selector selector, ScoreObject scoreObject)
+        public ScoreboardResetCommand(BaseSelector selector, Objective scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -445,12 +445,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to reset
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The objective to reset scores in. Null to reset all scores for the selected scores
         /// </summary>
-        public ScoreObject ScoreObject { get; set; }
+        public Objective ScoreObject { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -460,11 +460,11 @@ namespace SharpCraft.Commands
         {
             if (ScoreObject is null)
             {
-                return $"scoreboard players reset {Selector}";
+                return $"scoreboard players reset {Selector.GetSelectorString()}";
             }
             else
             {
-                return $"scoreboard players reset {Selector} {ScoreObject}";
+                return $"scoreboard players reset {Selector.GetSelectorString()} {ScoreObject.Name}";
             }
         }
     }
@@ -474,13 +474,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardListCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveListCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the entity to get a list of scores for</param>
-        public ScoreboardListCommand(Selector selector)
+        public ScoreboardListCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -488,7 +488,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the entity to get a list of scores for
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -507,7 +507,7 @@ namespace SharpCraft.Commands
         /// <returns>scoreboard players list [Selector]</returns>
         public string GetCommandString()
         {
-             return $"scoreboard players list {Selector}";
+             return $"scoreboard players list {Selector.GetSelectorString()}";
         }
     }
 
@@ -516,10 +516,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardOperationCommand : BaseCommand
     {
-        private Selector selector1;
-        private ScoreObject objective1;
-        private Selector selector2;
-        private ScoreObject objective2;
+        private BaseSelector selector1;
+        private Objective objective1;
+        private BaseSelector selector2;
+        private Objective objective2;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardOperationCommand"/>
@@ -529,7 +529,7 @@ namespace SharpCraft.Commands
         /// <param name="operator">The operation use on the 2 scores</param>
         /// <param name="selector2">Selector for selecting the scores to change with</param>
         /// <param name="objective2">The objective the scores used for changing is in</param>
-        public ScoreboardOperationCommand(Selector selector1, ScoreObject objective1, ID.Operation @operator, Selector selector2, ScoreObject objective2)
+        public ScoreboardOperationCommand(BaseSelector selector1, Objective objective1, ID.Operation @operator, BaseSelector selector2, Objective objective2)
         {
             Selector1 = selector1;
             Objective1 = objective1;
@@ -541,12 +541,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change
         /// </summary>
-        public Selector Selector1 { get => selector1; set => selector1 = value ?? throw new ArgumentNullException(nameof(Selector1), "Selector1 may not be null"); }
+        public BaseSelector Selector1 { get => selector1; set => selector1 = value ?? throw new ArgumentNullException(nameof(Selector1), "Selector1 may not be null"); }
 
         /// <summary>
         /// The objective the scores to change is in
         /// </summary>
-        public ScoreObject Objective1
+        public Objective Objective1
         {
             get => objective1;
             set
@@ -558,12 +558,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting the scores to change with
         /// </summary>
-        public Selector Selector2 { get => selector2; set => selector2 = value ?? throw new ArgumentNullException(nameof(Selector2), "Selector2 may not be null"); }
+        public BaseSelector Selector2 { get => selector2; set => selector2 = value ?? throw new ArgumentNullException(nameof(Selector2), "Selector2 may not be null"); }
 
         /// <summary>
         /// The objective the scores used for changing is in
         /// </summary>
-        public ScoreObject Objective2
+        public Objective Objective2
         {
             get => objective2;
             set
@@ -615,7 +615,7 @@ namespace SharpCraft.Commands
                     break;
             }
 
-            return $"scoreboard players operation {Selector1} {Objective1} {operatorString} {Selector2} {Objective2}";
+            return $"scoreboard players operation {Selector1.GetSelectorString()} {Objective1.Name} {operatorString} {Selector2.GetSelectorString()} {Objective2.Name}";
         }
     }
 }

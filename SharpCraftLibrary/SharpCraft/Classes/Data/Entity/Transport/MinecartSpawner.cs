@@ -39,7 +39,7 @@ namespace SharpCraft
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
             [Data.DataTag((object)"MinSpawnDelay","MaxSpawnDelay", ID.NBTTagType.TagShort, Merge = true)]
-            public Range RandomDelay { get; set; }
+            public MCRange RandomDelay { get; set; }
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn
             /// </summary>

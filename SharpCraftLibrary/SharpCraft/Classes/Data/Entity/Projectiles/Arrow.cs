@@ -54,7 +54,7 @@ namespace SharpCraft
             /// The color of the arrow
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public HexColor Color { get; set; }
+            public RGBColor Color { get; set; }
             /// <summary>
             /// The effects given by the arrow
             /// </summary>
@@ -64,7 +64,7 @@ namespace SharpCraft
             /// The color of the arrow's particles
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public HexColor CustomPotionColor { get; set; }
+            public RGBColor CustomPotionColor { get; set; }
             /// <summary>
             /// The amount of duration of the glowing effect given by the spectral arrow
             /// </summary>

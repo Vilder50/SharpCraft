@@ -12,13 +12,13 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class DamageChange : BaseChange
     {
-        private Range damage;
+        private MCRange damage;
 
         /// <summary>
         /// Intializes a new <see cref="DamageChange"/>
         /// </summary>
         /// <param name="damage">The amount of damage on the item. (0 = no durability, 1 = full)</param>
-        public DamageChange(Range damage) : base("set_damage")
+        public DamageChange(MCRange damage) : base("set_damage")
         {
             Damage = damage;
         }
@@ -27,6 +27,6 @@ namespace SharpCraft.LootObjects
         /// The amount of damage on the item. (0 = no durability, 1 = full)
         /// </summary>
         [DataTag("damage", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Damage { get => damage; set => damage = value ?? throw new ArgumentNullException(nameof(Damage), "Damage may not be null"); }
+        public MCRange Damage { get => damage; set => damage = value ?? throw new ArgumentNullException(nameof(Damage), "Damage may not be null"); }
     }
 }

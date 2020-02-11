@@ -8,7 +8,10 @@ namespace SharpCraft.FunctionWriters
     /// </summary>
     public class PlayerCommands
     {
-        readonly Function function;
+        /// <summary>
+        /// The function to write onto
+        /// </summary>
+        public Function Function { get; private set; }
         /// <summary>
         /// All commands for levels and xp
         /// </summary>
@@ -18,69 +21,72 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassXP
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassXP(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
             /// <summary>
             /// Adds the specified amount of levels to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="levels">The amount of levels to add. If this is negative levels will be removed</param>
-            public void LevelsAdd(Selector player, int levels)
+            public void LevelsAdd(BaseSelector player, int levels)
             {
-                function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
+                Function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
             }
             /// <summary>
             /// Sets the selected players' levels to the specified amount
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="levels">The amount to set the levels to</param>
-            public void LevelsSet(Selector player, int levels)
+            public void LevelsSet(BaseSelector player, int levels)
             {
-                function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
+                Function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
             }
             /// <summary>
             /// Outputs the amount of levels the selected player has
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void LevelsGet(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void LevelsGet(BaseSelector player)
             {
-                player.Limited();
-                function.AddCommand(new ExperienceGetCommand(player, true));
+                player.LimitSelector();
+                Function.AddCommand(new ExperienceGetCommand(player, true));
             }
             /// <summary>
             /// Adds the specified amount of points to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="points">The amount of points to add. If this is negative points will be removed</param>
-            public void PointsAdd(Selector player, int points)
+            public void PointsAdd(BaseSelector player, int points)
             {
-                function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
+                Function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
             }
             /// <summary>
             /// Sets the selected players' points to the specified amount
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="points">The amount to set the points to</param>
-            public void PointsSet(Selector player, int points)
+            public void PointsSet(BaseSelector player, int points)
             {
-                function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
+                Function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
             }
             /// <summary>
             /// Outputs the amount of points the selected player has
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void PointsGet(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void PointsGet(BaseSelector player)
             {
-                player.Limited();
-                function.AddCommand(new ExperienceGetCommand(player, false));
+                player.LimitSelector();
+                Function.AddCommand(new ExperienceGetCommand(player, false));
             }
         }
         internal PlayerCommands(Function function)
         {
-            this.function = function;
+            this.Function = function;
             XP = new ClassXP(function);
             Particle = new ClassParticle(function);
             Item = new ClassItem(function);
@@ -93,11 +99,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Changes the selected players gamemode
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="mode">the gamemode to change to</param>
-        public void Gamemode(Selector player, ID.Gamemode mode)
+        public void Gamemode(BaseSelector player, ID.Gamemode mode)
         {
-            function.AddCommand(new GamemodeCommand(player, mode));
+            Function.AddCommand(new GamemodeCommand(player, mode));
         }
 
         /// <summary>
@@ -105,79 +111,79 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="spectate">The entity to spectate</param>
         /// <param name="spectator">The spectating player</param>
-        public void Spectate(Selector spectate, Selector spectator)
+        public void Spectate(BaseSelector spectate, BaseSelector spectator)
         {
             if (spectate is null)
             {
-                function.AddCommand(new SpectateStopCommand());
+                Function.AddCommand(new SpectateStopCommand());
             }
             else
             {
-                spectate.Limited();
-                spectator.Limited();
-                function.AddCommand(new SpectateCommand(spectate, spectator));
+                spectate.LimitSelector();
+                spectator.LimitSelector();
+                Function.AddCommand(new SpectateCommand(spectate, spectator));
             }
         }
 
         /// <summary>
-        /// Changes the executing player's score in the given <see cref="ScoreObject"/>
+        /// Changes the executing player's score in the given <see cref="Objective"/>
         /// </summary>
-        /// <param name="scoreObject">the <see cref="ScoreObject"/> to change in</param>
+        /// <param name="scoreObject">the <see cref="Objective"/> to change in</param>
         /// <param name="number">The number to add/set it to</param>
         /// <param name="set">If the score should be set to the given number. If false it will be added instead</param>
-        public void Trigger(ScoreObject scoreObject, int number, bool set = true)
+        public void Trigger(Objective scoreObject, int number, bool set = true)
         {
-            function.AddCommand(new TriggerCommand(scoreObject, set, number));
+            Function.AddCommand(new TriggerCommand(scoreObject, set, number));
         }
 
         /// <summary>
         /// Whispers the specified message to the selected players
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the player</param>
-        public void Tell(Selector player, string message)
+        public void Tell(BaseSelector player, string message)
         {
-            function.AddCommand(new MsgCommand(player, message));
+            Function.AddCommand(new MsgCommand(player, message));
         }
 
         /// <summary>
         /// Changes the selected players' spawnpoint to the given location
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="spawn">The new spawnpoint location</param>
-        public void Spawnpoint(Selector player, Coords spawn = null)
+        public void Spawnpoint(BaseSelector player, Vector spawn = null)
         {
-            function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
+            Function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
 
         /// <summary>
         /// Enables a trigger for the selected players
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
-        /// <param name="objective">The trigger (<see cref="ScoreObject"/>) to enable</param>
-        public void EnableTrigger(Selector player, ScoreObject objective)
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+        /// <param name="objective">The trigger (<see cref="Objective"/>) to enable</param>
+        public void EnableTrigger(BaseSelector player, Objective objective)
         {
-            function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
+            Function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
         }
 
         /// <summary>
         /// Tells the selected players a message in chat
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the players</param>
-        public void Tellraw(Selector player, JSON[] message)
+        public void Tellraw(BaseSelector player, JsonText message)
         {
-            function.AddCommand(new TellrawCommand(player, message));
+            Function.AddCommand(new TellrawCommand(player, message));
         }
 
         /// <summary>
         /// Shows a message in the selected players actionbar
         /// </summary>
-        /// <param name="player">the <see cref="Selector"/> to use</param>
+        /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to show</param>
-        public void Actionbar(Selector player, JSON[] message)
+        public void Actionbar(BaseSelector player, JsonText message)
         {
-            function.AddCommand(new TitleActionbarCommand(player, message));
+            Function.AddCommand(new TitleActionbarCommand(player, message));
         }
 
         /// <summary>
@@ -189,10 +195,13 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassParticle
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassParticle(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
@@ -205,9 +214,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Normal(ID.Particle particle, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
-                function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
+                Function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -221,9 +230,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(HexColor color, double particleSize, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
-                function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
+                Function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -237,9 +246,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dust">If it should be dust or squares</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Block(Block block, Coords displayCoords, Coords size, double speed, int count, bool dust = false, bool force = false, Selector player = null)
+            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
             {
-                function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
+                Function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
 
             /// <summary>
@@ -252,9 +261,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Item(Item item, Coords displayCoords, Coords size, double speed, int count, bool force = false, Selector player = null)
+            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
             {
-                function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
+                Function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
         }
 
@@ -267,136 +276,139 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassItem
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassItem(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
             /// Gives an item to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The <see cref="Item"/> to give to the players</param>
-            public void GiveItem(Selector player, Item giveItem)
+            public void GiveItem(BaseSelector player, Item giveItem)
             {
                 if (giveItem.Slot is null)
                 {
-                    function.AddCommand(new GiveCommand(player, giveItem, giveItem.Count ?? 1));
+                    Function.AddCommand(new GiveCommand(player, giveItem, giveItem.Count ?? 1));
                 }
                 else
                 {
-                    function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.InventorySlot((int)giveItem.Slot), giveItem, giveItem.Count ?? 1));
+                    Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.InventorySlot((int)giveItem.Slot), giveItem, giveItem.Count ?? 1));
                 }
             }
 
             /// <summary>
             /// Gives the loot from a loottable to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
-            public void GiveItem(Selector player, ILootTable loot)
+            public void GiveItem(BaseSelector player, ILootTable loot)
             {
-                function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
+                Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
             /// Gives the loot which the selected entity would drop if killed to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="kill">the selector selecting the entity whose loot should be dropped</param>
-            public void GiveItem(Selector player, Selector kill)
+            public void GiveItem(BaseSelector player, BaseSelector kill)
             {
-                kill.Limited();
-                function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
+                kill.LimitSelector();
+                Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
             }
 
             /// <summary>
             /// Gives the loot which the block at the given coords would drop of broken to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
-            public void GiveItem(Selector player, Coords breakBlock, Item breakWith)
+            public void GiveItem(BaseSelector player, Vector breakBlock, Item breakWith)
             {
                 if (breakWith is null)
                 {
-                    function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineHandSource(breakBlock, true)));
+                    Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineHandSource(breakBlock, true)));
                 }
                 else
                 {
-                    function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineItemSource(breakBlock, breakWith)));
+                    Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineItemSource(breakBlock, breakWith)));
                 }
             }
 
             /// <summary>
             /// Puts an item into the selected players' enderchests
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert into the enderchest. <see cref="Item.Slot"/> choses the slot.</param>
-            public void GiveEnderChest(Selector player, Item giveItem)
+            public void GiveEnderChest(BaseSelector player, Item giveItem)
             {
-                function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
+                Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Puts an item into the selected players' hotbars
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert into the hotbar. <see cref="Item.Slot"/> choses the slot.</param>
-            public void GiveHotbar(Selector player, Item giveItem)
+            public void GiveHotbar(BaseSelector player, Item giveItem)
             {
-                function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
+                Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
 
             /// <summary>
             /// Puts the item from the loot table into the players hotbar
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, ILootTable loot, int slot)
+            public void GiveHotbar(BaseSelector player, ILootTable loot, int slot)
             {
-                function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
+                Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
             /// Puts the item from the loot table into the players hotbar
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(Selector player, Coords breakBlock, Item breakWith, int slot)
+            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item breakWith, int slot)
             {
                 if (breakWith is null)
                 {
-                    function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineHandSource(breakBlock, true)));
+                    Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineHandSource(breakBlock, true)));
                 }
                 else
                 {
-                    function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineItemSource(breakBlock, breakWith)));
+                    Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineItemSource(breakBlock, breakWith)));
                 }
             }
 
             /// <summary>
             /// Inserts an item into the selected players' selected slot
             /// </summary>
-            /// <param name="selector">the <see cref="Selector"/> to use</param>
+            /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveItem">The item to insert</param>
             /// <param name="offHand">If it should insert into the offhand instead</param>
-            public void GiveWeapon(Selector selector, Item giveItem, bool offHand = false)
+            public void GiveWeapon(BaseSelector selector, Item giveItem, bool offHand = false)
             {
-                function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
+                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Clears an item from the selected players' inventories
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="item">The item to clear</param>
             /// <param name="amount">The maximum amount of the item to clear. null clears all</param>
-            public void Clear(Selector player, Item item = null, int? amount = null)
+            public void Clear(BaseSelector player, Item item = null, int? amount = null)
             {
-                function.AddCommand(new ClearCommand(player, item, amount));
+                Function.AddCommand(new ClearCommand(player, item, amount));
             }
         }
 
@@ -409,37 +421,40 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassSound
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassSound(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
             /// Plays a sound for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="sound">the sound to play</param>
             /// <param name="source">the source to play the sound as</param>
             /// <param name="location">the location to play the sound at</param>
             /// <param name="volume">the maximum volume of the sound</param>
             /// <param name="speed">the speed of the sound (0-2)</param>
             /// <param name="minValue">the minimum volume of the sound (0-2)</param>
-            public void Play(Selector player, string sound, ID.SoundSource source, Coords location, double volume = 1, double speed = 1, double minValue = 0)
+            public void Play(BaseSelector player, string sound, ID.SoundSource source, Vector location, double volume = 1, double speed = 1, double minValue = 0)
             {
-                function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
+                Function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
             }
 
             /// <summary>
             /// Stops sounds for the selected players
             /// (If no source and sound is specified it will stop all sounds)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="source">the source to stop sounds at. Null will stop the sound from any source</param>
             /// <param name="sound">the sound to stop. Null will stop any sound in the given source</param>
-            public void Stop(Selector player, ID.SoundSource? source = null, string sound = null)
+            public void Stop(BaseSelector player, ID.SoundSource? source = null, string sound = null)
             {
-                function.AddCommand(new StopSoundCommand(player, sound, source));
+                Function.AddCommand(new StopSoundCommand(player, sound, source));
             }
         }
 
@@ -452,102 +467,93 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassTitle
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassTitle(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
             /// displays a title for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void Title(Selector player, JSON[] message)
+            public void Title(BaseSelector player, JsonText message)
             {
-                function.AddCommand(new TitleCommand(player, message));
+                Function.AddCommand(new TitleCommand(player, message));
             }
 
             /// <summary>
             /// displays a subtitle for the selected players
             /// Note: the subtitle is first shown when the title command is ran
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void SubTitle(Selector player, JSON[] message)
+            public void SubTitle(BaseSelector player, JsonText message)
             {
-                function.AddCommand(new TitleSubtitleCommand(player, message));
+                Function.AddCommand(new TitleSubtitleCommand(player, message));
             }
 
             /// <summary>
             /// choses how long the titles should be shown for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void Time(Selector player, Time startFade, Time stay, Time endFade)
+            public void Time(BaseSelector player, Time startFade, Time stay, Time endFade)
             {
-                function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
+                Function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
             }
 
             /// <summary>
             /// clears the shown title on the selected players' screens
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void Clear(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void Clear(BaseSelector player)
             {
-                function.AddCommand(new TitleClearCommand(player));
+                Function.AddCommand(new TitleClearCommand(player));
             }
 
             /// <summary>
             /// resets all the title values for the selected players' screens
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void Reset(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void Reset(BaseSelector player)
             {
-                function.AddCommand(new TitleResetCommand(player));
+                Function.AddCommand(new TitleResetCommand(player));
             }
 
             /// <summary>
             /// Displays a whole title for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="topMessage">The main title message</param>
             /// <param name="bottomMessage">the bottom part of the title message</param>
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(Selector player, JSON[] topMessage, JSON[] bottomMessage, Time startFade, Time stay, Time endFade)
+            public void FullTitle(BaseSelector player, JsonText topMessage, JsonText bottomMessage, Time startFade, Time stay, Time endFade)
             {
-                BaseExecuteCommand executeCommand1 = null;
-                BaseExecuteCommand executeCommand2 = null;
-                if (function.Commands.Count != 0 && function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                Function.Custom.GroupCommands(f => 
                 {
-                    executeCommand1 = (BaseExecuteCommand)execute.ShallowClone();
-                    executeCommand2 = (BaseExecuteCommand)execute.ShallowClone();
-                }
-                function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
-                if (!(bottomMessage is null))
-                {
-                    if (!(executeCommand1 is null))
+                    Function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
+                    if (!(bottomMessage is null))
                     {
-                        function.AddCommand(executeCommand1);
+                        Function.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
                     }
-                    function.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
-                }
-                if (!(executeCommand2 is null))
-                {
-                    function.AddCommand(executeCommand2);
-                }
-                if (topMessage is null)
-                {
-                    function.AddCommand(new TitleCommand(player, new JSON("")));
-                }
-                else
-                {
-                    function.AddCommand(new TitleCommand(player, topMessage));
-                }
+                    if (topMessage is null)
+                    {
+                        Function.AddCommand(new TitleCommand(player, new JsonText.Text("")));
+                    }
+                    else
+                    {
+                        Function.AddCommand(new TitleCommand(player, topMessage));
+                    }
+                });
             }
         }
 
@@ -560,45 +566,48 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassRecipe
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassRecipe(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
 
             /// <summary>
             /// Give a recipe to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveRecipe">The recipe to give</param>
-            public void Give(Selector player, IRecipe giveRecipe)
+            public void Give(BaseSelector player, IRecipe giveRecipe)
             {
-                function.AddCommand(new RecipeCommand(giveRecipe, player, true));
+                Function.AddCommand(new RecipeCommand(giveRecipe, player, true));
             }
             /// <summary>
             /// Gives all recipes to the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void GiveAll(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void GiveAll(BaseSelector player)
             {
-                function.AddCommand(new RecipeAllCommand(player, true));
+                Function.AddCommand(new RecipeAllCommand(player, true));
             }
             /// <summary>
             /// Removes a recipe from the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="giveRecipe">the recipe to remove</param>
-            public void Remove(Selector player, IRecipe giveRecipe)
+            public void Remove(BaseSelector player, IRecipe giveRecipe)
             {
-                function.AddCommand(new RecipeCommand(giveRecipe, player, false));
+                Function.AddCommand(new RecipeCommand(giveRecipe, player, false));
             }
             /// <summary>
             /// removes all recipes from the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
-            public void RemoveAll(Selector player)
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
+            public void RemoveAll(BaseSelector player)
             {
-                function.AddCommand(new RecipeAllCommand(player, false));
+                Function.AddCommand(new RecipeAllCommand(player, false));
             }
         }
 
@@ -611,66 +620,69 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ClassAdvancement
         {
-            readonly Function function;
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
             internal ClassAdvancement(Function function)
             {
-                this.function = function;
+                this.Function = function;
             }
             /// <summary>
             /// grants/evokes all advancements for the selected players
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Everything(Selector player, bool revoke = false)
+            public void Everything(BaseSelector player, bool revoke = false)
             {
-                function.AddCommand(new AdvancementAllCommand(player, !revoke));
+                Function.AddCommand(new AdvancementAllCommand(player, !revoke));
             }
             /// <summary>
             /// Grants/revokes all advancements up to the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke up to</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Until(Selector player, IAdvancement advancement, bool revoke = false)
+            public void Until(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
+                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
             }
             /// <summary>
             /// grants/revokes all advancements after the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke from</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void From(Selector player, IAdvancement advancement, bool revoke = false)
+            public void From(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
+                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
             }
 
             /// <summary>
             /// grants/revokes all advancements in the same branch as the specified advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">an advancement in the branch to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
-            public void Branch(Selector player, IAdvancement advancement, bool revoke = false)
+            public void Branch(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
+                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
             }
 
             /// <summary>
             /// grants/revokes the specified the advancement for the selected players
             /// (it also grants/revokes the specified advancement)
             /// </summary>
-            /// <param name="player">the <see cref="Selector"/> to use</param>
+            /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(Selector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
+            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
             {
-                function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
+                Function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }
         }
     }

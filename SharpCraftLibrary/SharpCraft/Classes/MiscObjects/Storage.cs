@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace SharpCraft
 {
@@ -28,7 +29,7 @@ namespace SharpCraft
         /// <summary>
         /// The namespace for the storage
         /// </summary>
-        public BasePackNamespace PackNamespace { get => packNamespace; set => packNamespace = value ?? throw new ArgumentNullException(nameof(PackNamespace), "PackNamespace may not be null"); }
+        public BasePackNamespace PackNamespace { get => packNamespace; protected set => packNamespace = value ?? throw new ArgumentNullException(nameof(PackNamespace), "PackNamespace may not be null"); }
 
         /// <summary>
         /// The name of the storage
@@ -36,13 +37,18 @@ namespace SharpCraft
         public string Name 
         { 
             get => name; 
-            set
+            protected set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
                     throw new ArgumentException(nameof(Name), "Name may not be null or whitespace");
                 }
-                name = value;
+                string loweredString = value.ToLower();
+                if (!Utils.ValidateName(loweredString,false,true))
+                {
+                    throw new ArgumentException("Storage name is invalid. Only accepts letters, numbers and /-._");
+                }
+                name = loweredString;
             }
         }
 
@@ -53,15 +59,6 @@ namespace SharpCraft
         public string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + Name.Replace("\\", "/");
-        }
-
-        /// <summary>
-        /// Returns the namespaced name of this storage
-        /// </summary>
-        /// <returns>The namespaced name of this storage</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
         }
     }
 }

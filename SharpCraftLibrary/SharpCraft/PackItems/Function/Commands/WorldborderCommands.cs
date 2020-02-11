@@ -79,13 +79,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WorldborderCenterCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
 
         /// <summary>
         /// Intializes a new <see cref="WorldborderCenterCommand"/>
         /// </summary>
         /// <param name="coordinates">The new center of the world border</param>
-        public WorldborderCenterCommand(Coords coordinates)
+        public WorldborderCenterCommand(Vector coordinates)
         {
             Coordinates = coordinates;
         }
@@ -93,7 +93,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The new center of the world border
         /// </summary>
-        public Coords Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
+        public Vector Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder center [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"worldborder center {Coordinates.StringX} {coordinates.StringZ}";
+            return $"worldborder center {Coordinates.GetXString()} {coordinates.GetZString()}";
         }
     }
     

@@ -158,7 +158,7 @@ namespace SharpCraft
         /// Gets the raw data used to set block this block
         /// </summary>
         /// <returns>Raw data used by Minecraft</returns>
-        public override string ToString()
+        public string GetBlockPlacementString()
         {
             if (ID == null)
             {
@@ -288,7 +288,7 @@ namespace SharpCraft
                 DataPartObject dataObject = new DataPartObject();
                 if (!(ID is null))
                 {
-                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag(ID, SharpCraft.ID.NBTTagType.TagString, isJson), isJson));
+                    dataObject.AddValue(new DataPartPath(idPath, new DataPartTag(ID.Name, SharpCraft.ID.NBTTagType.TagString, isJson), isJson));
                 }
                 if (HasState)
                 {
@@ -337,12 +337,12 @@ namespace SharpCraft
             
             if (HasState)
             {
-                returnObject.AddValue(new DataPartPath("state", GetStateData(json), json));
+                returnObject.AddValue(new DataPartPath(conversionData[3].ToString(), GetStateData(json), json));
             }
 
             if (HasData)
             {
-                returnObject.AddValue(new DataPartPath("nbt", new DataPartTag(GetDataString(), isJson: json), json));
+                returnObject.AddValue(new DataPartPath(conversionData[2].ToString(), new DataPartTag(GetDataString(), isJson: json), json));
             }
 
             return returnObject;

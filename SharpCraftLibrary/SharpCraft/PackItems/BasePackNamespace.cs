@@ -19,6 +19,7 @@ namespace SharpCraft
 
         private string name;
         private BaseDatapack datapack;
+        private BaseFile.FileListener fileListeners;
 
         /// <summary>
         /// The files inside this namespace
@@ -160,7 +161,7 @@ namespace SharpCraft
                 throw new InvalidOperationException("Namespace setup hasn't been run yet.");
             }
 
-            BaseFile file = files.SingleOrDefault(f => f.FileName == name && f.FileType == fileType);
+            BaseFile file = files.SingleOrDefault(f => f.FileId == name && f.FileType == fileType);
 
             if (file is null)
             {
@@ -189,8 +190,17 @@ namespace SharpCraft
             return settings.Any(s => s.GetType() == setting.GetType());
         }
 
-        internal void AddFile(BaseFile file)
+        /// <summary>
+        /// Adds the given file to this namespace
+        /// </summary>
+        /// <param name="file">The file to add</param>
+        public void AddFile(BaseFile file)
         {
+            if (file is null)
+            {
+                throw new ArgumentNullException(nameof(file), "Cannot add null as a file to a namespace");
+            }
+
             if (!IsSetup)
             {
                 throw new InvalidOperationException("Setup hasn't been run yet.");
@@ -201,11 +211,27 @@ namespace SharpCraft
                 throw new InvalidOperationException("Cannot add files to a disposed namespace.");
             }
 
-            if (files.Any(f => f.FileName == file.FileName && f.GetType() == file.GetType()))
+            if (file.PackNamespace != this)
             {
-                throw new ArgumentException("The namespace already contains a file with the given name");
+                throw new ArgumentException("Cannot add file which isn't made for this namespace", nameof(file));
             }
 
+            if (files.Any(f => f == file))
+            {
+                return;
+            }
+
+            if (files.Any(f => f.FileId == file.FileId && f.FileType == file.FileType))
+            {
+                throw new ArgumentException("The namespace already contains a file with the given name (" + file.FileId + ")", nameof(file));
+            }
+
+            if (files.Any(f => f.WritePath == file.WritePath && f.FileType == file.FileType))
+            {
+                throw new ArgumentException("The namespace already contains a file which writes to the given path ("+file.WritePath+")", nameof(file));
+            }
+
+            fileListeners?.Invoke(file);
             files.Add(file);
         }
 
@@ -230,11 +256,27 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Calls the given method when a new file is added to this namespace
+        /// </summary>
+        /// <param name="listener">The method to call</param>
+        public void AddNewFileListener(BaseFile.FileListener listener)
+        {
+            fileListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given file listener may not be null");
+        }
+
+        /// <summary>
         /// Extra things to do after dispose is ran
         /// </summary>
         protected virtual void AfterDispose()
         {
 
         }
+
+        /// <summary>
+        /// Generates a random id for the given <see cref="object"/>
+        /// </summary>
+        /// <param name="getIdFor">The object to id</param>
+        /// <returns>The id for the object</returns>
+        public abstract string GetID(object getIdFor);
     }
 }

@@ -77,16 +77,16 @@ namespace SharpCraft.Conditions
                 DataPartObject dataObject = new DataPartObject();
                 for (int i = 0; i < CheckScores.Count; i++)
                 {
-                    if (CheckScores[i].Range.Min == CheckScores[i].Range.Max)
+                    if (CheckScores[i].Range.Minimum == CheckScores[i].Range.Maximum)
                     {
-                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.ToString(), new DataPartTag((int)CheckScores[i].Range.Min, isJson: true), true));
+                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, new DataPartTag((int)CheckScores[i].Range.Minimum, isJson: true), true));
                     }
                     else
                     {
                         DataPartObject score = new DataPartObject();
-                        score.AddValue(new DataPartPath("min", new DataPartTag((int)(CheckScores[i].Range.Min ?? int.MinValue), isJson: true), true));
-                        score.AddValue(new DataPartPath("max", new DataPartTag((int)(CheckScores[i].Range.Max ?? int.MaxValue), isJson: true), true));
-                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.ToString(), score, true));
+                        score.AddValue(new DataPartPath("min", new DataPartTag((int)(CheckScores[i].Range.Minimum ?? int.MinValue), isJson: true), true));
+                        score.AddValue(new DataPartPath("max", new DataPartTag((int)(CheckScores[i].Range.Maximum ?? int.MaxValue), isJson: true), true));
+                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, score, true));
                     }
                 }
 
@@ -98,15 +98,15 @@ namespace SharpCraft.Conditions
             /// </summary>
             public class Score
             {
-                ScoreObject scoreObject;
-                Range range;
+                Objective scoreObject;
+                MCRange range;
 
                 /// <summary>
                 /// Intializes a new <see cref="Score"/>
                 /// </summary>
                 /// <param name="scoreObject">The objective to get the score from</param>
                 /// <param name="range">The range the score has to be inside</param>
-                public Score(ScoreObject scoreObject, Range range)
+                public Score(Objective scoreObject, MCRange range)
                 {
                     ScoreObject = scoreObject;
                     Range = range;
@@ -115,12 +115,21 @@ namespace SharpCraft.Conditions
                 /// <summary>
                 /// The objective to get the score from
                 /// </summary>
-                public ScoreObject ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
+                public Objective ScoreObject { get => scoreObject; set => scoreObject = value ?? throw new ArgumentNullException(nameof(ScoreObject), "ScoreObject may not be null"); }
 
                 /// <summary>
                 /// The range the score has to be inside
                 /// </summary>
-                public Range Range { get => range; set => range = value ?? throw new ArgumentNullException(nameof(Range), "Range may not be null"); }
+                public MCRange Range { get => range; set => range = value ?? throw new ArgumentNullException(nameof(Range), "Range may not be null"); }
+            }
+
+            /// <summary>
+            /// Converts a single score into a list of scores
+            /// </summary>
+            /// <param name="score">The score to convert</param>
+            public static implicit operator Scores (Score score)
+            {
+                return new Scores(score);
             }
         }
     }

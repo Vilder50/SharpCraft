@@ -24,8 +24,8 @@ namespace SharpCraft
             Short
         };
 
-        readonly int _time;
-        readonly ID.TimeType _timeType;
+        readonly int time;
+        readonly ID.TimeType timeType;
 
         /// <summary>
         /// Creates a new time object with the specified time
@@ -34,25 +34,22 @@ namespace SharpCraft
         /// <param name="timeType">the time measuring type</param>
         public Time(int time, ID.TimeType timeType)
         {
-            _time = Convert.ToInt32(time);
-            _timeType = timeType;
+            this.time = Convert.ToInt32(time);
+            this.timeType = timeType;
         }
 
         /// <summary>
         /// Converts the time into raw data used by the game
         /// </summary>
         /// <returns>Raw data used by the game</returns>
-        public override string ToString()
+        public string GetTimeString()
         {
-            switch(_timeType)
+            return timeType switch
             {
-                case ID.TimeType.days:
-                    return _time + "d";
-                case ID.TimeType.seconds:
-                    return _time + "s";
-                default:
-                    return _time + "t";
-            }
+                ID.TimeType.days => time + "d",
+                ID.TimeType.seconds => time + "s",
+                _ => time + "t",
+            };
         }
 
         /// <summary>
@@ -67,10 +64,10 @@ namespace SharpCraft
         /// <summary>
         /// Returns true if the time in this time object is negative
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the time in this time object is negative</returns>
         public bool IsNegative()
         {
-            return _time < 0;
+            return time < 0;
         }
 
         /// <summary>
@@ -86,15 +83,12 @@ namespace SharpCraft
                 {
                     try
                     {
-                        switch (_timeType)
+                        return timeType switch
                         {
-                            case ID.TimeType.days:
-                                return _time * 24000;
-                            case ID.TimeType.seconds:
-                                return _time * 20;
-                            default:
-                                return _time;
-                        }
+                            ID.TimeType.days => time * 24000,
+                            ID.TimeType.seconds => time * 20,
+                            _ => time,
+                        };
                     }
                     catch (OverflowException)
                     {
@@ -105,15 +99,12 @@ namespace SharpCraft
                 {
                     try
                     {
-                        switch (_timeType)
+                        return timeType switch
                         {
-                            case ID.TimeType.days:
-                                return (short)(_time * 24000);
-                            case ID.TimeType.seconds:
-                                return (short)(_time * 20);
-                            default:
-                                return (short)_time;
-                        }
+                            ID.TimeType.days => (short)(time * 24000),
+                            ID.TimeType.seconds => (short)(time * 20),
+                            _ => (short)time,
+                        };
                     }
                     catch (OverflowException)
                     {
@@ -131,30 +122,19 @@ namespace SharpCraft
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
-            long savedTime;
-            switch (_timeType)
+            int savedTime = timeType switch
             {
-                case ID.TimeType.days:
-                    savedTime =  _time * 24000;
-                    break;
-                case ID.TimeType.seconds:
-                    savedTime = _time * 20;
-                    break;
-                default:
-                    savedTime = _time;
-                    break;
-            }
-            switch (asType)
+                ID.TimeType.days => time * 24000,
+                ID.TimeType.seconds => time * 20,
+                _ => time,
+            };
+            return asType switch
             {
-                case ID.NBTTagType.TagInt:
-                    return new DataPartTag((int)savedTime);
-                case ID.NBTTagType.TagShort:
-                    return new DataPartTag((short)savedTime);
-                case ID.NBTTagType.TagLong:
-                    return new DataPartTag(savedTime);
-                default:
-                    throw new ArgumentException("Cannot convert time into a " + asType + " object");
-            }
+                ID.NBTTagType.TagInt => new DataPartTag(savedTime),
+                ID.NBTTagType.TagShort => new DataPartTag((short)savedTime),
+                ID.NBTTagType.TagLong => new DataPartTag((long)savedTime),
+                _ => throw new ArgumentException("Cannot convert time into a " + asType + " object"),
+            };
         }
     }
 }

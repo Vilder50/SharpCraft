@@ -1,28 +1,68 @@
-﻿namespace SharpCraft
+﻿using System.Text.RegularExpressions;
+
+namespace SharpCraft
 {
     /// <summary>
     /// An object used for boss bars
     /// </summary>
     public class BossBar
     {
-        readonly string Name;
+        private string name;
+
         /// <summary>
         /// Creates a new boss bar object.
         /// Note that this doesnt add the boss bar to the world
         /// </summary>
-        /// <param name="BossBarName">The name of the bossbar</param>
-        public BossBar(string BossBarName)
+        /// <param name="bossBarName">The name of the bossbar</param>
+        public BossBar(string bossBarName)
         {
-            Name = BossBarName;
+            Name = bossBarName;
         }
 
         /// <summary>
-        /// Outputs the name of this boss bar
+        /// Creates a new boss bar object.
+        /// Note that this doesnt add the boss bar to the world
         /// </summary>
-        /// <returns>the name of this boss bar</returns>
-        public override string ToString()
+        /// <param name="bossBarName">The name of the bossbar</param>
+        /// <param name="namespace">The namespace the bossbar is in. Null = minecraft namespace.</param>
+        public BossBar(BasePackNamespace @namespace, string bossBarName) : this(bossBarName)
         {
-            return Name;
+            Namespace = @namespace;
+        }
+
+        /// <summary>
+        /// The name of the bossbar
+        /// </summary>
+        public string Name 
+        { 
+            get => name;
+            protected set 
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new System.ArgumentException("BossBar name may not be null or whitespace", nameof(Name));
+                }
+                string loweredString = value.ToLower();
+                if (!Utils.ValidateName(loweredString,false,true))
+                {
+                    throw new System.ArgumentException("BossBar name is invalid. Name only accepts letters, numbers and /-._");
+                }
+                name = loweredString;
+            }
+        }
+
+        /// <summary>
+        /// The namespace the bossbar is in. Null = minecraft namespace.
+        /// </summary>
+        public BasePackNamespace Namespace { get; private set; }
+
+        /// <summary>
+        /// Get string used for refering this bossbar
+        /// </summary>
+        /// <returns>String used for refering this bossbar</returns>
+        public string GetFullName()
+        {
+            return (Namespace?.Name ?? "minecraft") + ":" + Name;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Tag : IConvertableToDataTag
     {
-        readonly string Name;
+        private string name;
         /// <summary>
         /// Creates a new tag with the given name
         /// </summary>
@@ -19,30 +19,41 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// The name of the tag
+        /// </summary>
+        public string Name
+        {
+            get => name;
+            protected set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Tag name may not be null or whitespace", nameof(Name));
+                }
+                if (!Utils.ValidateName(value, true, false))
+                {
+                    throw new ArgumentException("Tag name is invalid. Only accepts letters, numbers and -._");
+                }
+                name = value;
+            }
+        }
+
+        /// <summary>
         /// Converts this tag into a <see cref="DataPartTag"/>
         /// </summary>
-        /// <param name="extraConversionData">Not used</param>
+        /// <param name="extraConversionData">set to <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="asType">The type of tag</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagString)
             {
-                return new DataPartTag(ToString());
+                return new DataPartTag(Name);
             }
             else
             {
                 throw new ArgumentException("Cannot convert the tag into a " + asType + " object");
             }
-        }
-
-        /// <summary>
-        /// Returns the name of the tag
-        /// </summary>
-        /// <returns>The name of the tag</returns>
-        public override string ToString()
-        {
-            return Name;
         }
 
         /// <summary>

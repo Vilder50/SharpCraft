@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     public class RecipeCommand : BaseCommand
     {
         private IRecipe recipe;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="RecipeCommand"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="giveRecipe">True if the recipe should be given. False if it should be taken</param>
         /// <param name="recipe">The recipe to give/take</param>
         /// <param name="selector">Selector selecting the players to give/take the recipe from</param>
-        public RecipeCommand(IRecipe recipe, Selector selector, bool giveRecipe)
+        public RecipeCommand(IRecipe recipe, BaseSelector selector, bool giveRecipe)
         {
             GiveRecipe = giveRecipe;
             Recipe = recipe;
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players to give/take the recipe from
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -48,7 +48,7 @@ namespace SharpCraft.Commands
         /// <returns>recipe [GiveRecipe] [Selector] [Recipe]</returns>
         public override string GetCommandString()
         {
-            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} {Recipe.GetNamespacedName()}";
+            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector.GetSelectorString()} {Recipe.GetNamespacedName()}";
         }
     }
 
@@ -57,14 +57,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class RecipeAllCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="RecipeAllCommand"/>
         /// </summary>
         /// <param name="giveRecipe">True if the recipe should be given. False if it should be taken</param>
         /// <param name="selector">Selector selecting the players to give/take the recipe from</param>
-        public RecipeAllCommand(Selector selector, bool giveRecipe)
+        public RecipeAllCommand(BaseSelector selector, bool giveRecipe)
         {
             GiveRecipe = giveRecipe;
             Selector = selector;
@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players to give/take the recipes from
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -86,7 +86,7 @@ namespace SharpCraft.Commands
         /// <returns>recipe [GiveRecipe] [Selector] *</returns>
         public override string GetCommandString()
         {
-            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector} *";
+            return $"recipe {(GiveRecipe ? "give" : "take")} {Selector.GetSelectorString()} *";
         }
     }
 }

@@ -14,7 +14,21 @@ namespace SharpCraft
     /// </summary>
     public class Predicate : BaseFile, IPredicate
     {
+        private PredicateCondition thisCondition;
         private BaseCondition condition;
+
+        /// <summary>
+        /// Intializes a new <see cref="Predicate"/>. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the predicate is in</param>
+        /// <param name="fileName">The name of the predicate file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="condition">The predicate to test for</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected Predicate(bool _, BasePackNamespace packNamespace, string fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, writeSetting, "predicate")
+        {
+            Condition = condition;
+        }
 
         /// <summary>
         /// Intializes a new <see cref="Predicate"/>
@@ -23,14 +37,9 @@ namespace SharpCraft
         /// <param name="fileName">The name of the predicate file</param>
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="condition">The predicate to test for</param>
-        public Predicate(BasePackNamespace packNamespace, string fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, writeSetting, "predicate")
+        public Predicate(BasePackNamespace packNamespace, string fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, condition, writeSetting)
         {
-            Condition = condition;
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
+            FinishedConstructing();
         }
 
         /// <summary>
@@ -56,7 +65,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("predicates");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -67,6 +76,24 @@ namespace SharpCraft
         {
             stream.Write(condition.GetDataString());
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            condition = null;
+        }
+
+        /// <summary>
+        /// Returns a condition checking this predicate
+        /// </summary>
+        /// <returns>A condition checking this predicate</returns>
+        public PredicateCondition GetCondition()
+        {
+            thisCondition ??= new PredicateCondition(this);
+            return thisCondition;
+        }
     }
 
     /// <summary>
@@ -74,6 +101,8 @@ namespace SharpCraft
     /// </summary>
     public class EmptyPredicate : IPredicate
     {
+        private PredicateCondition thisCondition;
+
         /// <summary>
         /// Intializes a new <see cref="EmptyPredicate"/>
         /// </summary>
@@ -82,13 +111,13 @@ namespace SharpCraft
         public EmptyPredicate(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the predicate
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the predicate is in
@@ -101,7 +130,7 @@ namespace SharpCraft
         /// <returns>The string used for checking the predicate</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>
@@ -113,6 +142,30 @@ namespace SharpCraft
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
+        }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:PREDICATE into an <see cref="EmptyPredicate"/>
+        /// </summary>
+        /// <param name="predicate">The string to convert</param>
+        public static implicit operator EmptyPredicate(string predicate)
+        {
+            string[] parts = predicate.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty predicate has to contain a single :");
+            }
+            return new EmptyPredicate(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
+
+        /// <summary>
+        /// Returns a condition checking this predicate
+        /// </summary>
+        /// <returns>A condition checking this predicate</returns>
+        public PredicateCondition GetCondition()
+        {
+            thisCondition ??= new PredicateCondition(this);
+            return thisCondition;
         }
     }
 }

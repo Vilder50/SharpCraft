@@ -8,7 +8,7 @@ namespace SharpCraft
         /// <summary>
         /// The basic entity data
         /// </summary>
-        public abstract class EntityBasic : BaseEntity
+        public class EntityBasic : BaseEntity
         {
             /// <summary>
             /// Creates a new entity
@@ -19,8 +19,8 @@ namespace SharpCraft
             /// <summary>
             /// The entity's motion
             /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Coords Motion { get; set; }
+            [Data.DataTag]
+            public Vector Motion { get; set; }
 
             /// <summary>
             /// The entity's rotation
@@ -31,8 +31,8 @@ namespace SharpCraft
             /// <summary>
             /// The entity's location
             /// </summary>
-            [Data.DataTag("Pos", ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Coords Coords { get; set; }
+            [Data.DataTag("Pos")]
+            public Vector Coords { get; set; }
 
             /// <summary>
             /// The distance the entity has fallen
@@ -94,7 +94,7 @@ namespace SharpCraft
             /// The entity's shown name
             /// </summary>
             [Data.DataTag]
-            public JSON[] CustomName { get; set; }
+            public JsonText CustomName { get; set; }
 
             /// <summary>
             /// If the entity's name should be shown always

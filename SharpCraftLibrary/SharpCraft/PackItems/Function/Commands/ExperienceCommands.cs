@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceModifyCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceModifyCommand"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="changeLevels">True if the players' levels should change. False if the players' points should change</param>
         /// <param name="modifier">The way to modify the players experience</param>
         /// <param name="value">The value to modify with</param>
-        public ExperienceModifyCommand(Selector selector, bool changeLevels, ID.AddSetModifier modifier, int value)
+        public ExperienceModifyCommand(BaseSelector selector, bool changeLevels, ID.AddSetModifier modifier, int value)
         {
             Selector = selector;
             ChangeLevels = changeLevels;
@@ -31,7 +31,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the players whose experience to change
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// True if the players' levels should change. False if the players' points should change
@@ -54,7 +54,7 @@ namespace SharpCraft.Commands
         /// <returns>experience [Modifier] [Selector] [Value] [ChangeLevels]</returns>
         public override string GetCommandString()
         {
-            return $"xp {Modifier} {Selector} {Value} {(ChangeLevels ? "levels" : "points")}";
+            return $"xp {Modifier} {Selector.GetSelectorString()} {Value} {(ChangeLevels ? "levels" : "points")}";
         }
     }
 
@@ -63,14 +63,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceGetCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceGetCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the player whose experience to get</param>
         /// <param name="getLevels">True to get the player's levels. False to get the player's points</param>
-        public ExperienceGetCommand(Selector selector, bool getLevels)
+        public ExperienceGetCommand(BaseSelector selector, bool getLevels)
         {
             Selector = selector;
             GetLevels = getLevels;
@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the player whose experience to get
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -103,7 +103,7 @@ namespace SharpCraft.Commands
         /// <returns>experience query [Selector] [ChangeLevels]</returns>
         public override string GetCommandString()
         {
-            return $"xp query {Selector} {(GetLevels ? "levels" : "points")}";
+            return $"xp query {Selector.GetSelectorString()} {(GetLevels ? "levels" : "points")}";
         }
     }
 }

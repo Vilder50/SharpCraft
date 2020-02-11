@@ -13,6 +13,20 @@ namespace SharpCraft
     public class BlockGroup : BaseGroup<BlockType>, IBlockType
     {
         /// <summary>
+        /// Intializes a new Group with the given parameters. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the group is in</param>
+        /// <param name="fileName">The name of the group file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="items">The items in this group</param>
+        /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected BlockGroup(bool _, BasePackNamespace packNamespace, string fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "block")
+        {
+
+        }
+
+        /// <summary>
         /// Intializes a new Group with the given parameters
         /// </summary>
         /// <param name="packNamespace">The namespace the group is in</param>
@@ -20,9 +34,9 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public BlockGroup(BasePackNamespace packNamespace, string fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting)
+        public BlockGroup(BasePackNamespace packNamespace, string fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
-            
+            FinishedConstructing();
         }
 
         /// <summary>
@@ -45,7 +59,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("tags\\blocks");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\blocks\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\blocks\\" + WritePath + ".json");
         }
 
         /// <summary>

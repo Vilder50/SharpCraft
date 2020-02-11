@@ -32,7 +32,7 @@ namespace SharpCraft.Conditions
         /// <summary>
         /// Offset to check at
         /// </summary>
-        [DataTag((object)"offsetX", "offsetY", "offsetZ", ID.NBTTagType.TagInt,true, Merge = true, JsonTag = true)]
-        public Coords Offset { get; set; }
+        [DataTag((object)"offsetX", "offsetY", "offsetZ", true, Merge = true, JsonTag = true)]
+        public IntVector Offset { get; set; }
     }
 }

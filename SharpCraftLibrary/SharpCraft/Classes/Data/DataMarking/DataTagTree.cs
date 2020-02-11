@@ -200,7 +200,7 @@ namespace SharpCraft.Data
                 {
                     continue;
                 }
-                if (value.GetType().IsArray && !(value is JSON[]))
+                if (value.GetType().IsArray)
                 {
                     AddItem(new DataPartArray(value, forceType, conversionParams, IsJson));
                 }
@@ -210,23 +210,44 @@ namespace SharpCraft.Data
                     {
                         AddItem(dataHolder.GetDataTree());
                     }
-                    else if (value is IConvertableToDataObject canBeObject)
+                    else if (value is IConvertableToDataObject canBeObject && (forceType is null || forceType == ID.NBTTagType.TagCompoundArray))
                     {
-                        AddItem(canBeObject.GetAsDataObject(conversionParams));
+                        try
+                        {
+                            AddItem(canBeObject.GetAsDataObject(conversionParams));
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag object (See inner exception)", ex);
+                        }
                     }
-                    else if (value is IConvertableToDataArray canBeArray)
+                    else if (value is IConvertableToDataArray canBeArray && (forceType is null || forceType >= ID.NBTTagType.TagArrayArray))
                     {
-                        AddItem(canBeArray.GetAsArray(forceType, conversionParams));
+                        try
+                        {
+                            AddItem(canBeArray.GetAsArray(forceType, conversionParams));
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag array (See inner exception)", ex);
+                        }
                     }
                     else if (value is IConvertableToDataTag canBeTag)
                     {
-                        if (forceType is null)
-                        {
-                            AddItem(canBeTag.GetAsTag(null, conversionParams));
+                        try
+                        { 
+                            if (forceType is null)
+                            {
+                                AddItem(canBeTag.GetAsTag(null, conversionParams));
+                            }
+                            else
+                            {
+                                AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                            }
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            AddItem(canBeTag.GetAsTag((ID.NBTTagType)(int)forceType - 101, conversionParams));
+                            throw new InvalidCastException($"Failed to convert object at index {i} into a data tag (See inner exception)", ex);
                         }
                     }
                     else if (value is DataPartTag dataTag)
@@ -454,13 +475,6 @@ namespace SharpCraft.Data
                         TagType = ID.NBTTagType.TagString;
                     }
                 }
-                else if (value is JSON[] || value is JSON)
-                {
-                    if (TagType != ID.NBTTagType.TagCompound)
-                    {
-                        TagType = ID.NBTTagType.TagString;
-                    }
-                }
                 else if (value is SimpleDataHolder data && TagType == ID.NBTTagType.TagString)
                 {
                     this.value = data.GetDataString();
@@ -468,7 +482,7 @@ namespace SharpCraft.Data
                 }
                 else if (!(value.GetType().IsEnum))
                 {
-                    throw new ArgumentException("The object cannot be saved in this tag.", nameof(Value));
+                    throw new ArgumentException("The object cannot be saved in this tag: " + value.ToString(), nameof(Value));
                 }
                 this.value = value;
             }
@@ -552,28 +566,6 @@ namespace SharpCraft.Data
                     return "\"" + ((string)Value).Escape() + "\"";
                 }
             }
-            else if (Value is JSON[] jsonArray)
-            {
-                if (TagType == ID.NBTTagType.TagCompound)
-                {
-                    return jsonArray.GetString();
-                }
-                else
-                {
-                    return "\"" + jsonArray.GetString().Escape() + "\"";
-                }
-            }
-            else if (Value is JSON jsonObject)
-            {
-                if (TagType == ID.NBTTagType.TagCompound)
-                {
-                    return jsonObject.ToString();
-                }
-                else
-                {
-                    return "\"" + jsonObject.ToString().Escape() + "\"";
-                }
-            }
             else if (Value.GetType().IsEnum)
             {
                 int value = ((int)Value);
@@ -641,21 +633,15 @@ namespace SharpCraft.Data
             }
             else
             {
-                switch (type)
+                return type switch
                 {
-                    default:
-                        throw new ArgumentException("The given type doesn't have a special ending letter");
-                    case ID.NBTTagType.TagByte:
-                        return "b";
-                    case ID.NBTTagType.TagShort:
-                        return "s";
-                    case ID.NBTTagType.TagDouble:
-                        return "d";
-                    case ID.NBTTagType.TagFloat:
-                        return "f";
-                    case ID.NBTTagType.TagLong:
-                        return "L";
-                }
+                    ID.NBTTagType.TagByte => "b",
+                    ID.NBTTagType.TagShort => "s",
+                    ID.NBTTagType.TagDouble => "d",
+                    ID.NBTTagType.TagFloat => "f",
+                    ID.NBTTagType.TagLong => "L",
+                    _ => throw new ArgumentException("The given type doesn't have a special ending letter"),
+                };
             }
         }
     }

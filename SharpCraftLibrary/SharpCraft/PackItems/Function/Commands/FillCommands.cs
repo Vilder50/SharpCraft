@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FillCommand : BaseCommand
     {
-        private Coords corner1;
-        private Coords corner2;
+        private Vector corner1;
+        private Vector corner2;
         private Block block;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace SharpCraft.Commands
         /// <param name="corner2">The oppesite corner of the square to fill</param>
         /// <param name="block">The block to fill with</param>
         /// <param name="fillMode">The way to fill</param>
-        public FillCommand(Coords corner1, Coords corner2, Block block, ID.BlockFill fillMode)
+        public FillCommand(Vector corner1, Vector corner2, Block block, ID.BlockFill fillMode)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -33,7 +33,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the square to fill
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -45,7 +45,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corner of the square to fill
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -79,11 +79,11 @@ namespace SharpCraft.Commands
         {
             if (FillMode == ID.BlockFill.replace)
             {
-                return $"fill {Corner1} {Corner2} {Block.ToString()}";
+                return $"fill {Corner1.GetVectorString()} {Corner2.GetVectorString()} {Block.GetBlockPlacementString()}";
             }
             else
             {
-                return $"fill {Corner1} {Corner2} {Block.ToString()} {FillMode}";
+                return $"fill {Corner1.GetVectorString()} {Corner2.GetVectorString()} {Block.GetBlockPlacementString()} {FillMode}";
             }
         }
     }
@@ -93,8 +93,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FillReplaceCommand : BaseCommand
     {
-        private Coords corner1;
-        private Coords corner2;
+        private Vector corner1;
+        private Vector corner2;
         private Block block;
         private Block replaceBlock;
 
@@ -105,7 +105,7 @@ namespace SharpCraft.Commands
         /// <param name="corner2">The oppesite corner of the square to fill</param>
         /// <param name="block">The block to fill with</param>
         /// <param name="replaceBlock">The block to replace</param>
-        public FillReplaceCommand(Coords corner1, Coords corner2, Block block, Block replaceBlock)
+        public FillReplaceCommand(Vector corner1, Vector corner2, Block block, Block replaceBlock)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -116,7 +116,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the square to fill
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -128,7 +128,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corner of the square to fill
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -167,7 +167,7 @@ namespace SharpCraft.Commands
         /// <returns>fill [Corner1] [Corner2] [Block] replace [ReplaceBlock]</returns>
         public override string GetCommandString()
         {
-            return $"fill {Corner1} {Corner2} {Block.ToString()} replace {ReplaceBlock.ToString()}";
+            return $"fill {Corner1.GetVectorString()} {Corner2.GetVectorString()} {Block.GetBlockPlacementString()} replace {ReplaceBlock.GetBlockPlacementString()}";
         }
     }
 }

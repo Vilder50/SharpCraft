@@ -17,6 +17,24 @@ namespace SharpCraft
         private int count;
 
         /// <summary>
+        /// Intializes a new <see cref="CraftingRecipe"/>. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the recipe is in</param>
+        /// <param name="fileName">The name of the recipe file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="group">The name of the recipe group the recipe is in. Leave null for no group.</param>
+        /// <param name="recipe">The recipe for crafting the item. Use <see cref="ID.Item.air"/> or null for empty slots</param>
+        /// <param name="count">The amount of the result item the recipe should output</param>
+        /// <param name="result">The item to craft</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected CraftingRecipe(bool _, BasePackNamespace packNamespace, string fileName, ItemType[,] recipe, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shaped")
+        {
+            Recipe = recipe;
+            Result = result;
+            Count = count;
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="CraftingRecipe"/>
         /// </summary>
         /// <param name="packNamespace">The namespace the recipe is in</param>
@@ -26,12 +44,9 @@ namespace SharpCraft
         /// <param name="recipe">The recipe for crafting the item. Use <see cref="ID.Item.air"/> or null for empty slots</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public CraftingRecipe(BasePackNamespace packNamespace, string fileName, ItemType[,] recipe, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shaped")
+        public CraftingRecipe(BasePackNamespace packNamespace, string fileName, ItemType[,] recipe, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipe, result, count, group, writeSetting)
         {
-            Recipe = recipe;
-            Result = result;
-            Count = count;
-            EndConstructor();
+            FinishedConstructing();
         }
 
         /// <summary>
@@ -155,6 +170,15 @@ namespace SharpCraft
             stream.Write("}");
 
             WriteFileEnd(stream);
+        }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            base.AfterDispose();
+            recipe = null;
         }
     }
 }

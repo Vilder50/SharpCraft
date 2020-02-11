@@ -5,10 +5,18 @@ using System.Collections.Generic;
 namespace SharpCraft
 {
     /// <summary>
+    /// Interface for groups of an item
+    /// </summary>
+    public interface IGroup<TItem> where TItem : IGroupable
+    {
+
+    }
+
+    /// <summary>
     /// Abstract class for Groups of an item.
     /// </summary>
     /// <typeparam name="TItem">The item the group is for</typeparam>
-    public abstract class BaseGroup<TItem> : BaseFile where TItem : IGroupable
+    public abstract class BaseGroup<TItem> : BaseFile, IGroup<TItem> where TItem : IGroupable
     {
         private List<TItem> items;
         private bool appendGroup;
@@ -22,15 +30,11 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting, "recipe")
+        /// <param name="fileType">The type of group file</param>
+        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, "group_" + fileType)
         {
             Items = items;
             AppendGroup = appendGroup;
-            if (writeSetting == WriteSetting.Auto || writeSetting == WriteSetting.LockedAuto)
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
             halfLockProperties = true;
         }
 
@@ -98,7 +102,15 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public new string GetNamespacedName()
         {
-            return "#" + PackNamespace.Name + ":" + FileName.Replace("\\", "/");
+            return "#" + PackNamespace.Name + ":" + WritePath.Replace("\\", "/");
+        }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            items = null;
         }
     }
 

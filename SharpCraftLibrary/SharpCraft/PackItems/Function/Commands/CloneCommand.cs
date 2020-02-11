@@ -11,9 +11,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class CloneCommand : BaseCommand
     {
-        private Coords corner1;
-        private Coords corner2;
-        private Coords location;
+        private Vector corner1;
+        private Vector corner2;
+        private Vector location;
 
         /// <summary>
         /// Intializes a new <see cref="CloneCommand"/>
@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <param name="location">The location to clone the structure to</param>
         /// <param name="masked">True if air blocks shouldn't be cloned. False if air blocks should be cloned</param>
         /// <param name="mode">The way to clone the structure</param>
-        public CloneCommand(Coords corner1, Coords corner2, Coords location, bool masked, ID.BlockCloneWay mode)
+        public CloneCommand(Vector corner1, Vector corner2, Vector location, bool masked, ID.BlockCloneWay mode)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -35,7 +35,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the structure to clone
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -47,7 +47,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corners of the structure to clone
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -59,7 +59,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location to clone the structure to
         /// </summary>
-        public Coords Location
+        public Vector Location
         {
             get => location;
             set
@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
         /// <returns>clone [Corner1] [Corner2] [Location] [Masked] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"clone {Corner1} {Corner2} {Location} {(Masked ? "masked" : "replace")} {Mode}";
+            return $"clone {Corner1.GetVectorString()} {Corner2.GetVectorString()} {Location.GetVectorString()} {(Masked ? "masked" : "replace")} {Mode}";
         }
     }
 
@@ -93,9 +93,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FilteredCloneCommand : BaseCommand
     {
-        private Coords corner1;
-        private Coords corner2;
-        private Coords location;
+        private Vector corner1;
+        private Vector corner2;
+        private Vector location;
         private Block filterBlock;
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace SharpCraft.Commands
         /// <param name="location">The location to clone the structure to</param>
         /// <param name="filterBlock">The block to clone from one place to another</param>
         /// <param name="mode">The way to clone the structure</param>
-        public FilteredCloneCommand(Coords corner1, Coords corner2, Coords location, Block filterBlock, ID.BlockCloneWay mode)
+        public FilteredCloneCommand(Vector corner1, Vector corner2, Vector location, Block filterBlock, ID.BlockCloneWay mode)
         {
             Corner1 = corner1;
             Corner2 = corner2;
@@ -118,7 +118,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// One of the corners of the structure to clone
         /// </summary>
-        public Coords Corner1
+        public Vector Corner1
         {
             get => corner1;
             set
@@ -130,7 +130,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The oppesite corners of the structure to clone
         /// </summary>
-        public Coords Corner2
+        public Vector Corner2
         {
             get => corner2;
             set
@@ -142,7 +142,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location to clone the structure to
         /// </summary>
-        public Coords Location
+        public Vector Location
         {
             get => location;
             set
@@ -174,7 +174,7 @@ namespace SharpCraft.Commands
         /// <returns>clone [Corner1] [Corner2] [Location] filtered [FilterBlock] [Mode]</returns>
         public override string GetCommandString()
         {
-            return $"clone {Corner1} {Corner2} {Location} filtered {FilterBlock.ToString()} {Mode}";
+            return $"clone {Corner1.GetVectorString()} {Corner2.GetVectorString()} {Location.GetVectorString()} filtered {FilterBlock.GetBlockPlacementString()} {Mode}";
         }
     }
 }

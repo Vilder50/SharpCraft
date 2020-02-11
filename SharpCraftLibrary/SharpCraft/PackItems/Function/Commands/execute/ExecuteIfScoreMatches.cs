@@ -11,18 +11,18 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfScoreMatches : BaseExecuteIfCommand
     {
-        private Selector selector;
-        private ScoreObject objective;
-        private Range range;
+        private BaseSelector selector;
+        private Objective objective;
+        private MCRange range;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfScoreMatches"/> command
         /// </summary>
         /// <param name="selector">Selector selecting the thing to get a score from</param>
-        /// <param name="objective">The <see cref="ScoreObject"/> to get the score for <see cref="Selector"/> from</param>
+        /// <param name="objective">The <see cref="SharpCraft.Objective"/> to get the score for <see cref="Selector"/> from</param>
         /// <param name="range">The range the score should be inside</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfScoreMatches(Selector selector, ScoreObject objective, Range range, bool executeIf = true) : base(executeIf)
+        public ExecuteIfScoreMatches(BaseSelector selector, Objective objective, MCRange range, bool executeIf = true) : base(executeIf)
         {
             Selector = selector;
             Objective = objective;
@@ -32,7 +32,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the thing to get a score from
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -46,9 +46,9 @@ namespace SharpCraft.Commands
         }
 
         /// <summary>
-        /// The <see cref="ScoreObject"/> to get the score for <see cref="Selector"/> from
+        /// The <see cref="SharpCraft.Objective"/> to get the score for <see cref="Selector"/> from
         /// </summary>
-        public ScoreObject Objective
+        public Objective Objective
         {
             get => objective;
             set
@@ -60,7 +60,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The range the score should be inside
         /// </summary>
-        public Range Range
+        public MCRange Range
         {
             get => range;
             set
@@ -75,7 +75,7 @@ namespace SharpCraft.Commands
         /// <returns>score [Selector] [Objective] matches [Range]</returns>
         protected override string GetCheckPart()
         {
-            return "score " + Selector + " " + Objective + " matches " + Range.SelectorString();
+            return "score " + Selector.GetSelectorString() + " " + Objective.Name + " matches " + Range.SelectorString();
         }
     }
 }

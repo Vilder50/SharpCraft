@@ -12,19 +12,45 @@ namespace SharpCraft
     /// </summary>
     public abstract class BaseDatapack : IDisposable
     {
+        #region DatapackListener
+        private readonly static List<BaseDatapack> datapacks = new List<BaseDatapack>();
+        private readonly static List<DatapackListener> datapackListeners = new List<DatapackListener>();
+
+        /// <summary>
+        /// Used for calling methods when a new datapack is added or when datapacks already has been added
+        /// </summary>
+        /// <param name="datapack">the added datapack</param>
+        public delegate void DatapackListener(BaseDatapack datapack);
+
+        /// <summary>
+        /// Makes the given <see cref="DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        public static void AddDatapackListener(DatapackListener listener)
+        {
+            foreach(BaseDatapack datapack in datapacks)
+            {
+                listener(datapack);
+            }
+            datapackListeners.Add(listener);
+        }
+        #endregion
+
+        #region BaseDatapack
         private const string pathPattern = @"^[\s\S]*[^\\/]{1}$";
         private const string namePattern = @"^[0-9a-zA-Z_]+$";
 
         private string name;
         private string path;
         private readonly List<BasePackNamespace> namespaces;
+        private BaseFile.FileListener fileListeners;
 
         /// <summary>
         /// Creates a new <see cref="BaseDatapack"/> with the given parameters
         /// </summary>
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
-        public BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
+        protected BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
         {
             
         }
@@ -35,12 +61,24 @@ namespace SharpCraft
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        public BaseDatapack(string path, string packName, IFileCreator fileCreator)
+        protected BaseDatapack(string path, string packName, IFileCreator fileCreator)
         {
             Path = path;
             Name = packName.ToLower();
             namespaces = new List<BasePackNamespace>();
             FileCreator = fileCreator;
+        }
+
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected virtual void FinishedConstructing()
+        {
+            datapacks.Add(this);
+            foreach (DatapackListener listener in datapackListeners)
+            {
+                listener(this);
+            }
         }
 
         /// <summary>
@@ -86,11 +124,11 @@ namespace SharpCraft
         /// <summary>
         /// The name of the datapack used for refering to the datapack in game
         /// </summary>
-        public string IngameName
+        public virtual string IngameName
         {
             get
             {
-                return Name;
+                return "\"file/" + Name + "\""; ;
             }
         }
 
@@ -156,8 +194,23 @@ namespace SharpCraft
             {
                 TNamespace space = new TNamespace();
                 space.Setup(this, name);
+                space.AddNewFileListener(NewFileAdded);
                 return space;
             }
+        }
+
+        private void NewFileAdded(BaseFile file)
+        {
+            fileListeners?.Invoke(file);
+        }
+
+        /// <summary>
+        /// Calls the given method when a new file is added to a namespace in this datapack
+        /// </summary>
+        /// <param name="listener">The method to call</param>
+        public void AddNewFileListener(BaseFile.FileListener listener)
+        {
+            fileListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given file listener may not be null");
         }
 
         /// <summary>
@@ -172,6 +225,7 @@ namespace SharpCraft
                     packNamespace.Dispose();
                 }
                 AfterDispose();
+                datapacks.Remove(this);
                 Disposed = true;
             }
         }
@@ -193,5 +247,6 @@ namespace SharpCraft
 
             namespaces.Add(space);
         }
+        #endregion
     }
 }

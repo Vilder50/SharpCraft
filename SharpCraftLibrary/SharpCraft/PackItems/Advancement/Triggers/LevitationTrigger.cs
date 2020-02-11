@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The duration of the effect
         /// </summary>
         [DataTag("conditions.duration", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Duration { get; set; }
+        public MCRange Duration { get; set; }
     }
 }

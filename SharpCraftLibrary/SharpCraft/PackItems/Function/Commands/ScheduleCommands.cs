@@ -65,11 +65,11 @@ namespace SharpCraft.Commands
         {
             if (Append)
             {
-                return $"schedule function {Function.GetNamespacedName()} {Time.ToString()} append";
+                return $"schedule function {Function.GetNamespacedName()} {Time.GetTimeString()} append";
             }
             else
             {
-                return $"schedule function {Function.GetNamespacedName()} {Time.ToString()}";
+                return $"schedule function {Function.GetNamespacedName()} {Time.GetTimeString()}";
             }
         }
     }

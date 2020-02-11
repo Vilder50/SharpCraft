@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The distance to the closest stronghold
         /// </summary>
         [DataTag("conditions.distance", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-        public Range Distance { get; set; }
+        public MCRange Distance { get; set; }
     }
 }

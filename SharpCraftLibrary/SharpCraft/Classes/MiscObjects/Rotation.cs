@@ -11,53 +11,87 @@ namespace SharpCraft
         /// <summary>
         /// The rotation
         /// </summary>
-        public double XRot, YRot;
+        private double y;
 
-        /// <summary>
-        /// If the rotation is relative or not
-        /// </summary>
-        public bool RXRot, RYRot;
+        private bool yRelative;
+        private double x;
+        private bool xRelative;
 
         /// <summary>
         /// Creates a new rotation object with the specified rotation
         /// </summary>
-        /// <param name="xrot">the x rotation</param>
-        /// <param name="yrot">the y rotation (goes from -90 (up) to 90 (down))</param>
-        /// <param name="RelativeXRot">if the x rotation is relative or not</param>
-        /// <param name="RelativeYRot">if the y rotation is relative or not</param>
-        public Rotation(double xrot, double yrot,bool RelativeXRot = false, bool RelativeYRot = false)
+        /// <param name="xRotation">The vertical rotation</param>
+        /// <param name="yRotation">The horizontal rotation</param>
+        /// <param name="xRelative">if the vertical rotation is relative or not</param>
+        /// <param name="yRelative">if the horizontal rotation is relative or not</param>
+        public Rotation(double yRotation, double xRotation, bool yRelative = false, bool xRelative = false)
         {
-            XRot = xrot;
-            YRot = yrot;
-            RXRot = RelativeXRot;
-            RYRot = RelativeYRot;
+            X = xRotation;
+            Y = yRotation;
+            this.xRelative = xRelative;
+            this.yRelative = yRelative;
         }
         /// <summary>
         /// Creates a new rotation of the specified type
         /// </summary>
-        /// <param name="Relative">If the whole rotation is relative or not</param>
-        /// <param name="xrot">the x rotation</param>
-        /// <param name="yrot">the y rotation (goes from -90 (up) to 90 (down))</param>
-        public Rotation(bool Relative, double xrot, double yrot)
+        /// <param name="relative">If the whole rotation is relative or not</param>
+        /// <param name="xRotation">The vertical rotation</param>
+        /// <param name="yRotation">The horizontal rotation</param>
+        public Rotation(bool relative, double yRotation, double xRotation) : this(yRotation, xRotation, relative, relative)
         {
-            XRot = xrot;
-            YRot = yrot;
-            RXRot = Relative;
-            RYRot = Relative;
+            
         }
+
+        /// <summary>
+        /// The vertical rotation
+        /// </summary>
+        public double X { get => x; set => x = value; }
+
+        /// <summary>
+        /// The horizontal rotation
+        /// </summary>
+        public double Y { get => y; set => y = value; }
+
+        /// <summary>
+        /// If the Horizontal rotation is relative or not
+        /// </summary>
+        public bool XRelative { get => xRelative; set => xRelative = value; }
+
+        /// <summary>
+        /// If the Vertical rotation is relative or not
+        /// </summary>
+        public bool YRelative { get => yRelative; set => yRelative = value; }
 
         /// <summary>
         /// Gets the raw rotation
         /// </summary>
         /// <returns>the raw rotation used by the game</returns>
-        public override string ToString()
+        public string GetRotationString()
         {
-            string TempString = "";
-            if (RXRot) { TempString = "~"; }
-            TempString += XRot.ToString().Replace(",", ".") + " ";
-            if (RYRot) { TempString += "~"; }
-            TempString += YRot.ToString().Replace(",", ".");
-            return TempString;
+            return GetRotationString(Y,YRelative) + " " + GetRotationString(X, XRelative);
+        }
+
+        private string GetRotationString(double number, bool relative)
+        {
+            string prefix = "";
+            if (relative)
+            {
+                prefix = "~";
+                if (number == 0)
+                {
+                    return prefix;
+                }
+            }
+            string numberPart = number.ToMinecraftDouble();
+            if (number > 0 && number < 1)
+            {
+                numberPart = numberPart.Substring(1);
+            }
+            if (number < 0 && number > -1)
+            {
+                numberPart = "-" + numberPart.Substring(2);
+            }
+            return prefix + numberPart;
         }
 
         /// <summary>
@@ -70,7 +104,7 @@ namespace SharpCraft
         {
             if (asType == ID.NBTTagType.TagDoubleArray)
             {
-                DataPartArray dataArray = new DataPartArray(new double[] { XRot, YRot }, null, null);
+                DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, null);
                 return dataArray;
             }
             else

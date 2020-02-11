@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The amount of pyramide layers
         /// </summary>
         [DataTag("conditions.level", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Layers { get; set; }
+        public MCRange Layers { get; set; }
     }
 }

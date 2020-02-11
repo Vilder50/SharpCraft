@@ -179,24 +179,24 @@ namespace SharpCraft
         /// The color of the leather armor
         /// </summary>
         [DataTag("tag.display.color")]
-        public HexColor LeatherColor { get; set; }
+        public RGBColor LeatherColor { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)
         /// </summary>
         [DataTag("tag.display.MapColor")]
-        public HexColor MapColor { get; set; }
+        public RGBColor MapColor { get; set; }
         /// <summary>
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JSON[] Name { get; set; }
+        public JsonText Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public JSON[][] Lore { get; set; }
+        public JsonText[] Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
@@ -206,7 +206,7 @@ namespace SharpCraft
         /// The attributes the item has
         /// </summary>
         [DataTag("tag.AttributeModifiers")]
-        public MCAttribute[] Attributes { get; set; }
+        public ItemAttribute[] Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
@@ -245,21 +245,18 @@ namespace SharpCraft
         /// The items raw data with id at the start
         /// Used for give item commands
         /// </summary>
-        public string IDDataString
+        public string GetIDDataString()
         {
-            get
+            if (ID == null)
             {
-                if (ID == null)
-                {
-                    throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
-                }
-
-                string outputString = ID.Name;
-                string tagData = GetItemTagString();
-                if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
-
-                return outputString;
+                throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
             }
+
+            string outputString = ID.Name;
+            string tagData = GetItemTagString();
+            if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
+
+            return outputString;
         }
 
         /// <summary>

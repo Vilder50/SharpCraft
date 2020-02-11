@@ -18,7 +18,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="team">The team to add</param>
         /// <param name="displayName">The team's displayed name</param>
-        public TeamAddCommand(Team team, JSON[] displayName)
+        public TeamAddCommand(Team team, JsonText displayName)
         {
             Team = team;
             DisplayName = displayName;
@@ -32,7 +32,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The team's displayed name
         /// </summary>
-        public JSON[] DisplayName { get; set; }
+        public JsonText DisplayName { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -42,11 +42,11 @@ namespace SharpCraft.Commands
         {
             if (DisplayName is null)
             {
-                return $"team add {Team}";
+                return $"team add {Team.Name}";
             }
             else
             {
-                return $"team add {Team} {DisplayName.GetString()}";
+                return $"team add {Team.Name} {DisplayName.GetJsonString()}";
             }
         }
     }
@@ -78,7 +78,7 @@ namespace SharpCraft.Commands
         /// <returns>team empty [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team empty {Team}";
+            return $"team empty {Team.Name}";
         }
     }
 
@@ -88,14 +88,14 @@ namespace SharpCraft.Commands
     public class TeamJoinCommand : BaseCommand
     {
         private Team team;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TeamJoinCommand"/>
         /// </summary>
         /// <param name="team">The team to join</param>
         /// <param name="selector">Selector selecting the entities to put into the team</param>
-        public TeamJoinCommand(Team team, Selector selector)
+        public TeamJoinCommand(Team team, BaseSelector selector)
         {
             Team = team;
             Selector = selector;
@@ -109,7 +109,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to put into the team
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -117,7 +117,7 @@ namespace SharpCraft.Commands
         /// <returns>team join [Team] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"team join {Team} {Selector}";
+            return $"team join {Team.Name} {Selector.GetSelectorString()}";
         }
     }
 
@@ -126,13 +126,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamLeaveCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TeamLeaveCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting entities to make leave their team</param>
-        public TeamLeaveCommand(Selector selector)
+        public TeamLeaveCommand(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -140,7 +140,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector for selecting entities to make leave their team
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -148,7 +148,7 @@ namespace SharpCraft.Commands
         /// <returns>team leave [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"team leave {Selector}";
+            return $"team leave {Selector.GetSelectorString()}";
         }
     }
 
@@ -194,7 +194,7 @@ namespace SharpCraft.Commands
         /// <returns>team list [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team list {Team}";
+            return $"team list {Team.Name}";
         }
     }
 
@@ -225,7 +225,7 @@ namespace SharpCraft.Commands
         /// <returns>team remove [Team]</returns>
         public override string GetCommandString()
         {
-            return $"team remove {Team}";
+            return $"team remove {Team.Name}";
         }
     }
 
@@ -235,7 +235,7 @@ namespace SharpCraft.Commands
     public class TeamModifyDisplayCommand : BaseCommand
     {
         private Team team;
-        private JSON[] value;
+        private JsonText value;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyDisplayCommand"/>
@@ -243,7 +243,7 @@ namespace SharpCraft.Commands
         /// <param name="team">The team to modify</param>
         /// <param name="displaySlot">The display to change</param>
         /// <param name="value">The value to change it to</param>
-        public TeamModifyDisplayCommand(Team team, ID.TeamDisplayName displaySlot, JSON[] value)
+        public TeamModifyDisplayCommand(Team team, ID.TeamDisplayName displaySlot, JsonText value)
         {
             Team = team;
             DisplaySlot = displaySlot;
@@ -263,7 +263,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The value to change it to
         /// </summary>
-        public JSON[] Value { get => value; set => this.value = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
+        public JsonText Value { get => value; set => this.value = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -271,7 +271,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] [DisplaySlot] [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} {DisplaySlot} {Value.GetString()}";
+            return $"team modify {Team.Name} {DisplaySlot} {Value.GetJsonString()}";
         }
     }
 
@@ -309,7 +309,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] collisionRule [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} collisionRule {Value}";
+            return $"team modify {Team.Name} collisionRule {Value}";
         }
     }
 
@@ -347,7 +347,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] color [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} color {Value}";
+            return $"team modify {Team.Name} color {Value}";
         }
     }
 
@@ -385,7 +385,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] deathMessageVisibility [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} deathMessageVisibility {Value}";
+            return $"team modify {Team.Name} deathMessageVisibility {Value}";
         }
     }
 
@@ -423,7 +423,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] nametagVisibility [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} nametagVisibility {Value}";
+            return $"team modify {Team.Name} nametagVisibility {Value}";
         }
     }
 
@@ -461,7 +461,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] friendlyFire [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} friendlyFire {Value.ToMinecraftBool()}";
+            return $"team modify {Team.Name} friendlyFire {Value.ToMinecraftBool()}";
         }
     }
 
@@ -499,7 +499,7 @@ namespace SharpCraft.Commands
         /// <returns>team modify [Team] seeFriendlyInvisibles [Value]</returns>
         public override string GetCommandString()
         {
-            return $"team modify {Team} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
+            return $"team modify {Team.Name} seeFriendlyInvisibles {Value.ToMinecraftBool()}";
         }
     }
 }

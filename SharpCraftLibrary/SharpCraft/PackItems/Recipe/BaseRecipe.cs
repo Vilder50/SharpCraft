@@ -28,18 +28,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Call when the constructor is done. It writes the file if auto is on
-        /// </summary>
-        protected void EndConstructor()
-        {
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
-        }
-
-        /// <summary>
         /// The type of recipe
         /// </summary>
         public string Type { get; private set; }
@@ -56,7 +44,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("recipes");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "recipes\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -109,6 +97,15 @@ namespace SharpCraft
         {
             return new DataPartTag(GetNamespacedName());
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            Type = null;
+            Group = null;
+        }
     }
 
     /// <summary>
@@ -124,13 +121,13 @@ namespace SharpCraft
         public EmptyRecipe(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the recipe
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the recipe is in
@@ -143,7 +140,7 @@ namespace SharpCraft
         /// <returns>The string used for evoking this recipe</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>
@@ -155,6 +152,20 @@ namespace SharpCraft
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
+        }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:RECIPE into an <see cref="EmptyRecipe"/>
+        /// </summary>
+        /// <param name="recipe">The string to convert</param>
+        public static implicit operator EmptyRecipe(string recipe)
+        {
+            string[] parts = recipe.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty recipe has to contain a single :");
+            }
+            return new EmptyRecipe(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
     }
 }

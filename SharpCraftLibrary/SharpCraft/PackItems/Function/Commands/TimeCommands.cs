@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <returns>time [Modifier] [Time]</returns>
         public override string GetCommandString()
         {
-            return $"time {Modifier} {Time.ToString()}";
+            return $"time {Modifier} {Time.GetTimeString()}";
         }
     }
 

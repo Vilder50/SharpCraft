@@ -12,13 +12,13 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LimitCountChange : BaseChange
     {
-        private Range limit;
+        private MCRange limit;
 
         /// <summary>
         /// Intializes a new <see cref="LimitCountChange"/>
         /// </summary>
         /// <param name="limit">The amount of items in each stack</param>
-        public LimitCountChange(Range limit) : base("limit_count")
+        public LimitCountChange(MCRange limit) : base("limit_count")
         {
             Limit = limit;
         }
@@ -27,6 +27,6 @@ namespace SharpCraft.LootObjects
         /// The amount of items in each stack
         /// </summary>
         [DataTag("limit", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-        public Range Limit { get => limit; set => limit = value ?? throw new ArgumentNullException(nameof(Limit), "Limit may not be null"); }
+        public MCRange Limit { get => limit; set => limit = value ?? throw new ArgumentNullException(nameof(Limit), "Limit may not be null"); }
     }
 }

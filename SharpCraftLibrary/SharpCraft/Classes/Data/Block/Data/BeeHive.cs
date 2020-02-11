@@ -58,8 +58,8 @@ namespace SharpCraft
             /// <summary>
             /// The position of a flower the bees should path find to
             /// </summary>
-            [DataTag("FlowerPos", "X", "Y", "Z", SharpCraft.ID.NBTTagType.TagInt)]
-            public Coords DFlowerPosition { get; set; }
+            [DataTag("FlowerPos", "X", "Y", "Z")]
+            public IntVector DFlowerPosition { get; set; }
 
             /// <summary>
             /// The entities inside the bee hive

@@ -29,18 +29,6 @@ namespace SharpCraft.AdvancementObjects
         }
 
         /// <summary>
-        /// Call when the constructor is done. It writes the file if auto is on
-        /// </summary>
-        protected void EndConstructor()
-        {
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
-        }
-
-        /// <summary>
         /// The requirements for getting the advancement
         /// </summary>
         public Requirement[] Requirements { get => requirements; set => requirements = value ?? throw new ArgumentNullException(nameof(Requirements), "Requirements may not be null"); }
@@ -57,7 +45,7 @@ namespace SharpCraft.AdvancementObjects
         protected override TextWriter GetStream()
         {
             CreateDirectory("advancements");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "advancements\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -108,6 +96,15 @@ namespace SharpCraft.AdvancementObjects
         protected void WriteEnd(TextWriter stream)
         {
             stream.Write("}");
+        }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            requirements = null;
+            Reward = null;
         }
     }
 }

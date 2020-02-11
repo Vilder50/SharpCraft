@@ -19,13 +19,13 @@ namespace SharpCraft
         public EmptyAdvancement(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the advancement
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the advancement is in
@@ -38,7 +38,21 @@ namespace SharpCraft
         /// <returns>The string used for evoking this advancement</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
+        }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:ADVANCEMENT into an <see cref="EmptyAdvancement"/>
+        /// </summary>
+        /// <param name="advancement">The string to convert</param>
+        public static implicit operator EmptyAdvancement(string advancement)
+        {
+            string[] parts = advancement.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty advancement has to contain a single :");
+            }
+            return new EmptyAdvancement(EmptyDatapack.GetPack().Namespace(parts[0]),parts[1]);
         }
     }
 }

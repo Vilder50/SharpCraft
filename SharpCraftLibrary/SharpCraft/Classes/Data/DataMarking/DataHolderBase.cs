@@ -177,13 +177,20 @@ namespace SharpCraft.Data
                                 DataHolderBase dataObject = property.GetValue(this) as DataHolderBase;
                                 if (!(convertAbleObject is null) && ((!(dataObject is null) && conversionData.Length != 0) || dataObject is null))
                                 {
-                                    if (dataTagInformation.Merge)
+                                    try
                                     {
-                                        pathAtLocation.MergeDataPartObject(convertAbleObject.GetAsDataObject(conversionData));
+                                        if (dataTagInformation.Merge)
+                                        {
+                                            pathAtLocation.MergeDataPartObject(convertAbleObject.GetAsDataObject(conversionData));
+                                        }
+                                        else
+                                        {
+                                            pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleObject.GetAsDataObject(conversionData), dataTagInformation.JsonTag));
+                                        }
                                     }
-                                    else
+                                    catch (Exception ex)
                                     {
-                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleObject.GetAsDataObject(conversionData), dataTagInformation.JsonTag));
+                                        throw new InvalidCastException($"Failed to convert {property.Name} for {GetType().FullName} into a data tag object (See inner exception)", ex);
                                     }
                                 }
                                 else if (!(dataObject is null))
@@ -199,19 +206,33 @@ namespace SharpCraft.Data
                                 }
                                 else if(!(convertAbleTag is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
+                                    try
+                                    {
+                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new InvalidCastException($"Failed to convert {property.Name} for {GetType().FullName} into a data tag (See inner exception)", ex);
+                                    }
                                 }
                                 else
                                 {
                                     pathAtLocation.AddValue(new DataPartPath(pathParts[i], new DataPartTag(data, forceType, dataTagInformation.JsonTag), dataTagInformation.JsonTag));
                                 }
                             }
-                            else if ((property.PropertyType.IsArray && forceType is null && !(data is JSON[])) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
+                            else if ((property.PropertyType.IsArray && forceType is null) || ( forceType != null && (int)forceType >= 100) || (!(convertAbleArray is null) && forceType is null))
                             {
                                 //if its an array
                                 if (!(convertAbleArray is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleArray.GetAsArray(forceType, conversionData), dataTagInformation.JsonTag));
+                                    try
+                                    {
+                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleArray.GetAsArray(forceType, conversionData), dataTagInformation.JsonTag));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new InvalidCastException($"Failed to convert {property.Name} for {GetType().FullName} into a data tag array (See inner exception)", ex);
+                                    }
                                 }
                                 else if (data.GetType().IsArray)
                                 {
@@ -227,7 +248,14 @@ namespace SharpCraft.Data
                                 //if its a data tag
                                 if (!(convertAbleTag is null))
                                 {
-                                    pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
+                                    try
+                                    {
+                                        pathAtLocation.AddValue(new DataPartPath(pathParts[i], convertAbleTag.GetAsTag(forceType, conversionData), dataTagInformation.JsonTag));
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        throw new InvalidCastException($"Failed to convert {property.Name} for {GetType().FullName} into a data tag (See inner exception)", ex);
+                                    }
                                 }
                                 else
                                 {

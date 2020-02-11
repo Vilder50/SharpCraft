@@ -14,19 +14,28 @@ namespace SharpCraft
         /// Used to add commands to the given function
         /// </summary>
         /// <param name="function">the function to give the commands to</param>
-        public delegate void FunctionCreater(Function function);
+        public delegate void FunctionWriter(Function function);
+
+        /// <summary>
+        /// Used for running things on a function when it writes a command
+        /// </summary>
+        /// <param name="file">the function file which is writing the command</param>
+        /// <param name="command">The command its writing</param>
+        public delegate void CommandWriteListener(Function file, ICommand command);
 
         private List<ICommand> commands;
 
+        private CommandWriteListener writeCommandListener;
+
         /// <summary>
-        /// Intializes a new <see cref="Function"/> with the given values
+        /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
         /// </summary>
         /// <param name="space">The namespace the function is in</param>
         /// <param name="fileName">The name of the function</param>
         /// <param name="writeSetting">The setting for writing the file</param>
-        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected Function(bool _, BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
         {
-            CreateDirectory("functions");
             if (IsAuto())
             {
                 StreamWriter = GetStream();
@@ -40,6 +49,25 @@ namespace SharpCraft
             Custom = new FunctionWriters.CustomCommands(this);
 
             Commands = new List<ICommand>();
+        }
+
+        /// <summary>
+        /// Intializes a new <see cref="Function"/> with the given values
+        /// </summary>
+        /// <param name="space">The namespace the function is in</param>
+        /// <param name="fileName">The name of the function</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, space, fileName, writeSetting)
+        {
+            FinishedConstructing();
+        }
+
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected override void FinishedConstructing()
+        {
+            PackNamespace.AddFile(this);
         }
 
         /// <summary>
@@ -86,6 +114,8 @@ namespace SharpCraft
                     {
                         break;
                     }
+
+                    writeCommandListener?.Invoke(this, commands[i]);
                     string commandString = commands[i].GetCommandString();
                     if (!(commandString is null))
                     {
@@ -111,51 +141,43 @@ namespace SharpCraft
         /// <returns>the streamwriter to use</returns>
         protected override TextWriter GetStream()
         {
+            CreateDirectory("functions");
             if (StreamWriter is null)
             {
-                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + FileName + ".mcfunction");
+                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + WritePath + ".mcfunction");
             }
             return StreamWriter;
         }
 
         /// <summary>
-        /// Returns the namespace path of this <see cref="Function"/>
-        /// </summary>
-        /// <returns>this <see cref="Function"/>'s name</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
-        }
-
-        /// <summary>
         /// Commands run on blocks
         /// </summary>
-        public FunctionWriters.BlockCommands Block;
+        public FunctionWriters.BlockCommands Block { get; private set; }
 
         /// <summary>
         /// Commands run on entities
         /// </summary>
-        public FunctionWriters.EntityCommands Entity;
+        public FunctionWriters.EntityCommands Entity { get; private set; }
 
         /// <summary>
         /// Execute commands
         /// </summary>
-        public FunctionWriters.ExecuteCommands Execute;
+        public FunctionWriters.ExecuteCommands Execute { get; private set; }
 
         /// <summary>
         /// Commands run on players
         /// </summary>
-        public FunctionWriters.PlayerCommands Player;
+        public FunctionWriters.PlayerCommands Player { get; private set; }
 
         /// <summary>
         /// Commands run on the world
         /// </summary>
-        public FunctionWriters.WorldCommands World;
+        public FunctionWriters.WorldCommands World { get; private set; }
 
         /// <summary>
         /// Custom commands to make life easier
         /// </summary>
-        public FunctionWriters.CustomCommands Custom;
+        public FunctionWriters.CustomCommands Custom { get; private set; }
 
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
@@ -166,18 +188,14 @@ namespace SharpCraft
         public Function NewChild(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             string functionName = name;
-            if (string.IsNullOrWhiteSpace(functionName))
+            if (name is null)
             {
-                if (PackNamespace is PackNamespace space)
-                {
-                    functionName = space.NextFileID.ToString();
-                }
-                else
-                {
-                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
-                }
+                return new Function(PackNamespace, null, writeSetting);
             }
-            return new Function(PackNamespace, FileName + "\\" + functionName.ToLower(), writeSetting);
+            else
+            {
+                return new Function(PackNamespace, FileId + "\\" + functionName.ToLower(), writeSetting);
+            }
         }
         /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name and commands
@@ -186,7 +204,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string name, FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewChild(name, writeSetting);
             creater(function);
@@ -198,7 +216,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewChild((string)null, writeSetting);
             creater(function);
@@ -213,25 +231,20 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            string functionName = name;
-            if (string.IsNullOrWhiteSpace(functionName))
+            if (FileId.Contains("\\"))
             {
-                if (PackNamespace is PackNamespace space)
+                if (name is null)
                 {
-                    functionName = space.NextFileID.ToString();
+                    return new Function(PackNamespace, null, writeSetting);
                 }
                 else
                 {
-                    throw new InvalidOperationException("Cannot create function without a name without the namespace being a PackNamespace");
+                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
                 }
-            }
-            if (FileName.Contains("\\"))
-            {
-                return new Function(PackNamespace, FileName.Substring(0, FileName.LastIndexOf("\\") + 1) + functionName.ToLower(), writeSetting);
             }
             else
             {
-                return new Function(PackNamespace, functionName.ToLower(), writeSetting);
+                return new Function(PackNamespace, name?.ToLower(), writeSetting);
             }
         }
         /// <summary>
@@ -241,7 +254,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(string name, FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewSibling(name, writeSetting);
             creater(function);
@@ -253,11 +266,20 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(FunctionCreater creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewSibling((string)null, writeSetting);
             creater(function);
             return function;
+        }
+
+        /// <summary>
+        /// Adds a listener to this file which will be called when the file writes a new command
+        /// </summary>
+        /// <param name="listener">The listener to add</param>
+        public void AddCommandListener(CommandWriteListener listener)
+        {
+            writeCommandListener += listener ?? throw new ArgumentNullException(nameof(listener), "File dispose listener may not be null.");
         }
 
         /// <summary>
@@ -267,6 +289,7 @@ namespace SharpCraft
         {
             if (!Disposed)
             {
+                disposeListener?.Invoke(this);
                 GetStream();
                 WriteFile(StreamWriter);
                 AfterDispose();
@@ -283,12 +306,38 @@ namespace SharpCraft
         {
             for (int i = 0; i < commands.Count; i++)
             {
+                writeCommandListener?.Invoke(this, commands[i]);
                 string command = commands[i].GetCommandString();
                 if (!(command is null))
                 {
                     stream.WriteLine(command);
                 }
             }
+        }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            commands = null;
+            Block = null;
+            Entity = null;
+            Custom = null;
+            Execute = null;
+            World = null;
+            Player = null;
+        }
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new Data.DataPartTag(GetNamespacedName());
         }
     }
 
@@ -304,14 +353,14 @@ namespace SharpCraft
         /// <param name="name">The name of the function</param>
         public EmptyFunction(BasePackNamespace packNamespace, string name)
         {
-            FileName = name;
+            FileId = name;
             PackNamespace = packNamespace;
         }
 
         /// <summary>
         /// The name of the function
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the function is in
@@ -324,7 +373,7 @@ namespace SharpCraft
         /// <returns>The string used for running this function</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
         }
 
         /// <summary>
@@ -335,6 +384,29 @@ namespace SharpCraft
             get => GetNamespacedName();
         }
 
-        //TODO make way to convert from string into this
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:FUNCTION into an <see cref="EmptyFunction"/>
+        /// </summary>
+        /// <param name="function">The string to convert</param>
+        public static implicit operator EmptyFunction(string function)
+        {
+            string[] parts = function.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new InvalidCastException("String for creating empty function has to contain a single :");
+            }
+            return new EmptyFunction(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new Data.DataPartTag(GetNamespacedName());
+        }
     }
 }

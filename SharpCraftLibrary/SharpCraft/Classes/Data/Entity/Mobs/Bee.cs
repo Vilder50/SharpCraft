@@ -19,14 +19,14 @@ namespace SharpCraft
             /// <summary>
             /// The location of the bee's hive
             /// </summary>
-            [DataTag("HivePos", "X", "Y", "Z", ID.NBTTagType.TagInt)]
-            public Coords HivePosition { get; set; }
+            [DataTag("HivePos", "X", "Y", "Z")]
+            public IntVector HivePosition { get; set; }
 
             /// <summary>
             /// The location of the flower the bee should fly around
             /// </summary>
-            [DataTag("FlowerPos", "X", "Y", "Z", ID.NBTTagType.TagInt)]
-            public Coords FlowerPosition { get; set; }
+            [DataTag("FlowerPos", "X", "Y", "Z")]
+            public IntVector FlowerPosition { get; set; }
 
             /// <summary>
             /// If the bee has pollen

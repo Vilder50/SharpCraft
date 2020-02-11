@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The amount of entities killed
         /// </summary>
         [DataTag("conditions.unique_entity_types", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public Range Kills { get; set; }
+        public MCRange Kills { get; set; }
     }
 }

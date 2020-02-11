@@ -11,13 +11,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecutePositionedAs : BaseExecuteCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="ExecutePositionedAs"/> command
         /// </summary>
         /// <param name="selector">The selector for selecting the entity whose position to use for executing</param>
-        public ExecutePositionedAs(Selector selector)
+        public ExecutePositionedAs(BaseSelector selector)
         {
             Selector = selector;
         }
@@ -25,7 +25,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The selector for selecting the entity whose position to use for executing
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <returns>positioned as [selector]</returns>
         protected override string GetExecutePart()
         {
-            return "positioned as " + Selector;
+            return "positioned as " + Selector.GetSelectorString();
         }
     }
 }

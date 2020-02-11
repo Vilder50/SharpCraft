@@ -84,8 +84,8 @@ namespace SharpCraft
             /// <summary>
             /// The location the mob is leashed to
             /// </summary>
-            [Data.DataTag("Leash","X","Y","Z", ID.NBTTagType.TagInt)]
-            public Coords LeashCoords { get; set; }
+            [Data.DataTag("Leash","X","Y","Z")]
+            public IntVector LeashCoords { get; set; }
             /// <summary>
             /// The <see cref="UUID"/> of the leash
             /// </summary>
@@ -121,10 +121,10 @@ namespace SharpCraft
             [Data.DataTag]
             public Effect[] ActiveEffects { get; set; }
             /// <summary>
-            /// The <see cref="MCAttribute"/>s the mob has
+            /// The attributes the mob has
             /// </summary>
             [Data.DataTag]
-            public MCAttribute[] Attributes { get; set; }
+            public EntityAttribute[] Attributes { get; set; }
         }
 
         /// <summary>

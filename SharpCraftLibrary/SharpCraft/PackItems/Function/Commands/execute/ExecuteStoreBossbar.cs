@@ -48,7 +48,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar [Bossbar] [StoreAsValue]</returns>
         protected override string GetStorePart()
         {
-            return "bossbar " + Bossbar + " " + (StoreAsValue ? "value" : "max");
+            return "bossbar " + Bossbar.GetFullName() + " " + (StoreAsValue ? "value" : "max");
         }
     }
 }

@@ -34,7 +34,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         public class Attribute : DataHolderBase
         {
-            private Range valueRange;
+            private MCRange valueRange;
 
             /// <summary>
             /// Intializes a new <see cref="Attribute"/>
@@ -43,7 +43,7 @@ namespace SharpCraft.LootObjects
             /// <param name="operation">The attribute operation to use</param>
             /// <param name="value">The value to use in the operation</param>
             /// <param name="slot">Choses a random slot from the array the attribute effect works in</param>
-            public Attribute(ID.AttributeType type, ID.AttributeOperation operation, Range value, ID.AttributeSlot[] slot)
+            public Attribute(ID.AttributeType type, ID.AttributeOperation operation, MCRange value, ID.AttributeSlot[] slot)
             {
                 Type = type;
                 Operation = operation;
@@ -58,7 +58,7 @@ namespace SharpCraft.LootObjects
             /// <param name="operation">The attribute operation to use</param>
             /// <param name="value">The value to use in the operation</param>
             /// <param name="slot">The slot the attribute effect works in</param>
-            public Attribute(ID.AttributeType type, ID.AttributeOperation operation, Range value, ID.AttributeSlot slot)
+            public Attribute(ID.AttributeType type, ID.AttributeOperation operation, MCRange value, ID.AttributeSlot slot)
             {
                 Type = type;
                 Operation = operation;
@@ -87,8 +87,8 @@ namespace SharpCraft.LootObjects
             /// <summary>
             /// The value to use in the operation
             /// </summary>
-            [DataTag("amount", "min", "max", ID.NBTTagType.TagFloat, true, JsonTag = true)]
-            public Range Value { get => valueRange; set => valueRange = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
+            [DataTag("amount", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
+            public MCRange Value { get => valueRange; set => valueRange = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
 
             /// <summary>
             /// The UUID of the attribute. Leave empty to generate random one

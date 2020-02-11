@@ -14,7 +14,7 @@ namespace SharpCraft
         /// <summary>
         /// The file name of the loot table
         /// </summary>
-        string FileName { get; }
+        string FileId { get; }
 
         /// <summary>
         /// The namespace the loot table is in

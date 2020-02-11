@@ -30,16 +30,25 @@ namespace SharpCraft
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : base(path, packName, fileCreator)
+        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : this(path, packName, description, packFormat, fileCreator, true)
         {
-            if (!File.Exists(Path + "\\" + Name + "\\pack.mcmeta"))
-            {
-                FileCreator.CreateDirectory(Path + "\\" + Name);
-                using (TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta"))
-                {
-                    metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
-                }
-            }
+            FinishedConstructing();
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="Datapack"/> with the given parameters. Inherite from this constructor.
+        /// </summary>
+        /// <param name="path">The path to the folder to create this datapack in</param>
+        /// <param name="packName">The datapack's name</param>
+        /// <param name="description">The datapack's description</param>
+        /// <param name="packFormat">The datapack's format</param>
+        /// <param name="fileCreator">Class for creating files and directories</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, bool _) : base(path, packName, fileCreator)
+        {
+            FileCreator.CreateDirectory(Path + "\\" + Name);
+            using TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta");
+            metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
         }
 
         /// <summary>
@@ -66,12 +75,24 @@ namespace SharpCraft
     /// </summary>
     public class EmptyDatapack : BaseDatapack
     {
+        private static EmptyDatapack emptyPack;
+
+        /// <summary>
+        /// Returns an empty datapack
+        /// </summary>
+        /// <returns>An empty datapack</returns>
+        public static EmptyDatapack GetPack()
+        {
+            emptyPack ??= new EmptyDatapack("vanilla", false);
+            return emptyPack;
+        }
+
         /// <summary>
         /// Intializes a new <see cref="EmptyDatapack"/>
         /// </summary>
         /// <param name="name">The name of the datapack</param>
         /// <param name="fileDatapack">True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
-        public EmptyDatapack(string name, bool fileDatapack = true) : base("a", name)
+        public EmptyDatapack(string name, bool fileDatapack = true) : base("NoneExistingPath", name)
         {
             FileDatapack = fileDatapack;
         }
@@ -79,7 +100,7 @@ namespace SharpCraft
         /// <summary>
         /// The name of the datapack used for refering to the datapack in game
         /// </summary>
-        public new string IngameName
+        public override string IngameName
         {
             get
             {

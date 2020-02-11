@@ -55,14 +55,14 @@ namespace SharpCraft
             /// <summary>
             /// The location relative to the structure block to load/save the structure
             /// </summary>
-            [Data.DataTag((object)"posX","posY","posZ",SharpCraft.ID.NBTTagType.TagInt, Merge = true)]
-            public Coords DCoords { get; set; }
+            [Data.DataTag((object)"posX","posY","posZ", Merge = true)]
+            public IntVector DCoords { get; set; }
 
             /// <summary>
             /// The size of the structure to save
             /// </summary>
-            [Data.DataTag((object)"sizeX", "sizeY", "sizeZ", SharpCraft.ID.NBTTagType.TagInt, Merge = true)]
-            public Coords DSize { get; set; }
+            [Data.DataTag((object)"sizeX", "sizeY", "sizeZ", Merge = true)]
+            public IntVector DSize { get; set; }
 
             /// <summary>
             /// The way the structure is rotated when loaded

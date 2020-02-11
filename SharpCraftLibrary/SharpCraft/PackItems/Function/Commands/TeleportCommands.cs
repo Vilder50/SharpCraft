@@ -11,15 +11,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToCommand : BaseCommand
     {
-        private Coords coordinates;
-        private Selector selector;
+        private Vector coordinates;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToCommand"/>
         /// </summary>
         /// <param name="coordinates">The place to teleport the entities to</param>
         /// <param name="selector">Selector selecting the entities to teleport</param>
-        public TeleportToCommand(Coords coordinates, Selector selector)
+        public TeleportToCommand(Vector coordinates, BaseSelector selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -28,12 +28,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The place to teleport the entities to
         /// </summary>
-        public Coords Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
+        public Vector Coordinates { get => coordinates; set => coordinates = value ?? throw new ArgumentNullException(nameof(Coordinates), "Coordinates may not be null"); }
 
         /// <summary>
         /// Selector selecting the entities to teleport
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -41,7 +41,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates]</returns>
         public override string GetCommandString()
         {
-            return $"tp {Selector} {Coordinates}";
+            return $"tp {Selector.GetSelectorString()} {Coordinates.GetVectorString()}";
         }
     }
 
@@ -50,15 +50,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToEntityCommand : BaseCommand
     {
-        private Selector selector;
-        private Selector toSelector;
+        private BaseSelector selector;
+        private BaseSelector toSelector;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToEntityCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the entities to teleport</param>
         /// <param name="toSelector">The entity to teleport to</param>
-        public TeleportToEntityCommand(Selector selector, Selector toSelector)
+        public TeleportToEntityCommand(BaseSelector selector, BaseSelector toSelector)
         {
             Selector = selector;
             ToSelector = toSelector;
@@ -67,12 +67,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entities to teleport
         /// </summary>
-        public Selector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
+        public BaseSelector Selector { get => selector; set => selector = value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null"); }
 
         /// <summary>
         /// The entity to teleport to
         /// </summary>
-        public Selector ToSelector
+        public BaseSelector ToSelector
         {
             get => toSelector;
             set
@@ -91,7 +91,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [ToSelector]</returns>
         public override string GetCommandString()
         {
-            return $"tp {Selector} {ToSelector}";
+            return $"tp {Selector.GetSelectorString()} {ToSelector.GetSelectorString()}";
         }
     }
 
@@ -100,7 +100,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToFacingCommand : TeleportToCommand
     {
-        private Coords facingCoordinates;
+        private Vector facingCoordinates;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToFacingCommand"/>
@@ -108,7 +108,7 @@ namespace SharpCraft.Commands
         /// <param name="coordinates">The place to teleport the entities to</param>
         /// <param name="selector">Selector selecting the entities to teleport</param>
         /// <param name="facingCoordinates">The coordinates the entities will be facing after teleporting</param>
-        public TeleportToFacingCommand(Coords coordinates, Selector selector, Coords facingCoordinates) : base(coordinates, selector)
+        public TeleportToFacingCommand(Vector coordinates, BaseSelector selector, Vector facingCoordinates) : base(coordinates, selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -118,7 +118,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates the entities will be facing after teleporting
         /// </summary>
-        public Coords FacingCoordinates { get => facingCoordinates; set => facingCoordinates = value ?? throw new ArgumentNullException(nameof(FacingCoordinates), "FacingCoordinates may not be null"); }
+        public Vector FacingCoordinates { get => facingCoordinates; set => facingCoordinates = value ?? throw new ArgumentNullException(nameof(FacingCoordinates), "FacingCoordinates may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -126,7 +126,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] facing [FacingCoordinates]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} facing {FacingCoordinates}";
+            return $"{base.GetCommandString()} facing {FacingCoordinates.GetVectorString()}";
         }
     }
 
@@ -135,7 +135,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToFacingEntityCommand : TeleportToCommand
     {
-        private Selector facingSelector;
+        private BaseSelector facingSelector;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToFacingEntityCommand"/>
@@ -144,7 +144,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting the entities to teleport</param>
         /// <param name="facingSelector">The entity the other entities should face when teleported</param>
         /// <param name="anchor">The part of the entity to face</param>
-        public TeleportToFacingEntityCommand(Coords coordinates, Selector selector, Selector facingSelector, ID.FacingAnchor anchor) : base(coordinates, selector)
+        public TeleportToFacingEntityCommand(Vector coordinates, BaseSelector selector, BaseSelector facingSelector, ID.FacingAnchor anchor) : base(coordinates, selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -155,7 +155,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The entity the other entities should face when teleported
         /// </summary>
-        public Selector FacingSelector
+        public BaseSelector FacingSelector
         {
             get => facingSelector;
             set
@@ -179,7 +179,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] facing entity [FacingSelector] [Anchor]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} facing entity {FacingSelector} {Anchor}";
+            return $"{base.GetCommandString()} facing entity {FacingSelector.GetSelectorString()} {Anchor}";
         }
     }
 
@@ -196,7 +196,7 @@ namespace SharpCraft.Commands
         /// <param name="coordinates">The place to teleport the entities to</param>
         /// <param name="selector">Selector selecting the entities to teleport</param>
         /// <param name="rotation">The rotation the entites gets after being teleported</param>
-        public TeleportToRotationCommand(Coords coordinates, Selector selector, Rotation rotation) : base(coordinates, selector)
+        public TeleportToRotationCommand(Vector coordinates, BaseSelector selector, Rotation rotation) : base(coordinates, selector)
         {
             Coordinates = coordinates;
             Selector = selector;
@@ -214,7 +214,7 @@ namespace SharpCraft.Commands
         /// <returns>tp [Selector] [Coordinates] [Rotation]</returns>
         public override string GetCommandString()
         {
-            return $"{base.GetCommandString()} {Rotation}";
+            return $"{base.GetCommandString()} {Rotation.GetRotationString()}";
         }
     }
 }

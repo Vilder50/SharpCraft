@@ -18,13 +18,13 @@ namespace SharpCraft
             /// <summary>
             /// The location of the turtles home
             /// </summary>
-            [Data.DataTag((object)"HomePosX","HomePosY","HomePosZ",ID.NBTTagType.TagInt, Merge = true)]
-            public Coords HomePos { get; set; }
+            [Data.DataTag((object)"HomePosX","HomePosY","HomePosZ", Merge = true)]
+            public IntVector HomePos { get; set; }
             /// <summary>
             /// The location the turtle is traveling to
             /// </summary>
-            [Data.DataTag((object)"TravelPosX", "TravelPosY", "TravelPosZ", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords TravelPos { get; set; }
+            [Data.DataTag((object)"TravelPosX", "TravelPosY", "TravelPosZ", Merge = true)]
+            public IntVector TravelPos { get; set; }
             /// <summary>
             /// True if the turtle has eggs
             /// </summary>

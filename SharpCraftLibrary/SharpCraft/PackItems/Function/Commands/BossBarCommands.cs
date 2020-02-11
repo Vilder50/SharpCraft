@@ -12,14 +12,14 @@ namespace SharpCraft.Commands
     public class BossBarAddCommand : BaseCommand
     {
         private BossBar bossBar;
-        private JSON[] name;
+        private JsonText name;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarAddCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to add</param>
         /// <param name="name">The shown name of the boss bar</param>
-        public BossBarAddCommand(BossBar bossBar, JSON[] name)
+        public BossBarAddCommand(BossBar bossBar, JsonText name)
         {
             BossBar = bossBar;
             Name = name;
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The shown name of the boss bar
         /// </summary>
-        public JSON[] Name
+        public JsonText Name
         {
             get => name;
             set
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar add [Bossbar] [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar add {BossBar.ToString()} {Name.GetString()}";
+            return $"bossbar add {BossBar.GetFullName()} {Name.GetJsonString()}";
         }
     }
 
@@ -100,7 +100,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar add [Bossbar] [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar get {BossBar.ToString()} {GetValue}";
+            return $"bossbar get {BossBar.GetFullName()} {GetValue}";
         }
     }
 
@@ -153,7 +153,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar remove [Bossbar]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar remove {BossBar.ToString()}";
+            return $"bossbar remove {BossBar.GetFullName()}";
         }
     }
 
@@ -198,7 +198,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] color [Color]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} color {Color}";
+            return $"bossbar set {BossBar.GetFullName()} color {Color}";
         }
     }
 
@@ -255,7 +255,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] max [MaxValue]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} max {MaxValue}";
+            return $"bossbar set {BossBar.GetFullName()} max {MaxValue}";
         }
     }
 
@@ -312,7 +312,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] value [Value]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} value {Value}";
+            return $"bossbar set {BossBar.GetFullName()} value {Value}";
         }
     }
 
@@ -322,14 +322,14 @@ namespace SharpCraft.Commands
     public class BossBarChangeNameCommand : BaseCommand
     {
         private BossBar bossBar;
-        private JSON[] name;
+        private JsonText name;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangeNameCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change the name of</param>
         /// <param name="name">The name the bar should change to</param>
-        public BossBarChangeNameCommand(BossBar bossBar, JSON[] name)
+        public BossBarChangeNameCommand(BossBar bossBar, JsonText name)
         {
             BossBar = bossBar;
             Name = name;
@@ -350,7 +350,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The name the bar should change to
         /// </summary>
-        public JSON[] Name
+        public JsonText Name
         {
             get => name;
             set
@@ -365,7 +365,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] name [Name]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} name {Name.GetString()}";
+            return $"bossbar set {BossBar.GetFullName()} name {Name.GetJsonString()}";
         }
     }
 
@@ -375,14 +375,14 @@ namespace SharpCraft.Commands
     public class BossBarChangePlayersCommand : BaseCommand
     {
         private BossBar bossBar;
-        private Selector selector;
+        private BaseSelector selector;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangePlayersCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change the name of</param>
         /// <param name="selector">Selector selecting players who should see the bar</param>
-        public BossBarChangePlayersCommand(BossBar bossBar, Selector selector)
+        public BossBarChangePlayersCommand(BossBar bossBar, BaseSelector selector)
         {
             BossBar = bossBar;
             Selector = selector;
@@ -403,7 +403,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players who should see the bar
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -418,7 +418,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] players [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} players {Selector.ToString()}";
+            return $"bossbar set {BossBar.GetFullName()} players {Selector.GetSelectorString()}";
         }
     }
 
@@ -463,7 +463,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] style [Style]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} style {Style}";
+            return $"bossbar set {BossBar.GetFullName()} style {Style}";
         }
     }
 
@@ -508,7 +508,7 @@ namespace SharpCraft.Commands
         /// <returns>bossbar set [Bossbar] visible [Visible]</returns>
         public override string GetCommandString()
         {
-            return $"bossbar set {BossBar.ToString()} visible {Visible.ToMinecraftBool()}";
+            return $"bossbar set {BossBar.GetFullName()} visible {Visible.ToMinecraftBool()}";
         }
     }
 }

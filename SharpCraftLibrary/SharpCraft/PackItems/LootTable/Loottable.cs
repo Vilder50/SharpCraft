@@ -50,6 +50,21 @@ namespace SharpCraft
         private List<LootPool> pools;
 
         /// <summary>
+        /// Intializes a new <see cref="LootTable"/> with the given parameters. Inherite from this constructor.
+        /// </summary>
+        /// <param name="packNamespace">The namespace the loot table is in</param>
+        /// <param name="fileName">The name of the loot table file</param>
+        /// <param name="writeSetting">The settings for how to write this file</param>
+        /// <param name="pools">The loot pools in the loot table</param>
+        /// <param name="type">The type of loot table</param>
+        /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        protected LootTable(bool _, BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting, "loot_table")
+        {
+            Type = type;
+            Pools = pools.ToList();
+        }
+
+        /// <summary>
         /// Intializes a new <see cref="LootTable"/> with the given parameters
         /// </summary>
         /// <param name="packNamespace">The namespace the loot table is in</param>
@@ -57,15 +72,9 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="pools">The loot pools in the loot table</param>
         /// <param name="type">The type of loot table</param>
-        public LootTable(BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting, "loot_table")
+        public LootTable(BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : this(true, packNamespace, fileName, pools, type, writeSetting)
         {
-            Type = type;
-            Pools = pools.ToList();
-            if (IsAuto())
-            {
-                WriteFile(GetStream());
-                Dispose();
-            }
+            FinishedConstructing();
         }
 
         /// <summary>
@@ -79,15 +88,6 @@ namespace SharpCraft
         public List<LootPool> Pools { get => pools; set => pools = value ?? throw new System.ArgumentNullException(nameof(Pools), "Pools may not be null"); }
 
         /// <summary>
-        /// Returns the namespace path of this <see cref="LootTable"/>
-        /// </summary>
-        /// <returns>this <see cref="LootTable"/>'s name</returns>
-        public override string ToString()
-        {
-            return GetNamespacedName();
-        }
-
-        /// <summary>
         /// Converts this loot table into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">Not in use</param>
@@ -95,7 +95,7 @@ namespace SharpCraft
         /// <returns>the made <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
         {
-            return new DataPartTag(ToString());
+            return new DataPartTag(GetNamespacedName());
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("loot_tables");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + FileName + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + WritePath + ".json");
         }
 
         /// <summary>
@@ -129,6 +129,14 @@ namespace SharpCraft
             }
             stream.Write("\"pools\":[" + string.Join(",", StringPools) + "]}");
         }
+
+        /// <summary>
+        /// Clears the things in the file.
+        /// </summary>
+        protected override void AfterDispose()
+        {
+            pools = null;
+        }
     }
 
     /// <summary>
@@ -144,13 +152,13 @@ namespace SharpCraft
         public EmptyLoottable(BasePackNamespace packNamespace, string fileName)
         {
             PackNamespace = packNamespace;
-            FileName = fileName;
+            FileId = fileName;
         }
 
         /// <summary>
         /// The name of the loot table
         /// </summary>
-        public string FileName { get; private set; }
+        public string FileId { get; private set; }
 
         /// <summary>
         /// The namespace the loot table is in
@@ -163,7 +171,21 @@ namespace SharpCraft
         /// <returns>The string used for evoking this loot table</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + FileName;
+            return PackNamespace.Name + ":" + FileId;
+        }
+
+        /// <summary>
+        /// Converts a string of the format NAMESPACE:LOOTTABLE into an <see cref="EmptyLoottable"/>
+        /// </summary>
+        /// <param name="loottable">The string to convert</param>
+        public static implicit operator EmptyLoottable(string loottable)
+        {
+            string[] parts = loottable.Split(':');
+            if (parts.Length != 2)
+            {
+                throw new System.InvalidCastException("String for creating empty loottable has to contain a single :");
+            }
+            return new EmptyLoottable(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
     }
 }

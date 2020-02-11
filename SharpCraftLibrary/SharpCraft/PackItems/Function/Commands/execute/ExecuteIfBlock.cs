@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfBlock : BaseExecuteIfCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private Block block;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="coordinates">The coordinates of the block to check for</param>
         /// <param name="block">The block to check for</param>
         /// <param name="executeIf">True to use execute if and false to use execute unless the given thing is true</param>
-        public ExecuteIfBlock(Coords coordinates, Block block, bool executeIf = true) : base(executeIf)
+        public ExecuteIfBlock(Vector coordinates, Block block, bool executeIf = true) : base(executeIf)
         {
             Coordinates = coordinates;
             Block = block;
@@ -29,7 +29,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The coordinates of the block to check for
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -56,7 +56,7 @@ namespace SharpCraft.Commands
         /// <returns>block [Coordinates] [Block]</returns>
         protected override string GetCheckPart()
         {
-            return "block " + Coordinates + " " + Block;
+            return "block " + Coordinates.GetVectorString() + " " + Block.GetBlockPlacementString();
         }
     }
 }

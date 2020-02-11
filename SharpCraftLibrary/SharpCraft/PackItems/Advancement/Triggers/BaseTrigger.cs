@@ -73,6 +73,15 @@ namespace SharpCraft.AdvancementObjects
         {
             return new Requirement[] { new Requirement(new BaseTrigger[] { trigger }) };
         }
+
+        /// <summary>
+        /// Converts a <see cref="BaseTrigger"/> into a <see cref="Requirement"/>
+        /// </summary>
+        /// <param name="trigger">The <see cref="BaseTrigger"/> to convert</param>
+        public static implicit operator Requirement(BaseTrigger trigger)
+        {
+            return new Requirement(new BaseTrigger[] { trigger });
+        }
     }
 
     /// <summary>

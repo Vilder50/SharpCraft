@@ -19,8 +19,8 @@ namespace SharpCraft
             /// <summary>
             /// The coords of the block
             /// </summary>
-            [Data.DataTag((object)"xTile", "yTile", "zTile", ID.NBTTagType.TagInt, Merge = true)]
-            public Coords TileCoords { get; set; }
+            [Data.DataTag((object)"xTile", "yTile", "zTile", Merge = true)]
+            public IntVector TileCoords { get; set; }
 
             /// <summary>
             /// The block this projectile is in

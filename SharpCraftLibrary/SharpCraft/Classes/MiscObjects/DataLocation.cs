@@ -28,7 +28,7 @@ namespace SharpCraft
     /// </summary>
     public class BlockDataLocation : IDataLocation
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private string dataPath;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="coordinates">The location of the block holding the data</param>
         /// <param name="dataPath">The path to the data to get</param>
-        public BlockDataLocation(Coords coordinates, string dataPath)
+        public BlockDataLocation(Vector coordinates, string dataPath)
         {
             Coordinates = coordinates;
             DataPath = dataPath;
@@ -45,7 +45,7 @@ namespace SharpCraft
         /// <summary>
         /// The location of the block holding the data
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"block {Coordinates.ToString()} {DataPath}";
+            return $"block {Coordinates.GetVectorString()} {DataPath}";
         }
     }
 
@@ -85,7 +85,7 @@ namespace SharpCraft
     /// </summary>
     public class EntityDataLocation : IDataLocation
     {
-        private Selector selector;
+        private BaseSelector selector;
         private string dataPath;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="selector">Selector selecting the entity holding the data</param>
         /// <param name="dataPath">The path to the data to get</param>
-        public EntityDataLocation(Selector selector, string dataPath)
+        public EntityDataLocation(BaseSelector selector, string dataPath)
         {
             Selector = selector;
             DataPath = dataPath;
@@ -102,7 +102,7 @@ namespace SharpCraft
         /// <summary>
         /// Selector selecting the entity holding the data
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -137,7 +137,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"entity {Selector.ToString()} {DataPath}";
+            return $"entity {Selector.GetSelectorString()} {DataPath}";
         }
     }
 
@@ -194,7 +194,7 @@ namespace SharpCraft
         /// <returns>A string used in commands for getting the data</returns>
         public string GetLocationString()
         {
-            return $"storage {Storage.ToString()} {DataPath}";
+            return $"storage {Storage.GetNamespacedName()} {DataPath}";
         }
     }
 }

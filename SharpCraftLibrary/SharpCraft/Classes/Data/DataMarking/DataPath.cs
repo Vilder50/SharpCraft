@@ -156,7 +156,7 @@ namespace SharpCraft.Data
                     fullPath += "[";
                     if (!(conditions is null) && !(conditions[i] is null) && conditions[i].Type != DataPathCondition.ConditionType.Data)
                     {
-                        fullPath += conditions[i];
+                        fullPath += conditions[i].GetConditionString();
                     }
                     fullPath += "]";
                 }
@@ -165,7 +165,7 @@ namespace SharpCraft.Data
             {
                 if (!(conditions is null) && conditions.Length > 0 && !(conditions[0] is null))
                 {
-                    fullPath += conditions[0];
+                    fullPath += conditions[0].GetConditionString();
                 }
             }
 
@@ -299,7 +299,7 @@ namespace SharpCraft.Data
         /// Gets the condition as a string used in Minecraft
         /// </summary>
         /// <returns>a string used in Minecraft</returns>
-        public override string ToString()
+        public string GetConditionString()
         {
             return rawData ?? data?.GetDataString() ?? index.ToString();
         }

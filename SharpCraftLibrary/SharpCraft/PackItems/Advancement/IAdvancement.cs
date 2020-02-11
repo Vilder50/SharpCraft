@@ -14,7 +14,7 @@ namespace SharpCraft
         /// <summary>
         /// The file name of the advancement
         /// </summary>
-        string FileName { get; }
+        string FileId { get; }
 
         /// <summary>
         /// The namespace the advancement is in

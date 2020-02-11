@@ -16,15 +16,28 @@ namespace SharpCraft.Tests.PackItems
         {
             public DatapackTestClass(string path, string name) : base(path, name)
             {
-                
+                FinishedConstructing();
             }
         }
 
         class NamespaceTestClass : BasePackNamespace
         {
+            private int nextId = 0;
+
             public NamespaceTestClass(BaseDatapack datapack, string name) : base(datapack, name)
             {
 
+            }
+
+            public override string GetID(object getIdFor)
+            {
+                nextId++;
+                return nextId.ToString();
+            }
+
+            public void AddSetting(INamespaceSetting setting)
+            {
+                settings.Add(setting);
             }
         }
 
@@ -35,7 +48,12 @@ namespace SharpCraft.Tests.PackItems
 
             public BaseFileTestClass(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "filetest")
             {
+                FinishedConstructing();
+            }
 
+            protected override void FinishedConstructing()
+            {
+                PackNamespace.AddFile(this);
             }
 
             protected override void WriteFile(TextWriter stream)
@@ -64,9 +82,21 @@ namespace SharpCraft.Tests.PackItems
             using (BaseFile file = new BaseFileTestClass(packNamespace, "My/File", BaseFile.WriteSetting.Auto))
             {
                 //test
-                Assert.AreEqual("my\\file", file.FileName, "file name is not getting set by constructor");
+                Assert.AreEqual("my\\file", file.FileId, "file name is not getting set by constructor");
                 Assert.AreEqual(packNamespace, file.PackNamespace, "Packnamespace is not getting set by the constructor");
-                Assert.AreEqual(file, packNamespace.GetFile("filetest", file.FileName), "Constructor is not adding the file to the namespace");
+                Assert.AreEqual(file, packNamespace.GetFile("filetest", file.FileId), "Constructor is not adding the file to the namespace");
+            }
+
+            using (BaseFile file = new BaseFileTestClass(packNamespace, null, BaseFile.WriteSetting.Auto))
+            {
+                Assert.AreEqual("1", file.FileId, "file name wasn't generated correctly");
+            }
+
+            packNamespace.AddSetting(new NamespaceSettings().GenerateNames());
+            using (BaseFile file = new BaseFileTestClass(packNamespace, "folder\\ignored-name", BaseFile.WriteSetting.Auto))
+            {
+                Assert.AreEqual("2", file.WritePath, "writepath wasn't forced to be generated");
+                Assert.AreEqual("folder\\ignored-name", file.FileId, "filename wasn't kept after forced path generation");
             }
         }
 
@@ -105,6 +135,24 @@ namespace SharpCraft.Tests.PackItems
             BaseFileTestClass.WriterToUse = new StringWriter();
             auto.Dispose();
             Assert.AreEqual("", ((StringWriter)BaseFileTestClass.WriterToUse).GetStringBuilder().ToString(), "File is an Auto file and shouldn't write after being disposed");
+        }
+
+        [TestMethod]
+        public void TestDisposeListener()
+        {
+            //test
+            bool disposed = false;
+            BaseFile onDispose = new BaseFileTestClass(new NamespaceTestClass(new DatapackTestClass("pack", "path"), "namespace"), "MyFile", BaseFile.WriteSetting.OnDispose);
+            onDispose.AddDisposeListener(f => 
+            {
+                disposed = true;
+            });
+            Assert.IsFalse(disposed, "Dispose listener was called too early");
+            onDispose.Dispose();
+            Assert.IsTrue(disposed, "Dispose listener wasn't called when the file got disposed");
+
+            //test exception
+            Assert.ThrowsException<ArgumentNullException>(() => onDispose.AddDisposeListener(null));
         }
     }
 }

@@ -113,6 +113,7 @@ namespace SharpCraft.Commands
             {
                 throw new InvalidOperationException("Cannot add command to execute chain since the chain already ends in a command");
             }
+            DoneChanging = HasEndCommand();
             return this;
         }
 

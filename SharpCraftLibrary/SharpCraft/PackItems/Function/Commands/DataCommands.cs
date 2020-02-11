@@ -96,7 +96,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge block [Coordinates] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge storage {Storage.ToString()} {Data.GetDataString()}";
+            return $"data merge storage {Storage.GetNamespacedName()} {Data.GetDataString()}";
         }
     }
 
@@ -105,7 +105,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeBlockCommand : BaseCommand
     {
-        private Coords coordinates;
+        private Vector coordinates;
         private SimpleDataHolder data;
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="coordinates">The location of the block holding the data</param>
         /// <param name="data">The data to merge</param>
-        public DataMergeBlockCommand(Coords coordinates, SimpleDataHolder data)
+        public DataMergeBlockCommand(Vector coordinates, SimpleDataHolder data)
         {
             Coordinates = coordinates;
             Data = data;
@@ -122,7 +122,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location of the block holding the data
         /// </summary>
-        public Coords Coordinates
+        public Vector Coordinates
         {
             get => coordinates;
             set
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge block [Coordinates] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge block {Coordinates.ToString()} {data.GetDataString()}";
+            return $"data merge block {Coordinates.GetVectorString()} {data.GetDataString()}";
         }
     }
 
@@ -155,7 +155,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeEntityCommand : BaseCommand
     {
-        private Selector selector;
+        private BaseSelector selector;
         private SimpleDataHolder data;
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="selector">Selector selecting the entity holding the data</param>
         /// <param name="data">The data to merge</param>
-        public DataMergeEntityCommand(Selector selector, SimpleDataHolder data)
+        public DataMergeEntityCommand(BaseSelector selector, SimpleDataHolder data)
         {
             Selector = selector;
             Data = data;
@@ -172,7 +172,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting the entity holding the data
         /// </summary>
-        public Selector Selector
+        public BaseSelector Selector
         {
             get => selector;
             set
@@ -200,7 +200,7 @@ namespace SharpCraft.Commands
         /// <returns>data merge entity [Selector] [Data]</returns>
         public override string GetCommandString()
         {
-            return $"data merge entity {Selector.ToString()} {data.GetDataString()}";
+            return $"data merge entity {Selector.GetSelectorString()} {data.GetDataString()}";
         }
     }
 
