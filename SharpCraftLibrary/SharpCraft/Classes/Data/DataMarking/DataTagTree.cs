@@ -482,7 +482,7 @@ namespace SharpCraft.Data
                 }
                 else if (!(value.GetType().IsEnum))
                 {
-                    throw new ArgumentException("The object cannot be saved in this tag.", nameof(Value));
+                    throw new ArgumentException("The object cannot be saved in this tag: " + value.ToString(), nameof(Value));
                 }
                 this.value = value;
             }

@@ -132,7 +132,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<BlockType>)
+            if (Value is BaseGroup<BlockType> || Value is EmptyGroup<BlockType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -332,7 +332,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<BlockType>)
+            if (Value is BaseGroup<ItemType> || Value is EmptyGroup<ItemType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -448,7 +448,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<BlockType>)
+            if (Value is BaseGroup<EntityType> || Value is EmptyGroup<EntityType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -568,7 +568,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<BlockType>)
+            if (Value is BaseGroup<LiquidType> || Value is EmptyGroup<LiquidType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }

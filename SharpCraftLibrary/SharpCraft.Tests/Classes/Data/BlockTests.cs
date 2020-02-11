@@ -129,5 +129,25 @@ namespace SharpCraft.Tests.Data
         {
             Assert.AreEqual(((Block)ID.Block.stone).ID, ID.Block.stone);
         }
+
+        [TestMethod]
+        public void TestGetAsDataObject()
+        {
+            IConvertableToDataObject convertable = new Block.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            Assert.AreEqual("{i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s" }).GetDataString());
+            Assert.AreEqual("{\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s", true }).GetDataString());
+
+            Assert.AreEqual("{d:\"{Lock:\\\"locked\\\"}\",i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
+            Assert.AreEqual("{\"d\":\"{Lock:\\\"locked\\\"}\",\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", true }).GetDataString());
+            Assert.AreEqual("{g:\"a:b\"}", new Block.Chest(new BlockType(new EmptyGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
+        }
+
+        [TestMethod]
+        public void TestGetStateData()
+        {
+            Block block = new Block.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            Assert.AreEqual("{facing:\"north\"}", block.GetStateData(false).GetDataString());
+            Assert.AreEqual("{\"facing\":\"north\"}", block.GetStateData(true).GetDataString());
+        }
     }
 }

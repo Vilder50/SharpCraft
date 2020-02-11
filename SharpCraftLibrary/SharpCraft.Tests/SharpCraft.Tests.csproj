@@ -21,8 +21,4 @@
     <ProjectReference Include="..\SharpCraft\SharpCraft.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Classes\Data\MiscData\" />
-  </ItemGroup>
-
 </Project>

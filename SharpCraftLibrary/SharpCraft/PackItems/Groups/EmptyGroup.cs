@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SharpCraft.Data;
 
 namespace SharpCraft
 { 
     /// <summary>
     /// Used for calling groups outside this program
     /// </summary>
-    public class EmptyGroup<TItem> : IGroup<TItem> where TItem : IGroupable
+    public class EmptyGroup<TItem> : IBlockType, IEntityType, IItemType, ILiquidType, IFunction, IGroup<TItem> where TItem : IGroupable
     {
         /// <summary>
         /// Intializes a new <see cref="EmptyGroup{TItem}"/>
@@ -33,35 +34,38 @@ namespace SharpCraft
         public BasePackNamespace PackNamespace { get; private set; }
 
         /// <summary>
+        /// This
+        /// </summary>
+        public object Value => this;
+
+        /// <summary>
+        /// The name of this group
+        /// </summary>
+        public string Name => GetNamespacedName();
+
+        /// <summary>
+        /// The name of this group
+        /// </summary>
+        public string FileId => FileName;
+
+        /// <summary>
+        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
+        }
+
+        /// <summary>
         /// Returns the string used for refering this group
         /// </summary>
         /// <returns>The string used for refering this group</returns>
         public string GetNamespacedName()
         {
-            if (typeof(TItem) == typeof(ItemType))
-            {
-                return PackNamespace.Name + ":items/" + FileName;
-            }
-            else if (typeof(TItem) == typeof(BlockType))
-            {
-                return PackNamespace.Name + ":blocks/" + FileName;
-            }
-            else if (typeof(TItem) == typeof(EntityType))
-            {
-                return PackNamespace.Name + ":entity_types/" + FileName;
-            }
-            else if (typeof(TItem) == typeof(LiquidType))
-            {
-                return PackNamespace.Name + ":fluids/" + FileName;
-            }
-            else if (typeof(TItem) == typeof(IFunction))
-            {
-                return PackNamespace.Name + ":functions/" + FileName;
-            }
-            else
-            {
-                return PackNamespace.Name + ":" + FileName;
-            }
+            return "#" + PackNamespace.Name + ":" + FileName;
         }
     }
 }

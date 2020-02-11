@@ -22283,6 +22283,29 @@
             The namespace the group is in
             </summary>
         </member>
+        <member name="P:SharpCraft.EmptyGroup`1.Value">
+            <summary>
+            This
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EmptyGroup`1.Name">
+            <summary>
+            The name of this group
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EmptyGroup`1.FileId">
+            <summary>
+            The name of this group
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyGroup`1.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this recipe into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
         <member name="M:SharpCraft.EmptyGroup`1.GetNamespacedName">
             <summary>
             Returns the string used for refering this group

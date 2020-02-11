@@ -148,11 +148,7 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyGroup()
         {
-            Assert.AreEqual("space:blocks/file", new EmptyGroup<BlockType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "Block EmptyGroup doesn't return correct string");
-            Assert.AreEqual("space:entity_types/file", new EmptyGroup<EntityType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "Entity EmptyGroup doesn't return correct string");
-            Assert.AreEqual("space:fluids/file", new EmptyGroup<LiquidType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "Liquid EmptyGroup doesn't return correct string");
-            Assert.AreEqual("space:functions/file", new EmptyGroup<IFunction>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "Function EmptyGroup doesn't return correct string");
-            Assert.AreEqual("space:items/file",new EmptyGroup<ItemType>(EmptyDatapack.GetPack().Namespace("space"),"file").GetNamespacedName(), "Item EmptyGroup doesn't return correct string");
+            Assert.AreEqual("#space:file", new EmptyGroup<BlockType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "EmptyGroup doesn't return correct string");
         }
     }
 }
