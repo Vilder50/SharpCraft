@@ -28,7 +28,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentException>(() => new JsonText.OpenUrlClickEvent("   "), "OpenUrlClickEvent should throw exception when empty");
 
             //run command
-            Assert.AreEqual("\"clickEvent\":{\"action\":\"run_command\",\"value\":\"clear @s\"}", new JsonText.RunCommandClickEvent(new SharpCraft.Commands.ClearCommand(ID.Selector.s)).GetEventString(), "RunCommandClickEvent doesn't return correct string");
+            Assert.AreEqual("\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/clear @s\"}", new JsonText.RunCommandClickEvent(new SharpCraft.Commands.ClearCommand(ID.Selector.s)).GetEventString(), "RunCommandClickEvent doesn't return correct string");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.RunCommandClickEvent(null), "RunCommandClickEvent should throw exception if command is null");
 
             //change page
@@ -78,7 +78,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Names(null), "Names selector should throw exception if null");
 
             //keybind
-            Assert.AreEqual("{\"keybind\":\"key.inventory\"}", new JsonText.KeyBind(ID.Keys.inventory).GetJsonString(), "Keybind doesn't return correct string");
+            Assert.AreEqual("{\"keybind\":\"key.inventory\"}", new JsonText.KeyBind(ID.Key.inventory).GetJsonString(), "Keybind doesn't return correct string");
 
             //data
             Assert.AreEqual("{\"nbt\":\"test.t{a:\\\"hello\\\"}\",\"interpret\":true,\"entity\":\"@s[name=\\\"Name\\\"]\"}", new JsonText.Data(new EntityDataLocation(new Selector(ID.Selector.s) { SingleName = "Name" }, "test.t{a:\"hello\"}"), true).GetJsonString(), "Data entity doesn't return correct string");

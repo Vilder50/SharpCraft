@@ -38,6 +38,25 @@ namespace SharpCraft
             {
                 return $"\"clickEvent\":{{\"action\":\"{eventType}\",\"value\":{GetEventValue()}}}";
             }
+
+            /// <summary>
+            /// Converts a <see cref="Commands.BaseCommand"/> into a <see cref="BaseClickEvent"/> object
+            /// </summary>
+            /// <param name="command">the <see cref="Commands.BaseCommand"/> to convert</param>
+            public static implicit operator BaseClickEvent(Commands.BaseCommand command)
+            {
+                return new RunCommandClickEvent(command);
+            }
+
+
+            /// <summary>
+            /// Converts a number into a <see cref="BaseClickEvent"/> object used for changing page in a book.
+            /// </summary>
+            /// <param name="page">the number to convert</param>
+            public static implicit operator BaseClickEvent(int page)
+            {
+                return new ChangePageClickEvent(page);
+            }
         }
 
         /// <summary>
@@ -109,7 +128,7 @@ namespace SharpCraft
             /// <returns>The value of the event</returns>
             public override string GetEventValue()
             {
-                return "\"" + Command.GetCommandString() + "\"";
+                return "\"/" + Command.GetCommandString() + "\"";
             }
         }
 

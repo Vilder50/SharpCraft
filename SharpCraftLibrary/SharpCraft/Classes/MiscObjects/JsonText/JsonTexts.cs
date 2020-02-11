@@ -25,6 +25,17 @@ namespace SharpCraft
             }
 
             /// <summary>
+            /// Intializes a new <see cref="Text"/>
+            /// </summary>
+            /// <param name="displayText">The text to display</param>
+            /// <param name="color">The color of the text</param>
+            public Text(string displayText, ID.MinecraftColor color)
+            {
+                DisplayText = displayText;
+                Color = color;
+            }
+
+            /// <summary>
             /// The text to display
             /// </summary>
             public string DisplayText { get => displayText; set => displayText = value ?? throw new ArgumentNullException(nameof(displayText), "Json text to display may not be null"); }
@@ -124,7 +135,7 @@ namespace SharpCraft
             /// Intializes a new <see cref="KeyBind"/>
             /// </summary>
             /// <param name="key">The key to display</param>
-            public KeyBind(ID.Keys key)
+            public KeyBind(ID.Key key)
             {
                 Key = key;
             }
@@ -132,7 +143,7 @@ namespace SharpCraft
             /// <summary>
             /// The key to display
             /// </summary>
-            public ID.Keys Key { get; set; }
+            public ID.Key Key { get; set; }
 
             /// <summary>
             /// returns the raw string specific for this class

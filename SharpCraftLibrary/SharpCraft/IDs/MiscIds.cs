@@ -115,7 +115,7 @@
             hero_of_the_village,
             EffectEnumEnd
         }
-        public enum Keys
+        public enum Key
         {
             forward,
             left,

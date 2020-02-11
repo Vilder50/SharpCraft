@@ -38,6 +38,15 @@ namespace SharpCraft
             {
                 return $"\"hoverEvent\":{{\"action\":\"{eventType}\",\"value\":{GetEventValue()}}}";
             }
+
+            /// <summary>
+            /// Converts a <see cref="JsonText"/> into a <see cref="BaseHoverEvent"/> object
+            /// </summary>
+            /// <param name="text">the <see cref="JsonText"/> to convert</param>
+            public static implicit operator BaseHoverEvent(JsonText text)
+            {
+                return new TextHoverEvent(text);
+            }
         }
 
         /// <summary>

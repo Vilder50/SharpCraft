@@ -83,7 +83,7 @@ namespace SharpCraft
             if (!(ShiftClickInsertion is null)) { outString.Add("\"insertion\":\"" + ShiftClickInsertion.Escape() + "\""); }
             if (!(ClickEvent is null)) { outString.Add(ClickEvent.GetEventString()); }
             if (!(HoverEvent is null)) { outString.Add(HoverEvent.GetEventString()); }
-            if (!(Extra is null))  { outString.Add("\"extra\":[" + string.Join(",",Extra.Select(j => j.GetJsonString())) + "]"); }
+            if (!(Extra is null) && Extra.Length != 0)  { outString.Add("\"extra\":[" + string.Join(",",Extra.Select(j => j.GetJsonString())) + "]"); }
             outString.Add(GetSpecificJsonString());
 
             return "{" + string.Join(",", outString) + "}";
@@ -172,6 +172,24 @@ namespace SharpCraft
         public static implicit operator JsonText(ScoreValue score)
         {
             return new Score(score, score);
+        }
+
+        /// <summary>
+        /// Converts a <see cref="Selector"/> into a <see cref="JsonText"/> object
+        /// </summary>
+        /// <param name="selector">the <see cref="Selector"/> to convert</param>
+        public static implicit operator JsonText(Selector selector)
+        {
+            return new Names(selector);
+        }
+
+        /// <summary>
+        /// Converts a <see cref="ID.Key"/> into a <see cref="JsonText"/> object
+        /// </summary>
+        /// <param name="key">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator JsonText(ID.Key key)
+        {
+            return new KeyBind(key);
         }
     }
 }

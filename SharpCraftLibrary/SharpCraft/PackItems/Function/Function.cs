@@ -194,7 +194,7 @@ namespace SharpCraft
             }
             else
             {
-                return new Function(PackNamespace, WritePath + "\\" + functionName.ToLower(), writeSetting);
+                return new Function(PackNamespace, FileId + "\\" + functionName.ToLower(), writeSetting);
             }
         }
         /// <summary>
@@ -231,7 +231,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            if (WritePath.Contains("\\"))
+            if (FileId.Contains("\\"))
             {
                 if (name is null)
                 {
@@ -239,7 +239,7 @@ namespace SharpCraft
                 }
                 else
                 {
-                    return new Function(PackNamespace, WritePath.Substring(0, WritePath.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
+                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
                 }
             }
             else

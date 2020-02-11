@@ -807,7 +807,7 @@ namespace SharpCraft.FunctionWriters
             /// <returns>the newly created <see cref="SharpCraft.BossBar"/></returns>
             public BossBar Add(string name, JsonText showName)
             {
-                BossBar addBar = new BossBar(Function.PackNamespace.Name + ":" + name.ToLower());
+                BossBar addBar = new BossBar(Function.PackNamespace, name.ToLower());
                 Function.AddCommand(new BossBarAddCommand(addBar, showName));
                 return addBar;
             }

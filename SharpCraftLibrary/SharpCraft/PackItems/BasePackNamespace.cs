@@ -216,14 +216,19 @@ namespace SharpCraft
                 throw new ArgumentException("Cannot add file which isn't made for this namespace", nameof(file));
             }
 
+            if (files.Any(f => f == file))
+            {
+                return;
+            }
+
             if (files.Any(f => f.FileId == file.FileId && f.FileType == file.FileType))
             {
-                throw new ArgumentException("The namespace already contains a file with the given name", nameof(file));
+                throw new ArgumentException("The namespace already contains a file with the given name (" + file.FileId + ")", nameof(file));
             }
 
             if (files.Any(f => f.WritePath == file.WritePath && f.FileType == file.FileType))
             {
-                throw new ArgumentException("The namespace already contains a file which writes to the given path", nameof(file));
+                throw new ArgumentException("The namespace already contains a file which writes to the given path ("+file.WritePath+")", nameof(file));
             }
 
             fileListeners?.Invoke(file);

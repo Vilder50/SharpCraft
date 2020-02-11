@@ -8165,6 +8165,18 @@
             </summary>
             <param name="score">the <see cref="T:SharpCraft.ScoreValue"/> to convert</param>
         </member>
+        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.Selector)~SharpCraft.JsonText">
+            <summary>
+            Converts a <see cref="T:SharpCraft.Selector"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            </summary>
+            <param name="selector">the <see cref="T:SharpCraft.Selector"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.ID.Key)~SharpCraft.JsonText">
+            <summary>
+            Converts a <see cref="T:SharpCraft.ID.Key"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            </summary>
+            <param name="key">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
+        </member>
         <member name="T:SharpCraft.JsonText.BaseClickEvent">
             <summary>
             Base class for click events in json text
@@ -8187,6 +8199,18 @@
             Returns the string for this click event used in <see cref="T:SharpCraft.JsonText"/>
             </summary>
             <returns>The string used in <see cref="T:SharpCraft.JsonText"/></returns>
+        </member>
+        <member name="M:SharpCraft.JsonText.BaseClickEvent.op_Implicit(SharpCraft.Commands.BaseCommand)~SharpCraft.JsonText.BaseClickEvent">
+            <summary>
+            Converts a <see cref="T:SharpCraft.Commands.BaseCommand"/> into a <see cref="T:SharpCraft.JsonText.BaseClickEvent"/> object
+            </summary>
+            <param name="command">the <see cref="T:SharpCraft.Commands.BaseCommand"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.JsonText.BaseClickEvent.op_Implicit(System.Int32)~SharpCraft.JsonText.BaseClickEvent">
+            <summary>
+            Converts a number into a <see cref="T:SharpCraft.JsonText.BaseClickEvent"/> object used for changing page in a book.
+            </summary>
+            <param name="page">the number to convert</param>
         </member>
         <member name="T:SharpCraft.JsonText.OpenUrlClickEvent">
             <summary>
@@ -8321,6 +8345,12 @@
             </summary>
             <returns>The string used in <see cref="T:SharpCraft.JsonText"/></returns>
         </member>
+        <member name="M:SharpCraft.JsonText.BaseHoverEvent.op_Implicit(SharpCraft.JsonText)~SharpCraft.JsonText.BaseHoverEvent">
+            <summary>
+            Converts a <see cref="T:SharpCraft.JsonText"/> into a <see cref="T:SharpCraft.JsonText.BaseHoverEvent"/> object
+            </summary>
+            <param name="text">the <see cref="T:SharpCraft.JsonText"/> to convert</param>
+        </member>
         <member name="T:SharpCraft.JsonText.TextHoverEvent">
             <summary>
             Shows text when the text is being hovered
@@ -8410,6 +8440,13 @@
             </summary>
             <param name="displayText">The text to display</param>
         </member>
+        <member name="M:SharpCraft.JsonText.Text.#ctor(System.String,SharpCraft.ID.MinecraftColor)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.JsonText.Text"/>
+            </summary>
+            <param name="displayText">The text to display</param>
+            <param name="color">The color of the text</param>
+        </member>
         <member name="P:SharpCraft.JsonText.Text.DisplayText">
             <summary>
             The text to display
@@ -8476,7 +8513,7 @@
             Class for displaying a key bind as json text
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.KeyBind.#ctor(SharpCraft.ID.Keys)">
+        <member name="M:SharpCraft.JsonText.KeyBind.#ctor(SharpCraft.ID.Key)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.KeyBind"/>
             </summary>
