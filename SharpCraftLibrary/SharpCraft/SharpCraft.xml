@@ -10224,6 +10224,849 @@
             <summary>
             All the different ID's/Types/States things in the game can have
             </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+            <summary>
+            All the different ID's/Types/States things in the game can have
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateCompareMode.compare">
+            <summary>
+            Outputs the signal if it's the greatest signal
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateCompareMode.subtract">
+            <summary>
+            Subtracts the side signal from the input signal
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateChestType.single">
+            <summary>
+            Its a single chest
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateChestType.left">
+            <summary>
+            Connected with the chest to the left
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateChestType.right">
+            <summary>
+            Connected with the chest to the right
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.FSharp1">
+            <summary>
+            F♯/G♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.GSharp1">
+            <summary>
+            G♯/A♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.ASharp1">
+            <summary>
+            A♯/B♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.CSharp1">
+            <summary>
+            C♯/D♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.DSharp1">
+            <summary>
+            D♯/E♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.FSharp2">
+            <summary>
+            F♯/G♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.GSharp2">
+            <summary>
+            G♯/A♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.ASharp2">
+            <summary>
+            A♯/B♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.CSharp2">
+            <summary>
+            C♯/D♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.DSharp2">
+            <summary>
+            D♯/E♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateNote.FSharp3">
+            <summary>
+            F♯/G♭
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateStairShape.inner_left">
+            <summary>
+            7/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateStairShape.inner_right">
+            <summary>
+            7/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateStairShape.outer_left">
+            <summary>
+            5/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateStairShape.outer_right">
+            <summary>
+            5/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateStairShape.straight">
+            <summary>
+            6/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bs">
+            <summary>
+            Bottom Stripe
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.ts">
+            <summary>
+            Top Stripe
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.ls">
+            <summary>
+            Left Stripe
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.rs">
+            <summary>
+            Right Stripe
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.cs">
+            <summary>
+            Center Stripe
+            (bottom to top)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.ms">
+            <summary>
+            Middle Stripe
+            (left to right)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.drs">
+            <summary>
+            Down Right Stripe
+            (Starts at top left ends at bottom right)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.dls">
+            <summary>
+            Down Left Stripe
+            (Starts at top right ends at bottom left)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.ss">
+            <summary>
+            Small Stripes
+            (multiple lines going from bottom to top)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.cr">
+            <summary>
+            Cross
+            (X)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.sc">
+            <summary>
+            Cross
+            (+)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.ld">
+            <summary>
+            Left Top Diagonal
+            (Goes from bottom left to top right with the left side being colored)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.rud">
+            <summary>
+            Right Top Diagonal
+            (Goes from top left to bottom right with the right side being colored)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.lud">
+            <summary>
+            Left Bottom Diagonal
+            (Goes from top left to bottom right with the left side being colored)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.rd">
+            <summary>
+            Right Bottom Diagonal
+            (Goes from bottom left to top right with the right side being colored)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.vh">
+            <summary>
+            Vertical Half Left
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.vhr">
+            <summary>
+            Vertical Half Right
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.hh">
+            <summary>
+            Horizontal Half Top
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.hhb">
+            <summary>
+            Horizontal Half Bottom
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bl">
+            <summary>
+            Bottom Left Square
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.br">
+            <summary>
+            Bottom Right Square
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.tl">
+            <summary>
+            top Left Square
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.tr">
+            <summary>
+            Top Right Square
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bt">
+            <summary>
+            Bottom Triangle
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.tt">
+            <summary>
+            Top Triangle
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bts">
+            <summary>
+            Multiple Bottom Triangles
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.tts">
+            <summary>
+            Multiple Top Triangles
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.mc">
+            <summary>
+            Middle Circle
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.mr">
+            <summary>
+            Middle Rhombus
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bo">
+            <summary>
+            Border
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.cbo">
+            <summary>
+            Weird waving border
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.bri">
+            <summary>
+            Bricks
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.gra">
+            <summary>
+            Top Gradiant
+            (Solid at top and gone at bottom)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.gru">
+            <summary>
+            Bottom Gradiant
+            (Solid at bottom and gone at top)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.cre">
+            <summary>
+            Creeper
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.sku">
+            <summary>
+            Skull
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.flo">
+            <summary>
+            Flower
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BannerPattern.moj">
+            <summary>
+            Mojang
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.CoordType.Relative">
+            <summary>
+            A coordinate relative to another place
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.CoordType.Local">
+            <summary>
+            A coordinate in a direction
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.CoordType.Normal">
+            <summary>
+            A coordinate in the world
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.CoordType.Vector">
+            <summary>
+            Not used ingame. This coordinate type is for math.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.CoordType.Mixed">
+            <summary>
+            Used to mark a coordinate as a mix between relative and normal coords
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Selector.a">
+            <summary>
+            Selects all players
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Selector.p">
+            <summary>
+            Selects the closest player
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Selector.r">
+            <summary>
+            Selects a random player
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Selector.e">
+            <summary>
+            Selects all entities
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Selector.s">
+            <summary>
+            Selects the executing player
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BlockFill.destroy">
+            <summary>
+            Destroys all blocks and makes their items drop
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BlockFill.keep">
+            <summary>
+            Only replaces air blocks
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BlockFill.hollow">
+            <summary>
+            The inside of the fill is filled with air with a square of the chosen block around
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BlockFill.outline">
+            <summary>
+            The inside of the fill isn't effected. Only the frame is.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BlockFill.replace">
+            <summary>
+            Replaces blocks with the specified block
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.announceAdvancements">
+            <summary>
+            If the "Player has gotten advancement" message should be displayed
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.commandBlockOutput">
+            <summary>
+            If command blocks should tell admins when they run a command
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.disableElytraMovementCheck">
+            <summary>
+            If the server should skip checking player speed when flying with an elytra.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.disableRaids">
+            <summary>
+            If raids should be disabled
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doDaylightCycle">
+            <summary>
+            If the daylight cycle runs
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doEntityDrops">
+            <summary>
+            If entities should drop anything
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doFireTick">
+            <summary>
+            If fire should be able to spread
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doLimitedCrafting">
+            <summary>
+            If players only should be able to craft recipes they own
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doMobLoot">
+            <summary>
+            If mobs should drop their loot
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doMobSpawning">
+            <summary>
+            If mobs should be able to spawn naturally
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doTileDrops">
+            <summary>
+            If blocks should drop their loot
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doWeatherCycle">
+            <summary>
+            If the weather cycle runs
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.keepInventory">
+            <summary>
+            If players should keep their inventory on death
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.logAdminCommands">
+            <summary>
+            If admin commands should be logged in the server log
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.mobGriefing">
+            <summary>
+            If mobs should be able to grief/change blocks
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.naturalRegeneration">
+            <summary>
+            If players should be able to heal if they have enough food
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.reducedDegubInfo">
+            <summary>
+            If the debug screen (f3) should show limited information
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.sendCommandFeedback">
+            <summary>
+            If commands should tell players if they were successfull or not
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.showDeathMessages">
+            <summary>
+            If death messages should be displayed in chat
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.spectatorsGenerateChunks">
+            <summary>
+            If spectators are able to generate new chunks
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doInsomnia">
+            <summary>
+            If phantoms should spawn when player havent slept for some time
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.doImmediateRespawn">
+            <summary>
+            If players should respawn immediatly
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.drowningDamage">
+            <summary>
+            If players should take damage from drowning
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.fallDamage">
+            <summary>
+            If players should take fall damage
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.fireDamage">
+            <summary>
+            If players should take fire damage
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IntGamerule.maxEntityCramming">
+            <summary>
+            The amount of entities there can be in a crammed space before they start taking damage
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IntGamerule.randomTickSpeed">
+            <summary>
+            The amount of random block ticks which happens per chunk per tick
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IntGamerule.spawnRadius">
+            <summary>
+            The max distance players can spawn away from the world spawn center
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IntGamerule.maxCommandChainLength">
+            <summary>
+            The maximum amount of commands which can run at once
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.QueryTime.day">
+            <summary>
+            Returns the amount of days which has passed in the world
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.QueryTime.daytime">
+            <summary>
+            Returns the time of day
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.QueryTime.gametime">
+            <summary>
+            Returns the total amount of time there has passed in this world (based of what time it is)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.RelativeAdvancement.from">
+            <summary>
+            Selects all the child advancements of this advancement
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.RelativeAdvancement.through">
+            <summary>
+            Selects all advancements on the same branch as this advancement
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.RelativeAdvancement.until">
+            <summary>
+            Selects all the ancestor advancements of this advancement
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarValue.max">
+            <summary>
+            The max value the boss bar can have
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarValue.players">
+            <summary>
+            The amount of players who can see the boss bar
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarValue.value">
+            <summary>
+            The value displayed in the boss bar
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarValue.visible">
+            <summary>
+            1 if visible. 0 if not visible
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Add">
+            <summary>
+            Add (+) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Subtract">
+            <summary>
+            subtract (-) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Multiply">
+            <summary>
+            multiply (*) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Divide">
+            <summary>
+            divide (/) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Remainder">
+            <summary>
+            finds the remainder (%) when dividing the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Switch">
+            <summary>
+            Switches the 2 numbers. First <see cref="T:SharpCraft.ID.Selector"/> gets <see cref="T:SharpCraft.ID.Selector"/> 2's number and 2 gets 1's number
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.GetHigher">
+            <summary>
+            Finds the highest number of the given numbers and saves it in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.GetLowest">
+            <summary>
+            Finds the lowest number of the given numbers and saves it in the first <see cref="T:SharpCraft.ID.Selector"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Operation.Equel">
+            <summary>
+            Sets the first <see cref="T:SharpCraft.ID.Selector"/>'s score to the 2nd <see cref="T:SharpCraft.ID.Selector"/>'s score
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamCollision.always">
+            <summary>
+            Makes the team collide with everyone
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamCollision.never">
+            <summary>
+            Makes the team never collide
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamCollision.pushOtherTeams">
+            <summary>
+            Makes the team only collide with players not on their team
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamCollision.PushOwnTeam">
+            <summary>
+            Makes the team only collide with players on their team
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamVisibility.always">
+            <summary>
+            Makes the team visible to everyone
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamVisibility.never">
+            <summary>
+            Makes the team hidden for everyone
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamVisibility.hideForOtherTeams">
+            <summary>
+            Makes the team hidden for players not on their team
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TeamVisibility.hideForOwnTeam">
+            <summary>
+            Makes the team hidden for players on their own team
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IfScoreOperation.Smaller">
+            <summary>
+            &lt;
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IfScoreOperation.SmallerOrEquel">
+            <summary>
+            &lt;=
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IfScoreOperation.Equel">
+            <summary>
+            ==
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IfScoreOperation.Higher">
+            <summary>
+            &gt;
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.IfScoreOperation.HigherOrEquel">
+            <summary>
+            &gt;=
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarStyle.progress">
+            <summary>
+            The bar is one big bar
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarStyle.notched_6">
+            <summary>
+            The bar is split into 6 parts
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarStyle.notched_10">
+            <summary>
+            The bar is split into 10 parts
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarStyle.notched_12">
+            <summary>
+            The bar is split into 12 parts
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BossBarStyle.notched_20">
+            <summary>
+            The bar is split into 20 parts
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.ObjectiveRender.hearts">
+            <summary>
+            If each number should be displayed as a half heart
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.ObjectiveRender.integer">
+            <summary>
+            If the number should be displayed as a number
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TimeType.ticks">
+            <summary>
+            Makes the time be in ticks
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TimeType.seconds">
+            <summary>
+            Makes the time be in seconds
+            (20 ticks)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.TimeType.days">
+            <summary>
+            Makes the time be in Minecraft days
+            (24000 ticks)
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.Circling">
+            <summary>
+            The ender dragon will circle around the island
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.Strafing">
+            <summary>
+            Flies to a player and fires a fireball
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.FlyingToPortal">
+            <summary>
+            Flies to the portal
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.LandingOnPortal">
+            <summary>
+            Lands on the portal
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.TakingOffFromPortal">
+            <summary>
+            Taking of from the portal
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.LandedBreathAttack">
+            <summary>
+            Performs a breath attack while standing still
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.LandedReadyBreathAttack">
+            <summary>
+            Gets ready to perform a breath attack on a player
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.LandedRoar">
+            <summary>
+            Roars before going to <see cref="F:SharpCraft.ID.DragonPhase.LandedReadyBreathAttack"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.ChargingPlayer">
+            <summary>
+            Charges a player
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.FlyingToPortalToDie">
+            <summary>
+            Flies to the portal to die there
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.DragonPhase.NoAI">
+            <summary>
+            Enderdragon will not have any AI
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.ArrowPickup.CantPickUp">
+            <summary>
+            Players can't pick up the arrow
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.ArrowPickup.CanPickUp">
+            <summary>
+            Players can pick up the arrow
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.ArrowPickup.CreativePickUp">
+            <summary>
+            Players in creative mode can pick the arrow
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.AttributeOperation.addition">
+            <summary>
+            Adds the number to the base
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.AttributeOperation.multiply_base">
+            <summary>
+            Multiplies the base number with all the given multiply_base modifiers at once
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.AttributeOperation.multiply_total">
+            <summary>
+            Multiplies the total attribute value with the given number
+            </summary>
         </member>
         <member name="T:SharpCraft.ID.Files">
             <summary>
@@ -10613,831 +11456,6 @@
             <summary>
             Entities which glows when the bell rings.
             Entities which don't override ravager AI when riding on one
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.CoordType.Relative">
-            <summary>
-            A coordinate relative to another place
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.CoordType.Local">
-            <summary>
-            A coordinate in a direction
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.CoordType.Normal">
-            <summary>
-            A coordinate in the world
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.CoordType.Vector">
-            <summary>
-            Not used ingame. This coordinate type is for math.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.CoordType.Mixed">
-            <summary>
-            Used to mark a coordinate as a mix between relative and normal coords
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Selector.a">
-            <summary>
-            Selects all players
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Selector.p">
-            <summary>
-            Selects the closest player
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Selector.r">
-            <summary>
-            Selects a random player
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Selector.e">
-            <summary>
-            Selects all entities
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Selector.s">
-            <summary>
-            Selects the executing player
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.AttributeOperation.addition">
-            <summary>
-            Adds the number to the base
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.AttributeOperation.multiply_base">
-            <summary>
-            Multiplies the base number with all the given multiply_base modifiers at once
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.AttributeOperation.multiply_total">
-            <summary>
-            Multiplies the total attribute value with the given number
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.Circling">
-            <summary>
-            The ender dragon will circle around the island
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.Strafing">
-            <summary>
-            Flies to a player and fires a fireball
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.FlyingToPortal">
-            <summary>
-            Flies to the portal
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.LandingOnPortal">
-            <summary>
-            Lands on the portal
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.TakingOffFromPortal">
-            <summary>
-            Taking of from the portal
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.LandedBreathAttack">
-            <summary>
-            Performs a breath attack while standing still
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.LandedReadyBreathAttack">
-            <summary>
-            Gets ready to perform a breath attack on a player
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.LandedRoar">
-            <summary>
-            Roars before going to <see cref="F:SharpCraft.ID.DragonPhase.LandedReadyBreathAttack"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.ChargingPlayer">
-            <summary>
-            Charges a player
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.FlyingToPortalToDie">
-            <summary>
-            Flies to the portal to die there
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.DragonPhase.NoAI">
-            <summary>
-            Enderdragon will not have any AI
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.ArrowPickup.CantPickUp">
-            <summary>
-            Players can't pick up the arrow
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.ArrowPickup.CanPickUp">
-            <summary>
-            Players can pick up the arrow
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.ArrowPickup.CreativePickUp">
-            <summary>
-            Players in creative mode can pick the arrow
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bs">
-            <summary>
-            Bottom Stripe
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.ts">
-            <summary>
-            Top Stripe
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.ls">
-            <summary>
-            Left Stripe
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.rs">
-            <summary>
-            Right Stripe
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.cs">
-            <summary>
-            Center Stripe
-            (bottom to top)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.ms">
-            <summary>
-            Middle Stripe
-            (left to right)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.drs">
-            <summary>
-            Down Right Stripe
-            (Starts at top left ends at bottom right)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.dls">
-            <summary>
-            Down Left Stripe
-            (Starts at top right ends at bottom left)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.ss">
-            <summary>
-            Small Stripes
-            (multiple lines going from bottom to top)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.cr">
-            <summary>
-            Cross
-            (X)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.sc">
-            <summary>
-            Cross
-            (+)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.ld">
-            <summary>
-            Left Top Diagonal
-            (Goes from bottom left to top right with the left side being colored)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.rud">
-            <summary>
-            Right Top Diagonal
-            (Goes from top left to bottom right with the right side being colored)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.lud">
-            <summary>
-            Left Bottom Diagonal
-            (Goes from top left to bottom right with the left side being colored)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.rd">
-            <summary>
-            Right Bottom Diagonal
-            (Goes from bottom left to top right with the right side being colored)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.vh">
-            <summary>
-            Vertical Half Left
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.vhr">
-            <summary>
-            Vertical Half Right
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.hh">
-            <summary>
-            Horizontal Half Top
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.hhb">
-            <summary>
-            Horizontal Half Bottom
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bl">
-            <summary>
-            Bottom Left Square
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.br">
-            <summary>
-            Bottom Right Square
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.tl">
-            <summary>
-            top Left Square
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.tr">
-            <summary>
-            Top Right Square
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bt">
-            <summary>
-            Bottom Triangle
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.tt">
-            <summary>
-            Top Triangle
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bts">
-            <summary>
-            Multiple Bottom Triangles
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.tts">
-            <summary>
-            Multiple Top Triangles
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.mc">
-            <summary>
-            Middle Circle
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.mr">
-            <summary>
-            Middle Rhombus
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bo">
-            <summary>
-            Border
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.cbo">
-            <summary>
-            Weird waving border
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.bri">
-            <summary>
-            Bricks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.gra">
-            <summary>
-            Top Gradiant
-            (Solid at top and gone at bottom)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.gru">
-            <summary>
-            Bottom Gradiant
-            (Solid at bottom and gone at top)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.cre">
-            <summary>
-            Creeper
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.sku">
-            <summary>
-            Skull
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.flo">
-            <summary>
-            Flower
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BannerPattern.moj">
-            <summary>
-            Mojang
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateCompareMode.compare">
-            <summary>
-            Outputs the signal if it's the greatest signal
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateCompareMode.subtract">
-            <summary>
-            Subtracts the side signal from the input signal
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateChestType.single">
-            <summary>
-            Its a single chest
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateChestType.left">
-            <summary>
-            Connected with the chest to the left
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateChestType.right">
-            <summary>
-            Connected with the chest to the right
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.FSharp1">
-            <summary>
-            F♯/G♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.GSharp1">
-            <summary>
-            G♯/A♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.ASharp1">
-            <summary>
-            A♯/B♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.CSharp1">
-            <summary>
-            C♯/D♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.DSharp1">
-            <summary>
-            D♯/E♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.FSharp2">
-            <summary>
-            F♯/G♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.GSharp2">
-            <summary>
-            G♯/A♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.ASharp2">
-            <summary>
-            A♯/B♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.CSharp2">
-            <summary>
-            C♯/D♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.DSharp2">
-            <summary>
-            D♯/E♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateNote.FSharp3">
-            <summary>
-            F♯/G♭
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateStairShape.inner_left">
-            <summary>
-            7/8 of a block.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateStairShape.inner_right">
-            <summary>
-            7/8 of a block.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateStairShape.outer_left">
-            <summary>
-            5/8 of a block.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateStairShape.outer_right">
-            <summary>
-            5/8 of a block.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.StateStairShape.straight">
-            <summary>
-            6/8 of a block.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BlockFill.destroy">
-            <summary>
-            Destroys all blocks and makes their items drop
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BlockFill.keep">
-            <summary>
-            Only replaces air blocks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BlockFill.hollow">
-            <summary>
-            The inside of the fill is filled with air with a square of the chosen block around
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BlockFill.outline">
-            <summary>
-            The inside of the fill isn't effected. Only the frame is.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BlockFill.replace">
-            <summary>
-            Replaces blocks with the specified block
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.announceAdvancements">
-            <summary>
-            If the "Player has gotten advancement" message should be displayed
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.commandBlockOutput">
-            <summary>
-            If command blocks should tell admins when they run a command
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.disableElytraMovementCheck">
-            <summary>
-            If the server should skip checking player speed when flying with an elytra.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.disableRaids">
-            <summary>
-            If raids should be disabled
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doDaylightCycle">
-            <summary>
-            If the daylight cycle runs
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doEntityDrops">
-            <summary>
-            If entities should drop anything
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doFireTick">
-            <summary>
-            If fire should be able to spread
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doLimitedCrafting">
-            <summary>
-            If players only should be able to craft recipes they own
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doMobLoot">
-            <summary>
-            If mobs should drop their loot
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doMobSpawning">
-            <summary>
-            If mobs should be able to spawn naturally
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doTileDrops">
-            <summary>
-            If blocks should drop their loot
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doWeatherCycle">
-            <summary>
-            If the weather cycle runs
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.keepInventory">
-            <summary>
-            If players should keep their inventory on death
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.logAdminCommands">
-            <summary>
-            If admin commands should be logged in the server log
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.mobGriefing">
-            <summary>
-            If mobs should be able to grief/change blocks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.naturalRegeneration">
-            <summary>
-            If players should be able to heal if they have enough food
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.reducedDegubInfo">
-            <summary>
-            If the debug screen (f3) should show limited information
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.sendCommandFeedback">
-            <summary>
-            If commands should tell players if they were successfull or not
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.showDeathMessages">
-            <summary>
-            If death messages should be displayed in chat
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.spectatorsGenerateChunks">
-            <summary>
-            If spectators are able to generate new chunks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doInsomnia">
-            <summary>
-            If phantoms should spawn when player havent slept for some time
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.doImmediateRespawn">
-            <summary>
-            If players should respawn immediatly
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.drowningDamage">
-            <summary>
-            If players should take damage from drowning
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.fallDamage">
-            <summary>
-            If players should take fall damage
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BoolGamerule.fireDamage">
-            <summary>
-            If players should take fire damage
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IntGamerule.maxEntityCramming">
-            <summary>
-            The amount of entities there can be in a crammed space before they start taking damage
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IntGamerule.randomTickSpeed">
-            <summary>
-            The amount of random block ticks which happens per chunk per tick
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IntGamerule.spawnRadius">
-            <summary>
-            The max distance players can spawn away from the world spawn center
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IntGamerule.maxCommandChainLength">
-            <summary>
-            The maximum amount of commands which can run at once
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.QueryTime.day">
-            <summary>
-            Returns the amount of days which has passed in the world
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.QueryTime.daytime">
-            <summary>
-            Returns the time of day
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.QueryTime.gametime">
-            <summary>
-            Returns the total amount of time there has passed in this world (based of what time it is)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.RelativeAdvancement.from">
-            <summary>
-            Selects all the child advancements of this advancement
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.RelativeAdvancement.through">
-            <summary>
-            Selects all advancements on the same branch as this advancement
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.RelativeAdvancement.until">
-            <summary>
-            Selects all the ancestor advancements of this advancement
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarValue.max">
-            <summary>
-            The max value the boss bar can have
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarValue.players">
-            <summary>
-            The amount of players who can see the boss bar
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarValue.value">
-            <summary>
-            The value displayed in the boss bar
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarValue.visible">
-            <summary>
-            1 if visible. 0 if not visible
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Add">
-            <summary>
-            Add (+) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Subtract">
-            <summary>
-            subtract (-) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Multiply">
-            <summary>
-            multiply (*) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Divide">
-            <summary>
-            divide (/) the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Remainder">
-            <summary>
-            finds the remainder (%) when dividing the 2 numbers and saves the result in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Switch">
-            <summary>
-            Switches the 2 numbers. First <see cref="T:SharpCraft.ID.Selector"/> gets <see cref="T:SharpCraft.ID.Selector"/> 2's number and 2 gets 1's number
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.GetHigher">
-            <summary>
-            Finds the highest number of the given numbers and saves it in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.GetLowest">
-            <summary>
-            Finds the lowest number of the given numbers and saves it in the first <see cref="T:SharpCraft.ID.Selector"/>
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Operation.Equel">
-            <summary>
-            Sets the first <see cref="T:SharpCraft.ID.Selector"/>'s score to the 2nd <see cref="T:SharpCraft.ID.Selector"/>'s score
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamCollision.always">
-            <summary>
-            Makes the team collide with everyone
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamCollision.never">
-            <summary>
-            Makes the team never collide
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamCollision.pushOtherTeams">
-            <summary>
-            Makes the team only collide with players not on their team
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamCollision.PushOwnTeam">
-            <summary>
-            Makes the team only collide with players on their team
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamVisibility.always">
-            <summary>
-            Makes the team visible to everyone
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamVisibility.never">
-            <summary>
-            Makes the team hidden for everyone
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamVisibility.hideForOtherTeams">
-            <summary>
-            Makes the team hidden for players not on their team
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TeamVisibility.hideForOwnTeam">
-            <summary>
-            Makes the team hidden for players on their own team
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IfScoreOperation.Smaller">
-            <summary>
-            &lt;
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IfScoreOperation.SmallerOrEquel">
-            <summary>
-            &lt;=
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IfScoreOperation.Equel">
-            <summary>
-            ==
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IfScoreOperation.Higher">
-            <summary>
-            &gt;
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.IfScoreOperation.HigherOrEquel">
-            <summary>
-            &gt;=
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarStyle.progress">
-            <summary>
-            The bar is one big bar
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarStyle.notched_6">
-            <summary>
-            The bar is split into 6 parts
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarStyle.notched_10">
-            <summary>
-            The bar is split into 10 parts
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarStyle.notched_12">
-            <summary>
-            The bar is split into 12 parts
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.BossBarStyle.notched_20">
-            <summary>
-            The bar is split into 20 parts
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.ObjectiveRender.hearts">
-            <summary>
-            If each number should be displayed as a half heart
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.ObjectiveRender.integer">
-            <summary>
-            If the number should be displayed as a number
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TimeType.ticks">
-            <summary>
-            Makes the time be in ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TimeType.seconds">
-            <summary>
-            Makes the time be in seconds
-            (20 ticks)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.TimeType.days">
-            <summary>
-            Makes the time be in Minecraft days
-            (24000 ticks)
             </summary>
         </member>
         <member name="F:SharpCraft.ID.LootTarget.This">
