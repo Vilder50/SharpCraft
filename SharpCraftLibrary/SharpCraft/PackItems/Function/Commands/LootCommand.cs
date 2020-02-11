@@ -369,7 +369,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetVectorString()} {UsedItem.IDDataString}";
+                return $"fish {Loottable.GetNamespacedName()} {FishLocation.GetVectorString()} {UsedItem.GetIDDataString()}";
             }
         }
 
@@ -541,7 +541,7 @@ namespace SharpCraft.Commands
             /// <returns>A string for selecting the source</returns>
             public string GetSourceString()
             {
-                return $"mine {Coordinates.GetVectorString()} {UsedItem.IDDataString}";
+                return $"mine {Coordinates.GetVectorString()} {UsedItem.GetIDDataString()}";
             }
         }
     }

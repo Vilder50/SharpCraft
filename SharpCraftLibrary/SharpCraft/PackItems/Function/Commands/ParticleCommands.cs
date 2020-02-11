@@ -473,16 +473,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle item {item.IDDataString} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }

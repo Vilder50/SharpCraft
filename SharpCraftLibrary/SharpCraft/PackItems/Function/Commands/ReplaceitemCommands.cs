@@ -69,7 +69,7 @@ namespace SharpCraft.Commands
         /// <returns>replaceitem block [Coordinates] [Slot] [Item] [Count]</returns>
         public override string GetCommandString()
         {
-            return $"replaceitem block {Coordinates.GetVectorString()} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
+            return $"replaceitem block {Coordinates.GetVectorString()} {Slot.GetSlotString()} {Item.GetIDDataString()} {Count}";
         }
     }
 
@@ -135,7 +135,7 @@ namespace SharpCraft.Commands
         /// <returns>replaceitem entity [Selector] [Slot] [Item] [Count]</returns>
         public override string GetCommandString()
         {
-            return $"replaceitem entity {Selector.GetSelectorString()} {Slot.GetSlotString()} {Item.IDDataString} {Count}";
+            return $"replaceitem entity {Selector.GetSelectorString()} {Slot.GetSlotString()} {Item.GetIDDataString()} {Count}";
         }
     }
 }

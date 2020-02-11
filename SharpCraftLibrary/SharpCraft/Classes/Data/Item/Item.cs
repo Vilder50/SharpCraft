@@ -245,21 +245,18 @@ namespace SharpCraft
         /// The items raw data with id at the start
         /// Used for give item commands
         /// </summary>
-        public string IDDataString
+        public string GetIDDataString()
         {
-            get
+            if (ID == null)
             {
-                if (ID == null)
-                {
-                    throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
-                }
-
-                string outputString = ID.Name;
-                string tagData = GetItemTagString();
-                if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
-
-                return outputString;
+                throw new ArgumentNullException(nameof(ID) + " has to have a value to convert the item into a giveable item");
             }
+
+            string outputString = ID.Name;
+            string tagData = GetItemTagString();
+            if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
+
+            return outputString;
         }
 
         /// <summary>

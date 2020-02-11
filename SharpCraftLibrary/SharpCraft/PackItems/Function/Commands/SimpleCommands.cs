@@ -1005,11 +1005,11 @@ namespace SharpCraft.Commands
             }
             else if (MaxCount is null)
             {
-                return $"clear {Selector.GetSelectorString()} {Item.IDDataString}";
+                return $"clear {Selector.GetSelectorString()} {Item.GetIDDataString()}";
             }
             else
             {
-                return $"clear {Selector.GetSelectorString()} {Item.IDDataString} {MaxCount}";
+                return $"clear {Selector.GetSelectorString()} {Item.GetIDDataString()} {MaxCount}";
             }
         }
     }
@@ -1084,11 +1084,11 @@ namespace SharpCraft.Commands
         {
             if (count == 1)
             {
-                return $"give {Selector.GetSelectorString()} {Item.IDDataString}";
+                return $"give {Selector.GetSelectorString()} {Item.GetIDDataString()}";
             }
             else
             {
-                return $"give {Selector.GetSelectorString()} {Item.IDDataString} {Count}";
+                return $"give {Selector.GetSelectorString()} {Item.GetIDDataString()} {Count}";
             }
         }
     }

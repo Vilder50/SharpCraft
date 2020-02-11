@@ -7479,7 +7479,7 @@
             </summary>
             <returns>the .tag data. Null if there is not data there</returns>
         </member>
-        <member name="P:SharpCraft.Item.IDDataString">
+        <member name="M:SharpCraft.Item.GetIDDataString">
             <summary>
             The items raw data with id at the start
             Used for give item commands
