@@ -13,14 +13,14 @@ namespace SharpCraft.Commands
     public class DataGetCommand : BaseCommand
     {
         private IDataLocation dataLocation;
-        private double scale;
+        private double? scale;
 
         /// <summary>
         /// Intializes a new <see cref="DataGetCommand"/>
         /// </summary>
         /// <param name="dataLocation">The place to get the data from</param>
         /// <param name="scale">A number to multiply the data with</param>
-        public DataGetCommand(IDataLocation dataLocation, double scale)
+        public DataGetCommand(IDataLocation dataLocation, double? scale)
         {
             DataLocation = dataLocation;
             Scale = scale;
@@ -38,7 +38,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// A number to multiply the data with
         /// </summary>
-        public double Scale { get => scale; set => scale = value; }
+        public double? Scale { get => scale; set => scale = value; }
 
         /// <summary>
         /// Returns the command as a string
@@ -46,7 +46,14 @@ namespace SharpCraft.Commands
         /// <returns>data get [DataLocation] [Scale]</returns>
         public override string GetCommandString()
         {
-            return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
+            if (Scale is null)
+            {
+                return $"data get {DataLocation.GetLocationString()}";
+            }
+            else
+            {
+                return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
+            }
         }
     }
 

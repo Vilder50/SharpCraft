@@ -15231,12 +15231,13 @@
             <param name="objective">The objective the score to change is in</param>
             <param name="operation">The operation calculating the value the score should be set to</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.GroupCommands(SharpCraft.Function.FunctionWriter,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.GroupCommands(SharpCraft.Function.FunctionWriter,System.Boolean,System.Boolean)">
             <summary>
             If the last command is an unfinished execute command, every given command will be executed with a clone of the execute command. (All the given commands will only run if the execute command runs)
             </summary>
             <param name="writer">Writer for writing the commands</param>
-            <param name="forceFunction">Use a function instead of multiple execute commands</param>
+            <param name="useFunction">Use a function instead of multiple execute commands</param>
+            <param name="forceExecute">Don't use function no matter what</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.IfElse(SharpCraft.Commands.BaseExecuteCommand,SharpCraft.Function.FunctionWriter,SharpCraft.Function.FunctionWriter,System.String,System.String)">
             <summary>
@@ -15264,7 +15265,7 @@
             <param name="writeTo">The function to write the loop commands to</param>
             <param name="loopValue">The loop's value</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,SharpCraft.Commands.BaseExecuteCommand)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
             <summary>
             Loops through every value from "from" to and with "to"
             </summary>
@@ -15273,8 +15274,9 @@
             <param name="loopName">The name of the loop (used for function name and score name)</param>
             <param name="writer">Writer for writing commands to loop over</param>
             <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
             <summary>
             Loops through every value from "from" to and with "to"
             </summary>
@@ -15284,8 +15286,9 @@
             <param name="writer">Writer for writing commands to loop over</param>
             <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
             <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
             <summary>
             Loops through every value from "from" to and with "to"
             </summary>
@@ -15295,8 +15298,9 @@
             <param name="writer">Writer for writing commands to loop over</param>
             <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
             <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
             <summary>
             Loops through every value from "from" to and with "to"
             </summary>
@@ -15306,6 +15310,7 @@
             <param name="writer">Writer for writing commands to loop over</param>
             <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
             <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
+            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.RayCast(System.String,SharpCraft.Block,SharpCraft.Block,System.Int32,SharpCraft.Function.FunctionWriter,SharpCraft.Function.FunctionWriter)">
             <summary>
@@ -17558,7 +17563,7 @@
             Command for getting data out of a place
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.DataGetCommand.#ctor(SharpCraft.IDataLocation,System.Double)">
+        <member name="M:SharpCraft.Commands.DataGetCommand.#ctor(SharpCraft.IDataLocation,System.Nullable{System.Double})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.DataGetCommand"/>
             </summary>

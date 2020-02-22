@@ -298,33 +298,11 @@ namespace SharpCraft.FunctionWriters
         #region command grouping
         private class ExecutePrefixer : ICommandChanger
         {
-            private readonly BaseExecuteCommand prefixCommand;
-            private readonly Function writeToFunction;
-
-            public ExecutePrefixer(BaseExecuteCommand prefixCommand, Function writeToFunction)
-            {
-                this.prefixCommand = prefixCommand;
-                this.writeToFunction = writeToFunction;
-            }
-
             public bool DoneChanging { get; set; }
 
             public ICommand ChangeCommand(ICommand command)
             {
-                bool foundThis = false;
-                foreach (ICommand functionCommand in writeToFunction.Commands)
-                {
-                    if (functionCommand == this)
-                    {
-                        foundThis = true;
-                    }
-                    else if (foundThis && functionCommand is BaseExecuteCommand execute && !execute.DoneChanging)
-                    {
-                        return command;
-                    }
-                }
-                BaseExecuteCommand prefixer = (BaseExecuteCommand)prefixCommand.ShallowClone();
-                return prefixer.AddCommand(command);
+                return command;
             }
 
             public string GetCommandString()
@@ -334,7 +312,7 @@ namespace SharpCraft.FunctionWriters
 
             public BaseCommand ShallowClone()
             {
-                return prefixCommand.ShallowClone();
+                return null;
             }
         }
 
@@ -342,12 +320,13 @@ namespace SharpCraft.FunctionWriters
         /// If the last command is an unfinished execute command, every given command will be executed with a clone of the execute command. (All the given commands will only run if the execute command runs)
         /// </summary>
         /// <param name="writer">Writer for writing the commands</param>
-        /// <param name="forceFunction">Use a function instead of multiple execute commands</param>
-        public void GroupCommands(Function.FunctionWriter writer, bool forceFunction = false)
+        /// <param name="useFunction">Use a function instead of multiple execute commands</param>
+        /// <param name="forceExecute">Don't use function no matter what</param>
+        public void GroupCommands(Function.FunctionWriter writer, bool useFunction = false, bool forceExecute = false)
         {
             if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                if (forceFunction || Function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands()))
+                if (!forceExecute && (useFunction || Function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands())))
                 {
                     Function.World.Function(Function.NewSibling(writer, Function.Setting));
                 }
@@ -356,9 +335,22 @@ namespace SharpCraft.FunctionWriters
                     BaseExecuteCommand executeCommand = (BaseExecuteCommand)execute.ShallowClone();
                     int prefixLocation = Function.Commands.Count - 1;
                     Function.Commands.RemoveAt(prefixLocation);
-                    ExecutePrefixer prefixer = new ExecutePrefixer(executeCommand, Function);
-                    Function.AddCommand(new ExecutePrefixer(executeCommand, Function));
+                    ExecutePrefixer prefixer = new ExecutePrefixer();
+                    Function.AddCommand(prefixer);
                     writer(Function);
+                    bool foundPrefixer = false;
+                    for (int i = 0; i < Function.Commands.Count; i++)
+                    {
+                        if (foundPrefixer)
+                        {
+                            BaseExecuteCommand prefixWith = (BaseExecuteCommand)executeCommand.ShallowClone();
+                            Function.Commands[i] = prefixWith.AddCommand(Function.Commands[i]);
+                        }
+                        else if (Function.Commands[i] == prefixer)
+                        {
+                            foundPrefixer = true;
+                        }
+                    }
                     prefixer.DoneChanging = true;
                     Function.Commands.RemoveAt(prefixLocation);
                 }
@@ -451,13 +443,14 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand nextExecute = null)
+        /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
+        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
         {
             if (from == to)
             {
                 throw new ArgumentException("From and To has the same value so a loop isn't needed.");
             }
-            CreateForLoop(from, null, to, null, loopName, writer, from < to, nextExecute);
+            CreateForLoop(from, null, to, null, loopName, writer, from < to, nextExecute, stopAtTo);
         }
 
         /// <summary>
@@ -469,9 +462,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
+        /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
+        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
         {
-            CreateForLoop(0, from, to, null, loopName, writer, positive, nextExecute);
+            CreateForLoop(0, from, to, null, loopName, writer, positive, nextExecute, stopAtTo);
         }
 
 
@@ -484,9 +478,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
+        /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
+        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
         {
-            CreateForLoop(from, null, 0, to, loopName, writer, positive, nextExecute);
+            CreateForLoop(from, null, 0, to, loopName, writer, positive, nextExecute, stopAtTo);
         }
 
         /// <summary>
@@ -498,12 +493,13 @@ namespace SharpCraft.FunctionWriters
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
+        /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
+        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
         {
-            CreateForLoop(0, from, 0, to, loopName, writer, positive, nextExecute);
+            CreateForLoop(0, from, 0, to, loopName, writer, positive, nextExecute, stopAtTo);
         }
 
-        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand nextExecute)
+        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand nextExecute, bool stopAtTo)
         {
             if (!(nextExecute is null) && nextExecute.HasEndCommand())
             {
@@ -527,23 +523,17 @@ namespace SharpCraft.FunctionWriters
                 {
                     if (positive)
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(null, to));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(null, to - (stopAtTo ? 1 : 0)));
                     }
                     else
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(to, null));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(to + (stopAtTo ? 1 : 0), null));
                     }
                 }
                 else
                 {
-                    if (positive)
-                    {
-                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.SmallerOrEquel, toValue, toValue);
-                    }
-                    else
-                    {
-                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.HigherOrEquel, toValue, toValue);
-                    }
+                    ID.IfScoreOperation useOperator = (positive ? (stopAtTo ? ID.IfScoreOperation.Smaller : ID.IfScoreOperation.SmallerOrEquel) : (stopAtTo ? ID.IfScoreOperation.Higher : ID.IfScoreOperation.HigherOrEquel));
+                    testCommand = new ExecuteIfScoreRelative(loopSelector, math, useOperator, toValue, toValue);
                 }
                 if (!(fromValue is null && toValue is null))
                 {
