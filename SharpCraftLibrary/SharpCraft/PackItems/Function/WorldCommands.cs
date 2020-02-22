@@ -23,6 +23,7 @@ namespace SharpCraft.FunctionWriters
             Border = new ClassBorder(function);
             BossBar = new ClassBossBar(function);
             LoadSquare = new ClassLoadSquare(function);
+            Data = new ClassData(function);
         }
 
         /// <summary>

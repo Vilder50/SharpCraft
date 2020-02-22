@@ -15888,23 +15888,11 @@
             <param name="entity">The <see cref="T:SharpCraft.BaseSelector"/> to execute at</param>
             <returns>The function running the command</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.BaseSelector,System.String,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.IDataLocation,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
             <summary>
             Stores the command's success output inside the <see cref="T:SharpCraft.Entity"/>
             </summary>
-            <param name="entity">the <see cref="T:SharpCraft.BaseSelector"/> which choses the <see cref="T:SharpCraft.Entity"/></param>
-            <param name="dataPath">the datapath to store the output in</param>
-            <param name="dataType">the path to the place to store the score</param>
-            <param name="scale">the number the output should be multiplied with before being inserted</param>
-            <param name="storeSucces">true if it only should store if the command was successfull</param>
-            <returns>The function running the command</returns>
-        </member>
-        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.Vector,System.String,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
-            <summary>
-            Stores the command's success output inside the <see cref="T:SharpCraft.Block"/>
-            </summary>
-            <param name="blockCoords">the coords of the <see cref="T:SharpCraft.Block"/> to store the output in</param>
-            <param name="dataPath">the datapath to store the output in</param>
+            <param name="dataLocation">the location to store the result at</param>
             <param name="dataType">the path to the place to store the score</param>
             <param name="scale">the number the output should be multiplied with before being inserted</param>
             <param name="storeSucces">true if it only should store if the command was successfull</param>
@@ -18625,47 +18613,6 @@
             </summary>
             <returns>rotated as [selector]</returns>
         </member>
-        <member name="T:SharpCraft.Commands.ExecuteStoreBlock">
-            <summary>
-            Execute command used for storing the result of the command
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Commands.ExecuteStoreBlock.#ctor(SharpCraft.Vector,System.String,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.Commands.ExecuteStoreBlock"/> command
-            </summary>
-            <param name="coordinates">The position of the block to store the result in</param>
-            <param name="dataPath">The path to store the result at</param>
-            <param name="valueType">The type of number to store the result as</param>
-            <param name="scale">A number to multiply the result by before storing it</param>
-            <param name="storeResult">True if it should store the result. False if it should store success</param>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreBlock.Coordinates">
-            <summary>
-            The position of the block to store the result in
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreBlock.DataPath">
-            <summary>
-            The path to store the result at
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreBlock.ValueType">
-            <summary>
-            The type of number to store the result as
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreBlock.Scale">
-            <summary>
-            A number to multiply the result by before storing it
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Commands.ExecuteStoreBlock.GetStorePart">
-            <summary>
-            Returns the part of the execute command there is special for this command
-            </summary>
-            <returns>block [Coordinates] [Path] [ValueType] [Scale]</returns>
-        </member>
         <member name="T:SharpCraft.Commands.ExecuteStoreBossbar">
             <summary>
             Execute command used for storing the result of the command
@@ -18695,46 +18642,40 @@
             </summary>
             <returns>bossbar [Bossbar] [StoreAsValue]</returns>
         </member>
-        <member name="T:SharpCraft.Commands.ExecuteStoreEntity">
+        <member name="T:SharpCraft.Commands.ExecuteStoreData">
             <summary>
             Execute command used for storing the result of the command
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ExecuteStoreEntity.#ctor(SharpCraft.BaseSelector,System.String,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
+        <member name="M:SharpCraft.Commands.ExecuteStoreData.#ctor(SharpCraft.IDataLocation,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.Commands.ExecuteStoreEntity"/> command
+            Intializes a new <see cref="T:SharpCraft.Commands.ExecuteStoreData"/> command
             </summary>
-            <param name="selector">selector for selecting the entity to store the result on</param>
-            <param name="dataPath">The path to store the result at</param>
+            <param name="dataLocation">The location to store the result in</param>
             <param name="valueType">The type of number to store the result as</param>
             <param name="scale">A number to multiply the result by before storing it</param>
             <param name="storeResult">True if it should store the result. False if it should store success</param>
         </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreEntity.Selector">
-            <summary>
-            selector for selecting the entity to store the result on
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreEntity.DataPath">
-            <summary>
-            The path to store the result at
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreEntity.ValueType">
+        <member name="P:SharpCraft.Commands.ExecuteStoreData.ValueType">
             <summary>
             The type of number to store the result as
             </summary>
         </member>
-        <member name="P:SharpCraft.Commands.ExecuteStoreEntity.Scale">
+        <member name="P:SharpCraft.Commands.ExecuteStoreData.Scale">
             <summary>
             A number to multiply the result by before storing it
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ExecuteStoreEntity.GetStorePart">
+        <member name="P:SharpCraft.Commands.ExecuteStoreData.DataLocation">
+            <summary>
+            The location to store the result in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.ExecuteStoreData.GetStorePart">
             <summary>
             Returns the part of the execute command there is special for this command
             </summary>
-            <returns>entity [Selector] [Path] [ValueType] [Scale]</returns>
+            <returns>[DataLocation.String] [ValueType] [Scale]</returns>
         </member>
         <member name="T:SharpCraft.Commands.ExecuteStoreScore">
             <summary>

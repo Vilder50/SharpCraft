@@ -238,31 +238,14 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Stores the command's success output inside the <see cref="Entity"/>
         /// </summary>
-        /// <param name="entity">the <see cref="BaseSelector"/> which choses the <see cref="Entity"/></param>
-        /// <param name="dataPath">the datapath to store the output in</param>
+        /// <param name="dataLocation">the location to store the result at</param>
         /// <param name="dataType">the path to the place to store the score</param>
         /// <param name="scale">the number the output should be multiplied with before being inserted</param>
         /// <param name="storeSucces">true if it only should store if the command was successfull</param>
         /// <returns>The function running the command</returns>
-        public Function Store(BaseSelector entity, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
+        public Function Store(IDataLocation dataLocation, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
         {
-            entity.LimitSelector();
-            Function.AddCommand(new ExecuteStoreEntity(entity, dataPath, dataType, scale, !storeSucces));
-            return Function;
-        }
-
-        /// <summary>
-        /// Stores the command's success output inside the <see cref="Block"/>
-        /// </summary>
-        /// <param name="blockCoords">the coords of the <see cref="Block"/> to store the output in</param>
-        /// <param name="dataPath">the datapath to store the output in</param>
-        /// <param name="dataType">the path to the place to store the score</param>
-        /// <param name="scale">the number the output should be multiplied with before being inserted</param>
-        /// <param name="storeSucces">true if it only should store if the command was successfull</param>
-        /// <returns>The function running the command</returns>
-        public Function Store(Vector blockCoords, string dataPath, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
-        {
-            Function.AddCommand(new ExecuteStoreBlock(blockCoords, dataPath, dataType, scale, !storeSucces));
+            Function.AddCommand(new ExecuteStoreData(dataLocation, dataType, scale, !storeSucces));
             return Function;
         }
 
