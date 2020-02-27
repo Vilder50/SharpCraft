@@ -14990,11 +14990,6 @@
             All the block commands
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.BlockCommands.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.BlockCommands.Add(SharpCraft.Vector,SharpCraft.Block,SharpCraft.ID.BlockAdd)">
             <summary>
             Adds a <see cref="T:SharpCraft.Block"/> at the given coords
@@ -15066,11 +15061,6 @@
             The data commands
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.BlockCommands.ClassData.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassData.Change(SharpCraft.Vector,SharpCraft.Data.SimpleDataHolder)">
             <summary>
             Adds the given data to the <see cref="T:SharpCraft.Block"/>
@@ -15129,14 +15119,25 @@
             <param name="index">The index to copy the data to</param>
             <param name="dataLocation">The place to copy the data from</param>
         </member>
+        <member name="T:SharpCraft.FunctionWriters.CommandList">
+            <summary>
+            Base class for command lists
+            </summary>
+        </member>
+        <member name="P:SharpCraft.FunctionWriters.CommandList.ForFunction">
+            <summary>
+            The function to write onto
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CommandList.#ctor(SharpCraft.Function)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.FunctionWriters.CommandList"/>
+            </summary>
+            <param name="function">The function to write onto</param>
+        </member>
         <member name="T:SharpCraft.FunctionWriters.CustomCommands">
             <summary>
             All custom commands
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.CustomCommands.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="T:SharpCraft.FunctionWriters.CustomCommands.TreeSearchCommand">
@@ -15347,11 +15348,6 @@
             Commands for randomness
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.ExecuteIfRandom(System.Double,System.Boolean)">
             <summary>
             Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
@@ -15378,11 +15374,6 @@
         <member name="T:SharpCraft.FunctionWriters.EntityCommands">
             <summary>
             All the entity commands
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.Add(SharpCraft.Vector,SharpCraft.Entity.BaseEntity)">
@@ -15472,11 +15463,6 @@
             All commands using entity data
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassData.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassData.Change(SharpCraft.BaseSelector,SharpCraft.Data.SimpleDataHolder)">
             <summary>
             Adds the data from <paramref name="newEntity"/> to the selected entity
@@ -15545,11 +15531,6 @@
             All commands for entity tags
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassTag.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassTag.Add(SharpCraft.BaseSelector,SharpCraft.Tag)">
             <summary>
             Adds the specified tag the selected entities
@@ -15572,11 +15553,6 @@
         <member name="T:SharpCraft.FunctionWriters.EntityCommands.ClassScore">
             <summary>
             All commands for entity scores
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Add(SharpCraft.BaseSelector,SharpCraft.Objective,System.Int32)">
@@ -15638,11 +15614,6 @@
             All commands for effects
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassEffect.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassEffect.Clear(SharpCraft.BaseSelector,System.Nullable{SharpCraft.ID.Effect})">
             <summary>
             Clears the specified effect from the selected entities
@@ -15668,11 +15639,6 @@
         <member name="T:SharpCraft.FunctionWriters.EntityCommands.ClassItem">
             <summary>
             All commands for items
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassItem.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassItem.Armor(SharpCraft.BaseSelector,SharpCraft.Item,SharpCraft.ID.ArmorSlot)">
@@ -15746,11 +15712,6 @@
         <member name="T:SharpCraft.FunctionWriters.ExecuteCommands">
             <summary>
             All the execute commands
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.ExecuteCommands.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Stop">
@@ -15969,11 +15930,6 @@
             All the player commands
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="F:SharpCraft.FunctionWriters.PlayerCommands.XP">
             <summary>
             All commands for levels and xp
@@ -15982,11 +15938,6 @@
         <member name="T:SharpCraft.FunctionWriters.PlayerCommands.ClassXP">
             <summary>
             All commands for levels and xp
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassXP.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassXP.LevelsAdd(SharpCraft.BaseSelector,System.Int32)">
@@ -16096,11 +16047,6 @@
             All commands for particles
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassParticle.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassParticle.Normal(SharpCraft.ID.Particle,SharpCraft.Vector,SharpCraft.Vector,System.Double,System.Int32,System.Boolean,SharpCraft.BaseSelector)">
             <summary>
             Makes particles appear in the world
@@ -16159,11 +16105,6 @@
         <member name="T:SharpCraft.FunctionWriters.PlayerCommands.ClassItem">
             <summary>
             All commands for items
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassItem.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassItem.GiveItem(SharpCraft.BaseSelector,SharpCraft.Item)">
@@ -16252,11 +16193,6 @@
             All commands for sounds
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassSound.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassSound.Play(SharpCraft.BaseSelector,System.String,SharpCraft.ID.SoundSource,SharpCraft.Vector,System.Double,System.Double,System.Double)">
             <summary>
             Plays a sound for the selected players
@@ -16286,11 +16222,6 @@
         <member name="T:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle">
             <summary>
             All commands for titles
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Title(SharpCraft.BaseSelector,SharpCraft.JsonText)">
@@ -16350,11 +16281,6 @@
             All commands for recipes
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassRecipe.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassRecipe.Give(SharpCraft.BaseSelector,SharpCraft.IRecipe)">
             <summary>
             Give a recipe to the selected players
@@ -16389,11 +16315,6 @@
         <member name="T:SharpCraft.FunctionWriters.PlayerCommands.ClassAdvancement">
             <summary>
             All commands for advancements
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.PlayerCommands.ClassAdvancement.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassAdvancement.Everything(SharpCraft.BaseSelector,System.Boolean)">
@@ -16443,11 +16364,6 @@
         <member name="T:SharpCraft.FunctionWriters.WorldCommands">
             <summary>
             All commands for the world
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ToFunction">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.Spawn(SharpCraft.Vector)">
@@ -16658,11 +16574,6 @@
             All commands for scoreboards
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Add(System.String,System.String,SharpCraft.JsonText)">
             <summary>
             Adds the specified <see cref="T:SharpCraft.Objective"/> to the world
@@ -16716,11 +16627,6 @@
         <member name="T:SharpCraft.FunctionWriters.WorldCommands.ClassTeam">
             <summary>
             All commands for teams
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Add(System.String,SharpCraft.JsonText,System.Nullable{SharpCraft.ID.MinecraftColor})">
@@ -16817,11 +16723,6 @@
             All commands for datapacks
             </summary>
         </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassDatapack.Function">
-            <summary>
-            The function to write onto
-            </summary>
-        </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassDatapack.Disable(SharpCraft.BaseDatapack)">
             <summary>
             Disables the specified <see cref="T:SharpCraft.Datapack"/>
@@ -16844,11 +16745,6 @@
         <member name="T:SharpCraft.FunctionWriters.WorldCommands.ClassTime">
             <summary>
             All commands for time
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Add(SharpCraft.Time)">
@@ -16888,11 +16784,6 @@
         <member name="T:SharpCraft.FunctionWriters.WorldCommands.ClassBorder">
             <summary>
             All commands for the world border
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Add(System.Double,SharpCraft.Time)">
@@ -16945,11 +16836,6 @@
         <member name="T:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar">
             <summary>
             All commands for boss bars
-            </summary>
-        </member>
-        <member name="P:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Function">
-            <summary>
-            The function to write onto
             </summary>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Add(System.String,SharpCraft.JsonText)">

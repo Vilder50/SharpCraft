@@ -10,17 +10,11 @@ namespace SharpCraft.FunctionWriters
     /// <summary>
     /// All custom commands
     /// </summary>
-    public class CustomCommands
+    public class CustomCommands : CommandList
     {
-        /// <summary>
-        /// The function to write onto
-        /// </summary>
-        public Function Function { get; private set; }
-
-        internal CustomCommands(Function parentFunction)
+        internal CustomCommands(Function parentFunction) : base(parentFunction)
         {
-            Function = parentFunction;
-            Random = new ClassRandom(Function);
+            Random = new ClassRandom(ForFunction);
         }
 
         #region tree search
@@ -70,7 +64,7 @@ namespace SharpCraft.FunctionWriters
 
             GroupCommands(f => 
             { 
-                WriteTreeSearch(Function, method, command, minimum, maximum, branches, true);
+                WriteTreeSearch(ForFunction, method, command, minimum, maximum, branches, true);
             });
         }
 
@@ -290,7 +284,7 @@ namespace SharpCraft.FunctionWriters
         {
             GroupCommands(f =>
             {
-                operation.WriteCommands(Function, new ScoreValue(selector, objective));
+                operation.WriteCommands(ForFunction, new ScoreValue(selector, objective));
             });
         }
         #endregion
@@ -324,40 +318,40 @@ namespace SharpCraft.FunctionWriters
         /// <param name="forceExecute">Don't use function no matter what</param>
         public void GroupCommands(Function.FunctionWriter writer, bool useFunction = false, bool forceExecute = false)
         {
-            if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                if (!forceExecute && (useFunction || Function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands())))
+                if (!forceExecute && (useFunction || ForFunction.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands())))
                 {
-                    Function.World.Function(Function.NewSibling(writer, Function.Setting));
+                    ForFunction.World.Function(ForFunction.NewSibling(writer, ForFunction.Setting));
                 }
                 else
                 {
                     BaseExecuteCommand executeCommand = (BaseExecuteCommand)execute.ShallowClone();
-                    int prefixLocation = Function.Commands.Count - 1;
-                    Function.Commands.RemoveAt(prefixLocation);
+                    int prefixLocation = ForFunction.Commands.Count - 1;
+                    ForFunction.Commands.RemoveAt(prefixLocation);
                     ExecutePrefixer prefixer = new ExecutePrefixer();
-                    Function.AddCommand(prefixer);
-                    writer(Function);
+                    ForFunction.AddCommand(prefixer);
+                    writer(ForFunction);
                     bool foundPrefixer = false;
-                    for (int i = 0; i < Function.Commands.Count; i++)
+                    for (int i = 0; i < ForFunction.Commands.Count; i++)
                     {
                         if (foundPrefixer)
                         {
                             BaseExecuteCommand prefixWith = (BaseExecuteCommand)executeCommand.ShallowClone();
-                            Function.Commands[i] = prefixWith.AddCommand(Function.Commands[i]);
+                            ForFunction.Commands[i] = prefixWith.AddCommand(ForFunction.Commands[i]);
                         }
-                        else if (Function.Commands[i] == prefixer)
+                        else if (ForFunction.Commands[i] == prefixer)
                         {
                             foundPrefixer = true;
                         }
                     }
                     prefixer.DoneChanging = true;
-                    Function.Commands.RemoveAt(prefixLocation);
+                    ForFunction.Commands.RemoveAt(prefixLocation);
                 }
             }
             else
             {
-                writer(Function);
+                writer(ForFunction);
             }
         }
         #endregion
@@ -389,12 +383,12 @@ namespace SharpCraft.FunctionWriters
             {
                 f.AddCommand(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 0));
                 f.AddCommand(testCommand);
-                Function ifFunction = f.World.Function(Function.NewSibling(ifFunctionName, ifWriter)) as Function;
+                Function ifFunction = f.World.Function(ForFunction.NewSibling(ifFunctionName, ifWriter)) as Function;
                 ifFunction.Commands.Add(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 1));
                 ifFunction.Dispose();
 
                 f.AddCommand(new ExecuteIfScoreMatches(ifElseSelector, math, 0));
-                Function elseFunction = f.World.Function(Function.NewSibling(elseFunctionName, elseWriter)) as Function;
+                Function elseFunction = f.World.Function(ForFunction.NewSibling(elseFunctionName, elseWriter)) as Function;
                 elseFunction.Dispose();
             });
         }
@@ -423,8 +417,8 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException(nameof(loopWriter), "LoopWriter may not be null");
             }
 
-            Function.AddCommand(testCommand.ShallowClone());
-            Function loopFunction = Function.World.Function(Function.NewSibling(loopName, loopWriter)) as Function;
+            ForFunction.AddCommand(testCommand.ShallowClone());
+            Function loopFunction = ForFunction.World.Function(ForFunction.NewSibling(loopName, loopWriter)) as Function;
             loopFunction.Commands.Add(testCommand.AddCommand(new RunFunctionCommand(loopFunction)));
         }
 
@@ -604,8 +598,8 @@ namespace SharpCraft.FunctionWriters
             var (raySetup, xRotation, yRotation, rayState, predicates) = SharpCraftFiles.GetRayFiles();
 
             //execute as ray entity
-            Function.Execute.As(SharpCraftFiles.GetDummySelector());
-            Function.World.Function(Function.NewSibling(rayName + "\\start", startRay => 
+            ForFunction.Execute.As(SharpCraftFiles.GetDummySelector());
+            ForFunction.World.Function(ForFunction.NewSibling(rayName + "\\start", startRay => 
             {
                 startRay.World.Function(raySetup);
                 startRay.Custom.ForLoop(0, length - 1, "rStep", (step, stepValue) =>
@@ -730,7 +724,7 @@ namespace SharpCraft.FunctionWriters
                     }));
                 }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
             }));
-            Function.Entity.Teleport(SharpCraftFiles.GetDummySelector(), SharpCraftSettings.OwnedChunk * 16);
+            ForFunction.Entity.Teleport(SharpCraftFiles.GetDummySelector(), SharpCraftSettings.OwnedChunk * 16);
         }
 
         /// <summary>
@@ -752,7 +746,7 @@ namespace SharpCraft.FunctionWriters
             int boxes = 2;
             Function getStep(double number, int depth)
             {
-                Function outFunction = Function.NewSibling(rayName + "\\r" + depth);
+                Function outFunction = ForFunction.NewSibling(rayName + "\\r" + depth);
 
                 if (number > boxes)
                 {
@@ -806,23 +800,23 @@ namespace SharpCraft.FunctionWriters
             {
                 if (!(hit is null))
                 {
-                    Function.Execute.As(hit);
+                    ForFunction.Execute.As(hit);
                 }
                 else
                 {
-                    Function.Execute.As(ID.Selector.e);
+                    ForFunction.Execute.As(ID.Selector.e);
                 }
                 if (!(ignore is null))
                 {
                     Selector selector = ignore.ShallowClone();
                     selector.SelectorType = ID.Selector.s;
-                    Function.Execute.IfEntity(selector, false);
+                    ForFunction.Execute.IfEntity(selector, false);
                 }
-                Function.World.Function(getStep(length, 0));
+                ForFunction.World.Function(getStep(length, 0));
             }
             else
             {
-                Function.World.Function(Function.NewSibling(rayName + "\\start", start =>
+                ForFunction.World.Function(ForFunction.NewSibling(rayName + "\\start", start =>
                 {
                     start.Entity.Tag.Add(ID.Selector.s, rayShooterTag);
                     if (!(hit is null))
@@ -867,15 +861,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Commands for randomness
         /// </summary>
-        public class ClassRandom
+        public class ClassRandom : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassRandom(Function function)
+            internal ClassRandom(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -890,8 +880,8 @@ namespace SharpCraft.FunctionWriters
                 {
                     throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
                 }
-                Function.Execute.IfPredicate(SharpCraftFiles.GetRandomPredicate(chance), want);
-                return Function;
+                ForFunction.Execute.IfPredicate(SharpCraftFiles.GetRandomPredicate(chance), want);
+                return ForFunction;
             }
 
             /// <summary>
@@ -912,7 +902,7 @@ namespace SharpCraft.FunctionWriters
                     throw new ArgumentOutOfRangeException("To generate a number the difference between From and To may not be higher than int max value.");
                 }
                 ScoreValue randomHolder = null;
-                Function.Custom.GroupCommands((g) =>
+                ForFunction.Custom.GroupCommands((g) =>
                 {
                     g.World.Function(SharpCraftFiles.GetRandomNumberFunction());
                     randomHolder = SharpCraftFiles.GetRandomHolder();
@@ -935,7 +925,7 @@ namespace SharpCraft.FunctionWriters
                 }
 
                 var (function, location) = SharpCraftFiles.GetHashFunction();
-                Function.Custom.GroupCommands(g =>
+                ForFunction.Custom.GroupCommands(g =>
                 {
                     g.Execute.Store(new BlockDataLocation(location, Data.DataPath.GetDataPath<Block.ShulkerBox>(b => b.DLootTableSeed).ToString()), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
