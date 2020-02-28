@@ -8,6 +8,58 @@
 #pragma warning disable 1591
         public enum Block
         {
+            ancient_debris,
+            basalt,
+            netherite_block,
+            crimson_fungus,
+            crimson_nylium,
+            crimson_sign,
+            crimson_wall_sign,
+            stripped_crimson_stem,
+            crimson_planks,
+            crimson_stem,
+            crimson_pressure_plate,
+            crimson_trapdoor,
+            crimson_stairs,
+            crimson_button,
+            crimson_slab,
+            crimson_fence_gate,
+            crimson_fence,
+            crimson_door,
+            crimson_roots,
+            potted_crimson_fungus,
+            potted_crimson_roots,
+            warped_fungus,
+            warped_nylium,
+            warped_sign,
+            warped_wall_sign,
+            stripped_warped_stem,
+            warped_planks,
+            warped_stem,
+            warped_pressure_plate,
+            warped_trapdoor,
+            warped_stairs,
+            warped_button,
+            warped_slab,
+            warped_fence_gate,
+            warped_fence,
+            warped_door,
+            warped_roots,
+            warped_wart_block,
+            potted_warped_fungus,
+            potted_warped_roots,
+            crying_obsidian,
+            nether_sprouts,
+            shroomlight,
+            soul_fire,
+            soul_fire_lantern,
+            soul_fire_touch,
+            soul_fire_wall_touch,
+            target,
+            weeping_vines,
+            weeping_vines_plant,
+            soul_soil,
+
             beehive,
             bee_nest,
             honey_block,
@@ -673,6 +725,7 @@
             structure_block,
             BlockEnumEnd,
         }
+
         public enum Liquid
         {
             emtpty,
@@ -686,6 +739,22 @@
         public enum StructureMode { data, save, load, corner }
         public enum FacingFull { down, up, north, south, west, east }
         public enum PistonType { normal, sticky }
+
+        public enum StateWallConnection
+        {
+            /// <summary>
+            /// Wall isn't connected
+            /// </summary>
+            none,
+            /// <summary>
+            /// Wall is connected. But no connection upwards.
+            /// </summary>
+            low,
+            /// <summary>
+            /// Wall is connected upwards
+            /// </summary>
+            tall,
+        }
 
         public enum StateCompareMode
         {

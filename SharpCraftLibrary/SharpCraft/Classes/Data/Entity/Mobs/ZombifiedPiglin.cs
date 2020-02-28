@@ -7,13 +7,13 @@ namespace SharpCraft
         /// <summary>
         /// Entity data for zombie pigmen
         /// </summary>
-        public class ZombiePigman : Zombie
+        public class ZombifiedPiglin : Zombie
         {
             /// <summary>
             /// Creates a new zombie pigman
             /// </summary>
             /// <param name="type">the type of entity</param>
-            public ZombiePigman(ID.Entity? type = ID.Entity.zombie_pigman) : base(type) { }
+            public ZombifiedPiglin(ID.Entity? type = ID.Entity.zombified_piglin) : base(type) { }
 
             /// <summary>
             /// The time till the zombie pigman stops being angry (0 or smaller if not angry)

@@ -126,6 +126,11 @@ namespace SharpCraft
                 public static string CatMorningGift { get => "gameplay\\cat_morning_gift"; }
 
                 /// <summary>
+                /// Loot table for when bartering with piglins
+                /// </summary>
+                public static string PiglinBartering { get => "gameplay\\piglin_bartering"; }
+
+                /// <summary>
                 /// Loot tables Minecraft uses for chest loot
                 /// </summary>
                 public static class Chest
@@ -241,7 +246,9 @@ namespace SharpCraft
                         tall_flowers,
                         standing_signs,
                         wall_signs,
-                        walls
+                        walls,
+                        warped_stems,
+                        crimson_stems,
                         #pragma warning restore 1591
                     }
 
@@ -355,7 +362,42 @@ namespace SharpCraft
                         /// <summary>
                         /// Water doesn't break these blocks
                         /// </summary>
-                        signs
+                        signs,
+
+                        /// <summary>
+                        /// Blocks for building a beacon pyramid
+                        /// </summary>
+                        beacon_base_blocks,
+
+                        /// <summary>
+                        /// Make blocks climbable
+                        /// </summary>
+                        climbable,
+
+                        /// <summary>
+                        /// Blocks which can be broken with water bottle water. Falling blocks will try to fall through these blocks. 
+                        /// </summary>
+                        fire,
+
+                        /// <summary>
+                        /// Blocks nether fungus, roots and sprouts can be placed on. Netherrack can be bonemealed if around of these blocks (netherrack only converts into nylium).
+                        /// </summary>
+                        nylium,
+
+                        /// <summary>
+                        /// none solid blocks which still makes walls connect upwards.
+                        /// </summary>
+                        wall_post_override,
+
+                        /// <summary>
+                        /// Hoes destroy these blocks 15 times faster.
+                        /// </summary>
+                        wart_blocks,
+
+                        /// <summary>
+                        /// Blocks used for making the T part of the wither summon build.
+                        /// </summary>
+                        wither_summon_base_blocks,
                     }
                 }
 
@@ -413,7 +455,9 @@ namespace SharpCraft
                         spruce_logs,
                         stairs,
                         stone_bricks,
-                        tall_flowers
+                        tall_flowers,
+                        warped_stems,
+                        crimson_stems,
                         #pragma warning restore 1591
                     }
 
@@ -503,6 +547,10 @@ namespace SharpCraft
                         /// Items which burns in a furnace for 100 ticks
                         /// </summary>
                         wool,
+                        /// <summary>
+                        /// Items which can be used for activating beacons.
+                        /// </summary>
+                        beacon_payment_items,
                     }
                 }
 
@@ -536,7 +584,12 @@ namespace SharpCraft
                         /// Entities which glows when the bell rings.
                         /// Entities which don't override ravager AI when riding on one
                         /// </summary>
-                        raiders
+                        raiders,
+
+                        /// <summary>
+                        /// Entities which can break chorus fruit.
+                        /// </summary>
+                        impact_projectiles,
                     }
                 }
             }

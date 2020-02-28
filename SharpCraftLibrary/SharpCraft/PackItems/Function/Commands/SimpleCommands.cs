@@ -238,13 +238,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which locates where the closest structure of the given type is at
     /// </summary>
-    public class LocateCommand : BaseCommand
+    public class LocateStructureCommand : BaseCommand
     {
         /// <summary>
-        /// Intializes a new <see cref="LocateCommand"/>
+        /// Intializes a new <see cref="LocateStructureCommand"/>
         /// </summary>
         /// <param name="structure">The structure to locate</param>
-        public LocateCommand(ID.Structure structure)
+        public LocateStructureCommand(ID.Structure structure)
         {
             Structure = structure;
         }
@@ -261,6 +261,35 @@ namespace SharpCraft.Commands
         public override string GetCommandString()
         {
             return $"locate {Structure}";
+        }
+    }
+
+    /// <summary>
+    /// Command which locates where the closest biome of the given type is at
+    /// </summary>
+    public class LocateBiomeCommand : BaseCommand
+    {
+        /// <summary>
+        /// Intializes a new <see cref="LocateBiomeCommand"/>
+        /// </summary>
+        /// <param name="biome">The biome to locate</param>
+        public LocateBiomeCommand(ID.Biome biome)
+        {
+            Biome = biome;
+        }
+
+        /// <summary>
+        /// The structure to locate
+        /// </summary>
+        public ID.Biome Biome { get; set; }
+
+        /// <summary>
+        /// Returns the command as a string
+        /// </summary>
+        /// <returns>locatebiome [Biome]</returns>
+        public override string GetCommandString()
+        {
+            return $"locatebiome {Biome}";
         }
     }
 

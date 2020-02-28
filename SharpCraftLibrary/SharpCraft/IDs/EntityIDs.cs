@@ -8,6 +8,9 @@
 #pragma warning disable 1591
         public enum Entity
         {
+            zombified_piglin,
+            piglin,
+            hoglin,
             bee,
             fox,
             trader_llama,
@@ -107,7 +110,6 @@
             experience_orb,
             zombie,
             zombie_horse,
-            zombie_pigman,
             zombie_villager,
             EntityEnumEnd
         }

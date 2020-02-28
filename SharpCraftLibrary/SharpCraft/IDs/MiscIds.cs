@@ -27,6 +27,13 @@
         }
         public enum Particle
         {
+            ash,
+            crimson_spore,
+            soul_fire_flame,
+            warped_spore,
+            dripping_obsidian_tear,
+            falling_obsidian_tear,
+            landing_obsidian_tear,
             dripping_honey,
             falling_honey,
             falling_nectar,

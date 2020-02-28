@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for wall blocks
         /// </summary>
-        public class Wall : Block, IBlock.IConnectedCardinal, IBlock.IWaterLogged
+        public class Wall : Block, IBlock.IWaterLogged
         {
             /// <summary>
             /// Creates a new wall block
@@ -32,25 +32,25 @@ namespace SharpCraft
             /// If the block is connected in this direction
             /// </summary>
             [BlockState("east")]
-            public bool? SEast { get; set; }
+            public ID.StateWallConnection? SEast { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
             [BlockState("north")]
-            public bool? SNorth { get; set; }
+            public ID.StateWallConnection? SNorth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
             [BlockState("south")]
-            public bool? SSouth { get; set; }
+            public ID.StateWallConnection? SSouth { get; set; }
 
             /// <summary>
             /// If the block is connected in this direction
             /// </summary>
             [BlockState("west")]
-            public bool? SWest { get; set; }
+            public ID.StateWallConnection? SWest { get; set; }
 
             /// <summary>
             /// If the block is water logged
@@ -62,7 +62,7 @@ namespace SharpCraft
             /// If the block is connected in this direction
             /// </summary>
             [BlockState("up")]
-            public bool? SUp { get; set; }
+            public ID.StateWallConnection? SUp { get; set; }
         }
     }
 }

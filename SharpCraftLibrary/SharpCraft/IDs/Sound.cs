@@ -36,6 +36,126 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
+                public static class Stem
+                {
+                    public static string Break { get; } = "block.stem.break";
+                    public static string Fall { get; } = "block.stem.fall";
+                    public static string Hit { get; } = "block.stem.hit";
+                    public static string Place { get; } = "block.stem.place";
+                    public static string Step { get; } = "block.stem.step";
+                }
+                public static class SoulSoul
+                {
+                    public static string Break { get; } = "block.soul_soul.break";
+                    public static string Fall { get; } = "block.soul_soul.fall";
+                    public static string Hit { get; } = "block.soul_soul.hit";
+                    public static string Place { get; } = "block.soul_soul.place";
+                    public static string Step { get; } = "block.soul_soul.step";
+                }
+                public static class SoulSand
+                {
+                    public static string Break { get; } = "block.soul_sand.break";
+                    public static string Fall { get; } = "block.soul_sand.fall";
+                    public static string Hit { get; } = "block.soul_sand.hit";
+                    public static string Place { get; } = "block.soul_sand.place";
+                    public static string Step { get; } = "block.soul_sand.step";
+                }
+                public static class Shroomlight
+                {
+                    public static string Break { get; } = "block.shroomlight.break";
+                    public static string Fall { get; } = "block.shroomlight.fall";
+                    public static string Hit { get; } = "block.shroomlight.hit";
+                    public static string Place { get; } = "block.shroomlight.place";
+                    public static string Step { get; } = "block.shroomlight.step";
+                }
+                public static class Roots
+                {
+                    public static string Break { get; } = "block.roots.break";
+                    public static string Fall { get; } = "block.roots.fall";
+                    public static string Hit { get; } = "block.roots.hit";
+                    public static string Place { get; } = "block.roots.place";
+                    public static string Step { get; } = "block.roots.step";
+                }
+                public static class Nylium
+                {
+                    public static string Break { get; } = "block.nylium.break";
+                    public static string Fall { get; } = "block.nylium.fall";
+                    public static string Hit { get; } = "block.nylium.hit";
+                    public static string Place { get; } = "block.nylium.place";
+                    public static string Step { get; } = "block.nylium.step";
+                }
+                public static class WartBlock
+                {
+                    public static string Break { get; } = "block.wart_block.break";
+                    public static string Fall { get; } = "block.wart_block.fall";
+                    public static string Hit { get; } = "block.wart_block.hit";
+                    public static string Place { get; } = "block.wart_block.place";
+                    public static string Step { get; } = "block.wart_block.step";
+                }
+                public static class Netherrack
+                {
+                    public static string Break { get; } = "block.netherrack.break";
+                    public static string Fall { get; } = "block.netherrack.fall";
+                    public static string Hit { get; } = "block.netherrack.hit";
+                    public static string Place { get; } = "block.netherrack.place";
+                    public static string Step { get; } = "block.netherrack.step";
+                }
+                public static class Netherite
+                {
+                    public static string Break { get; } = "block.netherite.break";
+                    public static string Fall { get; } = "block.netherite.fall";
+                    public static string Hit { get; } = "block.netherite.hit";
+                    public static string Place { get; } = "block.netherite.place";
+                    public static string Step { get; } = "block.netherite.step";
+                }
+                public static class NetherOre
+                {
+                    public static string Break { get; } = "block.nether_ore.break";
+                    public static string Fall { get; } = "block.nether_ore.fall";
+                    public static string Hit { get; } = "block.nether_ore.hit";
+                    public static string Place { get; } = "block.nether_ore.place";
+                    public static string Step { get; } = "block.nether_ore.step";
+                }
+                public static class NetherBricks
+                {
+                    public static string Break { get; } = "block.nether_brick.break";
+                    public static string Fall { get; } = "block.nether_brick.fall";
+                    public static string Hit { get; } = "block.nether_brick.hit";
+                    public static string Place { get; } = "block.nether_brick.place";
+                    public static string Step { get; } = "block.nether_brick.step";
+                }
+                public static class Fungus
+                {
+                    public static string Break { get; } = "block.fungus.break";
+                    public static string Fall { get; } = "block.fungus.fall";
+                    public static string Hit { get; } = "block.fungus.hit";
+                    public static string Place { get; } = "block.fungus.place";
+                    public static string Step { get; } = "block.fungus.step";
+                }
+                public static class BoneBlock
+                {
+                    public static string Break { get; } = "block.bone_block.break";
+                    public static string Fall { get; } = "block.bone_block.fall";
+                    public static string Hit { get; } = "block.bone_block.hit";
+                    public static string Place { get; } = "block.bone_block.place";
+                    public static string Step { get; } = "block.bone_block.step";
+                }
+                public static class Basalt
+                {
+                    public static string Break { get; } = "block.basalt.break";
+                    public static string Fall { get; } = "block.basalt.fall";
+                    public static string Hit { get; } = "block.basalt.hit";
+                    public static string Place { get; } = "block.basalt.place";
+                    public static string Step { get; } = "block.basalt.step";
+                }
+                public static class AncientDebris
+                {
+                    public static string Break { get; } = "block.ancient_debris.break";
+                    public static string Fall { get; } = "block.ancient_debris.fall";
+                    public static string Hit { get; } = "block.ancient_debris.hit";
+                    public static string Place { get; } = "block.ancient_debris.place";
+                    public static string Step { get; } = "block.ancient_debris.step";
+                }
                 public static class BeeHive
                 {
                     public static string Drip { get; } = "block.beehive.drip";
@@ -359,6 +479,28 @@ namespace SharpCraft
             /// </summary>
             public static class Entity
             {
+                public static class Piglin
+                {
+                    public static string Admire { get; } = "entity.piglin.admiring_item";
+                    public static string Ambient { get; } = "entity.piglin.ambient";
+                    public static string Angry { get; } = "entity.piglin.angry";
+                    public static string Celebrate { get; } = "entity.piglin.celebrate";
+                    public static string ZombifiedConvert { get; } = "entity.piglin.converted_to_zombified";
+                    public static string Death { get; } = "entity.piglin.death";
+                    public static string Hurt { get; } = "entity.piglin.hurt";
+                    public static string Jealous { get; } = "entity.piglin.jealous";
+                    public static string Retreat { get; } = "entity.piglin.retreat";
+                    public static string Step { get; } = "entity.piglin.step";
+                }
+                public static class Hoglin
+                {
+                    public static string Death { get; } = "entity.hoglin.death";
+                    public static string Hurt { get; } = "entity.hoglin.hurt";
+                    public static string Ambient { get; } = "entity.hoglin.ambient";
+                    public static string Angry { get; } = "entity.hoglin.angry";
+                    public static string Retreat { get; } = "entity.hoglin.retreat";
+                    public static string Step { get; } = "entity.hoglin.step";
+                }
                 public static class Bee
                 {
                     public static string Death { get; } = "entity.bee.death";
@@ -794,7 +936,7 @@ namespace SharpCraft
                         public static string WitherSkeleton { get; } = "entity.parrot.imitate.wither_skeleton";
                         public static string Wolf { get; } = "entity.parrot.imitate.wolf";
                         public static string Zombie { get; } = "entity.parrot.imitate.zombie";
-                        public static string ZombiePigman { get; } = "entity.parrot.imitate.zombie_pigman";
+                        public static string ZombifiedPiglin { get; } = "entity.parrot.imitate.zombified_piglin";
                         public static string ZombieVillager { get; } = "entity.parrot.imitate.zombie_villager";
                     }
                 }
@@ -1040,12 +1182,12 @@ namespace SharpCraft
                     public static string Death { get; } = "entity.zombie_horse.death";
                     public static string Hurt { get; } = "entity.zombie_horse.hurt";
                 }
-                public static class ZombiePigman
+                public static class ZombifiedPiglin
                 {
-                    public static string Ambient { get; } = "entity.zombie_pigman.ambient";
-                    public static string Death { get; } = "entity.zombie_pigman.death";
-                    public static string Hurt { get; } = "entity.zombie_pigman.hurt";
-                    public static string Angry { get; } = "entity.zombie_pigman.angry";
+                    public static string Ambient { get; } = "entity.zombified_piglin.ambient";
+                    public static string Death { get; } = "entity.zombified_piglin.death";
+                    public static string Hurt { get; } = "entity.zombified_piglin.hurt";
+                    public static string Angry { get; } = "entity.zombified_piglin.angry";
                 }
                 public static class ZombieVillager
                 {
@@ -1066,6 +1208,7 @@ namespace SharpCraft
                 public static string DrinkHoneyBottle { get; } = "item.honey_bottle.drink";
                 public static class Armor
                 {
+                    public static string Netherite { get; } = "item.armor.equip_netherite";
                     public static string Chain { get; } = "item.armor.equip_chain";
                     public static string Diamond { get; } = "item.armor.equip_diamond";
                     public static string Elytra { get; } = "item.armor.equip_elytra";

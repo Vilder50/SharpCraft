@@ -8,6 +8,10 @@
 #pragma warning disable 1591
         public enum Biome
         {
+            crimson_forest,
+            warped_forest,
+            soul_sand_valley,
+            nether_wastes,
             ocean,
             deep_ocean,
             frozen_ocean,
@@ -76,7 +80,6 @@
             wooded_badlands_plateau,
             modified_wooded_badlands_plateau,
             eroded_badlands,
-            nether,
             the_end,
             small_end_islands,
             end_midlands,

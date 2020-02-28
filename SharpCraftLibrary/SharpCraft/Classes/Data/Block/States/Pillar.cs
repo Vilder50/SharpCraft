@@ -31,7 +31,12 @@ namespace SharpCraft
                     block == SharpCraft.ID.Block.purpur_pillar || 
                     block == SharpCraft.ID.Block.quartz_block ||
                     blockName.Contains("log") ||
-                    blockName.Contains("wood");
+                    blockName.Contains("wood") ||
+                    block == SharpCraft.ID.Block.basalt ||
+                    block == SharpCraft.ID.Block.crimson_stem ||
+                    block == SharpCraft.ID.Block.stripped_crimson_stem ||
+                    block == SharpCraft.ID.Block.stripped_warped_stem ||
+                    block == SharpCraft.ID.Block.warped_stem;
             }
 
             /// <summary>
