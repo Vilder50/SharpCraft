@@ -2,48 +2,45 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for bell blocks
+    /// </summary>
+    public class Bell : Block, Interfaces.IFacing
     {
         /// <summary>
-        /// An object for bell blocks
+        /// Creates a bell block
         /// </summary>
-        public class Bell : Block, IBlock.IFacing
+        /// <param name="type">The type of block</param>
+        public Bell(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a bell block
+        /// </summary>
+        /// <param name="type">The type of block</param>
+        public Bell(ID.Block type = SharpCraft.ID.Block.bell) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            /// <summary>
-            /// Creates a bell block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Bell(BlockType? type) : base(type) { }
-
-            /// <summary>
-            /// Creates a bell block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Bell(ID.Block type = SharpCraft.ID.Block.bell) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
-            {
-                return block == SharpCraft.ID.Block.bell;
-            }
-
-            /// <summary>
-            /// The way the bell is attached
-            /// </summary>
-            [BlockState("attachment")]
-            public ID.StateBellAttachment? SAttachement { get; set; }
-
-            /// <summary>
-            /// The way the bell faces
-            /// </summary>
-            [BlockState("facing")]
-            public ID.Facing? SFacing { get; set; }
+            return block == SharpCraft.ID.Block.bell;
         }
+
+        /// <summary>
+        /// The way the bell is attached
+        /// </summary>
+        [BlockState("attachment")]
+        public ID.StateBellAttachment? SAttachement { get; set; }
+
+        /// <summary>
+        /// The way the bell faces
+        /// </summary>
+        [BlockState("facing")]
+        public ID.Facing? SFacing { get; set; }
     }
 }

@@ -269,12 +269,12 @@ namespace SharpCraft
             }, 1), LootTable.TableType.chest);
 
             SetupFunction!.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
-            SetupFunction.Block.Add(hashBlockLocation, new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
+            SetupFunction.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
             Function hash = SharpCraftNamespace.Function("random\\hashing", h => 
             {
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
 
-                Data.DataPath slotpath = Data.DataPath.GetDataPath<Block.ShulkerBox>(b => b.DItems);
+                Data.DataPath slotpath = Data.DataPath.GetDataPath<Blocks.ShulkerBox>(b => b.DItems);
                 slotpath.Condition(0);
                 Data.DataPath attributePath = Data.DataPath.GetDataPath<Item>(i => i.Attributes);
                 attributePath.Condition(0);
@@ -284,7 +284,7 @@ namespace SharpCraft
                 h.Block.Data.Get(hashBlockLocation, slotpath.ToString() + ".Amount");
 
                 h.Block.Add(hashBlockLocation, ID.Block.air);
-                h.Block.Add(hashBlockLocation, new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
+                h.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
             });
 
             hashFunction = (hash, hashBlockLocation);

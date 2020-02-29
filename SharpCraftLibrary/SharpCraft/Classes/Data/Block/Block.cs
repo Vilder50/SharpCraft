@@ -7,7 +7,10 @@ using SharpCraft.Data;
 
 namespace SharpCraft
 {
-    public partial class Block : DataHolderBase, IConvertableToDataObject
+    /// <summary>
+    /// Base class for blocks
+    /// </summary>
+    public class Block : DataHolderBase, IConvertableToDataObject
     {
         private BlockType? id;
 
@@ -46,7 +49,7 @@ namespace SharpCraft
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute? attribute = (BlockStateAttribute?)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
                 if (!(attribute is null))
                 {
                     yield return property;
@@ -108,7 +111,7 @@ namespace SharpCraft
                 object? value = property.GetValue(this);
                 if (!(value is null))
                 {
-                    BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute))!;
+                    Blocks.BlockStateAttribute attribute = (Blocks.BlockStateAttribute)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute))!;
                     states.Add(attribute.DataName + "=" + GetStateValue(property));
                 }
             }
@@ -126,7 +129,7 @@ namespace SharpCraft
             object? value = stateProperty.GetValue(this);
             if (!(value is null))
             {
-                BlockStateAttribute? attribute = (BlockStateAttribute?)stateProperty.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)stateProperty.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
                 if (attribute is null)
                 {
                     throw new ArgumentException("The given property is not a state holding property", nameof(stateProperty));
@@ -185,7 +188,7 @@ namespace SharpCraft
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute? attribute = (BlockStateAttribute?)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
                 if (!(attribute is null))
                 {
                     object? value = property.GetValue(this);
@@ -365,7 +368,7 @@ namespace SharpCraft
             PropertyInfo[] properties = GetStateProperties().ToArray();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute))!;
+                Blocks.BlockStateAttribute attribute = (Blocks.BlockStateAttribute)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute))!;
                 states.AddValue(new DataPartPath(attribute.DataName, new DataPartTag(GetStateValue(property), isJson: true), isJson));
             }
 

@@ -41,16 +41,16 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ParticleBlockTest()
         {
-            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5 force @s", new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s).GetCommandString());
-            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5 force", new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, null).GetCommandString());
-            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5", new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, false, null).GetCommandString());
-            Assert.AreEqual("particle block minecraft:anvil[facing=east] ~ ~ ~ 2.1 2.1 2.1 0.2 5", new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2.1, 2.1, 2.1), 0.2, 5, false, false, null).GetCommandString());
+            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5 force @s", new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s).GetCommandString());
+            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5 force", new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, null).GetCommandString());
+            Assert.AreEqual("particle falling_dust minecraft:anvil[facing=east] ~ ~ ~ 2 2 2 0.2 5", new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, false, null).GetCommandString());
+            Assert.AreEqual("particle block minecraft:anvil[facing=east] ~ ~ ~ 2.1 2.1 2.1 0.2 5", new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2.1, 2.1, 2.1), 0.2, 5, false, false, null).GetCommandString());
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), -1, 5, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, -1, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), -1, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, -1, true, true, ID.Selector.s));
             Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(null, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, null, new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), null, 0.2, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, null, new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), null, 0.2, 5, true, true, ID.Selector.s));
         }
 
         [TestMethod]

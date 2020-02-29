@@ -2,42 +2,39 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for special rail blocks
+    /// </summary>
+    public class SpecialRail : Block, Interfaces.IPowered
     {
         /// <summary>
-        /// An object for special rail blocks
+        /// Creates a new special rail block
         /// </summary>
-        public class SpecialRail : Block, IBlock.IPowered
+        /// <param name="type">The type of block</param>
+        public SpecialRail(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            /// <summary>
-            /// Creates a new special rail block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public SpecialRail(BlockType? type) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
-            {
-                return block == SharpCraft.ID.Block.activator_rail || block == SharpCraft.ID.Block.detector_rail || block == SharpCraft.ID.Block.powered_rail;
-            }
-
-            /// <summary>
-            /// The direction the rail is going in.
-            /// </summary>
-            [BlockState("direction")]
-            public ID.StateSpecailRailShape? SDirection { get; set; }
-
-            /// <summary>
-            /// If the rail is activated
-            /// </summary>
-            [BlockState("powered")]
-            public bool? SPowered { get; set; }
+            return block == SharpCraft.ID.Block.activator_rail || block == SharpCraft.ID.Block.detector_rail || block == SharpCraft.ID.Block.powered_rail;
         }
+
+        /// <summary>
+        /// The direction the rail is going in.
+        /// </summary>
+        [BlockState("direction")]
+        public ID.StateSpecailRailShape? SDirection { get; set; }
+
+        /// <summary>
+        /// If the rail is activated
+        /// </summary>
+        [BlockState("powered")]
+        public bool? SPowered { get; set; }
     }
 }

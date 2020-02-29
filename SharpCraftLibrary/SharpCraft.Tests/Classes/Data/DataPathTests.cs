@@ -24,11 +24,11 @@ namespace SharpCraft.Tests.Data
         public void TestGetDataPath()
         {
             //Test simple path
-            DataPath path = DataPath.GetDataPath<Block.Furnace>(f => f.DLock);
+            DataPath path = DataPath.GetDataPath<Blocks.Furnace>(f => f.DLock);
             Assert.AreEqual("Lock", path.ToString());
 
             //Test not getting a data tag property
-            Assert.ThrowsException<ArgumentException>(() => { DataPath.GetDataPath<Block.Furnace>(f => f.SLit); });
+            Assert.ThrowsException<ArgumentException>(() => { DataPath.GetDataPath<Blocks.Furnace>(f => f.SLit); });
 
             //test get nested array
             path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested);

@@ -2,56 +2,53 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for composter blocks
+    /// </summary>
+    public class Composter : Block, Interfaces.ILevel
     {
+        private int? _sLevel;
+
         /// <summary>
-        /// An object for composter blocks
+        /// Creates a composter block
         /// </summary>
-        public class Composter : Block, IBlock.ILevel
+        /// <param name="type">The type of block</param>
+        public Composter(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a composter block
+        /// </summary>
+        /// <param name="type">The type of block</param>
+        public Composter(ID.Block type = SharpCraft.ID.Block.composter) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private int? _sLevel;
+            return block == SharpCraft.ID.Block.composter;
+        }
 
-            /// <summary>
-            /// Creates a composter block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Composter(BlockType? type) : base(type) { }
-
-            /// <summary>
-            /// Creates a composter block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Composter(ID.Block type = SharpCraft.ID.Block.composter) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// How much compost there is in the composter
+        /// (0-8. 0 = compost. 8 = full)
+        /// </summary>
+        [BlockState("level")]
+        [BlockIntStateRange(0, 8)]
+        public int? SLevel
+        {
+            get => _sLevel;
+            set
             {
-                return block == SharpCraft.ID.Block.composter;
-            }
-
-            /// <summary>
-            /// How much compost there is in the composter
-            /// (0-8. 0 = compost. 8 = full)
-            /// </summary>
-            [BlockState("level")]
-            [BlockIntStateRange(0, 8)]
-            public int? SLevel
-            {
-                get => _sLevel;
-                set
+                if (value != null && (value < 0 || value > 8))
                 {
-                    if (value != null && (value < 0 || value > 8))
-                    {
-                        throw new ArgumentException(nameof(SLevel) + " has to be equel to or between 0 and 8");
-                    }
-                    _sLevel = value;
+                    throw new ArgumentException(nameof(SLevel) + " has to be equel to or between 0 and 8");
                 }
+                _sLevel = value;
             }
         }
     }

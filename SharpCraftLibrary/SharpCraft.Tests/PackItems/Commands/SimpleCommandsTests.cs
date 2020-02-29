@@ -130,9 +130,9 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void SetblockCommandTest()
         {
-            Assert.AreEqual("setblock ~1 ~2 ~3 minecraft:anvil[facing=east] destroy", new SetblockCommand(new Coords(1, 2, 3), new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy).GetCommandString());
+            Assert.AreEqual("setblock ~1 ~2 ~3 minecraft:anvil[facing=east] destroy", new SetblockCommand(new Coords(1, 2, 3), new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(null, new Block.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy));
+            Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(null, new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, ID.BlockAdd.destroy));
             Assert.ThrowsException<ArgumentNullException>(() => new SetblockCommand(new Vector(1, 2, 3), null, ID.BlockAdd.destroy));
         }
 

@@ -2,59 +2,56 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for dispensers / dropper blocks
+    /// </summary>
+    public class DropperDispenser : BaseContainer, Interfaces.IPowered, Interfaces.IFacingFull
     {
+        private Item?[]? _dItems;
+
         /// <summary>
-        /// An object for dispensers / dropper blocks
+        /// Creates a dispenser/dropper block
         /// </summary>
-        public class DropperDispenser : BaseContainer, IBlock.IPowered, IBlock.IFacingFull
+        /// <param name="type">The type of block</param>
+        public DropperDispenser(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private Item?[]? _dItems;
+            return block == SharpCraft.ID.Block.dropper || block == SharpCraft.ID.Block.dispenser;
+        }
 
-            /// <summary>
-            /// Creates a dispenser/dropper block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public DropperDispenser(BlockType? type) : base(type) { }
+        /// <summary>
+        /// The direction the dispenser / dropper is facing
+        /// </summary>
+        [BlockState("facing")]
+        public ID.FacingFull? SFacing { get; set; }
+        /// <summary>
+        /// If the dispenser / dropper is powered right now
+        /// </summary>
+        [BlockState("triggered")]
+        public bool? SPowered { get; set; }
 
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// The item's inside the dispenser / dropper.
+        /// (0-8)
+        /// </summary>
+        public override Item?[]? DItems
+        {
+            get => _dItems;
+            set
             {
-                return block == SharpCraft.ID.Block.dropper || block == SharpCraft.ID.Block.dispenser;
-            }
-
-            /// <summary>
-            /// The direction the dispenser / dropper is facing
-            /// </summary>
-            [BlockState("facing")]
-            public ID.FacingFull? SFacing { get; set; }
-            /// <summary>
-            /// If the dispenser / dropper is powered right now
-            /// </summary>
-            [BlockState("triggered")]
-            public bool? SPowered { get; set; }
-
-            /// <summary>
-            /// The item's inside the dispenser / dropper.
-            /// (0-8)
-            /// </summary>
-            public override Item?[]? DItems
-            {
-                get => _dItems;
-                set
+                if (DItems != null && DItems.Length > 9)
                 {
-                    if (DItems != null && DItems.Length > 9)
-                    {
-                        throw new ArgumentException("Too many slots specified");
-                    }
-                    _dItems = value;
+                    throw new ArgumentException("Too many slots specified");
                 }
+                _dItems = value;
             }
         }
     }

@@ -2,59 +2,53 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
     /// <summary>
-    /// A object for minecraft blocks
+    /// An object for chorus flower blocks
     /// </summary>
-    public partial class Block
+    public class ChorusFlower : Block, Interfaces.IAge
     {
+        private int? _sAge;
+
         /// <summary>
-        /// An object for chorus flower blocks
+        /// Creates a chorus flower block
         /// </summary>
-        public class ChorusFlower : Block, IBlock.IAge
+        /// <param name="type">The type of block</param>
+        public ChorusFlower(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a chorus flower block
+        /// </summary>
+        /// <param name="type">The type of block</param>
+        public ChorusFlower(ID.Block type = SharpCraft.ID.Block.chorus_flower) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private int? _sAge;
+            return block == SharpCraft.ID.Block.chorus_flower;
+        }
 
-            /// <summary>
-            /// Creates a chorus flower block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public ChorusFlower(BlockType? type) : base(type) { }
-
-            /// <summary>
-            /// Creates a chorus flower block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public ChorusFlower(ID.Block type = SharpCraft.ID.Block.chorus_flower) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// The age of the flower.
+        /// (0-5. 1-4 = still growin. 5 = fully grown)
+        /// </summary>
+        [BlockState("age")]
+        [BlockIntStateRange(0, 5)]
+        public int? SAge
+        {
+            get => _sAge;
+            set
             {
-                return block == SharpCraft.ID.Block.chorus_flower;
-            }
-
-            /// <summary>
-            /// The age of the flower.
-            /// (0-5. 1-4 = still growin. 5 = fully grown)
-            /// </summary>
-            [BlockState("age")]
-            [BlockIntStateRange(0, 5)]
-            public int? SAge
-            {
-                get => _sAge;
-                set
+                if (value != null && (value < 0 || value > 5))
                 {
-                    if (value != null && (value < 0 || value > 5))
-                    {
-                        throw new ArgumentException(nameof(SAge) + " has to be equel to or between 0 and 5");
-                    }
-                    _sAge = value;
+                    throw new ArgumentException(nameof(SAge) + " has to be equel to or between 0 and 5");
                 }
+                _sAge = value;
             }
         }
     }
