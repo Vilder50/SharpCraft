@@ -19,37 +19,37 @@ namespace SharpCraft
             /// The <see cref="SharpCraft.Entity"/> type
             /// </summary>
             [DataTag("type", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public EntityType Type { get; set; }
+            public EntityType? Type { get; set; }
 
             /// <summary>
             /// the <see cref="Distance"/> to the <see cref="SharpCraft.Entity"/>
             /// </summary>
             [DataTag("distance", JsonTag = true)]
-            public Distance Distance { get; set; }
+            public Distance? Distance { get; set; }
 
             /// <summary>
             /// the <see cref="Location"/> of the <see cref="SharpCraft.Entity"/>
             /// </summary>
             [DataTag("location", JsonTag = true)]
-            public Location Location { get; set; }
+            public Location? Location { get; set; }
 
             /// <summary>
             /// the <see cref="JSONObjects.Effects"/>s the <see cref="SharpCraft.Entity"/> should have
             /// </summary>
             [DataTag("effects", JsonTag = true)]
-            public Effects Effects { get; set; }
+            public Effects? Effects { get; set; }
 
             /// <summary>
             /// the nbt the <see cref="SharpCraft.Entity"/> should have
             /// </summary>
             [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public SimpleDataHolder NBT { get; set; }
+            public SimpleDataHolder? NBT { get; set; }
 
             /// <summary>
             /// the amount of levels the player has
             /// </summary>
             [DataTag("player.level", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-            public MCRange Levels { get; set; }
+            public MCRange? Levels { get; set; }
 
             /// <summary>
             /// The gamemode the player is in
@@ -61,26 +61,26 @@ namespace SharpCraft
             /// Player recipes to check for
             /// </summary>
             [DataTag("player.recipes", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
-            public RecipeList Recipes { get; set; }
+            public RecipeList? Recipes { get; set; }
 
             /// <summary>
             /// Player advancements to check for
             /// </summary>
             [DataTag("player.advancements", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
-            public AdvancementList Advancements { get; set; }
+            public AdvancementList? Advancements { get; set; }
 
             /// <summary>
             /// The entity's team
             /// </summary>
             [DataTag(JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public Team Team { get; set; }
+            public Team? Team { get; set; }
 
             /// <summary>
             /// A list of <see cref="CheckRecipe"/>
             /// </summary>
             public class RecipeList : IConvertableToDataObject
             {
-                private CheckRecipe[] recipes;
+                private CheckRecipe[] recipes = null!;
 
                 /// <summary>
                 /// The recipes
@@ -92,7 +92,7 @@ namespace SharpCraft
                 /// </summary>
                 /// <param name="conversionData">Unused</param>
                 /// <returns>This object as a <see cref="DataPartObject"/></returns>
-                public DataPartObject GetAsDataObject(object[] conversionData)
+                public DataPartObject GetAsDataObject(object?[]? conversionData)
                 {
                     DataPartObject returnObject = new DataPartObject();
 
@@ -109,7 +109,7 @@ namespace SharpCraft
                 /// </summary>
                 public class CheckRecipe
                 {
-                    private IRecipe recipe;
+                    private IRecipe recipe = null!;
 
                     /// <summary>
                     /// Intializes a new <see cref="CheckRecipe"/>
@@ -139,7 +139,7 @@ namespace SharpCraft
             /// </summary>
             public class AdvancementList : IConvertableToDataObject
             {
-                private BaseCheckAdvancement[] advancements;
+                private BaseCheckAdvancement[] advancements = null!;
 
                 /// <summary>
                 /// The advancements
@@ -151,7 +151,7 @@ namespace SharpCraft
                 /// </summary>
                 /// <param name="conversionData">Unused</param>
                 /// <returns>This object as a <see cref="DataPartObject"/></returns>
-                public DataPartObject GetAsDataObject(object[] conversionData)
+                public DataPartObject GetAsDataObject(object?[]? conversionData)
                 {
                     DataPartObject returnObject = new DataPartObject();
 
@@ -168,7 +168,7 @@ namespace SharpCraft
                 /// </summary>
                 public abstract class BaseCheckAdvancement
                 {
-                    private IAdvancement advancement;
+                    private IAdvancement advancement = null!;
 
                     /// <summary>
                     /// The advancement to check for
@@ -187,7 +187,7 @@ namespace SharpCraft
                 /// </summary>
                 public class CheckAdvancementCriteria : BaseCheckAdvancement
                 {
-                    private BaseTrigger criteria;
+                    private BaseTrigger criteria = null!;
 
                     /// <summary>
                     /// Intializes a new <see cref="CheckAdvancementCriteria"/>
@@ -211,7 +211,7 @@ namespace SharpCraft
                     /// <returns>The value to check for</returns>
                     public override object GetValue()
                     {
-                        return Criteria.Name;
+                        return Criteria.Name!;
                     }
                 }
 

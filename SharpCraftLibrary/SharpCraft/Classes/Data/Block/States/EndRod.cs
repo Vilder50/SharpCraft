@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates an end rod block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndRod(BlockType type) : base(type) { }
+            public EndRod(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates an end rod block

@@ -64,7 +64,7 @@ namespace SharpCraft
         /// </summary>
         public class OpenUrlClickEvent : BaseClickEvent
         {
-            private string url;
+            private string url = null!;
 
             /// <summary>
             /// Intializes a new <see cref="OpenUrlClickEvent"/>
@@ -106,7 +106,7 @@ namespace SharpCraft
         /// </summary>
         public class RunCommandClickEvent : BaseClickEvent
         {
-            private Commands.BaseCommand command;
+            private Commands.BaseCommand command = null!;
 
             /// <summary>
             /// Intializes a new <see cref="RunCommandClickEvent"/>
@@ -166,7 +166,7 @@ namespace SharpCraft
         /// </summary>
         public class SuggestTextClickEvent : BaseClickEvent
         {
-            private string text;
+            private string text = null!;
 
             /// <summary>
             /// Intializes a new <see cref="SuggestTextClickEvent"/>
@@ -197,7 +197,7 @@ namespace SharpCraft
         /// </summary>
         public class SetClipboardClickEvent : BaseClickEvent
         {
-            private string text;
+            private string text = null!;
 
             /// <summary>
             /// Intializes a new <see cref="SetClipboardClickEvent"/>

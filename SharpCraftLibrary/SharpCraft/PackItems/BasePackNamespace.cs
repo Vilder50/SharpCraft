@@ -17,9 +17,11 @@ namespace SharpCraft
         /// </summary>
         public static readonly NamespaceSettings Settings = new NamespaceSettings();
 
-        private string name;
-        private BaseDatapack datapack;
-        private BaseFile.FileListener fileListeners;
+        private string name = null!;
+#pragma warning disable IDE0069
+        private BaseDatapack datapack = null!;
+#pragma warning restore IDE0069
+        private BaseFile.FileListener fileListeners = null!;
 
         /// <summary>
         /// The files inside this namespace
@@ -152,7 +154,7 @@ namespace SharpCraft
         /// <param name="fileType">The type of file to get</param>
         /// <param name="fileName">The name of the file</param>
         /// <returns>The file with the name or null</returns>
-        public BaseFile GetFile(string fileType, string fileName)
+        public BaseFile? GetFile(string fileType, string fileName)
         {
             string name = fileName.ToLower().Replace("/", "\\");
 

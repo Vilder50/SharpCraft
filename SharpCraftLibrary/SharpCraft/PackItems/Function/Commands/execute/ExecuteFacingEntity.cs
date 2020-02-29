@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteFacingEntity : BaseExecuteCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteFacingEntity"/> command

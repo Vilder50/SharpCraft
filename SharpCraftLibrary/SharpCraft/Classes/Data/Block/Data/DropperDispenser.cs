@@ -11,13 +11,13 @@ namespace SharpCraft
         /// </summary>
         public class DropperDispenser : BaseContainer, IBlock.IPowered, IBlock.IFacingFull
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a dispenser/dropper block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public DropperDispenser(BlockType type) : base(type) { }
+            public DropperDispenser(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -44,7 +44,7 @@ namespace SharpCraft
             /// The item's inside the dispenser / dropper.
             /// (0-8)
             /// </summary>
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set

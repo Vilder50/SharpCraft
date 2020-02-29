@@ -8,12 +8,9 @@ namespace SharpCraft
     /// </summary>
     public class Rotation : IConvertableToDataArray
     {
-        /// <summary>
-        /// The rotation
-        /// </summary>
         private double y;
-
         private bool yRelative;
+
         private double x;
         private bool xRelative;
 
@@ -100,7 +97,7 @@ namespace SharpCraft
         /// <param name="extraConversionData">Not used</param>
         /// <param name="asType">The type of array</param>
         /// <returns>the made <see cref="DataPartArray"/></returns>
-        public DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             if (asType == ID.NBTTagType.TagDoubleArray)
             {

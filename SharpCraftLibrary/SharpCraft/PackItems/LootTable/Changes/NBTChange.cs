@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class NBTChange : BaseChange
     {
-        private SimpleDataHolder data;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="NBTChange"/>

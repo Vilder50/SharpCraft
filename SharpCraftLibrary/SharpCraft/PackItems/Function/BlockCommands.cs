@@ -31,7 +31,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="corner2">the second corner coords</param>
         /// <param name="type">how to fill the <see cref="SharpCraft.Block"/>s</param>
         /// <param name="replaceBlock">the <see cref="SharpCraft.Block"/>s to replace</param>
-        public void Fill(Vector corner1, Vector corner2, Block fillBlock, ID.BlockFill type = ID.BlockFill.replace, Block replaceBlock = null)
+        public void Fill(Vector corner1, Vector corner2, Block fillBlock, ID.BlockFill type = ID.BlockFill.replace, Block? replaceBlock = null)
         {
             if (replaceBlock is null)
             {
@@ -52,7 +52,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="type">how to copy the <see cref="SharpCraft.Block"/>s</param>
         /// <param name="way">copy rules</param>
         /// <param name="filteredBlock">the <see cref="SharpCraft.Block"/> to copy</param>
-        public void Clone(Vector corner1, Vector corner2, Vector copyTo, ID.BlockClone type = ID.BlockClone.replace, ID.BlockCloneWay way = ID.BlockCloneWay.normal, Block filteredBlock = null)
+        public void Clone(Vector corner1, Vector corner2, Vector copyTo, ID.BlockClone type = ID.BlockClone.replace, ID.BlockCloneWay way = ID.BlockCloneWay.normal, Block? filteredBlock = null)
         {
             if (filteredBlock is null)
             {
@@ -117,7 +117,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="breakBlock">the <see cref="SharpCraft.Block"/>'s <see cref="LootTable"/> to input</param>
         /// <param name="breakWith">the tool used to break the <see cref="SharpCraft.Block"/></param>
         /// <param name="slot">the slot to insert the <see cref="LootTable"/> at</param>
-        public void Loot(Vector block, Vector breakBlock, Item breakWith = null, int? slot = null)
+        public void Loot(Vector block, Vector breakBlock, Item? breakWith = null, int? slot = null)
         {
             LootTargets.ILootTarget target;
             LootSources.ILootSource source;
@@ -131,11 +131,11 @@ namespace SharpCraft.FunctionWriters
             }
             if (breakWith is null)
             {
-                source = new LootSources.MineItemSource(breakBlock, breakWith);
+                source = new LootSources.MineHandSource(breakBlock, true);
             }
             else
             {
-                source = new LootSources.MineHandSource(breakBlock, true);
+                source = new LootSources.MineItemSource(breakBlock, breakWith);
             }
 
             ForFunction.AddCommand(new LootCommand(target, source));

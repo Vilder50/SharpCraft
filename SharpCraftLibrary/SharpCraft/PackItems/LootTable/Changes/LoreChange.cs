@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LoreChange : BaseChange
     {
-        private JsonText[] lore;
+        private JsonText[] lore = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LoreChange"/>

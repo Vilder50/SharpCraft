@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleClearCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleClearCommand"/>
@@ -42,7 +42,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleResetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleResetCommand"/>
@@ -73,8 +73,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private JsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleCommand"/>
@@ -112,8 +112,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleSubtitleCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private JsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleSubtitleCommand"/>
@@ -151,8 +151,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleActionbarCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private JsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleActionbarCommand"/>
@@ -190,10 +190,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleTimesCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private Time fadeIn;
-        private Time stay;
-        private Time fadeOut;
+        private BaseSelector selector = null!;
+        private Time fadeIn = null!;
+        private Time stay = null!;
+        private Time fadeOut = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleTimesCommand"/>

@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a sea picle block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public SeaPicles(BlockType type) : base(type) { }
+            public SeaPicles(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a sea picle block

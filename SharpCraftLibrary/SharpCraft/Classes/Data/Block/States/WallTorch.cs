@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a torch block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallTorch(BlockType type) : base(type) { }
+            public WallTorch(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a torch block

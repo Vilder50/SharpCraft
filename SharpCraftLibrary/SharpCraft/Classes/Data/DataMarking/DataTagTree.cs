@@ -175,7 +175,7 @@ namespace SharpCraft.Data
         /// <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
         /// <param name="forceType">a type used for converting the thing in the array correctly</param>
         /// <param name="isJson">If the datatags in the array should be in json format</param>
-        public DataPartArray(object data, ID.NBTTagType? forceType, object[] conversionParams, bool isJson = false)
+        public DataPartArray(object data, ID.NBTTagType? forceType, object?[]? conversionParams, bool isJson = false)
         {
             IsJson = isJson;
             items = new List<IDataPartPathEnding>();
@@ -195,7 +195,7 @@ namespace SharpCraft.Data
             
             for (int i = 0; i < array.Length; i++)
             {
-                object value = array.GetValue(i);
+                object? value = array.GetValue(i);
                 if (value is null)
                 {
                     continue;
@@ -403,7 +403,7 @@ namespace SharpCraft.Data
     /// </summary>
     public class DataPartTag : IDataPartPathEnding
     {
-        private object value;
+        private object? value;
 
         /// <summary>
         /// Intializes a new <see cref="DataPartTag"/> with the given value
@@ -411,7 +411,7 @@ namespace SharpCraft.Data
         /// <param name="value">The thing this <see cref="DataPartTag"/> should be</param>
         /// <param name="forceType">The type the object should be forced into. Used for enums and marking strings as objects</param>
         /// <param name="isJson">If the tag is a json value</param>
-        public DataPartTag(object value, ID.NBTTagType? forceType = null, bool isJson = false)
+        public DataPartTag(object? value, ID.NBTTagType? forceType = null, bool isJson = false)
         {
             TagType = forceType;
             Value = value;
@@ -421,7 +421,7 @@ namespace SharpCraft.Data
         /// <summary>
         /// The thing this <see cref="DataPartTag"/> is holding
         /// </summary>
-        public object Value
+        public object? Value
         {
             get
             {
@@ -590,7 +590,7 @@ namespace SharpCraft.Data
                     case ID.NBTTagType.TagString:
                         if (IsJson)
                         {
-                            return "\"" + Value.ToString().ToLower() + "\"";
+                            return "\"" + Value.ToString()!.ToLower() + "\"";
                         }
                         else
                         {
@@ -599,7 +599,7 @@ namespace SharpCraft.Data
                     case ID.NBTTagType.TagNamespacedString:
                         if (IsJson)
                         {
-                            return "\"minecraft:" + Value.ToString().ToLower() + "\"";
+                            return "\"minecraft:" + Value.ToString()!.ToLower() + "\"";
                         }
                         else
                         {
@@ -651,7 +651,7 @@ namespace SharpCraft.Data
     /// </summary>
     public class DataPartPath
     {
-        private string pathName;
+        private string pathName = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataPartPath"/>

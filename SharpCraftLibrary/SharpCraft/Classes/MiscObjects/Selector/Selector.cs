@@ -22,7 +22,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="SelectWay">the type of selector</param>
         /// <param name="HasTag">a tag the selected entity must have. Note that this can be overwritten by <see cref="Tags"/></param>
-        public Selector(ID.Selector SelectWay, Tag HasTag = null)
+        public Selector(ID.Selector SelectWay, Tag? HasTag = null)
         {
             SelectorType = SelectWay;
             if (HasTag != null) { Tags = new EntityTag[] { new EntityTag(HasTag) }; }
@@ -36,22 +36,22 @@ namespace SharpCraft
         /// <summary>
         /// The amount of levels the selected entity must have to be selected
         /// </summary>
-        public MCRange Level { get; set; }
+        public MCRange? Level { get; set; }
 
         /// <summary>
         /// The distance there has to be to the selected entity
         /// </summary>
-        public MCRange Distance { get; set; }
+        public MCRange? Distance { get; set; }
 
         /// <summary>
         /// The x-rotation the selected entity must have (Vertical rotation. 90 = down, -90 = up)
         /// </summary>
-        public MCRange XRotation { get; set; }
+        public MCRange? XRotation { get; set; }
 
         /// <summary>
         /// The y-rotation the selected entity must have (Horizontal rotation. 0 = +z, 90 = -x)
         /// </summary>
-        public MCRange YRotation { get; set; }
+        public MCRange? YRotation { get; set; }
 
         /// <summary>
         /// The maximum amount of entities this selector can select
@@ -91,37 +91,37 @@ namespace SharpCraft
         /// <summary>
         /// The names the selected entity must have / must not have to be selected
         /// </summary>
-        public EntityName[] Names { get; set; }
+        public EntityName[]? Names { get; set; }
 
         /// <summary>
         /// The types the selected entity must be / must not be to be selected
         /// </summary>
-        public EntityType[] Types { get; set; }
+        public EntityType[]? Types { get; set; }
 
         /// <summary>
         /// The tags the selected entity must have / must not have to be selected
         /// </summary>
-        public EntityTag[] Tags { get; set; }
+        public EntityTag[]? Tags { get; set; }
 
         /// <summary>
         /// The scores the selected entity must have
         /// </summary>
-        public EntityScore[] Scores { get; set; }
+        public EntityScore[]? Scores { get; set; }
 
         /// <summary>
         /// The teams the selected entity must be on / must not be on to be selected
         /// </summary>
-        public EntityTeam[] Teams { get; set; }
+        public EntityTeam[]? Teams { get; set; }
 
         /// <summary>
         /// The gamemode the selected entity must be in / must not be in to be selected
         /// </summary>
-        public EntityMode[] Modes { get; set; }
+        public EntityMode[]? Modes { get; set; }
 
         /// <summary>
         /// The predicates the selected entity must turn successfull / not successfull
         /// </summary>
-        public EntityPredicate[] Predicates { get; set; }
+        public EntityPredicate[]? Predicates { get; set; }
 
         /// <summary>
         /// The way the selected entities should be sorted in
@@ -131,7 +131,7 @@ namespace SharpCraft
         /// <summary>
         /// The NBT the selected entity have to have to be selected
         /// </summary>
-        public Entity.BaseEntity NBT { get; set; }
+        public Entity.BaseEntity? NBT { get; set; }
 
         /// <summary>
         /// If the entity shouldnt have the NBT in <see cref="NBT"/>
@@ -232,7 +232,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityType : ISelectorArgument
         {
-            private SharpCraft.EntityType id;
+            private SharpCraft.EntityType id = null!;
 
             /// <summary>
             /// Creates the object with the given parameters
@@ -299,7 +299,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityName : ISelectorArgument
         {
-            private string name;
+            private string name = null!;
 
             /// <summary>
             /// Creates an object defining a name an entity has to have / not to have
@@ -359,7 +359,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityTag : ISelectorArgument
         {
-            private Tag tag;
+            private Tag tag = null!;
 
             /// <summary>
             /// Creates an object defining a tag an entity has to have / not to have
@@ -417,8 +417,8 @@ namespace SharpCraft
         /// </summary>
         public class EntityScore : ISelectorArgument
         {
-            private Objective objective;
-            private MCRange score;
+            private Objective objective = null!;
+            private MCRange score = null!;
 
             /// <summary>
             /// Creates an object defining a score an entity has to have
@@ -464,7 +464,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityTeam : ISelectorArgument
         {
-            private Team team;
+            private Team team = null!;
 
             /// <summary>
             /// Creates an object defining a team an entity has to be / not to be on
@@ -578,7 +578,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityPredicate : ISelectorArgument
         {
-            private IPredicate predicate;
+            private IPredicate predicate = null!;
 
             /// <summary>
             /// Intializes a new <see cref="EntityPredicate"/>
@@ -635,12 +635,12 @@ namespace SharpCraft
             if (XRotation != null) { tempList.Add(XRotation.SelectorString("x_rotation")); }
             if (YRotation != null) { tempList.Add(YRotation.SelectorString("y_rotation")); }
             if (Limit != null && SelectorType != ID.Selector.s) { tempList.Add("limit=" + Limit); }
-            if (X != null) { tempList.Add("x=" + X.ToString().Replace(",", ".")); }
-            if (Y != null) { tempList.Add("y=" + Y.ToString().Replace(",", ".")); }
-            if (Z != null) { tempList.Add("z=" + Z.ToString().Replace(",", ".")); }
-            if (BoxX != null) { tempList.Add("dx=" + BoxX.ToString().Replace(",", ".")); }
-            if (BoxY != null) { tempList.Add("dy=" + BoxY.ToString().Replace(",", ".")); }
-            if (BoxZ != null) { tempList.Add("dz=" + BoxZ.ToString().Replace(",", ".")); }
+            if (X != null) { tempList.Add("x=" + X.ToString()!.Replace(",", ".")); }
+            if (Y != null) { tempList.Add("y=" + Y.ToString()!.Replace(",", ".")); }
+            if (Z != null) { tempList.Add("z=" + Z.ToString()!.Replace(",", ".")); }
+            if (BoxX != null) { tempList.Add("dx=" + BoxX.ToString()!.Replace(",", ".")); }
+            if (BoxY != null) { tempList.Add("dy=" + BoxY.ToString()!.Replace(",", ".")); }
+            if (BoxZ != null) { tempList.Add("dz=" + BoxZ.ToString()!.Replace(",", ".")); }
             if (Names != null) { tempList.Add(GetSelectionString(Names)); }
             if (Types != null) { tempList.Add(GetSelectionString(Types)); }
             if (Tags != null) { tempList.Add(GetSelectionString(Tags)); }

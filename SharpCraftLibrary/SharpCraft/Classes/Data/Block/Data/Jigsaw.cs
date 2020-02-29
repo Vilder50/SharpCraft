@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a jigsaw block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Jigsaw(BlockType type) : base(type) { }
+            public Jigsaw(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a jigsaw block
@@ -43,7 +43,7 @@ namespace SharpCraft
             /// The name of the structure pool to use
             /// </summary>
             [Data.DataTag("target_pool")]
-            public string DPool { get; set; }
+            public string? DPool { get; set; }
             /// <summary>
             /// The block the jigsaw should transform into when done
             /// </summary>
@@ -56,7 +56,7 @@ namespace SharpCraft
             /// (Jigsaws only connects to other jigsaws with the same name)
             /// </summary>
             [Data.DataTag("attachment_type")]
-            public string DName { get; set; }
+            public string? DName { get; set; }
         }
     }
 }

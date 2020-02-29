@@ -19,22 +19,22 @@ namespace SharpCraft
             /// The owner of the bullet
             /// </summary>
             [Data.DataTag((object)"M","L")]
-            public UUID Owner { get; set; }
+            public UUID? Owner { get; set; }
             /// <summary>
             /// The owner's location
             /// </summary>
             [Data.DataTag("Owner","X", "Y", "Z")]
-            public IntVector OwnerCoords { get; set; }
+            public IntVector? OwnerCoords { get; set; }
             /// <summary>
             /// The bullet's target
             /// </summary>
             [Data.DataTag((object)"M", "L")]
-            public UUID Target { get; set; }
+            public UUID? Target { get; set; }
             /// <summary>
             /// The target's location
             /// </summary>
             [Data.DataTag("Target", "X", "Y", "Z")]
-            public IntVector TargetCoords { get; set; }
+            public IntVector? TargetCoords { get; set; }
             /// <summary>
             /// The amount of steps it takes to get to the target
             /// </summary>
@@ -44,7 +44,7 @@ namespace SharpCraft
             /// The offset distance from the bullet to the target
             /// </summary>
             [Data.DataTag((object)"TXD", "TYD", "TZD", Merge = true)]
-            public IntVector OffsetTarget { get; set; }
+            public IntVector? OffsetTarget { get; set; }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace SharpCraft
             /// Note: block data is not supported
             /// </summary>
             [Data.DataTag("carriedBlockState","Name","Properties")]
-            public Block Holding { get; set; }
+            public Block? Holding { get; set; }
         }
     }
 }

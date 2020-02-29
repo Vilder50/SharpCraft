@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a new anvil block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Anvil(BlockType type) : base(type) { }
+            public Anvil(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -11,13 +11,13 @@ namespace SharpCraft
         /// </summary>
         public class Barrel : BaseContainer, IBlock.IOpen, IBlock.IFacingFull
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a barrel block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Barrel(BlockType type) : base(type) { }
+            public Barrel(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a barrel block
@@ -52,7 +52,7 @@ namespace SharpCraft
             /// (0-26)
             /// </summary>
             [Data.DataTag("Items")]
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set

@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamAddCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamAddCommand"/>
         /// </summary>
         /// <param name="team">The team to add</param>
         /// <param name="displayName">The team's displayed name</param>
-        public TeamAddCommand(Team team, JsonText displayName)
+        public TeamAddCommand(Team team, JsonText? displayName)
         {
             Team = team;
             DisplayName = displayName;
@@ -32,7 +32,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The team's displayed name
         /// </summary>
-        public JsonText DisplayName { get; set; }
+        public JsonText? DisplayName { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -56,7 +56,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamEmptyCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamEmptyCommand"/>
@@ -87,8 +87,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamJoinCommand : BaseCommand
     {
-        private Team team;
-        private BaseSelector selector;
+        private Team team = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamJoinCommand"/>
@@ -126,7 +126,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamLeaveCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamLeaveCommand"/>
@@ -172,7 +172,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamPlayerListCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamPlayerListCommand"/>
@@ -203,7 +203,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamRemoveCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamRemoveCommand"/>
@@ -234,8 +234,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyDisplayCommand : BaseCommand
     {
-        private Team team;
-        private JsonText value;
+        private Team team = null!;
+        private JsonText value = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyDisplayCommand"/>
@@ -280,7 +280,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyCollisionCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyCollisionCommand"/>
@@ -318,7 +318,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyColorCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyColorCommand"/>
@@ -356,7 +356,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyDeathMessageCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyDeathMessageCommand"/>
@@ -394,7 +394,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyNameVisibilityCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyNameVisibilityCommand"/>
@@ -432,7 +432,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyFriendlyFireCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyFriendlyFireCommand"/>
@@ -470,7 +470,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamModifyInvisibilityCommand : BaseCommand
     {
-        private Team team;
+        private Team team = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyInvisibilityCommand"/>

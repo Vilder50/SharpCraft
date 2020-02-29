@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a new pressure plate block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public PressurePlate(BlockType type) : base(type) { }
+            public PressurePlate(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

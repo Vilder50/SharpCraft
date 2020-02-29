@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The item the purchased
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JSONObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The villager the player traded with
         /// </summary>
         [DataTag("conditions.villager", JsonTag = true)]
-        public JSONObjects.Entity Villager { get; set; }
+        public JSONObjects.Entity? Villager { get; set; }
     }
 }

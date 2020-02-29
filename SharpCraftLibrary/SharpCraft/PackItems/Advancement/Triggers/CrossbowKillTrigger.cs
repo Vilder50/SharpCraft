@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The entities killed
         /// </summary>
         [DataTag("victims", JsonTag = true)]
-        public JSONObjects.Entity[] Victims { get; set; }
+        public JSONObjects.Entity[]? Victims { get; set; }
 
         /// <summary>
         /// The amount of entities killed
         /// </summary>
         [DataTag("conditions.unique_entity_types", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public MCRange Kills { get; set; }
+        public MCRange? Kills { get; set; }
     }
 }

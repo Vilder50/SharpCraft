@@ -12,8 +12,8 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class CopyStateChange : BaseChange
     {
-        private BlockType id;
-        private string[] states;
+        private BlockType id = null!;
+        private string[] states = null!;
 
         /// <summary>
         /// Intializes a new <see cref="CopyStateChange"/>

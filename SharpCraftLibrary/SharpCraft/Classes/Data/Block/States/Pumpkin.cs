@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a pumpkin block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Pumpkin(BlockType type) : base(type) { }
+            public Pumpkin(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a pumpkin block

@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The hopper's loottable
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-            public LootTable LootTable { get; set; }
+            public LootTable? LootTable { get; set; }
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>
@@ -29,7 +29,7 @@ namespace SharpCraft
             /// The items in the hopper
             /// </summary>
             [Data.DataTag]
-            public SharpCraft.Item[] Items { get; set; }
+            public SharpCraft.Item?[]? Items { get; set; }
             /// <summary>
             /// If the hopper is enabled
             /// </summary>
@@ -39,7 +39,7 @@ namespace SharpCraft
             /// Time until it transfer another item
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time TransferCooldown { get; set; }
+            public Time? TransferCooldown { get; set; }
         }
     }
 }

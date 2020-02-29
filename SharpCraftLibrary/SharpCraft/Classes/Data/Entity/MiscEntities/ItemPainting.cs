@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The block the entity is inside
             /// </summary>
             [Data.DataTag((object)"TileX","TileY","TileZ", Merge = true)]
-            public IntVector InTile { get; set; }
+            public IntVector? InTile { get; set; }
             /// <summary>
             /// The direction the entity is facing
             /// </summary>
@@ -36,7 +36,7 @@ namespace SharpCraft
             /// The item in the item frame
             /// </summary>
             [Data.DataTag("Item")]
-            public Item FrameItem { get; set; }
+            public Item? FrameItem { get; set; }
 
             /// <summary>
             /// The chance of the frame dropping its item

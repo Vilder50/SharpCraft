@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Team : IConvertableToDataTag
     {
-        private string name;
+        private string name = null!;
         /// <summary>
         /// Creates a new team object.
         /// Note that this doesnt add the team to the world
@@ -45,7 +45,7 @@ namespace SharpCraft
         /// <param name="asType">The type of tag (accepts <see cref="ID.NBTTagType.TagString"/>)</param>
         /// <param name="extraConversionData">Unused</param>
         /// <returns>This team as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             if (asType != ID.NBTTagType.TagString)
             {

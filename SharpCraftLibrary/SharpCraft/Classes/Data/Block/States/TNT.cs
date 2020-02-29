@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a tnt block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public TNT(BlockType type) : base(type) { }
+            public TNT(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a tnt block

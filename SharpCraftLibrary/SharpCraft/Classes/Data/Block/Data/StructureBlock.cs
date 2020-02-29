@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a structure block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public StructureBlock(BlockType type) : base(type) { }
+            public StructureBlock(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a structure block
@@ -44,25 +44,25 @@ namespace SharpCraft
             /// The name of the structure
             /// </summary>
             [Data.DataTag("name")]
-            public string DName { get; set; }
+            public string? DName { get; set; }
             /// <summary>
             /// The name of the structure's creator
             /// </summary>
 
             [Data.DataTag("metadata")]
-            public string DMetadata { get; set; }
+            public string? DMetadata { get; set; }
 
             /// <summary>
             /// The location relative to the structure block to load/save the structure
             /// </summary>
             [Data.DataTag((object)"posX","posY","posZ", Merge = true)]
-            public IntVector DCoords { get; set; }
+            public IntVector? DCoords { get; set; }
 
             /// <summary>
             /// The size of the structure to save
             /// </summary>
             [Data.DataTag((object)"sizeX", "sizeY", "sizeZ", Merge = true)]
-            public IntVector DSize { get; set; }
+            public IntVector? DSize { get; set; }
 
             /// <summary>
             /// The way the structure is rotated when loaded

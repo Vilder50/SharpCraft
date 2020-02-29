@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarAddCommand : BaseCommand
     {
-        private BossBar bossBar;
-        private JsonText name;
+        private BossBar bossBar = null!;
+        private JsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarAddCommand"/>
@@ -64,7 +64,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarGetValueCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarGetValueCommand"/>
@@ -124,7 +124,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarRemoveCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarRemoveCommand"/>
@@ -162,7 +162,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeColorCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarGetValueCommand"/>
@@ -207,7 +207,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeMaxValueCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
         private int maxValue;
 
         /// <summary>
@@ -264,7 +264,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeValueCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
         private int barValue;
 
         /// <summary>
@@ -321,8 +321,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeNameCommand : BaseCommand
     {
-        private BossBar bossBar;
-        private JsonText name;
+        private BossBar bossBar = null!;
+        private JsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangeNameCommand"/>
@@ -374,8 +374,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangePlayersCommand : BaseCommand
     {
-        private BossBar bossBar;
-        private BaseSelector selector;
+        private BossBar bossBar = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangePlayersCommand"/>
@@ -427,7 +427,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeStyleCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarGetValueCommand"/>
@@ -472,7 +472,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class BossBarChangeVisibilityCommand : BaseCommand
     {
-        private BossBar bossBar;
+        private BossBar bossBar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangeVisibilityCommand"/>

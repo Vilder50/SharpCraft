@@ -52,33 +52,30 @@ namespace SharpCraft
         /// Gets the raw data used in commands
         /// x..y or name=x..y
         /// </summary>
-        /// <param name="Name">The thing which has to be equal the range. If null the output will be x..y</param>
+        /// <param name="name">The thing which has to be equal the range</param>
         /// <returns>Raw data used in commands</returns>
-        public string SelectorString(string Name = null)
+        public string SelectorString(string name)
         {
-            
+            return name + "=" + SelectorString();
+        }
+
+        /// <summary>
+        /// Gets string in the format x..y
+        /// </summary>
+        /// <returns>x..y</returns>
+        public string SelectorString()
+        {
             if (Minimum != Maximum)
             {
-                string TempString = "";
-                if (Name != null)
-                {
-                    TempString = Name + "=";
-                }
-                if (Minimum != null) { TempString += Minimum.ToMinecraftDouble(); }
-                TempString += "..";
-                if (Maximum != null) { TempString += Maximum.ToMinecraftDouble(); }
-                return TempString;
+                string tempString = "";
+                if (!(Minimum is null)) { tempString += Minimum.ToMinecraftDouble(); }
+                tempString += "..";
+                if (!(Maximum is null)) { tempString += Maximum.ToMinecraftDouble(); }
+                return tempString;
             }
             else
             {
-                if (Name != null)
-                {
-                    return Name + "=" + Minimum;
-                }
-                else
-                {
-                    return Minimum.ToString();
-                }
+                return Minimum.ToMinecraftDouble();
             }
         }
 
@@ -87,8 +84,13 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: min path name, 1: max path name, 2: type of the range values, 3: is json</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[]? conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
+
             if (conversionData.Length < 3 || conversionData.Length > 4)
             {
                 throw new ArgumentException("There has to be exacly 3-4 conversion params to convert a range to a data object.");
@@ -97,7 +99,7 @@ namespace SharpCraft
             bool isJson = false;
             if (conversionData.Length == 4)
             {
-                isJson = (bool)conversionData[3];
+                isJson = (bool?)conversionData[3] ?? false;
             }
 
             if (conversionData[0] is string minName && conversionData[1] is string maxName && conversionData[2] is ID.NBTTagType forceType)

@@ -22,7 +22,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected ItemGroup(bool _, BasePackNamespace packNamespace, string fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "item")
+        protected ItemGroup(bool _, BasePackNamespace packNamespace, string? fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "item")
         {
             
         }
@@ -35,7 +35,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public ItemGroup(BasePackNamespace packNamespace, string fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
+        public ItemGroup(BasePackNamespace packNamespace, string? fileName, List<ItemType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
             FinishedConstructing();
         }
@@ -78,8 +78,12 @@ namespace SharpCraft
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="extraConversionData">0: If true returns the string without the #</param>
         /// <returns>This <see cref="ItemType"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
+            if (extraConversionData is null)
+            {
+                throw new ArgumentNullException(nameof(extraConversionData));
+            }
             if (extraConversionData.Length == 1)
             {
                 bool? ignoreGroupChar = extraConversionData[0] as bool?;

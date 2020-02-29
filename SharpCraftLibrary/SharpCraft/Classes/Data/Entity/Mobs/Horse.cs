@@ -37,17 +37,17 @@ namespace SharpCraft
             /// The <see cref="UUID"/> of the owner of the horse
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagString)]
-            public UUID OwnerUUID { get; set; }
+            public UUID? OwnerUUID { get; set; }
             /// <summary>
             /// The item the horse has as it's saddle
             /// </summary>
             [DataTag("SaddleItem")]
-            public Item HorseSaddle { get; set; }
+            public Item? HorseSaddle { get; set; }
             /// <summary>
             /// The armor the horse has on
             /// </summary>
             [DataTag("ArmorItem")]
-            public Item HorseArmor { get; set; }
+            public Item? HorseArmor { get; set; }
             /// <summary>
             /// If the donkey has a chest
             /// </summary>
@@ -57,12 +57,12 @@ namespace SharpCraft
             /// The items inside the donkeys inventory
             /// </summary>
             [DataTag("Items")]
-            public Item[] DonkeyItems { get; set; }
+            public Item?[]? DonkeyItems { get; set; }
             /// <summary>
             /// The horse variant
             /// </summary>
             [DataTag("Variant")]
-            public Variant HorseVariant { get; set; }
+            public Variant? HorseVariant { get; set; }
             /// <summary>
             /// A object used to defina a horse variant
             /// </summary>
@@ -83,7 +83,7 @@ namespace SharpCraft
                 /// <param name="asType">Not used</param>
                 /// <param name="extraConversionData">Not used</param>
                 /// <returns>the made <see cref="DataPartTag"/></returns>
-                public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+                public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
                 {
                     return new DataPartTag(GetValue());
                 }
@@ -107,7 +107,7 @@ namespace SharpCraft
             /// The item the llama has on. (Normally carpet)
             /// </summary>
             [DataTag("DecorItem")]
-            public Item LlamaDecorItem { get; set; }
+            public Item? LlamaDecorItem { get; set; }
             /// <summary>
             /// If the skeleton horse is a trap
             /// </summary>
@@ -117,7 +117,7 @@ namespace SharpCraft
             /// The time the skeleton trap has existed. When at 18000 ticks it despawns
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time SkeletonTrapTime { get; set; }
+            public Time? SkeletonTrapTime { get; set; }
             /// <summary>
             /// If the mob is tame
             /// </summary>

@@ -21,7 +21,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected BlockGroup(bool _, BasePackNamespace packNamespace, string fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "block")
+        protected BlockGroup(bool _, BasePackNamespace packNamespace, string? fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "block")
         {
 
         }
@@ -34,7 +34,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public BlockGroup(BasePackNamespace packNamespace, string fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
+        public BlockGroup(BasePackNamespace packNamespace, string? fileName, List<BlockType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
             FinishedConstructing();
         }

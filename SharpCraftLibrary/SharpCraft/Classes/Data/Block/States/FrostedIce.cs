@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a frosted ice block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public FrostedIce(BlockType type) : base(type) { }
+            public FrostedIce(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a frosted ice block

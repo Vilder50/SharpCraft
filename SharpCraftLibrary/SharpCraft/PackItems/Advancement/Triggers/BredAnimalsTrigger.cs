@@ -21,18 +21,18 @@ namespace SharpCraft.AdvancementObjects
         /// The new child animal
         /// </summary>
         [DataTag("conditions.child", JsonTag = true)]
-        public JSONObjects.Entity Child { get; set; }
+        public JSONObjects.Entity? Child { get; set; }
 
         /// <summary>
         /// One of the parent animals
         /// </summary>
         [DataTag("conditions.parent", JsonTag = true)]
-        public JSONObjects.Entity Parent1 { get; set; }
+        public JSONObjects.Entity? Parent1 { get; set; }
 
         /// <summary>
         /// The other parent animal
         /// </summary>
         [DataTag("conditions.partner", JsonTag = true)]
-        public JSONObjects.Entity Parent2 { get; set; }
+        public JSONObjects.Entity? Parent2 { get; set; }
     }
 }

@@ -48,22 +48,22 @@ namespace SharpCraft
         /// <summary>
         /// Text which should be inserted into the players chat when shift clicked
         /// </summary>
-        public string ShiftClickInsertion { get; set; }
+        public string? ShiftClickInsertion { get; set; }
 
         /// <summary>
         /// The thing which should happen when the text is clicked
         /// </summary>
-        public BaseClickEvent ClickEvent { get; set; }
+        public BaseClickEvent? ClickEvent { get; set; }
 
         /// <summary>
         /// The the which shows up when the text is hovered over
         /// </summary>
-        public BaseHoverEvent HoverEvent { get; set; }
+        public BaseHoverEvent? HoverEvent { get; set; }
 
         /// <summary>
         /// Extra text
         /// </summary>
-        public JsonText[] Extra { get; set; }
+        public JsonText[]? Extra { get; set; }
 
         /// <summary>
         /// Gets the raw JSON string
@@ -110,7 +110,7 @@ namespace SharpCraft
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>This <see cref="JsonText"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetJsonString());
         }

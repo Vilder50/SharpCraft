@@ -12,15 +12,15 @@ namespace SharpCraft
         /// </summary>
         public class Campfire : Block, IBlock.IWaterLogged, IBlock.ILit
         {
-            private Item[] _dItems;
-            private Time[] _dCookingTimes;
-            private Time[] _dTotalCookingTimes;
+            private Item?[]? _dItems;
+            private Time?[]? _dCookingTimes;
+            private Time?[]? _dTotalCookingTimes;
 
             /// <summary>
             /// Creates a campfire block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Campfire(BlockType type) : base(type) { }
+            public Campfire(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a campfire block
@@ -68,12 +68,12 @@ namespace SharpCraft
             /// (The fire place has 4 slots (0-3))
             /// </summary>
             [Data.DataTag("Items")]
-            public Item[] DItems
+            public Item?[]? DItems
             {
                 get => _dItems;
                 set
                 {
-                    if (value.Length > 4)
+                    if (!(value is null) && value.Length > 4)
                     {
                         throw new ArgumentException("Too many items have been specified. The fireplace only has 4 slots");
                     }
@@ -86,12 +86,12 @@ namespace SharpCraft
             /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
             /// </summary>
             [Data.DataTag("CookingTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
-            public Time[] DCookingTimes
+            public Time?[]? DCookingTimes
             {
                 get => _dCookingTimes;
                 set
                 {
-                    if (value.Length >4)
+                    if (!(value is null) && value.Length >4)
                     {
                         throw new ArgumentException("Too many times have been specified. The fireplace can only have 4 times");
                     }
@@ -104,12 +104,12 @@ namespace SharpCraft
             /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
             /// </summary>
             [Data.DataTag("CookingTotalTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
-            public Time[] DTotalCookingTimes
+            public Time?[]? DTotalCookingTimes
             {
                 get => _dTotalCookingTimes;
                 set
                 {
-                    if (value.Length > 4)
+                    if (!(value is null) && value.Length > 4)
                     {
                         throw new ArgumentException("Too many times have been specified. The fireplace can only have 4 times");
                     }

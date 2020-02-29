@@ -19,7 +19,7 @@ namespace SharpCraft.Commands
         /// <param name="size">The size to modify with</param>
         /// <param name="modifier">The way to modify the size</param>
         /// <param name="time">The amount of time to modification takes. Leave null to make it happen instant</param>
-        public WorldborderSizeCommand(double size, ID.AddSetModifier modifier, Time time)
+        public WorldborderSizeCommand(double size, ID.AddSetModifier modifier, Time? time)
         {
             Modifier = modifier;
             Size = size;
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time to modification takes. Leave null to make it happen instant
         /// </summary>
-        public Time Time { get; set; }
+        public Time? Time { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WorldborderCenterCommand : BaseCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="WorldborderCenterCommand"/>
@@ -251,7 +251,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WorldborderWarningTimeCommand : BaseCommand
     {
-        private Time time;
+        private Time time = null!;
 
         /// <summary>
         /// Intializes an ew <see cref="WorldborderWarningTimeCommand"/>

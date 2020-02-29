@@ -18,7 +18,7 @@ namespace SharpCraft
             /// Creates a turtle egg block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public TurtleEgg(BlockType type) : base(type) { }
+            public TurtleEgg(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a turtle egg block

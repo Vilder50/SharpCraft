@@ -22,7 +22,7 @@ namespace SharpCraft
             /// The time till the next spell is casted
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time SpellTicks { get; set; }
+            public Time? SpellTicks { get; set; }
         }
     }
 }

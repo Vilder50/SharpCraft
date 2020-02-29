@@ -21,7 +21,7 @@ namespace SharpCraft
             /// Fow the tropical fish looks
             /// </summary>
             [DataTag("Variant")]
-            public Variant FishVariant { get; set; }
+            public Variant? FishVariant { get; set; }
 
             /// <summary>
             /// A object used to define how a fish looks
@@ -51,7 +51,7 @@ namespace SharpCraft
                 /// <param name="asType">Not used</param>
                 /// <param name="extraConversionData">Not used</param>
                 /// <returns>the made <see cref="DataPartTag"/></returns>
-                public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+                public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
                 {
                     return new DataPartTag(GetValue());
                 }

@@ -7,7 +7,7 @@ namespace SharpCraft
     /// </summary>
     public class Objective
     {
-        private string name;
+        private string name = null!;
 
         /// <summary>
         /// Creates a new scoreboard objective object.

@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The distance the player has moved in the overworld using the nether
         /// </summary>
         [DataTag("conditions.distance", JsonTag = true)]
-        public JSONObjects.Distance Distance { get; set; }
+        public JSONObjects.Distance? Distance { get; set; }
     }
 }

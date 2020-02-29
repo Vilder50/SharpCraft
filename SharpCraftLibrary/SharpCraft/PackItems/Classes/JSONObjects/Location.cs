@@ -32,37 +32,37 @@ namespace SharpCraft
             /// the x coordinate to detect
             /// </summary>
             [DataTag("position.x","min","max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public MCRange X { get; set; }
+            public MCRange? X { get; set; }
 
             /// <summary>
             /// the y coordinate to detect
             /// </summary>
             [DataTag("position.y", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public MCRange Y { get; set; }
+            public MCRange? Y { get; set; }
 
             /// <summary>
             /// the z coordinate to detect
             /// </summary>
             [DataTag("position.z", "min", "max", ID.NBTTagType.TagDouble, true, JsonTag = true)]
-            public MCRange Z { get; set; }
+            public MCRange? Z { get; set; }
 
             /// <summary>
             /// the light level to check for
             /// </summary>
             [DataTag("light.light", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-            public MCRange Light { get; set; }
+            public MCRange? Light { get; set; }
 
             /// <summary>
             /// The block at the location
             /// </summary>
             [DataTag("block", "block", "tag", "nbt", "state", true, JsonTag = true)]
-            public Block Block { get; set; }
+            public Block? Block { get; set; }
 
             /// <summary>
             /// The liquid at the location
             /// </summary>
             [DataTag("fluid", "fluid", "tag", "nbt", "state", true, JsonTag = true)]
-            public Block Liquid { get; set; }
+            public Block? Liquid { get; set; }
 
             /// <summary>
             /// Converts a <see cref="ID.Biome"/> into a <see cref="Location"/>

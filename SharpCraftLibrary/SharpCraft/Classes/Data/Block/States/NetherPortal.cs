@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a nether portal block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public NetherPortal(BlockType type) : base(type) { }
+            public NetherPortal(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a nether portal block

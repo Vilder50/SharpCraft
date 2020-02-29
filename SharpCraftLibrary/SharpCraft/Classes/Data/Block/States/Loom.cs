@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a loom block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Loom(BlockType type) : base(type) { }
+            public Loom(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a loom block

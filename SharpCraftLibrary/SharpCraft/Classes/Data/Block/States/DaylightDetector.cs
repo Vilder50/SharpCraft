@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a daylight detector block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public DaylightDetector(BlockType type) : base(type) { }
+            public DaylightDetector(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a daylight detector block

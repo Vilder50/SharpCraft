@@ -143,7 +143,7 @@ namespace SharpCraft.FunctionWriters
             createEntity.Tags = tags.ToArray();
 
             //summon entity and execute as it
-            Function executeAs = null;
+            Function? executeAs = null;
             GroupCommands(f =>
             {
                 f.Entity.Add(spawnCoords, createEntity);
@@ -156,7 +156,7 @@ namespace SharpCraft.FunctionWriters
                 executeAs.Entity.Tag.Remove(new Selector(), findTag);
                 runCommands(executeAs);
             });
-            return executeAs;
+            return executeAs!;
         }
         #endregion
 
@@ -166,8 +166,8 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ScoreOperation : ScoreValue
         {
-            private ScoreValue score1;
-            private ScoreValue score2;
+            private ScoreValue score1 = null!;
+            private ScoreValue score2 = null!;
 
             /// <summary>
             /// Intializes a new <see cref="ScoreOperation"/>
@@ -264,7 +264,7 @@ namespace SharpCraft.FunctionWriters
                 {
                     if (Selector is NameSelector nameSelector && nameSelector.Name == "undefined")
                     {
-                        (Selector as NameSelector).Name = "Value" + usedNumbers;
+                        nameSelector.Name = "Value" + usedNumbers;
                         usedNumbers++;
                         function.AddCommand(new ScoreboardOperationCommand(Selector, mathObjective, ID.Operation.Equel, firstScoreValue, firstScoreValue));
                     }
@@ -299,14 +299,14 @@ namespace SharpCraft.FunctionWriters
                 return command;
             }
 
-            public string GetCommandString()
+            public string? GetCommandString()
             {
                 return null;
             }
 
             public BaseCommand ShallowClone()
             {
-                return null;
+                return new Comment("ExecutePrefix");
             }
         }
 
@@ -367,7 +367,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="elseWriter">The commands to run if the test isn't successfully</param>
         /// <param name="ifFunctionName">The name of the function for running the if commands</param>
         /// <param name="elseFunctionName">The name of the function for running the else commands</param>
-        public void IfElse(BaseExecuteCommand testCommand, Function.FunctionWriter ifWriter, Function.FunctionWriter elseWriter, string ifFunctionName = null, string elseFunctionName = null)
+        public void IfElse(BaseExecuteCommand testCommand, Function.FunctionWriter ifWriter, Function.FunctionWriter elseWriter, string? ifFunctionName = null, string? elseFunctionName = null)
         {
             if (testCommand.HasEndCommand())
             {
@@ -383,12 +383,12 @@ namespace SharpCraft.FunctionWriters
             {
                 f.AddCommand(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 0));
                 f.AddCommand(testCommand);
-                Function ifFunction = f.World.Function(ForFunction.NewSibling(ifFunctionName, ifWriter)) as Function;
+                Function ifFunction = (f.World.Function(ForFunction.NewSibling(ifFunctionName, ifWriter)) as Function)!;
                 ifFunction.Commands.Add(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 1));
                 ifFunction.Dispose();
 
                 f.AddCommand(new ExecuteIfScoreMatches(ifElseSelector, math, 0));
-                Function elseFunction = f.World.Function(ForFunction.NewSibling(elseFunctionName, elseWriter)) as Function;
+                Function elseFunction = (f.World.Function(ForFunction.NewSibling(elseFunctionName, elseWriter)) as Function)!;
                 elseFunction.Dispose();
             });
         }
@@ -402,7 +402,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopWriter">The commands the loop should run</param>
         /// <param name="loopName">The name of the loop file</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string loopName = null, BaseExecuteCommand nextExecute = null)
+        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string? loopName = null, BaseExecuteCommand? nextExecute = null)
         {
             if (testCommand.HasEndCommand())
             {
@@ -418,7 +418,7 @@ namespace SharpCraft.FunctionWriters
             }
 
             ForFunction.AddCommand(testCommand.ShallowClone());
-            Function loopFunction = ForFunction.World.Function(ForFunction.NewSibling(loopName, loopWriter)) as Function;
+            Function loopFunction = (ForFunction.World.Function(ForFunction.NewSibling(loopName, loopWriter)) as Function)!;
             loopFunction.Commands.Add(testCommand.AddCommand(new RunFunctionCommand(loopFunction)));
         }
 
@@ -438,7 +438,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
         /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
+        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand? nextExecute = null, bool stopAtTo = false)
         {
             if (from == to)
             {
@@ -457,7 +457,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
         /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
+        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand? nextExecute = null, bool stopAtTo = false)
         {
             CreateForLoop(0, from, to, null, loopName, writer, positive, nextExecute, stopAtTo);
         }
@@ -473,7 +473,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
         /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
+        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand? nextExecute = null, bool stopAtTo = false)
         {
             CreateForLoop(from, null, 0, to, loopName, writer, positive, nextExecute, stopAtTo);
         }
@@ -488,12 +488,12 @@ namespace SharpCraft.FunctionWriters
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
         /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null, bool stopAtTo = false)
+        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand? nextExecute = null, bool stopAtTo = false)
         {
             CreateForLoop(0, from, 0, to, loopName, writer, positive, nextExecute, stopAtTo);
         }
 
-        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand nextExecute, bool stopAtTo)
+        private void CreateForLoop(int from, ScoreValue? fromValue, int to, ScoreValue? toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand? nextExecute, bool stopAtTo)
         {
             if (!(nextExecute is null) && nextExecute.HasEndCommand())
             {
@@ -590,7 +590,7 @@ namespace SharpCraft.FunctionWriters
         /// <remarks>
         /// Running ray cast from within a ray cast might lead to unexpected behavior.
         /// </remarks>
-        public void RayCast(string rayName, Block hit, Block ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter stepCommands = null)
+        public void RayCast(string rayName, Block? hit, Block? ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter? stepCommands = null)
         {
             ValidateRayParams(rayName, length, onHit);
 
@@ -622,14 +622,14 @@ namespace SharpCraft.FunctionWriters
                     #region check predicate
                     BaseCondition getIfBlockCondition(IntVector location)
                     {
-                        BaseCondition blockCondition = null;
+                        BaseCondition blockCondition = null!;
                         if (!(ignore is null))
                         {
-                            blockCondition = !new LocationCondition(new JSONObjects.Location() { Block = ignore }) { Offset = location };
+                            blockCondition = !new LocationCondition(new JSONObjects.Location() { Block = ignore }, location);
                         }
                         if (!(hit is null))
                         {
-                            BaseCondition hitCondition = new LocationCondition(new JSONObjects.Location() { Block = hit }) { Offset = location };
+                            BaseCondition hitCondition = new LocationCondition(new JSONObjects.Location() { Block = hit }, location);
                             if (blockCondition is null)
                             {
                                 blockCondition = hitCondition;
@@ -736,7 +736,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="length">The amount of blocks he ray should travel.</param>
         /// <param name="onHit">The commands to run when the ray hits an entity</param>
         /// <param name="hitSelfAble">If the ray should be able to hit the executor</param>
-        public void RayCast(string rayName, Selector hit, Selector ignore, double length, Function.FunctionWriter onHit, bool hitSelfAble = false)
+        public void RayCast(string rayName, Selector? hit, Selector? ignore, double length, Function.FunctionWriter onHit, bool hitSelfAble = false)
         {
             ValidateRayParams(rayName, length, onHit);
 
@@ -901,7 +901,7 @@ namespace SharpCraft.FunctionWriters
                 {
                     throw new ArgumentOutOfRangeException("To generate a number the difference between From and To may not be higher than int max value.");
                 }
-                ScoreValue randomHolder = null;
+                ScoreValue randomHolder = null!;
                 ForFunction.Custom.GroupCommands((g) =>
                 {
                     g.World.Function(SharpCraftFiles.GetRandomNumberFunction());

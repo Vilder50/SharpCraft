@@ -34,7 +34,7 @@ namespace SharpCraft
             /// When it hits 1200 ticks while not moving the arrow despawns
             /// </summary>
             [Data.DataTag("life",ForceType = ID.NBTTagType.TagShort)]
-            public Time Life { get; set; }
+            public Time? Life { get; set; }
             /// <summary>
             /// The amount of damage dealt by the arrow
             /// </summary>
@@ -54,22 +54,22 @@ namespace SharpCraft
             /// The color of the arrow
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public RGBColor Color { get; set; }
+            public RGBColor? Color { get; set; }
             /// <summary>
             /// The effects given by the arrow
             /// </summary>
             [Data.DataTag]
-            public Effect[] CustomPotionEffects { get; set; }
+            public Effect?[]? CustomPotionEffects { get; set; }
             /// <summary>
             /// The color of the arrow's particles
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public RGBColor CustomPotionColor { get; set; }
+            public RGBColor? CustomPotionColor { get; set; }
             /// <summary>
             /// The amount of duration of the glowing effect given by the spectral arrow
             /// </summary>
             [Data.DataTag("Duration", ForceType = ID.NBTTagType.TagInt)]
-            public Time SpectralDuration { get; set; }
+            public Time? SpectralDuration { get; set; }
         }
     }
 }

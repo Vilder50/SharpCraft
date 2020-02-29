@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a new block being moved by a piston
             /// </summary>
             /// <param name="type">The type of block</param>
-            public MovedByPiston(BlockType type) : base(type) { }
+            public MovedByPiston(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -50,7 +50,7 @@ namespace SharpCraft
             /// Note: block data is not supported
             /// </summary>
             [Data.DataTag("blockState", "Name", "Properties")]
-            public Block DMovingBlock { get; set; }
+            public Block? DMovingBlock { get; set; }
 
             /// <summary>
             /// The way the block is being pushed / pulled from

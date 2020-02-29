@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The item which got enchanted
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JSONObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The amount of levels used for enchanting
         /// </summary>
         [DataTag("conditions.levels", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public MCRange Levels { get; set; }
+        public MCRange? Levels { get; set; }
     }
 }

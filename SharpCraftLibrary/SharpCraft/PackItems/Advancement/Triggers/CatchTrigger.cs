@@ -21,18 +21,18 @@ namespace SharpCraft.AdvancementObjects
         /// The entity caught with the rod
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JSONObjects.Entity Entity { get; set; }
+        public JSONObjects.Entity? Entity { get; set; }
 
         /// <summary>
         /// The item caught with the rod
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JSONObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The fishing rod used
         /// </summary>
         [DataTag("conditions.rod", JsonTag = true)]
-        public JSONObjects.Item FishingRod { get; set; }
+        public JSONObjects.Item? FishingRod { get; set; }
     }
 }

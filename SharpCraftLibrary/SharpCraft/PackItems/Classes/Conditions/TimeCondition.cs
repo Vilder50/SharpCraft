@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class TimeCondition : BaseCondition
     {
-        private MCRange time;
+        private MCRange time = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TimeCondition"/>

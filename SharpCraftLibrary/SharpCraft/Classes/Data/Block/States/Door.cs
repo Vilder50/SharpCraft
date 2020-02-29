@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a new door block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Door(BlockType type) : base(type) { }
+            public Door(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

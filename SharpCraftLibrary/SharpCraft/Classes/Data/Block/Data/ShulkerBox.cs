@@ -11,13 +11,13 @@ namespace SharpCraft
         /// </summary>
         public class ShulkerBox : BaseContainer, IBlock.IFacingFull
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a new shulker box
             /// </summary>
             /// <param name="type">The type of block</param>
-            public ShulkerBox(BlockType type) : base(type) { }
+            public ShulkerBox(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -41,7 +41,7 @@ namespace SharpCraft
             /// (0-26)
             /// </summary>
             [Data.DataTag("Items")]
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set

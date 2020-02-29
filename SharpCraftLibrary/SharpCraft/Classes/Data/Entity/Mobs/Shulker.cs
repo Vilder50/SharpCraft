@@ -35,7 +35,7 @@ namespace SharpCraft
             /// The approximate location of the shulker
             /// </summary>
             [Data.DataTag((object)"APX","APY","APZ", Merge = true)]
-            public IntVector ApproxCoords { get; set; }
+            public IntVector? ApproxCoords { get; set; }
         }
     }
 }

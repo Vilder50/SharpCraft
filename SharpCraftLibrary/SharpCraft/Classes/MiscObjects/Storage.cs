@@ -12,8 +12,8 @@ namespace SharpCraft
     /// </summary>
     public class Storage
     {
-        private BasePackNamespace packNamespace;
-        private string name;
+        private BasePackNamespace packNamespace = null!;
+        private string name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="Storage"/>

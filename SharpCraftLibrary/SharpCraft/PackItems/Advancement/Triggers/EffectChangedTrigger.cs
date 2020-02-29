@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The effects the player has
         /// </summary>
         [DataTag("conditions.effects", JsonTag = true)]
-        public JSONObjects.Effects Effects { get; set; }
+        public JSONObjects.Effects? Effects { get; set; }
     }
 }

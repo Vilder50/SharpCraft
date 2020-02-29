@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a bell block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Bell(BlockType type) : base(type) { }
+            public Bell(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a bell block

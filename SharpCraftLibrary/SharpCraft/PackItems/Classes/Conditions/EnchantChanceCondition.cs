@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EnchantChanceCondition : BaseCondition
     {
-        private double[] chances;
+        private double[] chances = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EnchantChanceCondition"/>

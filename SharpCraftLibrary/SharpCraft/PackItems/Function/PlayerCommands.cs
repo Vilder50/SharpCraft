@@ -142,7 +142,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="spawn">The new spawnpoint location</param>
-        public void Spawnpoint(BaseSelector player, Vector spawn = null)
+        public void Spawnpoint(BaseSelector player, Vector? spawn = null)
         {
             ForFunction.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
@@ -201,7 +201,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
                 ForFunction.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
@@ -217,7 +217,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
                 ForFunction.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
@@ -233,7 +233,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dust">If it should be dust or squares</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
+            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector? player = null)
             {
                 ForFunction.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
@@ -248,7 +248,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
                 ForFunction.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
@@ -312,7 +312,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
-            public void GiveItem(BaseSelector player, Vector breakBlock, Item breakWith)
+            public void GiveItem(BaseSelector player, Vector breakBlock, Item? breakWith)
             {
                 if (breakWith is null)
                 {
@@ -361,7 +361,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item breakWith, int slot)
+            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item? breakWith, int slot)
             {
                 if (breakWith is null)
                 {
@@ -389,7 +389,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="item">The item to clear</param>
             /// <param name="amount">The maximum amount of the item to clear. null clears all</param>
-            public void Clear(BaseSelector player, Item item = null, int? amount = null)
+            public void Clear(BaseSelector player, Item? item = null, int? amount = null)
             {
                 ForFunction.AddCommand(new ClearCommand(player, item, amount));
             }
@@ -431,7 +431,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="source">the source to stop sounds at. Null will stop the sound from any source</param>
             /// <param name="sound">the sound to stop. Null will stop any sound in the given source</param>
-            public void Stop(BaseSelector player, ID.SoundSource? source = null, string sound = null)
+            public void Stop(BaseSelector player, ID.SoundSource? source = null, string? sound = null)
             {
                 ForFunction.AddCommand(new StopSoundCommand(player, sound, source));
             }
@@ -647,7 +647,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
+            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger? trigger = null)
             {
                 ForFunction.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }

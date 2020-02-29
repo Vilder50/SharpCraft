@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a redstone dust block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public RedstoneDust(BlockType type) : base(type) { }
+            public RedstoneDust(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a redstone dust block

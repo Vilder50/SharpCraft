@@ -11,13 +11,13 @@ namespace SharpCraft
         /// </summary>
         public class Hopper : BaseContainer
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a hopper block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Hopper(BlockType type) : base(type) { }
+            public Hopper(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a hopper block
@@ -51,12 +51,12 @@ namespace SharpCraft
             /// (0-4)
             /// </summary>
             [Data.DataTag("Items")]
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set
                 {
-                    if (DItems != null && DItems.Length > 5)
+                    if (!(DItems is null) && DItems.Length > 5)
                     {
                         throw new ArgumentException("Too many slots specified");
                     }
@@ -68,7 +68,7 @@ namespace SharpCraft
             /// The time till the hopper again will transfer an item.
             /// </summary>
             [Data.DataTag("TransferCooldown", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-            public Time DCooldown { get; set; }
+            public Time? DCooldown { get; set; }
         }
     }
 }

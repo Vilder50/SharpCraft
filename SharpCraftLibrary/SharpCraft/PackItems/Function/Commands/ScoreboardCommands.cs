@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveAddCommand : BaseCommand
     {
-        private Objective scoreObject;
-        private string criterion;
+        private Objective scoreObject = null!;
+        private string criterion = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveAddCommand"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="displayName">The displayed name of the objective</param>
         /// <param name="scoreObject">The objective</param>
         /// <param name="criterion">The criterion for the objective</param>
-        public ScoreboardObjectiveAddCommand(Objective scoreObject, string criterion, JsonText displayName)
+        public ScoreboardObjectiveAddCommand(Objective scoreObject, string criterion, JsonText? displayName)
         {
             DisplayName = displayName;
             ScoreObject = scoreObject;
@@ -30,7 +30,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The displayed name of the objective
         /// </summary>
-        public JsonText DisplayName { get; set; }
+        public JsonText? DisplayName { get; set; }
 
         /// <summary>
         /// The objective
@@ -79,8 +79,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveChangeNameCommand : BaseCommand
     {
-        private Objective scoreObject;
-        private JsonText displayName;
+        private Objective scoreObject = null!;
+        private JsonText displayName = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveChangeNameCommand"/>
@@ -119,7 +119,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveChangeRenderCommand : BaseCommand
     {
-        private Objective scoreObject;
+        private Objective scoreObject = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveChangeRenderCommand"/>
@@ -157,7 +157,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardObjectiveRemoveCommand : BaseCommand
     {
-        private Objective scoreObject;
+        private Objective scoreObject = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveRemoveCommand"/>
@@ -193,7 +193,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="scoreObject">The objective to display. Null to display nothing</param>
         /// <param name="displaySlot">The slot to change displayed objective</param>
-        public ScoreboardSetDisplayCommand(Objective scoreObject, ID.ScoreDisplay displaySlot)
+        public ScoreboardSetDisplayCommand(Objective? scoreObject, ID.ScoreDisplay displaySlot)
         {
             ScoreObject = scoreObject;
             DisplaySlot = displaySlot;
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to display. Null to display nothing
         /// </summary>
-        public Objective ScoreObject { get; set; }
+        public Objective? ScoreObject { get; set; }
 
         /// <summary>
         /// The slot to change displayed objective
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="scoreObject">The objective to display. Null to display nothing</param>
         /// <param name="teamColor">The slot color to change</param>
-        public ScoreboardSetTeamDisplayCommand(Objective scoreObject, ID.MinecraftColor teamColor)
+        public ScoreboardSetTeamDisplayCommand(Objective? scoreObject, ID.MinecraftColor teamColor)
         {
             ScoreObject = scoreObject;
             TeamColor = teamColor;
@@ -245,7 +245,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to display. Null to display nothing
         /// </summary>
-        public Objective ScoreObject { get; set; }
+        public Objective? ScoreObject { get; set; }
 
         /// <summary>
         /// The slot color to change
@@ -274,8 +274,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardValueChangeCommand : BaseCommand
     {
-        private Objective scoreObject;
-        private BaseSelector selector;
+        private Objective scoreObject = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueChangeCommand"/>
@@ -338,8 +338,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardValueGetCommand : BaseCommand
     {
-        private Objective scoreObject;
-        private BaseSelector selector;
+        private Objective scoreObject = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardValueGetCommand"/>
@@ -389,8 +389,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardEnableTriggerCommand : BaseCommand
     {
-        private Objective scoreObject;
-        private BaseSelector selector;
+        private Objective scoreObject = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardEnableTriggerCommand"/>
@@ -429,14 +429,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardResetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardResetCommand"/>
         /// </summary>
         /// <param name="selector">Selector for selecting the scores to reset</param>
         /// <param name="scoreObject">The objective to reset scores in. Null to reset all scores for the selected scores</param>
-        public ScoreboardResetCommand(BaseSelector selector, Objective scoreObject)
+        public ScoreboardResetCommand(BaseSelector selector, Objective? scoreObject)
         {
             Selector = selector;
             ScoreObject = scoreObject;
@@ -450,7 +450,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The objective to reset scores in. Null to reset all scores for the selected scores
         /// </summary>
-        public Objective ScoreObject { get; set; }
+        public Objective? ScoreObject { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -474,7 +474,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardListCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardObjectiveListCommand"/>
@@ -516,10 +516,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScoreboardOperationCommand : BaseCommand
     {
-        private BaseSelector selector1;
-        private Objective objective1;
-        private BaseSelector selector2;
-        private Objective objective2;
+        private BaseSelector selector1 = null!;
+        private Objective objective1 = null!;
+        private BaseSelector selector2 = null!;
+        private Objective objective2 = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreboardOperationCommand"/>

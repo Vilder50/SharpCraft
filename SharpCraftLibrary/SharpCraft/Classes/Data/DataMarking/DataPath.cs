@@ -15,9 +15,9 @@ namespace SharpCraft.Data
     /// </summary>
     public class DataPath
     {
-        private string path;
-        private DataPath nextPath;
-        private DataPathCondition[] conditions;
+        private string path = null!;
+        private DataPath? nextPath;
+        private DataPathCondition?[]? conditions;
         private readonly bool isArray;
         private readonly int arrayCount;
 
@@ -138,7 +138,7 @@ namespace SharpCraft.Data
         /// Returns the continuation of this data path
         /// </summary>
         /// <returns>the continuation of this data path</returns>
-        public DataPath GetNextpath()
+        public DataPath? GetNextpath()
         {
             return nextPath;
         }
@@ -154,9 +154,9 @@ namespace SharpCraft.Data
                 for (int i = 0; i < arrayCount; i++)
                 {
                     fullPath += "[";
-                    if (!(conditions is null) && !(conditions[i] is null) && conditions[i].Type != DataPathCondition.ConditionType.Data)
+                    if (!(conditions is null) && !(conditions[i] is null) && conditions[i]!.Type != DataPathCondition.ConditionType.Data)
                     {
-                        fullPath += conditions[i].GetConditionString();
+                        fullPath += conditions[i]!.GetConditionString();
                     }
                     fullPath += "]";
                 }
@@ -165,7 +165,7 @@ namespace SharpCraft.Data
             {
                 if (!(conditions is null) && conditions.Length > 0 && !(conditions[0] is null))
                 {
-                    fullPath += conditions[0].GetConditionString();
+                    fullPath += conditions[0]!.GetConditionString();
                 }
             }
 
@@ -192,13 +192,13 @@ namespace SharpCraft.Data
         /// <typeparam name="T">The object to get the data path from</typeparam>
         /// <param name="dataHoldingProperty">The property holding the data to get a path to</param>
         /// <returns>A path to some data</returns>
-        public static DataPath GetDataPath<T>(Expression<Func<T, object>> dataHoldingProperty) where T : DataHolderBase
+        public static DataPath GetDataPath<T>(Expression<Func<T, object?>> dataHoldingProperty) where T : DataHolderBase
         {
-            MemberExpression memberExpression = dataHoldingProperty.Body as MemberExpression;
-            UnaryExpression unaryExpression = dataHoldingProperty.Body as UnaryExpression;
-            PropertyInfo property = (PropertyInfo)(memberExpression ?? unaryExpression.Operand as MemberExpression).Member;
+            MemberExpression? memberExpression = dataHoldingProperty.Body as MemberExpression;
+            UnaryExpression? unaryExpression = dataHoldingProperty.Body as UnaryExpression;
+            PropertyInfo property = (PropertyInfo)(memberExpression ?? unaryExpression!.Operand as MemberExpression)!.Member;
 
-            DataTagAttribute dataTagInformation = (DataTagAttribute)property.GetCustomAttribute(typeof(DataTagAttribute));
+            DataTagAttribute? dataTagInformation = (DataTagAttribute?)property.GetCustomAttribute(typeof(DataTagAttribute));
             if (dataTagInformation is null)
             {
                 throw new ArgumentException("The given property is not an NBT data tag holding property");
@@ -212,7 +212,7 @@ namespace SharpCraft.Data
                 while (checkType.IsArray)
                 {
                     arrays++;
-                    checkType = checkType.GetElementType();
+                    checkType = checkType.GetElementType()!;
                 }
                 return new DataPath(pathName, arrays);
             }
@@ -247,8 +247,8 @@ namespace SharpCraft.Data
             Index
         }
 
-        readonly DataHolderBase data;
-        readonly string rawData;
+        readonly DataHolderBase? data;
+        readonly string? rawData;
         readonly int? index;
         readonly ConditionType type;
 
@@ -301,7 +301,7 @@ namespace SharpCraft.Data
         /// <returns>a string used in Minecraft</returns>
         public string GetConditionString()
         {
-            return rawData ?? data?.GetDataString() ?? index.ToString();
+            return rawData ?? data?.GetDataString() ?? index.ToString()!;
         }
 
         /// <summary>

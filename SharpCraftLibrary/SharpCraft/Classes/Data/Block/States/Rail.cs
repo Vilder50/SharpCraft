@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a rail block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Rail(BlockType type) : base(type) { }
+            public Rail(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a rail block

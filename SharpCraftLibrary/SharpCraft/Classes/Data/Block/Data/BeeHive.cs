@@ -18,7 +18,7 @@ namespace SharpCraft
             /// Creates a new bee hive/nest block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BeeHive(BlockType type) : base(type) { }
+            public BeeHive(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -59,13 +59,13 @@ namespace SharpCraft
             /// The position of a flower the bees should path find to
             /// </summary>
             [DataTag("FlowerPos", "X", "Y", "Z")]
-            public IntVector DFlowerPosition { get; set; }
+            public IntVector? DFlowerPosition { get; set; }
 
             /// <summary>
             /// The entities inside the bee hive
             /// </summary>
             [DataTag("Bees")]
-            public InsideBeeHive[] DEntitiesInside { get; set; }
+            public InsideBeeHive?[]? DEntitiesInside { get; set; }
 
             /// <summary>
             /// An entity inside a bee hive
@@ -76,19 +76,19 @@ namespace SharpCraft
                 /// The entity inside the bee hive
                 /// </summary>
                 [DataTag("EntityData")]
-                public Entity.BaseEntity Entity { get; set; }
+                public Entity.BaseEntity? Entity { get; set; }
 
                 /// <summary>
                 /// The amount of ticks the entity has been in the hive.
                 /// </summary>
                 [DataTag(ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-                public Time TicksInHive { get; set; }
+                public Time? TicksInHive { get; set; }
 
                 /// <summary>
                 /// The minimum amount of ticks the entity has been in the hive.
                 /// </summary>
                 [DataTag("MinOccupationTicks", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-                public Time MinimumTicksInHive { get; set; }
+                public Time? MinimumTicksInHive { get; set; }
             }
         }
     }

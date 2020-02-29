@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a observer block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Observer(BlockType type) : base(type) { }
+            public Observer(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a observer block

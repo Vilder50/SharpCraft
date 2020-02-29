@@ -19,13 +19,13 @@ namespace SharpCraft
             /// The amount of time before the fangs appear
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Warmup { get; set; }
+            public Time? Warmup { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who summoned the fangs
             /// </summary>
             [Data.DataTag("Owner","OwnerUUIDMost","OwnerUUIDLeast")]
-            public UUID OwnerUUID { get; set; }
+            public UUID? OwnerUUID { get; set; }
 
             /// <summary>
             /// Makes the fang into a marker entity
@@ -35,6 +35,10 @@ namespace SharpCraft
             {
                 get
                 {
+                    if (Warmup is null)
+                    {
+                        return false;
+                    }
                     return Warmup.AsTicks() == int.MaxValue;
                 }
                 set

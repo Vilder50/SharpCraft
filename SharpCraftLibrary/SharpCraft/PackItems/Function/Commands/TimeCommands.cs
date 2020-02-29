@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TimeModifyCommand : BaseCommand
     {
-        private Time time;
+        private Time time = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TimeModifyCommand"/>

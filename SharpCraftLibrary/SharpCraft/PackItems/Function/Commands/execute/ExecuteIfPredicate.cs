@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfPredicate : BaseExecuteIfCommand
     {
-        private IPredicate predicate;
+        private IPredicate predicate = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfPredicate"/> command

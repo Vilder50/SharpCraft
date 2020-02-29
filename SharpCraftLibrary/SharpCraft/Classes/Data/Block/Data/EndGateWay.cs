@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates an end gateway block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndGateWay(BlockType type) : base(type) { }
+            public EndGateWay(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates an end gateway block
@@ -37,7 +37,7 @@ namespace SharpCraft
             /// The location the entity gets teleported to when entering
             /// </summary>
             [Data.DataTag("ExitPortal","X","Y","Z")]
-            public IntVector DExit { get; set; }
+            public IntVector? DExit { get; set; }
             /// <summary>
             /// If the entity should be teleported to this exact location
             /// </summary>
@@ -49,7 +49,7 @@ namespace SharpCraft
             /// x&lt;200 = magenta beam.
             /// </summary>
             [Data.DataTag("Age", ForceType = SharpCraft.ID.NBTTagType.TagLong)]
-            public Time DAge { get; set; }
+            public Time? DAge { get; set; }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a comparator block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Comparator(BlockType type) : base(type) { }
+            public Comparator(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a comparator block

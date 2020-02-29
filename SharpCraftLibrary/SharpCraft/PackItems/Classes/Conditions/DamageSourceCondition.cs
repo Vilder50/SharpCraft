@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class DamageSourceCondition : BaseCondition
     {
-        private JSONObjects.Damage damage;
+        private JSONObjects.Damage damage = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DamageSourceCondition"/>

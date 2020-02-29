@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EntityCondition : BaseCondition
     {
-        private JSONObjects.Entity data;
+        private JSONObjects.Entity data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EntityCondition"/>

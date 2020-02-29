@@ -54,7 +54,7 @@ namespace SharpCraft
         /// </summary>
         public class TextHoverEvent : BaseHoverEvent
         {
-            private JsonText text;
+            private JsonText text = null!;
 
             /// <summary>
             /// Intializes a new <see cref="TextHoverEvent"/>
@@ -96,7 +96,7 @@ namespace SharpCraft
         /// </summary>
         public class ItemHoverEvent : BaseHoverEvent
         {
-            private Item item;
+            private Item item = null!;
 
             /// <summary>
             /// Intializes a new <see cref="ItemHoverEvent"/>
@@ -142,7 +142,7 @@ namespace SharpCraft
         /// </summary>
         public class EntityHoverEvent : BaseHoverEvent
         {
-            private EntityType type;
+            private EntityType type = null!;
 
             /// <summary>
             /// Intializes a new <see cref="EntityHoverEvent"/>
@@ -150,7 +150,7 @@ namespace SharpCraft
             /// <param name="type">The type of entity</param>
             /// <param name="name">The entity's name (Not really used)</param>
             /// <param name="uuid">The entity's uuid</param>
-            public EntityHoverEvent(EntityType type, JsonText name = null, UUID uuid = null) : base("show_entity")
+            public EntityHoverEvent(EntityType type, JsonText? name = null, UUID? uuid = null) : base("show_entity")
             {
                 Type = type;
                 Name = name;
@@ -165,12 +165,12 @@ namespace SharpCraft
             /// <summary>
             /// The entity's name (Not really used)
             /// </summary>
-            public JsonText Name { get; set; }
+            public JsonText? Name { get; set; }
 
             /// <summary>
             /// The entity's uuid
             /// </summary>
-            public UUID UUID { get; set; }
+            public UUID? UUID { get; set; }
 
             /// <summary>
             /// Returns the value of the event

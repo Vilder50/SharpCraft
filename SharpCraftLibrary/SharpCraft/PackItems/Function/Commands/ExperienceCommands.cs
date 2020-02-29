@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceModifyCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceModifyCommand"/>
@@ -63,7 +63,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceGetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceGetCommand"/>

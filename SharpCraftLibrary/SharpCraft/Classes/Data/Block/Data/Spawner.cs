@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a spawner block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Spawner(BlockType type) : base(type) { }
+            public Spawner(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a spawner block
@@ -52,7 +52,7 @@ namespace SharpCraft
             /// The entities the spawner can spawn
             /// </summary>
             [Data.DataTag("SpawnPotentials")]
-            public SpawnerPotential[] DPotentials { get; set; }
+            public SpawnerPotential?[]? DPotentials { get; set; }
 
             /// <summary>
             /// How many entities to try to spawn every time
@@ -70,13 +70,13 @@ namespace SharpCraft
             /// Time till the next spawn
             /// </summary>
             [Data.DataTag("Delay", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-            public Time DDelay { get; set; }
+            public Time? DDelay { get; set; }
 
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
             [Data.DataTag((object)"MinSpawnDelay", "MaxSpawnDelay", SharpCraft.ID.NBTTagType.TagShort, Merge = true)]
-            public MCRange DRandomDelay { get; set; }
+            public MCRange? DRandomDelay { get; set; }
 
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn

@@ -45,13 +45,13 @@ namespace SharpCraft
             /// The item the player has selected
             /// </summary>
             [Data.DataTag]
-            public SharpCraft.Item SelectedItem { get; set; }
+            public Item? SelectedItem { get; set; }
 
             /// <summary>
             /// The player's spawnpoint
             /// </summary>
             [Data.DataTag((object)"SpawnX","SpawnY","SpawnZ", Merge = true)]
-            public IntVector Spawn { get; set; }
+            public IntVector? Spawn { get; set; }
 
             /// <summary>
             /// If the player should spawn at the given <see cref="Spawn"/> even if there is no bed
@@ -69,7 +69,7 @@ namespace SharpCraft
             /// The amount of time the player has been sleeping
             /// </summary>
             [Data.DataTag("SleepTimer",ForceType = ID.NBTTagType.TagShort)]
-            public Time SleepTime { get; set; }
+            public Time? SleepTime { get; set; }
 
             /// <summary>
             /// How much food the player has
@@ -95,7 +95,7 @@ namespace SharpCraft
             /// When this hits 80 ticks and the player has enough food, they will be healed
             /// </summary>
             [Data.DataTag("foodTickTimer", ForceType = ID.NBTTagType.TagInt)]
-            public Time FoodTimer { get; set; }
+            public Time? FoodTimer { get; set; }
 
             /// <summary>
             /// The level the player has
@@ -129,28 +129,28 @@ namespace SharpCraft
             /// (Slot -106 = off hand)
             /// </summary>
             [Data.DataTag]
-            public Item[] Inventory { get; set; }
+            public Item?[]? Inventory { get; set; }
             /// <summary>
             /// The items in the player's enderchest
             /// (Slot 0-26 = left top to right bottom slots)
             /// </summary>
             [Data.DataTag("EnderItems")]
-            public Item[] Enderchest { get; set; }
+            public Item?[]? Enderchest { get; set; }
             /// <summary>
             /// The entity the player is riding
             /// </summary>
             [Data.DataTag("RootVehicle.Entity")]
-            public BaseEntity Riding { get; set; }
+            public BaseEntity? Riding { get; set; }
             /// <summary>
             /// The entity on the player's left shoulder
             /// </summary>
             [Data.DataTag]
-            public BaseEntity ShoulderEntityLeft { get; set; }
+            public BaseEntity? ShoulderEntityLeft { get; set; }
             /// <summary>
             /// The entity on the player's right shoulder
             /// </summary>
             [Data.DataTag]
-            public BaseEntity ShoulderEntityRight { get; set; }
+            public BaseEntity? ShoulderEntityRight { get; set; }
             /// <summary>
             /// True if the player has seen the end to overworld credits
             /// </summary>
@@ -180,12 +180,12 @@ namespace SharpCraft
             /// A list of recipes the player has unlocked
             /// </summary>
             [Data.DataTag("recipeBook.recipes")]
-            public IRecipe[] UnlockedRecipes { get; set; }
+            public IRecipe?[]? UnlockedRecipes { get; set; }
             /// <summary>
             /// A list of recipes the player has unlocked, but still haven't seen in the recipe book.
             /// </summary>
             [Data.DataTag("recipeBook.toBeDisplayed")]
-            public IRecipe[] NotSeenRecipes { get; set; }
+            public IRecipe?[]? NotSeenRecipes { get; set; }
         }
     }
 }

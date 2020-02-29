@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScheduleAddCommand : BaseCommand
     {
-        private IFunction function;
-        private Time time;
+        private IFunction function = null!;
+        private Time time = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScheduleAddCommand"/>
@@ -79,7 +79,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ScheduleClearCommand : BaseCommand
     {
-        private IFunction function;
+        private IFunction function = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScheduleClearCommand"/>

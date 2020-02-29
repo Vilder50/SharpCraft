@@ -23,7 +23,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="addEntity">The entity to add to the world</param>
         /// <param name="coords">The coords to add the entity at</param>
-        public void Add(Vector coords, Entity.BaseEntity addEntity)
+        public void Add(Vector? coords, Entity.BaseEntity addEntity)
         {
             ForFunction.AddCommand(new SummonCommand(addEntity, coords ?? new Coords()));
         }
@@ -55,7 +55,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="team">The team they should join. Leave null to make them leave their team</param>
-        public void JoinTeam(BaseSelector selector, Team team)
+        public void JoinTeam(BaseSelector selector, Team? team)
         {
             if (team != null)
             {
@@ -83,7 +83,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to. Leave null to teleport to executed position</param>
-        public void Teleport(BaseSelector selector, Vector tpTo = null)
+        public void Teleport(BaseSelector selector, Vector? tpTo = null)
         {
             ForFunction.AddCommand(new TeleportToCommand(tpTo ?? new Coords(), selector));
         }
@@ -94,7 +94,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="rotation">The rotation to teleport the selected entities to</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, Rotation rotation)
+        public void Teleport(BaseSelector selector, Vector? tpTo, Rotation? rotation)
         {
             ForFunction.AddCommand(new TeleportToRotationCommand(tpTo ?? new Coords(), selector, rotation ?? new Rotation(true, 0, 0)));
         }
@@ -105,7 +105,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The selector the entities should look at</param>
         /// <param name="facingPart">The part of the entity to look at</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
+        public void Teleport(BaseSelector selector, Vector? tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
         {
             facing.LimitSelector();
             ForFunction.AddCommand(new TeleportToFacingEntityCommand(tpTo ?? new Coords(), selector, facing, facingPart));
@@ -117,7 +117,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The block to look at</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, Vector facing)
+        public void Teleport(BaseSelector selector, Vector? tpTo, Vector? facing)
         {
             ForFunction.AddCommand(new TeleportToFacingCommand(tpTo ?? new Coords(), selector, facing ?? new Coords()));
         }
@@ -314,7 +314,7 @@ namespace SharpCraft.FunctionWriters
             public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, int number)
             {
                 mainSelector.LimitSelector();
-                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, SharpCraftFiles.AddConstantNumber(number), SharpCraftFiles.ConstantObjective));
+                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, SharpCraftFiles.AddConstantNumber(number), SharpCraftFiles.ConstantObjective!));
             }
 
             /// <summary>
@@ -337,7 +337,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
             /// <param name="objective">if a <see cref="Objective"/> is specified only the score in the specified <see cref="Objective"/> will be reseted</param>
-            public void Reset(BaseSelector selector, Objective objective = null)
+            public void Reset(BaseSelector selector, Objective? objective = null)
             {
                 ForFunction.AddCommand(new ScoreboardResetCommand(selector, objective));
             }

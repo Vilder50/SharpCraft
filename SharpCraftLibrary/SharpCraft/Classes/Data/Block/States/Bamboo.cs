@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a bamboo block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Bamboo(BlockType type) : base(type) { }
+            public Bamboo(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a barrel block
@@ -81,7 +81,7 @@ namespace SharpCraft
             /// Creates a bamboo sapling block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BambooSapling(BlockType type) : base(type) { }
+            public BambooSapling(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a bamboo sapling block

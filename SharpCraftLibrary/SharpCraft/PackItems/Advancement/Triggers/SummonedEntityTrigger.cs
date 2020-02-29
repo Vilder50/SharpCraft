@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The summoned entity
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JSONObjects.Entity Entity { get; set; }
+        public JSONObjects.Entity? Entity { get; set; }
     }
 }

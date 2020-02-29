@@ -11,10 +11,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfScoreRelative : BaseExecuteIfCommand
     {
-        private BaseSelector selector1;
-        private Objective objective1;
-        private BaseSelector selector2;
-        private Objective objective2;
+        private BaseSelector selector1 = null!;
+        private Objective objective1 = null!;
+        private BaseSelector selector2 = null!;
+        private Objective objective2 = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfScoreRelative"/> command

@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class GroupEntry : BaseEntry
     {
-        private BaseEntry[] entries;
+        private BaseEntry[] entries = null!;
 
         /// <summary>
         /// Intializes a new <see cref="GroupEntry"/>

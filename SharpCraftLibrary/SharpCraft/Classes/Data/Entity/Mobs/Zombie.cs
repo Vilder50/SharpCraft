@@ -31,13 +31,13 @@ namespace SharpCraft
             /// Time till it converts into its next drowning type
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time DrownedConversionTime { get; set; }
+            public Time? DrownedConversionTime { get; set; }
 
             /// <summary>
             /// The amount of time the zombie has been in water
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time InWaterTime { get; set; }
+            public Time? InWaterTime { get; set; }
         }
     }
 }

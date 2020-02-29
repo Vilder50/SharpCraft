@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a kelp block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Kelp(BlockType type) : base(type) { }
+            public Kelp(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a kelp block

@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The entities the spawner can spawn
             /// </summary>
             [Data.DataTag]
-            public SpawnerPotential[] Potentials { get; set; }
+            public SpawnerPotential?[]? Potentials { get; set; }
             /// <summary>
             /// How many entities to try to spawn every time
             /// </summary>
@@ -34,12 +34,12 @@ namespace SharpCraft
             /// Time till the next spawn
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-            public Time Delay { get; set; }
+            public Time? Delay { get; set; }
             /// <summary>
             /// The amount of ticks to randomly add to the next spawn
             /// </summary>
             [Data.DataTag((object)"MinSpawnDelay","MaxSpawnDelay", ID.NBTTagType.TagShort, Merge = true)]
-            public MCRange RandomDelay { get; set; }
+            public MCRange? RandomDelay { get; set; }
             /// <summary>
             /// The maximum amount of entities there can be around the spawner for it to spawn
             /// </summary>

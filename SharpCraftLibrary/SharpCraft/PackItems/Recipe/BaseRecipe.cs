@@ -21,7 +21,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="group">The name of the recipe group the recipe is in. Leave null for no group.</param>
         /// <param name="recipeType">The type of recipe file</param>
-        protected BaseRecipe(BasePackNamespace packNamespace, string fileName, string group, WriteSetting writeSetting, string recipeType) : base(packNamespace, fileName, writeSetting, "recipe")
+        protected BaseRecipe(BasePackNamespace packNamespace, string? fileName, string? group, WriteSetting writeSetting, string recipeType) : base(packNamespace, fileName, writeSetting, "recipe")
         {
             Type = recipeType;
             Group = group;
@@ -35,7 +35,7 @@ namespace SharpCraft
         /// <summary>
         /// The name of the recipe group the recipe is in. Leave null for no group.
         /// </summary>
-        public string Group { get; set; }
+        public string? Group { get; set; }
 
         /// <summary>
         /// Returns the stream this file is going to use for writing it's file
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
         }
@@ -103,7 +103,7 @@ namespace SharpCraft
         /// </summary>
         protected override void AfterDispose()
         {
-            Type = null;
+            Type = null!;
             Group = null;
         }
     }
@@ -149,7 +149,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
         }

@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a tripwire hook block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public TripwireHook(BlockType type) : base(type) { }
+            public TripwireHook(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a tripwire hook block

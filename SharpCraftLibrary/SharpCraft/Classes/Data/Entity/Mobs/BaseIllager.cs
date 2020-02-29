@@ -37,7 +37,7 @@ namespace SharpCraft
             /// The place the illager is patrolling to
             /// </summary>
             [Data.DataTag((object)"X","Y","Z")]
-            public IntVector PatrolTarget { get; set; }
+            public IntVector? PatrolTarget { get; set; }
 
             /// <summary>
             /// The id of the raid the illager is in

@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The tamed mob
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JSONObjects.Entity Entity { get; set; }
+        public JSONObjects.Entity? Entity { get; set; }
     }
 }

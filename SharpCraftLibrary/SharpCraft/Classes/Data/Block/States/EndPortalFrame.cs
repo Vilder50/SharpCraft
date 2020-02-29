@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates an end portal frame block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public EndPortalFrame(BlockType type) : base(type) { }
+            public EndPortalFrame(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates an end portal frame block

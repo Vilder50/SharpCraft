@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a scaffolding block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Scaffolding(BlockType type) : base(type) { }
+            public Scaffolding(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a scaffolding block

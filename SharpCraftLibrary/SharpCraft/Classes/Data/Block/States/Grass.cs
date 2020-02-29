@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a grass block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Grass(BlockType type) : base(type) { }
+            public Grass(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a grass block

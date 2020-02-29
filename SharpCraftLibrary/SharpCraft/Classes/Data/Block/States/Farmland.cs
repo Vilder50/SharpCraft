@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a farmland block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Farmland(BlockType type) : base(type) { }
+            public Farmland(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a farmland block

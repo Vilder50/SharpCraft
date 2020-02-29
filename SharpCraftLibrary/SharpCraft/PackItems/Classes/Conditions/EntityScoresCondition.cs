@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EntityScoresCondition : BaseCondition
     {
-        private Scores checkScores;
+        private Scores checkScores = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EntityScoresCondition"/>
@@ -42,7 +42,7 @@ namespace SharpCraft.Conditions
         /// </summary>
         public class Scores : IConvertableToDataObject
         {
-            private List<Score> checkScores;
+            private List<Score> checkScores = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Scores"/> object
@@ -72,14 +72,14 @@ namespace SharpCraft.Conditions
             /// </summary>
             /// <param name="conversionData">Not in use</param>
             /// <returns>This object as a <see cref="DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object[] conversionData)
+            public DataPartObject GetAsDataObject(object?[]? conversionData)
             {
                 DataPartObject dataObject = new DataPartObject();
                 for (int i = 0; i < CheckScores.Count; i++)
                 {
                     if (CheckScores[i].Range.Minimum == CheckScores[i].Range.Maximum)
                     {
-                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, new DataPartTag((int)CheckScores[i].Range.Minimum, isJson: true), true));
+                        dataObject.AddValue(new DataPartPath(CheckScores[i].ScoreObject.Name, new DataPartTag((int)CheckScores[i].Range.Minimum!, isJson: true), true));
                     }
                     else
                     {
@@ -98,8 +98,8 @@ namespace SharpCraft.Conditions
             /// </summary>
             public class Score
             {
-                Objective scoreObject;
-                MCRange range;
+                Objective scoreObject = null!;
+                MCRange range = null!;
 
                 /// <summary>
                 /// Intializes a new <see cref="Score"/>

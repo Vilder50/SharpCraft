@@ -27,12 +27,12 @@ namespace SharpCraft
             /// The effects given by the potion
             /// </summary>
             [Data.DataTag("tag.CustomPotionEffects")]
-            public Effect[] PotionEffects { get; set; }
+            public Effect?[]? PotionEffects { get; set; }
             /// <summary>
             /// The color of the potion
             /// </summary>
             [Data.DataTag("tag.CustomPotionColor", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-            public RGBColor PotionColor { get; set; }
+            public RGBColor? PotionColor { get; set; }
             /// <summary>
             /// The effect given by the potion using minecraft values.
             /// </summary>

@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a banner block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Banner(BlockType type) : base(type) { }
+            public Banner(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -61,13 +61,13 @@ namespace SharpCraft
             /// This name is showed on maps which has clicked this banner.
             /// </summary>
             [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DCustomName { get; set; }
+            public JsonText? DCustomName { get; set; }
 
             /// <summary>
             /// The banner's patterns
             /// </summary>
             [Data.DataTag("Patterns")]
-            public BannerPattern[] DPatterns { get; set; }
+            public BannerPattern?[]? DPatterns { get; set; }
 
             /// <summary>
             /// An object defining a banner pattern
@@ -79,7 +79,7 @@ namespace SharpCraft
                 /// </summary>
                 /// <param name="SetPattern">The pattern to use</param>
                 /// <param name="SetColor">The color of the pattern</param>
-                public BannerPattern(ID.BannerPattern SetPattern, ID.Color SetColor)
+                public BannerPattern(ID.BannerPattern? SetPattern, ID.Color? SetColor)
                 {
                     Pattern = SetPattern;
                     Color = SetColor;
@@ -89,13 +89,13 @@ namespace SharpCraft
                 /// The pattern's color
                 /// </summary>
                 [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-                public ID.Color Color { get; set; }
+                public ID.Color? Color { get; set; }
 
                 /// <summary>
                 /// The pattern
                 /// </summary>
                 [Data.DataTag(ForceType = SharpCraft.ID.NBTTagType.TagString)]
-                public ID.BannerPattern Pattern { get; set; }
+                public ID.BannerPattern? Pattern { get; set; }
             }
         }
     }

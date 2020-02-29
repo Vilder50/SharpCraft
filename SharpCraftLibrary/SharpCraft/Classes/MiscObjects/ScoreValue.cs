@@ -11,8 +11,8 @@ namespace SharpCraft
     /// </summary>
     public class ScoreValue
     {
-        private Objective scoreObject;
-        private BaseSelector selector;
+        private Objective scoreObject = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScoreValue"/>

@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a note block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public NoteBlock(BlockType type) : base(type) { }
+            public NoteBlock(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a note block

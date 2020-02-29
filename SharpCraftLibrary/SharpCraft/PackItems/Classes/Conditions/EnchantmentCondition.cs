@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EnchantmentCondition : BaseCondition
     {
-        private JSONObjects.Item.Enchantment[] enchantments;
+        private JSONObjects.Item.Enchantment[] enchantments = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EnchantmentCondition"/>

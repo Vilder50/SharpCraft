@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a lectern block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Lectern(BlockType type) : base(type) { }
+            public Lectern(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a lectern block
@@ -55,13 +55,13 @@ namespace SharpCraft
             /// The book in the lectern
             /// </summary>
             [Data.DataTag("Book")]
-            public Item DBook { get; set; }
+            public Item? DBook { get; set; }
 
             /// <summary>
             /// The page the book in the lantern is on
             /// </summary>
             [Data.DataTag("Page")]
-            public int DPage { get; set; }
+            public int? DPage { get; set; }
         }
     }
 }

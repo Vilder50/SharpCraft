@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class ToolCondition : BaseCondition
     {
-        private JSONObjects.Item item;
+        private JSONObjects.Item item = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ToolCondition"/>

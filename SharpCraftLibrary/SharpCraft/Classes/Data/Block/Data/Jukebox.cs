@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a jukebox block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Jukebox(BlockType type) : base(type) { }
+            public Jukebox(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a jukebox block
@@ -43,7 +43,7 @@ namespace SharpCraft
             /// The item in the jukebox
             /// </summary>
             [Data.DataTag("RecordItem")]
-            public Item DRecordItem { get; set; }
+            public Item? DRecordItem { get; set; }
         }
     }
 }

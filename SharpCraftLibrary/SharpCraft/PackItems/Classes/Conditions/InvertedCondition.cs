@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class InvertedCondition : BaseCondition
     {
-        private BaseCondition condition;
+        private BaseCondition condition = null!;
 
         /// <summary>
         /// Intializes a new <see cref="InvertedCondition"/>

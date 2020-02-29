@@ -34,6 +34,10 @@ namespace SharpCraft
         /// <returns>The converted double</returns>
         public static string ToMinecraftDouble(this double? Double)
         {
+            if (Double is null)
+            {
+                return "0";
+            }
             return Double.Value.ToString().Replace(",", ".");
         }
 
@@ -53,6 +57,10 @@ namespace SharpCraft
         /// <returns>The converted float</returns>
         public static string ToMinecraftFloat(this float? Float)
         {
+            if (Float is null)
+            {
+                return "0";
+            }
             return Float.Value.ToString().Replace(",", ".");
         }
 
@@ -73,6 +81,10 @@ namespace SharpCraft
         /// <returns>The converted item</returns>
         public static string MinecraftValue(this ID.Item? item)
         {
+            if (item is null)
+            {
+                return "0";
+            }
             return item.Value.ToString().ToLower();
         }
 
@@ -93,6 +105,10 @@ namespace SharpCraft
         /// <returns>The converted bool</returns>
         public static string ToMinecraftBool(this bool? Bool)
         {
+            if (Bool is null)
+            {
+                return "false";
+            }
             return Bool.Value.ToString().ToLower();
         }
 

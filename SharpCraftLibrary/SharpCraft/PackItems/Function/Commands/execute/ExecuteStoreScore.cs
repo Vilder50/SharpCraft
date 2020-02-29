@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreScore : BaseExecuteStoreCommand
     {
-        private BaseSelector selector;
-        private Objective objective;
+        private BaseSelector selector = null!;
+        private Objective objective = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteStoreScore"/> command

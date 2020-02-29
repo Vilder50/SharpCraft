@@ -20,7 +20,7 @@ namespace SharpCraft
             /// (-1 ticks = not exploding)
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time TNTFuse { get; set; }
+            public Time? TNTFuse { get; set; }
         }
     }
 }

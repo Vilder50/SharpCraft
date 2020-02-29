@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a beacon block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Beacon(BlockType type) : base(type) { }
+            public Beacon(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a beacon block
@@ -40,7 +40,7 @@ namespace SharpCraft
             /// (Players have to use an item with the given name to open the block)
             /// </summary>
             [Data.DataTag("Lock")]
-            public string DLock { get; set; }
+            public string? DLock { get; set; }
 
             /// <summary>
             /// The number of layers the beacon pyramide has

@@ -19,17 +19,17 @@ namespace SharpCraft
             /// The direction the projectile flies in
             /// </summary>
             [Data.DataTag("direction", ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Vector Direction { get; set; }
+            public Vector? Direction { get; set; }
             /// <summary>
             /// The amount of time the projectile hasnt been moving
             /// </summary>
             [Data.DataTag("life",ForceType = ID.NBTTagType.TagInt)]
-            public Time Life { get; set; }
+            public Time? Life { get; set; }
             /// <summary>
             /// The direction the projectile flies in nonestop
             /// </summary>
             [Data.DataTag("power",ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Vector Power { get; set; }
+            public Vector? Power { get; set; }
             /// <summary>
             /// The power of the explosion caused by the ghast ball
             /// </summary>

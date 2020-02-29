@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreBossbar : BaseExecuteStoreCommand
     {
-        private BossBar bossbar;
+        private BossBar bossbar = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteStoreBossbar"/> command

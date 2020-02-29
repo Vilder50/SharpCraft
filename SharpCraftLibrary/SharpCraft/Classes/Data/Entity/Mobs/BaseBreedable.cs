@@ -19,26 +19,26 @@ namespace SharpCraft
             /// The amount of time the mob will be in love
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time InLove { get; set; }
+            public Time? InLove { get; set; }
 
             /// <summary>
             /// When negative it's the time till the mob turns into an adult
             /// When positive it's the time till the mob can breed again
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Age { get; set; }
+            public Time? Age { get; set; }
 
             /// <summary>
             /// A age which will be given to the mob when it has grown up.
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time ForcedAge { get; set; }
+            public Time? ForcedAge { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who fed the mob
             /// </summary>
             [Data.DataTag((object)"LoveCauseMost","LoveCauseLeast", Merge = true)]
-            public UUID LoveCause { get; set; }
+            public UUID? LoveCause { get; set; }
         }
 
         /// <summary>

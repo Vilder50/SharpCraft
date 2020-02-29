@@ -20,19 +20,19 @@ namespace SharpCraft
             /// The entity's motion
             /// </summary>
             [Data.DataTag]
-            public Vector Motion { get; set; }
+            public Vector? Motion { get; set; }
 
             /// <summary>
             /// The entity's rotation
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
-            public Rotation Rotation { get; set; }
+            public Rotation? Rotation { get; set; }
 
             /// <summary>
             /// The entity's location
             /// </summary>
             [Data.DataTag("Pos")]
-            public Vector Coords { get; set; }
+            public Vector? Coords { get; set; }
 
             /// <summary>
             /// The distance the entity has fallen
@@ -45,14 +45,14 @@ namespace SharpCraft
             /// Negative value means how long it takes for the entity to turn on fire.
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-            public Time Fire { get; set; }
+            public Time? Fire { get; set; }
 
             /// <summary>
             /// How much air the entity has left.
             /// (Being 0 under water will make the entity drown)
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-            public Time Air { get; set; }
+            public Time? Air { get; set; }
 
             /// <summary>
             /// If the entity is on the ground or not
@@ -82,19 +82,19 @@ namespace SharpCraft
             /// The amount of time before the entity can go through a portal again.
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time PortalCooldown { get; set; }
+            public Time? PortalCooldown { get; set; }
 
             /// <summary>
             /// The entity's UUID
             /// </summary>
             [Data.DataTag((object)"UUIDMost","UUIDLeast")]
-            public UUID UUID { get; set; }
+            public UUID? UUID { get; set; }
 
             /// <summary>
             /// The entity's shown name
             /// </summary>
             [Data.DataTag]
-            public JsonText CustomName { get; set; }
+            public JsonText? CustomName { get; set; }
 
             /// <summary>
             /// If the entity's name should be shown always
@@ -112,7 +112,7 @@ namespace SharpCraft
             /// The entities riding on the entity
             /// </summary>
             [Data.DataTag]
-            public BaseEntity[] Passengers { get; set; }
+            public BaseEntity[]? Passengers { get; set; }
 
             /// <summary>
             /// If the entity should glow
@@ -124,7 +124,7 @@ namespace SharpCraft
             /// The entity's tags
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagStringArray)]
-            public Tag[] Tags { get; set; }
+            public Tag[]? Tags { get; set; }
         }
     }
 }

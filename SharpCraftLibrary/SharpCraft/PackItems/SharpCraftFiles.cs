@@ -11,10 +11,10 @@ namespace SharpCraft
         private const string setupFunctionName = "setup";
         //private const string tickFunctionName = "tick";
 
-        public static BaseDatapack Datapack { get; private set; }
-        public static PackNamespace MinecraftNamespace { get; private set; }
-        public static PackNamespace SharpCraftNamespace { get; private set; }
-        public static Function SetupFunction { get; private set; }
+        public static BaseDatapack? Datapack { get; private set; }
+        public static PackNamespace? MinecraftNamespace { get; private set; }
+        public static PackNamespace? SharpCraftNamespace { get; private set; }
+        public static Function? SetupFunction { get; private set; }
         //public static Function TickFunction { get; private set; }
 
         static SharpCraftFiles()
@@ -56,18 +56,18 @@ namespace SharpCraft
 
         #region constants
         private const string constantFileName = "constants";
-        public static Objective ConstantObjective { get; private set; }
-        private static Function constantNumberFile;
+        public static Objective? ConstantObjective { get; private set; }
+        private static Function? constantNumberFile;
         private static readonly List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
         public static ScoreValue AddConstantNumber(int number)
         {
             //Get constant making function file
             if (constantNumberFile is null)
             {
-                constantNumberFile = SharpCraftNamespace.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                constantNumberFile = SharpCraftNamespace!.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
                 ConstantObjective = new Objective("constants");
                 constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
-                SetupFunction.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
+                SetupFunction!.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
             }
 
             //Check if constant already is added. If not add it to the constant function file.
@@ -75,27 +75,27 @@ namespace SharpCraft
             if (command is null)
             {
                 NameSelector selector = new NameSelector(number.ToString(), true);
-                Commands.ScoreboardValueChangeCommand addCommand = new Commands.ScoreboardValueChangeCommand(selector, ConstantObjective, ID.ScoreChange.set, number);
+                Commands.ScoreboardValueChangeCommand addCommand = new Commands.ScoreboardValueChangeCommand(selector, ConstantObjective!, ID.ScoreChange.set, number);
                 constantNumberFile.AddCommand(addCommand);
                 addedNumbers.Add(addCommand);
-                return new ScoreValue(selector, ConstantObjective);
+                return new ScoreValue(selector, ConstantObjective!);
             }
             else
             {
-                return new ScoreValue(command.Selector, ConstantObjective);
+                return new ScoreValue(command.Selector, ConstantObjective!);
             }
         }
         #endregion
 
         #region math
-        private static Objective mathObjective;
+        private static Objective? mathObjective;
         private const string mathObjectiveName = "math";
         public static Objective GetMathScoreObject()
         {
             if (mathObjective is null)
             {
                 mathObjective = new Objective(mathObjectiveName);
-                SetupFunction.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective, "dummy", null));
+                SetupFunction!.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective!, "dummy", null));
             }
 
             return mathObjective;
@@ -104,12 +104,12 @@ namespace SharpCraft
 
         #region ray cast
         private const string rotationObjectiveString = "_rotation";
-        private static (Function raySetup, Objective xRotation, Objective yRotation, ScoreValue rayState, Predicate[] predicates) rayFiles;
+        private static (Function? raySetup, Objective? xRotation, Objective? yRotation, ScoreValue? rayState, Predicate[]? predicates) rayFiles;
         public static (Function raySetup, Objective xRotation, Objective yRotation, ScoreValue rayState, Predicate[] predicates) GetRayFiles()
         {
             if (!(rayFiles.raySetup is null))
             {
-                return rayFiles;
+                return rayFiles!;
             }
 
             Objective xRotation;
@@ -118,10 +118,10 @@ namespace SharpCraft
             ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
 
             //ray casting files hasn't been set up
-            xRotation = SetupFunction.World.Objective.Add("x" + rotationObjectiveString);
+            xRotation = SetupFunction!.World.Objective.Add("x" + rotationObjectiveString);
             yRotation = SetupFunction.World.Objective.Add("y" + rotationObjectiveString);
 
-            Function raySetup = SharpCraftNamespace.Function("raycast\\block\\setup", setup =>
+            Function raySetup = SharpCraftNamespace!.Function("raycast\\block\\setup", setup =>
             {
                 setup.Entity.Teleport(new Selector(), new Coords(), new Rotation(true, 0, 0));
                 setup.Execute.Store(new Selector(), yRotation);
@@ -157,13 +157,13 @@ namespace SharpCraft
             predicates.Add(SharpCraftNamespace.Predicate("raycast\\block\\d3", !new Conditions.EntityScoresCondition(ID.LootTarget.This, new Conditions.EntityScoresCondition.Scores.Score(yRotation, new MCRange(-180, -90)))));
 
             rayFiles = (raySetup, xRotation, yRotation, rayState, predicates.ToArray());
-            return rayFiles;
+            return rayFiles!;
         }
         #endregion
 
         #region dummy entity
         private const string dummyEntityTag = "SharpDEntity";
-        private static Selector dummyEntitySelector;
+        private static Selector? dummyEntitySelector;
         public static Selector GetDummySelector()
         {
             if(!(dummyEntitySelector is null))
@@ -172,8 +172,8 @@ namespace SharpCraft
             }
 
             dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
-            SetupFunction.Entity.Kill(dummyEntitySelector);
-            Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags[0].Tag } };
+            SetupFunction!.Entity.Kill(dummyEntitySelector);
+            Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags![0].Tag } };
             SetupFunction.Entity.Add(SharpCraftSettings.OwnedChunk * 16, dummyEntity);
 
             return dummyEntitySelector;
@@ -191,20 +191,20 @@ namespace SharpCraft
             else
             {
                 //create randomness predicate
-                Predicate newPredicate = SharpCraftNamespace.Predicate("random\\chances\\" + chance.ToMinecraftDouble().Replace(".","_"), new Conditions.RandomCondition(chance));
+                Predicate newPredicate = SharpCraftNamespace!.Predicate("random\\chances\\" + chance.ToMinecraftDouble().Replace(".","_"), new Conditions.RandomCondition(chance));
                 randomnessPredicates.Add(chance, newPredicate);
                 return newPredicate;
             }
         }
 
-        private static ScoreValue randomNumberHolder;
+        private static ScoreValue? randomNumberHolder;
         public static ScoreValue GetRandomHolder()
         {
             randomNumberHolder ??= new ScoreValue("#random", GetMathScoreObject());
             return randomNumberHolder;
         }
 
-        private static Function randomNumberFunction;
+        private static Function? randomNumberFunction;
         public static Function GetRandomNumberFunction()
         {
             if (!(randomNumberFunction is null))
@@ -212,7 +212,7 @@ namespace SharpCraft
                 return randomNumberFunction;
             }
 
-            randomNumberFunction = SharpCraftNamespace.Function("random\\generate", (f) => 
+            randomNumberFunction = SharpCraftNamespace!.Function("random\\generate", (f) => 
             {
                 f.Entity.Score.Set(GetRandomHolder(), GetRandomHolder(), 0);
                 Predicate halfChance = GetRandomPredicate(0.5);
@@ -225,7 +225,7 @@ namespace SharpCraft
             return randomNumberFunction;
         }
 
-        private static LootTable hashLoottable;
+        private static LootTable? hashLoottable;
         public static LootTable GetHashLoottable()
         {
             if (!(hashLoottable is null))
@@ -233,7 +233,7 @@ namespace SharpCraft
                 return hashLoottable;
             }
 
-            hashLoottable = SharpCraftNamespace.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
+            hashLoottable = SharpCraftNamespace!.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
             {
                 Changes = new LootObjects.BaseChange[]
                     {
@@ -247,16 +247,16 @@ namespace SharpCraft
             return hashLoottable;
         }
 
-        private static (Function, Vector) hashFunction;
+        private static (Function?, Vector?) hashFunction;
         public static (Function function, Vector location) GetHashFunction()
         {
             if (!(hashFunction.Item1 is null))
             {
-                return hashFunction;
+                return hashFunction!;
             }
             Vector hashBlockLocation = SharpCraftSettings.OwnedChunk * 16;
 
-            LootTable hashLoottable = SharpCraftNamespace.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
+            LootTable hashLoottable = SharpCraftNamespace!.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
             {
                 Changes = new LootObjects.BaseChange[]
                     {
@@ -268,7 +268,7 @@ namespace SharpCraft
                     }
             }, 1), LootTable.TableType.chest);
 
-            SetupFunction.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
+            SetupFunction!.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
             SetupFunction.Block.Add(hashBlockLocation, new Block.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
             Function hash = SharpCraftNamespace.Function("random\\hashing", h => 
             {
@@ -288,7 +288,7 @@ namespace SharpCraft
             });
 
             hashFunction = (hash, hashBlockLocation);
-            return hashFunction;
+            return hashFunction!;
         }
         #endregion
     }

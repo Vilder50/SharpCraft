@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a new large flower block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public LargeFlower(BlockType type) : base(type) { }
+            public LargeFlower(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

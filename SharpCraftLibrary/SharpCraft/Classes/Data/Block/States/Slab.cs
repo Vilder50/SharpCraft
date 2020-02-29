@@ -16,7 +16,7 @@ namespace SharpCraft
             /// Creates a new slab block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Slab(BlockType type) : base(type) { }
+            public Slab(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

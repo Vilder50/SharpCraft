@@ -75,7 +75,7 @@ namespace SharpCraft
     /// </summary>
     public class EmptyDatapack : BaseDatapack
     {
-        private static EmptyDatapack emptyPack;
+        private static EmptyDatapack? emptyPack;
 
         /// <summary>
         /// Returns an empty datapack

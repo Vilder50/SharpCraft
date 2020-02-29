@@ -44,7 +44,7 @@ namespace SharpCraft.Data
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                DataTagAttribute attribute = (DataTagAttribute)property.GetCustomAttribute(typeof(DataTagAttribute));
+                DataTagAttribute? attribute = (DataTagAttribute?)property.GetCustomAttribute(typeof(DataTagAttribute));
                 if (attribute != null)
                 {
                     yield return property;
@@ -81,19 +81,19 @@ namespace SharpCraft.Data
         /// <returns>the cloned object</returns>
         public DataHolderBase Clone()
         {
-            DataHolderBase clonedObject = null;
+            DataHolderBase? clonedObject = null;
             ConstructorInfo[] constructors = GetType().GetConstructors();
             foreach (ConstructorInfo constructor in constructors)
             {
                 ParameterInfo[] parameters = constructor.GetParameters();
                 if (parameters.Length == 0)
                 {
-                    clonedObject = (DataHolderBase)Activator.CreateInstance(GetType(), true);
+                    clonedObject = (DataHolderBase)Activator.CreateInstance(GetType(), true)!;
                     break;
                 }
                 if (parameters.Length == 1 && (!(Nullable.GetUnderlyingType(parameters[0].ParameterType) is null) || parameters[0].ParameterType is object))
                 {
-                    clonedObject = (DataHolderBase)constructor.Invoke(new object[] { null });
+                    clonedObject = (DataHolderBase)constructor.Invoke(new object?[] { null });
                     break;
                 }
             }
@@ -106,13 +106,13 @@ namespace SharpCraft.Data
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                DataTagAttribute attribute = (DataTagAttribute)property.GetCustomAttribute(typeof(DataTagAttribute));
+                DataTagAttribute? attribute = (DataTagAttribute?)property.GetCustomAttribute(typeof(DataTagAttribute));
                 if (!(attribute is null))
                 {
-                    object value = property.GetValue(this);
+                    object? value = property.GetValue(this);
                     if (typeof(DataHolderBase).IsInstanceOfType(value))
                     {
-                        property.SetValue(clonedObject, ((DataHolderBase)value).Clone());
+                        property.SetValue(clonedObject, ((DataHolderBase)value!).Clone());
                     }
                     else
                     {
@@ -143,14 +143,14 @@ namespace SharpCraft.Data
             DataPartObject rootObject = new DataPartObject();
             foreach (PropertyInfo property in dataProperties)
             {
-                object data = property.GetValue(this);
+                object? data = property.GetValue(this);
                 if (data is null)
                 {
                     continue;
                 }
 
                 //get property full path and go through each part and add it to the end
-                DataTagAttribute dataTagInformation = (DataTagAttribute)property.GetCustomAttribute(typeof(DataTagAttribute));
+                DataTagAttribute dataTagInformation = (DataTagAttribute)property.GetCustomAttribute(typeof(DataTagAttribute))!;
                 string fullPath = dataTagInformation.DataTagName ?? property.Name;
 
                 DataPartObject pathAtLocation = rootObject;
@@ -166,15 +166,15 @@ namespace SharpCraft.Data
                             //Path doesn't exist yet
                             //Path can be an object, array or tag
                             ID.NBTTagType? forceType = dataTagInformation.UseForcedType ? dataTagInformation.ForceType : (ID.NBTTagType?)null;
-                            object[] conversionData = dataTagInformation.ConversionParams;
-                            IConvertableToDataTag convertAbleTag = data as IConvertableToDataTag;
-                            IConvertableToDataArray convertAbleArray = data as IConvertableToDataArray;
-                            IConvertableToDataObject convertAbleObject = data as IConvertableToDataObject;
+                            object?[] conversionData = dataTagInformation.ConversionParams;
+                            IConvertableToDataTag? convertAbleTag = data as IConvertableToDataTag;
+                            IConvertableToDataArray? convertAbleArray = data as IConvertableToDataArray;
+                            IConvertableToDataObject? convertAbleObject = data as IConvertableToDataObject;
 
                             if ((property.GetValue(this) is DataHolderBase && forceType is null) || forceType == ID.NBTTagType.TagCompound || (!(convertAbleObject is null) && forceType is null))
                             {
                                 //if its an object
-                                DataHolderBase dataObject = property.GetValue(this) as DataHolderBase;
+                                DataHolderBase? dataObject = property.GetValue(this) as DataHolderBase;
                                 if (!(convertAbleObject is null) && ((!(dataObject is null) && conversionData.Length != 0) || dataObject is null))
                                 {
                                     try

@@ -12,13 +12,13 @@ namespace SharpCraft
         /// </summary>
         public class BrewingStand : BaseInventory
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a brewingstand block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BrewingStand(BlockType type) : base(type) { }
+            public BrewingStand(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a brewingstand block
@@ -59,7 +59,7 @@ namespace SharpCraft
             /// 0-2 = potion slots (left to right). 3 = ingredient slot. 4 = fuel slot.
             /// </summary>
             [Data.DataTag("Items")]
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set
@@ -77,7 +77,7 @@ namespace SharpCraft
             /// Done when hitting 20 seconds.
             /// </summary>
             [Data.DataTag("BrewTime", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-            public Time DBrewTime { get; set; }
+            public Time? DBrewTime { get; set; }
 
             /// <summary>
             /// The amount of fule in the brewing stand.

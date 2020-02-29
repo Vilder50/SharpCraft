@@ -24,7 +24,7 @@ namespace SharpCraft
             /// The coords the crystal's beam should point to
             /// </summary>
             [Data.DataTag((object)"X","Y","Z")]
-            public IntVector BeamTarget { get; set; }
+            public IntVector? BeamTarget { get; set; }
         }
     }
 }

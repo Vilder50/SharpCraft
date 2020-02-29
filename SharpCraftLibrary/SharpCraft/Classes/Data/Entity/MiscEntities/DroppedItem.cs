@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The age of the item in ticks. When it hits 6000 it despawns
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-            public Time Age { get; set; }
+            public Time? Age { get; set; }
 
             /// <summary>
             /// The health of the item. despawns when at 0
@@ -31,25 +31,25 @@ namespace SharpCraft
             /// The delay before the item can be picked up in ticks
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-            public Time PickupDelay { get; set; }
+            public Time? PickupDelay { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who can pick up the item
             /// </summary>
             [Data.DataTag((object)"M","L")]
-            public UUID Owner { get; set; }
+            public UUID? Owner { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who threw the item
             /// </summary>
             [Data.DataTag((object)"M", "L")]
-            public UUID Thrower { get; set; }
+            public UUID? Thrower { get; set; }
 
             /// <summary>
             /// The item itself
             /// </summary>
             [Data.DataTag("Item")]
-            public SharpCraft.Item ItemData { get; set; }
+            public SharpCraft.Item? ItemData { get; set; }
 
             /// <summary>
             /// Makes the item unpickable
@@ -59,7 +59,7 @@ namespace SharpCraft
             {
                 get
                 {
-                    if (PickupDelay.AsTicks() != 32767)
+                    if (PickupDelay is null || PickupDelay.AsTicks() != 32767)
                     {
                         return false;
                     }
@@ -88,7 +88,7 @@ namespace SharpCraft
             {
                 get
                 {
-                    if (Age.AsTicks() != -32768)
+                    if (Age is null || Age.AsTicks() != -32768)
                     {
                         return false;
                     }

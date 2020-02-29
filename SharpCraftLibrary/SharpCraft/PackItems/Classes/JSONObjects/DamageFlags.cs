@@ -62,13 +62,13 @@ namespace SharpCraft
             /// the <see cref="Entity"/> doing damage
             /// </summary>
             [DataTag("direct_entity", JsonTag = true)]
-            public Entity DamagingEntity { get; set; }
+            public Entity? DamagingEntity { get; set; }
 
             /// <summary>
             /// the <see cref="Entity"/> which made the damage happen
             /// </summary>
             [DataTag("source_entity", JsonTag = true)]
-            public Entity SourceEntity { get; set; }
+            public Entity? SourceEntity { get; set; }
         }
     }
 }

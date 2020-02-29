@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a new sign block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Sign(BlockType type) : base(type) { }
+            public Sign(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -72,25 +72,25 @@ namespace SharpCraft
             /// The text on line 1
             /// </summary>
             [Data.DataTag("Text1", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DText1 { get; set; }
+            public JsonText? DText1 { get; set; }
 
             /// <summary>
             /// The text on line 2
             /// </summary>
             [Data.DataTag("Text2", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DText2 { get; set; }
+            public JsonText? DText2 { get; set; }
 
             /// <summary>
             /// The text on line 3
             /// </summary>
             [Data.DataTag("Text3", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DText3 { get; set; }
+            public JsonText? DText3 { get; set; }
 
             /// <summary>
             /// The text on line 4
             /// </summary>
             [Data.DataTag("Text4", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DText4 { get; set; }
+            public JsonText? DText4 { get; set; }
         }
     }
 }

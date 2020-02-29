@@ -26,7 +26,7 @@ namespace SharpCraft
             /// Note: block data is not supported
             /// </summary>
             [Data.DataTag("DisplayState","Name","Properties")]
-            public Block DisplayBlock { get; set; }
+            public Block? DisplayBlock { get; set; }
             /// <summary>
             /// The y-offset the block is displayed with
             /// </summary>

@@ -20,7 +20,7 @@ namespace SharpCraft
             /// Creates a chorus flower block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public ChorusFlower(BlockType type) : base(type) { }
+            public ChorusFlower(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a chorus flower block

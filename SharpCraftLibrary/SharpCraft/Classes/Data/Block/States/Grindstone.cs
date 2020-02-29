@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a grindstone block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Grindstone(BlockType type) : base(type) { }
+            public Grindstone(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a grindstone block

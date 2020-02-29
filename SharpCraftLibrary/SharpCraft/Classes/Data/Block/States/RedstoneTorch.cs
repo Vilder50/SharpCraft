@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a redstone torch block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public RedstoneWallTorch(BlockType type) : base(type) { }
+            public RedstoneWallTorch(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a redstone torch block

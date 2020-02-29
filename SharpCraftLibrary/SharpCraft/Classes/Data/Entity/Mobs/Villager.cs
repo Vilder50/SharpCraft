@@ -11,7 +11,7 @@ namespace SharpCraft
         /// </summary>
         public class Villager : BaseBreedable, IEntity.IVillager
         {
-            Item[] inventory;
+            Item?[]? inventory;
 
             /// <summary>
             /// Creates a new villager
@@ -41,13 +41,13 @@ namespace SharpCraft
             /// The gossips the villager has
             /// </summary>
             [DataTag]
-            public Gossip[] Gossips { get; set; }
+            public Gossip?[]? Gossips { get; set; }
 
             /// <summary>
             /// The villager's trades
             /// </summary>
             [DataTag("Offers.Recipes")]
-            public Trade[] Trades { get; set; }
+            public Trade?[]? Trades { get; set; }
 
             /// <summary>
             /// If the villager is willing to mate.
@@ -59,13 +59,13 @@ namespace SharpCraft
             /// Time since the villager last restocked
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagLong)]
-            public Time LastRestock { get; set; }
+            public Time? LastRestock { get; set; }
 
             /// <summary>
             /// Time since the villager's gossips escreased in strength
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagLong)]
-            public Time LastGossipDecay { get; set; }
+            public Time? LastGossipDecay { get; set; }
 
             /// <summary>
             /// The amount of times the villager has restocked since the <see cref="LastRestock"/> time.
@@ -83,7 +83,7 @@ namespace SharpCraft
             /// The items in the villagers inventory (up to 8 slots)
             /// </summary>
             [DataTag]
-            public Item[] Inventory
+            public Item?[]? Inventory
             {
                 get
                 {

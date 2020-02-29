@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class RecipeCommand : BaseCommand
     {
-        private IRecipe recipe;
-        private BaseSelector selector;
+        private IRecipe recipe = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="RecipeCommand"/>
@@ -57,7 +57,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class RecipeAllCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="RecipeAllCommand"/>

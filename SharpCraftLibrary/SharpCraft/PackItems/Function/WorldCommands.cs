@@ -174,7 +174,7 @@ namespace SharpCraft.FunctionWriters
         /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
         /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
         /// <returns>The ran function</returns>
-        public IFunction Function(IFunction runFunction, Time delay = null, bool append = true)
+        public IFunction Function(IFunction runFunction, Time? delay = null, bool append = true)
         {
             if (delay == null)
             {
@@ -194,7 +194,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="function">The function to clear the schedule for</param>
         public void StopSchedule(IFunction function)
         {
-            this.ForFunction.AddCommand(new ScheduleClearCommand(function));
+            ForFunction.AddCommand(new ScheduleClearCommand(function));
         }
 
         /// <summary>
@@ -343,7 +343,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="type">the type of the scoreboard. See <see cref="ID.Objective"/> for a list of types</param>
             /// <param name="displayName">The name to display when the scoreboard is viewed in the sidebar</param>
             /// <returns>the newly created <see cref="SharpCraft.Objective"/></returns>
-            public Objective Add(string scoreName, string type = "dummy", JsonText displayName = null)
+            public Objective Add(string scoreName, string type = "dummy", JsonText? displayName = null)
             {
                 Objective newObject = new Objective(scoreName);
                 ForFunction.AddCommand(new ScoreboardObjectiveAddCommand(newObject, type, displayName));
@@ -437,19 +437,17 @@ namespace SharpCraft.FunctionWriters
             {
                 Team creating = new Team(teamName);
 
-                BaseCommand executeCommand = null;
-                if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (teamColor is null)
                 {
-                    executeCommand = ForFunction.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new TeamAddCommand(creating, displayName));
                 }
-                ForFunction.AddCommand(new TeamAddCommand(creating, displayName));
-                if (!(teamColor is null))
+                else
                 {
-                    if (!(executeCommand is null))
+                    ForFunction.Custom.GroupCommands((g) =>
                     {
-                        ForFunction.AddCommand(executeCommand);
-                    }
-                    ForFunction.AddCommand(new TeamModifyColorCommand(creating, teamColor.Value));
+                        g.AddCommand(new TeamAddCommand(creating, displayName));
+                        g.AddCommand(new TeamModifyColorCommand(creating, teamColor.Value));
+                    });
                 }
 
                 return creating;
@@ -580,7 +578,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="datapack">the <see cref="SharpCraft.Datapack"/> to enable</param>
             /// <param name="placeAt">choses where the <see cref="SharpCraft.Datapack"/> should be placed relative to other enabled <see cref="SharpCraft.Datapack"/>s</param>
             /// <param name="otherPack">the <see cref="SharpCraft.Datapack"/> the <paramref name="datapack"/> is placed relative to</param>
-            public void Enable(BaseDatapack datapack, ID.DatapackPlace placeAt, Datapack otherPack = null)
+            public void Enable(BaseDatapack datapack, ID.DatapackPlace placeAt, Datapack? otherPack = null)
             {
                 if (otherPack is null)
                 {
@@ -667,7 +665,7 @@ namespace SharpCraft.FunctionWriters
             /// Note: the blocks are spread out from the center, so adding 1 block adds a half block to all sides
             /// Note: if the number is negative blocks will be removed</param>
             /// <param name="time">The amount of time it should take to add the blocks</param>
-            public void Add(double add, Time time = null)
+            public void Add(double add, Time? time = null)
             {
                 ForFunction.AddCommand(new WorldborderSizeCommand(add, ID.AddSetModifier.add, time));
             }
@@ -691,23 +689,19 @@ namespace SharpCraft.FunctionWriters
                     throw new System.ArgumentException("Both arguments may not be null at the same time");
                 }
 
-                BaseCommand executeCommand = null;
-                if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (amountPerBlock is null)
                 {
-                    executeCommand = ForFunction.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new WorldborderDamageBufferCommand(buffer!.Value));
                 }
-                if (!(amountPerBlock is null))
+                if (buffer is null)
                 {
-                    ForFunction.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock.Value));
-                    if (!(buffer is null))
-                    {
-                        ForFunction.AddCommand(executeCommand);
-                    }
+                    ForFunction.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock!.Value));
                 }
-                if (!(amountPerBlock is null))
+                ForFunction.Custom.GroupCommands((g) =>
                 {
-                    ForFunction.AddCommand(new WorldborderDamageBufferCommand(buffer.Value));
-                }
+                    g.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock!.Value));
+                    g.AddCommand(new WorldborderDamageBufferCommand(buffer!.Value));
+                });
             }
             /// <summary>
             /// Gets the worldborder's current size in blocks
@@ -722,37 +716,33 @@ namespace SharpCraft.FunctionWriters
             /// <param name="distance">the maximum distance in blocks the player has be away from the border for the red to show</param>
             /// <param name="time">The maximum amount of time the player is away from the border for the red to show.
             /// (Time as in: "the world border will be at the player in X seconds")</param>
-            public void Warning(int? distance = null, Time time = null)
+            public void Warning(int? distance = null, Time? time = null)
             {
                 if (distance is null && time is null)
                 {
                     throw new System.ArgumentException("Both arguments may not be null at the same time");
                 }
 
-                BaseCommand executeCommand = null;
-                if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (distance is null)
                 {
-                    executeCommand = ForFunction.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new WorldborderWarningTimeCommand(time!));
                 }
-                if (!(distance is null))
+                if (time is null)
                 {
-                    ForFunction.AddCommand(new WorldborderWarningDistanceCommand(distance.Value));
-                    if (!(time is null))
-                    {
-                        ForFunction.AddCommand(executeCommand);
-                    }
+                    ForFunction.AddCommand(new WorldborderWarningDistanceCommand(distance!.Value));
                 }
-                if (!(time is null))
+                ForFunction.Custom.GroupCommands((g) =>
                 {
-                    ForFunction.AddCommand(new WorldborderWarningTimeCommand(time));
-                }
+                    g.AddCommand(new WorldborderWarningDistanceCommand(distance!.Value));
+                    g.AddCommand(new WorldborderWarningTimeCommand(time!));
+                });
             }
             /// <summary>
             /// Sets the world border's size in blocks
             /// </summary>
             /// <param name="set">The amount of blocks wide the border is</param>
             /// <param name="time">The time it should take for the border to get there</param>
-            public void Set(double set, Time time = null)
+            public void Set(double set, Time? time = null)
             {
                 ForFunction.AddCommand(new WorldborderSizeCommand(set, ID.AddSetModifier.set, time));
             }

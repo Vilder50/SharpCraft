@@ -19,12 +19,12 @@ namespace SharpCraft
             /// The command to run
             /// </summary>
             [Data.DataTag]
-            public string Command { get; set; }
+            public string? Command { get; set; }
             /// <summary>
             /// The command's text output
             /// </summary>
             [Data.DataTag]
-            public string LastOutput { get; set; }
+            public string? LastOutput { get; set; }
             /// <summary>
             /// The command's output
             /// </summary>

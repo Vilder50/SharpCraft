@@ -16,7 +16,7 @@ namespace SharpCraft
             /// Creates a stonecutter block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Stonecutter(BlockType type) : base(type) { }
+            public Stonecutter(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a stonecutter block

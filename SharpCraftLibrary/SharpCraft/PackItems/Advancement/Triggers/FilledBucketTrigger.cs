@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The item the player got from filling a bucket
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JSONObjects.Item? Item { get; set; }
     }
 }

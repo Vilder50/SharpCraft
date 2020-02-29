@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a lantern block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Lantern(BlockType type) : base(type) { }
+            public Lantern(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a lantern block

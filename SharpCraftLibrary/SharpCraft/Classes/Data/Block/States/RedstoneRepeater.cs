@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a repeater block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public RedstoneRepeater(BlockType type) : base(type) { }
+            public RedstoneRepeater(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a repeater block

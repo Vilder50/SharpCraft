@@ -18,7 +18,7 @@ namespace SharpCraft
     /// <typeparam name="TItem">The item the group is for</typeparam>
     public abstract class BaseGroup<TItem> : BaseFile, IGroup<TItem> where TItem : IGroupable
     {
-        private List<TItem> items;
+        private List<TItem> items = null!;
         private bool appendGroup;
         private readonly bool halfLockProperties;
 
@@ -31,7 +31,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="fileType">The type of group file</param>
-        public BaseGroup(BasePackNamespace packNamespace, string fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, "group_" + fileType)
+        public BaseGroup(BasePackNamespace packNamespace, string? fileName, List<TItem> items, bool appendGroup, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, "group_" + fileType)
         {
             Items = items;
             AppendGroup = appendGroup;
@@ -110,7 +110,7 @@ namespace SharpCraft
         /// </summary>
         protected override void AfterDispose()
         {
-            items = null;
+            items = null!;
         }
     }
 

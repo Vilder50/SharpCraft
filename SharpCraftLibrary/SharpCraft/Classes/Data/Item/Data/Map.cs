@@ -32,7 +32,7 @@ namespace SharpCraft
                 /// A random name for the marker
                 /// </summary>
                 [Data.DataTag("id")]
-                public string ID { get; set; }
+                public string? ID { get; set; }
                 /// <summary>
                 /// The type of marker symbol
                 /// </summary>
@@ -77,7 +77,7 @@ namespace SharpCraft
                         List<string> TempList = new List<string>();
 
                         if (ID != null) { TempList.Add("id:\"" + ID.Escape() + "\""); }
-                        if (Rotation != null) { TempList.Add("rot:" + Rotation.ToString().Replace(",", ".")); }
+                        if (Rotation != null) { TempList.Add("rot:" + Rotation.ToString()!.Replace(",", ".")); }
                         if (X != null) { TempList.Add("x:" + X); }
                         if (Z != null) { TempList.Add("x:" + Z); }
                         if (MarkerType != null) { TempList.Add("type:" + (int)MarkerType); }
@@ -96,7 +96,7 @@ namespace SharpCraft
             /// The icons displayed on the map.
             /// </summary>
             [Data.DataTag("tag.Decorations")]
-            public Icon[] Icons { get; set; }
+            public Icon?[]? Icons { get; set; }
         }
     }
 }

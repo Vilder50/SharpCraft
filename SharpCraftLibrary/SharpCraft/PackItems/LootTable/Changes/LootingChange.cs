@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LootingChange : BaseChange
     {
-        private MCRange count;
+        private MCRange count = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LootingChange"/>

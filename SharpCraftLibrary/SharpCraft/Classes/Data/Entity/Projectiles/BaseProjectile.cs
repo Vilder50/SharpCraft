@@ -20,13 +20,13 @@ namespace SharpCraft
             /// The coords of the block
             /// </summary>
             [Data.DataTag((object)"xTile", "yTile", "zTile", Merge = true)]
-            public IntVector TileCoords { get; set; }
+            public IntVector? TileCoords { get; set; }
 
             /// <summary>
             /// The block this projectile is in
             /// </summary>
             [Data.DataTag("inBlockState","Name","Properties")]
-            public Block InBlock { get; set; }
+            public Block? InBlock { get; set; }
         }
     }
 }

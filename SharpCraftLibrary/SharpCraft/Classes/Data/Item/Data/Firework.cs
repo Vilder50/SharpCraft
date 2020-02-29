@@ -21,18 +21,18 @@ namespace SharpCraft
             /// <param name="ItemID">The type of the item. If null the item has no type</param>
             /// <param name="Count">The amount of the item. If null the item has no amount</param>
             /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-            public Firework(ItemType ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
+            public Firework(ItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
             /// <summary>
             /// The data for a single firework star item
             /// </summary>
             [Data.DataTag("tag.Explosion")]
-            public SharpCraft.Firework FireworkStar { get; set; }
+            public SharpCraft.Firework? FireworkStar { get; set; }
             /// <summary>
             /// The data for a firework rocket
             /// </summary>
             [Data.DataTag("tag.Fireworks.Explosions")]
-            public SharpCraft.Firework[] FireworkRocket { get; set; }
+            public SharpCraft.Firework?[]? FireworkRocket { get; set; }
             /// <summary>
             /// How many seconds the rocket will fly for
             /// </summary>

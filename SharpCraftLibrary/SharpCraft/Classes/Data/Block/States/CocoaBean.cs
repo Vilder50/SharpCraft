@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a cocoa bean block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public CocoaBean(BlockType type) : base(type) { }
+            public CocoaBean(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a cocoa bean block

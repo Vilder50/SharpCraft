@@ -13,7 +13,7 @@ namespace SharpCraft
         /// </summary>
         public class Text : JsonText
         {
-            private string displayText;
+            private string displayText = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Text"/>
@@ -55,14 +55,14 @@ namespace SharpCraft
         /// </summary>
         public class Translate : JsonText
         {
-            private string translateString;
+            private string translateString = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Translate"/>
             /// </summary>
             /// <param name="translateString">The translation string to translate</param>
             /// <param name="insert">Values to insert into the translation string (at places with %s)</param>
-            public Translate(string translateString, JsonText[] insert = null)
+            public Translate(string translateString, JsonText[]? insert = null)
             {
                 TranslateString = translateString;
                 Insert = insert;
@@ -76,7 +76,7 @@ namespace SharpCraft
             /// <summary>
             /// Values to insert into the translation string (at places with %s)
             /// </summary>
-            public JsonText[] Insert { get; set; }
+            public JsonText[]? Insert { get; set; }
 
             /// <summary>
             /// returns the raw string specific for this class
@@ -100,7 +100,7 @@ namespace SharpCraft
         /// </summary>
         public class Names : JsonText
         {
-            private Selector namesSelector;
+            private Selector namesSelector = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Names"/>
@@ -160,7 +160,7 @@ namespace SharpCraft
         /// </summary>
         public class Data : JsonText
         {
-            private IDataLocation dataLocation;
+            private IDataLocation dataLocation = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Data"/>
@@ -213,8 +213,8 @@ namespace SharpCraft
         /// </summary>
         public class Score : JsonText
         {
-            private BaseSelector selector;
-            private Objective scoreObject;
+            private BaseSelector selector = null!;
+            private Objective scoreObject = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Score"/>

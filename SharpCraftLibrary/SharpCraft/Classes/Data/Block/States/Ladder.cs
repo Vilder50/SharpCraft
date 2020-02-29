@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a ladder block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Ladder(BlockType type) : base(type) { }
+            public Ladder(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a ladder block

@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a composter block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Composter(BlockType type) : base(type) { }
+            public Composter(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a composter block

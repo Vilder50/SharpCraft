@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpectateCommand : BaseCommand
     {
-        private BaseSelector spectate;
-        private BaseSelector spectator;
+        private BaseSelector spectate = null!;
+        private BaseSelector spectator = null!;
 
         /// <summary>
         /// Intializes a new <see cref="SpectateCommand"/>

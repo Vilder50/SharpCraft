@@ -13,9 +13,9 @@ namespace SharpCraft.AdvancementObjects
     /// </summary>
     public abstract class BaseVisibleAdvancement : BaseAdvancement
     {
-        private Item icon;
-        private JsonText description;
-        private JsonText name;
+        private Item icon = null!;
+        private JsonText description = null!;
+        private JsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BaseVisibleAdvancement"/>
@@ -32,7 +32,7 @@ namespace SharpCraft.AdvancementObjects
         /// <param name="icon">The icon on the advancement</param>
         /// <param name="name">The shown advancement name</param>
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
-        protected BaseVisibleAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, JsonText name, JsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, writeSetting)
+        protected BaseVisibleAdvancement(BasePackNamespace packNamespace, string? fileName, Requirement[] requirements, Reward? reward, JsonText name, JsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, requirements, reward, writeSetting)
         {
             Name = name;
             Description = description;
@@ -88,7 +88,7 @@ namespace SharpCraft.AdvancementObjects
 
             //icon
             stream.Write("\"icon\":{\"item\":\""+Icon.ID + "\"");
-            string data = Icon.GetItemTagString();
+            string? data = Icon.GetItemTagString();
             if (!(data is null))
             {
                 stream.Write(",\"nbt\":\""+data.Escape()+"\"");
@@ -128,9 +128,9 @@ namespace SharpCraft.AdvancementObjects
         protected override void AfterDispose()
         {
             base.AfterDispose();
-            name = null;
-            description = null;
-            icon = null;
+            name = null!;
+            description = null!;
+            icon = null!;
         }
     }
 }

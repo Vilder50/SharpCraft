@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a tripwire block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Tripwire(BlockType type) : base(type) { }
+            public Tripwire(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a tripwire block

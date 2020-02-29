@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteFacingCoord : BaseExecuteCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteFacingCoord"/> command

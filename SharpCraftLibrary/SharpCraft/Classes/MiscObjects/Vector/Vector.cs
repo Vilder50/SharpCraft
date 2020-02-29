@@ -331,7 +331,7 @@ namespace SharpCraft
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>The vector as a <see cref="DataPartArray"/></returns>
-        public override DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        public override DataPartArray GetAsArray(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartArray(new int[] { (int)X, (int)Y, (int)Z }, null, null);
         }
@@ -341,8 +341,13 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: x path name, 1: y path name, 2: z path name, 3: if json</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public override DataPartObject GetAsDataObject(object[] conversionData)
+        public override DataPartObject GetAsDataObject(object?[]? conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
+
             if (!(conversionData.Length == 3 || conversionData.Length == 4))
             {
                 throw new ArgumentException("There has to be 3-4 conversion params to convert a coordinate to a data object.");

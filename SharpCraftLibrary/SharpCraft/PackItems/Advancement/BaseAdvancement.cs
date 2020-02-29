@@ -12,7 +12,7 @@ namespace SharpCraft.AdvancementObjects
     /// </summary>
     public abstract class BaseAdvancement : BaseFile, IAdvancement
     {
-        private Requirement[] requirements;
+        private Requirement[] requirements = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BaseAdvancement"/>
@@ -22,7 +22,7 @@ namespace SharpCraft.AdvancementObjects
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <param name="requirements">The requirements for getting the advancement</param>
         /// <param name="reward">The rewards to get for getting the advancement</param>
-        protected BaseAdvancement(BasePackNamespace packNamespace, string fileName, Requirement[] requirements, Reward reward, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting, "advancement")
+        protected BaseAdvancement(BasePackNamespace packNamespace, string? fileName, Requirement[] requirements, Reward? reward, WriteSetting writeSetting) : base(packNamespace, fileName, writeSetting, "advancement")
         {
             Requirements = requirements;
             Reward = reward;
@@ -36,7 +36,7 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The rewards to get for getting the advancement
         /// </summary>
-        public Reward Reward { get; set; }
+        public Reward? Reward { get; set; }
 
         /// <summary>
         /// Returns the stream this file is going to use for writing it's file
@@ -103,8 +103,8 @@ namespace SharpCraft.AdvancementObjects
         /// </summary>
         protected override void AfterDispose()
         {
-            requirements = null;
-            Reward = null;
+            requirements = null!;
+            Reward = null!;
         }
     }
 }

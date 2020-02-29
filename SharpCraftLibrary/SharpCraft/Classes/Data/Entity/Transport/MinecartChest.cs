@@ -19,7 +19,7 @@ namespace SharpCraft
             /// The chest's loottable
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-            public LootTable LootTable { get; set; }
+            public LootTable? LootTable { get; set; }
             /// <summary>
             /// The seed used to generate the loot
             /// </summary>
@@ -29,7 +29,7 @@ namespace SharpCraft
             /// The items in the chest
             /// </summary>
             [Data.DataTag]
-            public SharpCraft.Item[] Items { get; set; }
+            public SharpCraft.Item?[]? Items { get; set; }
         }
     }
 }

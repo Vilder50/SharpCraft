@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreData : BaseExecuteStoreCommand
     {
-        private IDataLocation dataLocation;
+        private IDataLocation dataLocation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteStoreData"/> command

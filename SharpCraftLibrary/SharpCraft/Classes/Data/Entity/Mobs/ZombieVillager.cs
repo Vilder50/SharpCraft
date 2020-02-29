@@ -39,25 +39,25 @@ namespace SharpCraft
             /// The gossips the villager has
             /// </summary>
             [DataTag]
-            public Gossip[] Gossips { get; set; }
+            public Gossip?[]? Gossips { get; set; }
 
             /// <summary>
             /// The villager's trades
             /// </summary>
             [DataTag("Offers.Recipes")]
-            public Trade[] Trades { get; set; }
+            public Trade?[]? Trades { get; set; }
 
             /// <summary>
             /// The time till this zombie villager turns into a villager. -1 when not being converted
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time ConversionTime { get; set; }
+            public Time? ConversionTime { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the player who is converting this zombie villager
             /// </summary>
             [DataTag((object)"ConversionPlayerMost", "ConversionPlayerLeast", Merge = true)]
-            public UUID ConverterUUID { get; set; }
+            public UUID? ConverterUUID { get; set; }
         }
     }
 }

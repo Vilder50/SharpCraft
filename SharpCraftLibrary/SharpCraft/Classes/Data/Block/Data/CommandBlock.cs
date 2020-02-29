@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a new chest block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public CommandBlock(BlockType type) : base(type) { }
+            public CommandBlock(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -43,19 +43,19 @@ namespace SharpCraft
             /// The name of the command block
             /// </summary>
             [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DCustomName { get; set; }
+            public JsonText? DCustomName { get; set; }
 
             /// <summary>
             /// The command in the command block
             /// </summary>
             [Data.DataTag("Command")]
-            public string DCommand { get; set; }
+            public string? DCommand { get; set; }
 
             /// <summary>
             /// The last command's string output
             /// </summary>
             [Data.DataTag("LastOutput", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-            public JsonText DLastOutput { get; set; }
+            public JsonText? DLastOutput { get; set; }
 
             /// <summary>
             /// The last command's success output

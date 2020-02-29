@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class CopyNBTChange : BaseChange
     {
-        private CopyOperation[] operations;
+        private CopyOperation[] operations = null!;
 
         /// <summary>
         /// Intializes a new <see cref="CopyNBTChange"/>
@@ -42,8 +42,8 @@ namespace SharpCraft.LootObjects
         /// </summary>
         public class CopyOperation : DataHolderBase
         {
-            private string toDataPath;
-            private string fromDataPath;
+            private string toDataPath = null!;
+            private string fromDataPath = null!;
 
             /// <summary>
             /// Intializes a new <see cref="CopyOperation"/>

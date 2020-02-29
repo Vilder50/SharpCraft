@@ -28,7 +28,7 @@
         /// The entity this spawner potential is for
         /// </summary>
         [Data.DataTag]
-        public Entity.BaseEntity Entity { get; set; }
+        public Entity.BaseEntity? Entity { get; set; }
 
         /// <summary>
         /// The weight for this potential to be selected

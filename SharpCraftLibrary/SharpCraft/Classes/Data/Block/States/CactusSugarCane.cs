@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a new cactus or sugar cane block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public CactusSugarCane(BlockType type) : base(type) { }
+            public CactusSugarCane(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectGiveCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
         private int seconds;
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectClearCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EffectClearCommand"/>

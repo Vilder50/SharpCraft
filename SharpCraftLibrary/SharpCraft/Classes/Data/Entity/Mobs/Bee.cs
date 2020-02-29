@@ -20,13 +20,13 @@ namespace SharpCraft
             /// The location of the bee's hive
             /// </summary>
             [DataTag("HivePos", "X", "Y", "Z")]
-            public IntVector HivePosition { get; set; }
+            public IntVector? HivePosition { get; set; }
 
             /// <summary>
             /// The location of the flower the bee should fly around
             /// </summary>
             [DataTag("FlowerPos", "X", "Y", "Z")]
-            public IntVector FlowerPosition { get; set; }
+            public IntVector? FlowerPosition { get; set; }
 
             /// <summary>
             /// If the bee has pollen
@@ -44,13 +44,13 @@ namespace SharpCraft
             /// Time since the bee last pollinated
             /// </summary>
             [DataTag("TicksSincePollination", ForceType = ID.NBTTagType.TagInt)]
-            public Time LastPollination { get; set; }
+            public Time? LastPollination { get; set; }
 
             /// <summary>
             /// Time till the bee is allowed to enter a hive
             /// </summary>
             [DataTag("CannotEnterHiveTicks", ForceType = ID.NBTTagType.TagInt)]
-            public Time ToEnterHive { get; set; }
+            public Time? ToEnterHive { get; set; }
 
             /// <summary>
             /// The amount of crops the bee has grown since it last pollinated
@@ -62,13 +62,13 @@ namespace SharpCraft
             /// The amount of time the bee is angry for
             /// </summary>
             [DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Anger { get; set; }
+            public Time? Anger { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity this bee is angry on
             /// </summary>
-            [Data.DataTag("HurtBy", ForceType = ID.NBTTagType.TagString)]
-            public UUID AngryOn { get; set; }
+            [DataTag("HurtBy", ForceType = ID.NBTTagType.TagString)]
+            public UUID? AngryOn { get; set; }
         }
     }
 }

@@ -14,8 +14,8 @@ namespace SharpCraft
     /// </summary>
     public class Predicate : BaseFile, IPredicate
     {
-        private PredicateCondition thisCondition;
-        private BaseCondition condition;
+        private PredicateCondition? thisCondition;
+        private BaseCondition condition = null!;
 
         /// <summary>
         /// Intializes a new <see cref="Predicate"/>. Inherite from this constructor.
@@ -25,7 +25,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="condition">The predicate to test for</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected Predicate(bool _, BasePackNamespace packNamespace, string fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, writeSetting, "predicate")
+        protected Predicate(bool _, BasePackNamespace packNamespace, string? fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, writeSetting, "predicate")
         {
             Condition = condition;
         }
@@ -37,7 +37,7 @@ namespace SharpCraft
         /// <param name="fileName">The name of the predicate file</param>
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="condition">The predicate to test for</param>
-        public Predicate(BasePackNamespace packNamespace, string fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, condition, writeSetting)
+        public Predicate(BasePackNamespace packNamespace, string? fileName, BaseCondition condition, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, condition, writeSetting)
         {
             FinishedConstructing();
         }
@@ -53,7 +53,7 @@ namespace SharpCraft
         /// <param name="asType">Unused</param>
         /// <param name="extraConversionData">Unused</param>
         /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
         }
@@ -82,7 +82,7 @@ namespace SharpCraft
         /// </summary>
         protected override void AfterDispose()
         {
-            condition = null;
+            condition = null!;
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace SharpCraft
     /// </summary>
     public class EmptyPredicate : IPredicate
     {
-        private PredicateCondition thisCondition;
+        private PredicateCondition? thisCondition;
 
         /// <summary>
         /// Intializes a new <see cref="EmptyPredicate"/>
@@ -139,7 +139,7 @@ namespace SharpCraft
         /// <param name="asType">Unused</param>
         /// <param name="extraConversionData">Unused</param>
         /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
         }

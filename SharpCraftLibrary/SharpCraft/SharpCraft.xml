@@ -159,7 +159,7 @@
             An object defining a banner pattern
             </summary>
         </member>
-        <member name="M:SharpCraft.Block.Banner.BannerPattern.#ctor(SharpCraft.ID.BannerPattern,SharpCraft.ID.Color)">
+        <member name="M:SharpCraft.Block.Banner.BannerPattern.#ctor(System.Nullable{SharpCraft.ID.BannerPattern},System.Nullable{SharpCraft.ID.Color})">
             <summary>
             Creates a new banner pattern
             </summary>
@@ -4234,7 +4234,7 @@
             <typeparam name="T">The type of object to clone</typeparam>
             <param name="emptyCopy">An empty object to clone the properties to</param>
             <param name="copy">The object to clone</param>
-            <returns></returns>
+            <returns><paramref name="emptyCopy"/></returns>
         </member>
         <member name="T:SharpCraft.Data.IDataPartPathEnding">
             <summary>
@@ -7335,8 +7335,8 @@
             <summary>
             Creates a new enchantment
             </summary>
-            <param name="ID">The enchantment type</param>
-            <param name="Level">The enchantment level</param>
+            <param name="id">The enchantment type</param>
+            <param name="level">The enchantment level</param>
         </member>
         <member name="T:SharpCraft.Item.HideFlags">
             <summary>
@@ -7501,7 +7501,7 @@
             Creates an empty effect
             </summary>
         </member>
-        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,SharpCraft.Time,System.SByte,System.Nullable{System.Boolean})">
+        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,SharpCraft.Time,System.Nullable{System.SByte},System.Nullable{System.Boolean})">
             <summary>
             Creates an effect with the specified parameters
             </summary>
@@ -8619,8 +8619,14 @@
             Gets the raw data used in commands
             x..y or name=x..y
             </summary>
-            <param name="Name">The thing which has to be equal the range. If null the output will be x..y</param>
+            <param name="name">The thing which has to be equal the range</param>
             <returns>Raw data used in commands</returns>
+        </member>
+        <member name="M:SharpCraft.MCRange.SelectorString">
+            <summary>
+            Gets string in the format x..y
+            </summary>
+            <returns>x..y</returns>
         </member>
         <member name="M:SharpCraft.MCRange.GetAsDataObject(System.Object[])">
             <summary>
@@ -8721,11 +8727,6 @@
         <member name="T:SharpCraft.Rotation">
             <summary>
             An object for rotations
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Rotation.y">
-            <summary>
-            The rotation
             </summary>
         </member>
         <member name="M:SharpCraft.Rotation.#ctor(System.Double,System.Double,System.Boolean,System.Boolean)">
@@ -14108,11 +14109,12 @@
             Condition which returns true if the location is correct
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.LocationCondition.#ctor(SharpCraft.JSONObjects.Location)">
+        <member name="M:SharpCraft.Conditions.LocationCondition.#ctor(SharpCraft.JSONObjects.Location,SharpCraft.IntVector)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.LocationCondition"/>
             </summary>
             <param name="location">The location to test for</param>
+            <param name="offset">Offset to check at</param>
         </member>
         <member name="P:SharpCraft.Conditions.LocationCondition.Location">
             <summary>
@@ -23419,7 +23421,7 @@
             <param name="setting">The settings for how to write the file</param>
             <returns>The newly created recipe</returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,System.Nullable{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new furnace/a type of furnace recipe with the given parameters
             </summary>

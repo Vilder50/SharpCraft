@@ -15,20 +15,20 @@ namespace SharpCraft
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public BaseSkull(BlockType type) : base(type) { }
+            public BaseSkull(BlockType? type) : base(type) { }
 
             /// <summary>
             /// The name of the player whose skin to display
             /// </summary>
             [Data.DataTag("SkullOwner")]
-            public string DPlayerSkin { get; set; }
+            public string? DPlayerSkin { get; set; }
 
             /// <summary>
             /// The raw data for a skin.
             /// (Starting from the Owner tag... so Owner:[value] (remember the {}))
             /// </summary>
             [Data.DataTag("Owner", ForceType = SharpCraft.ID.NBTTagType.TagCompound)]
-            public string DDataSkin { get; set; }
+            public string? DDataSkin { get; set; }
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace SharpCraft
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public GroundSkull(BlockType type) : base(type) { }
+            public GroundSkull(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -85,7 +85,7 @@ namespace SharpCraft
             /// Creates a new skull / head block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallSkull(BlockType type) : base(type) { }
+            public WallSkull(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object

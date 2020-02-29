@@ -19,44 +19,44 @@ namespace SharpCraft
             /// The amount of time before the cloud disapears after the <see cref="WaitTime"/> is over
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Duration { get; set; }
+            public Time? Duration { get; set; }
 
             /// <summary>
             /// The color of the particles it displays
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public RGBColor Color { get; set; }
+            public RGBColor? Color { get; set; }
 
             /// <summary>
             /// The amount of time the cloud has existed.
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Age { get; set; }
+            public Time? Age { get; set; }
 
             /// <summary>
             /// The time before the cloud will show up.
             /// (Time before the <see cref="Radius"/> will be used)
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time WaitTime { get; set; }
+            public Time? WaitTime { get; set; }
 
             /// <summary>
             /// The time before the cloud's effect will be given out to the entities inside again.
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time ReapplicationDealy { get; set; }
+            public Time? ReapplicationDealy { get; set; }
 
             /// <summary>
             /// The UUID of the entity who made the cloud
             /// </summary>
             [Data.DataTag((object)"OwnerUUIDMost","OwnerUUIDLeast")]
-            public UUID OwnerUUID { get; set; }
+            public UUID? OwnerUUID { get; set; }
 
             /// <summary>
             /// The amount of time to remove from the duration every time the cloud gives out its effect
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time DurationOnUse { get; set; }
+            public Time? DurationOnUse { get; set; }
 
             /// <summary>
             /// The radius of the cloud
@@ -86,7 +86,7 @@ namespace SharpCraft
             /// The effect the cloud gives
             /// </summary>
             [Data.DataTag]
-            public Effect[] Effects { get; set; }
+            public Effect?[]? Effects { get; set; }
 
             /// <summary>
             /// If the cloud shouldn't despawn
@@ -96,6 +96,10 @@ namespace SharpCraft
             {
                 get
                 {
+                    if (Duration is null)
+                    {
+                        return false;
+                    }
                     return Duration.AsTicks() == int.MaxValue;
                 }
                 set

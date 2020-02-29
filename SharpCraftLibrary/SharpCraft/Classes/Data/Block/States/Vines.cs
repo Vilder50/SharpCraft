@@ -15,7 +15,7 @@ namespace SharpCraft
             /// Creates a vine block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Vine(BlockType type) : base(type) { }
+            public Vine(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a vine block

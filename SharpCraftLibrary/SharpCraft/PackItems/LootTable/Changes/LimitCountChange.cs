@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LimitCountChange : BaseChange
     {
-        private MCRange limit;
+        private MCRange limit = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LimitCountChange"/>

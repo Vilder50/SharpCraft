@@ -11,13 +11,13 @@ namespace SharpCraft
         /// </summary>
         public class Chest : BaseContainer, IBlock.IFacing, IBlock.IWaterLogged
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a chest block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Chest(BlockType type) : base(type) { }
+            public Chest(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a chest block
@@ -58,12 +58,12 @@ namespace SharpCraft
             /// (0-26)
             /// </summary>
             [Data.DataTag("Items")]
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set
                 {
-                    if (DItems != null && DItems.Length > 27)
+                    if (!(DItems is null) && DItems.Length > 27)
                     {
                         throw new ArgumentException("Too many slots specified");
                     }

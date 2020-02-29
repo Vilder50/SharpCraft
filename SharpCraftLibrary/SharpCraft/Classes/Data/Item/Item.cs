@@ -20,7 +20,7 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ItemType itemID, sbyte? count = null, sbyte? slot = null)
+        public Item(ItemType? itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
@@ -46,7 +46,7 @@ namespace SharpCraft
         /// If null the item isnt any item type
         /// </summary>
         [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public ItemType ID { get; set; }
+        public ItemType? ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
@@ -66,12 +66,12 @@ namespace SharpCraft
             /// <summary>
             /// Creates a new enchantment
             /// </summary>
-            /// <param name="ID">The enchantment type</param>
-            /// <param name="Level">The enchantment level</param>
-            public Enchantment(ID.Enchant? ID = null, int? Level = null)
+            /// <param name="id">The enchantment type</param>
+            /// <param name="level">The enchantment level</param>
+            public Enchantment(ID.Enchant? id = null, int? level = null)
             {
-                this.ID = ID;
-                LVL = Level;
+                ID = id;
+                LVL = level;
             }
         }
 
@@ -129,7 +129,7 @@ namespace SharpCraft
             /// <param name="asType">Not used</param>
             /// <param name="extraConversionData">Not used</param>
             /// <returns>the made <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
             {
                 return new DataPartTag(HideFlagsNumber);
             }
@@ -144,12 +144,12 @@ namespace SharpCraft
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
         [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[] CanDestroy { get; set; }
+        public BlockType?[]? CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
         [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[] CanPlaceOn { get; set; }
+        public BlockType?[]? CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
@@ -159,17 +159,17 @@ namespace SharpCraft
         /// The data the block will have when the item is placed
         /// </summary>
         [DataTag("tag.BlockEntityTag")]
-        public Block BlockData { get; set; }
+        public Block? BlockData { get; set; }
         /// <summary>
         /// The data the entity will have when the item is placed
         /// </summary>
         [DataTag("tag.EntityTag")]
-        public Entity.BaseEntity EntityTag { get; set; }
+        public Entity.BaseEntity? EntityTag { get; set; }
         /// <summary>
         /// The enchants the item has on
         /// </summary>
         [DataTag("tag.Enchantments")]
-        public Enchantment[] Enchants { get; set; }
+        public Enchantment?[]? Enchants { get; set; }
         /// <summary>
         /// Number of levels to add to the base levels when using an anvil
         /// </summary>
@@ -179,44 +179,44 @@ namespace SharpCraft
         /// The color of the leather armor
         /// </summary>
         [DataTag("tag.display.color")]
-        public RGBColor LeatherColor { get; set; }
+        public RGBColor? LeatherColor { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)
         /// </summary>
         [DataTag("tag.display.MapColor")]
-        public RGBColor MapColor { get; set; }
+        public RGBColor? MapColor { get; set; }
         /// <summary>
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText Name { get; set; }
+        public JsonText? Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public JsonText[] Lore { get; set; }
+        public JsonText?[]? Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
         [DataTag("tag.HideFlags")]
-        public HideFlags HiddenFlags { get; set; }
+        public HideFlags? HiddenFlags { get; set; }
         /// <summary>
         /// The attributes the item has
         /// </summary>
         [DataTag("tag.AttributeModifiers")]
-        public ItemAttribute[] Attributes { get; set; }
+        public ItemAttribute?[]? Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
         [DataTag("tag.Data", ForceType = SharpCraft.ID.NBTTagType.TagCompound)]
-        public string FakeTag { get; set; }
+        public string? FakeTag { get; set; }
         /// <summary>
         /// Extra data for this item to hold
         /// </summary>
         [DataTag("tag.Data")]
-        public DataHolderBase ExtraTags { get; set; }
+        public DataHolderBase? ExtraTags { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>
@@ -227,10 +227,10 @@ namespace SharpCraft
         /// Returns the item's data from the .tag tag
         /// </summary>
         /// <returns>the .tag data. Null if there is not data there</returns>
-        public string GetItemTagString()
+        public string? GetItemTagString()
         {
             DataPartObject tree = GetDataTree();
-            DataPartObject tagTag = (DataPartObject)tree.GetValues().SingleOrDefault(o => o.PathName == "tag")?.PathValue;
+            DataPartObject? tagTag = (DataPartObject?)tree.GetValues().SingleOrDefault(o => o.PathName == "tag")?.PathValue;
             if (tagTag is null)
             {
                 return null;
@@ -253,7 +253,7 @@ namespace SharpCraft
             }
 
             string outputString = ID.Name;
-            string tagData = GetItemTagString();
+            string? tagData = GetItemTagString();
             if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
 
             return outputString;

@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a snow block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Snow(BlockType type) : base(type) { }
+            public Snow(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a snow block

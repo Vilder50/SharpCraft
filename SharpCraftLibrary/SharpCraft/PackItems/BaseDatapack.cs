@@ -40,10 +40,10 @@ namespace SharpCraft
         private const string pathPattern = @"^[\s\S]*[^\\/]{1}$";
         private const string namePattern = @"^[0-9a-zA-Z_]+$";
 
-        private string name;
-        private string path;
-        private readonly List<BasePackNamespace> namespaces;
-        private BaseFile.FileListener fileListeners;
+        private string name = null!;
+        private string path = null!;
+        private readonly List<BasePackNamespace> namespaces = null!;
+        private BaseFile.FileListener fileListeners = null!;
 
         /// <summary>
         /// Creates a new <see cref="BaseDatapack"/> with the given parameters

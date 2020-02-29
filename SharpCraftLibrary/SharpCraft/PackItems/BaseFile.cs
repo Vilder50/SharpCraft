@@ -47,15 +47,17 @@ namespace SharpCraft
             LockedOnDispose,
         }
 
-        BasePackNamespace packNamespace;
-        string fileId;
-        string writePath;
-        private string fileType;
+#pragma warning disable IDE0069
+        BasePackNamespace packNamespace = null!;
+#pragma warning restore IDE0069
+        string fileId = null!;
+        string writePath = null!;
+        private string fileType = null!;
 
         /// <summary>
         /// Listeners to call when the file gets disposed
         /// </summary>
-        protected FileListener disposeListener;
+        protected FileListener? disposeListener;
 
         /// <summary>
         /// Intializes a new <see cref="BaseFile"/> with the given values
@@ -64,13 +66,13 @@ namespace SharpCraft
         /// <param name="fileName">The name of the file</param>
         /// <param name="writeSetting">The setting for the file</param>
         /// <param name="fileType">The type of file</param>
-        protected BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
+        protected BaseFile(BasePackNamespace packNamespace, string? fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
             Setting = writeSetting;
             FileType = fileType;
 
-            string useName = fileName;
+            string useName = fileName!;
             if (string.IsNullOrWhiteSpace(useName))
             {
                 useName = PackNamespace.GetID(this);
@@ -188,7 +190,7 @@ namespace SharpCraft
         /// <summary>
         /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
         /// </summary>
-        protected TextWriter StreamWriter { get; set; }
+        protected TextWriter? StreamWriter { get; set; }
 
         /// <summary>
         /// States if the file has been written and shouldn't be able to be written again.

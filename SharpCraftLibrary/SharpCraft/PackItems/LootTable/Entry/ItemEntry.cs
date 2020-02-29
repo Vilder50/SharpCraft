@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class ItemEntry : BaseEntry
     {
-        private ItemType item;
+        private ItemType item = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ItemEntry"/>
@@ -33,6 +33,6 @@ namespace SharpCraft.LootObjects
         /// Changes to make to the entry
         /// </summary>
         [DataTag("functions", JsonTag = true)]
-        public BaseChange[] Changes { get; set; }
+        public BaseChange[]? Changes { get; set; }
     }
 }

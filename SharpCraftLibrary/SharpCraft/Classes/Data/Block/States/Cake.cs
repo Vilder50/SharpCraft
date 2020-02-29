@@ -17,7 +17,7 @@ namespace SharpCraft
             /// Creates a cake block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Cake(BlockType type) : base(type) { }
+            public Cake(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a cake block

@@ -7,7 +7,7 @@ namespace SharpCraft
     /// </summary>
     public class BossBar
     {
-        private string name;
+        private string name = null!;
 
         /// <summary>
         /// Creates a new boss bar object.
@@ -54,7 +54,7 @@ namespace SharpCraft
         /// <summary>
         /// The namespace the bossbar is in. Null = minecraft namespace.
         /// </summary>
-        public BasePackNamespace Namespace { get; private set; }
+        public BasePackNamespace? Namespace { get; private set; }
 
         /// <summary>
         /// Get string used for refering this bossbar

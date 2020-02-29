@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Tag : IConvertableToDataTag
     {
-        private string name;
+        private string name = null!;
         /// <summary>
         /// Creates a new tag with the given name
         /// </summary>
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <param name="extraConversionData">set to <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="asType">The type of tag</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             if (asType == ID.NBTTagType.TagString)
             {

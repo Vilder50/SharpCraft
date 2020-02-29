@@ -12,10 +12,10 @@ namespace SharpCraft
     /// </summary>
     public class SmeltRecipe : BaseRecipe
     {
-        private ItemType[] ingredients;
+        private ItemType[] ingredients = null!;
         private ID.Item result;
         private double experience;
-        private Time cookingTime;
+        private Time? cookingTime;
 
         /// <summary>
         /// Smelting recipe type
@@ -56,7 +56,7 @@ namespace SharpCraft
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time it takes to cook the item</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected SmeltRecipe(bool _, BasePackNamespace packNamespace, string fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, Time cookingTime = null, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, recipeType.ToString())
+        protected SmeltRecipe(bool _, BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, Time? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, recipeType.ToString())
         {
             Ingredients = ingredients;
             Result = result;
@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <param name="result">The result from the recipe</param>
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time it takes to cook the item</param>
-        public SmeltRecipe(BasePackNamespace packNamespace, string fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, Time cookingTime = null, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, ingredients, result, experience, cookingTime, group, writeSetting)
+        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, Time? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, ingredients, result, experience, cookingTime, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// <param name="result">The result from the recipe</param>
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time in ticks it takes to cook the item</param>
-        public SmeltRecipe(BasePackNamespace packNamespace, string fileName, SmeltType recipeType, ItemType ingredient, ID.Item result, double experience, Time cookingTime = null, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, new ItemType[] { ingredient }, result, experience, cookingTime, group, writeSetting)
+        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType ingredient, ID.Item result, double experience, Time? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, new ItemType[] { ingredient }, result, experience, cookingTime, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -165,7 +165,7 @@ namespace SharpCraft
         /// <summary>
         /// The amount of time in ticks it takes to cook the item
         /// </summary>
-        public Time CookingTime
+        public Time? CookingTime
         {
             get => cookingTime;
             set 
@@ -212,7 +212,7 @@ namespace SharpCraft
         protected override void AfterDispose()
         {
             base.AfterDispose();
-            ingredients = null;
+            ingredients = null!;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SharpCraft
             /// Creates a chorus plant block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public ChorusPlant(BlockType type) : base(type) { }
+            public ChorusPlant(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Creates a chorus plant block

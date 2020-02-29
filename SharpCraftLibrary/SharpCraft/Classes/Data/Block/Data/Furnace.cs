@@ -14,13 +14,13 @@ namespace SharpCraft
         /// </summary>
         public class Furnace : BaseInventory, IBlock.IFacing, IBlock.ILit
         {
-            private Item[] _dItems;
+            private Item?[]? _dItems;
 
             /// <summary>
             /// Creates a new furnace block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public Furnace(BlockType type) : base(type) { }
+            public Furnace(BlockType? type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -36,7 +36,7 @@ namespace SharpCraft
             /// The item's inside the brewing stand.
             /// 0 = Smelting item slot. 1 = Fuel slot. 2 = Result slot.
             /// </summary>
-            public override Item[] DItems
+            public override Item?[]? DItems
             {
                 get => _dItems;
                 set
@@ -64,19 +64,19 @@ namespace SharpCraft
             /// The amount of time till the used fuel item runs out
             /// </summary>
             [DataTag("BurnTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-            public Time DBurnTime { get; set; }
+            public Time? DBurnTime { get; set; }
 
             /// <summary>
             /// The amount of time the item has been smelting for
             /// </summary>
             [DataTag("CookTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-            public Time DCookTime { get; set; }
+            public Time? DCookTime { get; set; }
 
             /// <summary>
             /// The amount of time it will take for the item to smelt.
             /// </summary>
             [DataTag("CookTimeTotal", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-            public Time DCookTimeTotal { get; set; }
+            public Time? DCookTimeTotal { get; set; }
 
             /// <summary>
             /// The number of used recipes in this furnace
@@ -89,7 +89,7 @@ namespace SharpCraft
             /// Each recipes' number shows how many of the recipe there has been smelted since the player last took out the xp.
             /// </summary>
             [DataTag(Merge = true)]
-            public SmeltedRecipes DSmeltedRecipes {get; set;}
+            public SmeltedRecipes? DSmeltedRecipes {get; set;}
 
             /// <summary>
             /// Holds a list of smelted recipes
@@ -100,7 +100,7 @@ namespace SharpCraft
                 /// Intializes a new <see cref="SmeltedRecipes"/> with the given recipes
                 /// </summary>
                 /// <param name="recipes">The smelted recipes</param>
-                public SmeltedRecipes(SmeltedRecipe[] recipes)
+                public SmeltedRecipes(SmeltedRecipe?[] recipes)
                 {
                     if (recipes is null)
                     {
@@ -112,17 +112,17 @@ namespace SharpCraft
                 /// <summary>
                 /// The smelted recipes
                 /// </summary>
-                public SmeltedRecipe[] Recipes { get; private set; }
+                public SmeltedRecipe?[] Recipes { get; private set; }
 
                 /// <summary>
                 /// Converts this <see cref="SmeltedRecipes"/> object into a <see cref="DataPartObject"/>
                 /// </summary>
                 /// <param name="conversionData">Not in use</param>
                 /// <returns>This object as a <see cref="DataPartObject"/></returns>
-                public DataPartObject GetAsDataObject(object[] conversionData)
+                public DataPartObject GetAsDataObject(object?[]? conversionData)
                 {
                     DataPartObject returnObject = new DataPartObject();
-                    foreach(SmeltedRecipe recipe in Recipes)
+                    foreach(SmeltedRecipe? recipe in Recipes)
                     {
                         if (!(recipe is null))
                         {

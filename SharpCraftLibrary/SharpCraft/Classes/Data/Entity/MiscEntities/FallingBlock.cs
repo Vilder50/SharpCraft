@@ -20,13 +20,13 @@ namespace SharpCraft
             /// If this number is 0 the entity will dissapear the next tick
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Time { get; set; }
+            public Time? Time { get; set; }
 
             /// <summary>
             /// The falling block
             /// </summary>
             [Data.DataTag("BlockState","Name","Properties")]
-            public Block TheBlock { get; set; }
+            public Block? TheBlock { get; set; }
 
             /// <summary>
             /// If the block should be dropped if the falling block is destroyed

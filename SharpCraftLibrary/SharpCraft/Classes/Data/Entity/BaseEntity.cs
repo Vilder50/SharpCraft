@@ -26,7 +26,7 @@ namespace SharpCraft
             public string GetDataWithoutID()
             {
                 Data.DataPartObject dataObject = GetDataTree();
-                Data.DataPartPath idPath = dataObject.GetValues().SingleOrDefault(p => p.PathName == "id");
+                Data.DataPartPath? idPath = dataObject.GetValues().SingleOrDefault(p => p.PathName == "id");
                 if (!(idPath is null))
                 {
                     idPath.PathValue = new Data.DataPartTag(null);

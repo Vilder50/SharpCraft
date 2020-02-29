@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteRotated : BaseExecuteCommand
     {
-        private Rotation rotation;
+        private Rotation rotation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteRotated"/> command

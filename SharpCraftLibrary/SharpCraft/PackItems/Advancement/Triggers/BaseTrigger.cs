@@ -24,7 +24,7 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The distinct name of this trigger. Leaving null will generate a name when its added to an advancement and that advancement is written.
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The type of trigger
@@ -38,6 +38,10 @@ namespace SharpCraft.AdvancementObjects
         /// <returns>the bottom of the tree</returns>
         public override DataPartObject GetDataTree()
         {
+            if (Name is null)
+            {
+                throw new InvalidOperationException("Name is not set. Cannot get data tree");
+            }
             DataPartObject dataObject = new DataPartObject();
             dataObject.AddValue(new DataPartPath(Name, base.GetDataTree(), true));
             return dataObject;
@@ -92,6 +96,6 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The distinct name of this trigger.
         /// </summary>
-        string Name { get; set; }
+        string? Name { get; set; }
     }
 }
