@@ -179,17 +179,6 @@ namespace SharpCraft
         [DataTag("tag.RepairCost")]
         public int? RepairCost { get; set; }
         /// <summary>
-        /// The color of the leather armor
-        /// </summary>
-        [DataTag("tag.display.color")]
-        public RGBColor? LeatherColor { get; set; }
-        /// <summary>
-        /// The color the map item has.
-        /// (The small black text like things on the paper)
-        /// </summary>
-        [DataTag("tag.display.MapColor")]
-        public RGBColor? MapColor { get; set; }
-        /// <summary>
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
