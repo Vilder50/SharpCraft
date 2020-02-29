@@ -18,7 +18,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="team">The team to add</param>
         /// <param name="displayName">The team's displayed name</param>
-        public TeamAddCommand(Team team, JsonText? displayName)
+        public TeamAddCommand(Team team, BaseJsonText? displayName)
         {
             Team = team;
             DisplayName = displayName;
@@ -32,7 +32,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The team's displayed name
         /// </summary>
-        public JsonText? DisplayName { get; set; }
+        public BaseJsonText? DisplayName { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -235,7 +235,7 @@ namespace SharpCraft.Commands
     public class TeamModifyDisplayCommand : BaseCommand
     {
         private Team team = null!;
-        private JsonText value = null!;
+        private BaseJsonText value = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeamModifyDisplayCommand"/>
@@ -243,7 +243,7 @@ namespace SharpCraft.Commands
         /// <param name="team">The team to modify</param>
         /// <param name="displaySlot">The display to change</param>
         /// <param name="value">The value to change it to</param>
-        public TeamModifyDisplayCommand(Team team, ID.TeamDisplayName displaySlot, JsonText value)
+        public TeamModifyDisplayCommand(Team team, ID.TeamDisplayName displaySlot, BaseJsonText value)
         {
             Team = team;
             DisplaySlot = displaySlot;
@@ -263,7 +263,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The value to change it to
         /// </summary>
-        public JsonText Value { get => value; set => this.value = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
+        public BaseJsonText Value { get => value; set => this.value = value ?? throw new ArgumentNullException(nameof(Value), "Value may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command

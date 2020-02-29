@@ -21,7 +21,7 @@ namespace SharpCraft.AdvancementObjects
         /// The items in the players inventory
         /// </summary>
         [DataTag("conditions.items", JsonTag = true)]
-        public JSONObjects.Item[]? Items { get; set; }
+        public JsonObjects.Item[]? Items { get; set; }
 
         /// <summary>
         /// The amount of empty slots

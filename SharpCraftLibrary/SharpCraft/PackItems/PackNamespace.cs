@@ -404,7 +404,7 @@ namespace SharpCraft
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
         /// <returns>The advancement</returns>
-        public ParentAdvancement Advancement(string? fileName, Requirement[] requirements, Reward reward, JsonText name, JsonText description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public ParentAdvancement Advancement(string? fileName, Requirement[] requirements, Reward reward, BaseJsonText name, BaseJsonText description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseAdvancement? existingFile = null;
             if (!(fileName is null))
@@ -435,7 +435,7 @@ namespace SharpCraft
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="parent">The parent advancement</param>
         /// <returns>The advancement</returns>
-        public ChildAdvancement Advancement(string? fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText name, JsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public ChildAdvancement Advancement(string? fileName, IAdvancement parent, Requirement[] requirements, Reward reward, BaseJsonText name, BaseJsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseAdvancement? existingFile = null;
             if (!(fileName is null))

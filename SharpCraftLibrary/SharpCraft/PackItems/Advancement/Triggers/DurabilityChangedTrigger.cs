@@ -21,7 +21,7 @@ namespace SharpCraft.AdvancementObjects
         /// The item which was changed
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item? Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The amount of durability used

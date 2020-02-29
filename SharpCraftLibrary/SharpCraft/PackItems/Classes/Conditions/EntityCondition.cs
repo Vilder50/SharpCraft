@@ -12,14 +12,14 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EntityCondition : BaseCondition
     {
-        private JSONObjects.Entity data = null!;
+        private JsonObjects.Entity data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EntityCondition"/>
         /// </summary>
         /// <param name="data">The entity data to check for</param>
         /// <param name="target">The entity to check for data on</param>
-        public EntityCondition(ID.LootTarget target, JSONObjects.Entity data) : base("minecraft:entity_properties")
+        public EntityCondition(ID.LootTarget target, JsonObjects.Entity data) : base("minecraft:entity_properties")
         {
             Data = data;
             Target = target;
@@ -29,7 +29,7 @@ namespace SharpCraft.Conditions
         /// The entity data to check for
         /// </summary>
         [DataTag("predicate", JsonTag = true)]
-        public JSONObjects.Entity Data { get => data; set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null"); }
+        public JsonObjects.Entity Data { get => data; set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null"); }
 
         /// <summary>
         /// The entity to check for data on

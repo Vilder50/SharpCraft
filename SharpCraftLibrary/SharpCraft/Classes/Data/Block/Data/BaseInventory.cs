@@ -32,7 +32,7 @@ namespace SharpCraft.Blocks
         /// </summary>
 
         [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DCustomName { get; set; }
+        public BaseJsonText? DCustomName { get; set; }
         /// <summary>
         /// The items in the inventory
         /// </summary>

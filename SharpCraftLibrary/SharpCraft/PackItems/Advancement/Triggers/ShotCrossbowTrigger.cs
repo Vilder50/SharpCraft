@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The crossbow
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item? Crossbow { get; set; }
+        public JsonObjects.Item? Crossbow { get; set; }
     }
 }

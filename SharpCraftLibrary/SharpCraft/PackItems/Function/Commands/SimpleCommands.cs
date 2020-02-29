@@ -869,7 +869,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TellrawCommand : BaseCommand
     {
-        private JsonText text = null!;
+        private BaseJsonText text = null!;
         private BaseSelector selector = null!;
 
         /// <summary>
@@ -877,7 +877,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="text">The text it should display</param>
         /// <param name="selector">Selector for selecting players to private message</param>
-        public TellrawCommand(BaseSelector selector, JsonText text)
+        public TellrawCommand(BaseSelector selector, BaseJsonText text)
         {
             Text = text;
             Selector = selector;
@@ -886,7 +886,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text it should display
         /// </summary>
-        public JsonText Text
+        public BaseJsonText Text
         {
             get => text;
             set

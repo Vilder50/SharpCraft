@@ -2,13 +2,14 @@
 using System.Linq;
 using System.Collections.Generic;
 using SharpCraft.Data;
+using SharpCraft.JsonText;
 
 namespace SharpCraft
 {
     /// <summary>
     /// Base class for json text
     /// </summary>
-    public abstract partial class JsonText : IConvertableToDataTag
+    public abstract class BaseJsonText : IConvertableToDataTag
     {
         /// <summary>
         /// The color of the text
@@ -63,7 +64,7 @@ namespace SharpCraft
         /// <summary>
         /// Extra text
         /// </summary>
-        public JsonText[]? Extra { get; set; }
+        public BaseJsonText[]? Extra { get; set; }
 
         /// <summary>
         /// Gets the raw JSON string
@@ -96,43 +97,43 @@ namespace SharpCraft
         protected abstract string GetSpecificJsonString();
 
         /// <summary>
-        /// Returns a shallow clone of this <see cref="JsonText"/>
+        /// Returns a shallow clone of this <see cref="BaseJsonText"/>
         /// </summary>
-        /// <returns>A shallow clone of this <see cref="JsonText"/></returns>
-        public virtual JsonText ShallowClone()
+        /// <returns>A shallow clone of this <see cref="BaseJsonText"/></returns>
+        public virtual BaseJsonText ShallowClone()
         {
-            return (JsonText)MemberwiseClone();
+            return (BaseJsonText)MemberwiseClone();
         }
 
         /// <summary>
-        /// Converts this <see cref="JsonText"/> into a <see cref="DataPartTag"/>
+        /// Converts this <see cref="BaseJsonText"/> into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
-        /// <returns>This <see cref="JsonText"/> as a <see cref="DataPartTag"/></returns>
+        /// <returns>This <see cref="BaseJsonText"/> as a <see cref="DataPartTag"/></returns>
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
         {
             return new DataPartTag(GetJsonString());
         }
 
         /// <summary>
-        /// Converts a single <see cref="JsonText"/> into an array of <see cref="JsonText"/> only containing the <see cref="JsonText"/>
+        /// Converts a single <see cref="BaseJsonText"/> into an array of <see cref="BaseJsonText"/> only containing the <see cref="BaseJsonText"/>
         /// </summary>
-        /// <param name="jsonText">the <see cref="JsonText"/> to convert</param>
-        public static implicit operator JsonText[](JsonText jsonText)
+        /// <param name="jsonText">the <see cref="BaseJsonText"/> to convert</param>
+        public static implicit operator BaseJsonText[](BaseJsonText jsonText)
         {
-            return new JsonText[] { jsonText };
+            return new BaseJsonText[] { jsonText };
         }
 
         /// <summary>
-        /// Converts an array of <see cref="JsonText"/> into a single <see cref="JsonText"/> object
+        /// Converts an array of <see cref="BaseJsonText"/> into a single <see cref="BaseJsonText"/> object
         /// </summary>
-        /// <param name="array">the array of <see cref="JsonText"/> to convert</param>
-        public static implicit operator JsonText(JsonText[] array)
+        /// <param name="array">the array of <see cref="BaseJsonText"/> to convert</param>
+        public static implicit operator BaseJsonText(BaseJsonText[] array)
         {
-            JsonText parent = array[0].ShallowClone();
+            BaseJsonText parent = array[0].ShallowClone();
 
-            List<JsonText> extraText = parent.Extra?.ToList() ?? new List<JsonText>();
+            List<BaseJsonText> extraText = parent.Extra?.ToList() ?? new List<BaseJsonText>();
             extraText.AddRange(array[1..]);
             parent.Extra = extraText.ToArray();
 
@@ -140,16 +141,16 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Adds 2 <see cref="JsonText"/>s together into one object
+        /// Adds 2 <see cref="BaseJsonText"/>s together into one object
         /// </summary>
-        /// <param name="text1">The parent <see cref="JsonText"/></param>
-        /// <param name="text2">The <see cref="JsonText"/> to add to the parent</param>
-        /// <returns>The <see cref="JsonText"/>s added together</returns>
-        public static JsonText operator +(JsonText text1, JsonText text2)
+        /// <param name="text1">The parent <see cref="BaseJsonText"/></param>
+        /// <param name="text2">The <see cref="BaseJsonText"/> to add to the parent</param>
+        /// <returns>The <see cref="BaseJsonText"/>s added together</returns>
+        public static BaseJsonText operator +(BaseJsonText text1, BaseJsonText text2)
         {
-            JsonText parent = text1.ShallowClone();
+            BaseJsonText parent = text1.ShallowClone();
 
-            List<JsonText> extraText = parent.Extra?.ToList() ?? new List<JsonText>();
+            List<BaseJsonText> extraText = parent.Extra?.ToList() ?? new List<BaseJsonText>();
             extraText.Add(text2);
             parent.Extra = extraText.ToArray();
 
@@ -157,37 +158,37 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts a string into a <see cref="JsonText"/> object
+        /// Converts a string into a <see cref="BaseJsonText"/> object
         /// </summary>
         /// <param name="text">the string to convert</param>
-        public static implicit operator JsonText(string text)
+        public static implicit operator BaseJsonText(string text)
         {
             return new Text(text);
         }
 
         /// <summary>
-        /// Converts a <see cref="ScoreValue"/> into a <see cref="JsonText"/> object
+        /// Converts a <see cref="ScoreValue"/> into a <see cref="BaseJsonText"/> object
         /// </summary>
         /// <param name="score">the <see cref="ScoreValue"/> to convert</param>
-        public static implicit operator JsonText(ScoreValue score)
+        public static implicit operator BaseJsonText(ScoreValue score)
         {
             return new Score(score, score);
         }
 
         /// <summary>
-        /// Converts a <see cref="Selector"/> into a <see cref="JsonText"/> object
+        /// Converts a <see cref="Selector"/> into a <see cref="BaseJsonText"/> object
         /// </summary>
         /// <param name="selector">the <see cref="Selector"/> to convert</param>
-        public static implicit operator JsonText(Selector selector)
+        public static implicit operator BaseJsonText(Selector selector)
         {
             return new Names(selector);
         }
 
         /// <summary>
-        /// Converts a <see cref="ID.Key"/> into a <see cref="JsonText"/> object
+        /// Converts a <see cref="ID.Key"/> into a <see cref="BaseJsonText"/> object
         /// </summary>
         /// <param name="key">the <see cref="ID.Key"/> to convert</param>
-        public static implicit operator JsonText(ID.Key key)
+        public static implicit operator BaseJsonText(ID.Key key)
         {
             return new KeyBind(key);
         }

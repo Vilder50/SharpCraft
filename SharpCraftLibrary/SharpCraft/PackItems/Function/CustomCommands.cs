@@ -625,11 +625,11 @@ namespace SharpCraft.FunctionWriters
                         BaseCondition blockCondition = null!;
                         if (!(ignore is null))
                         {
-                            blockCondition = !new LocationCondition(new JSONObjects.Location() { Block = ignore }, location);
+                            blockCondition = !new LocationCondition(new JsonObjects.Location() { Block = ignore }, location);
                         }
                         if (!(hit is null))
                         {
-                            BaseCondition hitCondition = new LocationCondition(new JSONObjects.Location() { Block = hit }, location);
+                            BaseCondition hitCondition = new LocationCondition(new JsonObjects.Location() { Block = hit }, location);
                             if (blockCondition is null)
                             {
                                 blockCondition = hitCondition;

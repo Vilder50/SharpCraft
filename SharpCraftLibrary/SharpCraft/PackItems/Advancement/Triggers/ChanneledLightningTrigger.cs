@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The dimension the player is coming from
         /// </summary>
         [DataTag("conditions.victims", JsonTag = true)]
-        public JSONObjects.Entity[]? HitEntities { get; set; }
+        public JsonObjects.Entity[]? HitEntities { get; set; }
     }
 }

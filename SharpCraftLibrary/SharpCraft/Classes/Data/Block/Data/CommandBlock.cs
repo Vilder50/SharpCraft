@@ -41,7 +41,7 @@ namespace SharpCraft.Blocks
         /// The name of the command block
         /// </summary>
         [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DCustomName { get; set; }
+        public BaseJsonText? DCustomName { get; set; }
 
         /// <summary>
         /// The command in the command block
@@ -53,7 +53,7 @@ namespace SharpCraft.Blocks
         /// The last command's string output
         /// </summary>
         [Data.DataTag("LastOutput", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DLastOutput { get; set; }
+        public BaseJsonText? DLastOutput { get; set; }
 
         /// <summary>
         /// The last command's success output

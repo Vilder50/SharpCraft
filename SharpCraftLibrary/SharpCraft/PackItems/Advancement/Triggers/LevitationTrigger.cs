@@ -21,7 +21,7 @@ namespace SharpCraft.AdvancementObjects
         /// The distance the player has moved by the effect
         /// </summary>
         [DataTag("conditions.distance", JsonTag = true)]
-        public JSONObjects.Distance? Distance { get; set; }
+        public JsonObjects.Distance? Distance { get; set; }
 
         /// <summary>
         /// The duration of the effect

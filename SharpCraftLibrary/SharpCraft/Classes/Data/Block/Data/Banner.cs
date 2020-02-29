@@ -59,7 +59,7 @@ namespace SharpCraft.Blocks
         /// This name is showed on maps which has clicked this banner.
         /// </summary>
         [Data.DataTag("CustomName", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DCustomName { get; set; }
+        public BaseJsonText? DCustomName { get; set; }
 
         /// <summary>
         /// The banner's patterns

@@ -12,13 +12,13 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class DamageSourceCondition : BaseCondition
     {
-        private JSONObjects.Damage damage = null!;
+        private JsonObjects.Damage damage = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DamageSourceCondition"/>
         /// </summary>
         /// <param name="damage">The type of damage</param>
-        public DamageSourceCondition(JSONObjects.Damage damage) : base("minecraft:damage_source_properties")
+        public DamageSourceCondition(JsonObjects.Damage damage) : base("minecraft:damage_source_properties")
         {
             Damage = damage;
         }
@@ -27,6 +27,6 @@ namespace SharpCraft.Conditions
         /// The type of damage
         /// </summary>
         [DataTag("properties", JsonTag = true)]
-        public JSONObjects.Damage Damage { get => damage; set => damage = value ?? throw new ArgumentNullException(nameof(Damage), "Damage may not be null"); }
+        public JsonObjects.Damage Damage { get => damage; set => damage = value ?? throw new ArgumentNullException(nameof(Damage), "Damage may not be null"); }
     }
 }

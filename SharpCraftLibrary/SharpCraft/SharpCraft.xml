@@ -7047,23 +7047,18 @@
             (-1 ticks = not exploding)
             </summary>
         </member>
-        <member name="T:SharpCraft.Item">
-            <summary>
-            A object defining a Minecraft item
-            </summary>
-        </member>
-        <member name="T:SharpCraft.Item.Book">
+        <member name="T:SharpCraft.Items.Book">
             <summary>
             An object for book items
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Book.#ctor">
+        <member name="M:SharpCraft.Items.Book.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Book.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.Book.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7071,50 +7066,50 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="P:SharpCraft.Item.Book.Generation">
+        <member name="P:SharpCraft.Items.Book.Generation">
             <summary>
             The generation of the book.
             (How much it has been copied)
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Book.Author">
+        <member name="P:SharpCraft.Items.Book.Author">
             <summary>
             The auther of the book
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Book.Title">
+        <member name="P:SharpCraft.Items.Book.Title">
             <summary>
             The book's title
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Book.Pages">
+        <member name="P:SharpCraft.Items.Book.Pages">
             <summary>
             The book's pages.
             Each index in the first array means a new page.
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Book.UnlockRecipes">
+        <member name="P:SharpCraft.Items.Book.UnlockRecipes">
             <summary>
             The recipes unlocked when right clicking a recipe book
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Book.StoredEnchants">
+        <member name="P:SharpCraft.Items.Book.StoredEnchants">
             <summary>
             The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.
             </summary>
         </member>
-        <member name="T:SharpCraft.Item.Firework">
+        <member name="T:SharpCraft.Items.Firework">
             <summary>
             An object for firework items
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Firework.#ctor">
+        <member name="M:SharpCraft.Items.Firework.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Firework.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.Firework.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7122,33 +7117,33 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="P:SharpCraft.Item.Firework.FireworkStar">
+        <member name="P:SharpCraft.Items.Firework.FireworkStar">
             <summary>
             The data for a single firework star item
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Firework.FireworkRocket">
+        <member name="P:SharpCraft.Items.Firework.FireworkRocket">
             <summary>
             The data for a firework rocket
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Firework.RocketFlight">
+        <member name="P:SharpCraft.Items.Firework.RocketFlight">
             <summary>
             How many seconds the rocket will fly for
             </summary>
         </member>
-        <member name="T:SharpCraft.Item.Map">
+        <member name="T:SharpCraft.Items.Map">
             <summary>
             An object for map items
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Map.#ctor">
+        <member name="M:SharpCraft.Items.Map.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Map.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.Map.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7156,63 +7151,63 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="T:SharpCraft.Item.Map.Icon">
+        <member name="T:SharpCraft.Items.Map.Icon">
             <summary>
             A class used to define map icons
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.ID">
+        <member name="P:SharpCraft.Items.Map.Icon.ID">
             <summary>
             A random name for the marker
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.MarkerType">
+        <member name="P:SharpCraft.Items.Map.Icon.MarkerType">
             <summary>
             The type of marker symbol
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.X">
+        <member name="P:SharpCraft.Items.Map.Icon.X">
             <summary>
             The location to show it at.
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.Z">
+        <member name="P:SharpCraft.Items.Map.Icon.Z">
             <summary>
             Tge location to show it at.
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.Rotation">
+        <member name="P:SharpCraft.Items.Map.Icon.Rotation">
             <summary>
             The icon's rotation
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icon.IconString">
+        <member name="P:SharpCraft.Items.Map.Icon.IconString">
             <summary>
             The raw data used by the game to make icons on maps
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.MapID">
+        <member name="P:SharpCraft.Items.Map.MapID">
             <summary>
             The map's ID
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Map.Icons">
+        <member name="P:SharpCraft.Items.Map.Icons">
             <summary>
             The icons displayed on the map.
             </summary>
         </member>
-        <member name="T:SharpCraft.Item.Potion">
+        <member name="T:SharpCraft.Items.Potion">
             <summary>
             The data for potions
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Potion.#ctor">
+        <member name="M:SharpCraft.Items.Potion.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Item.Potion.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.Potion.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7220,19 +7215,24 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="P:SharpCraft.Item.Potion.PotionEffects">
+        <member name="P:SharpCraft.Items.Potion.PotionEffects">
             <summary>
             The effects given by the potion
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Potion.PotionColor">
+        <member name="P:SharpCraft.Items.Potion.PotionColor">
             <summary>
             The color of the potion
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.Potion.PotionType">
+        <member name="P:SharpCraft.Items.Potion.PotionType">
             <summary>
             The effect given by the potion using minecraft values.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Item">
+            <summary>
+            Class for items
             </summary>
         </member>
         <member name="M:SharpCraft.Item.#ctor">
@@ -7998,133 +7998,133 @@
             </summary>
             <returns>A string for selecting the slot</returns>
         </member>
-        <member name="T:SharpCraft.JsonText">
+        <member name="T:SharpCraft.BaseJsonText">
             <summary>
             Base class for json text
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Color">
+        <member name="P:SharpCraft.BaseJsonText.Color">
             <summary>
             The color of the text
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Obfuscated">
+        <member name="P:SharpCraft.BaseJsonText.Obfuscated">
             <summary>
             If the text is obfuscated or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Bold">
+        <member name="P:SharpCraft.BaseJsonText.Bold">
             <summary>
             If the text is bold or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Italic">
+        <member name="P:SharpCraft.BaseJsonText.Italic">
             <summary>
             If the text is italic or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Strikethrough">
+        <member name="P:SharpCraft.BaseJsonText.Strikethrough">
             <summary>
             If the text is strikethroughed or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Underline">
+        <member name="P:SharpCraft.BaseJsonText.Underline">
             <summary>
             If the text is underlined or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Reset">
+        <member name="P:SharpCraft.BaseJsonText.Reset">
             <summary>
             If the text should reset the text look defined by its parent
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.ShiftClickInsertion">
+        <member name="P:SharpCraft.BaseJsonText.ShiftClickInsertion">
             <summary>
             Text which should be inserted into the players chat when shift clicked
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.ClickEvent">
+        <member name="P:SharpCraft.BaseJsonText.ClickEvent">
             <summary>
             The thing which should happen when the text is clicked
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.HoverEvent">
+        <member name="P:SharpCraft.BaseJsonText.HoverEvent">
             <summary>
             The the which shows up when the text is hovered over
             </summary>
         </member>
-        <member name="P:SharpCraft.JsonText.Extra">
+        <member name="P:SharpCraft.BaseJsonText.Extra">
             <summary>
             Extra text
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.GetJsonString">
+        <member name="M:SharpCraft.BaseJsonText.GetJsonString">
             <summary>
             Gets the raw JSON string
             </summary>
             <returns>the raw JSON string used by the game</returns>
         </member>
-        <member name="M:SharpCraft.JsonText.GetSpecificJsonString">
+        <member name="M:SharpCraft.BaseJsonText.GetSpecificJsonString">
             <summary>
             Should return the part of the json string which is special for the object inheriting this class
             </summary>
             <returns>The special part of the json string gotten from the inheriting class</returns>
         </member>
-        <member name="M:SharpCraft.JsonText.ShallowClone">
+        <member name="M:SharpCraft.BaseJsonText.ShallowClone">
             <summary>
-            Returns a shallow clone of this <see cref="T:SharpCraft.JsonText"/>
+            Returns a shallow clone of this <see cref="T:SharpCraft.BaseJsonText"/>
             </summary>
-            <returns>A shallow clone of this <see cref="T:SharpCraft.JsonText"/></returns>
+            <returns>A shallow clone of this <see cref="T:SharpCraft.BaseJsonText"/></returns>
         </member>
-        <member name="M:SharpCraft.JsonText.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.BaseJsonText.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
-            Converts this <see cref="T:SharpCraft.JsonText"/> into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts this <see cref="T:SharpCraft.BaseJsonText"/> into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="asType">Not used</param>
             <param name="extraConversionData">Not used</param>
-            <returns>This <see cref="T:SharpCraft.JsonText"/> as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+            <returns>This <see cref="T:SharpCraft.BaseJsonText"/> as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.JsonText)~SharpCraft.JsonText[]">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.BaseJsonText)~SharpCraft.BaseJsonText[]">
             <summary>
-            Converts a single <see cref="T:SharpCraft.JsonText"/> into an array of <see cref="T:SharpCraft.JsonText"/> only containing the <see cref="T:SharpCraft.JsonText"/>
+            Converts a single <see cref="T:SharpCraft.BaseJsonText"/> into an array of <see cref="T:SharpCraft.BaseJsonText"/> only containing the <see cref="T:SharpCraft.BaseJsonText"/>
             </summary>
-            <param name="jsonText">the <see cref="T:SharpCraft.JsonText"/> to convert</param>
+            <param name="jsonText">the <see cref="T:SharpCraft.BaseJsonText"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.JsonText[])~SharpCraft.JsonText">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.BaseJsonText[])~SharpCraft.BaseJsonText">
             <summary>
-            Converts an array of <see cref="T:SharpCraft.JsonText"/> into a single <see cref="T:SharpCraft.JsonText"/> object
+            Converts an array of <see cref="T:SharpCraft.BaseJsonText"/> into a single <see cref="T:SharpCraft.BaseJsonText"/> object
             </summary>
-            <param name="array">the array of <see cref="T:SharpCraft.JsonText"/> to convert</param>
+            <param name="array">the array of <see cref="T:SharpCraft.BaseJsonText"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Addition(SharpCraft.JsonText,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.BaseJsonText.op_Addition(SharpCraft.BaseJsonText,SharpCraft.BaseJsonText)">
             <summary>
-            Adds 2 <see cref="T:SharpCraft.JsonText"/>s together into one object
+            Adds 2 <see cref="T:SharpCraft.BaseJsonText"/>s together into one object
             </summary>
-            <param name="text1">The parent <see cref="T:SharpCraft.JsonText"/></param>
-            <param name="text2">The <see cref="T:SharpCraft.JsonText"/> to add to the parent</param>
-            <returns>The <see cref="T:SharpCraft.JsonText"/>s added together</returns>
+            <param name="text1">The parent <see cref="T:SharpCraft.BaseJsonText"/></param>
+            <param name="text2">The <see cref="T:SharpCraft.BaseJsonText"/> to add to the parent</param>
+            <returns>The <see cref="T:SharpCraft.BaseJsonText"/>s added together</returns>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(System.String)~SharpCraft.JsonText">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(System.String)~SharpCraft.BaseJsonText">
             <summary>
-            Converts a string into a <see cref="T:SharpCraft.JsonText"/> object
+            Converts a string into a <see cref="T:SharpCraft.BaseJsonText"/> object
             </summary>
             <param name="text">the string to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.ScoreValue)~SharpCraft.JsonText">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.ScoreValue)~SharpCraft.BaseJsonText">
             <summary>
-            Converts a <see cref="T:SharpCraft.ScoreValue"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            Converts a <see cref="T:SharpCraft.ScoreValue"/> into a <see cref="T:SharpCraft.BaseJsonText"/> object
             </summary>
             <param name="score">the <see cref="T:SharpCraft.ScoreValue"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.Selector)~SharpCraft.JsonText">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.Selector)~SharpCraft.BaseJsonText">
             <summary>
-            Converts a <see cref="T:SharpCraft.Selector"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            Converts a <see cref="T:SharpCraft.Selector"/> into a <see cref="T:SharpCraft.BaseJsonText"/> object
             </summary>
             <param name="selector">the <see cref="T:SharpCraft.Selector"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonText.op_Implicit(SharpCraft.ID.Key)~SharpCraft.JsonText">
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.ID.Key)~SharpCraft.BaseJsonText">
             <summary>
-            Converts a <see cref="T:SharpCraft.ID.Key"/> into a <see cref="T:SharpCraft.JsonText"/> object
+            Converts a <see cref="T:SharpCraft.ID.Key"/> into a <see cref="T:SharpCraft.BaseJsonText"/> object
             </summary>
             <param name="key">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
         </member>
@@ -8147,9 +8147,9 @@
         </member>
         <member name="M:SharpCraft.JsonText.BaseClickEvent.GetEventString">
             <summary>
-            Returns the string for this click event used in <see cref="T:SharpCraft.JsonText"/>
+            Returns the string for this click event used in <see cref="T:SharpCraft.BaseJsonText"/>
             </summary>
-            <returns>The string used in <see cref="T:SharpCraft.JsonText"/></returns>
+            <returns>The string used in <see cref="T:SharpCraft.BaseJsonText"/></returns>
         </member>
         <member name="M:SharpCraft.JsonText.BaseClickEvent.op_Implicit(SharpCraft.Commands.BaseCommand)~SharpCraft.JsonText.BaseClickEvent">
             <summary>
@@ -8292,22 +8292,22 @@
         </member>
         <member name="M:SharpCraft.JsonText.BaseHoverEvent.GetEventString">
             <summary>
-            Returns the string for this hover event used in <see cref="T:SharpCraft.JsonText"/>
+            Returns the string for this hover event used in <see cref="T:SharpCraft.BaseJsonText"/>
             </summary>
-            <returns>The string used in <see cref="T:SharpCraft.JsonText"/></returns>
+            <returns>The string used in <see cref="T:SharpCraft.BaseJsonText"/></returns>
         </member>
-        <member name="M:SharpCraft.JsonText.BaseHoverEvent.op_Implicit(SharpCraft.JsonText)~SharpCraft.JsonText.BaseHoverEvent">
+        <member name="M:SharpCraft.JsonText.BaseHoverEvent.op_Implicit(SharpCraft.BaseJsonText)~SharpCraft.JsonText.BaseHoverEvent">
             <summary>
-            Converts a <see cref="T:SharpCraft.JsonText"/> into a <see cref="T:SharpCraft.JsonText.BaseHoverEvent"/> object
+            Converts a <see cref="T:SharpCraft.BaseJsonText"/> into a <see cref="T:SharpCraft.JsonText.BaseHoverEvent"/> object
             </summary>
-            <param name="text">the <see cref="T:SharpCraft.JsonText"/> to convert</param>
+            <param name="text">the <see cref="T:SharpCraft.BaseJsonText"/> to convert</param>
         </member>
         <member name="T:SharpCraft.JsonText.TextHoverEvent">
             <summary>
             Shows text when the text is being hovered
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.TextHoverEvent.#ctor(SharpCraft.JsonText)">
+        <member name="M:SharpCraft.JsonText.TextHoverEvent.#ctor(SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.TextHoverEvent"/>
             </summary>
@@ -8351,7 +8351,7 @@
             Shows some information about an entity when the text is hovered
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.EntityHoverEvent.#ctor(SharpCraft.EntityType,SharpCraft.JsonText,SharpCraft.UUID)">
+        <member name="M:SharpCraft.JsonText.EntityHoverEvent.#ctor(SharpCraft.EntityType,SharpCraft.BaseJsonText,SharpCraft.UUID)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.EntityHoverEvent"/>
             </summary>
@@ -8414,7 +8414,7 @@
             Class for displaying translated json text
             </summary>
         </member>
-        <member name="M:SharpCraft.JsonText.Translate.#ctor(System.String,SharpCraft.JsonText[])">
+        <member name="M:SharpCraft.JsonText.Translate.#ctor(System.String,SharpCraft.BaseJsonText[])">
             <summary>
             Intializes a new <see cref="T:SharpCraft.JsonText.Translate"/>
             </summary>
@@ -12290,7 +12290,7 @@
             Base class for visible advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.BaseVisibleAdvancement"/>
             </summary>
@@ -12354,7 +12354,7 @@
             </summary>
             <param name="stream">The stream used for writing the file</param>
         </member>
-        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.NewChild(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.AdvancementObjects.BaseVisibleAdvancement.NewChild(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new child advancement for this advancement
             </summary>
@@ -13169,7 +13169,7 @@
             Class for child advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ChildAdvancement"/>. Inherite from this constructor
             </summary>
@@ -13188,7 +13188,7 @@
             <param name="parent">The parent advancement</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ChildAdvancement"/>
             </summary>
@@ -13217,7 +13217,7 @@
             </summary>
             <param name="stream">The stream used for writing the file</param>
         </member>
-        <member name="M:SharpCraft.ChildAdvancement.NewSibling(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ChildAdvancement.NewSibling(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new sibling advancement for this advancement
             </summary>
@@ -13335,7 +13335,7 @@
             Class for parent advancement files
             </summary>
         </member>
-        <member name="M:SharpCraft.ParentAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ParentAdvancement.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ParentAdvancement"/>. Inherite from this constructor.
             </summary>
@@ -13354,7 +13354,7 @@
             <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
         </member>
-        <member name="M:SharpCraft.ParentAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.ParentAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ParentAdvancement"/>
             </summary>
@@ -13874,7 +13874,7 @@
             Condition which returns true if the entity data is correct
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.DamageSourceCondition.#ctor(SharpCraft.JSONObjects.Damage)">
+        <member name="M:SharpCraft.Conditions.DamageSourceCondition.#ctor(SharpCraft.JsonObjects.Damage)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.DamageSourceCondition"/>
             </summary>
@@ -13912,7 +13912,7 @@
             Condition which returns true if the item has the given enchants
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.EnchantmentCondition.#ctor(SharpCraft.JSONObjects.Item.Enchantment[])">
+        <member name="M:SharpCraft.Conditions.EnchantmentCondition.#ctor(SharpCraft.JsonObjects.Item.Enchantment[])">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.EnchantmentCondition"/>
             </summary>
@@ -13927,7 +13927,7 @@
             Condition which returns true if the damage is of a given type
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.EntityCondition.#ctor(SharpCraft.ID.LootTarget,SharpCraft.JSONObjects.Entity)">
+        <member name="M:SharpCraft.Conditions.EntityCondition.#ctor(SharpCraft.ID.LootTarget,SharpCraft.JsonObjects.Entity)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.EntityCondition"/>
             </summary>
@@ -14060,7 +14060,7 @@
             Condition which returns true if the location is correct
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.LocationCondition.#ctor(SharpCraft.JSONObjects.Location,SharpCraft.IntVector)">
+        <member name="M:SharpCraft.Conditions.LocationCondition.#ctor(SharpCraft.JsonObjects.Location,SharpCraft.IntVector)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.LocationCondition"/>
             </summary>
@@ -14168,7 +14168,7 @@
             Condition which returns true if the item is correct
             </summary>
         </member>
-        <member name="M:SharpCraft.Conditions.ToolCondition.#ctor(SharpCraft.JSONObjects.Item)">
+        <member name="M:SharpCraft.Conditions.ToolCondition.#ctor(SharpCraft.JsonObjects.Item)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Conditions.ToolCondition"/>
             </summary>
@@ -14199,560 +14199,555 @@
             If its thundering
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects">
-            <summary>
-            <see cref="T:System.Object"/>s used in <see cref="T:SharpCraft.LootTable"/>s and <see cref="T:SharpCraft.IAdvancement"/>s
-            </summary>
-        </member>
-        <member name="T:SharpCraft.JSONObjects.Damage">
+        <member name="T:SharpCraft.JsonObjects.Damage">
             <summary>
             a <see cref="T:System.Object"/> defining damage
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Damage.Dealt">
+        <member name="P:SharpCraft.JsonObjects.Damage.Dealt">
             <summary>
             The amount of damage actually dealt
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Damage.Taken">
+        <member name="P:SharpCraft.JsonObjects.Damage.Taken">
             <summary>
             The amount of damage taken
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Damage.Blocked">
+        <member name="P:SharpCraft.JsonObjects.Damage.Blocked">
             <summary>
             if the damage was blocked or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Damage.Type">
+        <member name="P:SharpCraft.JsonObjects.Damage.Type">
             <summary>
             the type of damage
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Damage.SourceEntity">
+        <member name="P:SharpCraft.JsonObjects.Damage.SourceEntity">
             <summary>
             the damage source entity
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.DamageFlags">
+        <member name="T:SharpCraft.JsonObjects.DamageFlags">
             <summary>
             a <see cref="T:System.Object"/> defining damage flags
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.ByPassArmor">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.ByPassArmor">
             <summary>
             if the damage by-passes armor or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Unblockable">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Unblockable">
             <summary>
             if the damage can be blocked or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Starvation">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Starvation">
             <summary>
             if the damage is starvation damage or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Explosion">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Explosion">
             <summary>
             if the damage is explosion damage or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Fire">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Fire">
             <summary>
             if the damage if fire damage or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Magic">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Magic">
             <summary>
             if the damage is magic damage or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Projectile">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Projectile">
             <summary>
             if its a projectile or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.Lightning">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.Lightning">
             <summary>
             if its lightning or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.DamagingEntity">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.DamagingEntity">
             <summary>
-            the <see cref="T:SharpCraft.JSONObjects.Entity"/> doing damage
+            the <see cref="T:SharpCraft.JsonObjects.Entity"/> doing damage
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.DamageFlags.SourceEntity">
+        <member name="P:SharpCraft.JsonObjects.DamageFlags.SourceEntity">
             <summary>
-            the <see cref="T:SharpCraft.JSONObjects.Entity"/> which made the damage happen
+            the <see cref="T:SharpCraft.JsonObjects.Entity"/> which made the damage happen
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Distance">
+        <member name="T:SharpCraft.JsonObjects.Distance">
             <summary>
             A <see cref="T:System.Object"/> defining a distance
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Distance.Absolute">
+        <member name="P:SharpCraft.JsonObjects.Distance.Absolute">
             <summary>
             The total distance between two things
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Distance.Horizontal">
+        <member name="P:SharpCraft.JsonObjects.Distance.Horizontal">
             <summary>
             the total horizontal distance between two things
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Distance.X">
+        <member name="P:SharpCraft.JsonObjects.Distance.X">
             <summary>
             the x amount of distance between two things
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Distance.Y">
+        <member name="P:SharpCraft.JsonObjects.Distance.Y">
             <summary>
             the y amount of distance between two things
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Distance.Z">
+        <member name="P:SharpCraft.JsonObjects.Distance.Z">
             <summary>
             the z amount of distance between two things
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Effects">
+        <member name="T:SharpCraft.JsonObjects.Effects">
             <summary>
             a <see cref="T:System.Object"/> defining an effect
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.#ctor(SharpCraft.JSONObjects.Effects.EffectArray)">
+        <member name="M:SharpCraft.JsonObjects.Effects.#ctor(SharpCraft.JsonObjects.Effects.EffectArray)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Effects"/> object
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Effects"/> object
             </summary>
             <param name="array">An array of effects to check for</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.#ctor(System.Collections.Generic.List{SharpCraft.JSONObjects.Effects.Effect})">
+        <member name="M:SharpCraft.JsonObjects.Effects.#ctor(System.Collections.Generic.List{SharpCraft.JsonObjects.Effects.Effect})">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Effects"/> object
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Effects"/> object
             </summary>
             <param name="effects">a list of effects to check for</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.#ctor(SharpCraft.JSONObjects.Effects.Effect)">
+        <member name="M:SharpCraft.JsonObjects.Effects.#ctor(SharpCraft.JsonObjects.Effects.Effect)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Effects"/> object
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Effects"/> object
             </summary>
             <param name="effect">a single effect to check for</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.CheckEffects">
+        <member name="P:SharpCraft.JsonObjects.Effects.CheckEffects">
             <summary>
             A list of effects to check for
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Effects.EffectArray">
+        <member name="T:SharpCraft.JsonObjects.Effects.EffectArray">
             <summary>
             A list of effects
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.EffectArray.#ctor(System.Collections.Generic.List{SharpCraft.JSONObjects.Effects.Effect})">
+        <member name="M:SharpCraft.JsonObjects.Effects.EffectArray.#ctor(System.Collections.Generic.List{SharpCraft.JsonObjects.Effects.Effect})">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Effects.EffectArray"/>
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Effects.EffectArray"/>
             </summary>
             <param name="effects">The effects in the array</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.EffectArray.#ctor(SharpCraft.JSONObjects.Effects.Effect)">
+        <member name="M:SharpCraft.JsonObjects.Effects.EffectArray.#ctor(SharpCraft.JsonObjects.Effects.Effect)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Effects.EffectArray"/>
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Effects.EffectArray"/>
             </summary>
             <param name="effect">The effect in the array</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.EffectArray.Effects">
+        <member name="P:SharpCraft.JsonObjects.Effects.EffectArray.Effects">
             <summary>
             The effects in the array
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.EffectArray.GetAsDataObject(System.Object[])">
+        <member name="M:SharpCraft.JsonObjects.Effects.EffectArray.GetAsDataObject(System.Object[])">
             <summary>
             Converts this object into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
             <param name="conversionData">Not in use</param>
             <returns>This object as a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Effects.Effect">
+        <member name="T:SharpCraft.JsonObjects.Effects.Effect">
             <summary>
             A single effect
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.Effect.#ctor(SharpCraft.ID.Effect)">
+        <member name="M:SharpCraft.JsonObjects.Effects.Effect.#ctor(SharpCraft.ID.Effect)">
             <summary>
-            creates a new <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/>
+            creates a new <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/>
             </summary>
             <param name="Effect">the effect</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.Effect.EffectName">
+        <member name="P:SharpCraft.JsonObjects.Effects.Effect.EffectName">
             <summary>
             The effect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.Effect.Amplifier">
+        <member name="P:SharpCraft.JsonObjects.Effects.Effect.Amplifier">
             <summary>
-            the <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/>'s amplifer
+            the <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/>'s amplifer
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.Effect.Duration">
+        <member name="P:SharpCraft.JsonObjects.Effects.Effect.Duration">
             <summary>
-            the <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/>'s duration
+            the <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/>'s duration
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.Effect.Ambient">
+        <member name="P:SharpCraft.JsonObjects.Effects.Effect.Ambient">
             <summary>
-            if the <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/> is ambient or not
+            if the <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/> is ambient or not
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Effects.Effect.Visible">
+        <member name="P:SharpCraft.JsonObjects.Effects.Effect.Visible">
             <summary>
-            if the <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/>'s particles are visible or not
+            if the <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/>'s particles are visible or not
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.op_Implicit(SharpCraft.JSONObjects.Effects.Effect)~SharpCraft.JSONObjects.Effects">
+        <member name="M:SharpCraft.JsonObjects.Effects.op_Implicit(SharpCraft.JsonObjects.Effects.Effect)~SharpCraft.JsonObjects.Effects">
             <summary>
-            Converts a single <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/> object into an <see cref="T:SharpCraft.JSONObjects.Effects"/> object
+            Converts a single <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/> object into an <see cref="T:SharpCraft.JsonObjects.Effects"/> object
             </summary>
-            <param name="effect">The <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/> to convert</param>
+            <param name="effect">The <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Effects.op_Implicit(System.Collections.Generic.List{SharpCraft.JSONObjects.Effects.Effect})~SharpCraft.JSONObjects.Effects">
+        <member name="M:SharpCraft.JsonObjects.Effects.op_Implicit(System.Collections.Generic.List{SharpCraft.JsonObjects.Effects.Effect})~SharpCraft.JsonObjects.Effects">
             <summary>
-            Converts a list of <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/> objects into an <see cref="T:SharpCraft.JSONObjects.Effects"/> object
+            Converts a list of <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/> objects into an <see cref="T:SharpCraft.JsonObjects.Effects"/> object
             </summary>
-            <param name="effects">The <see cref="T:SharpCraft.JSONObjects.Effects.Effect"/> to convert</param>
+            <param name="effects">The <see cref="T:SharpCraft.JsonObjects.Effects.Effect"/> to convert</param>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity">
+        <member name="T:SharpCraft.JsonObjects.Entity">
             <summary>
             a <see cref="T:System.Object"/> defining an <see cref="T:SharpCraft.Entity"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Type">
+        <member name="P:SharpCraft.JsonObjects.Entity.Type">
             <summary>
             The <see cref="T:SharpCraft.Entity"/> type
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Distance">
+        <member name="P:SharpCraft.JsonObjects.Entity.Distance">
             <summary>
-            the <see cref="P:SharpCraft.JSONObjects.Entity.Distance"/> to the <see cref="T:SharpCraft.Entity"/>
+            the <see cref="P:SharpCraft.JsonObjects.Entity.Distance"/> to the <see cref="T:SharpCraft.Entity"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Location">
+        <member name="P:SharpCraft.JsonObjects.Entity.Location">
             <summary>
-            the <see cref="P:SharpCraft.JSONObjects.Entity.Location"/> of the <see cref="T:SharpCraft.Entity"/>
+            the <see cref="P:SharpCraft.JsonObjects.Entity.Location"/> of the <see cref="T:SharpCraft.Entity"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Effects">
+        <member name="P:SharpCraft.JsonObjects.Entity.Effects">
             <summary>
-            the <see cref="T:SharpCraft.JSONObjects.Effects"/>s the <see cref="T:SharpCraft.Entity"/> should have
+            the <see cref="T:SharpCraft.JsonObjects.Effects"/>s the <see cref="T:SharpCraft.Entity"/> should have
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.NBT">
+        <member name="P:SharpCraft.JsonObjects.Entity.NBT">
             <summary>
             the nbt the <see cref="T:SharpCraft.Entity"/> should have
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Levels">
+        <member name="P:SharpCraft.JsonObjects.Entity.Levels">
             <summary>
             the amount of levels the player has
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Gamemode">
+        <member name="P:SharpCraft.JsonObjects.Entity.Gamemode">
             <summary>
             The gamemode the player is in
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Recipes">
+        <member name="P:SharpCraft.JsonObjects.Entity.Recipes">
             <summary>
             Player recipes to check for
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Advancements">
+        <member name="P:SharpCraft.JsonObjects.Entity.Advancements">
             <summary>
             Player advancements to check for
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.Team">
+        <member name="P:SharpCraft.JsonObjects.Entity.Team">
             <summary>
             The entity's team
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.RecipeList">
+        <member name="T:SharpCraft.JsonObjects.Entity.RecipeList">
             <summary>
-            A list of <see cref="T:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe"/>
+            A list of <see cref="T:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.RecipeList.Recipes">
+        <member name="P:SharpCraft.JsonObjects.Entity.RecipeList.Recipes">
             <summary>
             The recipes
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.RecipeList.GetAsDataObject(System.Object[])">
+        <member name="M:SharpCraft.JsonObjects.Entity.RecipeList.GetAsDataObject(System.Object[])">
             <summary>
             Converts this object into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
             <param name="conversionData">Unused</param>
             <returns>This object as a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe">
+        <member name="T:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe">
             <summary>
             A recipe to check for
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe.#ctor(SharpCraft.IRecipe,System.Boolean)">
+        <member name="M:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe.#ctor(SharpCraft.IRecipe,System.Boolean)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe"/>
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe"/>
             </summary>
             <param name="recipe">The recipe to check for</param>
             <param name="isUnlocked">True if the recipe should be unlocked</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe.Recipe">
+        <member name="P:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe.Recipe">
             <summary>
             The recipe to check for
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.RecipeList.CheckRecipe.IsUnlocked">
+        <member name="P:SharpCraft.JsonObjects.Entity.RecipeList.CheckRecipe.IsUnlocked">
             <summary>
             True if the recipe should be unlocked
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.AdvancementList">
+        <member name="T:SharpCraft.JsonObjects.Entity.AdvancementList">
             <summary>
-            A list of <see cref="T:SharpCraft.JSONObjects.Entity.AdvancementList.BaseCheckAdvancement"/>
+            A list of <see cref="T:SharpCraft.JsonObjects.Entity.AdvancementList.BaseCheckAdvancement"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.AdvancementList.Advancements">
+        <member name="P:SharpCraft.JsonObjects.Entity.AdvancementList.Advancements">
             <summary>
             The advancements
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.GetAsDataObject(System.Object[])">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.GetAsDataObject(System.Object[])">
             <summary>
             Converts this object into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
             <param name="conversionData">Unused</param>
             <returns>This object as a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.AdvancementList.BaseCheckAdvancement">
+        <member name="T:SharpCraft.JsonObjects.Entity.AdvancementList.BaseCheckAdvancement">
             <summary>
             Interface for advancement checks
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.AdvancementList.BaseCheckAdvancement.Advancement">
+        <member name="P:SharpCraft.JsonObjects.Entity.AdvancementList.BaseCheckAdvancement.Advancement">
             <summary>
             The advancement to check for
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.BaseCheckAdvancement.GetValue">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.BaseCheckAdvancement.GetValue">
             <summary>
             The value to check for
             </summary>
             <returns>The value to check for</returns>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancementCriteria">
+        <member name="T:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancementCriteria">
             <summary>
             Checks if the player has the given advancement criteria
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancementCriteria.#ctor(SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.BaseTrigger)">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancementCriteria.#ctor(SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.BaseTrigger)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancementCriteria"/>
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancementCriteria"/>
             </summary>
             <param name="advancement">The advancement to check for</param>
             <param name="criteria">The criteria to check for</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancementCriteria.Criteria">
+        <member name="P:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancementCriteria.Criteria">
             <summary>
             The criteria to check for
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancementCriteria.GetValue">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancementCriteria.GetValue">
             <summary>
             The value to check for
             </summary>
             <returns>The value to check for</returns>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancement">
+        <member name="T:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancement">
             <summary>
             Checks if the player has the advancement
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancement.#ctor(SharpCraft.IAdvancement,System.Boolean)">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancement.#ctor(SharpCraft.IAdvancement,System.Boolean)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancement"/>
+            Intializes a new <see cref="T:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancement"/>
             </summary>
             <param name="advancement">The advancement to check for</param>
             <param name="isCompleted">True if the advancement is completed</param>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancement.IsCompleted">
+        <member name="P:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancement.IsCompleted">
             <summary>
             True if the advancement is completed
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.AdvancementList.CheckAdvancement.GetValue">
+        <member name="M:SharpCraft.JsonObjects.Entity.AdvancementList.CheckAdvancement.GetValue">
             <summary>
             The value to check for
             </summary>
             <returns>The value to check for</returns>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.EntityType)~SharpCraft.JSONObjects.Entity">
+        <member name="M:SharpCraft.JsonObjects.Entity.op_Implicit(SharpCraft.EntityType)~SharpCraft.JsonObjects.Entity">
             <summary>
-            Implicit converts <see cref="T:SharpCraft.EntityType"/> into an <see cref="T:SharpCraft.JSONObjects.Entity"/> object
+            Implicit converts <see cref="T:SharpCraft.EntityType"/> into an <see cref="T:SharpCraft.JsonObjects.Entity"/> object
             </summary>
             <param name="type">the <see cref="T:SharpCraft.EntityType"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.ID.Entity)~SharpCraft.JSONObjects.Entity">
+        <member name="M:SharpCraft.JsonObjects.Entity.op_Implicit(SharpCraft.ID.Entity)~SharpCraft.JsonObjects.Entity">
             <summary>
-            Implicit converts <see cref="T:SharpCraft.ID.Entity"/> into an <see cref="T:SharpCraft.JSONObjects.Entity"/> object
+            Implicit converts <see cref="T:SharpCraft.ID.Entity"/> into an <see cref="T:SharpCraft.JsonObjects.Entity"/> object
             </summary>
             <param name="type">the <see cref="T:SharpCraft.ID.Entity"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.Entity)~SharpCraft.JSONObjects.Entity">
+        <member name="M:SharpCraft.JsonObjects.Entity.op_Implicit(SharpCraft.Entity)~SharpCraft.JsonObjects.Entity">
             <summary>
-            Converts a <see cref="T:SharpCraft.Entity"/> into an <see cref="T:SharpCraft.JSONObjects.Entity"/> object
+            Converts a <see cref="T:SharpCraft.Entity"/> into an <see cref="T:SharpCraft.JsonObjects.Entity"/> object
             </summary>
             <param name="entity">The <see cref="T:SharpCraft.Entity"/> to convert</param>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Item">
+        <member name="T:SharpCraft.JsonObjects.Item">
             <summary>
             a <see cref="T:System.Object"/> defining an <see cref="T:SharpCraft.Item"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Id">
+        <member name="P:SharpCraft.JsonObjects.Item.Id">
             <summary>
             the <see cref="T:SharpCraft.Item"/>'s id
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Durability">
+        <member name="P:SharpCraft.JsonObjects.Item.Durability">
             <summary>
             the <see cref="T:SharpCraft.Item"/>'s durability
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Count">
+        <member name="P:SharpCraft.JsonObjects.Item.Count">
             <summary>
             the <see cref="T:SharpCraft.Item"/>'s count
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Potion">
+        <member name="P:SharpCraft.JsonObjects.Item.Potion">
             <summary>
             the <see cref="T:SharpCraft.Item"/>'s potion
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Enchantments">
+        <member name="P:SharpCraft.JsonObjects.Item.Enchantments">
             <summary>
-            the <see cref="T:SharpCraft.Item"/>'s <see cref="T:SharpCraft.JSONObjects.Item.Enchantment"/>s
+            the <see cref="T:SharpCraft.Item"/>'s <see cref="T:SharpCraft.JsonObjects.Item.Enchantment"/>s
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.StoredEnchantments">
+        <member name="P:SharpCraft.JsonObjects.Item.StoredEnchantments">
             <summary>
-            the <see cref="T:SharpCraft.Item"/>'s stored <see cref="T:SharpCraft.JSONObjects.Item.Enchantment"/>s
+            the <see cref="T:SharpCraft.Item"/>'s stored <see cref="T:SharpCraft.JsonObjects.Item.Enchantment"/>s
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.NBT">
+        <member name="P:SharpCraft.JsonObjects.Item.NBT">
             <summary>
             the <see cref="T:SharpCraft.Item"/>'s nbt data
             </summary>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Item.Enchantment">
+        <member name="T:SharpCraft.JsonObjects.Item.Enchantment">
             <summary>
             a <see cref="T:System.Object"/> defining an enchantment
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Enchantment.Enchant">
+        <member name="P:SharpCraft.JsonObjects.Item.Enchantment.Enchant">
             <summary>
             the enchantment id
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Item.Enchantment.Level">
+        <member name="P:SharpCraft.JsonObjects.Item.Enchantment.Level">
             <summary>
             the level of the enchantment
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Item.op_Implicit(SharpCraft.ID.Item)~SharpCraft.JSONObjects.Item">
+        <member name="M:SharpCraft.JsonObjects.Item.op_Implicit(SharpCraft.ID.Item)~SharpCraft.JsonObjects.Item">
             <summary>
-            Converts an item id into a <see cref="T:SharpCraft.JSONObjects.Item"/> object
+            Converts an item id into a <see cref="T:SharpCraft.JsonObjects.Item"/> object
             </summary>
             <param name="item">the item id to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Item.op_Implicit(SharpCraft.ItemGroup)~SharpCraft.JSONObjects.Item">
+        <member name="M:SharpCraft.JsonObjects.Item.op_Implicit(SharpCraft.ItemGroup)~SharpCraft.JsonObjects.Item">
             <summary>
-            Converts an item group into a <see cref="T:SharpCraft.JSONObjects.Item"/> object
+            Converts an item group into a <see cref="T:SharpCraft.JsonObjects.Item"/> object
             </summary>
             <param name="group">the item group to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Item.op_Implicit(SharpCraft.Item)~SharpCraft.JSONObjects.Item">
+        <member name="M:SharpCraft.JsonObjects.Item.op_Implicit(SharpCraft.Item)~SharpCraft.JsonObjects.Item">
             <summary>
-            Converts an item into a <see cref="T:SharpCraft.JSONObjects.Item"/> object
+            Converts an item into a <see cref="T:SharpCraft.JsonObjects.Item"/> object
             </summary>
             <param name="item">The item to convert</param>
         </member>
-        <member name="T:SharpCraft.JSONObjects.Location">
+        <member name="T:SharpCraft.JsonObjects.Location">
             <summary>
             A <see cref="T:System.Object"/> defining a location
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Biome">
+        <member name="P:SharpCraft.JsonObjects.Location.Biome">
             <summary>
             The biome to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Dimension">
+        <member name="P:SharpCraft.JsonObjects.Location.Dimension">
             <summary>
             the dimension to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Structure">
+        <member name="P:SharpCraft.JsonObjects.Location.Structure">
             <summary>
             the structure to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.X">
+        <member name="P:SharpCraft.JsonObjects.Location.X">
             <summary>
             the x coordinate to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Y">
+        <member name="P:SharpCraft.JsonObjects.Location.Y">
             <summary>
             the y coordinate to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Z">
+        <member name="P:SharpCraft.JsonObjects.Location.Z">
             <summary>
             the z coordinate to detect
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Light">
+        <member name="P:SharpCraft.JsonObjects.Location.Light">
             <summary>
             the light level to check for
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Block">
+        <member name="P:SharpCraft.JsonObjects.Location.Block">
             <summary>
             The block at the location
             </summary>
         </member>
-        <member name="P:SharpCraft.JSONObjects.Location.Liquid">
+        <member name="P:SharpCraft.JsonObjects.Location.Liquid">
             <summary>
             The liquid at the location
             </summary>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Location.op_Implicit(SharpCraft.ID.Biome)~SharpCraft.JSONObjects.Location">
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.ID.Biome)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="T:SharpCraft.ID.Biome"/> into a <see cref="T:SharpCraft.JSONObjects.Location"/>
+            Converts a <see cref="T:SharpCraft.ID.Biome"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
             <param name="biome">The <see cref="T:SharpCraft.ID.Biome"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Location.op_Implicit(SharpCraft.ID.Structure)~SharpCraft.JSONObjects.Location">
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.ID.Structure)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="T:SharpCraft.ID.Structure"/> into a <see cref="T:SharpCraft.JSONObjects.Location"/>
+            Converts a <see cref="T:SharpCraft.ID.Structure"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
             <param name="structure">The <see cref="T:SharpCraft.ID.Structure"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Location.op_Implicit(SharpCraft.ID.Dimension)~SharpCraft.JSONObjects.Location">
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.ID.Dimension)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="T:SharpCraft.ID.Dimension"/> into a <see cref="T:SharpCraft.JSONObjects.Location"/>
+            Converts a <see cref="T:SharpCraft.ID.Dimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
             <param name="dimension">The <see cref="T:SharpCraft.ID.Dimension"/> to convert</param>
         </member>
@@ -15976,14 +15971,14 @@
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="objective">The trigger (<see cref="T:SharpCraft.Objective"/>) to enable</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Tellraw(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Tellraw(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             Tells the selected players a message in chat
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="message">The message to tell the players</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Actionbar(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.Actionbar(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             Shows a message in the selected players actionbar
             </summary>
@@ -16177,14 +16172,14 @@
             All commands for titles
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Title(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Title(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             displays a title for the selected players
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="message">The message to show the players</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.SubTitle(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.SubTitle(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             displays a subtitle for the selected players
             Note: the subtitle is first shown when the title command is ran
@@ -16213,7 +16208,7 @@
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
             <summary>
             Displays a whole title for the selected players
             </summary>
@@ -16527,7 +16522,7 @@
             All commands for scoreboards
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Add(System.String,System.String,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.Add(System.String,System.String,SharpCraft.BaseJsonText)">
             <summary>
             Adds the specified <see cref="T:SharpCraft.Objective"/> to the world
             </summary>
@@ -16558,7 +16553,7 @@
             <param name="display">the display slot to clear</param>
             <param name="teamColor">the team's sidebar slot to clear. Note: this only works with <see cref="F:SharpCraft.ID.ScoreDisplay.sidebar"/> as the <paramref name="display"/></param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.DisplayName(SharpCraft.Objective,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassObjective.DisplayName(SharpCraft.Objective,SharpCraft.BaseJsonText)">
             <summary>
             Changes the <see cref="T:SharpCraft.Objective"/>'s displayed name
             </summary>
@@ -16582,7 +16577,7 @@
             All commands for teams
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Add(System.String,SharpCraft.JsonText,System.Nullable{SharpCraft.ID.MinecraftColor})">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Add(System.String,SharpCraft.BaseJsonText,System.Nullable{SharpCraft.ID.MinecraftColor})">
             <summary>
             Adds the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to the world
             </summary>
@@ -16639,7 +16634,7 @@
             <param name="changeTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to change</param>
             <param name="visible">the visibility tule</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.DisplayName(SharpCraft.Team,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.DisplayName(SharpCraft.Team,SharpCraft.BaseJsonText)">
             <summary>
             Changes the display name of the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
@@ -16652,14 +16647,14 @@
             </summary>
             <param name="clearTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to remove players from</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Prefix(SharpCraft.Team,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Prefix(SharpCraft.Team,SharpCraft.BaseJsonText)">
             <summary>
             Changes the prefix shown before the name of players in the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
             <param name="changeTeam">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/> to change</param>
             <param name="preffixJson">The new prefix to show</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Suffix(SharpCraft.Team,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTeam.Suffix(SharpCraft.Team,SharpCraft.BaseJsonText)">
             <summary>
             Changes the suffix shown after the name of players in the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Team"/>
             </summary>
@@ -16791,7 +16786,7 @@
             All commands for boss bars
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Add(System.String,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.Add(System.String,SharpCraft.BaseJsonText)">
             <summary>
             Adds a <see cref="T:SharpCraft.BossBar"/> with the specified name to the world
             </summary>
@@ -16819,7 +16814,7 @@
             <param name="bossBar">the <see cref="T:SharpCraft.BossBar"/> to change</param>
             <param name="setTo">the new max value</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.SetName(SharpCraft.BossBar,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBossBar.SetName(SharpCraft.BossBar,SharpCraft.BaseJsonText)">
             <summary>
             Changes the specified <see cref="T:SharpCraft.BossBar"/>'s display name
             </summary>
@@ -17025,7 +17020,7 @@
             Command which adds the given boss bar to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.BossBarAddCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.BossBarAddCommand.#ctor(SharpCraft.BossBar,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.BossBarAddCommand"/>
             </summary>
@@ -17198,7 +17193,7 @@
             Command which changes a boss bar's name
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.BossBarChangeNameCommand.#ctor(SharpCraft.BossBar,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.BossBarChangeNameCommand.#ctor(SharpCraft.BossBar,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.BossBarChangeNameCommand"/>
             </summary>
@@ -19685,7 +19680,7 @@
             Command which adds a new scoreboard objective to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ScoreboardObjectiveAddCommand.#ctor(SharpCraft.Objective,System.String,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.ScoreboardObjectiveAddCommand.#ctor(SharpCraft.Objective,System.String,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ScoreboardObjectiveAddCommand"/>
             </summary>
@@ -19730,7 +19725,7 @@
             Command which changes the display name of an objective
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand.#ctor(SharpCraft.Objective,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand.#ctor(SharpCraft.Objective,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ScoreboardObjectiveChangeNameCommand"/>
             </summary>
@@ -20538,7 +20533,7 @@
             Sends a private message to one or more players
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TellrawCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TellrawCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             intializes a new <see cref="T:SharpCraft.Commands.TellrawCommand"/>
             </summary>
@@ -20877,7 +20872,7 @@
             Command which adds a team to the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TeamAddCommand.#ctor(SharpCraft.Team,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TeamAddCommand.#ctor(SharpCraft.Team,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TeamAddCommand"/>
             </summary>
@@ -21032,7 +21027,7 @@
             Command which changes how a team is displayed
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TeamModifyDisplayCommand.#ctor(SharpCraft.Team,SharpCraft.ID.TeamDisplayName,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TeamModifyDisplayCommand.#ctor(SharpCraft.Team,SharpCraft.ID.TeamDisplayName,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TeamModifyDisplayCommand"/>
             </summary>
@@ -21462,7 +21457,7 @@
             Command which displayes a title
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleCommand"/>
             </summary>
@@ -21490,7 +21485,7 @@
             Command which sets the sub title to display next
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleSubtitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TitleSubtitleCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleSubtitleCommand"/>
             </summary>
@@ -21518,7 +21513,7 @@
             Command which sets the text shown in the selected players' action bars
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleActionbarCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.JsonText)">
+        <member name="M:SharpCraft.Commands.TitleActionbarCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.BaseJsonText)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleActionbarCommand"/>
             </summary>
@@ -22733,7 +22728,7 @@
             Changes the loot lore
             </summary>
         </member>
-        <member name="M:SharpCraft.LootObjects.LoreChange.#ctor(SharpCraft.JsonText[],System.Nullable{SharpCraft.ID.LootTarget},System.Boolean)">
+        <member name="M:SharpCraft.LootObjects.LoreChange.#ctor(SharpCraft.BaseJsonText[],System.Nullable{SharpCraft.ID.LootTarget},System.Boolean)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.LootObjects.LoreChange"/>
             </summary>
@@ -22796,7 +22791,7 @@
             Changes the loot name
             </summary>
         </member>
-        <member name="M:SharpCraft.LootObjects.NameChange.#ctor(SharpCraft.JsonText,System.Nullable{SharpCraft.ID.LootTarget})">
+        <member name="M:SharpCraft.LootObjects.NameChange.#ctor(SharpCraft.BaseJsonText,System.Nullable{SharpCraft.ID.LootTarget})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.LootObjects.NameChange"/>
             </summary>
@@ -23438,7 +23433,7 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The newly created <see cref="T:SharpCraft.LootTable"/></returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,System.String,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new parent advancement with the given parameters
             </summary>
@@ -23456,7 +23451,7 @@
             <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
             <returns>The advancement</returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.JsonText,SharpCraft.JsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Advancement(System.String,SharpCraft.IAdvancement,SharpCraft.AdvancementObjects.Requirement[],SharpCraft.AdvancementObjects.Reward,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Item,SharpCraft.ID.AdvancementFrame,System.Boolean,System.Boolean,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new child advancement with the given parameters
             </summary>

@@ -70,24 +70,24 @@ namespace SharpCraft.Blocks
         /// The text on line 1
         /// </summary>
         [Data.DataTag("Text1", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DText1 { get; set; }
+        public BaseJsonText? DText1 { get; set; }
 
         /// <summary>
         /// The text on line 2
         /// </summary>
         [Data.DataTag("Text2", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DText2 { get; set; }
+        public BaseJsonText? DText2 { get; set; }
 
         /// <summary>
         /// The text on line 3
         /// </summary>
         [Data.DataTag("Text3", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DText3 { get; set; }
+        public BaseJsonText? DText3 { get; set; }
 
         /// <summary>
         /// The text on line 4
         /// </summary>
         [Data.DataTag("Text4", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? DText4 { get; set; }
+        public BaseJsonText? DText4 { get; set; }
     }
 }

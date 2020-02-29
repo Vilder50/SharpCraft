@@ -6,7 +6,10 @@ using System.Linq;
 
 namespace SharpCraft
 {
-    public partial class Item : DataHolderBase
+    /// <summary>
+    /// Class for items
+    /// </summary>
+    public class Item : DataHolderBase
     {
         /// <summary>
         /// Creates an item without an id or anything but which can have data
@@ -190,13 +193,13 @@ namespace SharpCraft
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText? Name { get; set; }
+        public BaseJsonText? Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public JsonText?[]? Lore { get; set; }
+        public BaseJsonText?[]? Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>

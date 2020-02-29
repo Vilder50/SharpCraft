@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The item the player consumed
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item? Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
     }
 }

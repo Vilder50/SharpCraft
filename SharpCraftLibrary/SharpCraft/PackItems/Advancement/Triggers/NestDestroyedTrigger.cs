@@ -21,7 +21,7 @@ namespace SharpCraft.AdvancementObjects
         /// The item the player used to break the nest with
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item? Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The block which was destroyed

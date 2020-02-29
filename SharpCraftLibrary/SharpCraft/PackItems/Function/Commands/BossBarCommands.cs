@@ -12,14 +12,14 @@ namespace SharpCraft.Commands
     public class BossBarAddCommand : BaseCommand
     {
         private BossBar bossBar = null!;
-        private JsonText name = null!;
+        private BaseJsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarAddCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to add</param>
         /// <param name="name">The shown name of the boss bar</param>
-        public BossBarAddCommand(BossBar bossBar, JsonText name)
+        public BossBarAddCommand(BossBar bossBar, BaseJsonText name)
         {
             BossBar = bossBar;
             Name = name;
@@ -40,7 +40,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The shown name of the boss bar
         /// </summary>
-        public JsonText Name
+        public BaseJsonText Name
         {
             get => name;
             set
@@ -322,14 +322,14 @@ namespace SharpCraft.Commands
     public class BossBarChangeNameCommand : BaseCommand
     {
         private BossBar bossBar = null!;
-        private JsonText name = null!;
+        private BaseJsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BossBarChangeNameCommand"/>
         /// </summary>
         /// <param name="bossBar">The boss bar to change the name of</param>
         /// <param name="name">The name the bar should change to</param>
-        public BossBarChangeNameCommand(BossBar bossBar, JsonText name)
+        public BossBarChangeNameCommand(BossBar bossBar, BaseJsonText name)
         {
             BossBar = bossBar;
             Name = name;
@@ -350,7 +350,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The name the bar should change to
         /// </summary>
-        public JsonText Name
+        public BaseJsonText Name
         {
             get => name;
             set
