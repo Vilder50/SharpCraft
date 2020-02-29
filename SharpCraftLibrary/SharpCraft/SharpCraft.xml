@@ -1307,7 +1307,7 @@
             </summary>
             <param name="type">The type of block</param>
         </member>
-        <member name="M:SharpCraft.Blocks.Spawner.#ctor(SharpCraft.Entity.BaseEntity,System.Nullable{SharpCraft.ID.Block})">
+        <member name="M:SharpCraft.Blocks.Spawner.#ctor(SharpCraft.Entity,System.Nullable{SharpCraft.ID.Block})">
             <summary>
             Creates a spawner with the specified entity inside. The entity wont move and the spawner wont spawn the entity
             </summary>
@@ -4455,1650 +4455,1698 @@
         </member>
         <member name="T:SharpCraft.Entity">
             <summary>
-            List of all entities
-            </summary>
-        </member>
-        <member name="T:SharpCraft.Entity.BaseEntity">
-            <summary>
             The base class for all entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseEntity.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entity.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="M:SharpCraft.Entity.BaseEntity.GetDataWithoutID">
+        <member name="M:SharpCraft.Entity.GetDataWithoutID">
             <summary>
             Returns this entity's data without its entity type
             </summary>
             <returns>This entity's data without its entity type</returns>
         </member>
-        <member name="P:SharpCraft.Entity.BaseEntity.EntityType">
+        <member name="P:SharpCraft.Entity.EntityType">
             <summary>
             The type of the entity
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.EntityBasic">
+        <member name="T:SharpCraft.Entities.BasicEntity">
             <summary>
             The basic entity data
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.EntityBasic.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.BasicEntity.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Motion">
+        <member name="P:SharpCraft.Entities.BasicEntity.Motion">
             <summary>
             The entity's motion
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Rotation">
+        <member name="P:SharpCraft.Entities.BasicEntity.Rotation">
             <summary>
             The entity's rotation
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Coords">
+        <member name="P:SharpCraft.Entities.BasicEntity.Coords">
             <summary>
             The entity's location
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.FallDistance">
+        <member name="P:SharpCraft.Entities.BasicEntity.FallDistance">
             <summary>
             The distance the entity has fallen
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Fire">
+        <member name="P:SharpCraft.Entities.BasicEntity.Fire">
             <summary>
             The time before the fire on the entity goes out.
             Negative value means how long it takes for the entity to turn on fire.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Air">
+        <member name="P:SharpCraft.Entities.BasicEntity.Air">
             <summary>
             How much air the entity has left.
             (Being 0 under water will make the entity drown)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.OnGround">
+        <member name="P:SharpCraft.Entities.BasicEntity.OnGround">
             <summary>
             If the entity is on the ground or not
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.NoGravity">
+        <member name="P:SharpCraft.Entities.BasicEntity.NoGravity">
             <summary>
             If the entity shouldn't be effected by gravity
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Dimension">
+        <member name="P:SharpCraft.Entities.BasicEntity.Dimension">
             <summary>
             The dimension the entity is in
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Invulnerable">
+        <member name="P:SharpCraft.Entities.BasicEntity.Invulnerable">
             <summary>
             If the entity is Invulnerable.
             (Can't be killed)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.PortalCooldown">
+        <member name="P:SharpCraft.Entities.BasicEntity.PortalCooldown">
             <summary>
             The amount of time before the entity can go through a portal again.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.UUID">
+        <member name="P:SharpCraft.Entities.BasicEntity.UUID">
             <summary>
             The entity's UUID
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.CustomName">
+        <member name="P:SharpCraft.Entities.BasicEntity.CustomName">
             <summary>
             The entity's shown name
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.CustomNameVisible">
+        <member name="P:SharpCraft.Entities.BasicEntity.CustomNameVisible">
             <summary>
             If the entity's name should be shown always
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Silent">
+        <member name="P:SharpCraft.Entities.BasicEntity.Silent">
             <summary>
             If the entity should be silent and not make any sounds
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Passengers">
+        <member name="P:SharpCraft.Entities.BasicEntity.Passengers">
             <summary>
             The entities riding on the entity
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Glowing">
+        <member name="P:SharpCraft.Entities.BasicEntity.Glowing">
             <summary>
             If the entity should glow
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EntityBasic.Tags">
+        <member name="P:SharpCraft.Entities.BasicEntity.Tags">
             <summary>
             The entity's tags
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.AreaCloud">
+        <member name="T:SharpCraft.Entities.Interfaces.IVillager">
+            <summary>
+            Interface for villager like mobs
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.IVillager.VillagerLevel">
+            <summary>
+            The villager's level (~Amount of trades)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.IVillager.VillagerProfession">
+            <summary>
+            The villagers proffesion
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.IVillager.VillagerType">
+            <summary>
+            The type of villager
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.IVillager.Gossips">
+            <summary>
+            The gossips the villager has
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.IVillager.Trades">
+            <summary>
+            The villager's trades
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entities.Interfaces.Gossip">
+            <summary>
+            Gossip which villagerscan exchange
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Gossip.Type">
+            <summary>
+            The type of gossip
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Gossip.Strength">
+            <summary>
+            The gossip's strength 
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Gossip.TartgetUUID">
+            <summary>
+            The UUID of the player who made this gossip.
+            (If its a <see cref="F:SharpCraft.ID.GossipType.golem"/> then its the villager who started the gossip)
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entities.Interfaces.Trade">
+            <summary>
+            An object used to define trades
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.RewardExp">
+            <summary>
+            True if the villager gives xp when traded with
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.MaxUses">
+            <summary>
+            The maximum number of times the trade can be traded before closing
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.Uses">
+            <summary>
+            The amount of times the trade has been used
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.BuyItem1">
+            <summary>
+            The first item the villager is buying in this trade
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.BuyItem2">
+            <summary>
+            The second item the villager is buying in this trade
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Interfaces.Trade.SellItem">
+            <summary>
+            The item the villager is selling in this trade
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entities.AreaCloud">
             <summary>
             An object for area effect cloud entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.AreaCloud.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.AreaCloud.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new area effect cloud
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Duration">
+        <member name="P:SharpCraft.Entities.AreaCloud.Duration">
             <summary>
-            The amount of time before the cloud disapears after the <see cref="P:SharpCraft.Entity.AreaCloud.WaitTime"/> is over
+            The amount of time before the cloud disapears after the <see cref="P:SharpCraft.Entities.AreaCloud.WaitTime"/> is over
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Color">
+        <member name="P:SharpCraft.Entities.AreaCloud.Color">
             <summary>
             The color of the particles it displays
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Age">
+        <member name="P:SharpCraft.Entities.AreaCloud.Age">
             <summary>
             The amount of time the cloud has existed.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.WaitTime">
+        <member name="P:SharpCraft.Entities.AreaCloud.WaitTime">
             <summary>
             The time before the cloud will show up.
-            (Time before the <see cref="P:SharpCraft.Entity.AreaCloud.Radius"/> will be used)
+            (Time before the <see cref="P:SharpCraft.Entities.AreaCloud.Radius"/> will be used)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.ReapplicationDealy">
+        <member name="P:SharpCraft.Entities.AreaCloud.ReapplicationDealy">
             <summary>
             The time before the cloud's effect will be given out to the entities inside again.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.OwnerUUID">
+        <member name="P:SharpCraft.Entities.AreaCloud.OwnerUUID">
             <summary>
             The UUID of the entity who made the cloud
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.DurationOnUse">
+        <member name="P:SharpCraft.Entities.AreaCloud.DurationOnUse">
             <summary>
             The amount of time to remove from the duration every time the cloud gives out its effect
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Radius">
+        <member name="P:SharpCraft.Entities.AreaCloud.Radius">
             <summary>
             The radius of the cloud
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.RadiusOnUse">
+        <member name="P:SharpCraft.Entities.AreaCloud.RadiusOnUse">
             <summary>
             The amount of radius to remove every time the cloud gives out its effect
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.RadiusPerTick">
+        <member name="P:SharpCraft.Entities.AreaCloud.RadiusPerTick">
             <summary>
             The amount of radius to remove each tick.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Particle">
+        <member name="P:SharpCraft.Entities.AreaCloud.Particle">
             <summary>
             The particle type the cloud displays
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Effects">
+        <member name="P:SharpCraft.Entities.AreaCloud.Effects">
             <summary>
             The effect the cloud gives
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.AreaCloud.Unspawnable">
+        <member name="P:SharpCraft.Entities.AreaCloud.Unspawnable">
             <summary>
             If the cloud shouldn't despawn
-            (Sets <see cref="P:SharpCraft.Entity.AreaCloud.Duration"/> to its max value)
+            (Sets <see cref="P:SharpCraft.Entities.AreaCloud.Duration"/> to its max value)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Armorstand">
+        <member name="T:SharpCraft.Entities.Armorstand">
             <summary>
             An object for armor stand entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Armorstand.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new armor stand entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.SlotRules">
+        <member name="P:SharpCraft.Entities.Armorstand.SlotRules">
             <summary>
             Choses which slots are locked
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Armorstand.LockedSlots">
+        <member name="T:SharpCraft.Entities.Armorstand.LockedSlots">
             <summary>
             Used to define what slots on an armor stand are locked
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockHand">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockHand">
             <summary>
             Locks the boots item 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockBoots">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockBoots">
             <summary>
             Locks the boots item 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockLeggings">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockLeggings">
             <summary>
             Locks the leggings item 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockChestplate">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockChestplate">
             <summary>
             Locks the chestplate item 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockHelmet">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockHelmet">
             <summary>
             Locks the helmet item 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.LockAll">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.LockAll">
             <summary>
             Locks all slots 100%
             </summary>
             <returns>Itself</returns>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockRemovingHand">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockRemovingHand">
             <summary>
             Makes it impossible to remove the hand item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockRemovingBoots">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockRemovingBoots">
             <summary>
             Makes it impossible to remove the boots item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockRemovingLeggings">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockRemovingLeggings">
             <summary>
             Makes it impossible to remove the leggings item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockRemovingChestplate">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockRemovingChestplate">
             <summary>
             Makes it impossible to remove the chestplate item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockRemovingHelmet">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockRemovingHelmet">
             <summary>
             Makes it impossible to remove the helmet item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockChangingHand">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockChangingHand">
             <summary>
             Makes it impossible to change the hand item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockChangingBoots">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockChangingBoots">
             <summary>
             Makes it impossible to change the boots item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockChangingLeggings">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockChangingLeggings">
             <summary>
             Makes it impossible to change the leggings item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockChangingChestplate">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockChangingChestplate">
             <summary>
             Makes it impossible to change the chestplate item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockChangingHelmet">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockChangingHelmet">
             <summary>
             Makes it impossible to change the helmet item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockAddingHand">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockAddingHand">
             <summary>
             Makes it impossible to add the hand item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockAddingBoots">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockAddingBoots">
             <summary>
             Makes it impossible to add the boots item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockAddingLeggings">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockAddingLeggings">
             <summary>
             Makes it impossible to add the leggings item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockAddingChestplate">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockAddingChestplate">
             <summary>
             Makes it impossible to add the chestplate item from the armor stand
             </summary>
         </member>
-        <member name="F:SharpCraft.Entity.Armorstand.LockedSlots.LockAddingHelmet">
+        <member name="F:SharpCraft.Entities.Armorstand.LockedSlots.LockAddingHelmet">
             <summary>
             Makes it impossible to add the helmet item from the armor stand
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.GetValue">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.GetValue">
             <summary>
             Gets the value Minecraft uses to disables slots
             </summary>
             <returns>Raw data used by Minecarft</returns>
         </member>
-        <member name="M:SharpCraft.Entity.Armorstand.LockedSlots.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.Entities.Armorstand.LockedSlots.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
-            Converts this <see cref="T:SharpCraft.Entity.Armorstand.LockedSlots"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts this <see cref="T:SharpCraft.Entities.Armorstand.LockedSlots"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="extraConversionData">Not used</param>
             <param name="asType">Not used</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.Marker">
+        <member name="P:SharpCraft.Entities.Armorstand.Marker">
             <summary>
             Makes the armor stand a marker armor stand.
             The armor stand wont have a hitbox.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.HandItems">
+        <member name="P:SharpCraft.Entities.Armorstand.HandItems">
             <summary>
             The items there is in the armor stand's hands.
             0: main hand. 1: off hand.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.ArmorItems">
+        <member name="P:SharpCraft.Entities.Armorstand.ArmorItems">
             <summary>
             The items the armor stand has on
             0: boots. 1: leggings. 2: chestplate. 3: helmet
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.Invisible">
+        <member name="P:SharpCraft.Entities.Armorstand.Invisible">
             <summary>
             Makes the armor stand invisible
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.NoBasePlate">
+        <member name="P:SharpCraft.Entities.Armorstand.NoBasePlate">
             <summary>
             Removes the armor stand's stone plate
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.FallFlying">
+        <member name="P:SharpCraft.Entities.Armorstand.FallFlying">
             <summary>
             Makes the armor stand fly when falling if it has an elytra on.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.ShowArms">
+        <member name="P:SharpCraft.Entities.Armorstand.ShowArms">
             <summary>
             If the armor stand should show its arms
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.Small">
+        <member name="P:SharpCraft.Entities.Armorstand.Small">
             <summary>
             If the armor stand is a small armor stand
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.BodyRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.BodyRotation">
             <summary>
             Rotates the armor stand's body
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.ArmLeftRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.ArmLeftRotation">
             <summary>
             Rotates the armor stand's left arm
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.ArmRightRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.ArmRightRotation">
             <summary>
             Rotates the armor stand's right arm
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.LegLeftRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.LegLeftRotation">
             <summary>
             Rotates the armor stand's left leg
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.LegRightRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.LegRightRotation">
             <summary>
             Rotates the armor stand's right leg
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Armorstand.HeadRotation">
+        <member name="P:SharpCraft.Entities.Armorstand.HeadRotation">
             <summary>
             Rotates the armor stand's head
             0: x. 1: y. 2: z.
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.EndCrystal">
+        <member name="T:SharpCraft.Entities.EndCrystal">
             <summary>
             An object for end crystal entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.EndCrystal.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.EndCrystal.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new end crystal
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.EndCrystal.ShowBottom">
+        <member name="P:SharpCraft.Entities.EndCrystal.ShowBottom">
             <summary>
             If the bedrock should be shown under the crystal
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EndCrystal.BeamTarget">
+        <member name="P:SharpCraft.Entities.EndCrystal.BeamTarget">
             <summary>
             The coords the crystal's beam should point to
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.DroppedItem">
+        <member name="T:SharpCraft.Entities.DroppedItem">
             <summary>
             An object for item entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.DroppedItem.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.DroppedItem.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new item
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.Age">
+        <member name="P:SharpCraft.Entities.DroppedItem.Age">
             <summary>
             The age of the item in ticks. When it hits 6000 it despawns
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.Health">
+        <member name="P:SharpCraft.Entities.DroppedItem.Health">
             <summary>
             The health of the item. despawns when at 0
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.PickupDelay">
+        <member name="P:SharpCraft.Entities.DroppedItem.PickupDelay">
             <summary>
             The delay before the item can be picked up in ticks
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.Owner">
+        <member name="P:SharpCraft.Entities.DroppedItem.Owner">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity who can pick up the item
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.Thrower">
+        <member name="P:SharpCraft.Entities.DroppedItem.Thrower">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity who threw the item
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.ItemData">
+        <member name="P:SharpCraft.Entities.DroppedItem.ItemData">
             <summary>
             The item itself
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.Unpickable">
+        <member name="P:SharpCraft.Entities.DroppedItem.Unpickable">
             <summary>
             Makes the item unpickable
-            (This overwrites <see cref="P:SharpCraft.Entity.DroppedItem.PickupDelay"/>)
+            (This overwrites <see cref="P:SharpCraft.Entities.DroppedItem.PickupDelay"/>)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.DroppedItem.IgnoreAge">
+        <member name="P:SharpCraft.Entities.DroppedItem.IgnoreAge">
             <summary>
             Makes the item not despawn
-            (This overwrites <see cref="P:SharpCraft.Entity.DroppedItem.Age"/>)
+            (This overwrites <see cref="P:SharpCraft.Entities.DroppedItem.Age"/>)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.FallingBlock">
+        <member name="T:SharpCraft.Entities.FallingBlock">
             <summary>
             An object for falling block entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.FallingBlock.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.FallingBlock.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new falling block
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.Time">
+        <member name="P:SharpCraft.Entities.FallingBlock.Time">
             <summary>
             The time the entity has been falling.
             If this number is 0 the entity will dissapear the next tick
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.TheBlock">
+        <member name="P:SharpCraft.Entities.FallingBlock.TheBlock">
             <summary>
             The falling block
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.DropItem">
+        <member name="P:SharpCraft.Entities.FallingBlock.DropItem">
             <summary>
             If the block should be dropped if the falling block is destroyed
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.HurtEntities">
+        <member name="P:SharpCraft.Entities.FallingBlock.HurtEntities">
             <summary>
             If the block should damage entities it lands on
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.MaxDamage">
+        <member name="P:SharpCraft.Entities.FallingBlock.MaxDamage">
             <summary>
             The maximum amount of damage it can cause
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.FallingBlock.DamageAmount">
+        <member name="P:SharpCraft.Entities.FallingBlock.DamageAmount">
             <summary>
             The amount of damage it should cause per block fallen
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.EvokerFangs">
+        <member name="T:SharpCraft.Entities.EvokerFangs">
             <summary>
             An object for evoker fangs entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.EvokerFangs.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.EvokerFangs.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new evoker fangs
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.EvokerFangs.Warmup">
+        <member name="P:SharpCraft.Entities.EvokerFangs.Warmup">
             <summary>
             The amount of time before the fangs appear
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EvokerFangs.OwnerUUID">
+        <member name="P:SharpCraft.Entities.EvokerFangs.OwnerUUID">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity who summoned the fangs
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.EvokerFangs.Marker">
+        <member name="P:SharpCraft.Entities.EvokerFangs.Marker">
             <summary>
             Makes the fang into a marker entity
-            (Sets <see cref="P:SharpCraft.Entity.EvokerFangs.Warmup"/> to its max value which makes the entity invisible)
+            (Sets <see cref="P:SharpCraft.Entities.EvokerFangs.Warmup"/> to its max value which makes the entity invisible)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Firework">
+        <member name="T:SharpCraft.Entities.Firework">
             <summary>
             An object for firework entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Firework.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Firework.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new firework rocket
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.Angled">
+        <member name="P:SharpCraft.Entities.Firework.Angled">
             <summary>
             Makes the firework stop flying upwards automatically
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.Life">
+        <member name="P:SharpCraft.Entities.Firework.Life">
             <summary>
             The amount of time the firework has been flying
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.LifeTime">
+        <member name="P:SharpCraft.Entities.Firework.LifeTime">
             <summary>
             The time before the firework blows up
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.Fireworks">
+        <member name="P:SharpCraft.Entities.Firework.Fireworks">
             <summary>
             The firework displayed when the rocket blows up.
-            This also sets <see cref="P:SharpCraft.Entity.Firework.ItemID"/> and <see cref="P:SharpCraft.Entity.Firework.ItemCount"/>
+            This also sets <see cref="P:SharpCraft.Entities.Firework.ItemID"/> and <see cref="P:SharpCraft.Entities.Firework.ItemCount"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.ItemID">
+        <member name="P:SharpCraft.Entities.Firework.ItemID">
             <summary>
             The id of the firework item (is normally <see cref="F:SharpCraft.ID.Item.firework_rocket"/>).
-            This is automatically set by <see cref="P:SharpCraft.Entity.Firework.Fireworks"/>
+            This is automatically set by <see cref="P:SharpCraft.Entities.Firework.Fireworks"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.ItemCount">
+        <member name="P:SharpCraft.Entities.Firework.ItemCount">
             <summary>
             The amount of firework items (is normally 1).
-            This is automatically set by <see cref="P:SharpCraft.Entity.Firework.Fireworks"/>
+            This is automatically set by <see cref="P:SharpCraft.Entities.Firework.Fireworks"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Firework.Flight">
+        <member name="P:SharpCraft.Entities.Firework.Flight">
             <summary>
             The amount of time the firework will fly
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ItemPainting">
+        <member name="T:SharpCraft.Entities.ItemPainting">
             <summary>
             An object for item frames and painting entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.ItemPainting.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.ItemPainting.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new item frame or painting entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.InTile">
+        <member name="P:SharpCraft.Entities.ItemPainting.InTile">
             <summary>
             The block the entity is inside
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.Facing">
+        <member name="P:SharpCraft.Entities.ItemPainting.Facing">
             <summary>
             The direction the entity is facing
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.Painting">
+        <member name="P:SharpCraft.Entities.ItemPainting.Painting">
             <summary>
             The type of painting
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameItem">
+        <member name="P:SharpCraft.Entities.ItemPainting.FrameItem">
             <summary>
             The item in the item frame
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameDropChance">
+        <member name="P:SharpCraft.Entities.ItemPainting.FrameDropChance">
             <summary>
             The chance of the frame dropping its item
             (0-1)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameRotation">
+        <member name="P:SharpCraft.Entities.ItemPainting.FrameRotation">
             <summary>
             The rotation of the item in the item frame.
-            Rotation = <see cref="P:SharpCraft.Entity.ItemPainting.FrameRotation"/> * 45 degrees clockwise
+            Rotation = <see cref="P:SharpCraft.Entities.ItemPainting.FrameRotation"/> * 45 degrees clockwise
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.TNT">
+        <member name="T:SharpCraft.Entities.TNT">
             <summary>
             An object for primed tnt entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.TNT.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.TNT.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates new primed tnt
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.TNT.Fuse">
+        <member name="P:SharpCraft.Entities.TNT.Fuse">
             <summary>
             The time in ticks before the tnt blows up
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.XP">
+        <member name="T:SharpCraft.Entities.XP">
             <summary>
             An object for xp orb entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.XP.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.XP.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new xp orb
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.XP.Age">
+        <member name="P:SharpCraft.Entities.XP.Age">
             <summary>
             The age of the item in ticks. When it hits 6000 it despawns
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.XP.Health">
+        <member name="P:SharpCraft.Entities.XP.Health">
             <summary>
             The health of the item. despawns when at 0
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.XP.Value">
+        <member name="P:SharpCraft.Entities.XP.Value">
             <summary>
             The amount of xp in the orb
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.XP.IgnoreAge">
+        <member name="P:SharpCraft.Entities.XP.IgnoreAge">
             <summary>
             Makes the orb not despawn
-            (This overwrites <see cref="P:SharpCraft.Entity.XP.Age"/>)
+            (This overwrites <see cref="P:SharpCraft.Entities.XP.Age"/>)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.BaseBreedable">
+        <member name="T:SharpCraft.Entities.BreedableMob">
             <summary>
             The basic entity data for breedable mobs
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseBreedable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.BreedableMob.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseBreedable.InLove">
+        <member name="P:SharpCraft.Entities.BreedableMob.InLove">
             <summary>
             The amount of time the mob will be in love
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseBreedable.Age">
+        <member name="P:SharpCraft.Entities.BreedableMob.Age">
             <summary>
             When negative it's the time till the mob turns into an adult
             When positive it's the time till the mob can breed again
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseBreedable.ForcedAge">
+        <member name="P:SharpCraft.Entities.BreedableMob.ForcedAge">
             <summary>
             A age which will be given to the mob when it has grown up.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseBreedable.LoveCause">
+        <member name="P:SharpCraft.Entities.BreedableMob.LoveCause">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity who fed the mob
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Breedable">
-            <summary>
-            Entity data for breedable mobs
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Entity.Breedable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
-            <summary>
-            Creates a new breedable mob
-            </summary>
-            <param name="type">the type of entity</param>
-        </member>
-        <member name="T:SharpCraft.Entity.BaseIllager">
+        <member name="T:SharpCraft.Entities.BaseIllager">
             <summary>
             The basic entity data for illagers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseIllager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.BaseIllager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.HasGoal">
+        <member name="P:SharpCraft.Entities.BaseIllager.HasGoal">
             <summary>
             If the illager has a raid goal
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.Patrolling">
+        <member name="P:SharpCraft.Entities.BaseIllager.Patrolling">
             <summary>
             If the illager is patrolling
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.Leader">
+        <member name="P:SharpCraft.Entities.BaseIllager.Leader">
             <summary>
             If the illager is the leader
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.PatrolTarget">
+        <member name="P:SharpCraft.Entities.BaseIllager.PatrolTarget">
             <summary>
             The place the illager is patrolling to
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.RaidID">
+        <member name="P:SharpCraft.Entities.BaseIllager.RaidID">
             <summary>
             The id of the raid the illager is in
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseIllager.Wave">
+        <member name="P:SharpCraft.Entities.BaseIllager.Wave">
             <summary>
             the wave number the illager is in
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Illager">
+        <member name="T:SharpCraft.Entities.Illager">
             <summary>
             Entity data for illagers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Illager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Illager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new illager
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="T:SharpCraft.Entity.BaseMob">
+        <member name="T:SharpCraft.Entities.Mob">
             <summary>
             The basic entity data for mobs
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseMob.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Mob.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.Health">
+        <member name="P:SharpCraft.Entities.Mob.Health">
             <summary>
             The amount of health the mob has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.AbsorptionAmount">
+        <member name="P:SharpCraft.Entities.Mob.AbsorptionAmount">
             <summary>
             The amount of extra health the mob has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.HurtTime">
+        <member name="P:SharpCraft.Entities.Mob.HurtTime">
             <summary>
             Makes the entity turn red for the given time
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.HurtByTimestamp">
+        <member name="P:SharpCraft.Entities.Mob.HurtByTimestamp">
             <summary>
             The time since the mob last was hit
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.DeathTime">
+        <member name="P:SharpCraft.Entities.Mob.DeathTime">
             <summary>
             The time the mob has been dead for.
             (0 = alive)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.FallFlying">
+        <member name="P:SharpCraft.Entities.Mob.FallFlying">
             <summary>
             Makes the mob fly when falling if it has an elytra on.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.DeathLootTable">
+        <member name="P:SharpCraft.Entities.Mob.DeathLootTable">
             <summary>
             The loot table the mob drops on death
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.DeathLootTableSeed">
+        <member name="P:SharpCraft.Entities.Mob.DeathLootTableSeed">
             <summary>
-            The seed to use when dropping the <see cref="P:SharpCraft.Entity.BaseMob.DeathLootTable"/>
+            The seed to use when dropping the <see cref="P:SharpCraft.Entities.Mob.DeathLootTable"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.CanPickUpLoot">
+        <member name="P:SharpCraft.Entities.Mob.CanPickUpLoot">
             <summary>
             If the mob can pick up armor and items from the ground
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.NoAI">
+        <member name="P:SharpCraft.Entities.Mob.NoAI">
             <summary>
             If the mob doesn't have an AI
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.PersistenceRequired">
+        <member name="P:SharpCraft.Entities.Mob.PersistenceRequired">
             <summary>
             If the mob shouldn't despawn
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.LeftHanded">
+        <member name="P:SharpCraft.Entities.Mob.LeftHanded">
             <summary>
             If the mob's main hand is its left hand
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.Team">
+        <member name="P:SharpCraft.Entities.Mob.Team">
             <summary>
             The team the mob is on
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.LeashCoords">
+        <member name="P:SharpCraft.Entities.Mob.LeashCoords">
             <summary>
             The location the mob is leashed to
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.LeashUUID">
+        <member name="P:SharpCraft.Entities.Mob.LeashUUID">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the leash
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.HandItems">
+        <member name="P:SharpCraft.Entities.Mob.HandItems">
             <summary>
             The items there is in the mob's hands.
             0: main hand. 1: off hand.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.ArmorItems">
+        <member name="P:SharpCraft.Entities.Mob.ArmorItems">
             <summary>
             The items the mob has on
             0: boots. 1: leggings. 2: chestplate. 3: helmet
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.HandDropChances">
+        <member name="P:SharpCraft.Entities.Mob.HandDropChances">
             <summary>
             The chance that the mob will drop its hand items when killed (number between 0-1)
             0: main hand. 1: off hand
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.ArmorDropChances">
+        <member name="P:SharpCraft.Entities.Mob.ArmorDropChances">
             <summary>
             The chance that the mob will drop its armor items when killed (number between 0-1)
             0: boots. 1: leggings. 2: chestplate. 3: helmet
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.ActiveEffects">
+        <member name="P:SharpCraft.Entities.Mob.ActiveEffects">
             <summary>
             The <see cref="T:SharpCraft.Effect"/>s the mob has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMob.Attributes">
+        <member name="P:SharpCraft.Entities.Mob.Attributes">
             <summary>
             The attributes the mob has
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Mob">
-            <summary>
-            Entity data for mobs
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Entity.Mob.#ctor(System.Nullable{SharpCraft.ID.Entity})">
-            <summary>
-            Creates a new mob
-            </summary>
-            <param name="type">the type of entity</param>
-        </member>
-        <member name="T:SharpCraft.Entity.BaseTameable">
+        <member name="T:SharpCraft.Entities.TameableMob">
             <summary>
             The basic entity data for tameable
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseTameable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.TameableMob.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseTameable.Sitting">
+        <member name="P:SharpCraft.Entities.TameableMob.Sitting">
             <summary>
             If the mob is sitting (wont follow / tp to its owner)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseTameable.OwnerUUID">
+        <member name="P:SharpCraft.Entities.TameableMob.OwnerUUID">
             <summary>
             the <see cref="T:SharpCraft.UUID"/> of the owner
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Tameable">
-            <summary>
-            Entity data for tameable mobs
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Entity.Tameable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
-            <summary>
-            Creates a new tameable mob
-            </summary>
-            <param name="type">the type of entity</param>
-        </member>
-        <member name="T:SharpCraft.Entity.Bat">
+        <member name="T:SharpCraft.Entities.Bat">
             <summary>
             Entity data for bats
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Bat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Bat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new bat
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Bat.BatFlags">
+        <member name="P:SharpCraft.Entities.Bat.BatFlags">
             <summary>
             True when flying. False when hanging
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Bee">
+        <member name="T:SharpCraft.Entities.Bee">
             <summary>
             Entity data for Bees
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Bee.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Bee.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new bee
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.HivePosition">
+        <member name="P:SharpCraft.Entities.Bee.HivePosition">
             <summary>
             The location of the bee's hive
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.FlowerPosition">
+        <member name="P:SharpCraft.Entities.Bee.FlowerPosition">
             <summary>
             The location of the flower the bee should fly around
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.HasNectar">
+        <member name="P:SharpCraft.Entities.Bee.HasNectar">
             <summary>
             If the bee has pollen
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.HasStung">
+        <member name="P:SharpCraft.Entities.Bee.HasStung">
             <summary>
             If the bee has stung
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.LastPollination">
+        <member name="P:SharpCraft.Entities.Bee.LastPollination">
             <summary>
             Time since the bee last pollinated
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.ToEnterHive">
+        <member name="P:SharpCraft.Entities.Bee.ToEnterHive">
             <summary>
             Time till the bee is allowed to enter a hive
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.CropsGrownSincePollination">
+        <member name="P:SharpCraft.Entities.Bee.CropsGrownSincePollination">
             <summary>
             The amount of crops the bee has grown since it last pollinated
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.Anger">
+        <member name="P:SharpCraft.Entities.Bee.Anger">
             <summary>
             The amount of time the bee is angry for
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Bee.AngryOn">
+        <member name="P:SharpCraft.Entities.Bee.AngryOn">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity this bee is angry on
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Cat">
+        <member name="T:SharpCraft.Entities.Cat">
             <summary>
             Entity data for cats
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Cat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Cat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new cat
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Cat.CatType">
+        <member name="P:SharpCraft.Entities.Cat.CatType">
             <summary>
             The cat's skin
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Cat.CollarColor">
+        <member name="P:SharpCraft.Entities.Cat.CollarColor">
             <summary>
             The color of the cat's collar
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Chicken">
+        <member name="T:SharpCraft.Entities.Chicken">
             <summary>
             Entity data for chickens
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Chicken.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Chicken.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new chicken
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Chicken.IsChickenJockey">
+        <member name="P:SharpCraft.Entities.Chicken.IsChickenJockey">
             <summary>
             Makes the chicken despawnable and drop 10 xp
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Chicken.EggLayTime">
+        <member name="P:SharpCraft.Entities.Chicken.EggLayTime">
             <summary>
             The time till the chicken lays another egg
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Creeper">
+        <member name="T:SharpCraft.Entities.Creeper">
             <summary>
             Entity data for creepers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Creeper.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Creeper.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new creeper
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Creeper.Charged">
+        <member name="P:SharpCraft.Entities.Creeper.Charged">
             <summary>
             If the creeper is charged (was hit by lightning)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Creeper.ExplosionRadius">
+        <member name="P:SharpCraft.Entities.Creeper.ExplosionRadius">
             <summary>
             The size of the explosion caused by the exploded creeper
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Creeper.Fuse">
+        <member name="P:SharpCraft.Entities.Creeper.Fuse">
             <summary>
             The time till the creeper will explode when trying to explode
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Creeper.Ignited">
+        <member name="P:SharpCraft.Entities.Creeper.Ignited">
             <summary>
             If the creeper is ignited and is forced to blow up
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Dolphin">
+        <member name="T:SharpCraft.Entities.Dolphin">
             <summary>
             Entity data for dolphins
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Dolphin.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Dolphin.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new dolphin
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Dolphin.TreasureLocation">
+        <member name="P:SharpCraft.Entities.Dolphin.TreasureLocation">
             <summary>
             The location of the treasure the dolphin will lead the player to
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Dolphin.GotFish">
+        <member name="P:SharpCraft.Entities.Dolphin.GotFish">
             <summary>
             If the dolphin has gotten any fish from the player
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Dolphin.CanFindTreasure">
+        <member name="P:SharpCraft.Entities.Dolphin.CanFindTreasure">
             <summary>
             If the dolphin will lead the player to a treasure
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Dragon">
+        <member name="T:SharpCraft.Entities.Dragon">
             <summary>
             Entity data for ender dragons
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Dragon.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Dragon.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new ender dragon
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Dragon.Phase">
+        <member name="P:SharpCraft.Entities.Dragon.Phase">
             <summary>
             The phase the ender dragon is in
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Enderman">
+        <member name="T:SharpCraft.Entities.Enderman">
             <summary>
             Entity data for endermen
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Enderman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Enderman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new enderman
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Enderman.Holding">
+        <member name="P:SharpCraft.Entities.Enderman.Holding">
             <summary>
             The block the enderman is holding.
             Note: block data is not supported
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Endermite">
+        <member name="T:SharpCraft.Entities.Endermite">
             <summary>
             Entity data for endermites
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Endermite.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Endermite.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new endermite
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Endermite.LifeTime">
+        <member name="P:SharpCraft.Entities.Endermite.LifeTime">
             <summary>
             The time the endermite has existed. When hitting 24000 it despawns
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Endermite.PlayerSpawned">
+        <member name="P:SharpCraft.Entities.Endermite.PlayerSpawned">
             <summary>
             If the endermite was spawned by a player. If true endermen will attack it.
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Fish">
+        <member name="T:SharpCraft.Entities.Fish">
             <summary>
             Entity data for fishs
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Fish.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Fish.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new fish
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.FishVariant">
+        <member name="P:SharpCraft.Entities.Fish.FishVariant">
             <summary>
             Fow the tropical fish looks
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Fish.Variant">
+        <member name="T:SharpCraft.Entities.Fish.Variant">
             <summary>
             A object used to define how a fish looks
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.Variant.Size">
+        <member name="P:SharpCraft.Entities.Fish.Variant.Size">
             <summary>
             The size of the fish
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.Variant.Pattern">
+        <member name="P:SharpCraft.Entities.Fish.Variant.Pattern">
             <summary>
             The fish's pattern
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.Variant.BodyColor">
+        <member name="P:SharpCraft.Entities.Fish.Variant.BodyColor">
             <summary>
             The color of the body of the fish
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.Variant.PatternColor">
+        <member name="P:SharpCraft.Entities.Fish.Variant.PatternColor">
             <summary>
             The color of the pattern on the fish
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Fish.Variant.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.Entities.Fish.Variant.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
-            Converts this <see cref="T:SharpCraft.Entity.Fish.Variant"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts this <see cref="T:SharpCraft.Entities.Fish.Variant"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="asType">Not used</param>
             <param name="extraConversionData">Not used</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="M:SharpCraft.Entity.Fish.Variant.GetValue">
+        <member name="M:SharpCraft.Entities.Fish.Variant.GetValue">
             <summary>
             Gets the value Minecraft uses
             </summary>
             <returns>Gets raw data used by Minecraft</returns>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.FromBucket">
+        <member name="P:SharpCraft.Entities.Fish.FromBucket">
             <summary>
             If the fish comes from a bucket.
             It wont despawn.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fish.PuffState">
+        <member name="P:SharpCraft.Entities.Fish.PuffState">
             <summary>
             The puff state for pufferfish.
             0 = deflated. 1 = halfway puffed-up. 2 = puffed-up.
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Fox">
+        <member name="T:SharpCraft.Entities.Fox">
             <summary>
             Entity data for foxes
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Fox.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Fox.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new fox
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Fox.FoxType">
+        <member name="P:SharpCraft.Entities.Fox.FoxType">
             <summary>
             The fox' skin
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fox.Sleeping">
+        <member name="P:SharpCraft.Entities.Fox.Sleeping">
             <summary>
             If the fox is sleeping
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Fox.Crouching">
+        <member name="P:SharpCraft.Entities.Fox.Crouching">
             <summary>
             If the fox is crouching
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Ghast">
+        <member name="T:SharpCraft.Entities.Ghast">
             <summary>
             Entity data for ghasts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Ghast.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Ghast.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new ghast
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Ghast.ExplosionPower">
+        <member name="P:SharpCraft.Entities.Ghast.ExplosionPower">
             <summary>
             The size of the explosion caused by the ghast's fireballs
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Horse">
+        <member name="T:SharpCraft.Entities.Horse">
             <summary>
             Entity data for horses, llamas, donkeys and mules
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Horse.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Horse.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new horse, llama, donkeys or mule
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.Bred">
+        <member name="P:SharpCraft.Entities.Horse.Bred">
             <summary>
             Makes the mob stay close to other mobs of the same time with this tag being true
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.EatingHayStack">
+        <member name="P:SharpCraft.Entities.Horse.EatingHayStack">
             <summary>
             Makes the horse graze
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.Temper">
+        <member name="P:SharpCraft.Entities.Horse.Temper">
             <summary>
             Makes the horse easier to tame.
             (Goes up when the horse is fed.)
             (A number between 0-100. the higher the easier to tame)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.OwnerUUID">
+        <member name="P:SharpCraft.Entities.Horse.OwnerUUID">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the owner of the horse
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.HorseSaddle">
+        <member name="P:SharpCraft.Entities.Horse.HorseSaddle">
             <summary>
             The item the horse has as it's saddle
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.HorseArmor">
+        <member name="P:SharpCraft.Entities.Horse.HorseArmor">
             <summary>
             The armor the horse has on
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.DonkeyChested">
+        <member name="P:SharpCraft.Entities.Horse.DonkeyChested">
             <summary>
             If the donkey has a chest
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.DonkeyItems">
+        <member name="P:SharpCraft.Entities.Horse.DonkeyItems">
             <summary>
             The items inside the donkeys inventory
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.HorseVariant">
+        <member name="P:SharpCraft.Entities.Horse.HorseVariant">
             <summary>
             The horse variant
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Horse.Variant">
+        <member name="T:SharpCraft.Entities.Horse.Variant">
             <summary>
             A object used to defina a horse variant
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.Variant.Color">
+        <member name="P:SharpCraft.Entities.Horse.Variant.Color">
             <summary>
             The color of the horse
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.Variant.Markings">
+        <member name="P:SharpCraft.Entities.Horse.Variant.Markings">
             <summary>
             The markings
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Horse.Variant.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.Entities.Horse.Variant.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
-            Converts this <see cref="T:SharpCraft.Entity.Horse.Variant"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts this <see cref="T:SharpCraft.Entities.Horse.Variant"/> object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="asType">Not used</param>
             <param name="extraConversionData">Not used</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="M:SharpCraft.Entity.Horse.Variant.GetValue">
+        <member name="M:SharpCraft.Entities.Horse.Variant.GetValue">
             <summary>
             Gets the value Minecraft uses to define horse variants
             </summary>
             <returns>Raw data used by Minecraft</returns>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.LlamaStrenght">
+        <member name="P:SharpCraft.Entities.Horse.LlamaStrenght">
             <summary>
             How many items the llama can hold
             (1-5. Slots = x * 3)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.LlamaDecorItem">
+        <member name="P:SharpCraft.Entities.Horse.LlamaDecorItem">
             <summary>
             The item the llama has on. (Normally carpet)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.SkeletonTrap">
+        <member name="P:SharpCraft.Entities.Horse.SkeletonTrap">
             <summary>
             If the skeleton horse is a trap
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.SkeletonTrapTime">
+        <member name="P:SharpCraft.Entities.Horse.SkeletonTrapTime">
             <summary>
             The time the skeleton trap has existed. When at 18000 ticks it despawns
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Horse.Tame">
+        <member name="P:SharpCraft.Entities.Horse.Tame">
             <summary>
             If the mob is tame
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.IronGolem">
+        <member name="T:SharpCraft.Entities.IronGolem">
             <summary>
             Entity data for iron golems
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.IronGolem.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.IronGolem.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new iron golem
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.IronGolem.PlayerCreated">
+        <member name="P:SharpCraft.Entities.IronGolem.PlayerCreated">
             <summary>
             If true the golem wont attack players
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MagicIllager">
+        <member name="T:SharpCraft.Entities.MagicIllager">
             <summary>
             Entity data for evokers and illusioners
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MagicIllager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MagicIllager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new evoker or illusioner
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MagicIllager.SpellTicks">
+        <member name="P:SharpCraft.Entities.MagicIllager.SpellTicks">
             <summary>
             The time till the next spell is casted
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Ocelot">
+        <member name="T:SharpCraft.Entities.Ocelot">
             <summary>
             Entity data for ocelots
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Ocelot.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Ocelot.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new ocelot
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Ocelot.Trust">
+        <member name="P:SharpCraft.Entities.Ocelot.Trust">
             <summary>
             If the ocelot trusts the player
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Panda">
+        <member name="T:SharpCraft.Entities.Panda">
             <summary>
             Entity data for pandas
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Panda.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Panda.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new panda
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Panda.MainType">
+        <member name="P:SharpCraft.Entities.Panda.MainType">
             <summary>
             The type of the panda
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Panda.HiddenType">
+        <member name="P:SharpCraft.Entities.Panda.HiddenType">
             <summary>
             The panda's hidden type which can be transfered to it's children
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Parrot">
+        <member name="T:SharpCraft.Entities.Parrot">
             <summary>
             Entity data for parrots
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Parrot.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Parrot.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new parrot
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Parrot.ParrotType">
+        <member name="P:SharpCraft.Entities.Parrot.ParrotType">
             <summary>
             How the parrot looks
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Phantom">
+        <member name="T:SharpCraft.Entities.Phantom">
             <summary>
             Entity data for phantoms
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Phantom.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Phantom.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new phantom
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Phantom.Area">
+        <member name="P:SharpCraft.Entities.Phantom.Area">
             <summary>
             The phantom will circle around this location when not attacking
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Phantom.Size">
+        <member name="P:SharpCraft.Entities.Phantom.Size">
             <summary>
             The size of the phantom.
             (0-64) Damage = 6+size
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Pig">
+        <member name="T:SharpCraft.Entities.Pig">
             <summary>
             Entity data for pigs
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Pig.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Pig.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new pigs
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Pig.Saddle">
+        <member name="P:SharpCraft.Entities.Pig.Saddle">
             <summary>
             If the pig has a saddle on
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Player">
+        <member name="T:SharpCraft.Entities.Player">
             <summary>
             Entity data for players
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Player.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Player.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new player
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Version">
+        <member name="P:SharpCraft.Entities.Player.Version">
             <summary>
             The ID of the Minecraft version the player is in
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Gamemode">
+        <member name="P:SharpCraft.Entities.Player.Gamemode">
             <summary>
             The player's gamemode
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.DeathScore">
+        <member name="P:SharpCraft.Entities.Player.DeathScore">
             <summary>
             The score displayed on death
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.SelectedSlot">
+        <member name="P:SharpCraft.Entities.Player.SelectedSlot">
             <summary>
             The slot the player has selected
             (0-8)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.SelectedItem">
+        <member name="P:SharpCraft.Entities.Player.SelectedItem">
             <summary>
             The item the player has selected
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Spawn">
+        <member name="P:SharpCraft.Entities.Player.Spawn">
             <summary>
             The player's spawnpoint
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.ForceSpawn">
+        <member name="P:SharpCraft.Entities.Player.ForceSpawn">
             <summary>
-            If the player should spawn at the given <see cref="P:SharpCraft.Entity.Player.Spawn"/> even if there is no bed
+            If the player should spawn at the given <see cref="P:SharpCraft.Entities.Player.Spawn"/> even if there is no bed
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Sleeping">
+        <member name="P:SharpCraft.Entities.Player.Sleeping">
             <summary>
             If the player is sleeping
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.SleepTime">
+        <member name="P:SharpCraft.Entities.Player.SleepTime">
             <summary>
             The amount of time the player has been sleeping
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Food">
+        <member name="P:SharpCraft.Entities.Player.Food">
             <summary>
             How much food the player has
             (0-20)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.FoodExhaustion">
+        <member name="P:SharpCraft.Entities.Player.FoodExhaustion">
             <summary>
             How close a food bar is from dissapearing
             (4=lose one bar)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.FoodSaturation">
+        <member name="P:SharpCraft.Entities.Player.FoodSaturation">
             <summary>
             How much saturation the player has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.FoodTimer">
+        <member name="P:SharpCraft.Entities.Player.FoodTimer">
             <summary>
             When this hits 80 ticks and the player has enough food, they will be healed
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Level">
+        <member name="P:SharpCraft.Entities.Player.Level">
             <summary>
             The level the player has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.XPPogress">
+        <member name="P:SharpCraft.Entities.Player.XPPogress">
             <summary>
             How far the player is to hit next level
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Totalxp">
+        <member name="P:SharpCraft.Entities.Player.Totalxp">
             <summary>
             The total amount of xp the player has picked up since last death
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.EnchantSeed">
+        <member name="P:SharpCraft.Entities.Player.EnchantSeed">
             <summary>
             The seed used to determine which enchantments should show up for the player
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Inventory">
+        <member name="P:SharpCraft.Entities.Player.Inventory">
             <summary>
             The player's inventory.
             (Slot 0-8 = hotbar left to right)
@@ -6107,993 +6155,896 @@
             (Slot -106 = off hand)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Enderchest">
+        <member name="P:SharpCraft.Entities.Player.Enderchest">
             <summary>
             The items in the player's enderchest
             (Slot 0-26 = left top to right bottom slots)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.Riding">
+        <member name="P:SharpCraft.Entities.Player.Riding">
             <summary>
             The entity the player is riding
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.ShoulderEntityLeft">
+        <member name="P:SharpCraft.Entities.Player.ShoulderEntityLeft">
             <summary>
             The entity on the player's left shoulder
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.ShoulderEntityRight">
+        <member name="P:SharpCraft.Entities.Player.ShoulderEntityRight">
             <summary>
             The entity on the player's right shoulder
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.SeenCredits">
+        <member name="P:SharpCraft.Entities.Player.SeenCredits">
             <summary>
             True if the player has seen the end to overworld credits
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.RecipeCraftingBookFiltered">
+        <member name="P:SharpCraft.Entities.Player.RecipeCraftingBookFiltered">
             <summary>
             True if the player only sees the crafting recipes they have unlocked
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.RecipeSmeltBookFiltered">
+        <member name="P:SharpCraft.Entities.Player.RecipeSmeltBookFiltered">
             <summary>
             True if the player only sees the furnace recipes they have unlocked
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.RecipeCraftingBookOpen">
+        <member name="P:SharpCraft.Entities.Player.RecipeCraftingBookOpen">
             <summary>
             True if the player has the crafting book open
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.RecipeSmeltBookOpen">
+        <member name="P:SharpCraft.Entities.Player.RecipeSmeltBookOpen">
             <summary>
             True if the player has the crafting book open
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.UnlockedRecipes">
+        <member name="P:SharpCraft.Entities.Player.UnlockedRecipes">
             <summary>
             A list of recipes the player has unlocked
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Player.NotSeenRecipes">
+        <member name="P:SharpCraft.Entities.Player.NotSeenRecipes">
             <summary>
             A list of recipes the player has unlocked, but still haven't seen in the recipe book.
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Rabbit">
+        <member name="T:SharpCraft.Entities.Rabbit">
             <summary>
             Entity data for rabbits
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Rabbit.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Rabbit.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new rabbit
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Rabbit.RabbitType">
+        <member name="P:SharpCraft.Entities.Rabbit.RabbitType">
             <summary>
             The type of rabbit
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Rabbit.MoreCarrotTicks">
+        <member name="P:SharpCraft.Entities.Rabbit.MoreCarrotTicks">
             <summary>
             Set to 40 when the rabbit has eaten a carrot.
             Goes down by 0-2 every tick.
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Ravager">
+        <member name="T:SharpCraft.Entities.Ravager">
             <summary>
             Entity data for ravagers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Ravager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Ravager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new ravager
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Ravager.Attack">
+        <member name="P:SharpCraft.Entities.Ravager.Attack">
             <summary>
             Cooldown till it can attack again
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Ravager.Roar">
+        <member name="P:SharpCraft.Entities.Ravager.Roar">
             <summary>
             Cooldown till it can roar again
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Ravager.Stun">
+        <member name="P:SharpCraft.Entities.Ravager.Stun">
             <summary>
             Cooldown till it can stun again
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Sheep">
+        <member name="T:SharpCraft.Entities.Sheep">
             <summary>
             Entity data for sheeps
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Sheep.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Sheep.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new sheep
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Sheep.Color">
+        <member name="P:SharpCraft.Entities.Sheep.Color">
             <summary>
             The sheep's color
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Sheep.Sheared">
+        <member name="P:SharpCraft.Entities.Sheep.Sheared">
             <summary>
             If the sheep is sheared
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Shulker">
+        <member name="T:SharpCraft.Entities.Shulker">
             <summary>
             Entity data for shulker
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Shulker.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Shulker.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new shulker
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Shulker.PlacedOn">
+        <member name="P:SharpCraft.Entities.Shulker.PlacedOn">
             <summary>
             The direction of the block the shulker is placed on
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Shulker.Color">
+        <member name="P:SharpCraft.Entities.Shulker.Color">
             <summary>
             The shulker's color.
             Setting this to (ID.Color)16 makes it the normal shulker color
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Shulker.Peek">
+        <member name="P:SharpCraft.Entities.Shulker.Peek">
             <summary>
             The height of the shulker peek
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Shulker.ApproxCoords">
+        <member name="P:SharpCraft.Entities.Shulker.ApproxCoords">
             <summary>
             The approximate location of the shulker
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Slime">
+        <member name="T:SharpCraft.Entities.Slime">
             <summary>
             Entity data for slimes and magma cubes
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Slime.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Slime.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new slime or magma cube
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Slime.Size">
+        <member name="P:SharpCraft.Entities.Slime.Size">
             <summary>
             The size of the slime
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Slime.WasOnGround">
+        <member name="P:SharpCraft.Entities.Slime.WasOnGround">
             <summary>
             True if the slime touches the ground
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Snowman">
+        <member name="T:SharpCraft.Entities.Snowman">
             <summary>
             Entity data for snowmen
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Snowman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Snowman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new snowman
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Snowman.Pumpkin">
+        <member name="P:SharpCraft.Entities.Snowman.Pumpkin">
             <summary>
             True if the snowman has a pumpkin on
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Turtle">
+        <member name="T:SharpCraft.Entities.Turtle">
             <summary>
             Entity data for turtles
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Turtle.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Turtle.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new turtle
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Turtle.HomePos">
+        <member name="P:SharpCraft.Entities.Turtle.HomePos">
             <summary>
             The location of the turtles home
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Turtle.TravelPos">
+        <member name="P:SharpCraft.Entities.Turtle.TravelPos">
             <summary>
             The location the turtle is traveling to
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Turtle.HasEgg">
+        <member name="P:SharpCraft.Entities.Turtle.HasEgg">
             <summary>
             True if the turtle has eggs
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Vex">
+        <member name="T:SharpCraft.Entities.Vex">
             <summary>
             Entity data for vexes
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Vex.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Vex.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new vex
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Vex.LifeTicks">
+        <member name="P:SharpCraft.Entities.Vex.LifeTicks">
             <summary>
             The time till the vex dissapears
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Vex.Bound">
+        <member name="P:SharpCraft.Entities.Vex.Bound">
             <summary>
             The location the vex should fly around in
             (It flies to random location in a 15x11x15 around this spot)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Villager">
+        <member name="T:SharpCraft.Entities.Villager">
             <summary>
             Entity data for villagers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Villager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Villager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new villager
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.VillagerLevel">
+        <member name="P:SharpCraft.Entities.Villager.VillagerLevel">
             <summary>
             The villager's level (~Amount of trades)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.VillagerProfession">
+        <member name="P:SharpCraft.Entities.Villager.VillagerProfession">
             <summary>
             The villagers proffesion
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.VillagerType">
+        <member name="P:SharpCraft.Entities.Villager.VillagerType">
             <summary>
             The type of villager
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.Gossips">
+        <member name="P:SharpCraft.Entities.Villager.Gossips">
             <summary>
             The gossips the villager has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.Trades">
+        <member name="P:SharpCraft.Entities.Villager.Trades">
             <summary>
             The villager's trades
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.Willing">
+        <member name="P:SharpCraft.Entities.Villager.Willing">
             <summary>
             If the villager is willing to mate.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.LastRestock">
+        <member name="P:SharpCraft.Entities.Villager.LastRestock">
             <summary>
             Time since the villager last restocked
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.LastGossipDecay">
+        <member name="P:SharpCraft.Entities.Villager.LastGossipDecay">
             <summary>
             Time since the villager's gossips escreased in strength
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.RestocksToday">
+        <member name="P:SharpCraft.Entities.Villager.RestocksToday">
             <summary>
-            The amount of times the villager has restocked since the <see cref="P:SharpCraft.Entity.Villager.LastRestock"/> time.
+            The amount of times the villager has restocked since the <see cref="P:SharpCraft.Entities.Villager.LastRestock"/> time.
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.Xp">
+        <member name="P:SharpCraft.Entities.Villager.Xp">
             <summary>
             The amount of XP the villager has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Villager.Inventory">
+        <member name="P:SharpCraft.Entities.Villager.Inventory">
             <summary>
             The items in the villagers inventory (up to 8 slots)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Vindicator">
+        <member name="T:SharpCraft.Entities.Vindicator">
             <summary>
             Entity data for vindicators
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Vindicator.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Vindicator.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new vindicator
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Vindicator.Johnny">
+        <member name="P:SharpCraft.Entities.Vindicator.Johnny">
             <summary>
             If the vindicator is a Johnny vindicator (attacks everything)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Wither">
+        <member name="T:SharpCraft.Entities.Wither">
             <summary>
             Entity data for withers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Wither.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Wither.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new wither
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Wither.Invul">
+        <member name="P:SharpCraft.Entities.Wither.Invul">
             <summary>
             The time before the wither actually spawns / can be fought
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Wolf">
+        <member name="T:SharpCraft.Entities.Wolf">
             <summary>
             Entity data for wolves
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Wolf.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Wolf.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new wolf
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Wolf.Color">
+        <member name="P:SharpCraft.Entities.Wolf.Color">
             <summary>
             The color of the wolf's collar
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Wolf.Angry">
+        <member name="P:SharpCraft.Entities.Wolf.Angry">
             <summary>
             If the wolf is angry
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Zombie">
+        <member name="T:SharpCraft.Entities.Zombie">
             <summary>
             Entity data for zombies and drowned
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Zombie.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Zombie.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new zombie or drowned
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Zombie.IsBaby">
+        <member name="P:SharpCraft.Entities.Zombie.IsBaby">
             <summary>
             If its a baby
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Zombie.CanBreakDoors">
+        <member name="P:SharpCraft.Entities.Zombie.CanBreakDoors">
             <summary>
             If its allowed to break doors
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Zombie.DrownedConversionTime">
+        <member name="P:SharpCraft.Entities.Zombie.DrownedConversionTime">
             <summary>
             Time till it converts into its next drowning type
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Zombie.InWaterTime">
+        <member name="P:SharpCraft.Entities.Zombie.InWaterTime">
             <summary>
             The amount of time the zombie has been in water
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ZombiePigman">
+        <member name="T:SharpCraft.Entities.ZombiePigman">
             <summary>
             Entity data for zombie pigmen
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.ZombiePigman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.ZombiePigman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new zombie pigman
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.ZombiePigman.Anger">
+        <member name="P:SharpCraft.Entities.ZombiePigman.Anger">
             <summary>
             The time till the zombie pigman stops being angry (0 or smaller if not angry)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombiePigman.AngryOn">
+        <member name="P:SharpCraft.Entities.ZombiePigman.AngryOn">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the entity this pigman is angry on
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ZombieVillager">
+        <member name="T:SharpCraft.Entities.ZombieVillager">
             <summary>
             Entity data for zombie villagers
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.ZombieVillager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.ZombieVillager.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new zombie villager
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.VillagerLevel">
+        <member name="P:SharpCraft.Entities.ZombieVillager.VillagerLevel">
             <summary>
             The villager's level (~Amount of trades)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.VillagerProfession">
+        <member name="P:SharpCraft.Entities.ZombieVillager.VillagerProfession">
             <summary>
             The villagers proffesion
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.VillagerType">
+        <member name="P:SharpCraft.Entities.ZombieVillager.VillagerType">
             <summary>
             The type of villager
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.Gossips">
+        <member name="P:SharpCraft.Entities.ZombieVillager.Gossips">
             <summary>
             The gossips the villager has
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.Trades">
+        <member name="P:SharpCraft.Entities.ZombieVillager.Trades">
             <summary>
             The villager's trades
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.ConversionTime">
+        <member name="P:SharpCraft.Entities.ZombieVillager.ConversionTime">
             <summary>
             The time till this zombie villager turns into a villager. -1 when not being converted
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ZombieVillager.ConverterUUID">
+        <member name="P:SharpCraft.Entities.ZombieVillager.ConverterUUID">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the player who is converting this zombie villager
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Arrow">
+        <member name="T:SharpCraft.Entities.Arrow">
             <summary>
             Entity data for arrows
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Arrow.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Arrow.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new arrow
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Shake">
+        <member name="P:SharpCraft.Entities.Arrow.Shake">
             <summary>
             The arrow shaking when hitting a block
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Pickupable">
+        <member name="P:SharpCraft.Entities.Arrow.Pickupable">
             <summary>
             Rules for picking up the arrow
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.PlayerShot">
+        <member name="P:SharpCraft.Entities.Arrow.PlayerShot">
             <summary>
             If the arrow is shot by a player
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Life">
+        <member name="P:SharpCraft.Entities.Arrow.Life">
             <summary>
             When it hits 1200 ticks while not moving the arrow despawns
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Damage">
+        <member name="P:SharpCraft.Entities.Arrow.Damage">
             <summary>
             The amount of damage dealt by the arrow
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.InGround">
+        <member name="P:SharpCraft.Entities.Arrow.InGround">
             <summary>
             If the arrow is in the ground
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Crit">
+        <member name="P:SharpCraft.Entities.Arrow.Crit">
             <summary>
             If the deals critical damage
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.Color">
+        <member name="P:SharpCraft.Entities.Arrow.Color">
             <summary>
             The color of the arrow
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.CustomPotionEffects">
+        <member name="P:SharpCraft.Entities.Arrow.CustomPotionEffects">
             <summary>
             The effects given by the arrow
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.CustomPotionColor">
+        <member name="P:SharpCraft.Entities.Arrow.CustomPotionColor">
             <summary>
             The color of the arrow's particles
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Arrow.SpectralDuration">
+        <member name="P:SharpCraft.Entities.Arrow.SpectralDuration">
             <summary>
             The amount of duration of the glowing effect given by the spectral arrow
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.BaseProjectile">
+        <member name="T:SharpCraft.Entities.BaseProjectile">
             <summary>
             The base of all projectile entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseProjectile.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.BaseProjectile.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseProjectile.TileCoords">
+        <member name="P:SharpCraft.Entities.BaseProjectile.TileCoords">
             <summary>
             The coords of the block
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseProjectile.InBlock">
+        <member name="P:SharpCraft.Entities.BaseProjectile.InBlock">
             <summary>
             The block this projectile is in
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MobProjectile">
+        <member name="T:SharpCraft.Entities.MobProjectile">
             <summary>
             Entity data for <see cref="F:SharpCraft.ID.Entity.dragon_fireball"/>s, <see cref="F:SharpCraft.ID.Entity.fireball"/>s, <see cref="F:SharpCraft.ID.Entity.small_fireball"/> and <see cref="F:SharpCraft.ID.Entity.wither_skull"/>s
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MobProjectile.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MobProjectile.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new <see cref="F:SharpCraft.ID.Entity.dragon_fireball"/>, <see cref="F:SharpCraft.ID.Entity.fireball"/>, <see cref="F:SharpCraft.ID.Entity.small_fireball"/> or <see cref="F:SharpCraft.ID.Entity.wither_skull"/>
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MobProjectile.Direction">
+        <member name="P:SharpCraft.Entities.MobProjectile.Direction">
             <summary>
             The direction the projectile flies in
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MobProjectile.Life">
+        <member name="P:SharpCraft.Entities.MobProjectile.Life">
             <summary>
             The amount of time the projectile hasnt been moving
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MobProjectile.Power">
+        <member name="P:SharpCraft.Entities.MobProjectile.Power">
             <summary>
             The direction the projectile flies in nonestop
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MobProjectile.GhastExplosionPower">
+        <member name="P:SharpCraft.Entities.MobProjectile.GhastExplosionPower">
             <summary>
             The power of the explosion caused by the ghast ball
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ShulkerBullet">
+        <member name="T:SharpCraft.Entities.ShulkerBullet">
             <summary>
             An object for shulker bullets
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.ShulkerBullet.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.ShulkerBullet.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new shulker bullet
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.Owner">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.Owner">
             <summary>
             The owner of the bullet
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.OwnerCoords">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.OwnerCoords">
             <summary>
             The owner's location
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.Target">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.Target">
             <summary>
             The bullet's target
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.TargetCoords">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.TargetCoords">
             <summary>
             The target's location
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.Steps">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.Steps">
             <summary>
             The amount of steps it takes to get to the target
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ShulkerBullet.OffsetTarget">
+        <member name="P:SharpCraft.Entities.ShulkerBullet.OffsetTarget">
             <summary>
             The offset distance from the bullet to the target
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.LlamaSpit">
+        <member name="T:SharpCraft.Entities.LlamaSpit">
             <summary>
             An object for llama spit entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.LlamaSpit.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.LlamaSpit.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates new llama spit
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.LlamaSpit.OwnerUUID">
+        <member name="P:SharpCraft.Entities.LlamaSpit.OwnerUUID">
             <summary>
             The owner of the spit
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Throwable">
+        <member name="T:SharpCraft.Entities.Throwable">
             <summary>
             Entity data for <see cref="F:SharpCraft.ID.Entity.egg"/>s, <see cref="F:SharpCraft.ID.Entity.ender_pearl"/>s, <see cref="F:SharpCraft.ID.Entity.experience_bottle"/>s, <see cref="F:SharpCraft.ID.Entity.potion"/>s and <see cref="F:SharpCraft.ID.Entity.snowball"/>s
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Throwable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Throwable.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new <see cref="F:SharpCraft.ID.Entity.egg"/>, <see cref="F:SharpCraft.ID.Entity.ender_pearl"/>, <see cref="F:SharpCraft.ID.Entity.experience_bottle"/>, <see cref="F:SharpCraft.ID.Entity.potion"/> or <see cref="F:SharpCraft.ID.Entity.snowball"/>
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Throwable.Shake">
+        <member name="P:SharpCraft.Entities.Throwable.Shake">
             <summary>
             The entity shaking when hitting a block
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Throwable.Owner">
+        <member name="P:SharpCraft.Entities.Throwable.Owner">
             <summary>
             The owner of the projectile
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Throwable.Potion">
+        <member name="P:SharpCraft.Entities.Throwable.Potion">
             <summary>
             The type of thrown potion
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.Throwable.DisplayItem">
+        <member name="P:SharpCraft.Entities.Throwable.DisplayItem">
             <summary>
             The item the entity is displayed as
             (Potions do not support use this)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.BaseMinecart">
+        <member name="T:SharpCraft.Entities.Minecart">
             <summary>
             The basic entity data for minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.BaseMinecart.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Minecart.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMinecart.CustomDisplayTile">
+        <member name="P:SharpCraft.Entities.Minecart.CustomDisplayTile">
             <summary>
-            If <see cref="P:SharpCraft.Entity.BaseMinecart.DisplayBlock"/> should be displayed
+            If <see cref="P:SharpCraft.Entities.Minecart.DisplayBlock"/> should be displayed
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMinecart.DisplayBlock">
+        <member name="P:SharpCraft.Entities.Minecart.DisplayBlock">
             <summary>
             The block to display
             Note: block data is not supported
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.BaseMinecart.DisplayOffset">
+        <member name="P:SharpCraft.Entities.Minecart.DisplayOffset">
             <summary>
             The y-offset the block is displayed with
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.Minecart">
-            <summary>
-            Entity data for minecarts
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Entity.Minecart.#ctor(System.Nullable{SharpCraft.ID.Entity})">
-            <summary>
-            Creates a new minecart
-            </summary>
-            <param name="type">the type of entity</param>
-        </member>
-        <member name="T:SharpCraft.Entity.Boat">
+        <member name="T:SharpCraft.Entities.Boat">
             <summary>
             Entity data for boats
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.Boat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.Boat.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new boat
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.Boat.Type">
+        <member name="P:SharpCraft.Entities.Boat.Type">
             <summary>
             The type of boat
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartChest">
+        <member name="T:SharpCraft.Entities.MinecartChest">
             <summary>
             Entity data for chest minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartChest.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartChest.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new chest minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartChest.LootTable">
+        <member name="P:SharpCraft.Entities.MinecartChest.LootTable">
             <summary>
             The chest's loottable
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartChest.LootTableSeed">
+        <member name="P:SharpCraft.Entities.MinecartChest.LootTableSeed">
             <summary>
             The seed used to generate the loot
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartChest.Items">
+        <member name="P:SharpCraft.Entities.MinecartChest.Items">
             <summary>
             The items in the chest
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartCommand">
+        <member name="T:SharpCraft.Entities.MinecartCommand">
             <summary>
             Entity data for command block minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartCommand.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartCommand.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new command block minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartCommand.Command">
+        <member name="P:SharpCraft.Entities.MinecartCommand.Command">
             <summary>
             The command to run
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartCommand.LastOutput">
+        <member name="P:SharpCraft.Entities.MinecartCommand.LastOutput">
             <summary>
             The command's text output
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartCommand.SuccessCount">
+        <member name="P:SharpCraft.Entities.MinecartCommand.SuccessCount">
             <summary>
             The command's output
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartCommand.TrackOutput">
+        <member name="P:SharpCraft.Entities.MinecartCommand.TrackOutput">
             <summary>
-            Makes it so last output will be stored in <see cref="P:SharpCraft.Entity.MinecartCommand.LastOutput"/>
+            Makes it so last output will be stored in <see cref="P:SharpCraft.Entities.MinecartCommand.LastOutput"/>
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartFurnace">
+        <member name="T:SharpCraft.Entities.MinecartFurnace">
             <summary>
             Entity data for furnace minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartFurnace.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartFurnace.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new furnace minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartFurnace.PushX">
+        <member name="P:SharpCraft.Entities.MinecartFurnace.PushX">
             <summary>
             Force along the x axis
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartFurnace.PushZ">
+        <member name="P:SharpCraft.Entities.MinecartFurnace.PushZ">
             <summary>
             Force along the y axis
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartFurnace.Fuel">
+        <member name="P:SharpCraft.Entities.MinecartFurnace.Fuel">
             <summary>
             The time till the furnace's fuel runs out
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartHopper">
+        <member name="T:SharpCraft.Entities.MinecartHopper">
             <summary>
             Entity data for hopper minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartHopper.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartHopper.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new hopper minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartHopper.LootTable">
+        <member name="P:SharpCraft.Entities.MinecartHopper.LootTable">
             <summary>
             The hopper's loottable
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartHopper.LootTableSeed">
+        <member name="P:SharpCraft.Entities.MinecartHopper.LootTableSeed">
             <summary>
             The seed used to generate the loot
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartHopper.Items">
+        <member name="P:SharpCraft.Entities.MinecartHopper.Items">
             <summary>
             The items in the hopper
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartHopper.Enabled">
+        <member name="P:SharpCraft.Entities.MinecartHopper.Enabled">
             <summary>
             If the hopper is enabled
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartHopper.TransferCooldown">
+        <member name="P:SharpCraft.Entities.MinecartHopper.TransferCooldown">
             <summary>
             Time until it transfer another item
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartSpawner">
+        <member name="T:SharpCraft.Entities.MinecartSpawner">
             <summary>
             Entity data for spawner minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartSpawner.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartSpawner.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new spawner minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.Potentials">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.Potentials">
             <summary>
             The entities the spawner can spawn
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.SpawnCount">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.SpawnCount">
             <summary>
             How many entities to try to spawn every time
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.SpawnRange">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.SpawnRange">
             <summary>
             The range to spawn the entities in
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.Delay">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.Delay">
             <summary>
             Time till the next spawn
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.RandomDelay">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.RandomDelay">
             <summary>
             The amount of ticks to randomly add to the next spawn
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.MaxEntities">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.MaxEntities">
             <summary>
             The maximum amount of entities there can be around the spawner for it to spawn
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartSpawner.PlayerRange">
+        <member name="P:SharpCraft.Entities.MinecartSpawner.PlayerRange">
             <summary>
             The range the player has to be in for the spawner to start spawning
-            (<see cref="P:SharpCraft.Entity.MinecartSpawner.MaxEntities"/> has to be set for this to work)
+            (<see cref="P:SharpCraft.Entities.MinecartSpawner.MaxEntities"/> has to be set for this to work)
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.MinecartTNT">
+        <member name="T:SharpCraft.Entities.MinecartTNT">
             <summary>
             Entity data for tnt minecarts
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.MinecartTNT.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entities.MinecartTNT.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new tnt minecart
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.MinecartTNT.TNTFuse">
+        <member name="P:SharpCraft.Entities.MinecartTNT.TNTFuse">
             <summary>
             Time till it explodes
             (-1 ticks = not exploding)
-            </summary>
-        </member>
-        <member name="T:SharpCraft.IEntity.IVillager">
-            <summary>
-            Interface for villager like mobs
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.IVillager.VillagerLevel">
-            <summary>
-            The villager's level (~Amount of trades)
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.IVillager.VillagerProfession">
-            <summary>
-            The villagers proffesion
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.IVillager.VillagerType">
-            <summary>
-            The type of villager
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.IVillager.Gossips">
-            <summary>
-            The gossips the villager has
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.IVillager.Trades">
-            <summary>
-            The villager's trades
-            </summary>
-        </member>
-        <member name="T:SharpCraft.IEntity.Gossip">
-            <summary>
-            Gossip which villagerscan exchange
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Gossip.Type">
-            <summary>
-            The type of gossip
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Gossip.Strength">
-            <summary>
-            The gossip's strength 
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Gossip.TartgetUUID">
-            <summary>
-            The UUID of the player who made this gossip.
-            (If its a <see cref="F:SharpCraft.ID.GossipType.golem"/> then its the villager who started the gossip)
-            </summary>
-        </member>
-        <member name="T:SharpCraft.IEntity.Trade">
-            <summary>
-            An object used to define trades
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.RewardExp">
-            <summary>
-            True if the villager gives xp when traded with
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.MaxUses">
-            <summary>
-            The maximum number of times the trade can be traded before closing
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.Uses">
-            <summary>
-            The amount of times the trade has been used
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.BuyItem1">
-            <summary>
-            The first item the villager is buying in this trade
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.BuyItem2">
-            <summary>
-            The second item the villager is buying in this trade
-            </summary>
-        </member>
-        <member name="P:SharpCraft.IEntity.Trade.SellItem">
-            <summary>
-            The item the villager is selling in this trade
             </summary>
         </member>
         <member name="T:SharpCraft.Item">
@@ -7685,7 +7636,7 @@
             Creates a new <see cref="T:SharpCraft.SpawnerPotential"/>
             </summary>
         </member>
-        <member name="M:SharpCraft.SpawnerPotential.#ctor(SharpCraft.Entity.BaseEntity,System.Int32)">
+        <member name="M:SharpCraft.SpawnerPotential.#ctor(SharpCraft.Entity,System.Int32)">
             <summary>
             Creates a new <see cref="T:SharpCraft.SpawnerPotential"/> for the entity with the given weight
             </summary>
@@ -14658,11 +14609,11 @@
             </summary>
             <param name="type">the <see cref="T:SharpCraft.ID.Entity"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.Entity.BaseEntity)~SharpCraft.JSONObjects.Entity">
+        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.Entity)~SharpCraft.JSONObjects.Entity">
             <summary>
-            Converts a <see cref="T:SharpCraft.Entity.BaseEntity"/> into an <see cref="T:SharpCraft.JSONObjects.Entity"/> object
+            Converts a <see cref="T:SharpCraft.Entity"/> into an <see cref="T:SharpCraft.JSONObjects.Entity"/> object
             </summary>
-            <param name="entity">The <see cref="T:SharpCraft.Entity.BaseEntity"/> to convert</param>
+            <param name="entity">The <see cref="T:SharpCraft.Entity"/> to convert</param>
         </member>
         <member name="T:SharpCraft.JSONObjects.Item">
             <summary>
@@ -15168,7 +15119,7 @@
             <param name="maximum">The highest number to search for</param>
             <param name="branches">The amount of branches to check at a time (Low number = fast, but many files. High number = slow, but less files)</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SummonExecute(SharpCraft.Entity.EntityBasic,System.String,SharpCraft.Function.FunctionWriter,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SummonExecute(SharpCraft.Entity,System.String,SharpCraft.Function.FunctionWriter,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Summons a new entity and runs the given commands as the entity
             </summary>
@@ -15179,7 +15130,7 @@
             <param name="writeSetting">The setting for writing the function file</param>
             <returns>The function the entity runs</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SummonExecute(SharpCraft.Entity.EntityBasic,SharpCraft.Vector,System.String,SharpCraft.Function.FunctionWriter,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SummonExecute(SharpCraft.Entity,SharpCraft.Vector,System.String,SharpCraft.Function.FunctionWriter,System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Summons a new entity and runs the given commands as the entity
             </summary>
@@ -15378,7 +15329,7 @@
             All the entity commands
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Add(SharpCraft.Vector,SharpCraft.Entity.BaseEntity)">
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Add(SharpCraft.Vector,SharpCraft.Entity)">
             <summary>
             Adds the specified entity to the world at the specified location
             </summary>
@@ -20559,7 +20510,7 @@
             Command which summons an entity at the given location
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.SummonCommand.#ctor(SharpCraft.Entity.BaseEntity,SharpCraft.Vector)">
+        <member name="M:SharpCraft.Commands.SummonCommand.#ctor(SharpCraft.Entity,SharpCraft.Vector)">
             <summary>
             intializes a new <see cref="T:SharpCraft.Commands.SummonCommand"/>
             </summary>

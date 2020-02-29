@@ -74,7 +74,7 @@ namespace SharpCraft.Blocks
             /// The entity inside the bee hive
             /// </summary>
             [DataTag("EntityData")]
-            public Entity.BaseEntity? Entity { get; set; }
+            public Entity? Entity { get; set; }
 
             /// <summary>
             /// The amount of ticks the entity has been in the hive.

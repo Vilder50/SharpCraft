@@ -1,41 +1,38 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// Entity data for <see cref="ID.Entity.egg"/>s, <see cref="ID.Entity.ender_pearl"/>s, <see cref="ID.Entity.experience_bottle"/>s, <see cref="ID.Entity.potion"/>s and <see cref="ID.Entity.snowball"/>s
+    /// </summary>
+    public class Throwable : BaseProjectile
     {
         /// <summary>
-        /// Entity data for <see cref="ID.Entity.egg"/>s, <see cref="ID.Entity.ender_pearl"/>s, <see cref="ID.Entity.experience_bottle"/>s, <see cref="ID.Entity.potion"/>s and <see cref="ID.Entity.snowball"/>s
+        /// Creates a new <see cref="ID.Entity.egg"/>, <see cref="ID.Entity.ender_pearl"/>, <see cref="ID.Entity.experience_bottle"/>, <see cref="ID.Entity.potion"/> or <see cref="ID.Entity.snowball"/>
         /// </summary>
-        public class Throwable : BaseProjectile
-        {
-            /// <summary>
-            /// Creates a new <see cref="ID.Entity.egg"/>, <see cref="ID.Entity.ender_pearl"/>, <see cref="ID.Entity.experience_bottle"/>, <see cref="ID.Entity.potion"/> or <see cref="ID.Entity.snowball"/>
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public Throwable(ID.Entity? type) : base(type) { }
+        /// <param name="type">the type of entity</param>
+        public Throwable(ID.Entity? type) : base(type) { }
 
-            /// <summary>
-            /// The entity shaking when hitting a block
-            /// </summary>
-            [Data.DataTag("shake")]
-            public byte? Shake { get; set; }
-            /// <summary>
-            /// The owner of the projectile
-            /// </summary>
-            [Data.DataTag("owner","M","L")]
-            public UUID? Owner { get; set; }
-            /// <summary>
-            /// The type of thrown potion
-            /// </summary>
-            [Data.DataTag]
-            public Item? Potion { get; set; }
-            /// <summary>
-            /// The item the entity is displayed as
-            /// (Potions do not support use this)
-            /// </summary>
-            [Data.DataTag("Item")]
-            public Item? DisplayItem { get; set; }
-        }
+        /// <summary>
+        /// The entity shaking when hitting a block
+        /// </summary>
+        [Data.DataTag("shake")]
+        public byte? Shake { get; set; }
+        /// <summary>
+        /// The owner of the projectile
+        /// </summary>
+        [Data.DataTag("owner", "M", "L")]
+        public UUID? Owner { get; set; }
+        /// <summary>
+        /// The type of thrown potion
+        /// </summary>
+        [Data.DataTag]
+        public Item? Potion { get; set; }
+        /// <summary>
+        /// The item the entity is displayed as
+        /// (Potions do not support use this)
+        /// </summary>
+        [Data.DataTag("Item")]
+        public Item? DisplayItem { get; set; }
     }
 }

@@ -23,7 +23,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="addEntity">The entity to add to the world</param>
         /// <param name="coords">The coords to add the entity at</param>
-        public void Add(Vector? coords, Entity.BaseEntity addEntity)
+        public void Add(Vector? coords, Entity addEntity)
         {
             ForFunction.AddCommand(new SummonCommand(addEntity, coords ?? new Coords()));
         }

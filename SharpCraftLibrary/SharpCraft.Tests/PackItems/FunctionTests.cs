@@ -210,7 +210,7 @@ namespace SharpCraft.Tests.PackItems
             Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
             //test
-            function.Custom.SummonExecute(new Entity.Armorstand() { Tags = new Tag[] { "ATag" } }, new Coords(1, 2, 3), "execute", (f) =>
+            function.Custom.SummonExecute(new Entities.Armorstand() { Tags = new Tag[] { "ATag" } }, new Coords(1, 2, 3), "execute", (f) =>
               {
                   f.World.Say("hello");
               });

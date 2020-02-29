@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpCraft.Data;
 
-namespace SharpCraft.IEntity
+namespace SharpCraft.Entities.Interfaces
 {
     /// <summary>
     /// Interface for villager like mobs
@@ -34,13 +34,13 @@ namespace SharpCraft.IEntity
         /// The gossips the villager has
         /// </summary>
         [DataTag]
-        Gossip?[]? Gossips { get; set; }
+        Gossip[]? Gossips { get; set; }
 
         /// <summary>
         /// The villager's trades
         /// </summary>
         [DataTag("Offers.Recipes")]
-        Trade?[]? Trades { get; set; }
+        Trade[]? Trades { get; set; }
     }
 
     /// <summary>

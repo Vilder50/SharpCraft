@@ -113,7 +113,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="executeAt">True if it should run the commands at the entity's location</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity entity, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt, writeSetting);
         }
@@ -128,7 +128,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="spawnCoords">The place to spawn the entity at</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             if (runCommands is null)
             {
@@ -137,7 +137,7 @@ namespace SharpCraft.FunctionWriters
 
             //add tag to find the summoned entity
             Tag findTag = new Tag("SharpSummon");
-            Entity.EntityBasic createEntity = (Entity.EntityBasic)entity.Clone();
+            Entities.BasicEntity createEntity = (Entities.BasicEntity)entity.Clone();
             List<Tag> tags = createEntity.Tags?.ToList() ?? new List<Tag>();
             tags.Add(findTag);
             createEntity.Tags = tags.ToArray();

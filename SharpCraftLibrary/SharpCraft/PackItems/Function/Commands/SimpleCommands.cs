@@ -808,7 +808,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SummonCommand : BaseCommand
     {
-        private Entity.BaseEntity entity = null!;
+        private Entity entity = null!;
         private Vector coordinates = null!;
 
         /// <summary>
@@ -816,7 +816,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="entity">The entity to summon</param>
         /// <param name="coordinates">The coordinates the summon the entity at</param>
-        public SummonCommand(Entity.BaseEntity entity, Vector coordinates)
+        public SummonCommand(Entity entity, Vector coordinates)
         {
             Entity = entity;
             Coordinates = coordinates;
@@ -825,7 +825,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The entity to summon
         /// </summary>
-        public Entity.BaseEntity Entity
+        public Entity Entity
         {
             get => entity;
             set

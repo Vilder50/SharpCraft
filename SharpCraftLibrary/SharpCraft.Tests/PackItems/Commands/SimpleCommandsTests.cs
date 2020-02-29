@@ -158,9 +158,9 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void SummonCommandTest()
         {
-            Assert.AreEqual("summon armor_stand ~1 ~2 ~3 {Invisible:1b}", new SummonCommand(new Entity.Armorstand() { Invisible = true }, new Coords(1,2,3)).GetCommandString());
+            Assert.AreEqual("summon armor_stand ~1 ~2 ~3 {Invisible:1b}", new SummonCommand(new Entities.Armorstand() { Invisible = true }, new Coords(1,2,3)).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(new Entity.Armorstand() { Invisible = true }, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(new Entities.Armorstand() { Invisible = true }, null));
             Assert.ThrowsException<ArgumentNullException>(() => new SummonCommand(null, new Vector(1, 2, 3)));
         }
 

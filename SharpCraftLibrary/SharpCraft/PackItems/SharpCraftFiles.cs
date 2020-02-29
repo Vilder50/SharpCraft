@@ -173,7 +173,7 @@ namespace SharpCraft
 
             dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
             SetupFunction!.Entity.Kill(dummyEntitySelector);
-            Entity.EntityBasic dummyEntity = new Entity.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags![0].Tag } };
+            Entity dummyEntity = new Entities.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags![0].Tag } };
             SetupFunction.Entity.Add(SharpCraftSettings.OwnedChunk * 16, dummyEntity);
 
             return dummyEntitySelector;

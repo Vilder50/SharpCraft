@@ -164,7 +164,7 @@ namespace SharpCraft
         /// The data the entity will have when the item is placed
         /// </summary>
         [DataTag("tag.EntityTag")]
-        public Entity.BaseEntity? EntityTag { get; set; }
+        public Entity? EntityTag { get; set; }
         /// <summary>
         /// The enchants the item has on
         /// </summary>

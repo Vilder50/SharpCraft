@@ -131,7 +131,7 @@ namespace SharpCraft
         /// <summary>
         /// The NBT the selected entity have to have to be selected
         /// </summary>
-        public Entity.BaseEntity? NBT { get; set; }
+        public Entity? NBT { get; set; }
 
         /// <summary>
         /// If the entity shouldnt have the NBT in <see cref="NBT"/>

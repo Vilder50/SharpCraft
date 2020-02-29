@@ -266,10 +266,10 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Converts a <see cref="SharpCraft.Entity.BaseEntity"/> into an <see cref="Entity"/> object
+            /// Converts a <see cref="SharpCraft.Entity"/> into an <see cref="Entity"/> object
             /// </summary>
-            /// <param name="entity">The <see cref="SharpCraft.Entity.BaseEntity"/> to convert</param>
-            public static implicit operator Entity(SharpCraft.Entity.BaseEntity entity)
+            /// <param name="entity">The <see cref="SharpCraft.Entity"/> to convert</param>
+            public static implicit operator JSONObjects.Entity(SharpCraft.Entity entity)
             {
                 return new Entity() { Type = entity.EntityType, NBT = entity };
             }
