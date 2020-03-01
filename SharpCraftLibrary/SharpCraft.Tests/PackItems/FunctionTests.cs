@@ -260,12 +260,6 @@ namespace SharpCraft.Tests.PackItems
             function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), (value1 + 5) * (value2 + 10));
             Assert.AreEqual(6, function.Commands.Count, "Operation didn't add the correct amount of commands to the function");
             Assert.AreEqual("Score", (function.Commands[5] as ScoreboardOperationCommand).Objective1.Name, "Operation didn't end up setting the correct score");
-
-            function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), value1 + 5);
-            Assert.AreEqual("Score", (function.Commands[6] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't set correct score");
-            Assert.AreEqual("Cakes", (function.Commands[6] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't get the correct score");
-            Assert.AreEqual("Score", (function.Commands[7] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't add to the correct score");
-            Assert.AreEqual("constants", (function.Commands[7] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't add with correct number");
         }
 
         [TestMethod]

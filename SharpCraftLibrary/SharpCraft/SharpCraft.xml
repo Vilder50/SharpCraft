@@ -7047,18 +7047,18 @@
             (-1 ticks = not exploding)
             </summary>
         </member>
-        <member name="T:SharpCraft.Items.Book">
+        <member name="T:SharpCraft.Items.BucketFish">
             <summary>
-            An object for book items
+            An object for fish in a bucket
             </summary>
         </member>
-        <member name="M:SharpCraft.Items.Book.#ctor">
+        <member name="M:SharpCraft.Items.BucketFish.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Items.Book.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.BucketFish.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7066,50 +7066,162 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="P:SharpCraft.Items.Book.Generation">
+        <member name="P:SharpCraft.Items.BucketFish.Variant">
             <summary>
-            The generation of the book.
-            (How much it has been copied)
+            The variant of tropical fish in the bucket
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Book.Author">
+        <member name="T:SharpCraft.Items.Crossbow">
             <summary>
-            The auther of the book
+            An object for crossbow
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Book.Title">
+        <member name="M:SharpCraft.Items.Crossbow.#ctor">
             <summary>
-            The book's title
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Book.Pages">
+        <member name="M:SharpCraft.Items.Crossbow.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
-            The book's pages.
-            Each index in the first array means a new page.
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.Crossbow.Projectile">
+            <summary>
+            The item there is in the crossbow
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Book.UnlockRecipes">
+        <member name="P:SharpCraft.Items.Crossbow.Charged">
             <summary>
-            The recipes unlocked when right clicking a recipe book
+            If the crossbow is charged
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Book.StoredEnchants">
+        <member name="T:SharpCraft.Items.DebugStick">
+            <summary>
+            An object for debug sticks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.DebugStick.LatestProperties">
+            <summary>
+            List of properties this debug stick last edited.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.DebugStick.StateList">
+            <summary>
+            Class for holding a list of states
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.StateList.#ctor(SharpCraft.Items.DebugStick.State[])">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Items.DebugStick.StateList"/>
+            </summary>
+            <param name="states">states this list is holding</param>
+        </member>
+        <member name="P:SharpCraft.Items.DebugStick.StateList.States">
+            <summary>
+            states this list is holding
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.StateList.GetAsDataObject(System.Object[])">
+            <summary>
+            Converts this object into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+            <param name="conversionData">Not used</param>
+            <returns>This object into a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
+        </member>
+        <member name="T:SharpCraft.Items.DebugStick.State">
+            <summary>
+            Class for holding a property a debug stick should remember
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.State.New``1(SharpCraft.BlockType,System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Items.DebugStick.State"/>
+            </summary>
+            <typeparam name="T">Block to get the state for</typeparam>
+            <param name="stateOwner">The block id of the block holding the state</param>
+            <param name="stateHoldingProperty">The state</param>
+            <returns></returns>
+        </member>
+        <member name="P:SharpCraft.Items.DebugStick.State.StateOwner">
+            <summary>
+            The block type holding the property
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.State.SetState``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Sets the state saved in the debug stick
+            </summary>
+            <param name="stateHoldingProperty"></param>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.State.GetState">
+            <summary>
+            Returns the property holding the state
+            </summary>
+            <returns>Property holding the state</returns>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.State.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this object into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not used</param>
+            <param name="extraConversionData">Not used</param>
+            <returns>This object into a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.Items.EnchantedBook">
+            <summary>
+            An object for enchanted book items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.EnchantedBook.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.EnchantedBook.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.EnchantedBook.StoredEnchants">
             <summary>
             The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.
             </summary>
         </member>
-        <member name="T:SharpCraft.Items.Firework">
+        <member name="T:SharpCraft.Items.FireworkRocket">
             <summary>
-            An object for firework items
+            An object for firework rocket items
             </summary>
         </member>
-        <member name="M:SharpCraft.Items.Firework.#ctor">
+        <member name="M:SharpCraft.Items.FireworkRocket.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
             This is used to test for item with data
             </summary>
         </member>
-        <member name="M:SharpCraft.Items.Firework.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+        <member name="M:SharpCraft.Items.FireworkRocket.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
             <summary>
             Creates a new item
             </summary>
@@ -7117,19 +7229,63 @@
             <param name="Count">The amount of the item. If null the item has no amount</param>
             <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
         </member>
-        <member name="P:SharpCraft.Items.Firework.FireworkStar">
-            <summary>
-            The data for a single firework star item
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Items.Firework.FireworkRocket">
+        <member name="P:SharpCraft.Items.FireworkRocket.Explosion">
             <summary>
             The data for a firework rocket
             </summary>
         </member>
-        <member name="P:SharpCraft.Items.Firework.RocketFlight">
+        <member name="P:SharpCraft.Items.FireworkRocket.RocketFlight">
             <summary>
             How many seconds the rocket will fly for
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.FireworkStar">
+            <summary>
+            An object for firework star items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.FireworkStar.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.FireworkStar.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.FireworkStar.Explosion">
+            <summary>
+            The data for a single firework star item
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.Leather">
+            <summary>
+            An object for colorable leather items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.Leather.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.Leather.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.Leather.Color">
+            <summary>
+            The generation of the book.
+            (How much it has been copied)
             </summary>
         </member>
         <member name="T:SharpCraft.Items.Map">
@@ -7196,6 +7352,51 @@
             The icons displayed on the map.
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.Map.Color">
+            <summary>
+            The color the map item has.
+            (The small black text like things on the paper)
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.PlayerHead">
+            <summary>
+            An object for player heads
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.PlayerHead.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.PlayerHead.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.PlayerHead.PlayerName">
+            <summary>
+            The name of the player whose skin to display. Tag doesn't work with other head tags.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.PlayerHead.UUID">
+            <summary>
+            The UUID of the player to show the skin for.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.PlayerHead.HeadName">
+            <summary>
+            The name of the player whose skin to display.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.PlayerHead.Textures">
+            <summary>
+            Textures saved in the skull.
+            </summary>
+        </member>
         <member name="T:SharpCraft.Items.Potion">
             <summary>
             The data for potions
@@ -7228,6 +7429,100 @@
         <member name="P:SharpCraft.Items.Potion.PotionType">
             <summary>
             The effect given by the potion using minecraft values.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.RecipeBook">
+            <summary>
+            An object for recipe book items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.RecipeBook.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.RecipeBook.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.RecipeBook.UnlockRecipes">
+            <summary>
+            The recipes unlocked when right clicking a recipe book
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.SuspiciousStew">
+            <summary>
+            An object for suspicious stew
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.SuspiciousStew.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.SuspiciousStew.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.SuspiciousStew.Effect">
+            <summary>
+            The effect the stew gives
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.SuspiciousStew.Duration">
+            <summary>
+            The duration of the effect.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Items.WrittenBook">
+            <summary>
+            An object for written book items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.WrittenBook.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Items.WrittenBook.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Items.WrittenBook.Generation">
+            <summary>
+            The generation of the book.
+            (How much it has been copied)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.WrittenBook.Author">
+            <summary>
+            The auther of the book
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.WrittenBook.Title">
+            <summary>
+            The book's title
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Items.WrittenBook.Pages">
+            <summary>
+            The book's pages.
+            Each index in the first array means a new page.
             </summary>
         </member>
         <member name="T:SharpCraft.Item">
@@ -7377,17 +7672,6 @@
             Number of levels to add to the base levels when using an anvil
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.LeatherColor">
-            <summary>
-            The color of the leather armor
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Item.MapColor">
-            <summary>
-            The color the map item has.
-            (The small black text like things on the paper)
-            </summary>
-        </member>
         <member name="P:SharpCraft.Item.Name">
             <summary>
             The item's shown name
@@ -7522,6 +7806,27 @@
             <summary>
             the colors the explosion fades into
             </summary>
+        </member>
+        <member name="T:SharpCraft.HeadTexture">
+            <summary>
+            An object for skins for player heads
+            </summary>
+        </member>
+        <member name="P:SharpCraft.HeadTexture.Signature">
+            <summary>
+            No idea
+            </summary>
+        </member>
+        <member name="P:SharpCraft.HeadTexture.Value">
+            <summary>
+            Data about the skin bas64 encoded.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.HeadTexture.op_Implicit(SharpCraft.HeadTexture)~SharpCraft.HeadTexture[]">
+            <summary>
+            Converts a single <see cref="T:SharpCraft.HeadTexture"/> into an array of textures.
+            </summary>
+            <param name="texture">The <see cref="T:SharpCraft.HeadTexture"/> to convert</param>
         </member>
         <member name="T:SharpCraft.AttributeModifier">
             <summary>
@@ -8736,6 +9041,11 @@
             Way of storing a scoreboard balue
             </summary>
         </member>
+        <member name="M:SharpCraft.ScoreValue.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.ScoreValue"/> for holding a value.
+            </summary>
+        </member>
         <member name="M:SharpCraft.ScoreValue.#ctor(SharpCraft.BaseSelector,SharpCraft.Objective)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.ScoreValue"/>
@@ -8765,7 +9075,7 @@
             </summary>
             <param name="score">The <see cref="T:SharpCraft.ScoreValue"/>'s scoreObject</param>
         </member>
-        <member name="M:SharpCraft.ScoreValue.op_Addition(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.ScoreValue.op_Addition(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
             <summary>
             Adds the two values together into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -8781,15 +9091,7 @@
             <param name="value2">One of the numbers to add together</param>
             <returns>The score operation for doing the math</returns>
         </member>
-        <member name="M:SharpCraft.ScoreValue.op_Addition(SharpCraft.ScoreValue,SharpCraft.ScoreValue)">
-            <summary>
-            Adds the two values together into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
-            </summary>
-            <param name="value1">One of the numbers to add together</param>
-            <param name="value2">One of the numbers to add together</param>
-            <returns>The score operation for doing the math</returns>
-        </member>
-        <member name="M:SharpCraft.ScoreValue.op_Subtraction(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.ScoreValue.op_Subtraction(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
             <summary>
             subtracts the two values from each other into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -8805,15 +9107,7 @@
             <param name="value2">The number to subtract with</param>
             <returns>The score operation for doing the math</returns>
         </member>
-        <member name="M:SharpCraft.ScoreValue.op_Subtraction(SharpCraft.ScoreValue,SharpCraft.ScoreValue)">
-            <summary>
-            subtracts the two values from each other into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
-            </summary>
-            <param name="value1">The number to subtract from</param>
-            <param name="value2">The number to subtract with</param>
-            <returns>The score operation for doing the math</returns>
-        </member>
-        <member name="M:SharpCraft.ScoreValue.op_Multiply(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.ScoreValue.op_Multiply(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
             <summary>
             multiplies the two values together into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -8829,15 +9123,7 @@
             <param name="value2">One of the values to multiply with</param>
             <returns>The score operation for doing the math</returns>
         </member>
-        <member name="M:SharpCraft.ScoreValue.op_Multiply(SharpCraft.ScoreValue,SharpCraft.ScoreValue)">
-            <summary>
-            multiplies the two values together into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
-            </summary>
-            <param name="value1">One of the values to multiply with</param>
-            <param name="value2">One of the values to multiply with</param>
-            <returns>The score operation for doing the math</returns>
-        </member>
-        <member name="M:SharpCraft.ScoreValue.op_Division(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.ScoreValue.op_Division(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
             <summary>
             divides the two values by each other into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -8853,15 +9139,7 @@
             <param name="value2">The number to divide with</param>
             <returns>The score operation for doing the math</returns>
         </member>
-        <member name="M:SharpCraft.ScoreValue.op_Division(SharpCraft.ScoreValue,SharpCraft.ScoreValue)">
-            <summary>
-            divides the two values by each other into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
-            </summary>
-            <param name="value1">The number to divide</param>
-            <param name="value2">The number to divide with</param>
-            <returns>The score operation for doing the math</returns>
-        </member>
-        <member name="M:SharpCraft.ScoreValue.op_Modulus(SharpCraft.ScoreValue,System.Int32)">
+        <member name="M:SharpCraft.ScoreValue.op_Modulus(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
             <summary>
             modulos the two values into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -8870,14 +9148,6 @@
             <returns>The score operation for doing the math</returns>
         </member>
         <member name="M:SharpCraft.ScoreValue.op_Modulus(System.Int32,SharpCraft.ScoreValue)">
-            <summary>
-            modulos the two values into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
-            </summary>
-            <param name="value1">The number to divide</param>
-            <param name="value2">The number to divide with</param>
-            <returns>The score operation for doing the math</returns>
-        </member>
-        <member name="M:SharpCraft.ScoreValue.op_Modulus(SharpCraft.ScoreValue,SharpCraft.ScoreValue)">
             <summary>
             modulos the two values into a <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -9779,6 +10049,57 @@
             <param name="asType">The type to convert the uuid into</param>
             <param name="extraConversionData">Not used</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.ValueParameter">
+            <summary>
+            Struct for holding making parameters which accepts scores and ints
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.#ctor(SharpCraft.ScoreValue)">
+            <summary>
+            Creates a new <see cref="T:SharpCraft.ValueParameter"/> holding a <see cref="F:SharpCraft.ValueParameter.ScoreValue"/>
+            </summary>
+            <param name="scoreValue">The <see cref="F:SharpCraft.ValueParameter.ScoreValue"/> its holding</param>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.#ctor(System.Int32)">
+            <summary>
+            Creates a new <see cref="T:SharpCraft.ValueParameter"/> holding an <see cref="T:System.Int32"/>
+            </summary>
+            <param name="intValue">The <see cref="T:System.Int32"/> its holding</param>
+        </member>
+        <member name="F:SharpCraft.ValueParameter.IntValue">
+            <summary>
+            The <see cref="T:System.Int32"/> its holding
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ValueParameter.ScoreValue">
+            <summary>
+            The <see cref="F:SharpCraft.ValueParameter.ScoreValue"/> its holding
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.IsInt">
+            <summary>
+            If this <see cref="T:SharpCraft.ValueParameter"/> is holding an <see cref="T:System.Int32"/>
+            </summary>
+            <returns>True if it's holding an <see cref="T:System.Int32"/></returns>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.IsScore">
+            <summary>
+            If this <see cref="T:SharpCraft.ValueParameter"/> is holding a <see cref="F:SharpCraft.ValueParameter.ScoreValue"/>
+            </summary>
+            <returns>True if it's holding a <see cref="F:SharpCraft.ValueParameter.ScoreValue"/></returns>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.op_Implicit(System.Int32)~SharpCraft.ValueParameter">
+            <summary>
+            Converts a <see cref="T:System.Int32"/> into a <see cref="T:SharpCraft.ValueParameter"/>
+            </summary>
+            <param name="value">The new <see cref="T:SharpCraft.ValueParameter"/></param>
+        </member>
+        <member name="M:SharpCraft.ValueParameter.op_Implicit(SharpCraft.ScoreValue)~SharpCraft.ValueParameter">
+            <summary>
+            Converts a <see cref="F:SharpCraft.ValueParameter.ScoreValue"/> into a <see cref="T:SharpCraft.ValueParameter"/>
+            </summary>
+            <param name="value">The new <see cref="T:SharpCraft.ValueParameter"/></param>
         </member>
         <member name="T:SharpCraft.Coords">
             <summary>
@@ -15142,7 +15463,7 @@
             Holds a math operation between two scores
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation.#ctor(SharpCraft.ScoreValue,SharpCraft.ID.Operation,SharpCraft.ScoreValue)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation.#ctor(SharpCraft.ValueParameter,SharpCraft.ID.Operation,SharpCraft.ValueParameter)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.FunctionWriters.CustomCommands.ScoreOperation"/>
             </summary>
@@ -15172,13 +15493,13 @@
             <param name="function">The function to write the commands to</param>
             <param name="endingValue">The <see cref="T:SharpCraft.ScoreValue"/> the result should end up in</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SetToScoreOperation(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.FunctionWriters.CustomCommands.ScoreOperation)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SetToScoreOperation(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.ValueParameter)">
             <summary>
             Sets a score value to the value made by a calculation
             </summary>
             <param name="selector">The selector for selecting the score</param>
             <param name="objective">The objective the score to change is in</param>
-            <param name="operation">The operation calculating the value the score should be set to</param>
+            <param name="value">The operation calculating the value the score should be set to</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.GroupCommands(SharpCraft.Function.FunctionWriter,System.Boolean,System.Boolean)">
             <summary>
@@ -15214,42 +15535,7 @@
             <param name="writeTo">The function to write the loop commands to</param>
             <param name="loopValue">The loop's value</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
-            <summary>
-            Loops through every value from "from" to and with "to"
-            </summary>
-            <param name="from">The start value</param>
-            <param name="to">The ending value</param>
-            <param name="loopName">The name of the loop (used for function name and score name)</param>
-            <param name="writer">Writer for writing commands to loop over</param>
-            <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,System.Int32,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
-            <summary>
-            Loops through every value from "from" to and with "to"
-            </summary>
-            <param name="from">The start value</param>
-            <param name="to">The ending value</param>
-            <param name="loopName">The name of the loop (used for function name and score name)</param>
-            <param name="writer">Writer for writing commands to loop over</param>
-            <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-            <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(System.Int32,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
-            <summary>
-            Loops through every value from "from" to and with "to"
-            </summary>
-            <param name="from">The start value</param>
-            <param name="to">The ending value</param>
-            <param name="loopName">The name of the loop (used for function name and score name)</param>
-            <param name="writer">Writer for writing commands to loop over</param>
-            <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-            <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-            <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
-        </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ScoreValue,SharpCraft.ScoreValue,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ForLoop(SharpCraft.ValueParameter,SharpCraft.ValueParameter,System.String,SharpCraft.FunctionWriters.CustomCommands.ForLoopDelegate,System.Boolean,SharpCraft.Commands.BaseExecuteCommand,System.Boolean)">
             <summary>
             Loops through every value from "from" to and with "to"
             </summary>
