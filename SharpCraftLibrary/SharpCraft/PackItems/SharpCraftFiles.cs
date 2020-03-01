@@ -274,14 +274,8 @@ namespace SharpCraft
             {
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
 
-                Data.DataPath slotpath = Data.DataPath.GetDataPath<Blocks.ShulkerBox>(b => b.DItems);
-                slotpath.Condition(0);
-                Data.DataPath attributePath = Data.DataPath.GetDataPath<Item>(i => i.Attributes);
-                attributePath.Condition(0);
-                slotpath.SetNextPath(attributePath);
-
                 h.Execute.Store(GetRandomHolder(), GetRandomHolder());
-                h.Block.Data.Get(hashBlockLocation, slotpath.ToString() + ".Amount");
+                h.Block.Data.Get(hashBlockLocation, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DItems![0]!.Attributes![0]!.Amount));
 
                 h.Block.Add(hashBlockLocation, ID.Block.air);
                 h.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });

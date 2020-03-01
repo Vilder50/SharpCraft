@@ -954,7 +954,7 @@ namespace SharpCraft.FunctionWriters
                 var (function, location) = SharpCraftFiles.GetHashFunction();
                 ForFunction.Custom.GroupCommands(g =>
                 {
-                    g.Execute.Store(new BlockDataLocation(location, Data.DataPath.GetDataPath<Blocks.ShulkerBox>(b => b.DLootTableSeed).ToString()), ID.StoreTypes.Int);
+                    g.Execute.Store(new BlockDataLocation(location, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DLootTableSeed)), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
                     g.World.Function(function);
                     g.Execute.IfScore(value, value, 0);

@@ -31,7 +31,7 @@ namespace SharpCraft.Blocks
         }
 
         /// <summary>
-        /// The item's inside the brewing stand.
+        /// The item's inside the furnace.
         /// 0 = Smelting item slot. 1 = Fuel slot. 2 = Result slot.
         /// </summary>
         public override Item?[]? DItems

@@ -807,7 +807,7 @@
         </member>
         <member name="P:SharpCraft.Blocks.Furnace.DItems">
             <summary>
-            The item's inside the brewing stand.
+            The item's inside the furnace.
             0 = Smelting item slot. 1 = Fuel slot. 2 = Result slot.
             </summary>
         </member>
@@ -4035,148 +4035,34 @@
             </summary>
             <returns>The data in this object</returns>
         </member>
-        <member name="T:SharpCraft.Data.DataPath">
+        <member name="T:SharpCraft.Data.DataPathCreator">
             <summary>
-            Describes the location of some data
+            Static class containing a method for getting datapaths
             </summary>
         </member>
-        <member name="M:SharpCraft.Data.DataPath.#ctor(System.String)">
+        <member name="M:SharpCraft.Data.DataPathCreator.GetPath``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
             <summary>
-            Creates a new datapath with the given path
+            Gets the datapath for the given location
             </summary>
-            <param name="path">The path to the data</param>
+            <typeparam name="T">The type of object to get data for</typeparam>
+            <param name="pathExpression">The datapath to get</param>
+            <returns>The datapath string</returns>
         </member>
-        <member name="M:SharpCraft.Data.DataPath.#ctor(System.String,System.Int32)">
+        <member name="M:SharpCraft.Data.DataPathCreator.AddCompoundCheck``1(``0,SharpCraft.Data.SimpleDataHolder)">
             <summary>
-            Creates a new datapath with the given path which ends with array(s)
+            Used for adding a compound check to a datapath. Wrap this method around the path to add a check to it.
             </summary>
-            <param name="path">The path of the array(s)</param>
-            <param name="arrayCount">the amount of arrays</param>
+            <typeparam name="T">The return type of path</typeparam>
+            <param name="addTo">The path to the the compund check to</param>
+            <param name="check">The thing to check for</param>
+            <returns>The path the compund check was added to</returns>
         </member>
-        <member name="P:SharpCraft.Data.DataPath.Path">
+        <member name="M:SharpCraft.Data.DataPathCreator.AddArrayFilter(SharpCraft.Data.SimpleDataHolder)">
             <summary>
-            The path to the data
+            Used for adding a filter to arrays in datapaths. Put this into an indexer to filter it.
             </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataPath.ArrayCount">
-            <summary>
-            The amount of nested arrays in this path
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataPath.IsArray">
-            <summary>
-            If this datapath is a path to an array or not
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.Condition(SharpCraft.Data.DataPathCondition[])">
-            <summary>
-            Continues the path if the condition(s) are meet
-            </summary>
-            <param name="conditions">The condition(s)</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.SetNextPath(SharpCraft.Data.DataPath)">
-            <summary>
-            Sets the continuation of the path
-            </summary>
-            <param name="path"></param>
-            <returns>This datapath</returns>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.GetNextpath">
-            <summary>
-            Returns the continuation of this data path
-            </summary>
-            <returns>the continuation of this data path</returns>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.ToString">
-            <summary>
-            Converts the datapath into a string
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.op_Implicit(SharpCraft.Data.DataPath)~System.String">
-            <summary>
-            Converts the datapath into a string
-            </summary>
-            <param name="dataPath">The datapath to convert into a string</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPath.GetDataPath``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
-            <summary>
-            Creates an object containing information about how to find the given data
-            </summary>
-            <typeparam name="T">The object to get the data path from</typeparam>
-            <param name="dataHoldingProperty">The property holding the data to get a path to</param>
-            <returns>A path to some data</returns>
-        </member>
-        <member name="T:SharpCraft.Data.DataPathCondition">
-            <summary>
-            A condition for if the path should be used or not
-            </summary>
-        </member>
-        <member name="T:SharpCraft.Data.DataPathCondition.ConditionType">
-            <summary>
-            Types of conditions
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataPathCondition.ConditionType.Data">
-            <summary>
-            If its a condition searching for data
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataPathCondition.ConditionType.RawData">
-            <summary>
-            If its a condition searching for data in the form of a string
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataPathCondition.ConditionType.Index">
-            <summary>
-            If its a condition searching for an array index
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.#ctor(System.String)">
-            <summary>
-            Creates a new condition to check for data in text form
-            </summary>
-            <param name="rawData">the data it should have</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.#ctor(System.Nullable{System.Int32})">
-            <summary>
-            Creates a new condition to select an index in an array
-            </summary>
-            <param name="index">the index to select. Use negative to start from the top. Use null to select every path in the array</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.#ctor(SharpCraft.Data.DataHolderBase)">
-            <summary>
-            Creates a new condition to check for the given data at the path
-            </summary>
-            <param name="data">the data to check for</param>
-        </member>
-        <member name="P:SharpCraft.Data.DataPathCondition.Type">
-            <summary>
-            The type of condition this condition is
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.GetConditionString">
-            <summary>
-            Gets the condition as a string used in Minecraft
-            </summary>
-            <returns>a string used in Minecraft</returns>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.op_Implicit(System.Nullable{System.Int32})~SharpCraft.Data.DataPathCondition">
-            <summary>
-            Converts a number into an index condition
-            </summary>
-            <param name="index">the index to use</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.op_Implicit(System.String)~SharpCraft.Data.DataPathCondition">
-            <summary>
-            Converts a string into a raw data condition
-            </summary>
-            <param name="rawData">the raw data</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataPathCondition.op_Implicit(SharpCraft.Data.DataHolderBase)~SharpCraft.Data.DataPathCondition">
-            <summary>
-            Converts a data holder into a data condition
-            </summary>
-            <param name="data">the data</param>
+            <param name="filter">The thing to filter for. Leave null to get all items.</param>
+            <returns>0 (So it can be used in indexers)</returns>
         </member>
         <member name="T:SharpCraft.Data.DataTagAttribute">
             <summary>
@@ -7284,8 +7170,7 @@
         </member>
         <member name="P:SharpCraft.Items.Leather.Color">
             <summary>
-            The generation of the book.
-            (How much it has been copied)
+            The color of the leather armor
             </summary>
         </member>
         <member name="T:SharpCraft.Items.Map">

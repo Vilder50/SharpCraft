@@ -22,8 +22,7 @@ namespace SharpCraft.Items
         public Leather(ItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
         /// <summary>
-        /// The generation of the book.
-        /// (How much it has been copied)
+        /// The color of the leather armor
         /// </summary>
         [Data.DataTag("tag.display.color", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
         public RGBColor? Color { get; set; }
