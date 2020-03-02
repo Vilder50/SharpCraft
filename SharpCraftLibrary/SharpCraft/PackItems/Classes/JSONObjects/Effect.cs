@@ -74,7 +74,7 @@ namespace SharpCraft.JsonObjects
             /// </summary>
             /// <param name="conversionData">Not in use</param>
             /// <returns>This object as a <see cref="DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object?[]? conversionData)
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
                 DataPartObject dataObject = new DataPartObject();
                 for (int i = 0; i < Effects.Count; i++)

@@ -17,7 +17,7 @@ namespace SharpCraft.Entities
         /// The entities the spawner can spawn
         /// </summary>
         [Data.DataTag]
-        public SpawnerPotential?[]? Potentials { get; set; }
+        public SpawnerPotential[]? Potentials { get; set; }
         /// <summary>
         /// How many entities to try to spawn every time
         /// </summary>

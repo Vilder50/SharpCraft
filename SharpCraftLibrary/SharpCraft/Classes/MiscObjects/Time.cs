@@ -120,7 +120,7 @@ namespace SharpCraft
         /// <param name="extraConversionData">Not used</param>
         /// <param name="asType">The type of tag</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             int savedTime = timeType switch
             {

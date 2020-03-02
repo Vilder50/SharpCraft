@@ -50,7 +50,7 @@ namespace SharpCraft.Blocks
         /// The entities the spawner can spawn
         /// </summary>
         [Data.DataTag("SpawnPotentials")]
-        public SpawnerPotential?[]? DPotentials { get; set; }
+        public SpawnerPotential[]? DPotentials { get; set; }
 
         /// <summary>
         /// How many entities to try to spawn every time

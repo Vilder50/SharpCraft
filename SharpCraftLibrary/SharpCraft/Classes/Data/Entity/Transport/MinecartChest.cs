@@ -27,6 +27,6 @@ namespace SharpCraft.Entities
         /// The items in the chest
         /// </summary>
         [Data.DataTag]
-        public SharpCraft.Item?[]? Items { get; set; }
+        public SharpCraft.Item[]? Items { get; set; }
     }
 }

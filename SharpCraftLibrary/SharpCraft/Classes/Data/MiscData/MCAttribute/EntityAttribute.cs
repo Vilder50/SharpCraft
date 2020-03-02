@@ -16,7 +16,7 @@ namespace SharpCraft
         /// <param name="attribute">The attribute</param>
         /// <param name="value">The value of the attribute</param>
         /// <param name="modifiers">Modifiers for the attribute</param>
-        public EntityAttribute(ID.AttributeType attribute, double value, AttributeModifier?[]? modifiers = null)
+        public EntityAttribute(ID.AttributeType attribute, double value, AttributeModifier[]? modifiers = null)
         {
             Attribute = attribute;
             Base = value;
@@ -47,6 +47,6 @@ namespace SharpCraft
         /// Modifiers for modifying the attribute
         /// </summary>
         [DataTag]
-        public AttributeModifier?[]? Modifiers { get; set; }
+        public AttributeModifier[]? Modifiers { get; set; }
     }
 }

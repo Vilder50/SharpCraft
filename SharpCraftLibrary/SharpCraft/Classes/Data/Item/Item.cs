@@ -132,7 +132,7 @@ namespace SharpCraft
             /// <param name="asType">Not used</param>
             /// <param name="extraConversionData">Not used</param>
             /// <returns>the made <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
             {
                 return new DataPartTag(HideFlagsNumber);
             }
@@ -147,12 +147,12 @@ namespace SharpCraft
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
         [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType?[]? CanDestroy { get; set; }
+        public BlockType[]? CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
         [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType?[]? CanPlaceOn { get; set; }
+        public BlockType[]? CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
@@ -188,7 +188,7 @@ namespace SharpCraft
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BaseJsonText?[]? Lore { get; set; }
+        public BaseJsonText[]? Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
@@ -198,7 +198,7 @@ namespace SharpCraft
         /// The attributes the item has
         /// </summary>
         [DataTag("tag.AttributeModifiers")]
-        public ItemAttribute?[]? Attributes { get; set; }
+        public ItemAttribute[]? Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>

@@ -97,11 +97,11 @@ namespace SharpCraft
         /// <param name="extraConversionData">Not used</param>
         /// <param name="asType">The type of array</param>
         /// <returns>the made <see cref="DataPartArray"/></returns>
-        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagDoubleArray)
             {
-                DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, null);
+                DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, new object?[0]);
                 return dataArray;
             }
             else

@@ -335,7 +335,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new Data.DataPartTag(GetNamespacedName());
         }
@@ -404,7 +404,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new Data.DataPartTag(GetNamespacedName());
         }

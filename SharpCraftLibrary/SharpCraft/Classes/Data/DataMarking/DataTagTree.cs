@@ -175,7 +175,7 @@ namespace SharpCraft.Data
         /// <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
         /// <param name="forceType">a type used for converting the thing in the array correctly</param>
         /// <param name="isJson">If the datatags in the array should be in json format</param>
-        public DataPartArray(object data, ID.NBTTagType? forceType, object?[]? conversionParams, bool isJson = false)
+        public DataPartArray(object data, ID.NBTTagType? forceType, object?[] conversionParams, bool isJson = false)
         {
             IsJson = isJson;
             items = new List<IDataPartPathEnding>();

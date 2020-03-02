@@ -25,7 +25,7 @@ namespace SharpCraft.Items
         /// The effects given by the potion
         /// </summary>
         [Data.DataTag("tag.CustomPotionEffects")]
-        public Effect?[]? PotionEffects { get; set; }
+        public Effect[]? PotionEffects { get; set; }
         /// <summary>
         /// The color of the potion
         /// </summary>

@@ -25,7 +25,7 @@ namespace SharpCraft.Items
         /// The data for a firework rocket
         /// </summary>
         [Data.DataTag("tag.Fireworks.Explosions")]
-        public Firework?[]? Explosion { get; set; }
+        public Firework[]? Explosion { get; set; }
         /// <summary>
         /// How many seconds the rocket will fly for
         /// </summary>

@@ -29,12 +29,12 @@ namespace SharpCraft
         /// the colors of the explosion
         /// </summary>
         [Data.DataTag]
-        public RGBColor?[]? Colors { get; set; }
+        public RGBColor[]? Colors { get; set; }
 
         /// <summary>
         /// the colors the explosion fades into
         /// </summary>
         [Data.DataTag]
-        public RGBColor?[]? FadeColors { get; set; }
+        public RGBColor[]? FadeColors { get; set; }
     }
 }

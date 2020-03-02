@@ -127,13 +127,13 @@ namespace SharpCraft.Entities
         /// (Slot -106 = off hand)
         /// </summary>
         [Data.DataTag]
-        public Item?[]? Inventory { get; set; }
+        public Item[]? Inventory { get; set; }
         /// <summary>
         /// The items in the player's enderchest
         /// (Slot 0-26 = left top to right bottom slots)
         /// </summary>
         [Data.DataTag("EnderItems")]
-        public Item?[]? Enderchest { get; set; }
+        public Item[]? Enderchest { get; set; }
         /// <summary>
         /// The entity the player is riding
         /// </summary>
@@ -178,11 +178,11 @@ namespace SharpCraft.Entities
         /// A list of recipes the player has unlocked
         /// </summary>
         [Data.DataTag("recipeBook.recipes")]
-        public IRecipe?[]? UnlockedRecipes { get; set; }
+        public IRecipe[]? UnlockedRecipes { get; set; }
         /// <summary>
         /// A list of recipes the player has unlocked, but still haven't seen in the recipe book.
         /// </summary>
         [Data.DataTag("recipeBook.toBeDisplayed")]
-        public IRecipe?[]? NotSeenRecipes { get; set; }
+        public IRecipe[]? NotSeenRecipes { get; set; }
     }
 }

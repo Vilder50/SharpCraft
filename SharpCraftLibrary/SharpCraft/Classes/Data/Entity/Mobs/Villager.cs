@@ -9,7 +9,7 @@ namespace SharpCraft.Entities
     /// </summary>
     public class Villager : BreedableMob, IVillager
     {
-        Item?[]? inventory;
+        Item[]? inventory;
 
         /// <summary>
         /// Creates a new villager
@@ -81,7 +81,7 @@ namespace SharpCraft.Entities
         /// The items in the villagers inventory (up to 8 slots)
         /// </summary>
         [DataTag]
-        public Item?[]? Inventory
+        public Item[]? Inventory
         {
             get
             {

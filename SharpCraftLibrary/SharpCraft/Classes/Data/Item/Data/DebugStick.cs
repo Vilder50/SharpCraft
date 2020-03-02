@@ -58,13 +58,13 @@ namespace SharpCraft.Items
             /// </summary>
             /// <param name="conversionData">Not used</param>
             /// <returns>This object into a <see cref="Data.DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object?[]? conversionData)
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
                 DataPartObject returnObject = new DataPartObject();
 
                 foreach(State state in States)
                 {
-                    returnObject.AddValue(new DataPartPath(state.StateOwner.Name, state.GetAsTag(null, null), true));
+                    returnObject.AddValue(new DataPartPath(state.StateOwner.Name, state.GetAsTag(null, new object?[0]), true));
                 }
 
                 return returnObject;
@@ -139,7 +139,7 @@ namespace SharpCraft.Items
             /// <param name="asType">Not used</param>
             /// <param name="extraConversionData">Not used</param>
             /// <returns>This object into a <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
             {
                 Blocks.BlockStateAttribute stateInformation = (Blocks.BlockStateAttribute?)state.GetCustomAttribute(typeof(Blocks.BlockStateAttribute))!;
                 return new DataPartTag(stateInformation.DataName);

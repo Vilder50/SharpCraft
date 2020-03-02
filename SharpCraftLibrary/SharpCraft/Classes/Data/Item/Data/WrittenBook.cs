@@ -45,6 +45,6 @@ namespace SharpCraft.Items
         /// Each index in the first array means a new page.
         /// </summary>
         [Data.DataTag("tag.Pages", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BaseJsonText?[]? Pages { get; set; }
+        public BaseJsonText[]? Pages { get; set; }
     }
 }

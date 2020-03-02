@@ -12,7 +12,7 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Furnace : BaseInventory, Interfaces.IFacing, Interfaces.ILit
     {
-        private Item?[]? _dItems;
+        private Item[]? _dItems;
 
         /// <summary>
         /// Creates a new furnace block
@@ -34,7 +34,7 @@ namespace SharpCraft.Blocks
         /// The item's inside the furnace.
         /// 0 = Smelting item slot. 1 = Fuel slot. 2 = Result slot.
         /// </summary>
-        public override Item?[]? DItems
+        public override Item[]? DItems
         {
             get => _dItems;
             set
@@ -98,7 +98,7 @@ namespace SharpCraft.Blocks
             /// Intializes a new <see cref="SmeltedRecipes"/> with the given recipes
             /// </summary>
             /// <param name="recipes">The smelted recipes</param>
-            public SmeltedRecipes(SmeltedRecipe?[] recipes)
+            public SmeltedRecipes(SmeltedRecipe[] recipes)
             {
                 if (recipes is null)
                 {
@@ -110,14 +110,14 @@ namespace SharpCraft.Blocks
             /// <summary>
             /// The smelted recipes
             /// </summary>
-            public SmeltedRecipe?[] Recipes { get; private set; }
+            public SmeltedRecipe[] Recipes { get; private set; }
 
             /// <summary>
             /// Converts this <see cref="SmeltedRecipes"/> object into a <see cref="DataPartObject"/>
             /// </summary>
             /// <param name="conversionData">Not in use</param>
             /// <returns>This object as a <see cref="DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object?[]? conversionData)
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
                 DataPartObject returnObject = new DataPartObject();
                 foreach (SmeltedRecipe? recipe in Recipes)

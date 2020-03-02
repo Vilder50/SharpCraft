@@ -25,6 +25,6 @@ namespace SharpCraft.Items
         /// The recipes unlocked when right clicking a recipe book
         /// </summary>
         [Data.DataTag("tag.Recipes", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public IRecipe?[]? UnlockRecipes { get; set; }
+        public IRecipe[]? UnlockRecipes { get; set; }
     }
 }

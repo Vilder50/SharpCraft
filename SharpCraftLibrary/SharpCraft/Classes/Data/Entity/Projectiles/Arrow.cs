@@ -57,7 +57,7 @@ namespace SharpCraft.Entities
         /// The effects given by the arrow
         /// </summary>
         [Data.DataTag]
-        public Effect?[]? CustomPotionEffects { get; set; }
+        public Effect[]? CustomPotionEffects { get; set; }
         /// <summary>
         /// The color of the arrow's particles
         /// </summary>

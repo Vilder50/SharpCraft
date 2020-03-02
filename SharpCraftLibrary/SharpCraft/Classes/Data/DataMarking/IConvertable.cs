@@ -11,7 +11,7 @@
         /// <param name="asType">The type of <see cref="DataPartTag"/></param>
         /// <param name="extraConversionData">Extra parameters for specific conversion</param>
         /// <returns>The object as a <see cref="DataPartTag"/></returns>
-        DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData);
+        DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData);
     }
 
     /// <summary>
@@ -25,7 +25,7 @@
         /// <param name="asType">The type of <see cref="DataPartArray"/></param>
         /// <param name="extraConversionData">Extra parameters for specific conversion</param>
         /// <returns>The object as a <see cref="DataPartArray"/></returns>
-        DataPartArray GetAsArray(ID.NBTTagType? asType, object?[]? extraConversionData);
+        DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData);
     }
 
     /// <summary>
@@ -38,6 +38,6 @@
         /// </summary>
         /// <param name="conversionData">parameters for specific conversion</param>
         /// <returns>The object as a <see cref="DataPartObject"/></returns>
-        DataPartObject GetAsDataObject(object?[]? conversionData);
+        DataPartObject GetAsDataObject(object?[] conversionData);
     }
 }

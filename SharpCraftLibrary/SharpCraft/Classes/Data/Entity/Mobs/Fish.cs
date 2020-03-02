@@ -49,7 +49,7 @@ namespace SharpCraft.Entities
             /// <param name="asType">Not used</param>
             /// <param name="extraConversionData">Not used</param>
             /// <returns>the made <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
             {
                 return new DataPartTag(GetValue());
             }

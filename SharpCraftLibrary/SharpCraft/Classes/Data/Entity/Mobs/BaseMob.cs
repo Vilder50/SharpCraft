@@ -94,34 +94,34 @@ namespace SharpCraft.Entities
         /// 0: main hand. 1: off hand.
         /// </summary>
         [Data.DataTag]
-        public Item?[]? HandItems { get; set; }
+        public Item[]? HandItems { get; set; }
         /// <summary>
         /// The items the mob has on
         /// 0: boots. 1: leggings. 2: chestplate. 3: helmet
         /// </summary>
         [Data.DataTag]
-        public Item?[]? ArmorItems { get; set; }
+        public Item[]? ArmorItems { get; set; }
         /// <summary>
         /// The chance that the mob will drop its hand items when killed (number between 0-1)
         /// 0: main hand. 1: off hand
         /// </summary>
         [Data.DataTag]
-        public float?[]? HandDropChances { get; set; }
+        public float[]? HandDropChances { get; set; }
         /// <summary>
         /// The chance that the mob will drop its armor items when killed (number between 0-1)
         /// 0: boots. 1: leggings. 2: chestplate. 3: helmet
         /// </summary>
         [Data.DataTag]
-        public float?[]? ArmorDropChances { get; set; }
+        public float[]? ArmorDropChances { get; set; }
         /// <summary>
         /// The <see cref="Effect"/>s the mob has
         /// </summary>
         [Data.DataTag]
-        public Effect?[]? ActiveEffects { get; set; }
+        public Effect[]? ActiveEffects { get; set; }
         /// <summary>
         /// The attributes the mob has
         /// </summary>
         [Data.DataTag]
-        public EntityAttribute?[]? Attributes { get; set; }
+        public EntityAttribute[]? Attributes { get; set; }
     }
 }

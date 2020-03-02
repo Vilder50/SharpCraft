@@ -25,6 +25,6 @@ namespace SharpCraft.Items
         /// The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.
         /// </summary>
         [Data.DataTag("tag.StoredEnchantments")]
-        public Enchantment?[]? StoredEnchants { get; set; }
+        public Enchantment[]? StoredEnchants { get; set; }
     }
 }

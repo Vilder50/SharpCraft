@@ -27,7 +27,7 @@ namespace SharpCraft.Entities
         /// The items in the hopper
         /// </summary>
         [Data.DataTag]
-        public SharpCraft.Item?[]? Items { get; set; }
+        public SharpCraft.Item[]? Items { get; set; }
         /// <summary>
         /// If the hopper is enabled
         /// </summary>

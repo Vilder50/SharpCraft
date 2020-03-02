@@ -195,7 +195,7 @@ namespace SharpCraft.Entities
             /// <param name="extraConversionData">Not used</param>
             /// <param name="asType">Not used</param>
             /// <returns>the made <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
             {
                 return new DataPartTag(GetValue());
             }
@@ -212,13 +212,13 @@ namespace SharpCraft.Entities
         /// 0: main hand. 1: off hand.
         /// </summary>
         [DataTag]
-        public Item?[]? HandItems { get; set; }
+        public Item[]? HandItems { get; set; }
         /// <summary>
         /// The items the armor stand has on
         /// 0: boots. 1: leggings. 2: chestplate. 3: helmet
         /// </summary>
         [DataTag]
-        public Item?[]? ArmorItems { get; set; }
+        public Item[]? ArmorItems { get; set; }
         /// <summary>
         /// Makes the armor stand invisible
         /// </summary>
@@ -249,36 +249,36 @@ namespace SharpCraft.Entities
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.Body")]
-        public float?[]? BodyRotation { get; set; }
+        public float[]? BodyRotation { get; set; }
         /// <summary>
         /// Rotates the armor stand's left arm
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.LeftArm")]
-        public float?[]? ArmLeftRotation { get; set; }
+        public float[]? ArmLeftRotation { get; set; }
         /// <summary>
         /// Rotates the armor stand's right arm
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.RightArm")]
-        public float?[]? ArmRightRotation { get; set; }
+        public float[]? ArmRightRotation { get; set; }
         /// <summary>
         /// Rotates the armor stand's left leg
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.LeftLeg")]
-        public float?[]? LegLeftRotation { get; set; }
+        public float[]? LegLeftRotation { get; set; }
         /// <summary>
         /// Rotates the armor stand's right leg
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.RightLeg")]
-        public float?[]? LegRightRotation { get; set; }
+        public float[]? LegRightRotation { get; set; }
         /// <summary>
         /// Rotates the armor stand's head
         /// 0: x. 1: y. 2: z.
         /// </summary>
         [DataTag("Pose.Head")]
-        public float?[]? HeadRotation { get; set; }
+        public float[]? HeadRotation { get; set; }
     }
 }

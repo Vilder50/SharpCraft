@@ -269,7 +269,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: the path to the block id, 1: the path to the state holding <see cref="DataPartObject"/>, 2: if it should return in json format. Or: 0: the path if block is an id, 1: path if block is group, 2: nbt path, 3: state path, 4: isjson</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object?[]? conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
             if (conversionData is null)
             {

@@ -78,7 +78,7 @@ namespace SharpCraft
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="extraConversionData">0: If true returns the string without the #</param>
         /// <returns>This <see cref="ItemType"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (extraConversionData is null)
             {

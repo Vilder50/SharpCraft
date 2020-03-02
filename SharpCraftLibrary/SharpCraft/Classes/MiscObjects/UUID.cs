@@ -95,7 +95,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: UUIDMost path, 1: UUIDLeast path</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object?[]? conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
             if (conversionData is null)
             {
@@ -128,7 +128,7 @@ namespace SharpCraft
         /// <param name="asType">The type to convert the uuid into</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagString)
             {

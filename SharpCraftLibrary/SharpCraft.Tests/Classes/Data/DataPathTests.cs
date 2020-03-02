@@ -32,6 +32,7 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestGetIndexDataPath()
         {
+            Assert.AreEqual("tag.Enchantments", DataPathCreator.GetPath<Item>(i => i.Enchants));
             Assert.AreEqual("tag.Enchantments[10].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[10].LVL));
             Assert.AreEqual("tag.Enchantments[{id:\"minecraft:aqua_infinity\"}].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[DataPathCreator.AddArrayFilter(new Item.Enchantment(ID.Enchant.aqua_infinity, null))].LVL));
             Assert.AreEqual("tag.Enchantments[].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[DataPathCreator.AddArrayFilter(null)].LVL));

@@ -65,7 +65,7 @@ namespace SharpCraft.Blocks
         /// The banner's patterns
         /// </summary>
         [Data.DataTag("Patterns")]
-        public BannerPattern?[]? DPatterns { get; set; }
+        public BannerPattern[]? DPatterns { get; set; }
 
         /// <summary>
         /// An object defining a banner pattern

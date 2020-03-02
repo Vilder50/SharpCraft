@@ -38,6 +38,6 @@ namespace SharpCraft.Blocks
         /// </summary>
 
         [Data.DataTag("Items")]
-        public abstract Item?[]? DItems { get; set; }
+        public abstract Item[]? DItems { get; set; }
     }
 }

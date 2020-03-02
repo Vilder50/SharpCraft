@@ -36,7 +36,7 @@ namespace SharpCraft.Entities
         /// This also sets <see cref="ItemID"/> and <see cref="ItemCount"/>
         /// </summary>
         [Data.DataTag("FireworksItem.tag.Fireworks.Explosions")]
-        public SharpCraft.Firework?[]? Fireworks { get; set; }
+        public SharpCraft.Firework[]? Fireworks { get; set; }
 
         /// <summary>
         /// The id of the firework item (is normally <see cref="ID.Item.firework_rocket"/>).

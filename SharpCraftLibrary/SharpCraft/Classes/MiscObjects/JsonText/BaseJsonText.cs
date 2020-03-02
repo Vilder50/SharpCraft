@@ -111,7 +111,7 @@ namespace SharpCraft
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>This <see cref="BaseJsonText"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[]? extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new DataPartTag(GetJsonString());
         }

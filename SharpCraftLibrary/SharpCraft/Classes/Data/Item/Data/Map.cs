@@ -94,7 +94,7 @@ namespace SharpCraft.Items
         /// The icons displayed on the map.
         /// </summary>
         [Data.DataTag("tag.Decorations")]
-        public Icon?[]? Icons { get; set; }
+        public Icon[]? Icons { get; set; }
         /// <summary>
         /// The color the map item has.
         /// (The small black text like things on the paper)

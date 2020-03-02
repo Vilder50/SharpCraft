@@ -9,7 +9,7 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class DropperDispenser : BaseContainer, Interfaces.IPowered, Interfaces.IFacingFull
     {
-        private Item?[]? _dItems;
+        private Item[]? _dItems;
 
         /// <summary>
         /// Creates a dispenser/dropper block
@@ -42,7 +42,7 @@ namespace SharpCraft.Blocks
         /// The item's inside the dispenser / dropper.
         /// (0-8)
         /// </summary>
-        public override Item?[]? DItems
+        public override Item[]? DItems
         {
             get => _dItems;
             set

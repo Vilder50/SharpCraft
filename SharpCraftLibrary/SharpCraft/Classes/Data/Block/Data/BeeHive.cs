@@ -63,7 +63,7 @@ namespace SharpCraft.Blocks
         /// The entities inside the bee hive
         /// </summary>
         [DataTag("Bees")]
-        public InsideBeeHive?[]? DEntitiesInside { get; set; }
+        public InsideBeeHive[]? DEntitiesInside { get; set; }
 
         /// <summary>
         /// An entity inside a bee hive

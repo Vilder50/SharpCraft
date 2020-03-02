@@ -87,7 +87,7 @@ namespace SharpCraft.JsonObjects
             /// </summary>
             /// <param name="conversionData">Unused</param>
             /// <returns>This object as a <see cref="DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object?[]? conversionData)
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
                 DataPartObject returnObject = new DataPartObject();
 
@@ -146,7 +146,7 @@ namespace SharpCraft.JsonObjects
             /// </summary>
             /// <param name="conversionData">Unused</param>
             /// <returns>This object as a <see cref="DataPartObject"/></returns>
-            public DataPartObject GetAsDataObject(object?[]? conversionData)
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
                 DataPartObject returnObject = new DataPartObject();
 

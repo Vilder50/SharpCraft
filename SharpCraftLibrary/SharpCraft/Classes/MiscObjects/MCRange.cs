@@ -84,7 +84,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: min path name, 1: max path name, 2: type of the range values, 3: is json</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object?[]? conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
             if (conversionData is null)
             {
