@@ -41,11 +41,13 @@ namespace SharpCraft
         /// <summary>
         /// The smallest number in the range
         /// </summary>
+        [CompoundPath(0)]
         public double? Minimum { get; protected set; }
 
         /// <summary>
         /// The highest number in the range
         /// </summary>
+        [CompoundPath(1)]
         public double? Maximum { get; protected set; }
 
         /// <summary>

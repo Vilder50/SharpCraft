@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for vectors
     /// </summary>
-    public class Vector
+    public class Vector : IConvertableToDataArray<double>
     {
         /// <summary>
         /// Intializes a new <see cref="Vector"/>
@@ -37,16 +37,22 @@ namespace SharpCraft
         /// <summary>
         /// The X part of the vector
         /// </summary>
+        [ArrayPath(0)]
+        [CompoundPath(0)]
         public double X { get; protected set; }
 
         /// <summary>
         /// The Y part of the vector
         /// </summary>
+        [ArrayPath(1)]
+        [CompoundPath(1)]
         public double Y { get; protected set; }
 
         /// <summary>
         /// The Z part of the vector
         /// </summary>
+        [ArrayPath(2)]
+        [CompoundPath(2)]
         public double Z { get; protected set; }
 
         /// <summary>
@@ -91,7 +97,7 @@ namespace SharpCraft
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>The vector as a <see cref="DataPartArray"/></returns>
-        public virtual DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        public virtual DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new DataPartArray(new double[] { X, Y, Z }, null, new object?[0]);
         }
@@ -222,6 +228,16 @@ namespace SharpCraft
             }
         }
 
+        /// <summary>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
+        /// </summary>
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public double[] PathArray()
+        {
+            throw new NotImplementedException();
+        }
+
         #region operator
         /// <summary>
         /// Adds the given vectors together
@@ -294,7 +310,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for int vectors
     /// </summary>
-    public class IntVector : Vector, IConvertableToDataArray, IConvertableToDataObject
+    public class IntVector : Vector, IConvertableToDataArray<int>, IConvertableToDataObject
     {
         /// <summary>
         /// Intializes a new <see cref="IntVector"/>
@@ -371,6 +387,16 @@ namespace SharpCraft
             {
                 throw new ArgumentException("The 3 first conversion params has be be strings.");
             }
+        }
+
+        /// <summary>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
+        /// </summary>
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public new int[] PathArray()
+        {
+            throw new NotImplementedException();
         }
     }
 }

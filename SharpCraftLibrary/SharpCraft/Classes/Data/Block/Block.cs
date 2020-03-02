@@ -60,6 +60,7 @@ namespace SharpCraft
         /// <summary>
         /// The block's ID
         /// </summary>
+        [CompoundPath(0)]
         public BlockType? ID
         {
             get => id;

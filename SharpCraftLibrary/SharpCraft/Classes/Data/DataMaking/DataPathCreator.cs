@@ -73,21 +73,28 @@ namespace SharpCraft.Data
             }
             else if (expression is MemberExpression propertyExpression)
             {
-                path = CreatePropertyPathPart(propertyExpression.Member as PropertyInfo) + path;
+                path = CreatePropertyPathPart(propertyExpression.Member as PropertyInfo, propertyExpression) + path;
                 CreatePath(propertyExpression.Expression, PathPart.Path, ref path);
             }
             else if (expression is MethodCallExpression methodExpression)
             {
-                if (methodExpression.Arguments.Count != 2)
+                if (!(methodExpression.Method.GetCustomAttribute(typeof(PathArrayGetterAttribute)) is null))
                 {
-                    throw new ArgumentException("Methods are not supported.");
+                    CreatePath(methodExpression.Object, lastPart, ref path);
                 }
-                path = CreateParameterPathPart(methodExpression.Method, methodExpression.Arguments[1]) + path;
-                if (lastPart == PathPart.Check)
+                else
                 {
-                    throw new ArgumentException("Cannot have 2 compound checks after each other.");
+                    if (methodExpression.Arguments.Count != 2)
+                    {
+                        throw new ArgumentException("Methods are not supported.");
+                    }
+                    path = CreateParameterPathPart(methodExpression.Method, methodExpression.Arguments[1]) + path;
+                    if (lastPart == PathPart.Check)
+                    {
+                        throw new ArgumentException("Cannot have 2 compound checks after each other.");
+                    }
+                    CreatePath(methodExpression.Arguments[0], PathPart.Check, ref path);
                 }
-                CreatePath(methodExpression.Arguments[0], PathPart.Check, ref path);
             }
             else if (expression is UnaryExpression asExpression)
             {
@@ -95,18 +102,88 @@ namespace SharpCraft.Data
             }
         }
 
-        private static string CreatePropertyPathPart(PropertyInfo? property)
+        private static string CreatePropertyPathPart(PropertyInfo? property, MemberExpression propertyExpression)
         {
             if (property is null)
             {
                 throw new ArgumentException("Fields are not supported");
             }
             DataTagAttribute? attribute = (DataTagAttribute?)property.GetCustomAttribute(typeof(DataTagAttribute));
-            if (attribute is null)
+            ArrayPathAttribute? arrayAttribute = (ArrayPathAttribute?)property.GetCustomAttribute(typeof(ArrayPathAttribute));
+            CompoundPathAttribute? compoundAttribute = (CompoundPathAttribute?)property.GetCustomAttribute(typeof(CompoundPathAttribute));
+            if (!(attribute is null))
             {
-                throw new ArgumentException("Only allows properties with DataTagAttribute");
+                if (attribute.Merge)
+                {
+                    return "";
+                }
+                else
+                {
+                    return "." + (attribute.DataTagName ?? property.Name);
+                }
             }
-            return "." + (attribute.DataTagName ?? property.Name);
+            if (arrayAttribute is null && compoundAttribute is null)
+            {
+                throw new ArgumentException("Only allows properties with DataTagAttribute or array/compound path attributes");
+            }
+            //get conversion attribute
+            Expression searchAt = propertyExpression.Expression;
+            DataConvertionAttribute? converter;
+            do
+            {
+                if (!(searchAt is MemberExpression memberExpression))
+                {
+                    if (searchAt is BinaryExpression index)
+                    {
+                        searchAt = index.Left;
+                        continue;
+                    }
+                    if (searchAt is MethodCallExpression method)
+                    {
+                        searchAt = method.Object;
+                        continue;
+                    }
+                }
+                else
+                {
+                    if (!(memberExpression.Member is PropertyInfo callerProperty))
+                    {
+                        throw new ArgumentException("Doesn't support fields. Use properties.");
+                    }
+                    converter = (DataConvertionAttribute?)callerProperty.GetCustomAttribute(typeof(DataConvertionAttribute));
+                    if (converter is null)
+                    {
+                        throw new ArgumentException("Caller property doesn't have a data convertion attribute.");
+                    }
+                    break;
+                }
+            }
+            while (true);
+
+            if (!(arrayAttribute is null) && (compoundAttribute is null || converter.ConvertType() == DataConvertionAttribute.TagType.Array))
+            {
+                return "["+arrayAttribute.Index+"]";
+            }
+            if (!(compoundAttribute is null))
+            {
+                if (compoundAttribute.ConversionIndex is null)
+                {
+                    return "." + compoundAttribute.DataTagName!;
+                }
+                else
+                {
+                    if (compoundAttribute.ConversionIndex.Value > converter.ConversionParams.Length)
+                    {
+                        throw new ArgumentException("Couldnt get conversionparams index. index out of array.");
+                    }
+                    if (converter.ConversionParams[compoundAttribute.ConversionIndex.Value] is string name)
+                    {
+                        return "." + name;
+                    }
+                    throw new ArgumentException("Couldnt get conversionparams index. value is not a string.");
+                }
+            }
+            throw new Exception("Can't get here");
         }
 
         private static MethodInfo? compoundCheckerInfo;

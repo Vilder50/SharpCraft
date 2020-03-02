@@ -221,7 +221,7 @@ namespace SharpCraft.Data
                             throw new InvalidCastException($"Failed to convert object at index {i} into a data tag object (See inner exception)", ex);
                         }
                     }
-                    else if (value is IConvertableToDataArray canBeArray && (forceType is null || forceType >= ID.NBTTagType.TagArrayArray))
+                    else if (value is IConvertableToDataArrayBase canBeArray && (forceType is null || forceType >= ID.NBTTagType.TagArrayArray))
                     {
                         try
                         {

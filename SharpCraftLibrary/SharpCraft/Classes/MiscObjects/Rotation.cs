@@ -6,7 +6,7 @@ namespace SharpCraft
     /// <summary>
     /// An object for rotations
     /// </summary>
-    public class Rotation : IConvertableToDataArray
+    public class Rotation : IConvertableToDataArray<double>
     {
         private double y;
         private bool yRelative;
@@ -42,11 +42,13 @@ namespace SharpCraft
         /// <summary>
         /// The vertical rotation
         /// </summary>
+        [ArrayPath(0)]
         public double X { get => x; set => x = value; }
 
         /// <summary>
         /// The horizontal rotation
         /// </summary>
+        [ArrayPath(1)]
         public double Y { get => y; set => y = value; }
 
         /// <summary>
@@ -108,6 +110,16 @@ namespace SharpCraft
             {
                 throw new ArgumentException("Can only convert the rotation in a double array");
             }
+        }
+
+        /// <summary>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
+        /// </summary>
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public double[] PathArray()
+        {
+            throw new NotImplementedException();
         }
     }
 }

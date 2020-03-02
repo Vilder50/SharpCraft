@@ -5,28 +5,20 @@ using System.Reflection;
 
 namespace SharpCraft.Data
 {
+
     /// <summary>
     /// An attribute used to mark NBT data tags.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class DataTagAttribute : Attribute
+    public class DataTagAttribute : DataConvertionAttribute
     {
-        private ID.NBTTagType forceType;
-        private object?[] conversionParams = null!;
-
-        /// <summary>
-        /// If the property this attrbite is marking is a <see cref="DataPartObject"/> and it's inside of a <see cref="DataHolderBase"/>. 
-        /// Setting this to true will merge them together instead of adding the <see cref="DataPartObject"/> at the end of a path in <see cref="DataHolderBase"/>
-        /// </summary>
-        public bool Merge;
-
         /// <summary>
         /// Marks the property as a datatag holder
         /// </summary>
         /// <param name="conversionParams">Extra values used for converting the object correctly</param>
-        public DataTagAttribute(params object?[] conversionParams)
+        public DataTagAttribute(params object?[] conversionParams) : base(conversionParams)
         {
-            ConversionParams = conversionParams;
+            
         }
 
         /// <summary>
@@ -34,10 +26,9 @@ namespace SharpCraft.Data
         /// </summary>
         /// <param name="dataTagName">the name of the data tag its holding</param>
         /// <param name="conversionParams">Extra values used for converting the object correctly</param>
-        public DataTagAttribute(string? dataTagName, params object?[] conversionParams)
+        public DataTagAttribute(string? dataTagName, params object?[] conversionParams) : base(conversionParams)
         {
             DataTagName = dataTagName;
-            ConversionParams = conversionParams;
         }
 
         /// <summary>
@@ -49,42 +40,6 @@ namespace SharpCraft.Data
         /// True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
         /// </summary>
         public bool JsonTag { get; set; }
-
-        /// <summary>
-        /// The type this data actually is
-        /// </summary>
-        public ID.NBTTagType ForceType
-        {
-            get
-            {
-                return forceType;
-            }
-            set
-            {
-                forceType = value;
-                UseForcedType = true;
-            }
-        }
-
-        /// <summary>
-        /// Extra parameters used for converting the object into the correct type
-        /// </summary>
-        public object?[] ConversionParams
-        {
-            get
-            {
-                return conversionParams;
-            }
-            set
-            {
-                conversionParams = value ?? throw new ArgumentNullException(nameof(ConversionParams), "ConversionParams may not be null.");
-            }
-        }
-
-        /// <summary>
-        /// If <see cref="ForceType"/> should be used (this will be set if <see cref="ForceType"/> gets set)
-        /// </summary>
-        public bool UseForcedType { get; set; }
 
         /// <summary>
         /// Clones all properties with a <see cref="DataTagAttribute"/> from one object to another

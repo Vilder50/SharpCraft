@@ -67,11 +67,13 @@ namespace SharpCraft
         /// <summary>
         /// the UUIDLeast
         /// </summary>
+        [CompoundPath(1)]
         public long Least { get; protected set; }
 
         /// <summary>
         /// the UUIDMost
         /// </summary>
+        [CompoundPath(0)]
         public long Most { get; protected set; }
 
         /// <summary>

@@ -39,5 +39,19 @@ namespace SharpCraft.Tests.Data
 
             Assert.ThrowsException<ArgumentException>(() => DataPathCreator.GetPath<Item>(i => DataPathCreator.AddCompoundCheck(i.Enchants[DataPathCreator.AddArrayFilter(null)], new Item.Enchantment(ID.Enchant.aqua_infinity, null)).LVL));
         }
+
+        [TestMethod]
+        public void TestIConvertableArrayPath()
+        {
+            Assert.AreEqual("Pos[0]", DataPathCreator.GetPath<Entities.BasicEntity>(e => e.Coords.PathArray()[0]));
+            Assert.AreEqual("Pos[1]", DataPathCreator.GetPath<Entities.BasicEntity>(e => e.Coords.Y));
+        }
+
+        [TestMethod]
+        public void TestIConvertableCompoundPath()
+        {
+            Assert.AreEqual("Target.Z", DataPathCreator.GetPath<Entities.ShulkerBullet>(e => e.TargetCoords.Z));
+            Assert.AreEqual("TZD", DataPathCreator.GetPath<Entities.ShulkerBullet>(e => e.OffsetTarget.Z));
+        }
     }
 }

@@ -140,7 +140,7 @@ namespace SharpCraft.Tests.Data
             }
         }
 
-        private class CustomDataArray : IConvertableToDataArray
+        private class CustomDataArray : IConvertableToDataArray<double>
         {
             public DataPartArray GetAsArray(ID.NBTTagType? asType = null, object[] extraConversionData = null)
             {
@@ -156,6 +156,11 @@ namespace SharpCraft.Tests.Data
                 {
                     throw new Exception();
                 }
+            }
+
+            public double[] PathArray()
+            {
+                throw new NotImplementedException();
             }
         }
 

@@ -3962,6 +3962,157 @@
             The way the torch is facing. (The way it points)
             </summary>
         </member>
+        <member name="T:SharpCraft.Data.ArrayPathAttribute">
+            <summary>
+            Marks a property as a datapath array indexer
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.ArrayPathAttribute.#ctor(System.Int32,System.Object[])">
+            <summary>
+            Marks the property as a datatag holder holding a tag with the given name
+            </summary>
+            <param name="index">The index the property is marking</param>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="P:SharpCraft.Data.ArrayPathAttribute.Index">
+            <summary>
+            The index the property is marking
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Data.CompoundPathAttribute">
+            <summary>
+            Marks a property as a datapath
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.CompoundPathAttribute.#ctor(System.String,System.Object[])">
+            <summary>
+            Marks the property as a datatag holder holding a tag with the given name
+            </summary>
+            <param name="dataTagName">the name of the datapath to the value</param>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="M:SharpCraft.Data.CompoundPathAttribute.#ctor(System.Int32,System.Object[])">
+            <summary>
+            Marks the property as a datatag holder holding a tag with the given name
+            </summary>
+            <param name="index">An index in the parents conversionparams to use for the datapath</param>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="P:SharpCraft.Data.CompoundPathAttribute.DataTagName">
+            <summary>
+            The name of this data tag
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.CompoundPathAttribute.ConversionIndex">
+            <summary>
+            An index in the parents conversionparams to use for the datapath
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Data.DataConvertionAttribute">
+            <summary>
+            Base class for datapath related attributes
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Data.DataConvertionAttribute.TagType">
+            <summary>
+            Types of datatags
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Array">
+            <summary>
+            Array tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Compound">
+            <summary>
+            Compound tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Tag">
+            <summary>
+            Normal tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Unknown">
+            <summary>
+            Unknown tag type
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Data.DataConvertionAttribute.Merge">
+            <summary>
+            If the property this attrbite is marking is a <see cref="T:SharpCraft.Data.DataPartObject"/> and it's inside of a <see cref="T:SharpCraft.Data.DataHolderBase"/>. 
+            Setting this to true will merge them together instead of adding the <see cref="T:SharpCraft.Data.DataPartObject"/> at the end of a path in <see cref="T:SharpCraft.Data.DataHolderBase"/>
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.DataConvertionAttribute.#ctor(System.Object[])">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Data.DataConvertionAttribute"/>
+            </summary>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="P:SharpCraft.Data.DataConvertionAttribute.ForceType">
+            <summary>
+            The type this data actually is
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataConvertionAttribute.ConversionParams">
+            <summary>
+            Extra parameters used for converting the object into the correct type
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataConvertionAttribute.UseForcedType">
+            <summary>
+            If <see cref="P:SharpCraft.Data.DataConvertionAttribute.ForceType"/> should be used (this will be set if <see cref="P:SharpCraft.Data.DataConvertionAttribute.ForceType"/> gets set)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.DataConvertionAttribute.ConvertType">
+            <summary>
+            The type of <see cref="P:SharpCraft.Data.DataConvertionAttribute.ForceType"/>.
+            </summary>
+            <returns>The type of forced type</returns>
+        </member>
+        <member name="T:SharpCraft.Data.DataTagAttribute">
+            <summary>
+            An attribute used to mark NBT data tags.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.DataTagAttribute.#ctor(System.Object[])">
+            <summary>
+            Marks the property as a datatag holder
+            </summary>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="M:SharpCraft.Data.DataTagAttribute.#ctor(System.String,System.Object[])">
+            <summary>
+            Marks the property as a datatag holder holding a tag with the given name
+            </summary>
+            <param name="dataTagName">the name of the data tag its holding</param>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="P:SharpCraft.Data.DataTagAttribute.DataTagName">
+            <summary>
+            The name of this data tag
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataTagAttribute.JsonTag">
+            <summary>
+            True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.DataTagAttribute.Clone``1(``0,``0)">
+            <summary>
+            Clones all properties with a <see cref="T:SharpCraft.Data.DataTagAttribute"/> from one object to another
+            </summary>
+            <typeparam name="T">The type of object to clone</typeparam>
+            <param name="emptyCopy">An empty object to clone the properties to</param>
+            <param name="copy">The object to clone</param>
+            <returns><paramref name="emptyCopy"/></returns>
+        </member>
+        <member name="T:SharpCraft.Data.PathArrayGetterAttribute">
+            <summary>
+            Marks a method as a method to get an indexer for an array
+            </summary>
+        </member>
         <member name="T:SharpCraft.Data.SimpleDataHolder">
             <summary>
             An interface for classes which holds data
@@ -4063,64 +4214,6 @@
             </summary>
             <param name="filter">The thing to filter for. Leave null to get all items.</param>
             <returns>0 (So it can be used in indexers)</returns>
-        </member>
-        <member name="T:SharpCraft.Data.DataTagAttribute">
-            <summary>
-            An attribute used to mark NBT data tags.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataTagAttribute.Merge">
-            <summary>
-            If the property this attrbite is marking is a <see cref="T:SharpCraft.Data.DataPartObject"/> and it's inside of a <see cref="T:SharpCraft.Data.DataHolderBase"/>. 
-            Setting this to true will merge them together instead of adding the <see cref="T:SharpCraft.Data.DataPartObject"/> at the end of a path in <see cref="T:SharpCraft.Data.DataHolderBase"/>
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataTagAttribute.#ctor(System.Object[])">
-            <summary>
-            Marks the property as a datatag holder
-            </summary>
-            <param name="conversionParams">Extra values used for converting the object correctly</param>
-        </member>
-        <member name="M:SharpCraft.Data.DataTagAttribute.#ctor(System.String,System.Object[])">
-            <summary>
-            Marks the property as a datatag holder holding a tag with the given name
-            </summary>
-            <param name="dataTagName">the name of the data tag its holding</param>
-            <param name="conversionParams">Extra values used for converting the object correctly</param>
-        </member>
-        <member name="P:SharpCraft.Data.DataTagAttribute.DataTagName">
-            <summary>
-            The name of this data tag
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataTagAttribute.JsonTag">
-            <summary>
-            True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataTagAttribute.ForceType">
-            <summary>
-            The type this data actually is
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataTagAttribute.ConversionParams">
-            <summary>
-            Extra parameters used for converting the object into the correct type
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Data.DataTagAttribute.UseForcedType">
-            <summary>
-            If <see cref="P:SharpCraft.Data.DataTagAttribute.ForceType"/> should be used (this will be set if <see cref="P:SharpCraft.Data.DataTagAttribute.ForceType"/> gets set)
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Data.DataTagAttribute.Clone``1(``0,``0)">
-            <summary>
-            Clones all properties with a <see cref="T:SharpCraft.Data.DataTagAttribute"/> from one object to another
-            </summary>
-            <typeparam name="T">The type of object to clone</typeparam>
-            <param name="emptyCopy">An empty object to clone the properties to</param>
-            <param name="copy">The object to clone</param>
-            <returns><paramref name="emptyCopy"/></returns>
         </member>
         <member name="T:SharpCraft.Data.IDataPartPathEnding">
             <summary>
@@ -4314,18 +4407,30 @@
             <param name="extraConversionData">Extra parameters for specific conversion</param>
             <returns>The object as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="T:SharpCraft.Data.IConvertableToDataArray">
+        <member name="T:SharpCraft.Data.IConvertableToDataArrayBase">
             <summary>
             Makes a class able to convert itself into a <see cref="T:SharpCraft.Data.DataPartArray"/>
             </summary>
         </member>
-        <member name="M:SharpCraft.Data.IConvertableToDataArray.GetAsArray(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.Data.IConvertableToDataArrayBase.GetAsArray(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
             Converts the object into a <see cref="T:SharpCraft.Data.DataPartArray"/> of the given type
             </summary>
             <param name="asType">The type of <see cref="T:SharpCraft.Data.DataPartArray"/></param>
             <param name="extraConversionData">Extra parameters for specific conversion</param>
             <returns>The object as a <see cref="T:SharpCraft.Data.DataPartArray"/></returns>
+        </member>
+        <member name="T:SharpCraft.Data.IConvertableToDataArray`1">
+            <summary>
+            Makes a class able to convert itself into a <see cref="T:SharpCraft.Data.DataPartArray"/>
+            </summary>
+            <typeparam name="T">The type of value this array outputs</typeparam>
+        </member>
+        <member name="M:SharpCraft.Data.IConvertableToDataArray`1.PathArray">
+            <summary>
+            Used for getting the datapath for this array. Method throws an exception if called.
+            </summary>
+            <returns>An object to continue the datapath on</returns>
         </member>
         <member name="T:SharpCraft.Data.IConvertableToDataObject">
             <summary>
@@ -8921,6 +9026,12 @@
             <param name="asType">The type of array</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartArray"/></returns>
         </member>
+        <member name="M:SharpCraft.Rotation.PathArray">
+            <summary>
+            Used for getting the datapath for this array. Method throws an exception if called.
+            </summary>
+            <returns>An object to continue the datapath on</returns>
+        </member>
         <member name="T:SharpCraft.ScoreValue">
             <summary>
             Way of storing a scoreboard balue
@@ -10327,6 +10438,12 @@
             <param name="ignoreAxis">If set it won't return directions on the given axis</param>
             <returns>A direction</returns>
         </member>
+        <member name="M:SharpCraft.Vector.PathArray">
+            <summary>
+            Used for getting the datapath for this array. Method throws an exception if called.
+            </summary>
+            <returns>An object to continue the datapath on</returns>
+        </member>
         <member name="M:SharpCraft.Vector.op_Addition(SharpCraft.Vector,SharpCraft.Vector)">
             <summary>
             Adds the given vectors together
@@ -10414,6 +10531,12 @@
             </summary>
             <param name="conversionData">0: x path name, 1: y path name, 2: z path name, 3: if json</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
+        </member>
+        <member name="M:SharpCraft.IntVector.PathArray">
+            <summary>
+            Used for getting the datapath for this array. Method throws an exception if called.
+            </summary>
+            <returns>An object to continue the datapath on</returns>
         </member>
         <member name="T:SharpCraft.ID">
             <summary>

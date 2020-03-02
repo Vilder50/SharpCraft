@@ -29,7 +29,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The entity's location
         /// </summary>
-        [Data.DataTag("Pos")]
+        [Data.DataTag("Pos", ForceType = ID.NBTTagType.TagDoubleArray)]
         public Vector? Coords { get; set; }
 
         /// <summary>

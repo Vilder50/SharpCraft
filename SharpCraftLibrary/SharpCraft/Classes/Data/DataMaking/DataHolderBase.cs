@@ -168,7 +168,7 @@ namespace SharpCraft.Data
                             ID.NBTTagType? forceType = dataTagInformation.UseForcedType ? dataTagInformation.ForceType : (ID.NBTTagType?)null;
                             object?[] conversionData = dataTagInformation.ConversionParams;
                             IConvertableToDataTag? convertAbleTag = data as IConvertableToDataTag;
-                            IConvertableToDataArray? convertAbleArray = data as IConvertableToDataArray;
+                            IConvertableToDataArrayBase? convertAbleArray = data as IConvertableToDataArrayBase;
                             IConvertableToDataObject? convertAbleObject = data as IConvertableToDataObject;
 
                             if ((property.GetValue(this) is DataHolderBase && forceType is null) || forceType == ID.NBTTagType.TagCompound || (!(convertAbleObject is null) && forceType is null))
