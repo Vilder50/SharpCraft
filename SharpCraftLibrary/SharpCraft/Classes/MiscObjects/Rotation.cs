@@ -119,7 +119,7 @@ namespace SharpCraft
         [PathArrayGetter]
         public double[] PathArray()
         {
-            throw new NotImplementedException();
+            throw new PathGettingMethodCallException();
         }
     }
 }

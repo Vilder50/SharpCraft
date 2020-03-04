@@ -37,6 +37,26 @@
             The block's ID
             </summary>
         </member>
+        <member name="M:SharpCraft.Block.GetStatePath">
+            <summary>
+            Used for getting the path to block states
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.GetStatePath``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Used for getting the path to a specific block state
+            </summary>
+            <typeparam name="T">The type of block to get state from</typeparam>
+            <param name="stateProperty">The state to get</param>
+        </member>
+        <member name="M:SharpCraft.Block.StatePathGenerator(SharpCraft.Data.DataConvertionAttribute,System.Reflection.MemberInfo,System.Collections.Generic.IReadOnlyCollection{System.Linq.Expressions.Expression})">
+            <summary>
+            Used for generating state datapaths.
+            </summary>
+            <param name="convertionInfo">Data on how the paths should be generated</param>
+            <param name="caller">The method/property calling this method</param>
+            <param name="arguments">Arguments from the calling method</param>
+        </member>
         <member name="P:SharpCraft.Block.HasState">
             <summary>
             Checks if the block has any block states defined
@@ -862,6 +882,26 @@
             <summary>
             The smelted recipes
             </summary>
+        </member>
+        <member name="M:SharpCraft.Blocks.Furnace.SmeltedRecipes.GetRecipePath(System.Int32)">
+            <summary>
+            Used for getting the path to a smelted furnace recipe
+            </summary>
+            <param name="recipeId">The id of the smelted recipe to get</param>
+        </member>
+        <member name="M:SharpCraft.Blocks.Furnace.SmeltedRecipes.GetRecipeAmountPath(System.Int32)">
+            <summary>
+            Used for getting the path to the amount of times a recipe has been used
+            </summary>
+            <param name="recipeId">The id of the smelted recipe to get</param>
+        </member>
+        <member name="M:SharpCraft.Blocks.Furnace.SmeltedRecipes.RecipePathGenerator(SharpCraft.Data.DataConvertionAttribute,System.Reflection.MemberInfo,System.Collections.Generic.IReadOnlyCollection{System.Linq.Expressions.Expression})">
+            <summary>
+            Used for generating recipe datapaths.
+            </summary>
+            <param name="convertionInfo">Data on how the paths should be generated</param>
+            <param name="caller">The method/property calling this method</param>
+            <param name="arguments">Arguments from the calling method</param>
         </member>
         <member name="M:SharpCraft.Blocks.Furnace.SmeltedRecipes.GetAsDataObject(System.Object[])">
             <summary>
@@ -4013,31 +4053,6 @@
             Base class for datapath related attributes
             </summary>
         </member>
-        <member name="T:SharpCraft.Data.DataConvertionAttribute.TagType">
-            <summary>
-            Types of datatags
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Array">
-            <summary>
-            Array tag
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Compound">
-            <summary>
-            Compound tag
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Tag">
-            <summary>
-            Normal tag
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Data.DataConvertionAttribute.TagType.Unknown">
-            <summary>
-            Unknown tag type
-            </summary>
-        </member>
         <member name="F:SharpCraft.Data.DataConvertionAttribute.Merge">
             <summary>
             If the property this attrbite is marking is a <see cref="T:SharpCraft.Data.DataPartObject"/> and it's inside of a <see cref="T:SharpCraft.Data.DataHolderBase"/>. 
@@ -4107,6 +4122,29 @@
             <param name="emptyCopy">An empty object to clone the properties to</param>
             <param name="copy">The object to clone</param>
             <returns><paramref name="emptyCopy"/></returns>
+        </member>
+        <member name="T:SharpCraft.Data.GeneratePathAttribute">
+            <summary>
+            Marks a property or method as a datapath generator
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.GeneratePathAttribute.#ctor(System.String,SharpCraft.ID.SimpleNBTTagType,System.Object[])">
+            <summary>
+            Marks the property as a datatag holder holding a tag with the given name
+            </summary>
+            <param name="generatorName">The name of the static method used for generating the datapath</param>
+            <param name="forType">The type of tag this generator should generate</param>
+            <param name="conversionParams">Extra values used for converting the object correctly</param>
+        </member>
+        <member name="P:SharpCraft.Data.GeneratePathAttribute.GeneratorName">
+            <summary>
+            The name of the static method used for generating the datapath
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.GeneratePathAttribute.ForType">
+            <summary>
+            The type of tag this generator should generate
+            </summary>
         </member>
         <member name="T:SharpCraft.Data.PathArrayGetterAttribute">
             <summary>
@@ -4443,6 +4481,39 @@
             </summary>
             <param name="conversionData">parameters for specific conversion</param>
             <returns>The object as a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
+        </member>
+        <member name="T:SharpCraft.Data.PathCreatorException">
+            <summary>
+            Exception for when <see cref="T:SharpCraft.Data.DataPathCreator"/> fails to create a path
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.PathCreatorException.#ctor">
+            <summary>
+            Intalizes a new <see cref="T:SharpCraft.Data.PathCreatorException"/>
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.PathCreatorException.#ctor(System.String)">
+            <summary>
+            Intalizes a new <see cref="T:SharpCraft.Data.PathCreatorException"/>
+            </summary>
+            <param name="message">The exception message</param>
+        </member>
+        <member name="M:SharpCraft.Data.PathCreatorException.#ctor(System.String,System.Exception)">
+            <summary>
+            Intalizes a new <see cref="T:SharpCraft.Data.PathCreatorException"/>
+            </summary>
+            <param name="message">The exception message</param>
+            <param name="innerException">The inner exception</param>
+        </member>
+        <member name="T:SharpCraft.Data.PathGettingMethodCallException">
+            <summary>
+            Exception for when a datapath getting method was called directly.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Data.PathGettingMethodCallException.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Data.PathGettingMethodCallException"/>
+            </summary>
         </member>
         <member name="T:SharpCraft.Entity">
             <summary>
@@ -7125,6 +7196,21 @@
             Intializes a new <see cref="T:SharpCraft.Items.DebugStick.StateList"/>
             </summary>
             <param name="states">states this list is holding</param>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.StateList.GetStatePath(SharpCraft.BlockType)">
+            <summary>
+            Used for getting the path to the remembered state for a block
+            </summary>
+            <param name="block">The block to get the remembered state for</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpCraft.Items.DebugStick.StateList.StatePathGenerator(SharpCraft.Data.DataConvertionAttribute,System.Reflection.MemberInfo,System.Collections.Generic.IReadOnlyCollection{System.Linq.Expressions.Expression})">
+            <summary>
+            Used for generating state datapaths.
+            </summary>
+            <param name="convertionInfo">Data on how the paths should be generated</param>
+            <param name="caller">The method/property calling this method</param>
+            <param name="arguments">Arguments from the calling method</param>
         </member>
         <member name="P:SharpCraft.Items.DebugStick.StateList.States">
             <summary>
@@ -11810,6 +11896,31 @@
         <member name="F:SharpCraft.ID.AdvancementFrame.goal">
             <summary>
             A advancement which is round instead of being square
+            </summary>
+        </member>
+        <member name="T:SharpCraft.ID.SimpleNBTTagType">
+            <summary>
+            Types of datatags
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.SimpleNBTTagType.Array">
+            <summary>
+            Array tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.SimpleNBTTagType.Compound">
+            <summary>
+            Compound tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.SimpleNBTTagType.Tag">
+            <summary>
+            Normal tag
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.SimpleNBTTagType.Unknown">
+            <summary>
+            Unknown tag type
             </summary>
         </member>
         <member name="T:SharpCraft.ID.ScoreDisplay">

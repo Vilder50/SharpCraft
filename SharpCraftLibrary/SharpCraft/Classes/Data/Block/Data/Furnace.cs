@@ -113,6 +113,48 @@ namespace SharpCraft.Blocks
             public SmeltedRecipe[] Recipes { get; private set; }
 
             /// <summary>
+            /// Used for getting the path to a smelted furnace recipe
+            /// </summary>
+            /// <param name="recipeId">The id of the smelted recipe to get</param>
+            [GeneratePath(nameof(SmeltedRecipes.RecipePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+            public string GetRecipePath(int recipeId)
+            {
+                _ = recipeId;
+                throw new PathGettingMethodCallException();
+            }
+
+            /// <summary>
+            /// Used for getting the path to the amount of times a recipe has been used
+            /// </summary>
+            /// <param name="recipeId">The id of the smelted recipe to get</param>
+            [GeneratePath(nameof(SmeltedRecipes.RecipePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+            public string GetRecipeAmountPath(int recipeId)
+            {
+                _ = recipeId;
+                throw new PathGettingMethodCallException();
+            }
+
+            /// <summary>
+            /// Used for generating recipe datapaths.
+            /// </summary>
+            /// <param name="convertionInfo">Data on how the paths should be generated</param>
+            /// <param name="caller">The method/property calling this method</param>
+            /// <param name="arguments">Arguments from the calling method</param>
+            protected static string RecipePathGenerator(DataConvertionAttribute convertionInfo, System.Reflection.MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+            {
+                _ = convertionInfo;
+                int id = (Expression.Lambda(arguments.ToArray()[0]).Compile().DynamicInvoke() as int?)!.Value!;
+                if (caller.Name == nameof(GetRecipeAmountPath))
+                {
+                    return ".RecipeAmount" + id;
+                }
+                else
+                {
+                    return ".RecipeLocation" + id;
+                }
+            }
+
+            /// <summary>
             /// Converts this <see cref="SmeltedRecipes"/> object into a <see cref="DataPartObject"/>
             /// </summary>
             /// <param name="conversionData">Not in use</param>

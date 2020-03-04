@@ -49,9 +49,35 @@ namespace SharpCraft.Items
             }
 
             /// <summary>
+            /// Used for getting the path to the remembered state for a block
+            /// </summary>
+            /// <param name="block">The block to get the remembered state for</param>
+            /// <returns></returns>
+            [GeneratePath(nameof(StateList.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+            public string GetStatePath(BlockType block)
+            {
+                _ = block;
+                throw new PathGettingMethodCallException();
+            }
+
+            /// <summary>
+            /// Used for generating state datapaths.
+            /// </summary>
+            /// <param name="convertionInfo">Data on how the paths should be generated</param>
+            /// <param name="caller">The method/property calling this method</param>
+            /// <param name="arguments">Arguments from the calling method</param>
+            protected static string StatePathGenerator(DataConvertionAttribute convertionInfo, MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+            {
+                _ = caller;
+                _ = convertionInfo;
+                BlockType block = (Expression.Lambda(arguments.ToArray()[0]).Compile().DynamicInvoke() as BlockType)!;
+                return block.Name;
+            }
+
+            /// <summary>
             /// states this list is holding
             /// </summary>
-            public State[] States { get => states; set => states = value ?? throw new System.ArgumentNullException(nameof(States), "States may not be null"); }
+            public State[] States { get => states; set => states = value ?? throw new ArgumentNullException(nameof(States), "States may not be null"); }
 
             /// <summary>
             /// Converts this object into a <see cref="Data.DataPartObject"/>

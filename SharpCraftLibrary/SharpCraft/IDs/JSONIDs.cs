@@ -67,6 +67,29 @@
             goal
         }
 
+        /// <summary>
+        /// Types of datatags
+        /// </summary>
+        public enum SimpleNBTTagType
+        {
+            /// <summary>
+            /// Array tag
+            /// </summary>
+            Array,
+            /// <summary>
+            /// Compound tag
+            /// </summary>
+            Compound,
+            /// <summary>
+            /// Normal tag
+            /// </summary>
+            Tag,
+            /// <summary>
+            /// Unknown tag type
+            /// </summary>
+            Unknown,
+        }
+
         public enum NBTTagType
         {
             TagByte,

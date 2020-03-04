@@ -7,28 +7,6 @@ namespace SharpCraft.Data
     /// </summary>
     public abstract class DataConvertionAttribute : Attribute
     {
-        /// <summary>
-        /// Types of datatags
-        /// </summary>
-        public enum TagType
-        {
-            /// <summary>
-            /// Array tag
-            /// </summary>
-            Array,
-            /// <summary>
-            /// Compound tag
-            /// </summary>
-            Compound,
-            /// <summary>
-            /// Normal tag
-            /// </summary>
-            Tag,
-            /// <summary>
-            /// Unknown tag type
-            /// </summary>
-            Unknown,
-        }
 
         private ID.NBTTagType forceType;
         private object?[] conversionParams = null!;
@@ -88,23 +66,23 @@ namespace SharpCraft.Data
         /// The type of <see cref="ForceType"/>.
         /// </summary>
         /// <returns>The type of forced type</returns>
-        public TagType ConvertType()
+        public ID.SimpleNBTTagType ConvertType()
         {
             if (!UseForcedType)
             {
-                return TagType.Unknown;
+                return ID.SimpleNBTTagType.Unknown;
             }
             if (ForceType == ID.NBTTagType.TagCompound)
             {
-                return TagType.Compound;
+                return ID.SimpleNBTTagType.Compound;
             }
             else if ((int)ForceType >= 100)
             {
-                return TagType.Array;
+                return ID.SimpleNBTTagType.Array;
             }
             else
             {
-                return TagType.Tag;
+                return ID.SimpleNBTTagType.Tag;
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace SharpCraft.Data
@@ -31,7 +32,7 @@ namespace SharpCraft.Data
             CreatePath(pathExpression.Body, PathPart.Nothing, ref path);
             if (string.IsNullOrWhiteSpace(path))
             {
-                throw new ArgumentException("Failed to get path for the given location");
+                throw new PathCreatorException("Failed to get path for the given location");
             }
             return path.Trim('.');
         }
@@ -66,7 +67,7 @@ namespace SharpCraft.Data
             {
                 if (lastPart == PathPart.Check)
                 {
-                    throw new ArgumentException("Cannot have index filter and compound check after each other.");
+                    throw new PathCreatorException("Cannot have index filter and compound check after each other.");
                 }
                 path = CreateIndexPathPart(indexExpression.Right) + path;
                 CreatePath(indexExpression.Left, PathPart.Filter, ref path);
@@ -78,20 +79,26 @@ namespace SharpCraft.Data
             }
             else if (expression is MethodCallExpression methodExpression)
             {
+                GeneratePathAttribute[] generators = methodExpression.Method.GetCustomAttributes(typeof(GeneratePathAttribute)).Select(a => (a as GeneratePathAttribute)!).ToArray();
                 if (!(methodExpression.Method.GetCustomAttribute(typeof(PathArrayGetterAttribute)) is null))
                 {
                     CreatePath(methodExpression.Object, lastPart, ref path);
+                }
+                else if(generators.Length != 0)
+                {
+                    path = CreateGeneratorString(methodExpression, generators);
+                    CreatePath(methodExpression.Object, PathPart.Path, ref path);
                 }
                 else
                 {
                     if (methodExpression.Arguments.Count != 2)
                     {
-                        throw new ArgumentException("Methods are not supported.");
+                        throw new PathCreatorException("Methods are not supported.");
                     }
                     path = CreateParameterPathPart(methodExpression.Method, methodExpression.Arguments[1]) + path;
                     if (lastPart == PathPart.Check)
                     {
-                        throw new ArgumentException("Cannot have 2 compound checks after each other.");
+                        throw new PathCreatorException("Cannot have 2 compound checks after each other.");
                     }
                     CreatePath(methodExpression.Arguments[0], PathPart.Check, ref path);
                 }
@@ -102,15 +109,67 @@ namespace SharpCraft.Data
             }
         }
 
+        private static string CreateGeneratorString(Expression expression, GeneratePathAttribute[] generators)
+        {
+            MethodCallExpression? method = expression as MethodCallExpression;
+            MemberExpression? property = expression as MemberExpression;
+            MemberInfo caller = method?.Method ?? property!.Member!;
+            DataConvertionAttribute? convertionInfo = GetNextConvertionAttribute(method?.Object ?? property!.Expression!);
+            if (convertionInfo is null)
+            {
+                throw new PathCreatorException("Couldn't find any information on what datapath to get from the property or method.");
+            }
+            GeneratePathAttribute? generatorInfo = null;
+            foreach(GeneratePathAttribute generatorAttribute in generators)
+            {
+                if (convertionInfo.ConvertType() == ID.SimpleNBTTagType.Unknown || convertionInfo.ConvertType() == generatorAttribute.ForType)
+                {
+                    if (!(generatorInfo is null))
+                    {
+                        throw new PathCreatorException("Cannot generate path with path generators since multiple generators can be used. Please specify a ForceType to parent property.");
+                    }
+                    generatorInfo = generatorAttribute;
+                }
+            }
+            if (generatorInfo is null)
+            {
+                throw new PathCreatorException("Cannot generate path with path generators since none of them generates path of the given type.");
+            }
+
+            Type parent = caller.DeclaringType!;
+            MethodInfo? generator = parent.GetMethod(generatorInfo.GeneratorName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+            if (generator is null)
+            {
+                throw new PathCreatorException("Failed to find \"" + generatorInfo.GeneratorName + "\" generator inside of \"" + parent.Name + "\".");
+            }
+            string? generated;
+            try
+            {
+                generated = generator.Invoke(null, new object?[] { GetNextConvertionAttribute(expression), caller, method?.Arguments }) as string;
+            }
+            catch(Exception ex)
+            {
+                throw new PathCreatorException("Generator failed to generate datapath (See inner exception)",ex);
+            }
+
+            if (generated is null)
+            {
+                throw new PathCreatorException("Generator failed to generate datapath. Didn't return a string.");
+            }
+            
+            return generated;
+        }
+
         private static string CreatePropertyPathPart(PropertyInfo? property, MemberExpression propertyExpression)
         {
             if (property is null)
             {
-                throw new ArgumentException("Fields are not supported");
+                throw new PathCreatorException("Fields are not supported");
             }
             DataTagAttribute? attribute = (DataTagAttribute?)property.GetCustomAttribute(typeof(DataTagAttribute));
             ArrayPathAttribute? arrayAttribute = (ArrayPathAttribute?)property.GetCustomAttribute(typeof(ArrayPathAttribute));
             CompoundPathAttribute? compoundAttribute = (CompoundPathAttribute?)property.GetCustomAttribute(typeof(CompoundPathAttribute));
+            GeneratePathAttribute[] generators = propertyExpression.Type.GetCustomAttributes(typeof(GeneratePathAttribute)).Select(a => (a as GeneratePathAttribute)!).ToArray();
             if (!(attribute is null))
             {
                 if (attribute.Merge)
@@ -122,45 +181,23 @@ namespace SharpCraft.Data
                     return "." + (attribute.DataTagName ?? property.Name);
                 }
             }
-            if (arrayAttribute is null && compoundAttribute is null)
+            if (arrayAttribute is null && compoundAttribute is null && generators is null)
             {
-                throw new ArgumentException("Only allows properties with DataTagAttribute or array/compound path attributes");
+                throw new PathCreatorException("Only allows properties with DataTagAttribute or array/compound/generate path attributes");
             }
-            //get conversion attribute
-            Expression searchAt = propertyExpression.Expression;
-            DataConvertionAttribute? converter;
-            do
-            {
-                if (!(searchAt is MemberExpression memberExpression))
-                {
-                    if (searchAt is BinaryExpression index)
-                    {
-                        searchAt = index.Left;
-                        continue;
-                    }
-                    if (searchAt is MethodCallExpression method)
-                    {
-                        searchAt = method.Object;
-                        continue;
-                    }
-                }
-                else
-                {
-                    if (!(memberExpression.Member is PropertyInfo callerProperty))
-                    {
-                        throw new ArgumentException("Doesn't support fields. Use properties.");
-                    }
-                    converter = (DataConvertionAttribute?)callerProperty.GetCustomAttribute(typeof(DataConvertionAttribute));
-                    if (converter is null)
-                    {
-                        throw new ArgumentException("Caller property doesn't have a data convertion attribute.");
-                    }
-                    break;
-                }
-            }
-            while (true);
 
-            if (!(arrayAttribute is null) && (compoundAttribute is null || converter.ConvertType() == DataConvertionAttribute.TagType.Array))
+            DataConvertionAttribute? converter = GetNextConvertionAttribute(propertyExpression.Expression);
+            if (converter is null)
+            {
+                throw new PathCreatorException("Couldn't find any information on what datapath to get from the property.");
+            }
+
+            if (generators.Length != 0)
+            {
+                return CreateGeneratorString(propertyExpression, generators);
+            }
+
+            if (!(arrayAttribute is null) && (compoundAttribute is null || converter.ConvertType() == ID.SimpleNBTTagType.Array))
             {
                 return "["+arrayAttribute.Index+"]";
             }
@@ -174,13 +211,13 @@ namespace SharpCraft.Data
                 {
                     if (compoundAttribute.ConversionIndex.Value > converter.ConversionParams.Length)
                     {
-                        throw new ArgumentException("Couldnt get conversionparams index. index out of array.");
+                        throw new PathCreatorException("Couldnt get conversionparams index. index out of array.");
                     }
                     if (converter.ConversionParams[compoundAttribute.ConversionIndex.Value] is string name)
                     {
                         return "." + name;
                     }
-                    throw new ArgumentException("Couldnt get conversionparams index. value is not a string.");
+                    throw new PathCreatorException("Couldnt get conversionparams index. value is not a string.");
                 }
             }
             throw new Exception("Can't get here");
@@ -195,7 +232,7 @@ namespace SharpCraft.Data
             }
             if (method.GetType() != compoundCheckerInfo.GetType())
             {
-                throw new ArgumentException("Methods are not supported (Only "+nameof(AddCompoundCheck)+" is supported)");
+                throw new PathCreatorException("Methods are not supported (Only "+nameof(AddCompoundCheck)+" is supported)");
             }
             if (Expression.Lambda(check).Compile().DynamicInvoke() is SimpleDataHolder dataHolder)
             {
@@ -228,8 +265,47 @@ namespace SharpCraft.Data
                     }
                 }
             }
-            int value = Expression.Lambda(filter).Compile().DynamicInvoke() as int? ?? throw new ArgumentException("Indexer has to return int value");
+            int value = Expression.Lambda(filter).Compile().DynamicInvoke() as int? ?? throw new PathCreatorException("Indexer has to return int value");
             return "["+value+"]";
+        }
+
+        private static DataConvertionAttribute? GetNextConvertionAttribute(Expression searchFrom)
+        {
+            Expression searchAt = searchFrom;
+            DataConvertionAttribute? converter = null;
+            do
+            {
+                if (!(searchAt is MemberExpression memberExpression))
+                {
+                    if (searchAt is BinaryExpression index)
+                    {
+                        searchAt = index.Left;
+                        continue;
+                    }
+                    if (searchAt is MethodCallExpression method)
+                    {
+                        searchAt = method.Object;
+                        continue;
+                    }
+                    break;
+                }
+                else
+                {
+                    if (!(memberExpression.Member is PropertyInfo callerProperty))
+                    {
+                        throw new PathCreatorException("Doesn't support fields. Use properties.");
+                    }
+                    converter = (DataConvertionAttribute?)callerProperty.GetCustomAttribute(typeof(DataConvertionAttribute));
+                    if (converter is null)
+                    {
+                        throw new PathCreatorException("Caller property doesn't have a data convertion attribute.");
+                    }
+                    break;
+                }
+            }
+            while (true);
+
+            return converter;
         }
     }
 }

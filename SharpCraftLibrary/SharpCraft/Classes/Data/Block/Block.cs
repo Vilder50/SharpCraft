@@ -4,6 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.Linq;
 using SharpCraft.Data;
+using System.Linq.Expressions;
 
 namespace SharpCraft
 {
@@ -67,6 +68,80 @@ namespace SharpCraft
             set
             {
                 id = value;
+            }
+        }
+
+        /// <summary>
+        /// Used for getting the path to block states
+        /// </summary>
+        [GeneratePath(nameof(Block.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+        public string GetStatePath()
+        {
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
+        /// Used for getting the path to a specific block state
+        /// </summary>
+        /// <typeparam name="T">The type of block to get state from</typeparam>
+        /// <param name="stateProperty">The state to get</param>
+        [GeneratePath(nameof(Block.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+        public string GetStatePath<T>(Expression<Func<T,object?>> stateProperty) where T : Block
+        {
+            _ = stateProperty;
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
+        /// Used for generating state datapaths.
+        /// </summary>
+        /// <param name="convertionInfo">Data on how the paths should be generated</param>
+        /// <param name="caller">The method/property calling this method</param>
+        /// <param name="arguments">Arguments from the calling method</param>
+        protected static string StatePathGenerator(DataConvertionAttribute convertionInfo, MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+        {
+            _ = caller;
+            if (convertionInfo.ConversionParams.Length < 2)
+            {
+                throw new PathCreatorException("Not enough conversion params.");
+            }
+            if (!(convertionInfo.ConversionParams[1] is string basePath))
+            {
+                throw new PathCreatorException("2nd conversion param was expected to be a string.");
+            }
+            if (arguments is null)
+            {
+                throw new PathCreatorException("Path generator expected to be called by a method.");
+            }
+
+            if (arguments.Count == 0)
+            {
+                return "." + basePath;
+            }
+            else
+            {
+                Expression? stateParameter = null;
+                stateParameter ??= (arguments.ElementAt(0) as LambdaExpression);
+                stateParameter ??= ((arguments.ElementAt(0) as UnaryExpression)!.Operand as LambdaExpression)?.Body;
+                if (stateParameter is null)
+                {
+                    throw new PathCreatorException("Failed to get state property from " + nameof(GetStatePath) + ".");
+                }
+
+                MemberExpression? memberExpression = stateParameter as MemberExpression;
+                UnaryExpression? unaryExpression = stateParameter as UnaryExpression;
+                PropertyInfo? property = (PropertyInfo?)(memberExpression ?? unaryExpression!.Operand as MemberExpression)?.Member;
+
+                if (property is null)
+                {
+                    throw new PathCreatorException("Failed to get state parameter from " + nameof(GetStatePath) + ".");
+                }
+                Blocks.BlockStateAttribute? stateAttribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
+                if (stateAttribute is null)
+                {
+                    throw new PathCreatorException("Failed to get state parameter. The given path doesn't end with a state property.");
+                }
+                return "." + basePath + "." + stateAttribute.DataName;
             }
         }
 
@@ -264,6 +339,8 @@ namespace SharpCraft
 
             return new Block(type);
         }
+
+        
 
         /// <summary>
         /// Converts this block into a <see cref="DataPartObject"/>

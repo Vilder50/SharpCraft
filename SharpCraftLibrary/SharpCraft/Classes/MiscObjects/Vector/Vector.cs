@@ -235,7 +235,7 @@ namespace SharpCraft
         [PathArrayGetter]
         public double[] PathArray()
         {
-            throw new NotImplementedException();
+            throw new PathGettingMethodCallException();
         }
 
         #region operator
@@ -396,7 +396,7 @@ namespace SharpCraft
         [PathArrayGetter]
         public new int[] PathArray()
         {
-            throw new NotImplementedException();
+            throw new PathGettingMethodCallException();
         }
     }
 }
