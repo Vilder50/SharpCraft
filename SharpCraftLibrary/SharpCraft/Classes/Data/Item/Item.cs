@@ -216,6 +216,32 @@ namespace SharpCraft
         public int? CustomModelData { get; set; }
 
         /// <summary>
+        /// Clones the item and change the count of the item
+        /// </summary>
+        /// <param name="count">The new count of the item</param>
+        /// <returns>The new cloned item</returns>
+        public Item Clone(sbyte count)
+        {
+            Item newItem = (Item)Clone();
+            newItem.Count = count;
+            return newItem;
+        }
+
+        /// <summary>
+        /// Clones the item and change the count and slot of the item
+        /// </summary>
+        /// <param name="count">The new count of the item</param>
+        /// <param name="slot">The new slot the item is in</param>
+        /// <returns>The new cloned item</returns>
+        public Item Clone(sbyte count, sbyte slot)
+        {
+            Item newItem = (Item)Clone();
+            newItem.Count = count;
+            newItem.Slot = slot;
+            return newItem;
+        }
+
+        /// <summary>
         /// Returns the item's data from the .tag tag
         /// </summary>
         /// <returns>the .tag data. Null if there is not data there</returns>
