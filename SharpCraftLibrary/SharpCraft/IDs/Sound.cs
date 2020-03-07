@@ -29,6 +29,28 @@ namespace SharpCraft
                     public static string ExtraLoop2 { get; } = "ambient.underwater.loop.additions.rare";
                     public static string ExtraLoop3 { get; } = "ambient.underwater.loop.additions.ultra_rare";
                 }
+
+                public static class Nether
+                {
+                    public class NetherSounds
+                    {
+                        private string biome;
+
+                        public NetherSounds(string biome)
+                        {
+                            this.biome = biome;
+                        }
+
+                        public string Additions { get => "ambient." + biome + ".additions"; }
+                        public string Loop { get => "ambient." + biome + ".loop"; }
+                        public string Mood { get => "ambient." + biome + ".mood"; }
+                    }
+
+                    public static NetherSounds SoulSandValley { get; } = new NetherSounds("soul_sand_valley");
+                    public static NetherSounds CrimsonForst { get; } = new NetherSounds("crimson_forest");
+                    public static NetherSounds NetherWastes { get; } = new NetherSounds("nether_wastes");
+                    public static NetherSounds WarpedForest { get; } = new NetherSounds("warped_forest");
+                }
             }
 
             /// <summary>

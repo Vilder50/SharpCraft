@@ -7,13 +7,13 @@ namespace SharpCraft
         /// <summary>
         /// An object for item frames and painting entities
         /// </summary>
-        public class ItemPainting : EntityBasic
+        public class ItemFrame : EntityBasic
         {
             /// <summary>
             /// Creates a new item frame or painting entity
             /// </summary>
             /// <param name="type">the type of entity</param>
-            public ItemPainting(ID.Entity? type = ID.Entity.item_frame) : base(type) { }
+            public ItemFrame(ID.Entity? type = ID.Entity.item_frame) : base(type) { }
 
             /// <summary>
             /// The block the entity is inside
@@ -25,12 +25,6 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
             public ID.FacingFull? Facing { get; set; }
-
-            /// <summary>
-            /// The type of painting
-            /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-            public ID.Painting? Painting { get; set; }
 
             /// <summary>
             /// The item in the item frame
@@ -51,6 +45,18 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag("ItemRotation")]
             public sbyte? FrameRotation { get; set; }
+
+            /// <summary>
+            /// Makes the item frame invisible
+            /// </summary>
+            [Data.DataTag]
+            public bool Invisible { get; set; }
+
+            /// <summary>
+            /// Stops players from being able to get the item out of the item. The item frame can also not be broken
+            /// </summary>
+            [Data.DataTag]
+            public bool Fixed { get; set; }
         }
     }
 }

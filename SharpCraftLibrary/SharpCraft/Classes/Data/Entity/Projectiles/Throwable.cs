@@ -23,19 +23,19 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the projectile
             /// </summary>
-            [Data.DataTag("owner","M","L")]
-            public UUID Owner { get; set; }
+            [Data.DataTag("OwnerUUID")]
+            public int[] Owner { get; set; }
             /// <summary>
             /// The type of thrown potion
             /// </summary>
             [Data.DataTag]
-            public SharpCraft.Item Potion { get; set; }
+            public Item Potion { get; set; }
             /// <summary>
             /// The item the entity is displayed as
             /// (Potions do not support use this)
             /// </summary>
             [Data.DataTag("Item")]
-            public SharpCraft.Item DisplayItem { get; set; }
+            public Item DisplayItem { get; set; }
         }
     }
 }

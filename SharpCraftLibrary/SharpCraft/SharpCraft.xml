@@ -3367,6 +3367,36 @@
             The direction the block is facing
             </summary>
         </member>
+        <member name="T:SharpCraft.Block.Target">
+            <summary>
+            An object for anvil blocks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.Target.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a daylight detector block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.Target.#ctor(SharpCraft.ID.Block)">
+            <summary>
+            Creates a daylight detector block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.Target.FitsBlock(SharpCraft.ID.Block)">
+            <summary>
+            Tests if the given block type fits this type of block object
+            </summary>
+            <param name="block">The block to test</param>
+            <returns>true if the block fits</returns>
+        </member>
+        <member name="P:SharpCraft.Block.Target.SPower">
+            <summary>
+            How much redstone power it outputs
+            (0-15)
+            </summary>
+        </member>
         <member name="T:SharpCraft.Block.Terracotta">
             <summary>
             An object for terracotta blocks
@@ -3725,6 +3755,36 @@
         <member name="P:SharpCraft.Block.WallTorch.SFacing">
             <summary>
             The way the torch is facing. (The way it points)
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Block.WeepingVines">
+            <summary>
+            An object for vine blocks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.WeepingVines.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a vine block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.WeepingVines.#ctor(SharpCraft.ID.Block)">
+            <summary>
+            Creates a vine block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.WeepingVines.FitsBlock(SharpCraft.ID.Block)">
+            <summary>
+            Tests if the given block type fits this type of block object
+            </summary>
+            <param name="block">The block to test</param>
+            <returns>true if the block fits</returns>
+        </member>
+        <member name="P:SharpCraft.Block.WeepingVines.SAge">
+            <summary>
+            How much the cactus / sugar cane has grown
+            (0-25)
             </summary>
         </member>
         <member name="T:SharpCraft.BlockStateAttribute">
@@ -5999,6 +6059,32 @@
             If the pig has a saddle on
             </summary>
         </member>
+        <member name="T:SharpCraft.Entity.Piglin">
+            <summary>
+            Entity data for piglins
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Entity.Piglin.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+            <summary>
+            Creates a new piglin
+            </summary>
+            <param name="type">the type of entity</param>
+        </member>
+        <member name="P:SharpCraft.Entity.Piglin.IsBaby">
+            <summary>
+            If its a baby
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Piglin.IsImmuneToZombification">
+            <summary>
+            True if it shouldn't turn into a <see cref="F:SharpCraft.ID.Entity.zombified_piglin"/> when in the overworld
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Piglin.Inventory">
+            <summary>
+            The items in the piglins inventory
+            </summary>
+        </member>
         <member name="T:SharpCraft.Entity.Player">
             <summary>
             Entity data for players
@@ -6499,27 +6585,6 @@
             The amount of time the zombie has been in water
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ZombiePigman">
-            <summary>
-            Entity data for zombie pigmen
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Entity.ZombiePigman.#ctor(System.Nullable{SharpCraft.ID.Entity})">
-            <summary>
-            Creates a new zombie pigman
-            </summary>
-            <param name="type">the type of entity</param>
-        </member>
-        <member name="P:SharpCraft.Entity.ZombiePigman.Anger">
-            <summary>
-            The time till the zombie pigman stops being angry (0 or smaller if not angry)
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Entity.ZombiePigman.AngryOn">
-            <summary>
-            The <see cref="T:SharpCraft.UUID"/> of the entity this pigman is angry on
-            </summary>
-        </member>
         <member name="T:SharpCraft.Entity.ZombieVillager">
             <summary>
             Entity data for zombie villagers
@@ -6564,6 +6629,27 @@
         <member name="P:SharpCraft.Entity.ZombieVillager.ConverterUUID">
             <summary>
             The <see cref="T:SharpCraft.UUID"/> of the player who is converting this zombie villager
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entity.ZombifiedPiglin">
+            <summary>
+            Entity data for zombie pigmen
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Entity.ZombifiedPiglin.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+            <summary>
+            Creates a new zombie pigman
+            </summary>
+            <param name="type">the type of entity</param>
+        </member>
+        <member name="P:SharpCraft.Entity.ZombifiedPiglin.Anger">
+            <summary>
+            The time till the zombie pigman stops being angry (0 or smaller if not angry)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.ZombifiedPiglin.AngryOn">
+            <summary>
+            The <see cref="T:SharpCraft.UUID"/> of the entity this pigman is angry on
             </summary>
         </member>
         <member name="T:SharpCraft.Entity.Arrow">
@@ -10280,6 +10366,21 @@
             All the different ID's/Types/States things in the game can have
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.StateWallConnection.none">
+            <summary>
+            Wall isn't connected
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateWallConnection.low">
+            <summary>
+            Wall is connected. But no connection upwards.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.StateWallConnection.tall">
+            <summary>
+            Wall is connected upwards
+            </summary>
+        </member>
         <member name="F:SharpCraft.ID.StateCompareMode.compare">
             <summary>
             Outputs the signal if it's the greatest signal
@@ -11174,6 +11275,11 @@
             A random item dropped by cats at the morning
             </summary>
         </member>
+        <member name="P:SharpCraft.ID.Files.LootTables.PiglinBartering">
+            <summary>
+            Loot table for when bartering with piglins
+            </summary>
+        </member>
         <member name="T:SharpCraft.ID.Files.LootTables.Chest">
             <summary>
             Loot tables Minecraft uses for chest loot
@@ -11327,6 +11433,41 @@
             Water doesn't break these blocks
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.beacon_base_blocks">
+            <summary>
+            Blocks for building a beacon pyramid
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.climbable">
+            <summary>
+            Make blocks climbable
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.fire">
+            <summary>
+            Blocks which can be broken with water bottle water. Falling blocks will try to fall through these blocks. 
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.nylium">
+            <summary>
+            Blocks nether fungus, roots and sprouts can be placed on. Netherrack can be bonemealed if around of these blocks (netherrack only converts into nylium).
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wall_post_override">
+            <summary>
+            none solid blocks which still makes walls connect upwards.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wart_blocks">
+            <summary>
+            Hoes destroy these blocks 15 times faster.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wither_summon_base_blocks">
+            <summary>
+            Blocks used for making the T part of the wither summon build.
+            </summary>
+        </member>
         <member name="T:SharpCraft.ID.Files.Groups.Fluid">
             <summary>
             fluid groups used by Minecraft
@@ -11469,6 +11610,11 @@
             Items which burns in a furnace for 100 ticks
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.beacon_payment_items">
+            <summary>
+            Items which can be used for activating beacons.
+            </summary>
+        </member>
         <member name="T:SharpCraft.ID.Files.Groups.Entities">
             <summary>
             entity groups
@@ -11493,6 +11639,11 @@
             <summary>
             Entities which glows when the bell rings.
             Entities which don't override ravager AI when riding on one
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Entities.Special.impact_projectiles">
+            <summary>
+            Entities which can break chorus fruit.
             </summary>
         </member>
         <member name="F:SharpCraft.ID.LootTarget.This">
@@ -13135,6 +13286,21 @@
         <member name="P:SharpCraft.AdvancementObjects.TamedEntityTrigger.Entity">
             <summary>
             The tamed mob
+            </summary>
+        </member>
+        <member name="T:SharpCraft.AdvancementObjects.TargetHitTrigger">
+            <summary>
+            Gets triggered when the player shoots a <see cref="F:SharpCraft.ID.Block.target"/>.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.TargetHitTrigger.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.TargetHitTrigger"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.TargetHitTrigger.SignalLength">
+            <summary>
+            The redstone length the target outputs
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.TickTrigger">
@@ -20393,27 +20559,49 @@
             </summary>
             <returns>seed</returns>
         </member>
-        <member name="T:SharpCraft.Commands.LocateCommand">
+        <member name="T:SharpCraft.Commands.LocateStructureCommand">
             <summary>
             Command which locates where the closest structure of the given type is at
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.LocateCommand.#ctor(SharpCraft.ID.Structure)">
+        <member name="M:SharpCraft.Commands.LocateStructureCommand.#ctor(SharpCraft.ID.Structure)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.Commands.LocateCommand"/>
+            Intializes a new <see cref="T:SharpCraft.Commands.LocateStructureCommand"/>
             </summary>
             <param name="structure">The structure to locate</param>
         </member>
-        <member name="P:SharpCraft.Commands.LocateCommand.Structure">
+        <member name="P:SharpCraft.Commands.LocateStructureCommand.Structure">
             <summary>
             The structure to locate
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.LocateCommand.GetCommandString">
+        <member name="M:SharpCraft.Commands.LocateStructureCommand.GetCommandString">
             <summary>
             Returns the command as a string
             </summary>
             <returns>locate [Structure]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.LocateBiomeCommand">
+            <summary>
+            Command which locates where the closest biome of the given type is at
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.LocateBiomeCommand.#ctor(SharpCraft.ID.Biome)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.LocateBiomeCommand"/>
+            </summary>
+            <param name="biome">The biome to locate</param>
+        </member>
+        <member name="P:SharpCraft.Commands.LocateBiomeCommand.Biome">
+            <summary>
+            The structure to locate
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.LocateBiomeCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>locatebiome [Biome]</returns>
         </member>
         <member name="T:SharpCraft.Commands.TriggerCommand">
             <summary>

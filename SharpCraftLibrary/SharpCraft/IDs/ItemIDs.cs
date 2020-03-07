@@ -8,6 +8,10 @@
 #pragma warning disable 1591
         public enum Item
         {
+            stripped_warped_hyphae,
+            stripped_crimson_hyphae,
+            warped_hyphae,
+            crimson_hyphae,
             ancient_debris,
             basalt,
             netherite_block,

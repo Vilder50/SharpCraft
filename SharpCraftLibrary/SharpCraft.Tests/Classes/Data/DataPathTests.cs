@@ -36,7 +36,7 @@ namespace SharpCraft.Tests.Data
             Assert.IsTrue(path.IsArray);
 
             //test getting tag in tag
-            path = DataPath.GetDataPath<Entity.ItemPainting>(f => f.FrameItem.Damage);
+            path = DataPath.GetDataPath<Entity.ItemFrame>(f => f.FrameItem.Damage);
         }
 
         [TestMethod]

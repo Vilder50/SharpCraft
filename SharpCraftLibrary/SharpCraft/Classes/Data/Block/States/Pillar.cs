@@ -32,6 +32,7 @@ namespace SharpCraft
                     block == SharpCraft.ID.Block.quartz_block ||
                     blockName.Contains("log") ||
                     blockName.Contains("wood") ||
+                    blockName.Contains("hyphae") ||
                     block == SharpCraft.ID.Block.basalt ||
                     block == SharpCraft.ID.Block.crimson_stem ||
                     block == SharpCraft.ID.Block.stripped_crimson_stem ||

@@ -398,6 +398,16 @@ namespace SharpCraft
                         /// Blocks used for making the T part of the wither summon build.
                         /// </summary>
                         wither_summon_base_blocks,
+
+                        /// <summary>
+                        /// Blocks hoglins tries to stay away from
+                        /// </summary>
+                        hoglin_repellents,
+
+                        /// <summary>
+                        /// Blocks piglins tries to stay away from
+                        /// </summary>
+                        piglin_repellents,
                     }
                 }
 
