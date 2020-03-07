@@ -220,9 +220,19 @@ namespace SharpCraft
         {
             if (!Disposed)
             {
-                foreach (BasePackNamespace packNamespace in namespaces)
+                bool disposing = false;
+                try
                 {
-                    packNamespace.Dispose();
+                    foreach (BasePackNamespace packNamespace in namespaces)
+                    {
+                        disposing = true;
+                        packNamespace.Dispose();
+                        disposing = false;
+                    }
+                }
+                catch (InvalidOperationException) when (!disposing)
+                {
+                    throw new InvalidOperationException("A new namespace was added while the datapack was trying to dispose. (Might be possible a WriteOnDispose file created a namespace (eg. needed and made the sharpcraft namespace))");
                 }
                 AfterDispose();
                 datapacks.Remove(this);

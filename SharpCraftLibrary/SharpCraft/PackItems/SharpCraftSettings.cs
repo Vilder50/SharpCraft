@@ -10,6 +10,7 @@ namespace SharpCraft
     public static class SharpCraftSettings
     {
         private static IntVector ownedChunk = new IntVector(0);
+        private static string sharpNamespace = "sharpcraft";
         private static bool isLocked = false;
 
         internal static void LockSettings()
@@ -29,5 +30,10 @@ namespace SharpCraft
         /// A chunk SharpCraft freely can use. Note that the value has to be for a chunk and not for a block.
         /// </summary>
         public static IntVector OwnedChunk { get => ownedChunk; set { ThrowIfLocked(); ownedChunk = new IntVector((int)value.X, 0, (int)value.Z); } }
+
+        /// <summary>
+        /// The namespace sharpcraft will generate it's files in
+        /// </summary>
+        public static string SharpCraftNamespace { get => sharpNamespace; set { ThrowIfLocked(); sharpNamespace = value; } }
     }
 }

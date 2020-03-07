@@ -248,9 +248,19 @@ namespace SharpCraft
             }
             if (!Disposed)
             {
-                foreach(BaseFile file in files)
+                bool disposing = false;
+                try
                 {
-                    file.Dispose();
+                    foreach (BaseFile file in files)
+                    {
+                        disposing = true;
+                        file.Dispose();
+                        disposing = false;
+                    }
+                }
+                catch (InvalidOperationException) when (!disposing)
+                {
+                    throw new InvalidOperationException("A new file was added while the namespace was trying to dispose. (Might be possible a WriteOnDispose file created a new file)");
                 }
                 AfterDispose();
                 Disposed = true;

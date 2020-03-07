@@ -24661,6 +24661,11 @@
             A chunk SharpCraft freely can use. Note that the value has to be for a chunk and not for a block.
             </summary>
         </member>
+        <member name="P:SharpCraft.SharpCraftSettings.SharpCraftNamespace">
+            <summary>
+            The namespace sharpcraft will generate it's files in
+            </summary>
+        </member>
         <member name="T:SharpCraft.Writer.ISharpWriter">
             <summary>
             Interface for classes with a method which should run using <see cref="T:SharpCraft.Writer.SharpWriter"/> 

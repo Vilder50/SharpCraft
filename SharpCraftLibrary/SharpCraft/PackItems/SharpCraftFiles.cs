@@ -17,30 +17,37 @@ namespace SharpCraft
         public static Function? SetupFunction { get; private set; }
         //public static Function TickFunction { get; private set; }
 
-        static SharpCraftFiles()
+        private static void TrySetupFiles()
         {
-            BaseDatapack.AddDatapackListener(dp =>
+            if (Datapack is null)
             {
+                BaseDatapack.AddDatapackListener(dp =>
+                {
+                    if (Datapack is null)
+                    {
+                        Datapack = dp;
+                        try
+                        {
+                            SetupFiles(dp);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Exception("Failed to create and/or add sharpcraft files to the datapack. See inner exception.", ex);
+                        }
+                    }
+                });
                 if (Datapack is null)
                 {
-                    Datapack = dp;
-                    try
-                    {
-                        SetupFiles(dp);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Failed to create and/or add sharpcraft files to the datapack. See inner exception.", ex);
-                    }
+                    throw new Exception("Cannot create sharpcraft files since no datapack exists.");
                 }
-            });
+            }
         }
 
         private static void SetupFiles(BaseDatapack pack)
         {
             SharpCraftSettings.LockSettings();
             MinecraftNamespace = pack.Namespace<PackNamespace>("minecraft");
-            SharpCraftNamespace = pack.Namespace<PackNamespace>("sharpcraft");
+            SharpCraftNamespace = pack.Namespace<PackNamespace>(SharpCraftSettings.SharpCraftNamespace);
             #pragma warning disable IDE0067
             FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
             //FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
@@ -61,6 +68,7 @@ namespace SharpCraft
         private static readonly List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
         public static ScoreValue AddConstantNumber(int number)
         {
+            TrySetupFiles();
             //Get constant making function file
             if (constantNumberFile is null)
             {
@@ -92,6 +100,7 @@ namespace SharpCraft
         private const string mathObjectiveName = "math";
         public static Objective GetMathScoreObject()
         {
+            TrySetupFiles();
             if (mathObjective is null)
             {
                 mathObjective = new Objective(mathObjectiveName);
@@ -107,6 +116,7 @@ namespace SharpCraft
         private static (Function? raySetup, Objective? xRotation, Objective? yRotation, ScoreValue? rayState, Predicate[]? predicates) rayFiles;
         public static (Function raySetup, Objective xRotation, Objective yRotation, ScoreValue rayState, Predicate[] predicates) GetRayFiles()
         {
+            TrySetupFiles();
             if (!(rayFiles.raySetup is null))
             {
                 return rayFiles!;
@@ -166,7 +176,8 @@ namespace SharpCraft
         private static Selector? dummyEntitySelector;
         public static Selector GetDummySelector()
         {
-            if(!(dummyEntitySelector is null))
+            TrySetupFiles();
+            if (!(dummyEntitySelector is null))
             {
                 return dummyEntitySelector;
             }
@@ -184,6 +195,7 @@ namespace SharpCraft
         private static readonly Dictionary<double, Predicate> randomnessPredicates = new Dictionary<double, Predicate>();
         public static Predicate GetRandomPredicate(double chance)
         {
+            TrySetupFiles();
             if (randomnessPredicates.ContainsKey(chance))
             {
                 return randomnessPredicates[chance];
@@ -207,6 +219,7 @@ namespace SharpCraft
         private static Function? randomNumberFunction;
         public static Function GetRandomNumberFunction()
         {
+            TrySetupFiles();
             if (!(randomNumberFunction is null))
             {
                 return randomNumberFunction;
@@ -228,6 +241,7 @@ namespace SharpCraft
         private static LootTable? hashLoottable;
         public static LootTable GetHashLoottable()
         {
+            TrySetupFiles();
             if (!(hashLoottable is null))
             {
                 return hashLoottable;
@@ -250,6 +264,7 @@ namespace SharpCraft
         private static (Function?, Vector?) hashFunction;
         public static (Function function, Vector location) GetHashFunction()
         {
+            TrySetupFiles();
             if (!(hashFunction.Item1 is null))
             {
                 return hashFunction!;
