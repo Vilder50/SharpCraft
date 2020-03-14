@@ -181,8 +181,9 @@ namespace SharpCraft
         /// <param name="name">The name to check</param>
         /// <param name="allowCapitialized">If capitialized letters are allowed</param>
         /// <param name="allowSlash">If / is allowed</param>
+        /// <param name="maxLength">The maximum length of the name</param>
         /// <returns>True if the name is valid</returns>
-        public static bool ValidateName(string name, bool allowCapitialized, bool allowSlash)
+        public static bool ValidateName(string name, bool allowCapitialized, bool allowSlash, int? maxLength)
         {
             if (name is null)
             {
@@ -195,6 +196,10 @@ namespace SharpCraft
                 checkString = checkString.ToLower();
             }
             if (!allowSlash && name.Contains("/"))
+            {
+                return false;
+            }
+            if (!(maxLength is null) && name.Length > maxLength)
             {
                 return false;
             }

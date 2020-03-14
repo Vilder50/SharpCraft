@@ -86,7 +86,7 @@ namespace SharpCraft.Data
                 }
                 else if(generators.Length != 0)
                 {
-                    path = CreateGeneratorString(methodExpression, generators);
+                    path = CreateGeneratorString(methodExpression, generators) + path;
                     CreatePath(methodExpression.Object, PathPart.Path, ref path);
                 }
                 else

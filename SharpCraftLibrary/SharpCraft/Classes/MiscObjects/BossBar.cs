@@ -43,7 +43,7 @@ namespace SharpCraft
                     throw new System.ArgumentException("BossBar name may not be null or whitespace", nameof(Name));
                 }
                 string loweredString = value.ToLower();
-                if (!Utils.ValidateName(loweredString,false,true))
+                if (!Utils.ValidateName(loweredString,false,true, null))
                 {
                     throw new System.ArgumentException("BossBar name is invalid. Name only accepts letters, numbers and /-._");
                 }

@@ -7774,7 +7774,7 @@
             A fake tag. A place to write directly in the item's data.
             </summary>
         </member>
-        <member name="P:SharpCraft.Item.ExtraTags">
+        <member name="P:SharpCraft.Item.ExtraData">
             <summary>
             Extra data for this item to hold
             </summary>
@@ -7783,6 +7783,21 @@
             <summary>
             The item's model ID
             </summary>
+        </member>
+        <member name="M:SharpCraft.Item.Clone(System.SByte)">
+            <summary>
+            Clones the item and change the count of the item
+            </summary>
+            <param name="count">The new count of the item</param>
+            <returns>The new cloned item</returns>
+        </member>
+        <member name="M:SharpCraft.Item.Clone(System.SByte,System.SByte)">
+            <summary>
+            Clones the item and change the count and slot of the item
+            </summary>
+            <param name="count">The new count of the item</param>
+            <param name="slot">The new slot the item is in</param>
+            <returns>The new cloned item</returns>
         </member>
         <member name="M:SharpCraft.Item.GetItemTagString">
             <summary>
@@ -7796,11 +7811,63 @@
             Used for give item commands
             </summary>
         </member>
+        <member name="M:SharpCraft.Item.AddExtraData(SharpCraft.Data.DataHolderBase[])">
+            <summary>
+            Adds extra data to this item
+            </summary>
+            <param name="data">The data to add to the item</param>
+        </member>
         <member name="M:SharpCraft.Item.op_Implicit(SharpCraft.ID.Item)~SharpCraft.Item">
             <summary>
             Converts an item id into a simple item
             </summary>
             <param name="item">The item id to convert</param>
+        </member>
+        <member name="T:SharpCraft.Item.ExtraDataList">
+            <summary>
+            A list of <see cref="T:SharpCraft.Data.SimpleDataHolder"/>
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Item.ExtraDataList"/>
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.#ctor(SharpCraft.Data.DataHolderBase[])">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Item.ExtraDataList"/>
+            </summary>
+            <param name="startData">Data which is in the list from the start</param>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.#ctor(System.Collections.Generic.List{SharpCraft.Data.DataHolderBase})">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Item.ExtraDataList"/>
+            </summary>
+            <param name="data">Data the list should start with</param>
+        </member>
+        <member name="P:SharpCraft.Item.ExtraDataList.Data">
+            <summary>
+            Data this list is holding
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.AddData(SharpCraft.Data.DataHolderBase[])">
+            <summary>
+            Adds the given data to the list
+            </summary>
+            <param name="data">The data to add</param>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.ContinuePath``1">
+            <summary>
+            Used for getting the paths for a <see cref="T:SharpCraft.Data.DataHolderBase"/>. Do not call this method without using <see cref="T:SharpCraft.Data.DataPathCreator"/>.
+            </summary>
+            <typeparam name="T">The type of <see cref="T:SharpCraft.Data.DataHolderBase"/> to get the path for</typeparam>
+        </member>
+        <member name="M:SharpCraft.Item.ExtraDataList.GetAsDataObject(System.Object[])">
+            <summary>
+            Converts this <see cref="T:SharpCraft.Data.SimpleDataHolder"/> into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+            <param name="conversionData">Not used</param>
+            <returns>This as a <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
         </member>
         <member name="T:SharpCraft.Effect">
             <summary>
@@ -10065,13 +10132,14 @@
             <param name="block">The block to convert</param>
             <returns>The item</returns>
         </member>
-        <member name="M:SharpCraft.Utils.ValidateName(System.String,System.Boolean,System.Boolean)">
+        <member name="M:SharpCraft.Utils.ValidateName(System.String,System.Boolean,System.Boolean,System.Nullable{System.Int32})">
             <summary>
             Checks if the given name is valid or not
             </summary>
             <param name="name">The name to check</param>
             <param name="allowCapitialized">If capitialized letters are allowed</param>
             <param name="allowSlash">If / is allowed</param>
+            <param name="maxLength">The maximum length of the name</param>
             <returns>True if the name is valid</returns>
         </member>
         <member name="T:SharpCraft.UUID">

@@ -122,7 +122,7 @@ namespace SharpCraft
             WriteFileStart(stream);
 
             //write ingredients
-            stream.Write(",\"ingredient\":["+string.Join(",",Ingredients.Select(i => GetItemCompound(i)))+"]");
+            stream.Write(",\"ingredients\":["+string.Join(",",Ingredients.Select(i => GetItemCompound(i)))+"]");
 
             //write output item
             stream.Write(",\"result\":{\"item\":\"minecraft:" + Result.MinecraftValue() + "\"");

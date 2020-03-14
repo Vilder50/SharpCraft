@@ -71,7 +71,7 @@ namespace SharpCraft.Tests.PackItems
             //test
             ShapelessRecipe recipe = space.Recipe("recipe", new ItemType[] { ID.Item.dirt, ID.Item.gravel }, ID.Item.coarse_dirt, 1, null);
             string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
-            Assert.AreEqual("{\"type\":\"minecraft:crafting_shapeless\",\"ingredient\":[{\"item\":\"minecraft:dirt\"},{\"item\":\"minecraft:gravel\"}],\"result\":{\"item\":\"minecraft:coarse_dirt\"}}", recipeString, "recipe file wasn't written correctly");
+            Assert.AreEqual("{\"type\":\"minecraft:crafting_shapeless\",\"ingredients\":[{\"item\":\"minecraft:dirt\"},{\"item\":\"minecraft:gravel\"}],\"result\":{\"item\":\"minecraft:coarse_dirt\"}}", recipeString, "recipe file wasn't written correctly");
             Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
             //exceptions

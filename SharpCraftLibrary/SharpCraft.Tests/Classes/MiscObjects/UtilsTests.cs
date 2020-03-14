@@ -88,15 +88,17 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestValidateName()
         {
-            Assert.IsFalse(Utils.ValidateName(null,true,true), "Null is not a valid name");
-            Assert.IsTrue(Utils.ValidateName("...__---",false,false), "Name should accept / . _ and -");
-            Assert.IsTrue(Utils.ValidateName("as0ds9az564xxcy12", false, false), "Name should accept letters and numbers");
-            Assert.IsFalse(Utils.ValidateName("test:test", false, false), "Name should not accept :");
-            Assert.IsFalse(Utils.ValidateName("", false, false), "Name may not be empty");
-            Assert.IsFalse(Utils.ValidateName("ASD", false, false), "Name may not contain capitialized letters");
-            Assert.IsTrue(Utils.ValidateName("ASD", true, false), "Name may contain capitialized letters if specified");
-            Assert.IsFalse(Utils.ValidateName("/", false, false), "Name may not /");
-            Assert.IsTrue(Utils.ValidateName("/", true, true), "Name may contain / if specified");
+            Assert.IsFalse(Utils.ValidateName(null,true,true, null), "Null is not a valid name");
+            Assert.IsTrue(Utils.ValidateName("...__---",false,false, null), "Name should accept / . _ and -");
+            Assert.IsTrue(Utils.ValidateName("as0ds9az564xxcy12", false, false, null), "Name should accept letters and numbers");
+            Assert.IsFalse(Utils.ValidateName("test:test", false, false, null), "Name should not accept :");
+            Assert.IsFalse(Utils.ValidateName("", false, false, null), "Name may not be empty");
+            Assert.IsFalse(Utils.ValidateName("ASD", false, false, null), "Name may not contain capitialized letters");
+            Assert.IsTrue(Utils.ValidateName("ASD", true, false, null), "Name may contain capitialized letters if specified");
+            Assert.IsFalse(Utils.ValidateName("/", false, false, null), "Name may not /");
+            Assert.IsTrue(Utils.ValidateName("/", true, true, null), "Name may contain / if specified");
+            Assert.IsTrue(Utils.ValidateName("123", true, true, 3), "Name is 3 chars long");
+            Assert.IsFalse(Utils.ValidateName("1234", true, true, 3), "Name is 4 chars long and shouldn't be allowed");
         }
     }
 }

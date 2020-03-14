@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using SharpCraft.Data;
 using System.Linq;
+using System.Reflection;
+using System.Linq.Expressions;
 
 namespace SharpCraft
 {
@@ -207,8 +209,8 @@ namespace SharpCraft
         /// <summary>
         /// Extra data for this item to hold
         /// </summary>
-        [DataTag("tag.Data")]
-        public DataHolderBase? ExtraTags { get; set; }
+        [DataTag("tag")]
+        public ExtraDataList? ExtraData { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>
@@ -278,12 +280,110 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Adds extra data to this item
+        /// </summary>
+        /// <param name="data">The data to add to the item</param>
+        public void AddExtraData(params DataHolderBase[] data)
+        {
+            ExtraData ??= new ExtraDataList();
+            ExtraData.AddData(data);
+        }
+
+        /// <summary>
         /// Converts an item id into a simple item
         /// </summary>
         /// <param name="item">The item id to convert</param>
         public static implicit operator Item(ID.Item item)
         {
             return new Item(item);
+        }
+
+        /// <summary>
+        /// A list of <see cref="SimpleDataHolder"/>
+        /// </summary>
+        public class ExtraDataList : IConvertableToDataObject
+        {
+            private List<DataHolderBase> data = null!;
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            public ExtraDataList()
+            {
+                Data = new List<DataHolderBase>();
+            }
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            /// <param name="startData">Data which is in the list from the start</param>
+            public ExtraDataList(params DataHolderBase[] startData)
+            {
+                Data = startData.ToList();
+            }
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            /// <param name="data">Data the list should start with</param>
+            public ExtraDataList(List<DataHolderBase> data)
+            {
+                Data = data;
+            }
+
+            /// <summary>
+            /// Data this list is holding
+            /// </summary>
+            public List<DataHolderBase> Data { get => data; set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null"); }
+
+            /// <summary>
+            /// Adds the given data to the list
+            /// </summary>
+            /// <param name="data">The data to add</param>
+            public void AddData(params DataHolderBase[] data)
+            {
+                Data.AddRange(data);
+            }
+
+            /// <summary>
+            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator"/>.
+            /// </summary>
+            /// <typeparam name="T">The type of <see cref="DataHolderBase"/> to get the path for</typeparam>
+            [GeneratePath("ContinuePathGenerator", SharpCraft.ID.SimpleNBTTagType.Compound)]
+            public T ContinuePath<T>() where T : DataHolderBase
+            {
+                _ = ContinuePathGenerator(null!, null!, null!);
+                throw new PathGettingMethodCallException();
+            }
+
+            private static string ContinuePathGenerator(DataConvertionAttribute convertionInfo, MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+            {
+                _ = convertionInfo;
+                _ = caller;
+                _ = arguments;
+                return "";
+            }
+
+            /// <summary>
+            /// Converts this <see cref="SimpleDataHolder"/> into a <see cref="DataPartObject"/>
+            /// </summary>
+            /// <param name="conversionData">Not used</param>
+            /// <returns>This as a <see cref="DataPartObject"/></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
+            {
+                DataPartObject outObject = new DataPartObject();
+
+                foreach(DataHolderBase dataHolder in data)
+                {
+                    if (dataHolder is null)
+                    {
+                        throw new ArgumentNullException("Extra item data may not contain null");
+                    }
+                    outObject.MergeDataPartObject(dataHolder.GetDataTree());
+                }
+
+                return outObject;
+            }
         }
     }
 }
