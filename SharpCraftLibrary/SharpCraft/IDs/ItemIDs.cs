@@ -8,6 +8,8 @@
 #pragma warning disable 1591
         public enum Item
         {
+            nether_gold_ore,
+            twisting_vines,
             stripped_warped_hyphae,
             stripped_crimson_hyphae,
             warped_hyphae,
@@ -976,7 +978,7 @@
             impaling = 66,
             loyalty = 65,
             riptide = 67,
-            EnchantEnumEnd
+            soul_speed,
         }
         public enum Potion
         {

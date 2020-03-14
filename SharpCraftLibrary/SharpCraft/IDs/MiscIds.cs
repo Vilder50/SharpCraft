@@ -27,6 +27,7 @@
         }
         public enum Particle
         {
+            soul,
             ash,
             crimson_spore,
             soul_fire_flame,
@@ -84,7 +85,7 @@
             bubble_pop,
             current_down,
             squid_ink,
-            nautilus
+            nautilus,
         }
         public enum Effect
         {

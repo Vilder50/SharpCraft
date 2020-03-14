@@ -104,7 +104,8 @@
             Village,
             Buried_Treasure,
             Ocean_Ruin,
-            Shipwreck
+            Shipwreck,
+            Nether_Fossil,
         }
 #pragma warning restore 1591
     }

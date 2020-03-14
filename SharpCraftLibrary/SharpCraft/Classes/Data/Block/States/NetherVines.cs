@@ -7,23 +7,23 @@ namespace SharpCraft
     public partial class Block
     {
         /// <summary>
-        /// An object for vine blocks
+        /// An object for nether vine blocks
         /// </summary>
-        public class WeepingVines : Block, IBlock.IAge
+        public class NetherVines : Block, IBlock.IAge
         {
             private int? _sAge;
 
             /// <summary>
-            /// Creates a vine block
+            /// Creates a nether vine block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WeepingVines(BlockType type) : base(type) { }
+            public NetherVines(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Creates a vine block
+            /// Creates a nether vine block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WeepingVines(ID.Block type = SharpCraft.ID.Block.weeping_vines) : base(type) { }
+            public NetherVines(ID.Block type) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -32,7 +32,7 @@ namespace SharpCraft
             /// <returns>true if the block fits</returns>
             public new static bool FitsBlock(ID.Block block)
             {
-                return block == SharpCraft.ID.Block.weeping_vines;
+                return block == SharpCraft.ID.Block.weeping_vines || block == SharpCraft.ID.Block.twisting_vines;
             }
 
             /// <summary>

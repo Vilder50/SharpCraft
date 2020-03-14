@@ -58,6 +58,16 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
+                public static string VineClimb { get; } = "block.vine.step";
+                public static string SmithingTableUse { get; } = "block.smithing_table.use";
+                public static class WeepingVine
+                {
+                    public static string Break { get; } = "block.weeping_vines.break";
+                    public static string Fall { get; } = "block.weeping_vines.fall";
+                    public static string Hit { get; } = "block.weeping_vines.hit";
+                    public static string Place { get; } = "block.weeping_vines.place";
+                    public static string Step { get; } = "block.weeping_vines.step";
+                }
                 public static class Stem
                 {
                     public static string Break { get; } = "block.stem.break";

@@ -8,6 +8,9 @@
 #pragma warning disable 1591
         public enum Block
         {
+            nether_gold_ore,
+            twisting_vines,
+            twisting_vines_plant,
             stripped_warped_hyphae,
             stripped_crimson_hyphae,
             warped_hyphae,

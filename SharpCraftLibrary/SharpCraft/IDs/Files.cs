@@ -249,6 +249,7 @@ namespace SharpCraft
                         walls,
                         warped_stems,
                         crimson_stems,
+                        wart_blocks,
                         #pragma warning restore 1591
                     }
 
@@ -390,11 +391,6 @@ namespace SharpCraft
                         wall_post_override,
 
                         /// <summary>
-                        /// Hoes destroy these blocks 15 times faster.
-                        /// </summary>
-                        wart_blocks,
-
-                        /// <summary>
                         /// Blocks used for making the T part of the wither summon build.
                         /// </summary>
                         wither_summon_base_blocks,
@@ -408,6 +404,16 @@ namespace SharpCraft
                         /// Blocks piglins tries to stay away from
                         /// </summary>
                         piglin_repellents,
+
+                        /// <summary>
+                        /// Iron pickaxes or better will make blocks with this tag drop their loot
+                        /// </summary>
+                        gold_ores,
+
+                        /// <summary>
+                        /// Blocks the <see cref="ID.Enchant.soul_speed"/> enchant works on
+                        /// </summary>
+                        soul_speed_blocks,
                     }
                 }
 
@@ -451,6 +457,7 @@ namespace SharpCraft
                     {
                         #pragma warning disable 1591
                         acacia_logs,
+                        gold_ores
                         anvil,
                         birch_logs,
                         buttons,
@@ -561,6 +568,10 @@ namespace SharpCraft
                         /// Items which can be used for activating beacons.
                         /// </summary>
                         beacon_payment_items,
+                        /// <summary>
+                        /// Items piglins wont pickup
+                        /// </summary>
+                        piglin_repellents,
                     }
                 }
 
