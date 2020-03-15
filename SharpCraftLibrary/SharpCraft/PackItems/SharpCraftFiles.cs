@@ -17,7 +17,7 @@ namespace SharpCraft
         public static Function? SetupFunction { get; private set; }
         //public static Function TickFunction { get; private set; }
 
-        private static void TrySetupFiles()
+        internal static void TrySetupFiles()
         {
             if (Datapack is null)
             {
@@ -269,7 +269,7 @@ namespace SharpCraft
             {
                 return hashFunction!;
             }
-            Vector hashBlockLocation = SharpCraftSettings.OwnedChunk * 16;
+            Vector hashBlockLocation = SharpCraftItems.GetNextLoadedCoords();
 
             LootTable hashLoottable = SharpCraftNamespace!.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
             {
@@ -298,6 +298,47 @@ namespace SharpCraft
 
             hashFunction = (hash, hashBlockLocation);
             return hashFunction!;
+        }
+        #endregion
+
+        #region
+        class ShulkerItemTag : Data.DataHolderBase
+        {
+            [Data.DataTag("SharpCraft.ShulkerLooter")]
+            public bool IsShulkerItem { get; private set; } = true;
+        }
+        private static Item? shulkerLootItem;
+        public static Item GetShulkerLootItem()
+        {
+            TrySetupFiles();
+            if (shulkerLootItem is null)
+            {
+                shulkerLootItem = new Item(ID.Item.ice);
+                shulkerLootItem.AddExtraData(new ShulkerItemTag());
+
+                Conditions.BaseCondition itemCondition = new Conditions.ToolCondition(new JsonObjects.Item() { NBT = shulkerLootItem.GetItemTagString() });
+#pragma warning disable IDE0067
+                MinecraftNamespace!.Loottable(ID.Files.LootTables.Block(ID.Block.shulker_box), new LootObjects.LootPool[]
+                {
+                    new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.shulker_box)
+                    {
+                        Changes = new LootObjects.BaseChange[]
+                        {
+                            new LootObjects.CopyNameChange(),
+                            new LootObjects.CopyNBTChange(ID.LootTarget.block_entity, new LootObjects.CopyNBTChange.CopyOperation[] 
+                            {
+                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLock), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLock), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTable), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTable), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTableSeed), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTableSeed), ID.LootDataModifierType.replace)
+                            }),
+                            new LootObjects.ContentChange(new LootObjects.DynamicEntry(LootObjects.DynamicEntry.DynamicType.contents))
+                        }
+                    }, 1, !itemCondition),
+                    new LootObjects.LootPool(new LootObjects.DynamicEntry(LootObjects.DynamicEntry.DynamicType.contents), 1, itemCondition),
+                });
+                #pragma warning restore IDE0067
+            }
+            return shulkerLootItem;
         }
         #endregion
     }

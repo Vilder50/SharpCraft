@@ -45,10 +45,10 @@ namespace SharpCraft.JsonObjects
         public Enchantment[]? StoredEnchantments { get; set; }
 
         /// <summary>
-        /// the <see cref="SharpCraft.Item"/>'s nbt data
+        /// the <see cref="SharpCraft.Item"/>'s nbt data. Use <see cref="SharpCraft.Item.GetItemTagString"/> to get it.
         /// </summary>
-        [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-        public SharpCraft.Item? NBT { get; set; }
+        [DataTag("nbt", JsonTag = true)]
+        public string? NBT { get; set; }
 
         /// <summary>
         /// a <see cref="object"/> defining an enchantment
@@ -92,7 +92,7 @@ namespace SharpCraft.JsonObjects
         /// <param name="item">The item to convert</param>
         public static implicit operator Item(SharpCraft.Item item)
         {
-            return new Item() { Id = item.ID, NBT = item };
+            return new Item() { Id = item.ID, NBT = item.GetItemTagString() };
         }
     }
 }

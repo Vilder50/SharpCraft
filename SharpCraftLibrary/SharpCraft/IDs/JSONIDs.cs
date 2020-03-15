@@ -90,6 +90,13 @@
             Unknown,
         }
 
+        public enum LootDataModifierType
+        {
+            replace,
+            append,
+            merge
+        }
+
         public enum NBTTagType
         {
             TagByte,

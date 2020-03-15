@@ -15155,7 +15155,7 @@
         </member>
         <member name="P:SharpCraft.JsonObjects.Item.NBT">
             <summary>
-            the <see cref="T:SharpCraft.Item"/>'s nbt data
+            the <see cref="T:SharpCraft.Item"/>'s nbt data. Use <see cref="M:SharpCraft.Item.GetItemTagString"/> to get it.
             </summary>
         </member>
         <member name="T:SharpCraft.JsonObjects.Item.Enchantment">
@@ -23035,7 +23035,7 @@
             Class for making nbt copy operations
             </summary>
         </member>
-        <member name="M:SharpCraft.LootObjects.CopyNBTChange.CopyOperation.#ctor(System.String,System.String,SharpCraft.ID.EntityDataModifierType)">
+        <member name="M:SharpCraft.LootObjects.CopyNBTChange.CopyOperation.#ctor(System.String,System.String,SharpCraft.ID.LootDataModifierType)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.LootObjects.CopyNBTChange.CopyOperation"/>
             </summary>
@@ -24718,6 +24718,30 @@
             Writes the file
             </summary>
             <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="T:SharpCraft.SharpCraftItems">
+            <summary>
+            Static class containing usefull things
+            </summary>
+        </member>
+        <member name="M:SharpCraft.SharpCraftItems.GetNextLoadedCoords">
+            <summary>
+            Returns a coordinate in a loaded chunk. The given coordinate is only ever given out once so the coordinate is save to use for whatever you want to.
+            </summary>
+            <returns>A coordinate in a loaded chunk</returns>
+        </member>
+        <member name="M:SharpCraft.SharpCraftItems.ClaimLoadedCoordsSquare(SharpCraft.IntVector)">
+            <summary>
+            Loads a block of coords of the given size
+            </summary>
+            <param name="size">The size of the block to load</param>
+            <returns>The "smallest" corner of the loaded block or null if it failed to claim</returns>
+        </member>
+        <member name="M:SharpCraft.SharpCraftItems.GetShulkerItemSource(SharpCraft.Vector)">
+            <summary>
+            Returns a part of a loot command used for getting a shulker box's content. Note the shulker box has to be of the type <see cref="F:SharpCraft.ID.Block.shulker_box"/>
+            </summary>
+            <returns>A <see cref="T:SharpCraft.Commands.LootSources.MineItemSource"/> for getting loot from a shulker box</returns>
         </member>
         <member name="T:SharpCraft.SharpCraftSettings">
             <summary>
