@@ -16,8 +16,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the zombie pigman stops being angry (0 or smaller if not angry)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Anger { get; set; }
+        [Data.DataTag]
+        public Time<short>? Anger { get; set; }
 
         /// <summary>
         /// The <see cref="UUID"/> of the entity this pigman is angry on

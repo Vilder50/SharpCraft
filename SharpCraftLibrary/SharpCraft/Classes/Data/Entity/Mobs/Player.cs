@@ -66,8 +66,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time the player has been sleeping
         /// </summary>
-        [Data.DataTag("SleepTimer", ForceType = ID.NBTTagType.TagShort)]
-        public Time? SleepTime { get; set; }
+        [Data.DataTag("SleepTimer")]
+        public Time<short>? SleepTime { get; set; }
 
         /// <summary>
         /// How much food the player has
@@ -92,8 +92,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// When this hits 80 ticks and the player has enough food, they will be healed
         /// </summary>
-        [Data.DataTag("foodTickTimer", ForceType = ID.NBTTagType.TagInt)]
-        public Time? FoodTimer { get; set; }
+        [Data.DataTag("foodTickTimer")]
+        public Time<int>? FoodTimer { get; set; }
 
         /// <summary>
         /// The level the player has

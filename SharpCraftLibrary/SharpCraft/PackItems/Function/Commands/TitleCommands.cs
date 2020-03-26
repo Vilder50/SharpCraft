@@ -191,9 +191,9 @@ namespace SharpCraft.Commands
     public class TitleTimesCommand : BaseCommand
     {
         private BaseSelector selector = null!;
-        private Time fadeIn = null!;
-        private Time stay = null!;
-        private Time fadeOut = null!;
+        private NoneNegativeTime<int> fadeIn = null!;
+        private NoneNegativeTime<int> stay = null!;
+        private NoneNegativeTime<int> fadeOut = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleTimesCommand"/>
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// <param name="fadeIn">How long it takes for the title to fade in</param>
         /// <param name="stay">How long the title stays</param>
         /// <param name="fadeOut">How long it takes for the title to fade out</param>
-        public TitleTimesCommand(BaseSelector selector, Time fadeIn, Time stay, Time fadeOut)
+        public TitleTimesCommand(BaseSelector selector, NoneNegativeTime<int> fadeIn, NoneNegativeTime<int> stay, NoneNegativeTime<int> fadeOut)
         {
             Selector = selector;
             FadeIn = fadeIn;
@@ -218,17 +218,17 @@ namespace SharpCraft.Commands
         /// <summary>
         /// How long it takes for the title to fade in
         /// </summary>
-        public Time FadeIn { get => fadeIn; set => fadeIn = value ?? throw new ArgumentNullException(nameof(FadeIn), "FadeIn may not be null"); }
+        public NoneNegativeTime<int> FadeIn { get => fadeIn; set => fadeIn = value ?? throw new ArgumentNullException(nameof(FadeIn), "FadeIn may not be null"); }
 
         /// <summary>
         /// How long the title stays
         /// </summary>
-        public Time Stay { get => stay; set => stay = value ?? throw new ArgumentNullException(nameof(Stay), "Stay may not be null"); }
+        public NoneNegativeTime<int> Stay { get => stay; set => stay = value ?? throw new ArgumentNullException(nameof(Stay), "Stay may not be null"); }
 
         /// <summary>
         /// How long it takes for the title to fade out
         /// </summary>
-        public Time FadeOut { get => fadeOut; set => fadeOut = value ?? throw new ArgumentNullException(nameof(FadeOut), "FadeOut may not be null"); }
+        public NoneNegativeTime<int> FadeOut { get => fadeOut; set => fadeOut = value ?? throw new ArgumentNullException(nameof(FadeOut), "FadeOut may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] times [FadeIn] [Stay] [FadeOut]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector.GetSelectorString()} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
+            return $"title {Selector.GetSelectorString()} times {FadeIn.GetAsTicks()} {Stay.GetAsTicks()} {FadeOut.GetAsTicks()}";
         }
     }
 }

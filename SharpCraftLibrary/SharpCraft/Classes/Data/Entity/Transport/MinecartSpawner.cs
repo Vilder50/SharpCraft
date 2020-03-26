@@ -31,8 +31,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// Time till the next spawn
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Delay { get; set; }
+        [Data.DataTag]
+        public Time<short>? Delay { get; set; }
         /// <summary>
         /// The amount of ticks to randomly add to the next spawn
         /// </summary>

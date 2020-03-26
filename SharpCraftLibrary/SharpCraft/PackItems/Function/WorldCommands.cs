@@ -174,7 +174,7 @@ namespace SharpCraft.FunctionWriters
         /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
         /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
         /// <returns>The ran function</returns>
-        public IFunction Function(IFunction runFunction, Time? delay = null, bool append = true)
+        public IFunction Function(IFunction runFunction, NoneNegativeTime<int>? delay = null, bool append = true)
         {
             if (delay == null)
             {
@@ -202,7 +202,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="SetTo">The new type of weather</param>
         /// <param name="WeatherTime">The number of ticks the weather should be going. Null means the game chose</param>
-        public void Weather(ID.WeatherType SetTo, Time WeatherTime)
+        public void Weather(ID.WeatherType SetTo, NoneNegativeTime<int> WeatherTime)
         {
             ForFunction.AddCommand(new WeatherCommand(SetTo, WeatherTime));
         }
@@ -608,7 +608,7 @@ namespace SharpCraft.FunctionWriters
             /// Adds the specified amount of <see cref="Time"/> to the time of day
             /// </summary>
             /// <param name="time">the <see cref="Time"/> to add</param>
-            public void Add(Time time)
+            public void Add(NoneNegativeTime<int> time)
             {
                 ForFunction.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.add));
             }
@@ -616,7 +616,7 @@ namespace SharpCraft.FunctionWriters
             /// Sets the time of day to the specified <see cref="Time"/>
             /// </summary>
             /// <param name="time">the <see cref="Time"/> to set it to</param>
-            public void Set(Time time)
+            public void Set(NoneNegativeTime<int> time)
             {
                 ForFunction.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.set));
             }
@@ -665,7 +665,7 @@ namespace SharpCraft.FunctionWriters
             /// Note: the blocks are spread out from the center, so adding 1 block adds a half block to all sides
             /// Note: if the number is negative blocks will be removed</param>
             /// <param name="time">The amount of time it should take to add the blocks</param>
-            public void Add(double add, Time? time = null)
+            public void Add(double add, NoneNegativeTime<int>? time = null)
             {
                 ForFunction.AddCommand(new WorldborderSizeCommand(add, ID.AddSetModifier.add, time));
             }
@@ -716,7 +716,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="distance">the maximum distance in blocks the player has be away from the border for the red to show</param>
             /// <param name="time">The maximum amount of time the player is away from the border for the red to show.
             /// (Time as in: "the world border will be at the player in X seconds")</param>
-            public void Warning(int? distance = null, Time? time = null)
+            public void Warning(int? distance = null, NoneNegativeTime<int>? time = null)
             {
                 if (distance is null && time is null)
                 {
@@ -742,7 +742,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="set">The amount of blocks wide the border is</param>
             /// <param name="time">The time it should take for the border to get there</param>
-            public void Set(double set, Time? time = null)
+            public void Set(double set, NoneNegativeTime<int>? time = null)
             {
                 ForFunction.AddCommand(new WorldborderSizeCommand(set, ID.AddSetModifier.set, time));
             }

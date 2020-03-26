@@ -31,8 +31,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// When it hits 1200 ticks while not moving the arrow despawns
         /// </summary>
-        [Data.DataTag("life", ForceType = ID.NBTTagType.TagShort)]
-        public Time? Life { get; set; }
+        [Data.DataTag("life")]
+        public Time<short>? Life { get; set; }
         /// <summary>
         /// The amount of damage dealt by the arrow
         /// </summary>
@@ -66,7 +66,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of duration of the glowing effect given by the spectral arrow
         /// </summary>
-        [Data.DataTag("Duration", ForceType = ID.NBTTagType.TagInt)]
-        public Time? SpectralDuration { get; set; }
+        [Data.DataTag("Duration")]
+        public Time<int>? SpectralDuration { get; set; }
     }
 }

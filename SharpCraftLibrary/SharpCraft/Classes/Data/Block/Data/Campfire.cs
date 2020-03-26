@@ -11,8 +11,8 @@ namespace SharpCraft.Blocks
     public class Campfire : Block, Interfaces.IWaterLogged, Interfaces.ILit
     {
         private Item[]? _dItems;
-        private Time[]? _dCookingTimes;
-        private Time[]? _dTotalCookingTimes;
+        private Time<int>[]? _dCookingTimes;
+        private Time<int>[]? _dTotalCookingTimes;
 
         /// <summary>
         /// Creates a campfire block
@@ -83,8 +83,8 @@ namespace SharpCraft.Blocks
         /// How long the items have been burning.
         /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
         /// </summary>
-        [Data.DataTag("CookingTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
-        public Time[]? DCookingTimes
+        [Data.DataTag("CookingTimes")]
+        public Time<int>[]? DCookingTimes
         {
             get => _dCookingTimes;
             set
@@ -101,8 +101,8 @@ namespace SharpCraft.Blocks
         /// How long it takes for the items to burn.
         /// Each index are the time for a different slot. index 0 = slot 0. index 3 = slot 3.
         /// </summary>
-        [Data.DataTag("CookingTotalTimes", ForceType = SharpCraft.ID.NBTTagType.TagIntArray)]
-        public Time[]? DTotalCookingTimes
+        [Data.DataTag("CookingTotalTimes")]
+        public Time<int>[]? DTotalCookingTimes
         {
             get => _dTotalCookingTimes;
             set

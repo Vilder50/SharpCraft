@@ -16,7 +16,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the next spell is casted
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? SpellTicks { get; set; }
+        [Data.DataTag]
+        public Time<int>? SpellTicks { get; set; }
     }
 }

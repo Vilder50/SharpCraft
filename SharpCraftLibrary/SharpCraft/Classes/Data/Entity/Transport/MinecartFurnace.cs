@@ -26,7 +26,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the furnace's fuel runs out
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Fuel { get; set; }
+        [Data.DataTag]
+        public Time<short>? Fuel { get; set; }
     }
 }

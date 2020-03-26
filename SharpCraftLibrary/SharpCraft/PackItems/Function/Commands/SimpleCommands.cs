@@ -1342,14 +1342,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WeatherCommand : BaseCommand
     {
-        private Time? time;
+        private NoneNegativeTime<int>? time;
 
         /// <summary>
         /// Intializes a new <see cref="WeatherCommand"/>
         /// </summary>
         /// <param name="time">The amount of time the weather is there for</param>
         /// <param name="weather">The weather to change the weather to</param>
-        public WeatherCommand(ID.WeatherType weather, Time? time)
+        public WeatherCommand(ID.WeatherType weather, NoneNegativeTime<int>? time)
         {
             Time = time;
             Weather = weather;
@@ -1358,7 +1358,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time the weather is there for
         /// </summary>
-        public Time? Time { get => time; set => time = value; }
+        public NoneNegativeTime<int>? Time { get => time; set => time = value; }
 
         /// <summary>
         /// The weather to change the weather to
@@ -1377,7 +1377,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"weather {Weather} {Time.AsTicks()}";
+                return $"weather {Weather} {Time.GetAsTicks()}";
             }
         }
     }

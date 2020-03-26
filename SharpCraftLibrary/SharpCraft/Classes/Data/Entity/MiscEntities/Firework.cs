@@ -22,14 +22,14 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time the firework has been flying
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Life { get; set; }
+        [Data.DataTag]
+        public Time<int>? Life { get; set; }
 
         /// <summary>
         /// The time before the firework blows up
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? LifeTime { get; set; }
+        [Data.DataTag]
+        public Time<int>? LifeTime { get; set; }
 
         /// <summary>
         /// The firework displayed when the rocket blows up.

@@ -46,7 +46,7 @@ namespace SharpCraft.Blocks
         /// The amount of time the portal has existed.
         /// x&lt;200 = magenta beam.
         /// </summary>
-        [Data.DataTag("Age", ForceType = SharpCraft.ID.NBTTagType.TagLong)]
-        public Time? DAge { get; set; }
+        [Data.DataTag("Age")]
+        public Time<long>? DAge { get; set; }
     }
 }

@@ -65,7 +65,7 @@ namespace SharpCraft.Blocks
         /// <summary>
         /// The time till the hopper again will transfer an item.
         /// </summary>
-        [Data.DataTag("TransferCooldown", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-        public Time? DCooldown { get; set; }
+        [Data.DataTag("TransferCooldown")]
+        public Time<int>? DCooldown { get; set; }
     }
 }

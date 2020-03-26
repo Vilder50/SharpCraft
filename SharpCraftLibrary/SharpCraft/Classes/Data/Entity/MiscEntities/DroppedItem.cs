@@ -16,8 +16,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The age of the item in ticks. When it hits 6000 it despawns
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Age { get; set; }
+        [Data.DataTag]
+        public Time<short>? Age { get; set; }
 
         /// <summary>
         /// The health of the item. despawns when at 0
@@ -28,8 +28,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The delay before the item can be picked up in ticks
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? PickupDelay { get; set; }
+        [Data.DataTag]
+        public Time<short>? PickupDelay { get; set; }
 
         /// <summary>
         /// The <see cref="UUID"/> of the entity who can pick up the item
@@ -57,7 +57,7 @@ namespace SharpCraft.Entities
         {
             get
             {
-                if (PickupDelay is null || PickupDelay.AsTicks() != 32767)
+                if (PickupDelay is null || PickupDelay.GetAsTicks() != short.MaxValue)
                 {
                     return false;
                 }
@@ -70,7 +70,7 @@ namespace SharpCraft.Entities
             {
                 if (value)
                 {
-                    PickupDelay = 32767;
+                    PickupDelay = short.MaxValue;
                 }
                 else
                 {
@@ -86,7 +86,7 @@ namespace SharpCraft.Entities
         {
             get
             {
-                if (Age is null || Age.AsTicks() != -32768)
+                if (Age is null || Age.GetAsTicks() != short.MinValue)
                 {
                     return false;
                 }
@@ -99,7 +99,7 @@ namespace SharpCraft.Entities
             {
                 if (value)
                 {
-                    Age = -32768;
+                    Age = short.MinValue;
                 }
                 else
                 {

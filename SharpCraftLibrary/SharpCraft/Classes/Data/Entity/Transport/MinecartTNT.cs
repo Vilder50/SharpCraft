@@ -17,7 +17,7 @@ namespace SharpCraft.Entities
         /// Time till it explodes
         /// (-1 ticks = not exploding)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? TNTFuse { get; set; }
+        [Data.DataTag]
+        public Time<int>? TNTFuse { get; set; }
     }
 }

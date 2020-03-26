@@ -46,15 +46,15 @@ namespace SharpCraft.Entities
         /// The time before the fire on the entity goes out.
         /// Negative value means how long it takes for the entity to turn on fire.
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Fire { get; set; }
+        [Data.DataTag]
+        public Time<short>? Fire { get; set; }
 
         /// <summary>
         /// How much air the entity has left.
         /// (Being 0 under water will make the entity drown)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Air { get; set; }
+        [Data.DataTag]
+        public Time<short>? Air { get; set; }
 
         /// <summary>
         /// If the entity is on the ground or not
@@ -83,8 +83,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time before the entity can go through a portal again.
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? PortalCooldown { get; set; }
+        [Data.DataTag]
+        public Time<int>? PortalCooldown { get; set; }
 
         /// <summary>
         /// The entity's UUID

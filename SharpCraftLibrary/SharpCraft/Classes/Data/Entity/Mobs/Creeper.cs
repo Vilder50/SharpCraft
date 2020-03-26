@@ -28,8 +28,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the creeper will explode when trying to explode
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? Fuse { get; set; }
+        [Data.DataTag]
+        public Time<short>? Fuse { get; set; }
 
         /// <summary>
         /// If the creeper is ignited and is forced to blow up

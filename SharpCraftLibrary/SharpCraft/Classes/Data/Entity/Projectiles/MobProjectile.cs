@@ -21,8 +21,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time the projectile hasnt been moving
         /// </summary>
-        [Data.DataTag("life", ForceType = ID.NBTTagType.TagInt)]
-        public Time? Life { get; set; }
+        [Data.DataTag("life")]
+        public Time<int>? Life { get; set; }
         /// <summary>
         /// The direction the projectile flies in nonestop
         /// </summary>

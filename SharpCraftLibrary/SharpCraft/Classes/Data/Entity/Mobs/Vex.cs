@@ -16,8 +16,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the vex dissapears
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? LifeTicks { get; set; }
+        [Data.DataTag]
+        public Time<int>? LifeTicks { get; set; }
         /// <summary>
         /// The location the vex should fly around in
         /// (It flies to random location in a 15x11x15 around this spot)

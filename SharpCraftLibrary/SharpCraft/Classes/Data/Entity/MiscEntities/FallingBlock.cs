@@ -17,8 +17,8 @@ namespace SharpCraft.Entities
         /// The time the entity has been falling.
         /// If this number is 0 the entity will dissapear the next tick
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Time { get; set; }
+        [Data.DataTag]
+        public Time<int>? Time { get; set; }
 
         /// <summary>
         /// The falling block

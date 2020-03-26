@@ -26,19 +26,19 @@ namespace SharpCraft.Entities
         /// <summary>
         /// Makes the entity turn red for the given time
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? HurtTime { get; set; }
+        [Data.DataTag]
+        public Time<short>? HurtTime { get; set; }
         /// <summary>
         /// The time since the mob last was hit
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? HurtByTimestamp { get; set; }
+        [Data.DataTag]
+        public Time<int>? HurtByTimestamp { get; set; }
         /// <summary>
         /// The time the mob has been dead for.
         /// (0 = alive)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagShort)]
-        public Time? DeathTime { get; set; }
+        [Data.DataTag]
+        public Time<short>? DeathTime { get; set; }
         /// <summary>
         /// Makes the mob fly when falling if it has an elytra on.
         /// </summary>

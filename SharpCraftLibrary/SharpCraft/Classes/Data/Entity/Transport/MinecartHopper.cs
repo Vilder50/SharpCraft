@@ -36,7 +36,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// Time until it transfer another item
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? TransferCooldown { get; set; }
+        [Data.DataTag]
+        public Time<int>? TransferCooldown { get; set; }
     }
 }

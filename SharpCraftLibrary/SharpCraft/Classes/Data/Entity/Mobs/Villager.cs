@@ -56,14 +56,14 @@ namespace SharpCraft.Entities
         /// <summary>
         /// Time since the villager last restocked
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagLong)]
-        public Time? LastRestock { get; set; }
+        [DataTag]
+        public Time<long>? LastRestock { get; set; }
 
         /// <summary>
         /// Time since the villager's gossips escreased in strength
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagLong)]
-        public Time? LastGossipDecay { get; set; }
+        [DataTag]
+        public Time<long>? LastGossipDecay { get; set; }
 
         /// <summary>
         /// The amount of times the villager has restocked since the <see cref="LastRestock"/> time.

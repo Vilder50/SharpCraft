@@ -223,7 +223,7 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, Time? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -253,7 +253,7 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, Time? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))

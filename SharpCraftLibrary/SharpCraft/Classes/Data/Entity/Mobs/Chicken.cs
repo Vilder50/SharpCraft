@@ -21,7 +21,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till the chicken lays another egg
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? EggLayTime { get; set; }
+        [Data.DataTag]
+        public Time<int>? EggLayTime { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace SharpCraft.Items
         /// <summary>
         /// The duration of the effect.
         /// </summary>
-        [Data.DataTag("tag.EffectDuration", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-        public Time? Duration { get; set; }
+        [Data.DataTag("tag.EffectDuration")]
+        public Time<int>? Duration { get; set; }
     }
 }

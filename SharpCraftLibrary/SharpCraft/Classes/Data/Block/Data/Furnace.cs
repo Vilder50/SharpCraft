@@ -61,20 +61,20 @@ namespace SharpCraft.Blocks
         /// <summary>
         /// The amount of time till the used fuel item runs out
         /// </summary>
-        [DataTag("BurnTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-        public Time? DBurnTime { get; set; }
+        [DataTag("BurnTime")]
+        public Time<short>? DBurnTime { get; set; }
 
         /// <summary>
         /// The amount of time the item has been smelting for
         /// </summary>
-        [DataTag("CookTime", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-        public Time? DCookTime { get; set; }
+        [DataTag("CookTime")]
+        public Time<short>? DCookTime { get; set; }
 
         /// <summary>
         /// The amount of time it will take for the item to smelt.
         /// </summary>
-        [DataTag("CookTimeTotal", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-        public Time? DCookTimeTotal { get; set; }
+        [DataTag("CookTimeTotal")]
+        public Time<short>? DCookTimeTotal { get; set; }
 
         /// <summary>
         /// The number of used recipes in this furnace

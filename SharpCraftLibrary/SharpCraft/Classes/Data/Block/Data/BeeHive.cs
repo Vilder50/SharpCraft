@@ -79,14 +79,14 @@ namespace SharpCraft.Blocks
             /// <summary>
             /// The amount of ticks the entity has been in the hive.
             /// </summary>
-            [DataTag(ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-            public Time? TicksInHive { get; set; }
+            [DataTag]
+            public Time<int>? TicksInHive { get; set; }
 
             /// <summary>
             /// The minimum amount of ticks the entity has been in the hive.
             /// </summary>
-            [DataTag("MinOccupationTicks", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-            public Time? MinimumTicksInHive { get; set; }
+            [DataTag("MinOccupationTicks")]
+            public Time<int>? MinimumTicksInHive { get; set; }
         }
     }
 }

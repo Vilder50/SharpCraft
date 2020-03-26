@@ -16,8 +16,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time before the cloud disapears after the <see cref="WaitTime"/> is over
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Duration { get; set; }
+        [Data.DataTag]
+        public Time<int>? Duration { get; set; }
 
         /// <summary>
         /// The color of the particles it displays
@@ -28,21 +28,21 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time the cloud has existed.
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Age { get; set; }
+        [Data.DataTag]
+        public Time<int>? Age { get; set; }
 
         /// <summary>
         /// The time before the cloud will show up.
         /// (Time before the <see cref="Radius"/> will be used)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? WaitTime { get; set; }
+        [Data.DataTag]
+        public Time<int>? WaitTime { get; set; }
 
         /// <summary>
         /// The time before the cloud's effect will be given out to the entities inside again.
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? ReapplicationDealy { get; set; }
+        [Data.DataTag]
+        public Time<int>? ReapplicationDealy { get; set; }
 
         /// <summary>
         /// The UUID of the entity who made the cloud
@@ -53,8 +53,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time to remove from the duration every time the cloud gives out its effect
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? DurationOnUse { get; set; }
+        [Data.DataTag]
+        public Time<int>? DurationOnUse { get; set; }
 
         /// <summary>
         /// The radius of the cloud
@@ -98,7 +98,7 @@ namespace SharpCraft.Entities
                 {
                     return false;
                 }
-                return Duration.AsTicks() == int.MaxValue;
+                return Duration.GetAsTicks() == int.MaxValue;
             }
             set
             {

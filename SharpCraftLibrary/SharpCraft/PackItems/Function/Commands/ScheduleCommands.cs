@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     public class ScheduleAddCommand : BaseCommand
     {
         private IFunction function = null!;
-        private Time time = null!;
+        private NoneNegativeTime<int> time = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ScheduleAddCommand"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.Commands
         /// <param name="function">The function to schedule</param>
         /// <param name="time">The amount of time before the function should run</param>
         /// <param name="append">True if the function should append. False if it should replace other times the function has been scheduled.</param>
-        public ScheduleAddCommand(IFunction function, Time time, bool append = false)
+        public ScheduleAddCommand(IFunction function, NoneNegativeTime<int> time, bool append = false)
         {
             Function = function;
             Time = time;
@@ -35,7 +35,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time before the function should run
         /// </summary>
-        public Time Time 
+        public NoneNegativeTime<int> Time 
         { 
             get => time; 
             set
@@ -43,10 +43,6 @@ namespace SharpCraft.Commands
                 if (value is null)
                 {
                     throw new ArgumentNullException(nameof(Time), "Time may not be null");
-                }
-                if (value.IsNegative())
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Time), "Time may not be negative");
                 }
                 time = value;
             }

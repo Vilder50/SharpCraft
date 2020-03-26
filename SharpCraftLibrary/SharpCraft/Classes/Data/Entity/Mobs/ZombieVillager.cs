@@ -48,8 +48,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time till this zombie villager turns into a villager. -1 when not being converted
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? ConversionTime { get; set; }
+        [DataTag]
+        public Time<int>? ConversionTime { get; set; }
 
         /// <summary>
         /// The <see cref="UUID"/> of the player who is converting this zombie villager

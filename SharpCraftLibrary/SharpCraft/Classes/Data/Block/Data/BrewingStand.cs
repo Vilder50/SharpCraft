@@ -74,8 +74,8 @@ namespace SharpCraft.Blocks
         /// The amount of time the potion has brewed.
         /// Done when hitting 20 seconds.
         /// </summary>
-        [Data.DataTag("BrewTime", ForceType = SharpCraft.ID.NBTTagType.TagInt)]
-        public Time? DBrewTime { get; set; }
+        [Data.DataTag("BrewTime")]
+        public Time<int>? DBrewTime { get; set; }
 
         /// <summary>
         /// The amount of fule in the brewing stand.

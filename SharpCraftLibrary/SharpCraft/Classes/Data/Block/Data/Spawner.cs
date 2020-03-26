@@ -67,8 +67,8 @@ namespace SharpCraft.Blocks
         /// <summary>
         /// Time till the next spawn
         /// </summary>
-        [Data.DataTag("Delay", ForceType = SharpCraft.ID.NBTTagType.TagShort)]
-        public Time? DDelay { get; set; }
+        [Data.DataTag("Delay")]
+        public Time<short>? DDelay { get; set; }
 
         /// <summary>
         /// The amount of ticks to randomly add to the next spawn

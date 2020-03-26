@@ -24,7 +24,7 @@ namespace SharpCraft
         /// <param name="duration">the duration of the effect (in ticks)</param>
         /// <param name="amplifier">the amplifier of the effect (0 = level 1)</param>
         /// <param name="showParticles">if the effect should show particles or not</param>
-        public Effect(ID.Effect type, Time? duration, sbyte? amplifier, bool? showParticles = null)
+        public Effect(ID.Effect type, Time<int>? duration, sbyte? amplifier, bool? showParticles = null)
         {
             Duration = duration;
             Amplifier = amplifier;
@@ -35,8 +35,8 @@ namespace SharpCraft
         /// <summary>
         /// The duration of the effect (in ticks)
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Duration { get; set; }
+        [Data.DataTag]
+        public Time<int>? Duration { get; set; }
 
         /// <summary>
         /// The amplifier of the effect

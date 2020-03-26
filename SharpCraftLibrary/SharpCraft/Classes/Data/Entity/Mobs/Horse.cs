@@ -114,8 +114,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The time the skeleton trap has existed. When at 18000 ticks it despawns
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? SkeletonTrapTime { get; set; }
+        [DataTag]
+        public Time<int>? SkeletonTrapTime { get; set; }
         /// <summary>
         /// If the mob is tame
         /// </summary>

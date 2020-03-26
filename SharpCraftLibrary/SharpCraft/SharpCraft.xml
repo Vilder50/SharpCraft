@@ -7884,7 +7884,7 @@
             Creates an empty effect
             </summary>
         </member>
-        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,SharpCraft.Time,System.Nullable{System.SByte},System.Nullable{System.Boolean})">
+        <member name="M:SharpCraft.Effect.#ctor(SharpCraft.ID.Effect,SharpCraft.Time{System.Int32},System.Nullable{System.SByte},System.Nullable{System.Boolean})">
             <summary>
             Creates an effect with the specified parameters
             </summary>
@@ -9981,65 +9981,76 @@
             <param name="extraConversionData">Unused</param>
             <returns>This team as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="T:SharpCraft.Time">
+        <member name="T:SharpCraft.Time`1">
             <summary>
             An object used to define time
             </summary>
         </member>
-        <member name="T:SharpCraft.Time.TimerType">
-            <summary>
-            The type of time to output
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Time.TimerType.Int">
-            <summary>
-            Will output a time which can be in an int
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Time.TimerType.Short">
-            <summary>
-            Will output a time which can be in an short
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Time.#ctor(System.Int32,SharpCraft.ID.TimeType)">
+        <member name="M:SharpCraft.Time`1.#ctor(`0,SharpCraft.ID.TimeType)">
             <summary>
             Creates a new time object with the specified time
             </summary>
-            <param name="time">the amount of time</param>
-            <param name="timeType">the time measuring type</param>
+            <param name="value">the amount of time</param>
+            <param name="type">the time measuring type</param>
         </member>
-        <member name="M:SharpCraft.Time.GetTimeString">
+        <member name="P:SharpCraft.Time`1.Value">
+            <summary>
+            The time value
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Time`1.Type">
+            <summary>
+            The measurement
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Time`1.GetTimeString">
             <summary>
             Converts the time into raw data used by the game
             </summary>
             <returns>Raw data used by the game</returns>
         </member>
-        <member name="M:SharpCraft.Time.op_Implicit(System.Int32)~SharpCraft.Time">
+        <member name="M:SharpCraft.Time`1.op_Implicit(`0)~SharpCraft.Time{`0}">
             <summary>
             Converts a number into a new time object in ticks
             </summary>
             <param name="ticks">The amount of ticks the time should be</param>
         </member>
-        <member name="M:SharpCraft.Time.IsNegative">
-            <summary>
-            Returns true if the time in this time object is negative
-            </summary>
-            <returns>True if the time in this time object is negative</returns>
-        </member>
-        <member name="M:SharpCraft.Time.AsTicks(SharpCraft.Time.TimerType)">
+        <member name="M:SharpCraft.Time`1.GetAsTicks">
             <summary>
             Outputs this time amount in ticks
             </summary>
-            <param name="type">The type of output</param>
             <returns>This time amount in ticks</returns>
         </member>
-        <member name="M:SharpCraft.Time.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.Time`1.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
             Converts this time into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="extraConversionData">Not used</param>
-            <param name="asType">The type of tag</param>
+            <param name="asType">Not used</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.NoneNegativeTime`1">
+            <summary>
+            An object used to define none negative time
+            </summary>
+        </member>
+        <member name="M:SharpCraft.NoneNegativeTime`1.#ctor(`0,SharpCraft.ID.TimeType)">
+            <summary>
+            Creates a new time object with the specified time
+            </summary>
+            <param name="value">the amount of time</param>
+            <param name="type">the time measuring type</param>
+        </member>
+        <member name="P:SharpCraft.NoneNegativeTime`1.Value">
+            <summary>
+            The time value
+            </summary>
+        </member>
+        <member name="M:SharpCraft.NoneNegativeTime`1.op_Implicit(`0)~SharpCraft.NoneNegativeTime{`0}">
+            <summary>
+            Converts a number into a new time object in ticks
+            </summary>
+            <param name="ticks">The amount of ticks the time should be</param>
         </member>
         <member name="T:SharpCraft.Utils">
             <summary>
@@ -16665,7 +16676,7 @@
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="message">The message to show the players</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Time(SharpCraft.BaseSelector,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.Time(SharpCraft.BaseSelector,SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             choses how long the titles should be shown for the selected players
             </summary>
@@ -16686,7 +16697,7 @@
             </summary>
             <param name="player">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.PlayerCommands.ClassTitle.FullTitle(SharpCraft.BaseSelector,SharpCraft.BaseJsonText,SharpCraft.BaseJsonText,SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Displays a whole title for the selected players
             </summary>
@@ -16885,7 +16896,7 @@
             <param name="breakBlock">the block whose "when mined loot" should be dropped</param>
             <param name="breakWith">the tool used to break the block</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Function(SharpCraft.IFunction,SharpCraft.Time,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Function(SharpCraft.IFunction,SharpCraft.NoneNegativeTime{System.Int32},System.Boolean)">
             <summary>
             Runs the specified function
             </summary>
@@ -16901,7 +16912,7 @@
             </summary>
             <param name="function">The function to clear the schedule for</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Weather(SharpCraft.ID.WeatherType,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Weather(SharpCraft.ID.WeatherType,SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Changes the weather to the specified type
             </summary>
@@ -17173,13 +17184,13 @@
             All commands for time
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Add(SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Add(SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Adds the specified amount of <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Time"/> to the time of day
             </summary>
             <param name="time">the <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Time"/> to add</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Set(SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassTime.Set(SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Sets the time of day to the specified <see cref="F:SharpCraft.FunctionWriters.WorldCommands.Time"/>
             </summary>
@@ -17212,7 +17223,7 @@
             All commands for the world border
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Add(System.Double,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Add(System.Double,SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Adds blocks to the world border size
             </summary>
@@ -17239,7 +17250,7 @@
             Gets the worldborder's current size in blocks
             </summary>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Warning(System.Nullable{System.Int32},SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Warning(System.Nullable{System.Int32},SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Changes when the worldborder starts to show red on the players' screens
             </summary>
@@ -17247,7 +17258,7 @@
             <param name="time">The maximum amount of time the player is away from the border for the red to show.
             (Time as in: "the world border will be at the player in X seconds")</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Set(System.Double,SharpCraft.Time)">
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.ClassBorder.Set(System.Double,SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Sets the world border's size in blocks
             </summary>
@@ -20102,7 +20113,7 @@
             Command which makes a function run at some point in time
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ScheduleAddCommand.#ctor(SharpCraft.IFunction,SharpCraft.Time,System.Boolean)">
+        <member name="M:SharpCraft.Commands.ScheduleAddCommand.#ctor(SharpCraft.IFunction,SharpCraft.NoneNegativeTime{System.Int32},System.Boolean)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ScheduleAddCommand"/>
             </summary>
@@ -21227,7 +21238,7 @@
             Command which changes the weather for some time
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.WeatherCommand.#ctor(SharpCraft.ID.WeatherType,SharpCraft.Time)">
+        <member name="M:SharpCraft.Commands.WeatherCommand.#ctor(SharpCraft.ID.WeatherType,SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.WeatherCommand"/>
             </summary>
@@ -21841,7 +21852,7 @@
             Command which changes the time in the world
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TimeModifyCommand.#ctor(SharpCraft.Time,SharpCraft.ID.AddSetModifier)">
+        <member name="M:SharpCraft.Commands.TimeModifyCommand.#ctor(SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.ID.AddSetModifier)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TimeModifyCommand"/>
             </summary>
@@ -22019,7 +22030,7 @@
             Command which changes how long a title will appear for the selected players
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.TitleTimesCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.Time,SharpCraft.Time,SharpCraft.Time)">
+        <member name="M:SharpCraft.Commands.TitleTimesCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32},SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.TitleTimesCommand"/>
             </summary>
@@ -22059,7 +22070,7 @@
             Command which changes the size of the worldborder
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.WorldborderSizeCommand.#ctor(System.Double,SharpCraft.ID.AddSetModifier,SharpCraft.Time)">
+        <member name="M:SharpCraft.Commands.WorldborderSizeCommand.#ctor(System.Double,SharpCraft.ID.AddSetModifier,SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.WorldborderSizeCommand"/>
             </summary>
@@ -22192,7 +22203,7 @@
             Command which changes how much time in advance the border should warn players when the border is shrinking
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.WorldborderWarningTimeCommand.#ctor(SharpCraft.Time)">
+        <member name="M:SharpCraft.Commands.WorldborderWarningTimeCommand.#ctor(SharpCraft.NoneNegativeTime{System.Int32})">
             <summary>
             Intializes an ew <see cref="T:SharpCraft.Commands.WorldborderWarningTimeCommand"/>
             </summary>
@@ -23845,7 +23856,7 @@
             <param name="setting">The settings for how to write the file</param>
             <returns>The newly created recipe</returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.NoneNegativeTime{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new furnace/a type of furnace recipe with the given parameters
             </summary>
@@ -23859,7 +23870,7 @@
             <param name="setting">The settings for how to write the file</param>
             <returns>The newly created recipe</returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType,SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType,SharpCraft.ID.Item,System.Double,SharpCraft.NoneNegativeTime{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Creates a new furnace/a type of furnace recipe with the given parameters
             </summary>
@@ -24553,7 +24564,7 @@
             Smoker recipe
             </summary>
         </member>
-        <member name="M:SharpCraft.SmeltRecipe.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.SmeltRecipe.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.NoneNegativeTime{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.SmeltRecipe"/>. Inherite from this constructor.
             </summary>
@@ -24568,7 +24579,7 @@
             <param name="cookingTime">The amount of time it takes to cook the item</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
         </member>
-        <member name="M:SharpCraft.SmeltRecipe.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.SmeltRecipe.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType[],SharpCraft.ID.Item,System.Double,SharpCraft.NoneNegativeTime{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.SmeltRecipe"/>
             </summary>
@@ -24582,7 +24593,7 @@
             <param name="experience">The amount of experience to get for smelting the item</param>
             <param name="cookingTime">The amount of time it takes to cook the item</param>
         </member>
-        <member name="M:SharpCraft.SmeltRecipe.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType,SharpCraft.ID.Item,System.Double,SharpCraft.Time,System.String,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.SmeltRecipe.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.SmeltRecipe.SmeltType,SharpCraft.ItemType,SharpCraft.ID.Item,System.Double,SharpCraft.NoneNegativeTime{System.Int32},System.String,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.SmeltRecipe"/>
             </summary>

@@ -479,7 +479,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void Time(BaseSelector player, Time startFade, Time stay, Time endFade)
+            public void Time(BaseSelector player, NoneNegativeTime<int> startFade, NoneNegativeTime<int> stay, NoneNegativeTime<int> endFade)
             {
                 ForFunction.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
             }
@@ -511,7 +511,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(BaseSelector player, BaseJsonText topMessage, BaseJsonText bottomMessage, Time startFade, Time stay, Time endFade)
+            public void FullTitle(BaseSelector player, BaseJsonText topMessage, BaseJsonText bottomMessage, NoneNegativeTime<int> startFade, NoneNegativeTime<int> stay, NoneNegativeTime<int> endFade)
             {
                 ForFunction.Custom.GroupCommands(f => 
                 {

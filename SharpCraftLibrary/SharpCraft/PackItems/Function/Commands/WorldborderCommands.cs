@@ -19,7 +19,7 @@ namespace SharpCraft.Commands
         /// <param name="size">The size to modify with</param>
         /// <param name="modifier">The way to modify the size</param>
         /// <param name="time">The amount of time to modification takes. Leave null to make it happen instant</param>
-        public WorldborderSizeCommand(double size, ID.AddSetModifier modifier, Time? time)
+        public WorldborderSizeCommand(double size, ID.AddSetModifier modifier, NoneNegativeTime<int>? time)
         {
             Modifier = modifier;
             Size = size;
@@ -55,7 +55,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time to modification takes. Leave null to make it happen instant
         /// </summary>
-        public Time? Time { get; set; }
+        public NoneNegativeTime<int>? Time { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -69,7 +69,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"worldborder {Modifier} {Size.ToMinecraftDouble()} {Time.AsTicks()}";
+                return $"worldborder {Modifier} {Size.ToMinecraftDouble()} {Time.GetAsTicks()}";
             }
         }
     }
@@ -251,13 +251,13 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WorldborderWarningTimeCommand : BaseCommand
     {
-        private Time time = null!;
+        private NoneNegativeTime<int> time = null!;
 
         /// <summary>
         /// Intializes an ew <see cref="WorldborderWarningTimeCommand"/>
         /// </summary>
         /// <param name="time">The amount of time in advance the border should warn players when the border is shrinking</param>
-        public WorldborderWarningTimeCommand(Time time)
+        public WorldborderWarningTimeCommand(NoneNegativeTime<int> time)
         {
             Time = time;
         }
@@ -265,16 +265,12 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time in advance the border should warn players when the border is shrinking
         /// </summary>
-        public Time Time 
+        public NoneNegativeTime<int> Time 
         { 
             get => time;
             set 
             {
-                if (value?.IsNegative() ?? throw new ArgumentNullException(nameof(Time), "Time may not be null"))
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Time), "Time may not be negative");
-                }
-                time = value;
+                time = value ?? throw new ArgumentNullException(nameof(Time), "Time may not be null");
             }
         }
 
@@ -284,7 +280,7 @@ namespace SharpCraft.Commands
         /// <returns>worldborder warning time [Time]</returns>
         public override string GetCommandString()
         {
-            return $"worldborder warning time {Time.AsTicks()}";
+            return $"worldborder warning time {Time.GetAsTicks()}";
         }
     }
 }

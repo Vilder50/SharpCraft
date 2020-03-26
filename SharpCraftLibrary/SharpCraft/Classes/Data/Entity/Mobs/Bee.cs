@@ -41,14 +41,14 @@ namespace SharpCraft.Entities
         /// <summary>
         /// Time since the bee last pollinated
         /// </summary>
-        [DataTag("TicksSincePollination", ForceType = ID.NBTTagType.TagInt)]
-        public Time? LastPollination { get; set; }
+        [DataTag("TicksSincePollination")]
+        public Time<int>? LastPollination { get; set; }
 
         /// <summary>
         /// Time till the bee is allowed to enter a hive
         /// </summary>
-        [DataTag("CannotEnterHiveTicks", ForceType = ID.NBTTagType.TagInt)]
-        public Time? ToEnterHive { get; set; }
+        [DataTag("CannotEnterHiveTicks")]
+        public Time<int>? ToEnterHive { get; set; }
 
         /// <summary>
         /// The amount of crops the bee has grown since it last pollinated
@@ -59,8 +59,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The amount of time the bee is angry for
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public Time? Anger { get; set; }
+        [DataTag]
+        public Time<int>? Anger { get; set; }
 
         /// <summary>
         /// The <see cref="UUID"/> of the entity this bee is angry on
