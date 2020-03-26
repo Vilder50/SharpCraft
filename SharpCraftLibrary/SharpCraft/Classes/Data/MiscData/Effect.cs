@@ -8,6 +8,11 @@ namespace SharpCraft
     public class Effect : Data.DataHolderBase
     {
         /// <summary>
+        /// The maximum time you can use in <see cref="Commands.EffectGiveCommand"/>
+        /// </summary>
+        public const int MaxEffectGiveTime = 1000000;
+
+        /// <summary>
         /// Creates an empty effect
         /// </summary>
         public Effect() { }

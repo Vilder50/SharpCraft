@@ -267,9 +267,21 @@ namespace SharpCraft.Data
                         {
                             //Path ends in an object
                             //If this property doesn't hold an object then rip
-                            if (property.GetValue(this) is DataHolderBase dataObject && addToPath.PathValue is DataPartObject addToObject)
+                            if (addToPath.PathValue is DataPartObject addToObject)
                             {
-                                addToObject.MergeDataPartObject(dataObject.GetDataTree());
+                                if (property.GetValue(this) is DataHolderBase dataObject)
+                                {
+                                    addToObject.MergeDataPartObject(dataObject.GetDataTree());
+                                }
+                                else if (data is IConvertableToDataObject objectable)
+                                {
+                                    object?[] conversionData = dataTagInformation.ConversionParams;
+                                    addToObject.MergeDataPartObject(objectable.GetAsDataObject(conversionData));
+                                }
+                                else
+                                {
+                                    throw new ArgumentException("The data path " + addToPath.PathName + " is trying to be an object and not an object at the same time.");
+                                }
                             }
                             else
                             {

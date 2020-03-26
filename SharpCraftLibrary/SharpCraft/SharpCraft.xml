@@ -4568,6 +4568,11 @@
             The distance the entity has fallen
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.BasicEntity.Team">
+            <summary>
+            The team the entity is on
+            </summary>
+        </member>
         <member name="P:SharpCraft.Entities.BasicEntity.Fire">
             <summary>
             The time before the fire on the entity goes out.
@@ -5467,11 +5472,6 @@
         <member name="P:SharpCraft.Entities.Mob.LeftHanded">
             <summary>
             If the mob's main hand is its left hand
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Entities.Mob.Team">
-            <summary>
-            The team the mob is on
             </summary>
         </member>
         <member name="P:SharpCraft.Entities.Mob.LeashCoords">
@@ -7872,6 +7872,11 @@
         <member name="T:SharpCraft.Effect">
             <summary>
             An object for effects
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Effect.MaxEffectGiveTime">
+            <summary>
+            The maximum time you can use in <see cref="T:SharpCraft.Commands.EffectGiveCommand"/>
             </summary>
         </member>
         <member name="M:SharpCraft.Effect.#ctor">

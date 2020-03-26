@@ -37,7 +37,11 @@ namespace SharpCraft.Entities
         /// </summary>
         [Data.DataTag]
         public float? FallDistance { get; set; }
-
+        /// <summary>
+        /// The team the entity is on
+        /// </summary>
+        [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
+        public Team? Team { get; set; }
         /// <summary>
         /// The time before the fire on the entity goes out.
         /// Negative value means how long it takes for the entity to turn on fire.

@@ -55,7 +55,7 @@ namespace SharpCraft.Data
         /// </summary>
         /// <param name="filter">The thing to filter for. Leave null to get all items.</param>
         /// <returns>0 (So it can be used in indexers)</returns>
-        public static int AddArrayFilter(SimpleDataHolder filter)
+        public static int AddArrayFilter(SimpleDataHolder? filter)
         {
             _ = filter;
             return 0;

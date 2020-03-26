@@ -51,7 +51,7 @@ namespace SharpCraft.Commands
             get => seconds; 
             set
             {
-                if (value < 0 || value > 1000000)
+                if (value < 0 || value > SharpCraft.Effect.MaxEffectGiveTime)
                 {
                     throw new ArgumentOutOfRangeException(nameof(Seconds), "Seconds may not be less than 0 or higher than 1000000");
                 }

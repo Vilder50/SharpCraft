@@ -75,11 +75,6 @@ namespace SharpCraft.Entities
         [Data.DataTag]
         public bool? LeftHanded { get; set; }
         /// <summary>
-        /// The team the mob is on
-        /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
-        public Team? Team { get; set; }
-        /// <summary>
         /// The location the mob is leashed to
         /// </summary>
         [Data.DataTag("Leash", "X", "Y", "Z")]
