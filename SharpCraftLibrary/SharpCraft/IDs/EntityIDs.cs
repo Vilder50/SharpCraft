@@ -8,6 +8,8 @@
 #pragma warning disable 1591
         public enum Entity
         {
+            zoglin,
+            strider,
             zombified_piglin,
             piglin,
             hoglin,
@@ -284,18 +286,18 @@
         }
         public enum AttributeType
         {
-            generic_maxHealth,
-            generic_followRange,
-            generic_knockbackResistance,
-            generic_movementSpeed,
-            generic_attackDamage,
-            generic_armor,
-            generic_armorToughness,
-            generic_attackSpeed,
-            generic_luck,
-            horse_jumpStrenght,
-            generic_flyingSpeed,
-            zombie_spawnReinforcements
+            generic_max_health,
+            zombie_spawn_reinforcements,
+            horse_jump_strength,
+            generic_follow_range,
+            generic_knockback_resistance,
+            generic_movement_speed,
+            generic_flying_speed,
+            generic_attack_damage,
+            generic_attack_knockback,
+            generic_attack_speed,
+            generic_armor_toughness,
+            generic_luck
         }
         public enum AttributeSlot
         {

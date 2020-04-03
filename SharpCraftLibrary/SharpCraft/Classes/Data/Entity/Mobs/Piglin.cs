@@ -32,6 +32,18 @@ namespace SharpCraft
             /// </summary>
             [Data.DataTag]
             public Item[] Inventory { get; set; }
+
+            /// <summary>
+            /// True if it shouldn't hunt hoglins
+            /// </summary>
+            [Data.DataTag]
+            public bool? CannotHunt { get; set; }
+
+            /// <summary>
+            /// Time the piglin has been in the overworld. It transforms after 15 seconds.
+            /// </summary>
+            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
+            public Time TimeInOverworld { get; set; }
         }
     }
 }

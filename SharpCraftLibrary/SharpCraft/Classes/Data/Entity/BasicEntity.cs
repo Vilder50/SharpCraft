@@ -87,7 +87,7 @@ namespace SharpCraft
             /// <summary>
             /// The entity's UUID
             /// </summary>
-            [Data.DataTag((object)"UUIDMost","UUIDLeast")]
+            [Data.DataTag(ForceType = ID.NBTTagType.TagIntArray)]
             public UUID UUID { get; set; }
 
             /// <summary>

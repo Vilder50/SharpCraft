@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the bullet
             /// </summary>
-            [Data.DataTag((object)"M","L")]
+            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID Owner { get; set; }
             /// <summary>
             /// The owner's location
@@ -28,7 +28,7 @@ namespace SharpCraft
             /// <summary>
             /// The bullet's target
             /// </summary>
-            [Data.DataTag((object)"M", "L")]
+            [Data.DataTag("Target", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID Target { get; set; }
             /// <summary>
             /// The target's location

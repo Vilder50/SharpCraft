@@ -89,7 +89,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the leash
             /// </summary>
-            [Data.DataTag("Least","UUIDMost", "UUIDLeast")]
+            [Data.DataTag("Leash.UUID", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID LeashUUID { get; set; }
             /// <summary>
             /// The items there is in the mob's hands.

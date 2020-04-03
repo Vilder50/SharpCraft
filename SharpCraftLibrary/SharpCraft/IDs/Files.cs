@@ -250,7 +250,10 @@ namespace SharpCraft
                         warped_stems,
                         crimson_stems,
                         wart_blocks,
-                        #pragma warning restore 1591
+                        gold_ores,
+                        logs_that_burn,
+                        non_flammable_wood,
+#pragma warning restore 1591
                     }
 
                     /// <summary>
@@ -406,14 +409,14 @@ namespace SharpCraft
                         piglin_repellents,
 
                         /// <summary>
-                        /// Iron pickaxes or better will make blocks with this tag drop their loot
-                        /// </summary>
-                        gold_ores,
-
-                        /// <summary>
                         /// Blocks the <see cref="ID.Enchant.soul_speed"/> enchant works on
                         /// </summary>
                         soul_speed_blocks,
+
+                        /// <summary>
+                        /// Shriders in this block will shake
+                        /// </summary>
+                        non_flammable_wood,
                     }
                 }
 
@@ -457,7 +460,7 @@ namespace SharpCraft
                     {
                         #pragma warning disable 1591
                         acacia_logs,
-                        gold_ores
+                        gold_ores,
                         anvil,
                         birch_logs,
                         buttons,
@@ -475,7 +478,8 @@ namespace SharpCraft
                         tall_flowers,
                         warped_stems,
                         crimson_stems,
-                        #pragma warning restore 1591
+                        logs_that_burn,
+#pragma warning restore 1591
                     }
 
                     /// <summary>
@@ -572,6 +576,10 @@ namespace SharpCraft
                         /// Items piglins wont pickup
                         /// </summary>
                         piglin_repellents,
+                        /// <summary>
+                        /// Won't be able to be used as furnace fuel
+                        /// </summary>
+                        non_flammable_wood,
                     }
                 }
 

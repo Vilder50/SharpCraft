@@ -34,7 +34,7 @@ namespace SharpCraft
                 {
                     public class NetherSounds
                     {
-                        private string biome;
+                        private readonly string biome;
 
                         public NetherSounds(string biome)
                         {
@@ -58,8 +58,23 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
+                public static class RespawnAnchor
+                {
+                    public static string Ambient { get; } = "block.respawn_anchor.ambient";
+                    public static string Charge { get; } = "block.respawn_anchor.charge";
+                    public static string Deplete { get; } = "block.respawn_anchor.deplete";
+                    public static string SetSpawn { get; } = "block.respawn_anchor.set_spawn";
+                }
                 public static string VineClimb { get; } = "block.vine.step";
                 public static string SmithingTableUse { get; } = "block.smithing_table.use";
+                public static class Lodestone
+                {
+                    public static string Break { get; } = "block.lodestone.break";
+                    public static string Fall { get; } = "block.lodestone.fall";
+                    public static string Hit { get; } = "block.lodestone.hit";
+                    public static string Place { get; } = "block.lodestone.place";
+                    public static string Step { get; } = "block.lodestone.step";
+                }
                 public static class WeepingVine
                 {
                     public static string Break { get; } = "block.weeping_vines.break";
@@ -524,13 +539,24 @@ namespace SharpCraft
                     public static string Retreat { get; } = "entity.piglin.retreat";
                     public static string Step { get; } = "entity.piglin.step";
                 }
+                public static class Zoglin
+                {
+                    public static string Death { get; } = "entity.zoglin.death";
+                    public static string Hurt { get; } = "entity.zoglin.hurt";
+                    public static string Ambient { get; } = "entity.zoglin.ambient";
+                    public static string Angry { get; } = "entity.zoglin.angry";
+                    public static string Attack { get; } = "entity.zoglin.attack";
+                    public static string Step { get; } = "entity.zoglin.step";
+                }
                 public static class Hoglin
                 {
                     public static string Death { get; } = "entity.hoglin.death";
                     public static string Hurt { get; } = "entity.hoglin.hurt";
                     public static string Ambient { get; } = "entity.hoglin.ambient";
                     public static string Angry { get; } = "entity.hoglin.angry";
+                    public static string Attack { get; } = "entity.hoglin.attack";
                     public static string Retreat { get; } = "entity.hoglin.retreat";
+                    public static string Convert { get; } = "entity.hoglin.converted_to_zombified";
                     public static string Step { get; } = "entity.hoglin.step";
                 }
                 public static class Bee

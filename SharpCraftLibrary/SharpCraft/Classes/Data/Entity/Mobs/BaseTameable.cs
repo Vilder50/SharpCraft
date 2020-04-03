@@ -23,7 +23,7 @@ namespace SharpCraft
             /// <summary>
             /// the <see cref="UUID"/> of the owner
             /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagString)]
+            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID OwnerUUID { get; set; }
         }
 

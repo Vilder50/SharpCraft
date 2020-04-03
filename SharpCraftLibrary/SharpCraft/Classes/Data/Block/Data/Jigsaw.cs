@@ -9,7 +9,7 @@ namespace SharpCraft
         /// <summary>
         /// An object for jigsaw blocks
         /// </summary>
-        public class Jigsaw : Block, IBlock.IFacingFull
+        public class Jigsaw : Block
         {
             /// <summary>
             /// Creates a jigsaw block
@@ -42,7 +42,7 @@ namespace SharpCraft
             /// <summary>
             /// The name of the structure pool to use
             /// </summary>
-            [Data.DataTag("target_pool")]
+            [Data.DataTag("pool")]
             public string DPool { get; set; }
             /// <summary>
             /// The block the jigsaw should transform into when done
@@ -53,10 +53,21 @@ namespace SharpCraft
 
             /// <summary>
             /// The name of the jigsaw block.
-            /// (Jigsaws only connects to other jigsaws with the same name)
             /// </summary>
-            [Data.DataTag("attachment_type")]
+            [Data.DataTag("name")]
             public string DName { get; set; }
+
+            /// <summary>
+            /// The name of the jigsaw blocks this jigsaw connects to.
+            /// </summary>
+            [Data.DataTag("target")]
+            public string DTarget { get; set; }
+
+            /// <summary>
+            /// The type of connection the jigsaw makes
+            /// </summary>
+            [Data.DataTag("joint")]
+            public ID.JigsawJoint DJoint { get; set; }
         }
     }
 }

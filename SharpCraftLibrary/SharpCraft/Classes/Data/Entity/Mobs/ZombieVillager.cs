@@ -56,7 +56,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the player who is converting this zombie villager
             /// </summary>
-            [DataTag((object)"ConversionPlayerMost", "ConversionPlayerLeast", Merge = true)]
+            [Data.DataTag("ConverterUUID", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID ConverterUUID { get; set; }
         }
     }

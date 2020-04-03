@@ -18,7 +18,7 @@ namespace SharpCraft
             /// <summary>
             /// The owner of the spit
             /// </summary>
-            [Data.DataTag("Owner","OwnerUUIDMost","OwnerUUIDLeast")]
+            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID OwnerUUID { get; set; }
         }
     }

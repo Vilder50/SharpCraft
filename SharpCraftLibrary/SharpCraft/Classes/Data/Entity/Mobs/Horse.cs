@@ -36,7 +36,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the owner of the horse
             /// </summary>
-            [DataTag(ForceType = ID.NBTTagType.TagString)]
+            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID OwnerUUID { get; set; }
             /// <summary>
             /// The item the horse has as it's saddle

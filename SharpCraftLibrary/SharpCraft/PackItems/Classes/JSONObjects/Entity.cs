@@ -40,6 +40,12 @@ namespace SharpCraft
             public Effects Effects { get; set; }
 
             /// <summary>
+            /// If the fishing hook is in "open water"
+            /// </summary>
+            [DataTag("fishing_hook.in_open_water", JsonTag = true)]
+            public bool FishingHookInOpenWater { get; set; }
+
+            /// <summary>
             /// the nbt the <see cref="SharpCraft.Entity"/> should have
             /// </summary>
             [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]

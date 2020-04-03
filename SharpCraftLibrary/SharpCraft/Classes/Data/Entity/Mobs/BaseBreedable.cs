@@ -37,7 +37,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity who fed the mob
             /// </summary>
-            [Data.DataTag((object)"LoveCauseMost","LoveCauseLeast", Merge = true)]
+            [Data.DataTag("LoveCause", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID LoveCause { get; set; }
         }
 

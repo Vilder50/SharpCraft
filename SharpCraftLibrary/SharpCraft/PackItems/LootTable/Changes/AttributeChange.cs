@@ -93,7 +93,7 @@ namespace SharpCraft.LootObjects
             /// <summary>
             /// The UUID of the attribute. Leave empty to generate random one
             /// </summary>
-            [DataTag("id", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+            [Data.DataTag("UUID", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID UUID { get; set; }
 
             /// <summary>

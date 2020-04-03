@@ -49,7 +49,7 @@ namespace SharpCraft
             /// <summary>
             /// The UUID of the entity who made the cloud
             /// </summary>
-            [Data.DataTag((object)"OwnerUUIDMost","OwnerUUIDLeast")]
+            [Data.DataTag("Owner",ForceType = ID.NBTTagType.TagIntArray)]
             public UUID OwnerUUID { get; set; }
 
             /// <summary>

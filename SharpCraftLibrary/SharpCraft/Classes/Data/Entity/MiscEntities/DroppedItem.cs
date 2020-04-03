@@ -36,13 +36,13 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity who can pick up the item
             /// </summary>
-            [Data.DataTag((object)"M","L")]
+            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID Owner { get; set; }
 
             /// <summary>
             /// The <see cref="UUID"/> of the entity who threw the item
             /// </summary>
-            [Data.DataTag((object)"M", "L")]
+            [Data.DataTag("Thrower", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID Thrower { get; set; }
 
             /// <summary>

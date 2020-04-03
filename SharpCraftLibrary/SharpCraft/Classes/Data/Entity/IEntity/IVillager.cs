@@ -64,7 +64,7 @@ namespace SharpCraft.IEntity
         /// The UUID of the player who made this gossip.
         /// (If its a <see cref="ID.GossipType.golem"/> then its the villager who started the gossip)
         /// </summary>
-        [DataTag((object)"TargetMost","TargetLeast")]
+        [Data.DataTag("Target",ForceType = ID.NBTTagType.TagIntArray)]
         public UUID TartgetUUID { get; set; }
     }
 

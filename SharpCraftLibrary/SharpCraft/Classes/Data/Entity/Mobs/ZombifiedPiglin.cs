@@ -24,7 +24,7 @@ namespace SharpCraft
             /// <summary>
             /// The <see cref="UUID"/> of the entity this pigman is angry on
             /// </summary>
-            [Data.DataTag("HurtBy",ForceType = ID.NBTTagType.TagString)]
+            [Data.DataTag("HurtBy", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID AngryOn { get; set; }
         }
     }

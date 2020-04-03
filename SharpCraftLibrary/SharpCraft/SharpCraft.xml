@@ -2659,6 +2659,36 @@
             The axis the portal is parallel to
             </summary>
         </member>
+        <member name="T:SharpCraft.Block.NetherVines">
+            <summary>
+            An object for nether vine blocks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.NetherVines.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a nether vine block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.NetherVines.#ctor(SharpCraft.ID.Block)">
+            <summary>
+            Creates a nether vine block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.NetherVines.FitsBlock(SharpCraft.ID.Block)">
+            <summary>
+            Tests if the given block type fits this type of block object
+            </summary>
+            <param name="block">The block to test</param>
+            <returns>true if the block fits</returns>
+        </member>
+        <member name="P:SharpCraft.Block.NetherVines.SAge">
+            <summary>
+            How much the cactus / sugar cane has grown
+            (0-25)
+            </summary>
+        </member>
         <member name="T:SharpCraft.Block.NoteBlock">
             <summary>
             An object for note block blocks
@@ -3112,6 +3142,35 @@
         <member name="P:SharpCraft.Block.RedstoneWallTorch.SLit">
             <summary>
             If the block is lit up
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Block.RespawnAnchor">
+            <summary>
+            An object for respawn anchor blocks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.RespawnAnchor.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a respawn anchor block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.RespawnAnchor.#ctor(SharpCraft.ID.Block)">
+            <summary>
+            Creates a respawn anchor block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.RespawnAnchor.FitsBlock(SharpCraft.ID.Block)">
+            <summary>
+            Tests if the given block type fits this type of block object
+            </summary>
+            <param name="block">The block to test</param>
+            <returns>true if the block fits</returns>
+        </member>
+        <member name="P:SharpCraft.Block.RespawnAnchor.SCharges">
+            <summary>
+            How many charges the anchor has left
             </summary>
         </member>
         <member name="T:SharpCraft.Block.Sapling">
@@ -3755,36 +3814,6 @@
         <member name="P:SharpCraft.Block.WallTorch.SFacing">
             <summary>
             The way the torch is facing. (The way it points)
-            </summary>
-        </member>
-        <member name="T:SharpCraft.Block.WeepingVines">
-            <summary>
-            An object for vine blocks
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Block.WeepingVines.#ctor(SharpCraft.BlockType)">
-            <summary>
-            Creates a vine block
-            </summary>
-            <param name="type">The type of block</param>
-        </member>
-        <member name="M:SharpCraft.Block.WeepingVines.#ctor(SharpCraft.ID.Block)">
-            <summary>
-            Creates a vine block
-            </summary>
-            <param name="type">The type of block</param>
-        </member>
-        <member name="M:SharpCraft.Block.WeepingVines.FitsBlock(SharpCraft.ID.Block)">
-            <summary>
-            Tests if the given block type fits this type of block object
-            </summary>
-            <param name="block">The block to test</param>
-            <returns>true if the block fits</returns>
-        </member>
-        <member name="P:SharpCraft.Block.WeepingVines.SAge">
-            <summary>
-            How much the cactus / sugar cane has grown
-            (0-25)
             </summary>
         </member>
         <member name="T:SharpCraft.BlockStateAttribute">
@@ -5139,47 +5168,78 @@
             The amount of time the firework will fly
             </summary>
         </member>
-        <member name="T:SharpCraft.Entity.ItemPainting">
+        <member name="T:SharpCraft.Entity.ItemFrame">
             <summary>
             An object for item frames and painting entities
             </summary>
         </member>
-        <member name="M:SharpCraft.Entity.ItemPainting.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+        <member name="M:SharpCraft.Entity.ItemFrame.#ctor(System.Nullable{SharpCraft.ID.Entity})">
             <summary>
             Creates a new item frame or painting entity
             </summary>
             <param name="type">the type of entity</param>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.InTile">
+        <member name="P:SharpCraft.Entity.ItemFrame.InTile">
             <summary>
             The block the entity is inside
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.Facing">
+        <member name="P:SharpCraft.Entity.ItemFrame.Facing">
             <summary>
             The direction the entity is facing
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.Painting">
-            <summary>
-            The type of painting
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameItem">
+        <member name="P:SharpCraft.Entity.ItemFrame.FrameItem">
             <summary>
             The item in the item frame
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameDropChance">
+        <member name="P:SharpCraft.Entity.ItemFrame.FrameDropChance">
             <summary>
             The chance of the frame dropping its item
             (0-1)
             </summary>
         </member>
-        <member name="P:SharpCraft.Entity.ItemPainting.FrameRotation">
+        <member name="P:SharpCraft.Entity.ItemFrame.FrameRotation">
             <summary>
             The rotation of the item in the item frame.
-            Rotation = <see cref="P:SharpCraft.Entity.ItemPainting.FrameRotation"/> * 45 degrees clockwise
+            Rotation = <see cref="P:SharpCraft.Entity.ItemFrame.FrameRotation"/> * 45 degrees clockwise
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.ItemFrame.Invisible">
+            <summary>
+            Makes the item frame invisible
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.ItemFrame.Fixed">
+            <summary>
+            Stops players from being able to get the item out of the item. The item frame can also not be broken
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entity.Painting">
+            <summary>
+            An object for item frames and painting entities
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Entity.Painting.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+            <summary>
+            Creates a new item frame or painting entity
+            </summary>
+            <param name="type">the type of entity</param>
+        </member>
+        <member name="P:SharpCraft.Entity.Painting.InTile">
+            <summary>
+            The block the entity is inside
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Painting.Facing">
+            <summary>
+            The direction the entity is facing
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Painting.Picture">
+            <summary>
+            The type of painting
             </summary>
         </member>
         <member name="T:SharpCraft.Entity.TNT">
@@ -5823,6 +5883,32 @@
             The size of the explosion caused by the ghast's fireballs
             </summary>
         </member>
+        <member name="T:SharpCraft.Entity.Hoglin">
+            <summary>
+            Entity data for hoglins
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Entity.Hoglin.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+            <summary>
+            Creates a new hoglin
+            </summary>
+            <param name="type">the type of entity</param>
+        </member>
+        <member name="P:SharpCraft.Entity.Hoglin.IsImmuneToZombification">
+            <summary>
+            True if it shouldn't turn into a <see cref="F:SharpCraft.ID.Entity.zoglin"/> when in the overworld
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Hoglin.CannotBeHunted">
+            <summary>
+            True if it shouldn't be hunted by piglins
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Hoglin.TimeInOverworld">
+            <summary>
+            Time the hoglin has been in the overworld. It transforms after 15 seconds.
+            </summary>
+        </member>
         <member name="T:SharpCraft.Entity.Horse">
             <summary>
             Entity data for horses, llamas, donkeys and mules
@@ -6083,6 +6169,16 @@
         <member name="P:SharpCraft.Entity.Piglin.Inventory">
             <summary>
             The items in the piglins inventory
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Piglin.CannotHunt">
+            <summary>
+            True if it shouldn't hunt hoglins
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Entity.Piglin.TimeInOverworld">
+            <summary>
+            Time the piglin has been in the overworld. It transforms after 15 seconds.
             </summary>
         </member>
         <member name="T:SharpCraft.Entity.Player">
@@ -6385,6 +6481,22 @@
         <member name="P:SharpCraft.Entity.Snowman.Pumpkin">
             <summary>
             True if the snowman has a pumpkin on
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Entity.Strider">
+            <summary>
+            Entity data for striders
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Entity.Strider.#ctor(System.Nullable{SharpCraft.ID.Entity})">
+            <summary>
+            Creates a new strider
+            </summary>
+            <param name="type">the type of entity</param>
+        </member>
+        <member name="P:SharpCraft.Entity.Strider.Saddle">
+            <summary>
+            If the strider has a saddle on
             </summary>
         </member>
         <member name="T:SharpCraft.Entity.Turtle">
@@ -7236,6 +7348,40 @@
         <member name="P:SharpCraft.Item.Book.StoredEnchants">
             <summary>
             The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Item.Compass">
+            <summary>
+            An object for compass items
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Item.Compass.#ctor">
+            <summary>
+            Creates an item without an id or anything but which can have data
+            This is used to test for item with data
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Item.Compass.#ctor(SharpCraft.ItemType,System.Nullable{System.SByte},System.Nullable{System.SByte})">
+            <summary>
+            Creates a new item
+            </summary>
+            <param name="ItemID">The type of the item. If null the item has no type</param>
+            <param name="Count">The amount of the item. If null the item has no amount</param>
+            <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
+        </member>
+        <member name="P:SharpCraft.Item.Compass.LodestoneDimension">
+            <summary>
+            The dimension of the lodestone the compass is tracking
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Item.Compass.TrackingLodestone">
+            <summary>
+            If the compass is tracking a lodestone
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Item.Compass.LodestonePosition">
+            <summary>
+            The location of the lodestone the compass is tracking
             </summary>
         </member>
         <member name="T:SharpCraft.Item.Firework">
@@ -9884,6 +10030,15 @@
             </summary>
             <param name="uuid">the string to convert</param>
         </member>
+        <member name="M:SharpCraft.UUID.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.UUID"/> from 4 ints
+            </summary>
+            <param name="a">int part</param>
+            <param name="b">int part</param>
+            <param name="c">int part</param>
+            <param name="d">int part</param>
+        </member>
         <member name="P:SharpCraft.UUID.Least">
             <summary>
             the UUIDLeast
@@ -9899,20 +10054,19 @@
             The UUID string
             </summary>
         </member>
-        <member name="M:SharpCraft.UUID.GetAsDataObject(System.Object[])">
+        <member name="M:SharpCraft.UUID.GetUUIDAsInts">
             <summary>
-            Converts this UUID into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            Returns this uuid as an array
             </summary>
-            <param name="conversionData">0: UUIDMost path, 1: UUIDLeast path</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartObject"/></returns>
+            <returns>This uuid as an array</returns>
         </member>
-        <member name="M:SharpCraft.UUID.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.UUID.GetAsArray(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
-            Converts this UUID into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts this uuid into a <see cref="T:SharpCraft.Data.DataPartArray"/>
             </summary>
-            <param name="asType">The type to convert the uuid into</param>
+            <param name="asType">Not used</param>
             <param name="extraConversionData">Not used</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+            <returns>This uuid as an int array</returns>
         </member>
         <member name="T:SharpCraft.Coords">
             <summary>
@@ -11458,14 +11612,29 @@
             none solid blocks which still makes walls connect upwards.
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wart_blocks">
-            <summary>
-            Hoes destroy these blocks 15 times faster.
-            </summary>
-        </member>
         <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wither_summon_base_blocks">
             <summary>
             Blocks used for making the T part of the wither summon build.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.hoglin_repellents">
+            <summary>
+            Blocks hoglins tries to stay away from
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.piglin_repellents">
+            <summary>
+            Blocks piglins tries to stay away from
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.soul_speed_blocks">
+            <summary>
+            Blocks the <see cref="F:SharpCraft.ID.Enchant.soul_speed"/> enchant works on
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.non_flammable_wood">
+            <summary>
+            Shriders in this block will shake
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Fluid">
@@ -11613,6 +11782,16 @@
         <member name="F:SharpCraft.ID.Files.Groups.Items.Special.beacon_payment_items">
             <summary>
             Items which can be used for activating beacons.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.piglin_repellents">
+            <summary>
+            Items piglins wont pickup
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.non_flammable_wood">
+            <summary>
+            Won't be able to be used as furnace fuel
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Entities">
@@ -13303,6 +13482,16 @@
             The redstone length the target outputs
             </summary>
         </member>
+        <member name="P:SharpCraft.AdvancementObjects.TargetHitTrigger.Projectile">
+            <summary>
+            The entity which hit the target
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.TargetHitTrigger.Shooter">
+            <summary>
+            The entity which shot the target
+            </summary>
+        </member>
         <member name="T:SharpCraft.AdvancementObjects.TickTrigger">
             <summary>
             Gets triggered 20 times a second
@@ -14660,6 +14849,11 @@
         <member name="P:SharpCraft.JSONObjects.Entity.Effects">
             <summary>
             the <see cref="T:SharpCraft.JSONObjects.Effects"/>s the <see cref="T:SharpCraft.Entity"/> should have
+            </summary>
+        </member>
+        <member name="P:SharpCraft.JSONObjects.Entity.FishingHookInOpenWater">
+            <summary>
+            If the fishing hook is in "open water"
             </summary>
         </member>
         <member name="P:SharpCraft.JSONObjects.Entity.NBT">

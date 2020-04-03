@@ -8,6 +8,9 @@
 #pragma warning disable 1591
         public enum Block
         {
+            polished_basalt,
+            respawn_anchor,
+            lodestone,
             nether_gold_ore,
             twisting_vines,
             twisting_vines_plant,
@@ -889,6 +892,32 @@
         public enum StateSimplePlaced { bottom, top }
         public enum Axis { x, y, z }
         public enum Facing { north, south, east, west }
+        public enum JigsawOrientation
+        {
+            down_east,
+            down_south,
+            down_north,
+            down_west,
+            east_up,
+            north_up,
+            south_up,
+            up_east,
+            up_north,
+            up_south,
+            up_west,
+            west_up
+        }
+        public enum JigsawJoint
+        {
+            /// <summary>
+            /// If it can be rotated
+            /// </summary>
+            rollable,
+            /// <summary>
+            /// If it can't be rotated
+            /// </summary>
+            aligned
+        }
         public enum BannerPattern
         {
             /// <summary>

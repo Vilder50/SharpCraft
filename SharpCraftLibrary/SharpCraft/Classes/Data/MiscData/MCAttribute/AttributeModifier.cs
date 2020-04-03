@@ -54,7 +54,7 @@ namespace SharpCraft
         /// <summary>
         /// The UUID of the modifier
         /// </summary>
-        [DataTag((object)"UUIDMost", "UUIDLeast", Merge = true)]
+        [Data.DataTag("UUID", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID UUID { get; set; }
     }
 }

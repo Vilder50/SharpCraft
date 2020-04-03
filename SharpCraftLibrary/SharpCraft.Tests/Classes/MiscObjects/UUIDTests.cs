@@ -23,19 +23,10 @@ namespace SharpCraft.Tests.MiscObjects
         }
 
         [TestMethod]
-        public void TestGetAsDataObject()
+        public void TestGetAsArray()
         {
-            SharpCraft.Data.IConvertableToDataObject convertable = new UUID("00000000-0000-0001-0000-000000000002");
-            Assert.AreEqual("{l:2L,m:1L}", convertable.GetAsDataObject(new object[] { "m","l" }).GetDataString());
-        }
-
-        [TestMethod]
-        public void TestGetAsTag()
-        {
-            SharpCraft.Data.IConvertableToDataTag convertable = new UUID("00000000-0000-0002-0000-000000000001");
-            Assert.AreEqual("\"00000000-0000-0002-0000-000000000001\"", convertable.GetAsTag(ID.NBTTagType.TagString,null).GetDataString());
-
-            Assert.ThrowsException<ArgumentException>(() => convertable.GetAsTag(ID.NBTTagType.TagLong, null), "UUID cannot be long");
+            SharpCraft.Data.IConvertableToDataArray convertable = new UUID("f6b1914d-b176-4850-8a06-b50380412b85");
+            Assert.AreEqual("[I;-156135091,-1317648304,-1979271933,-2143212667]", convertable.GetAsArray(ID.NBTTagType.TagString, null).GetDataString());
         }
 
         [TestMethod]

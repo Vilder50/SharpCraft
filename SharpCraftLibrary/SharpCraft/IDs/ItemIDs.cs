@@ -8,6 +8,12 @@
 #pragma warning disable 1591
         public enum Item
         {
+            strider_spawn_egg,
+            zoglin_spawn_egg,
+            polished_basalt,
+            respawn_anchor,
+            lodestone,
+            warped_fungus_on_a_stick,
             nether_gold_ore,
             twisting_vines,
             stripped_warped_hyphae,
