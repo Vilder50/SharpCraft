@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for structure blocks
     /// </summary>
-    public class StructureBlock : Block
+    public class StructureBlock : BaseBlockEntity
     {
         /// <summary>
         /// Creates a structure block

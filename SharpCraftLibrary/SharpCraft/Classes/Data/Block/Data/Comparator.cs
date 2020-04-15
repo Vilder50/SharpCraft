@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for comparator blocks
     /// </summary>
-    public class Comparator : Block, Interfaces.IPowered, Interfaces.IFacing
+    public class Comparator : BaseBlockEntity, Interfaces.IPowered, Interfaces.IFacing
     {
         /// <summary>
         /// Creates a comparator block

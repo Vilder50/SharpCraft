@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for jukebox blocks
     /// </summary>
-    public class Jukebox : Block
+    public class Jukebox : BaseBlockEntity
     {
         /// <summary>
         /// Creates a jukebox block

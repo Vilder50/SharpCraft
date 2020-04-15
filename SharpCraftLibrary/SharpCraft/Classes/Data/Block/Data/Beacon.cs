@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for beacon blocks
     /// </summary>
-    public class Beacon : Block
+    public class Beacon : BaseBlockEntity
     {
         private int? _dLevels;
 

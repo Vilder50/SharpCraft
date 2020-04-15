@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for end spawner blocks
     /// </summary>
-    public class Spawner : Block
+    public class Spawner : BaseBlockEntity
     {
         /// <summary>
         /// Creates a spawner block

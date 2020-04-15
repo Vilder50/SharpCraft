@@ -8,7 +8,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for bee hive/nest blocks
     /// </summary>
-    public class BeeHive : Block, Interfaces.IFacing
+    public class BeeHive : BaseBlockEntity, Interfaces.IFacing
     {
         private int? _sLevel;
 

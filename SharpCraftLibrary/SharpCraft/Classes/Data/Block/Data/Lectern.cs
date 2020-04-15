@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for lectern blocks
     /// </summary>
-    public class Lectern : Block, Interfaces.IFacing, Interfaces.IPowered
+    public class Lectern : BaseBlockEntity, Interfaces.IFacing, Interfaces.IPowered
     {
         /// <summary>
         /// Creates a lectern block

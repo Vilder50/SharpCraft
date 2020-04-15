@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for sign blocks
     /// </summary>
-    public class Sign : Block, Interfaces.IRotation, Interfaces.IWaterLogged
+    public class Sign : BaseBlockEntity, Interfaces.IRotation, Interfaces.IWaterLogged
     {
         private int? _sRotation;
 

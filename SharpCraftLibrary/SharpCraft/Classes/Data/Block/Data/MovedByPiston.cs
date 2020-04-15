@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for blocks being moved by a piston
     /// </summary>
-    public class MovedByPiston : Block, Interfaces.IFacingFull
+    public class MovedByPiston : BaseBlockEntity, Interfaces.IFacingFull
     {
         /// <summary>
         /// Creates a new block being moved by a piston

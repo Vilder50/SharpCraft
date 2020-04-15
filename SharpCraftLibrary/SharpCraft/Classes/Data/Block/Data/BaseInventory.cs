@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// A base class ofr blocks with inventories
     /// </summary>
-    public abstract class BaseInventory : Block
+    public abstract class BaseInventory : BaseBlockEntity
     {
         /// <summary>
         /// Creates a new inventory block

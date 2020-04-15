@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for banner blocks
     /// </summary>
-    public class Banner : Block, Interfaces.IRotation, Interfaces.IFacing
+    public class Banner : BaseBlockEntity, Interfaces.IRotation, Interfaces.IFacing
     {
         private int? _sRotation;
 

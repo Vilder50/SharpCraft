@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for skull / head blocks
     /// </summary>
-    public abstract class BaseSkull : Block
+    public abstract class BaseSkull : BaseBlockEntity
     {
         /// <summary>
         /// Creates a new skull / head block

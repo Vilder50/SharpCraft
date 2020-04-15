@@ -8,7 +8,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for campfire blocks
     /// </summary>
-    public class Campfire : Block, Interfaces.IWaterLogged, Interfaces.ILit
+    public class Campfire : BaseBlockEntity, Interfaces.IWaterLogged, Interfaces.ILit
     {
         private Item[]? _dItems;
         private Time<int>[]? _dCookingTimes;

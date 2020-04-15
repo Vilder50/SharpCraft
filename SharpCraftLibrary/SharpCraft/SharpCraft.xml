@@ -281,6 +281,33 @@
             (0-26)
             </summary>
         </member>
+        <member name="T:SharpCraft.Blocks.BaseBlockEntity">
+            <summary>
+            Base object for block entities
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Blocks.BaseBlockEntity.#ctor(System.Nullable{SharpCraft.ID.Block})">
+            <summary>
+            Creates a block entity
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Blocks.BaseBlockEntity.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a block entity
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="P:SharpCraft.Blocks.BaseBlockEntity.DBlockEntityCoords">
+            <summary>
+            The location the block entity is at
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.BaseBlockEntity.DBlockEntityId">
+            <summary>
+            The id of the block entity
+            </summary>
+        </member>
         <member name="T:SharpCraft.Blocks.BaseContainer">
             <summary>
             A base class ofr blocks with inventories

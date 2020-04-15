@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for chest blocks
     /// </summary>
-    public class CommandBlock : Block, Interfaces.IFacingFull
+    public class CommandBlock : BaseBlockEntity, Interfaces.IFacingFull
     {
         /// <summary>
         /// Creates a new chest block

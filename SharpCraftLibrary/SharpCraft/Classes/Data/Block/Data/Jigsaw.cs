@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for jigsaw blocks
     /// </summary>
-    public class Jigsaw : Block, Interfaces.IFacingFull
+    public class Jigsaw : BaseBlockEntity, Interfaces.IFacingFull
     {
         /// <summary>
         /// Creates a jigsaw block

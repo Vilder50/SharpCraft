@@ -7,7 +7,7 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for end gateway blocks
     /// </summary>
-    public class EndGateWay : Block
+    public class EndGateWay : BaseBlockEntity
     {
         /// <summary>
         /// Creates an end gateway block
