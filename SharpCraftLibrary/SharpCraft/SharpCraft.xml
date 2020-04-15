@@ -14705,7 +14705,7 @@
         </member>
         <member name="T:SharpCraft.Conditions.WeatherCondition">
             <summary>
-            Condition which returns true if the item has the given enchants
+            Condition which returns true if the weather is of the given type
             </summary>
         </member>
         <member name="M:SharpCraft.Conditions.WeatherCondition.#ctor(System.Boolean,System.Nullable{System.Boolean})">

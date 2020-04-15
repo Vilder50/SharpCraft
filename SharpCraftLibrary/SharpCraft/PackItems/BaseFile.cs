@@ -97,7 +97,8 @@ namespace SharpCraft
             PackNamespace.AddFile(this);
             if (IsAuto())
             {
-                WriteFile(GetStream());
+                StreamWriter = GetStream();
+                WriteFile(StreamWriter);
                 Dispose();
             }
         }
