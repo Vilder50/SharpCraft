@@ -8,6 +8,7 @@
 #pragma warning disable 1591
         public enum Biome
         {
+            basalt_deltas,
             crimson_forest,
             warped_forest,
             soul_sand_valley,
@@ -106,6 +107,8 @@
             Ocean_Ruin,
             Shipwreck,
             Nether_Fossil,
+            Bastion_Remnant,
+            Ruined_Portal
         }
 #pragma warning restore 1591
     }

@@ -46,6 +46,7 @@ namespace SharpCraft
                         public string Mood { get => "ambient." + biome + ".mood"; }
                     }
 
+                    public static NetherSounds BasaltDeltas { get; } = new NetherSounds("basalt_deltas");
                     public static NetherSounds SoulSandValley { get; } = new NetherSounds("soul_sand_valley");
                     public static NetherSounds CrimsonForst { get; } = new NetherSounds("crimson_forest");
                     public static NetherSounds NetherWastes { get; } = new NetherSounds("nether_wastes");
@@ -1318,8 +1319,16 @@ namespace SharpCraft
                 public static string End { get; } = "music.end";
                 public static string Game { get; } = "music.game";
                 public static string Menu { get; } = "music.menu";
-                public static string Nether { get; } = "music.nether";
                 public static string UnderWater { get; } = "music.under_water";
+
+                public static class Nether
+                {
+                    public static string BasaltDeltas { get; } = "music.nether.basalt_deltas";
+                    public static string CrimsonForest { get; } = "music.nether.crimson_forest";
+                    public static string NetherWastes { get; } = "music.nether.nether_wastes";
+                    public static string SoulSandValley { get; } = "music.nether.soul_sand_valley";
+                    public static string WarpedForest { get; } = "music.nether.warped_forest";
+                }
             }
 
             /// <summary>

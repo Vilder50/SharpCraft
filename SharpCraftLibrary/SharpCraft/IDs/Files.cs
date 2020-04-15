@@ -253,6 +253,7 @@ namespace SharpCraft
                         gold_ores,
                         logs_that_burn,
                         non_flammable_wood,
+                        signs,
 #pragma warning restore 1591
                     }
 
@@ -416,7 +417,17 @@ namespace SharpCraft
                         /// <summary>
                         /// Shriders in this block will shake
                         /// </summary>
-                        non_flammable_wood,
+                        strider_warm_blocks,
+
+                        /// <summary>
+                        /// Can be lit with flint and steel
+                        /// </summary>
+                        campfires,
+
+                        /// <summary>
+                        /// Piglins will be angry if any of these blocks are broken
+                        /// </summary>
+                        guarded_by_piglins,
                     }
                 }
 
@@ -479,6 +490,9 @@ namespace SharpCraft
                         warped_stems,
                         crimson_stems,
                         logs_that_burn,
+                        furnace_materials,
+                        stone_tool_materials,
+                        soul_fire_base_blocks,
 #pragma warning restore 1591
                     }
 

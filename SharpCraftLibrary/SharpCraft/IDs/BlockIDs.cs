@@ -8,6 +8,27 @@
 #pragma warning disable 1591
         public enum Block
         {
+            blackstone,
+            blackstone_slab,
+            blackstone_stairs,
+            blackstone_wall,
+            gilded_blackstone,
+            polished_blackstone,
+            polished_blackstone_slab,
+            polished_blackstone_stairs,
+            polished_blackstone_wall,
+            chiseled_polished_blackstone,
+            polished_blackstone_bricks,
+            polished_blackstone_brick_slab,
+            polished_blackstone_brick_stairs,
+            polished_blackstone_brick_wall,
+            cracked_polished_blackstone_bricks,
+            chain,
+            cracked_nether_bricks,
+            chiseled_nether_bricks,
+            quartz_bricks,
+            soul_campfire,
+
             polished_basalt,
             respawn_anchor,
             lodestone,

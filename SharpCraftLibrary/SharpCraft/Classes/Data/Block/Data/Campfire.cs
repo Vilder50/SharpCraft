@@ -35,7 +35,7 @@ namespace SharpCraft
             /// <returns>true if the block fits</returns>
             public new static bool FitsBlock(ID.Block block)
             {
-                return block == SharpCraft.ID.Block.campfire;
+                return block == SharpCraft.ID.Block.campfire || block == SharpCraft.ID.Block.soul_campfire;
             }
 
             /// <summary>
