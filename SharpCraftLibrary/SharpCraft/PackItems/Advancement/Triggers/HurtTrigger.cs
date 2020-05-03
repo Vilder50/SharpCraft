@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player gets hurt
     /// </summary>
-    public class HurtTrigger : BaseTrigger
+    public class HurtTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="HurtTrigger"/>

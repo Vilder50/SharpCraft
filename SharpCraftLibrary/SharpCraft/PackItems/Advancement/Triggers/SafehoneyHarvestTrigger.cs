@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player safely harvest honey from a nest
     /// </summary>
-    public class SafeHoneyHarvestTrigger : BaseTrigger
+    public class SafeHoneyHarvestTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="SafeHoneyHarvestTrigger"/>

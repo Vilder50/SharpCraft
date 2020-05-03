@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player tames a mob
     /// </summary>
-    public class TamedEntityTrigger : BaseTrigger
+    public class TamedEntityTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="TamedEntityTrigger"/>
@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The tamed mob
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JSONObjects.Entity Entity { get; set; }
+        public Conditions.EntityCondition[] Entity { get; set; }
     }
 }

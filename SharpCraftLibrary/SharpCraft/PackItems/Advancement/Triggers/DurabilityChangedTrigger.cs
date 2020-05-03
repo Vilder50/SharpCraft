@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player damages an item
     /// </summary>
-    public class DurabilityChangedTrigger : BaseTrigger
+    public class DurabilityChangedTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="DurabilityChangedTrigger"/>

@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player shoots a <see cref="ID.Block.target"/>.
     /// </summary>
-    public class TargetHitTrigger : BaseTrigger
+    public class TargetHitTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="TargetHitTrigger"/>
@@ -27,12 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The entity which hit the target
         /// </summary>
         [DataTag("conditions.projectile", JsonTag = true)]
-        public JSONObjects.Entity Projectile { get; set; }
-
-        /// <summary>
-        /// The entity which shot the target
-        /// </summary>
-        [DataTag("conditions.shooter", JsonTag = true)]
-        public JSONObjects.Entity Shooter { get; set; }
+        public Conditions.EntityCondition[] Projectile { get; set; }
     }
 }

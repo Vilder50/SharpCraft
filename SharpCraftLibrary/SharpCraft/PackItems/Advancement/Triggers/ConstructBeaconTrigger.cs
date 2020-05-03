@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player makes a beacon pyramide
     /// </summary>
-    public class ConstructBeaconTrigger : BaseTrigger
+    public class ConstructBeaconTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ConstructBeaconTrigger"/>

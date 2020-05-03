@@ -37,10 +37,10 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestMinecraftValue()
         {
             ID.Item value = ID.Item.String;
-            Assert.AreEqual("string", value.MinecraftValue());
+            Assert.AreEqual("string", value.FixEnum());
 
             ID.Item? nullAble = ID.Item.structure_void;
-            Assert.AreEqual("structure_void", nullAble.MinecraftValue());
+            Assert.AreEqual("structure_void", nullAble.FixEnum());
         }
 
         [TestMethod]

@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player shoots with a crossbow
     /// </summary>
-    public class ShotCrossbowTrigger : BaseTrigger
+    public class ShotCrossbowTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ShotCrossbowTrigger"/>

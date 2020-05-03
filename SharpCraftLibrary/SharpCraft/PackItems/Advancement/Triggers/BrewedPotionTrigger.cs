@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when a potion is taken out of a brewing stand
     /// </summary>
-    public class BrewedPotionTrigger : BaseTrigger
+    public class BrewedPotionTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="BrewedPotionTrigger"/>

@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player trades with a villager
     /// </summary>
-    public class TradedVillagerTrigger : BaseTrigger
+    public class TradedVillagerTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="TradedVillagerTrigger"/>
@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The villager the player traded with
         /// </summary>
         [DataTag("conditions.villager", JsonTag = true)]
-        public JSONObjects.Entity Villager { get; set; }
+        public Conditions.EntityCondition[] Villager { get; set; }
     }
 }

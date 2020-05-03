@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player cures a zombie villager
     /// </summary>
-    public class CuredVillagerTrigger : BaseTrigger
+    public class CuredVillagerTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="CuredVillagerTrigger"/>
@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The new cured villager
         /// </summary>
         [DataTag("conditions.villager", JsonTag = true)]
-        public JSONObjects.Entity Villager { get; set; }
+        public Conditions.EntityCondition[] Villager { get; set; }
 
         /// <summary>
         /// The zombie which was cured
         /// </summary>
         [DataTag("conditions.zombie", JsonTag = true)]
-        public JSONObjects.Entity Zombie { get; set; }
+        public Conditions.EntityCondition[] Zombie { get; set; }
     }
 }

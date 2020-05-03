@@ -68,6 +68,13 @@ namespace SharpCraft.Tests.MiscObjects
         }
 
         [TestMethod]
+        public void TestColorHex()
+        {
+            Assert.AreEqual("#010203", new RGBColor(1, 2, 3).GetHexColor());
+            Assert.AreEqual("ffffff", new RGBColor(255, 255, 255).GetHexColor(false));
+        }
+
+        [TestMethod]
         public void TestGetAsTag()
         {
             SharpCraft.Data.IConvertableToDataTag convertAble = new RGBColor(34, 123, 78);

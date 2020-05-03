@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Triggers when a player travels to the nether and back to the overworld
     /// </summary>
-    public class NetherTravelTrigger : BaseTrigger
+    public class NetherTravelTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="NetherTravelTrigger"/>

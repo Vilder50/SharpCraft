@@ -279,6 +279,18 @@ namespace SharpCraft
             {
                 return new Entity() { Type = entity.EntityType, NBT = entity };
             }
+
+            /// <summary>
+            /// Converts a <see cref="Entity"/> to an array of <see cref="Conditions.EntityCondition"/>
+            /// </summary>
+            /// <param name="entity">The entity to convert</param>
+            public static implicit operator Conditions.EntityCondition[](Entity entity)
+            {
+                return new Conditions.EntityCondition[]
+                {
+                    new Conditions.EntityCondition(ID.LootTarget.This, entity)
+                };
+            }
         }
     }
 }

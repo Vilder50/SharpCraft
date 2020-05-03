@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered 20 times a second
     /// </summary>
-    public class TickTrigger : BaseTrigger
+    public class TickTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="TickTrigger"/>

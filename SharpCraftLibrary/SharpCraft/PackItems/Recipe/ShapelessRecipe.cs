@@ -125,7 +125,7 @@ namespace SharpCraft
             stream.Write(",\"ingredient\":["+string.Join(",",Ingredients.Select(i => GetItemCompound(i)))+"]");
 
             //write output item
-            stream.Write(",\"result\":{\"item\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":{\"item\":\"minecraft:" + Result.FixEnum() + "\"");
             if (Count != 1)
             {
                 stream.Write(",\"count\":" + Count);

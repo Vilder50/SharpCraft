@@ -213,7 +213,7 @@ namespace SharpCraft
         /// <param name="item">The id of this item</param>
         public ItemType(ID.Item item)
         {
-            Name = "minecraft:" + item.MinecraftValue();
+            Name = "minecraft:" + item.FixEnum();
             Value = item;
         }
 
@@ -264,7 +264,7 @@ namespace SharpCraft
         /// <returns>True if they are equal</returns>
         public static bool operator == (ItemType type, ID.Item item)
         {
-            return type.Name == "minecraft:" + item.MinecraftValue();
+            return type.Name == "minecraft:" + item.FixEnum();
         }
 
         /// <summary>
@@ -275,7 +275,7 @@ namespace SharpCraft
         /// <returns>True if they are not equal</returns>
         public static bool operator != (ItemType type, ID.Item item)
         {
-            return type.Name != "minecraft:" + item.MinecraftValue();
+            return type.Name != "minecraft:" + item.FixEnum();
         }
 
         /// <summary>

@@ -59,6 +59,14 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
+                public static class Chain
+                {
+                    public static string Break { get; } = "block.chain.break";
+                    public static string Fall { get; } = "block.chain.fall";
+                    public static string Hit { get; } = "block.chain.hit";
+                    public static string Place { get; } = "block.chain.place";
+                    public static string Step { get; } = "block.chain.step";
+                }
                 public static class RespawnAnchor
                 {
                     public static string Ambient { get; } = "block.respawn_anchor.ambient";

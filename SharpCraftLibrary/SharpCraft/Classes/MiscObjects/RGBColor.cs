@@ -111,6 +111,26 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Returns the color as a hex color string
+        /// </summary>
+        /// <param name="addTag">If # should be prepended to the string</param>
+        /// <returns>The color as a hex color string</returns>
+        public string GetHexColor(bool addTag = true)
+        {
+            static string NumberToHex(int number)
+            {
+                string hexValue = Convert.ToString(number, 16);
+                if (hexValue.Length == 1)
+                {
+                    hexValue = "0" + hexValue;
+                }
+                return hexValue;
+            }
+
+            return (addTag ? "#" : "") + NumberToHex(Red) + NumberToHex(Green) + NumberToHex(Blue);
+        }
+
+        /// <summary>
         /// Converts this HexColor into a <see cref="DataPartTag"/>
         /// </summary>
         /// <param name="asType">Not in use</param>
@@ -129,5 +149,30 @@ namespace SharpCraft
         {
             return new RGBColor(hexColor);
         }
+
+        /// <summary>
+        /// Converts a <see cref="ID.MinecraftColor"/> into a <see cref="RGBColor"/>
+        /// </summary>
+        /// <param name="color">The color to convert</param>
+        public static implicit operator RGBColor(ID.MinecraftColor color) => color switch
+        {
+            ID.MinecraftColor.aqua => new RGBColor(85, 255, 255),
+            ID.MinecraftColor.black => new RGBColor(0, 0, 0),
+            ID.MinecraftColor.blue => new RGBColor(0, 0, 170),
+            ID.MinecraftColor.dark_aqua => new RGBColor(0, 170, 170),
+            ID.MinecraftColor.dark_blue => new RGBColor(0, 0, 170),
+            ID.MinecraftColor.dark_gray => new RGBColor(85, 85, 85),
+            ID.MinecraftColor.dark_green => new RGBColor(0, 170, 0),
+            ID.MinecraftColor.dark_purple => new RGBColor(170, 0, 170),
+            ID.MinecraftColor.dark_red => new RGBColor(170, 0, 0),
+            ID.MinecraftColor.gold => new RGBColor(255, 170, 0),
+            ID.MinecraftColor.gray => new RGBColor(170, 170, 170),
+            ID.MinecraftColor.green => new RGBColor(85, 255, 85),
+            ID.MinecraftColor.light_purple => new RGBColor(255, 85, 255),
+            ID.MinecraftColor.red => new RGBColor(255, 85, 85),
+            ID.MinecraftColor.white => new RGBColor(255, 255, 255),
+            ID.MinecraftColor.yellow => new RGBColor(255, 255, 85),
+            _ => new RGBColor(0,0,0)
+        };
     }
 }

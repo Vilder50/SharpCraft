@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player breaks a bee nest
     /// </summary>
-    public class NestDestroyedTrigger : BaseTrigger
+    public class NestDestroyedTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="NestDestroyedTrigger"/>

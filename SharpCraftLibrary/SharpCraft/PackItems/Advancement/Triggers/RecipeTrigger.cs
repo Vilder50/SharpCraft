@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player unlocks a new recipe
     /// </summary>
-    public class RecipeTrigger : BaseTrigger
+    public class RecipeTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="RecipeTrigger"/>

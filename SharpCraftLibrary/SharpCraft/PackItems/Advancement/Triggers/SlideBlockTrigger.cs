@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player slides down a block
     /// </summary>
-    public class SlideBlockTrigger : BaseTrigger
+    public class SlideBlockTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="SlideBlockTrigger"/>

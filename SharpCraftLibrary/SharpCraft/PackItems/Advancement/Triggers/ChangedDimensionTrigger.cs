@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player switches dimension
     /// </summary>
-    public class ChangedDimensionTrigger : BaseTrigger
+    public class ChangedDimensionTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ChangedDimensionTrigger"/>

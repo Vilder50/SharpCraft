@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player enchants an item
     /// </summary>
-    public class EnchantedItemTrigger : BaseTrigger
+    public class EnchantedItemTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="EnchantedItemTrigger"/>

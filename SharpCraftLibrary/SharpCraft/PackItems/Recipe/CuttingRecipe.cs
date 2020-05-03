@@ -147,7 +147,7 @@ namespace SharpCraft
             }
 
             //write output item
-            stream.Write(",\"result\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":\"minecraft:" + Result.FixEnum() + "\"");
             stream.Write(",\"count\":" + Count);
 
             WriteFileEnd(stream);

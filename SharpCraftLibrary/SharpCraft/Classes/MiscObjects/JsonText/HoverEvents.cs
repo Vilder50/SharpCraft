@@ -36,7 +36,7 @@ namespace SharpCraft
             /// <returns>The string used in <see cref="JsonText"/></returns>
             public string GetEventString()
             {
-                return $"\"hoverEvent\":{{\"action\":\"{eventType}\",\"value\":{GetEventValue()}}}";
+                return $"\"hoverEvent\":{{\"action\":\"{eventType}\",\"contents\":{GetEventValue()}}}";
             }
 
             /// <summary>
@@ -133,7 +133,17 @@ namespace SharpCraft
             /// <returns>The value of the event</returns>
             public override string GetEventValue()
             {
-                return "\"" + Item.GetDataString().Escape() + "\"";
+                string output = "\"id\":\"" + Item.ID.Name+ "\"";
+                string tagString = Item.GetItemTagString();
+                if (tagString != "{}")
+                {
+                    output += ",\"tag\":\"" + tagString.Escape() + "\"";
+                }
+                if (!(item.Count is null))
+                {
+                    output += ",\"count\":" + item.Count;
+                }
+                return "{" + output + "}";
             }
         }
 
@@ -178,17 +188,17 @@ namespace SharpCraft
             /// <returns>The value of the event</returns>
             public override string GetEventValue()
             {
-                string output = $"type:\"{Type.Name}\"";
+                string output = $"\"type\":\"{Type.Name}\"";
                 if (!(Name is null))
                 {
-                    output += ",name:" + Name.GetJsonString();
+                    output += ",\"name\":" + Name.GetJsonString();
                 }
                 if (!(UUID is null))
                 {
-                    output += ",id:\"" + UUID.UUIDString + "\"";
+                    output += ",\"id\":\"" + UUID.UUIDString + "\"";
                 }
 
-                return "\"{" + output.Escape() + "}\"";
+                return "{" + output + "}";
             }
         }
     }

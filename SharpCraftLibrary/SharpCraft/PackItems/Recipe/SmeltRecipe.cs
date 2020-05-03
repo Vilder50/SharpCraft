@@ -196,7 +196,7 @@ namespace SharpCraft
                 stream.Write("[" + string.Join(",", Ingredients.Select(i => GetItemCompound(i))) + "]");
             }
 
-            stream.Write(",\"result\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":\"minecraft:" + Result.FixEnum() + "\"");
             stream.Write(",\"experience\":" + Experience.ToMinecraftDouble());
             if (!(CookingTime is null))
             {

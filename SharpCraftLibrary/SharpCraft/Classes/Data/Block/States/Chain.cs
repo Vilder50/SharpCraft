@@ -7,21 +7,21 @@ namespace SharpCraft
     public partial class Block
     {
         /// <summary>
-        /// An object for wall torch blocks
+        /// An object for chain blocks
         /// </summary>
-        public class WallTorch : Block, IBlock.IFacing
+        public class Chain : Block, IBlock.IWaterLogged
         {
             /// <summary>
-            /// Creates a torch block
+            /// Creates a chain block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallTorch(BlockType type) : base(type) { }
+            public Chain(BlockType type) : base(type) { }
 
             /// <summary>
-            /// Creates a torch block
+            /// Creates a chain block
             /// </summary>
             /// <param name="type">The type of block</param>
-            public WallTorch(ID.Block type = SharpCraft.ID.Block.wall_torch) : base(type) { }
+            public Chain(ID.Block type = SharpCraft.ID.Block.chain) : base(type) { }
 
             /// <summary>
             /// Tests if the given block type fits this type of block object
@@ -30,14 +30,14 @@ namespace SharpCraft
             /// <returns>true if the block fits</returns>
             public new static bool FitsBlock(ID.Block block)
             {
-                return block == SharpCraft.ID.Block.wall_torch || block == SharpCraft.ID.Block.soul_wall_touch;
+                return block == SharpCraft.ID.Block.chain;
             }
 
             /// <summary>
-            /// The way the torch is facing. (The way it points)
+            /// If the chain is water logged
             /// </summary>
-            [BlockState("facing")]
-            public ID.Facing? SFacing { get; set; }
+            [BlockState("waterlogged")]
+            public bool? SWaterLogged { get; set; }
         }
     }
 }

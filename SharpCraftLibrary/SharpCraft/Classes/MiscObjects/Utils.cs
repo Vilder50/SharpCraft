@@ -61,7 +61,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="item">The item to convert</param>
         /// <returns>The converted item</returns>
-        public static string MinecraftValue(this ID.Item item)
+        public static string FixEnum(this ID.Item item)
         {
             return item.ToString().ToLower();
         }
@@ -71,9 +71,9 @@ namespace SharpCraft
         /// </summary>
         /// <param name="item">The item to convert</param>
         /// <returns>The converted item</returns>
-        public static string MinecraftValue(this ID.Item? item)
+        public static string FixEnum(this ID.Item? item)
         {
-            return item.Value.ToString().ToLower();
+            return item.Value.FixEnum();
         }
 
         /// <summary>
@@ -156,6 +156,28 @@ namespace SharpCraft
                 return null;
             }
             return ConvertToItem(block.Value);
+        }
+
+        /// <summary>
+        /// Fixes the name of attribute
+        /// </summary>
+        /// <param name="attribute">The attribute to fix</param>
+        /// <returns>The fixed attribute string</returns>
+        public static string FixEnum(this ID.AttributeType attribute)
+        {
+            string asString = attribute.ToString();
+            int firstIndex = asString.IndexOf("_");
+            return asString.Substring(0, firstIndex) + "." + asString.Substring(firstIndex + 1);
+        }
+
+        /// <summary>
+        /// Fixes the name of attribute
+        /// </summary>
+        /// <param name="attribute">The attribute to fix</param>
+        /// <returns>The fixed attribute string</returns>
+        public static string FixEnum(this ID.AttributeType? attribute)
+        {
+            return attribute.Value.FixEnum();
         }
 
         private const string namePattern = @"^[a-z\-_\./0-9]+$";

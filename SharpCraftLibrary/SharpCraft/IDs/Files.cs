@@ -157,7 +157,7 @@ namespace SharpCraft
                     public static string WoodlandMansion { get => "chests\\woodland_mansion"; }
 
                     /// <summary>
-                    /// Loot tables for chests in villagers
+                    /// Loot tables for chests in villages
                     /// </summary>
                     public static class Village 
                     {
@@ -177,6 +177,17 @@ namespace SharpCraft
                         public static string Temple { get => "chests\\village\\village_temple"; }
                         public static string Toolsmith { get => "chests\\village\\village_toolsmith"; }
                         public static string Weaponsmith { get => "chests\\village\\village_weaponsmith"; }
+                    }
+
+                    /// <summary>
+                    /// Loot tables for chests in bastions
+                    /// </summary>
+                    public static class Bastion
+                    {
+                        public static string Bridge { get => "chests\\bastion_bridge"; }
+                        public static string HoglinStable { get => "chests\\bastion_hoglin_stable"; }
+                        public static string BastionOther { get => "chests\\bastion_other"; }
+                        public static string BastionTreasure { get => "chests\\bastion_treasure"; }
                     }
 
                     #pragma warning restore 1591
@@ -254,6 +265,8 @@ namespace SharpCraft
                         logs_that_burn,
                         non_flammable_wood,
                         signs,
+                        pressure_plates,
+                        stone_pressure_plates
 #pragma warning restore 1591
                     }
 

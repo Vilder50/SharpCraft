@@ -940,7 +940,16 @@
         <member name="P:SharpCraft.Block.Jigsaw.DName">
             <summary>
             The name of the jigsaw block.
-            (Jigsaws only connects to other jigsaws with the same name)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Block.Jigsaw.DTarget">
+            <summary>
+            The name of the jigsaw blocks this jigsaw connects to.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Block.Jigsaw.DJoint">
+            <summary>
+            The type of connection the jigsaw makes
             </summary>
         </member>
         <member name="T:SharpCraft.Block.Jukebox">
@@ -1710,6 +1719,35 @@
             <summary>
             How much water there is in the cauldron
             (0-3. 0 = no water. 3 = full)
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Block.Chain">
+            <summary>
+            An object for chain blocks
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Block.Chain.#ctor(SharpCraft.BlockType)">
+            <summary>
+            Creates a chain block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.Chain.#ctor(SharpCraft.ID.Block)">
+            <summary>
+            Creates a chain block
+            </summary>
+            <param name="type">The type of block</param>
+        </member>
+        <member name="M:SharpCraft.Block.Chain.FitsBlock(SharpCraft.ID.Block)">
+            <summary>
+            Tests if the given block type fits this type of block object
+            </summary>
+            <param name="block">The block to test</param>
+            <returns>true if the block fits</returns>
+        </member>
+        <member name="P:SharpCraft.Block.Chain.SWaterLogged">
+            <summary>
+            If the chain is water logged
             </summary>
         </member>
         <member name="T:SharpCraft.Block.ChorusFlower">
@@ -8286,7 +8324,7 @@
         </member>
         <member name="P:SharpCraft.JsonText.Color">
             <summary>
-            The color of the text
+            The color of the text. (Cannot exist together with <see cref="P:SharpCraft.JsonText.RGBColor"/>)
             </summary>
         </member>
         <member name="P:SharpCraft.JsonText.Obfuscated">
@@ -8337,6 +8375,16 @@
         <member name="P:SharpCraft.JsonText.Extra">
             <summary>
             Extra text
+            </summary>
+        </member>
+        <member name="P:SharpCraft.JsonText.Font">
+            <summary>
+            The font. (minecraft:default is the normal font)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.JsonText.RGBColor">
+            <summary>
+            The exact color of the text. (Cannot exist together with <see cref="P:SharpCraft.JsonText.Color"/>)
             </summary>
         </member>
         <member name="M:SharpCraft.JsonText.GetJsonString">
@@ -8936,6 +8984,13 @@
             Outputs the color as an int
             </summary>
         </member>
+        <member name="M:SharpCraft.RGBColor.GetHexColor(System.Boolean)">
+            <summary>
+            Returns the color as a hex color string
+            </summary>
+            <param name="addTag">If # should be prepended to the string</param>
+            <returns>The color as a hex color string</returns>
+        </member>
         <member name="M:SharpCraft.RGBColor.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
             <summary>
             Converts this HexColor into a <see cref="T:SharpCraft.Data.DataPartTag"/>
@@ -8949,6 +9004,12 @@
             Converts a string with a hex color value into an <see cref="T:SharpCraft.RGBColor"/> object
             </summary>
             <param name="hexColor">the string to convert</param>
+        </member>
+        <member name="M:SharpCraft.RGBColor.op_Implicit(SharpCraft.ID.MinecraftColor)~SharpCraft.RGBColor">
+            <summary>
+            Converts a <see cref="T:SharpCraft.ID.MinecraftColor"/> into a <see cref="T:SharpCraft.RGBColor"/>
+            </summary>
+            <param name="color">The color to convert</param>
         </member>
         <member name="T:SharpCraft.Rotation">
             <summary>
@@ -9937,14 +9998,14 @@
             <param name="Float">The float to convert</param>
             <returns>The converted float</returns>
         </member>
-        <member name="M:SharpCraft.Utils.MinecraftValue(SharpCraft.ID.Item)">
+        <member name="M:SharpCraft.Utils.FixEnum(SharpCraft.ID.Item)">
             <summary>
             Takes the item and converts it into an value Minecraft can use
             </summary>
             <param name="item">The item to convert</param>
             <returns>The converted item</returns>
         </member>
-        <member name="M:SharpCraft.Utils.MinecraftValue(System.Nullable{SharpCraft.ID.Item})">
+        <member name="M:SharpCraft.Utils.FixEnum(System.Nullable{SharpCraft.ID.Item})">
             <summary>
             Takes the item and converts it into an value Minecraft can use
             </summary>
@@ -9992,6 +10053,20 @@
             </summary>
             <param name="block">The block to convert</param>
             <returns>The item</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.FixEnum(SharpCraft.ID.AttributeType)">
+            <summary>
+            Fixes the name of attribute
+            </summary>
+            <param name="attribute">The attribute to fix</param>
+            <returns>The fixed attribute string</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.FixEnum(System.Nullable{SharpCraft.ID.AttributeType})">
+            <summary>
+            Fixes the name of attribute
+            </summary>
+            <param name="attribute">The attribute to fix</param>
+            <returns>The fixed attribute string</returns>
         </member>
         <member name="M:SharpCraft.Utils.ValidateName(System.String,System.Boolean,System.Boolean)">
             <summary>
@@ -10638,6 +10713,16 @@
         <member name="F:SharpCraft.ID.StateStairShape.straight">
             <summary>
             6/8 of a block.
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.JigsawJoint.rollable">
+            <summary>
+            If it can be rotated
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.JigsawJoint.aligned">
+            <summary>
+            If it can't be rotated
             </summary>
         </member>
         <member name="F:SharpCraft.ID.BannerPattern.bs">
@@ -11441,7 +11526,12 @@
         </member>
         <member name="T:SharpCraft.ID.Files.LootTables.Chest.Village">
             <summary>
-            Loot tables for chests in villagers
+            Loot tables for chests in villages
+            </summary>
+        </member>
+        <member name="T:SharpCraft.ID.Files.LootTables.Chest.Bastion">
+            <summary>
+            Loot tables for chests in bastions
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups">
@@ -11632,9 +11722,19 @@
             Blocks the <see cref="F:SharpCraft.ID.Enchant.soul_speed"/> enchant works on
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.non_flammable_wood">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.strider_warm_blocks">
             <summary>
             Shriders in this block will shake
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.campfires">
+            <summary>
+            Can be lit with flint and steel
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.guarded_by_piglins">
+            <summary>
+            Piglins will be angry if any of these blocks are broken
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Fluid">
@@ -12819,6 +12919,22 @@
             The amount of experience to reward
             </summary>
         </member>
+        <member name="T:SharpCraft.AdvancementObjects.BasePlayerTrigger">
+            <summary>
+            The base class for advancement triggers
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.BasePlayerTrigger.#ctor(System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.BasePlayerTrigger"/>
+            </summary>
+            <param name="type">The type of trigger</param>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.BasePlayerTrigger.Player">
+            <summary>
+            The player triggering the trigger
+            </summary>
+        </member>
         <member name="T:SharpCraft.AdvancementObjects.BaseTrigger">
             <summary>
             The base class for advancement triggers
@@ -12955,11 +13071,6 @@
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.CausedRaidTrigger"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.AdvancementObjects.CausedRaidTrigger.Location">
-            <summary>
-            The location the player triggered the raid
-            </summary>
-        </member>
         <member name="T:SharpCraft.AdvancementObjects.ChangedDimensionTrigger">
             <summary>
             Gets triggered when the player switches dimension
@@ -12992,7 +13103,7 @@
         </member>
         <member name="P:SharpCraft.AdvancementObjects.ChanneledLightningTrigger.HitEntities">
             <summary>
-            The dimension the player is coming from
+            The entities hit by the lightning
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.ConstructBeaconTrigger">
@@ -13301,11 +13412,6 @@
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.LocationTrigger"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.AdvancementObjects.LocationTrigger.Location">
-            <summary>
-            The location of the player
-            </summary>
-        </member>
         <member name="T:SharpCraft.AdvancementObjects.NestDestroyedTrigger">
             <summary>
             Gets triggered when the player breaks a bee nest
@@ -13487,11 +13593,6 @@
             The entity which hit the target
             </summary>
         </member>
-        <member name="P:SharpCraft.AdvancementObjects.TargetHitTrigger.Shooter">
-            <summary>
-            The entity which shot the target
-            </summary>
-        </member>
         <member name="T:SharpCraft.AdvancementObjects.TickTrigger">
             <summary>
             Gets triggered 20 times a second
@@ -13532,11 +13633,6 @@
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.UsedBedTrigger"/>
             </summary>
         </member>
-        <member name="P:SharpCraft.AdvancementObjects.UsedBedTrigger.Location">
-            <summary>
-            The location the player entered the bed
-            </summary>
-        </member>
         <member name="T:SharpCraft.AdvancementObjects.UsedEnderEyeTriggerTrigger">
             <summary>
             Gets triggered when the player throws an eye of ender
@@ -13560,11 +13656,6 @@
         <member name="M:SharpCraft.AdvancementObjects.VillageHeroTrigger.#ctor">
             <summary>
             Intializes a new <see cref="T:SharpCraft.AdvancementObjects.VillageHeroTrigger"/>
-            </summary>
-        </member>
-        <member name="P:SharpCraft.AdvancementObjects.VillageHeroTrigger.Location">
-            <summary>
-            The location the player defeated the raid at
             </summary>
         </member>
         <member name="T:SharpCraft.ChildAdvancement">
@@ -15022,6 +15113,12 @@
             </summary>
             <param name="entity">The <see cref="T:SharpCraft.Entity.BaseEntity"/> to convert</param>
         </member>
+        <member name="M:SharpCraft.JSONObjects.Entity.op_Implicit(SharpCraft.JSONObjects.Entity)~SharpCraft.Conditions.EntityCondition[]">
+            <summary>
+            Converts a <see cref="T:SharpCraft.JSONObjects.Entity"/> to an array of <see cref="T:SharpCraft.Conditions.EntityCondition"/>
+            </summary>
+            <param name="entity">The entity to convert</param>
+        </member>
         <member name="T:SharpCraft.JSONObjects.Item">
             <summary>
             a <see cref="T:System.Object"/> defining an <see cref="T:SharpCraft.Item"/>
@@ -16097,6 +16194,73 @@
             </summary>
             <param name="selector">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="giveItem">the item to add to the horses.</param>
+        </member>
+        <member name="F:SharpCraft.FunctionWriters.EntityCommands.Attribute">
+            <summary>
+            All commands for attributes
+            </summary>
+        </member>
+        <member name="T:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute">
+            <summary>
+            All commands for attributes
+            </summary>
+        </member>
+        <member name="P:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.Function">
+            <summary>
+            The function to write onto
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.GetValue(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Gets the value of an attribute
+            </summary>
+            <param name="selector">Selector which selects the entity to get the attribute for</param>
+            <param name="attribute">The attribute to get</param>
+            <param name="scale">A value to multiply the attribute with before outputting</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.GetBase(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Gets the base value of an attribute
+            </summary>
+            <param name="selector">Selector which selects the entity to get the attribute base for</param>
+            <param name="attribute">The attribute base to get</param>
+            <param name="scale">A value to multiply the attribute base with before outputting</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.SetBase(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Sets the base value of an attribute
+            </summary>
+            <param name="selector">Selector which selects the entity to set the attribute base for</param>
+            <param name="attribute">The attribute base to set</param>
+            <param name="value">The value to set the base to</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.AddModifier(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID,System.String,System.Double,SharpCraft.ID.AttributeOperation)">
+            <summary>
+            Adds an attribute modifer to an entity
+            </summary>
+            <param name="selector">Selector which selects the entity to add the modifier to</param>
+            <param name="attribute">The attribute to add the modifier to</param>
+            <param name="uuid">The UUID of the modifier</param>
+            <param name="name">The name of the modifier</param>
+            <param name="value">The value of the modifier</param>
+            <param name="operation">The modifier's operation</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.RemoveModifier(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID)">
+            <summary>
+            Removes an attribute modifer from an entity
+            </summary>
+            <param name="selector">Selector which selects the entity to remove the modifier from</param>
+            <param name="attribute">The attribute to remove the modifier from</param>
+            <param name="uuid">The UUID of the modifier</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassAttribute.GetModifier(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID,System.Double)">
+            <summary>
+            Gets an attribute modifer from an entity
+            </summary>
+            <param name="selector">Selector which selects the entity to get the modifier from</param>
+            <param name="attribute">The attribute to get the modifier from</param>
+            <param name="uuid">The UUID of the modifier</param>
+            <param name="scale">A value to multiply the attribute modifier with before outputting</param>
         </member>
         <member name="T:SharpCraft.FunctionWriters.ExecuteCommands">
             <summary>
@@ -17513,6 +17677,234 @@
             Returns the command as a string
             </summary>
             <returns>advancement grant/revoke [Selector] [Select] [Advancement]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeGetCommand">
+            <summary>
+            Command which gets the value of an attribute
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeGetCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to get the attribute for</param>
+            <param name="attribute">The attribute to get</param>
+            <param name="scale">A value to multiply the attribute with before outputting</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetCommand.Selector">
+            <summary>
+            Selector which selects the entity to get the attribute for
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetCommand.Attribute">
+            <summary>
+            The attribute to get
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetCommand.Scale">
+            <summary>
+            A value to multiply the attribute with before outputting
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] get [Scale]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeGetBaseCommand">
+            <summary>
+            Command which gets the base value of an attribute
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetBaseCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeGetBaseCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to get the attribute base for</param>
+            <param name="attribute">The attribute to get the base for</param>
+            <param name="scale">A value to multiply the attribute base with before outputting</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetBaseCommand.Selector">
+            <summary>
+            Selector which selects the entity to get the attribute base for
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetBaseCommand.Attribute">
+            <summary>
+            The attribute to get the base for
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetBaseCommand.Scale">
+            <summary>
+            A value to multiply the attribute base with before outputting
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetBaseCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] base get [Scale]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeSetBaseCommand">
+            <summary>
+            Command which sets the base value of an attribute
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeSetBaseCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,System.Double)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeSetBaseCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to set the attribute base for</param>
+            <param name="attribute">The attribute base to get</param>
+            <param name="value">The value to set the base to</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeSetBaseCommand.Selector">
+            <summary>
+            Selector which selects the entity to set the attribute base for
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeSetBaseCommand.Attribute">
+            <summary>
+            The attribute base to get
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeSetBaseCommand.Value">
+            <summary>
+            The value to set the base to
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeSetBaseCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] base set [Value]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeAddModifierCommand">
+            <summary>
+            Command which adds an attribute modifier to an entity
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeAddModifierCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID,System.String,System.Double,SharpCraft.ID.AttributeOperation)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeAddModifierCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to add the attribute modifier to</param>
+            <param name="attribute">The attribute to add the modifier to</param>
+            <param name="name">The name of the modifier</param>
+            <param name="operation">The modifier's operation</param>
+            <param name="uuid">The UUID of the modifier</param>
+            <param name="value">The value of the modifier</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.Selector">
+            <summary>
+            Selector which selects the entity to add the attribute modifier to
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.Attribute">
+            <summary>
+            The attribute to add the modifier to
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.UUID">
+            <summary>
+            The UUID of the modifier
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.Name">
+            <summary>
+            The name of the modifier
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.Value">
+            <summary>
+            The value of the modifier
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeAddModifierCommand.Operation">
+            <summary>
+            The modifier's operation
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeAddModifierCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] modifier add [UUID] [Name] [Value] [Operation]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeRemoveModifierCommand">
+            <summary>
+            Command which removes an attribute modifier from an entity
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeRemoveModifierCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeRemoveModifierCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to remove the attribute modifier from</param>
+            <param name="attribute">The attribute to remove the modifier from</param>
+            <param name="uuid">The UUID of the modifier</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeRemoveModifierCommand.Selector">
+            <summary>
+            Selector which selects the entity to remove the attribute modifier from
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeRemoveModifierCommand.Attribute">
+            <summary>
+            The attribute to remove the modifier from
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeRemoveModifierCommand.UUID">
+            <summary>
+            The UUID of the modifier
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeRemoveModifierCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] modifier remove [UUID]</returns>
+        </member>
+        <member name="T:SharpCraft.Commands.AttributeGetModifierCommand">
+            <summary>
+            Command which gets an attribute modifier from an entity
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetModifierCommand.#ctor(SharpCraft.BaseSelector,SharpCraft.ID.AttributeType,SharpCraft.UUID,System.Double)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Commands.AttributeGetModifierCommand"/>
+            </summary>
+            <param name="selector">Selector which selects the entity to get the attribute modifier from</param>
+            <param name="attribute">The attribute to get the modifier from</param>
+            <param name="uuid">The UUID of the modifier</param>
+            <param name="scale">A value to multiply the attribute modifier with before outputting</param>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetModifierCommand.Selector">
+            <summary>
+            Selector which selects the entity to get the attribute modifier from
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetModifierCommand.Attribute">
+            <summary>
+            The attribute to get the modifier from
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetModifierCommand.UUID">
+            <summary>
+            The UUID of the modifier
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.AttributeGetModifierCommand.Scale">
+            <summary>
+            A value to multiply the attribute modifier with before outputting
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Commands.AttributeGetModifierCommand.GetCommandString">
+            <summary>
+            Returns the command as a string
+            </summary>
+            <returns>attribute [Selector] [Attribute] modifier get [UUID] [Scale]</returns>
         </member>
         <member name="T:SharpCraft.Commands.ICommand">
             <summary>
