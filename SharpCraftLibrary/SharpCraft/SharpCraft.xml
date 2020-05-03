@@ -13939,112 +13939,6 @@
             Clears the things in the file.
             </summary>
         </member>
-        <member name="T:SharpCraft.BaseDatapack">
-            <summary>
-            base class for datapacks
-            </summary>
-        </member>
-        <member name="T:SharpCraft.BaseDatapack.DatapackListener">
-            <summary>
-            Used for calling methods when a new datapack is added or when datapacks already has been added
-            </summary>
-            <param name="datapack">the added datapack</param>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.AddDatapackListener(SharpCraft.BaseDatapack.DatapackListener)">
-            <summary>
-            Makes the given <see cref="T:SharpCraft.BaseDatapack.DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
-            </summary>
-            <param name="listener">The listener to add</param>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.#ctor(System.String,System.String)">
-            <summary>
-            Creates a new <see cref="T:SharpCraft.BaseDatapack"/> with the given parameters
-            </summary>
-            <param name="path">The path to the folder to create this datapack in</param>
-            <param name="packName">The datapack's name</param>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.#ctor(System.String,System.String,SharpCraft.IFileCreator)">
-            <summary>
-            Creates a new <see cref="T:SharpCraft.BaseDatapack"/> with the given parameters
-            </summary>
-            <param name="path">The path to the folder to create this datapack in</param>
-            <param name="packName">The datapack's name</param>
-            <param name="fileCreator">Class for creating files and directories</param>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.FinishedConstructing">
-            <summary>
-            Call when constructors are done
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BaseDatapack.Path">
-            <summary>
-            The path to the folder to create this datapack in
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BaseDatapack.Name">
-            <summary>
-            The name of the datapack
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BaseDatapack.IngameName">
-            <summary>
-            The name of the datapack used for refering to the datapack in game
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BaseDatapack.Disposed">
-            <summary>
-            If the datapack has been disposed
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BaseDatapack.FileCreator">
-            <summary>
-            Used for getting text streams and create directories
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.GetDataPath">
-            <summary>
-            Gets the path to the data folder in the datapack
-            </summary>
-            <returns>the path to the data folder in the datapack</returns>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.ValidatePath(System.String)">
-            <summary>
-            Validates the given path
-            </summary>
-            <param name="path">The path to validate</param>
-            <returns>True if the path is valid</returns>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.ValidateName(System.String)">
-            <summary>
-            Validates the given datapack name
-            </summary>
-            <param name="name">The name to validate</param>
-            <returns>True if the name is valid</returns>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.Namespace``1(System.String)">
-            <summary>
-            Outputs a namespace for this datapack
-            </summary>
-            <typeparam name="TNamespace">The type of namespace</typeparam>
-            <param name="name">The namespace to get</param>
-            <returns>A namespace</returns>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.AddNewFileListener(SharpCraft.BaseFile.FileListener)">
-            <summary>
-            Calls the given method when a new file is added to a namespace in this datapack
-            </summary>
-            <param name="listener">The method to call</param>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.Dispose">
-            <summary>
-            Disposes the namespaces inside this pack
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BaseDatapack.AfterDispose">
-            <summary>
-            Extra things to do after dispose is ran
-            </summary>
-        </member>
         <member name="T:SharpCraft.BaseFile">
             <summary>
             The base class used for files in a datapack
@@ -14209,116 +14103,6 @@
             Creates the directory for the given file
             </summary>
             <param name="folderPath">The base folder the file should be in</param>
-        </member>
-        <member name="T:SharpCraft.BasePackNamespace">
-            <summary>
-            base class for pack namespaces
-            </summary>
-        </member>
-        <member name="F:SharpCraft.BasePackNamespace.Settings">
-            <summary>
-            List of settings namespaces can have
-            </summary>
-        </member>
-        <member name="F:SharpCraft.BasePackNamespace.files">
-            <summary>
-            The files inside this namespace
-            </summary>
-        </member>
-        <member name="F:SharpCraft.BasePackNamespace.settings">
-            <summary>
-            The settings for this namespace
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.#ctor">
-            <summary>
-            Intializes a new namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
-            <summary>
-            Creates a new namespace in a datapack
-            </summary>
-            <param name="datapack">The datapack to add the namespace to</param>
-            <param name="namespaceName">the name of the namespace</param>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)">
-            <summary>
-            Sets up the namespace
-            </summary>
-            <param name="datapack">The datapack to add the namespace to</param>
-            <param name="namespaceName">the name of the namespace</param>
-        </member>
-        <member name="P:SharpCraft.BasePackNamespace.IsSetup">
-            <summary>
-            Returns true if Setup has been run
-            </summary>
-            <returns>true if Setup has been run</returns>
-        </member>
-        <member name="P:SharpCraft.BasePackNamespace.Name">
-            <summary>
-            The name of this namespace
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BasePackNamespace.Disposed">
-            <summary>
-            If the namespace has been disposed
-            </summary>
-        </member>
-        <member name="P:SharpCraft.BasePackNamespace.Datapack">
-            <summary>
-            The datapack this namespace is a part of
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.GetPath">
-            <summary>
-            Returns the path to this namespace
-            </summary>
-            <returns>The path to this namespace</returns>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.GetFile(System.String,System.String)">
-            <summary>
-            Returns the file with the name and of the type. If it doesn't exist it returns null
-            </summary>
-            <param name="fileType">The type of file to get</param>
-            <param name="fileName">The name of the file</param>
-            <returns>The file with the name or null</returns>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.IsSettingSet(SharpCraft.INamespaceSetting)">
-            <summary>
-            returns true if the given setting is on in this namespace
-            </summary>
-            <param name="setting">The setting to test for</param>
-            <returns>True if the setting is on</returns>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.AddFile(SharpCraft.BaseFile)">
-            <summary>
-            Adds the given file to this namespace
-            </summary>
-            <param name="file">The file to add</param>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.Dispose">
-            <summary>
-            Disposes all the files in this namespace
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.AddNewFileListener(SharpCraft.BaseFile.FileListener)">
-            <summary>
-            Calls the given method when a new file is added to this namespace
-            </summary>
-            <param name="listener">The method to call</param>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.AfterDispose">
-            <summary>
-            Extra things to do after dispose is ran
-            </summary>
-        </member>
-        <member name="M:SharpCraft.BasePackNamespace.GetID(System.Object)">
-            <summary>
-            Generates a random id for the given <see cref="T:System.Object"/>
-            </summary>
-            <param name="getIdFor">The object to id</param>
-            <returns>The id for the object</returns>
         </member>
         <member name="T:SharpCraft.Conditions.AllCondition">
             <summary>
@@ -15302,12 +15086,139 @@
             </summary>
             <param name="dimension">The <see cref="T:SharpCraft.ID.Dimension"/> to convert</param>
         </member>
+        <member name="T:SharpCraft.BaseDatapack">
+            <summary>
+            base class for datapacks
+            </summary>
+        </member>
+        <member name="T:SharpCraft.BaseDatapack.DatapackListener">
+            <summary>
+            Used for calling methods when a new datapack is added or when datapacks already has been added
+            </summary>
+            <param name="datapack">the added datapack</param>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.AddDatapackListener(SharpCraft.BaseDatapack.DatapackListener)">
+            <summary>
+            Makes the given <see cref="T:SharpCraft.BaseDatapack.DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
+            </summary>
+            <param name="listener">The listener to add</param>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.MakeForDatapack">
+            <summary>
+            The datapack to generate things for
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.#ctor(System.String,System.String,SharpCraft.IDatapackSetting[])">
+            <summary>
+            Creates a new <see cref="T:SharpCraft.BaseDatapack"/> with the given parameters
+            </summary>
+            <param name="path">The path to the folder to create this datapack in</param>
+            <param name="packName">The datapack's name</param>
+            <param name="settings">Datapack settings</param>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.#ctor(System.String,System.String,SharpCraft.IFileCreator,SharpCraft.IDatapackSetting[])">
+            <summary>
+            Creates a new <see cref="T:SharpCraft.BaseDatapack"/> with the given parameters
+            </summary>
+            <param name="path">The path to the folder to create this datapack in</param>
+            <param name="packName">The datapack's name</param>
+            <param name="fileCreator">Class for creating files and directories</param>
+            <param name="settings">Datapack settings</param>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.FinishedConstructing">
+            <summary>
+            Call when constructors are done
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.Path">
+            <summary>
+            The path to the folder to create this datapack in
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.Name">
+            <summary>
+            The name of the datapack
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.IngameName">
+            <summary>
+            The name of the datapack used for refering to the datapack in game
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.Disposed">
+            <summary>
+            If the datapack has been disposed
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BaseDatapack.FileCreator">
+            <summary>
+            Used for getting text streams and create directories
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.GetDataPath">
+            <summary>
+            Gets the path to the data folder in the datapack
+            </summary>
+            <returns>the path to the data folder in the datapack</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.ValidatePath(System.String)">
+            <summary>
+            Validates the given path
+            </summary>
+            <param name="path">The path to validate</param>
+            <returns>True if the path is valid</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.ValidateName(System.String)">
+            <summary>
+            Validates the given datapack name
+            </summary>
+            <param name="name">The name to validate</param>
+            <returns>True if the name is valid</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.GetDatapackSetting``1">
+            <summary>
+            Returns the setting of the given type or null if the setting doesnt' exist on this datapack
+            </summary>
+            <typeparam name="T">The type of setting</typeparam>
+            <returns>The setting</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.GetItems``1">
+            <summary>
+            Returns an object holding files and such for the datapack.
+            </summary>
+            <typeparam name="T">The type of item holder to get</typeparam>
+            <returns>The item holder</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.Namespace``1(System.String)">
+            <summary>
+            Outputs a namespace for this datapack
+            </summary>
+            <typeparam name="TNamespace">The type of namespace</typeparam>
+            <param name="name">The namespace to get</param>
+            <returns>A namespace</returns>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.AddNewFileListener(SharpCraft.BaseFile.FileListener)">
+            <summary>
+            Calls the given method when a new file is added to a namespace in this datapack
+            </summary>
+            <param name="listener">The method to call</param>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.Dispose">
+            <summary>
+            Disposes the namespaces inside this pack
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.AfterDispose">
+            <summary>
+            Extra things to do after dispose is ran
+            </summary>
+        </member>
         <member name="T:SharpCraft.Datapack">
             <summary>
             An <see cref="T:System.Object"/> used to define a datapack
             </summary>
         </member>
-        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32)">
+        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32,SharpCraft.IDatapackSetting[])">
             <summary>
             Creates a new <see cref="T:SharpCraft.Datapack"/> with the given parameters
             </summary>
@@ -15315,8 +15226,9 @@
             <param name="packName">The datapack's name</param>
             <param name="description">The datapack's description</param>
             <param name="packFormat">The datapack's format</param>
+            <param name="settings">Datapack settings</param>
         </member>
-        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32,SharpCraft.IFileCreator)">
+        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32,SharpCraft.IFileCreator,SharpCraft.IDatapackSetting[])">
             <summary>
             Creates a new <see cref="T:SharpCraft.Datapack"/> with the given parameters
             </summary>
@@ -15325,8 +15237,9 @@
             <param name="description">The datapack's description</param>
             <param name="packFormat">The datapack's format</param>
             <param name="fileCreator">Class for creating files and directories</param>
+            <param name="settings">Datapack settings</param>
         </member>
-        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32,SharpCraft.IFileCreator,System.Boolean)">
+        <member name="M:SharpCraft.Datapack.#ctor(System.String,System.String,System.String,System.Int32,SharpCraft.IFileCreator,SharpCraft.IDatapackSetting[],System.Boolean)">
             <summary>
             Creates a new <see cref="T:SharpCraft.Datapack"/> with the given parameters. Inherite from this constructor.
             </summary>
@@ -15336,6 +15249,7 @@
             <param name="packFormat">The datapack's format</param>
             <param name="fileCreator">Class for creating files and directories</param>
             <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+            <param name="settings">Datapack settings</param>
         </member>
         <member name="P:SharpCraft.Datapack.IngameName">
             <summary>
@@ -15383,6 +15297,86 @@
             </summary>
             <param name="packNamespace">The name of the namespace</param>
             <returns>A new empty namespace</returns>
+        </member>
+        <member name="T:SharpCraft.IDatapackItems">
+            <summary>
+            Interface for classes holding items for datapacks
+            </summary>
+        </member>
+        <member name="P:SharpCraft.IDatapackItems.Datapack">
+            <summary>
+            The datapack the items are for
+            </summary>
+        </member>
+        <member name="T:SharpCraft.LoadedBlockItems">
+            <summary>
+            Used for getting locations which a force loaded. (Use a datapack to get this item)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.LoadedBlockItems.Datapack">
+            <summary>
+            The datapack the items are for
+            </summary>
+        </member>
+        <member name="M:SharpCraft.LoadedBlockItems.GetNextLoadedCoords">
+            <summary>
+            Returns a coordinate in a loaded chunk. The given coordinate is only ever given out once so the coordinate is save to use for whatever you want to.
+            </summary>
+            <returns>A coordinate in a loaded chunk</returns>
+        </member>
+        <member name="M:SharpCraft.LoadedBlockItems.ClaimLoadedCoordsSquare(SharpCraft.IntVector)">
+            <summary>
+            Loads a block of coords of the given size
+            </summary>
+            <param name="size">The size of the block to load</param>
+            <returns>The "smallest" corner of the loaded block or null if it failed to claim</returns>
+        </member>
+        <member name="T:SharpCraft.LoottableItems">
+            <summary>
+            Contains items which are related to loot tables. (Use a datapack to get this item)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.LoottableItems.Datapack">
+            <summary>
+            The datapack the items are for
+            </summary>
+        </member>
+        <member name="M:SharpCraft.LoottableItems.GetShulkerItemSource(SharpCraft.Vector)">
+            <summary>
+            Returns a part of a loot command used for getting a shulker box's content. Note the shulker box has to be of the type <see cref="F:SharpCraft.ID.Block.purple_shulker_box"/>
+            </summary>
+            <returns>A <see cref="T:SharpCraft.Commands.LootSources.MineItemSource"/> for getting loot from a shulker box</returns>
+        </member>
+        <member name="T:SharpCraft.IDatapackSetting">
+            <summary>
+            Interface for datapack settings
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DatapackSettings">
+            <summary>
+            Class holding a list of datapack settings
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DatapackSettings.LoadedChunkSetting(SharpCraft.IntVector)">
+            <summary>
+            Setting which choses what chunk sharpcraft can use for random things
+            </summary>
+            <param name="chunkLocation">The chunk coordinate (Note that this is the coordinate of the chunk. So divide world coordinates with 16)</param>
+            <returns>The setting</returns>
+        </member>
+        <member name="M:SharpCraft.DatapackSettings.SharpCraftNamespaceNameSetting(System.String)">
+            <summary>
+            The name to use for the SharpCraft generated namespace. (Please note that changing this can result in problems when used with other datapacks)
+            </summary>
+            <param name="name">The name the namespace should have</param>
+            <returns>The setting</returns>
+        </member>
+        <member name="M:SharpCraft.DatapackSettings.SharpDatapackChildSetting(System.Boolean)">
+            <summary>
+            If the SharpCraft namespace should generate it's basic files for making custom SharpCraft things run.
+            </summary>
+            <param name="isChild">True if the datapack is a child of another datapack which generates all the SharpCraft items</param>
+            <returns>The setting</returns>
         </member>
         <member name="T:SharpCraft.IFileCreator">
             <summary>
@@ -22842,28 +22836,6 @@
             </summary>
             <param name="group">The group to convert</param>
         </member>
-        <member name="T:SharpCraft.INamespaceSetting">
-            <summary>
-            Interface for settings a <see cref="T:SharpCraft.BasePackNamespace"/> can have
-            </summary>
-        </member>
-        <member name="T:SharpCraft.NamespaceSettings">
-            <summary>
-            Holds settings <see cref="T:SharpCraft.BasePackNamespace"/> can have
-            </summary>
-        </member>
-        <member name="M:SharpCraft.NamespaceSettings.GenerateNames">
-            <summary>
-            Use this setting to force files to get a generated name
-            </summary>
-            <returns>The setting</returns>
-        </member>
-        <member name="M:SharpCraft.NamespaceSettings.FunctionGroupedCommands">
-            <summary>
-            Settting used for making the custom command group method make a function instead of using execute commands.
-            </summary>
-            <returns>The setting</returns>
-        </member>
         <member name="T:SharpCraft.LootObjects.AttributeChange">
             <summary>
             Changes the attributes on the item
@@ -23780,6 +23752,175 @@
             </summary>
             <param name="loottable">The string to convert</param>
         </member>
+        <member name="T:SharpCraft.BasePackNamespace">
+            <summary>
+            base class for pack namespaces
+            </summary>
+        </member>
+        <member name="F:SharpCraft.BasePackNamespace.Settings">
+            <summary>
+            List of settings namespaces can have
+            </summary>
+        </member>
+        <member name="F:SharpCraft.BasePackNamespace.files">
+            <summary>
+            The files inside this namespace
+            </summary>
+        </member>
+        <member name="F:SharpCraft.BasePackNamespace.settings">
+            <summary>
+            The settings for this namespace
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.#ctor">
+            <summary>
+            Intializes a new namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
+            <summary>
+            Creates a new namespace in a datapack
+            </summary>
+            <param name="datapack">The datapack to add the namespace to</param>
+            <param name="namespaceName">the name of the namespace</param>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)">
+            <summary>
+            Sets up the namespace
+            </summary>
+            <param name="datapack">The datapack to add the namespace to</param>
+            <param name="namespaceName">the name of the namespace</param>
+        </member>
+        <member name="P:SharpCraft.BasePackNamespace.IsSetup">
+            <summary>
+            Returns true if Setup has been run
+            </summary>
+            <returns>true if Setup has been run</returns>
+        </member>
+        <member name="P:SharpCraft.BasePackNamespace.Name">
+            <summary>
+            The name of this namespace
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BasePackNamespace.Disposed">
+            <summary>
+            If the namespace has been disposed
+            </summary>
+        </member>
+        <member name="P:SharpCraft.BasePackNamespace.Datapack">
+            <summary>
+            The datapack this namespace is a part of
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.GetPath">
+            <summary>
+            Returns the path to this namespace
+            </summary>
+            <returns>The path to this namespace</returns>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.GetFile(System.String,System.String)">
+            <summary>
+            Returns the file with the name and of the type. If it doesn't exist it returns null
+            </summary>
+            <param name="fileType">The type of file to get</param>
+            <param name="fileName">The name of the file</param>
+            <returns>The file with the name or null</returns>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.IsSettingSet(SharpCraft.INamespaceSetting)">
+            <summary>
+            returns true if the given setting is on in this namespace
+            </summary>
+            <param name="setting">The setting to test for</param>
+            <returns>True if the setting is on</returns>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.AddFile(SharpCraft.BaseFile)">
+            <summary>
+            Adds the given file to this namespace
+            </summary>
+            <param name="file">The file to add</param>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.Dispose">
+            <summary>
+            Disposes all the files in this namespace
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.AddNewFileListener(SharpCraft.BaseFile.FileListener)">
+            <summary>
+            Calls the given method when a new file is added to this namespace
+            </summary>
+            <param name="listener">The method to call</param>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.AfterDispose">
+            <summary>
+            Extra things to do after dispose is ran
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.GetID(System.Object)">
+            <summary>
+            Generates a random id for the given <see cref="T:System.Object"/>
+            </summary>
+            <param name="getIdFor">The object to id</param>
+            <returns>The id for the object</returns>
+        </member>
+        <member name="T:SharpCraft.EmptyNamespace">
+            <summary>
+            A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyNamespace.GetMinecraftNamespace">
+            <summary>
+            Returns a reference to the minecraft namespace
+            </summary>
+            <returns>A reference to the minecraft namespace</returns>
+        </member>
+        <member name="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)">
+            <summary>
+            Returns a reference to the namespace
+            </summary>
+            <param name="namespace">The namespace to get</param>
+            <returns>The namespace</returns>
+        </member>
+        <member name="M:SharpCraft.EmptyNamespace.#ctor">
+            <summary>
+            Intializes a new empty namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
+            <summary>
+            Creates a new namespace in a datapack. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead
+            </summary>
+            <param name="datapack">The datapack to add the namespace to</param>
+            <param name="namespaceName">the name of the namespace</param>
+        </member>
+        <member name="M:SharpCraft.EmptyNamespace.GetID(System.Object)">
+            <summary>
+            Not used. Makes no sense to generate names for empty namespace.
+            </summary>
+            <param name="getIdFor">Not used</param>
+            <returns>Not used</returns>
+        </member>
+        <member name="T:SharpCraft.INamespaceSetting">
+            <summary>
+            Interface for settings a <see cref="T:SharpCraft.BasePackNamespace"/> can have
+            </summary>
+        </member>
+        <member name="T:SharpCraft.NamespaceSettings">
+            <summary>
+            Holds settings <see cref="T:SharpCraft.BasePackNamespace"/> can have
+            </summary>
+        </member>
+        <member name="M:SharpCraft.NamespaceSettings.GenerateNames">
+            <summary>
+            Use this setting to force files to get a generated name
+            </summary>
+            <returns>The setting</returns>
+        </member>
+        <member name="M:SharpCraft.NamespaceSettings.FunctionGroupedCommands">
+            <summary>
+            Settting used for making the custom command group method make a function instead of using execute commands.
+            </summary>
+            <returns>The setting</returns>
+        </member>
         <member name="T:SharpCraft.PackNamespace">
             <summary>
             An <see cref="T:System.Object"/> used to define a namespace in a datapack
@@ -24056,43 +24197,6 @@
             Adds the given setting to this namespace
             </summary>
             <param name="setting">The setting to add</param>
-        </member>
-        <member name="T:SharpCraft.EmptyNamespace">
-            <summary>
-            A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetMinecraftNamespace">
-            <summary>
-            Returns a reference to the minecraft namespace
-            </summary>
-            <returns>A reference to the minecraft namespace</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)">
-            <summary>
-            Returns a reference to the namespace
-            </summary>
-            <param name="namespace">The namespace to get</param>
-            <returns>The namespace</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.#ctor">
-            <summary>
-            Intializes a new empty namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
-            <summary>
-            Creates a new namespace in a datapack. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead
-            </summary>
-            <param name="datapack">The datapack to add the namespace to</param>
-            <param name="namespaceName">the name of the namespace</param>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetID(System.Object)">
-            <summary>
-            Not used. Makes no sense to generate names for empty namespace.
-            </summary>
-            <param name="getIdFor">Not used</param>
-            <returns>Not used</returns>
         </member>
         <member name="T:SharpCraft.IPredicate">
             <summary>
@@ -24761,45 +24865,6 @@
             Writes the file
             </summary>
             <param name="stream">The stream used for writing the file</param>
-        </member>
-        <member name="T:SharpCraft.SharpCraftItems">
-            <summary>
-            Static class containing usefull things
-            </summary>
-        </member>
-        <member name="M:SharpCraft.SharpCraftItems.GetNextLoadedCoords">
-            <summary>
-            Returns a coordinate in a loaded chunk. The given coordinate is only ever given out once so the coordinate is save to use for whatever you want to.
-            </summary>
-            <returns>A coordinate in a loaded chunk</returns>
-        </member>
-        <member name="M:SharpCraft.SharpCraftItems.ClaimLoadedCoordsSquare(SharpCraft.IntVector)">
-            <summary>
-            Loads a block of coords of the given size
-            </summary>
-            <param name="size">The size of the block to load</param>
-            <returns>The "smallest" corner of the loaded block or null if it failed to claim</returns>
-        </member>
-        <member name="M:SharpCraft.SharpCraftItems.GetShulkerItemSource(SharpCraft.Vector)">
-            <summary>
-            Returns a part of a loot command used for getting a shulker box's content. Note the shulker box has to be of the type <see cref="F:SharpCraft.ID.Block.shulker_box"/>
-            </summary>
-            <returns>A <see cref="T:SharpCraft.Commands.LootSources.MineItemSource"/> for getting loot from a shulker box</returns>
-        </member>
-        <member name="T:SharpCraft.SharpCraftSettings">
-            <summary>
-            Settings for SharpCraft
-            </summary>
-        </member>
-        <member name="P:SharpCraft.SharpCraftSettings.OwnedChunk">
-            <summary>
-            A chunk SharpCraft freely can use. Note that the value has to be for a chunk and not for a block.
-            </summary>
-        </member>
-        <member name="P:SharpCraft.SharpCraftSettings.SharpCraftNamespace">
-            <summary>
-            The namespace sharpcraft will generate it's files in
-            </summary>
         </member>
         <member name="T:SharpCraft.Writer.ISharpWriter">
             <summary>

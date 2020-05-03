@@ -23,7 +23,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The entity's rotation
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagDoubleArray)]
+        [Data.DataTag(ForceType = ID.NBTTagType.TagFloatArray)]
         public Rotation? Rotation { get; set; }
 
         /// <summary>

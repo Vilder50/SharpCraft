@@ -6,23 +6,68 @@ using System.Linq;
 namespace SharpCraft
 {
     /// <summary>
-    /// Static class containing usefull things
+    /// Interface for datapack settings
     /// </summary>
-    public static class SharpCraftItems
+    public interface IDatapackSetting
     {
-        private static readonly List<IntVector> claimedCoords = new List<IntVector>();
-        private static int lastLoadedCoordsX = -1;
-        private static int lastLoadedCoordsY = 0;
-        private static int lastLoadedCoordsZ = 0;
+        
+    }
+
+    /// <summary>
+    /// Class holding a list of datapack settings
+    /// </summary>
+    public class DatapackSettings
+    {
+        /// <summary>
+        /// Setting which choses what chunk sharpcraft can use for random things
+        /// </summary>
+        /// <param name="chunkLocation">The chunk coordinate (Note that this is the coordinate of the chunk. So divide world coordinates with 16)</param>
+        /// <returns>The setting</returns>
+        public IDatapackSetting LoadedChunkSetting(IntVector chunkLocation)
+        {
+            return new LoadedChunkSetting(chunkLocation);
+        }
 
         /// <summary>
-        /// Returns a coordinate in a loaded chunk. The given coordinate is only ever given out once so the coordinate is save to use for whatever you want to.
+        /// The name to use for the SharpCraft generated namespace. (Please note that changing this can result in problems when used with other datapacks)
         /// </summary>
-        /// <returns>A coordinate in a loaded chunk</returns>
-        public static IntVector GetNextLoadedCoords()
+        /// <param name="name">The name the namespace should have</param>
+        /// <returns>The setting</returns>
+        public IDatapackSetting SharpCraftNamespaceNameSetting(string name)
         {
-            SharpCraftFiles.TrySetupFiles();
+            return new SharpCraftNamespaceNameSetting(name);
+        }
 
+        /// <summary>
+        /// If the SharpCraft namespace should generate it's basic files for making custom SharpCraft things run.
+        /// </summary>
+        /// <param name="isChild">True if the datapack is a child of another datapack which generates all the SharpCraft items</param>
+        /// <returns>The setting</returns>
+        public IDatapackSetting SharpDatapackChildSetting(bool isChild)
+        {
+            return new SharpDatapackChildSetting(isChild);
+        }
+    }
+
+    internal class LoadedChunkSetting : IDatapackSetting
+    {
+        private readonly List<IntVector> claimedCoords = new List<IntVector>();
+        private int lastLoadedCoordsX = -1;
+        private int lastLoadedCoordsY = 0;
+        private int lastLoadedCoordsZ = 0;
+
+        public LoadedChunkSetting(IntVector chunkLocation)
+        {
+            ChunkLocation = new IntVector((int)chunkLocation.X, 0, (int)chunkLocation.Z);
+            CornerBlock = new IntVector((int)chunkLocation.X * 16, 0, (int)chunkLocation.Z * 16);
+        }
+
+        public IntVector ChunkLocation { get; private set; }
+
+        public IntVector CornerBlock { get; private set; }
+
+        public IntVector GetNextLoadedCoords()
+        {
             if (lastLoadedCoordsY > 255)
             {
                 throw new InvalidOperationException("Cannot give more coordinates. All coordinates are given out.");
@@ -42,13 +87,13 @@ namespace SharpCraft
                     }
                 }
 
-                blockCoords = new IntVector((int)(SharpCraftSettings.OwnedChunk.X * 16 + lastLoadedCoordsX), (int)(SharpCraftSettings.OwnedChunk.Y * 16 + lastLoadedCoordsY), (int)(SharpCraftSettings.OwnedChunk.Z * 16 + lastLoadedCoordsZ));
+                blockCoords = new IntVector((int)(CornerBlock.X + lastLoadedCoordsX), (int)(CornerBlock.Y + lastLoadedCoordsY), (int)(CornerBlock.Z + lastLoadedCoordsZ));
             } while (claimedCoords.Any(c => c.X == lastLoadedCoordsX && c.Y == lastLoadedCoordsY && c.Z == lastLoadedCoordsZ));
 
             return blockCoords;
         }
 
-        private static bool IsLoadedCoordsClaimed(IntVector check)
+        private bool IsLoadedCoordsClaimed(IntVector check)
         {
             if (claimedCoords.Any(c => c.GetVectorString() == check.GetVectorString()))
             {
@@ -86,12 +131,7 @@ namespace SharpCraft
             return false;
         }
 
-        /// <summary>
-        /// Loads a block of coords of the given size
-        /// </summary>
-        /// <param name="size">The size of the block to load</param>
-        /// <returns>The "smallest" corner of the loaded block or null if it failed to claim</returns>
-        public static IntVector? ClaimLoadedCoordsSquare(IntVector size)
+        public IntVector? ClaimLoadedCoordsSquare(IntVector size)
         {
             for (int y = lastLoadedCoordsY; y < 256 - size.Y; y++)
             {
@@ -128,7 +168,7 @@ namespace SharpCraft
                                     }
                                 }
                             }
-                            return new IntVector((int)(x + SharpCraftSettings.OwnedChunk.X * 16), (int)(y + SharpCraftSettings.OwnedChunk.Y * 16), (int)(z + SharpCraftSettings.OwnedChunk.Z * 16));
+                            return new IntVector((int)(x + CornerBlock.X), (int)(y + CornerBlock.Y), (int)(z + CornerBlock.Z));
                         }
                     }
                 }
@@ -136,14 +176,25 @@ namespace SharpCraft
 
             return null;
         }
+    }
 
-        /// <summary>
-        /// Returns a part of a loot command used for getting a shulker box's content. Note the shulker box has to be of the type <see cref="ID.Block.shulker_box"/>
-        /// </summary>
-        /// <returns>A <see cref="Commands.LootSources.MineItemSource"/> for getting loot from a shulker box</returns>
-        public static Commands.LootSources.MineItemSource GetShulkerItemSource(Vector shulkerLocation)
+    internal class SharpCraftNamespaceNameSetting : IDatapackSetting
+    {
+        public SharpCraftNamespaceNameSetting(string name)
         {
-            return new Commands.LootSources.MineItemSource(shulkerLocation, SharpCraftFiles.GetShulkerLootItem());
+            Name = name;
         }
+
+        public string Name { get; private set; }
+    }
+
+    internal class SharpDatapackChildSetting : IDatapackSetting
+    {
+        public SharpDatapackChildSetting(bool isChild)
+        {
+            IsChild = isChild;
+        }
+
+        public bool IsChild { get; private set; }
     }
 }

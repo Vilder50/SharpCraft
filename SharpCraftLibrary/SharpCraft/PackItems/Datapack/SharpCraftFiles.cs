@@ -6,76 +6,69 @@ using System.Threading.Tasks;
 
 namespace SharpCraft
 {
-    static class SharpCraftFiles
+    internal class SharpCraftFiles : IDatapackItems
     {
+        private BaseDatapack datapack = null!;
+
+        public BaseDatapack Datapack { get => datapack; set => datapack ??= value; }
+
         private const string setupFunctionName = "setup";
         //private const string tickFunctionName = "tick";
 
-        public static BaseDatapack? Datapack { get; private set; }
-        public static PackNamespace? MinecraftNamespace { get; private set; }
-        public static PackNamespace? SharpCraftNamespace { get; private set; }
-        public static Function? SetupFunction { get; private set; }
-        //public static Function TickFunction { get; private set; }
+        public PackNamespace? MinecraftNamespace { get; private set; }
+        public PackNamespace? SharpCraftNamespace { get; private set; }
+        public Function? SetupFunction { get; private set; }
+        //public Function TickFunction { get; private set; }
 
-        internal static void TrySetupFiles()
+        public bool IsChild()
         {
-            if (Datapack is null)
-            {
-                BaseDatapack.AddDatapackListener(dp =>
-                {
-                    if (Datapack is null)
-                    {
-                        Datapack = dp;
-                        try
-                        {
-                            SetupFiles(dp);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw new Exception("Failed to create and/or add sharpcraft files to the datapack. See inner exception.", ex);
-                        }
-                    }
-                });
-                if (Datapack is null)
-                {
-                    throw new Exception("Cannot create sharpcraft files since no datapack exists.");
-                }
-            }
+            return Datapack.GetDatapackSetting<SharpDatapackChildSetting>()?.IsChild ?? false;
         }
 
-        private static void SetupFiles(BaseDatapack pack)
+        private bool isSetup = false;
+        public void SetupFiles()
         {
-            SharpCraftSettings.LockSettings();
-            MinecraftNamespace = pack.Namespace<PackNamespace>("minecraft");
-            SharpCraftNamespace = pack.Namespace<PackNamespace>(SharpCraftSettings.SharpCraftNamespace);
-            #pragma warning disable IDE0067
-            FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-            //FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
-            #pragma warning restore IDE0067
+            if (!isSetup)
+            {
+                SharpCraftNamespace = Datapack.Namespace<PackNamespace>(Datapack.GetDatapackSetting<SharpCraftNamespaceNameSetting>()?.Name ?? "sharpcraft");
+                if (!IsChild())
+                {
+                    MinecraftNamespace = Datapack.Namespace<PackNamespace>("minecraft");
+                    #pragma warning disable IDE0067
+                    FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
+                    //FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
+                    #pragma warning restore IDE0067
 
-            SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
-            SetupFunction.World.LoadSquare.ForceLoad(SharpCraftSettings.OwnedChunk * 16);
-            loadGroup.Items.Insert(0, SetupFunction);
+                    SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
+                    SetupFunction.World.LoadSquare.ForceLoad(Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
+                    loadGroup.Items.Insert(0, SetupFunction);
 
-            //TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
-            //tickGroup.Items.Insert(0, TickFunction);
+                    //TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
+                    //tickGroup.Items.Insert(0, TickFunction);
+                }
+                isSetup = true;
+            }
         }
 
         #region constants
         private const string constantFileName = "constants";
-        public static Objective? ConstantObjective { get; private set; }
-        private static Function? constantNumberFile;
-        private static readonly List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
-        public static ScoreValue AddConstantNumber(int number)
+        public Objective? ConstantObjective { get; private set; }
+        private Function? constantNumberFile;
+        private readonly List<Commands.ScoreboardValueChangeCommand> addedNumbers = new List<Commands.ScoreboardValueChangeCommand>();
+        public ScoreValue AddConstantNumber(int number)
         {
-            TrySetupFiles();
+            SetupFiles();
             //Get constant making function file
             if (constantNumberFile is null)
             {
-                constantNumberFile = SharpCraftNamespace!.Function(constantFileName, BaseFile.WriteSetting.OnDispose);
+                constantNumberFile = SharpCraftNamespace!.Function(Datapack.Name + "\\" + constantFileName, BaseFile.WriteSetting.OnDispose);
                 ConstantObjective = new Objective("constants");
-                constantNumberFile.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
-                SetupFunction!.AddCommand(new Commands.RunFunctionCommand(constantNumberFile));
+
+                if (!IsChild())
+                {
+                    SetupFunction!.AddCommand(new Commands.ScoreboardObjectiveAddCommand(ConstantObjective, "dummy", null));
+                    SetupFunction!.AddCommand(new Commands.RunFunctionCommand(SharpCraftNamespace.Group("constants", new List<IFunction>() { constantNumberFile }, true)));
+                }
             }
 
             //Check if constant already is added. If not add it to the constant function file.
@@ -96,15 +89,18 @@ namespace SharpCraft
         #endregion
 
         #region math
-        private static Objective? mathObjective;
+        private Objective? mathObjective;
         private const string mathObjectiveName = "math";
-        public static Objective GetMathScoreObject()
+        public Objective GetMathScoreObject()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (mathObjective is null)
             {
                 mathObjective = new Objective(mathObjectiveName);
-                SetupFunction!.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective!, "dummy", null));
+                if (!IsChild())
+                {
+                    SetupFunction!.AddCommand(new Commands.ScoreboardObjectiveAddCommand(mathObjective!, "dummy", null));
+                }
             }
 
             return mathObjective;
@@ -113,19 +109,42 @@ namespace SharpCraft
 
         #region ray cast
         private const string rotationObjectiveString = "_rotation";
-        private static (Function? raySetup, Objective? xRotation, Objective? yRotation, ScoreValue? rayState, Predicate[]? predicates) rayFiles;
-        public static (Function raySetup, Objective xRotation, Objective yRotation, ScoreValue rayState, Predicate[] predicates) GetRayFiles()
+        private (IFunction? raySetup, Objective? xRotation, Objective? yRotation, ScoreValue? rayState, IPredicate[]? predicates) rayFiles;
+        public (IFunction raySetup, Objective xRotation, Objective yRotation, ScoreValue rayState, IPredicate[] predicates) GetRayFiles()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (!(rayFiles.raySetup is null))
             {
+                return rayFiles!;
+            }
+
+            ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
+            if (IsChild())
+            {
+                rayFiles = (new EmptyFunction(SharpCraftNamespace!, "raycast\\block\\setup"), new Objective("x" + rotationObjectiveString), new Objective("y" + rotationObjectiveString), rayState, new IPredicate[] 
+                {
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\py"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\ny"),
+
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cnz"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cpx"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cpz"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cnx"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cny"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\cpy"),
+
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\xyz"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\d0"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\d1"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\d2"),
+                    new EmptyPredicate(SharpCraftNamespace!, "raycast\\block\\d3"),
+                });
                 return rayFiles!;
             }
 
             Objective xRotation;
             Objective yRotation;
             List<Predicate> predicates = new List<Predicate>();
-            ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
 
             //ray casting files hasn't been set up
             xRotation = SetupFunction!.World.Objective.Add("x" + rotationObjectiveString);
@@ -173,29 +192,32 @@ namespace SharpCraft
 
         #region dummy entity
         private const string dummyEntityTag = "SharpDEntity";
-        private static Selector? dummyEntitySelector;
-        public static Selector GetDummySelector()
+        private Selector? dummyEntitySelector;
+        public Selector GetDummySelector()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (!(dummyEntitySelector is null))
             {
                 return dummyEntitySelector;
             }
 
             dummyEntitySelector = new Selector(ID.Selector.e, dummyEntityTag) { Limit = 1 };
-            SetupFunction!.Entity.Kill(dummyEntitySelector);
-            Entity dummyEntity = new Entities.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags![0].Tag } };
-            SetupFunction.Entity.Add(SharpCraftSettings.OwnedChunk * 16, dummyEntity);
+            if (!IsChild())
+            {
+                SetupFunction!.Entity.Kill(dummyEntitySelector);
+                Entity dummyEntity = new Entities.AreaCloud(ID.Entity.area_effect_cloud) { Unspawnable = true, Tags = new Tag[] { dummyEntitySelector.Tags![0].Tag } };
+                SetupFunction.Entity.Add(Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock, dummyEntity);
+            }
 
             return dummyEntitySelector;
         }
         #endregion
 
         #region random
-        private static readonly Dictionary<double, Predicate> randomnessPredicates = new Dictionary<double, Predicate>();
-        public static Predicate GetRandomPredicate(double chance)
+        private readonly Dictionary<double, Predicate> randomnessPredicates = new Dictionary<double, Predicate>();
+        public Predicate GetRandomPredicate(double chance)
         {
-            TrySetupFiles();
+            SetupFiles();
             if (randomnessPredicates.ContainsKey(chance))
             {
                 return randomnessPredicates[chance];
@@ -203,25 +225,31 @@ namespace SharpCraft
             else
             {
                 //create randomness predicate
-                Predicate newPredicate = SharpCraftNamespace!.Predicate("random\\chances\\" + chance.ToMinecraftDouble().Replace(".","_"), new Conditions.RandomCondition(chance));
+                Predicate newPredicate = SharpCraftNamespace!.Predicate(datapack.Name + "\\random\\chances\\" + chance.ToMinecraftDouble().Replace(".","_"), new Conditions.RandomCondition(chance));
                 randomnessPredicates.Add(chance, newPredicate);
                 return newPredicate;
             }
         }
 
-        private static ScoreValue? randomNumberHolder;
-        public static ScoreValue GetRandomHolder()
+        private ScoreValue? randomNumberHolder;
+        public ScoreValue GetRandomHolder()
         {
             randomNumberHolder ??= new ScoreValue("#random", GetMathScoreObject());
             return randomNumberHolder;
         }
 
-        private static Function? randomNumberFunction;
-        public static Function GetRandomNumberFunction()
+        private IFunction? randomNumberFunction;
+        public IFunction GetRandomNumberFunction()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (!(randomNumberFunction is null))
             {
+                return randomNumberFunction;
+            }
+
+            if (IsChild())
+            {
+                randomNumberFunction = new EmptyFunction(SharpCraftNamespace!, "random\\generate");
                 return randomNumberFunction;
             }
 
@@ -238,13 +266,18 @@ namespace SharpCraft
             return randomNumberFunction;
         }
 
-        private static LootTable? hashLoottable;
-        public static LootTable GetHashLoottable()
+        private ILootTable? hashLoottable;
+        public ILootTable GetHashLoottable()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (!(hashLoottable is null))
             {
                 return hashLoottable;
+            }
+
+            if (IsChild())
+            {
+                hashLoottable = new EmptyLoottable(SharpCraftNamespace!, "random\\hashing");
             }
 
             hashLoottable = SharpCraftNamespace!.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
@@ -261,17 +294,17 @@ namespace SharpCraft
             return hashLoottable;
         }
 
-        private static (Function?, Vector?) hashFunction;
-        public static (Function function, Vector location) GetHashFunction()
+        private (Function?, Vector?) hashFunction;
+        public (Function function, Vector location) GetHashFunction()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (!(hashFunction.Item1 is null))
             {
                 return hashFunction!;
             }
-            Vector hashBlockLocation = SharpCraftItems.GetNextLoadedCoords();
+            Vector hashBlockLocation = Datapack.GetItems<LoadedBlockItems>().GetNextLoadedCoords();
 
-            LootTable hashLoottable = SharpCraftNamespace!.Loottable("random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
+            LootTable hashLoottable = SharpCraftNamespace!.Loottable(Datapack.Name + "\\random\\hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
             {
                 Changes = new LootObjects.BaseChange[]
                     {
@@ -285,7 +318,7 @@ namespace SharpCraft
 
             SetupFunction!.AddCommand(new Commands.SetblockCommand(hashBlockLocation, ID.Block.bedrock, ID.BlockAdd.replace));
             SetupFunction.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
-            Function hash = SharpCraftNamespace.Function("random\\hashing", h => 
+            Function hash = SharpCraftNamespace.Function(Datapack.Name + "\\random\\hashing", h => 
             {
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
 
@@ -307,20 +340,24 @@ namespace SharpCraft
             [Data.DataTag("SharpCraft.ShulkerLooter")]
             public bool IsShulkerItem { get; private set; } = true;
         }
-        private static Item? shulkerLootItem;
-        public static Item GetShulkerLootItem()
+        private Item? shulkerLootItem;
+        public Item GetShulkerLootItem()
         {
-            TrySetupFiles();
+            SetupFiles();
             if (shulkerLootItem is null)
             {
                 shulkerLootItem = new Item(ID.Item.ice);
                 shulkerLootItem.AddExtraData(new ShulkerItemTag());
+                if (IsChild())
+                {
+                    return shulkerLootItem;
+                }
 
                 Conditions.BaseCondition itemCondition = new Conditions.ToolCondition(new JsonObjects.Item() { NBT = shulkerLootItem.GetItemTagString() });
 #pragma warning disable IDE0067
-                MinecraftNamespace!.Loottable(ID.Files.LootTables.Block(ID.Block.shulker_box), new LootObjects.LootPool[]
+                MinecraftNamespace!.Loottable(ID.Files.LootTables.Block(ID.Block.purple_shulker_box), new LootObjects.LootPool[]
                 {
-                    new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.shulker_box)
+                    new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.purple_shulker_box)
                     {
                         Changes = new LootObjects.BaseChange[]
                         {

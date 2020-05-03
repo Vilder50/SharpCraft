@@ -28,11 +28,30 @@ namespace SharpCraft
         /// <param name="listener">The listener to add</param>
         public static void AddDatapackListener(DatapackListener listener)
         {
-            foreach(BaseDatapack datapack in datapacks)
+            foreach (BaseDatapack datapack in datapacks)
             {
                 listener(datapack);
             }
             datapackListeners.Add(listener);
+        }
+
+        private static BaseDatapack? makeForDatapack;
+
+        /// <summary>
+        /// The datapack to generate things for
+        /// </summary>
+        public static BaseDatapack MakeForDatapack 
+        {
+            get 
+            {
+                BaseDatapack? pack = (makeForDatapack?.Disposed ?? true) ? null : makeForDatapack;
+                if (pack is null)
+                {
+                    throw new ArgumentNullException(nameof(MakeForDatapack), "Make for datapack isn't set and something needs it. Please set it with: " + nameof(BaseDatapack.MakeForDatapack));
+                }
+                return pack;
+            }
+            set => makeForDatapack = value; 
         }
         #endregion
 
@@ -44,15 +63,18 @@ namespace SharpCraft
         private string path = null!;
         private readonly List<BasePackNamespace> namespaces = null!;
         private BaseFile.FileListener fileListeners = null!;
+        private readonly List<IDatapackSetting> settings;
+        private readonly List<IDatapackItems> items;
 
         /// <summary>
         /// Creates a new <see cref="BaseDatapack"/> with the given parameters
         /// </summary>
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
-        protected BaseDatapack(string path, string packName) : this(path, packName, new FileCreator())
+        /// <param name="settings">Datapack settings</param>
+        protected BaseDatapack(string path, string packName, IDatapackSetting[]? settings = null) : this(path, packName, new FileCreator(), settings)
         {
-            
+
         }
 
         /// <summary>
@@ -61,12 +83,40 @@ namespace SharpCraft
         /// <param name="path">The path to the folder to create this datapack in</param>
         /// <param name="packName">The datapack's name</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        protected BaseDatapack(string path, string packName, IFileCreator fileCreator)
+        /// <param name="settings">Datapack settings</param>
+        protected BaseDatapack(string path, string packName, IFileCreator fileCreator, IDatapackSetting[]? settings = null)
         {
             Path = path;
             Name = packName.ToLower();
             namespaces = new List<BasePackNamespace>();
             FileCreator = fileCreator;
+            items = new List<IDatapackItems>();
+
+            //Make sure setting list is good
+            this.settings = settings?.ToList() ?? new List<IDatapackSetting>();
+            for (int i = 0; i < this.settings.Count; i++)
+            {
+                if (this.settings[i] is null)
+                {
+                    throw new ArgumentNullException("Cannot add null as a datapack setting. (It's at index " + i + ")");
+                }
+                Type settingType = this.settings[i].GetType();
+                for (int j = i + 1; j < this.settings.Count; j++)
+                {
+                    Type otherSettingType = this.settings[j].GetType();
+                    if (settingType.IsAssignableFrom(otherSettingType) || otherSettingType.IsAssignableFrom(settingType))
+                    {
+                        throw new ArgumentException("Datapack setting " + i + " and " + j + " are of the same type and may not both be added.");
+                    }
+                }
+            }
+
+            //add chunk setting if missing
+            Type chunkSetting = typeof(LoadedChunkSetting);
+            if (!this.settings.Any(s => chunkSetting.IsAssignableFrom(s.GetType())))
+            {
+                this.settings.Add(new LoadedChunkSetting(new IntVector(0)));
+            }
         }
 
         /// <summary>
@@ -97,7 +147,7 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Path is not valid (Make sure it doesn't end with \\ or /)", nameof(Path));
                 }
-                path = value.Replace("/","\\");
+                path = value.Replace("/", "\\");
             }
         }
 
@@ -111,7 +161,7 @@ namespace SharpCraft
             {
                 if (value is null)
                 {
-                    throw new ArgumentNullException(nameof(Name), "Path may not be null");
+                    throw new ArgumentNullException(nameof(Name), "Pack name not be null");
                 }
                 if (!ValidateName(value))
                 {
@@ -169,6 +219,35 @@ namespace SharpCraft
         public static bool ValidateName(string name)
         {
             return Regex.IsMatch(name, namePattern);
+        }
+
+        /// <summary>
+        /// Returns the setting of the given type or null if the setting doesnt' exist on this datapack
+        /// </summary>
+        /// <typeparam name="T">The type of setting</typeparam>
+        /// <returns>The setting</returns>
+        public T? GetDatapackSetting<T>() where T : class, IDatapackSetting
+        {
+            return settings.SingleOrDefault(s => s is T) as T;
+        }
+
+        /// <summary>
+        /// Returns an object holding files and such for the datapack.
+        /// </summary>
+        /// <typeparam name="T">The type of item holder to get</typeparam>
+        /// <returns>The item holder</returns>
+        public T GetItems<T>() where T : class, IDatapackItems, new()
+        {
+            if (!(items.SingleOrDefault(s => s is T) is T existingItem))
+            {
+                existingItem = new T
+                {
+                    Datapack = this
+                };
+                items.Add(existingItem);
+            }
+
+            return existingItem;
         }
 
         /// <summary>

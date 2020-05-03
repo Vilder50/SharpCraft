@@ -314,7 +314,7 @@ namespace SharpCraft.FunctionWriters
             public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, int number)
             {
                 mainSelector.LimitSelector();
-                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, SharpCraftFiles.AddConstantNumber(number), SharpCraftFiles.ConstantObjective!));
+                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().AddConstantNumber(number), ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().ConstantObjective!));
             }
 
             /// <summary>

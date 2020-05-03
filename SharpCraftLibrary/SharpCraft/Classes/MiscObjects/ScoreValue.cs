@@ -20,7 +20,11 @@ namespace SharpCraft
         /// </summary>
         public ScoreValue()
         {
-            ScoreObject = SharpCraftFiles.GetMathScoreObject();
+            if (BaseDatapack.MakeForDatapack.GetItems<SharpCraftFiles>().IsChild())
+            {
+                throw new InvalidOperationException("Cannot create random score value for child datapack");
+            }
+            ScoreObject = BaseDatapack.MakeForDatapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
             Selector = new NameSelector("Variable_" + nextVarName, true);
             nextVarName++;
         }

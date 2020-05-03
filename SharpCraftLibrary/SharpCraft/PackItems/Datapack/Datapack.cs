@@ -17,7 +17,8 @@ namespace SharpCraft
         /// <param name="packName">The datapack's name</param>
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
-        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 5) : this(path, packName, description, packFormat, new FileCreator())
+        /// <param name="settings">Datapack settings</param>
+        public Datapack(string path, string packName, string description = "Generated with Sharpcraft", int packFormat = 5, IDatapackSetting[]? settings = null) : this(path, packName, description, packFormat, new FileCreator(), settings)
         {
 
         }
@@ -30,8 +31,10 @@ namespace SharpCraft
         /// <param name="description">The datapack's description</param>
         /// <param name="packFormat">The datapack's format</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
-        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator) : this(path, packName, description, packFormat, fileCreator, true)
+        /// <param name="settings">Datapack settings</param>
+        public Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, IDatapackSetting[]? settings = null) : this(path, packName, description, packFormat, fileCreator, settings, true)
         {
+            MakeForDatapack = this;
             FinishedConstructing();
         }
 
@@ -44,7 +47,8 @@ namespace SharpCraft
         /// <param name="packFormat">The datapack's format</param>
         /// <param name="fileCreator">Class for creating files and directories</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, bool _) : base(path, packName, fileCreator)
+        /// <param name="settings">Datapack settings</param>
+        protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, IDatapackSetting[]? settings, bool _) : base(path, packName, fileCreator, settings)
         {
             FileCreator.CreateDirectory(Path + "\\" + Name);
             using TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta");
@@ -67,67 +71,6 @@ namespace SharpCraft
         public PackNamespace Namespace(string packNamespace)
         {
             return Namespace<PackNamespace>(packNamespace);
-        }
-    }
-
-    /// <summary>
-    /// A datapack used for disabling/enabling datapacks.
-    /// </summary>
-    public class EmptyDatapack : BaseDatapack
-    {
-        private static EmptyDatapack? emptyPack;
-
-        /// <summary>
-        /// Returns an empty datapack
-        /// </summary>
-        /// <returns>An empty datapack</returns>
-        public static EmptyDatapack GetPack()
-        {
-            emptyPack ??= new EmptyDatapack("vanilla", false);
-            return emptyPack;
-        }
-
-        /// <summary>
-        /// Intializes a new <see cref="EmptyDatapack"/>
-        /// </summary>
-        /// <param name="name">The name of the datapack</param>
-        /// <param name="fileDatapack">True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
-        public EmptyDatapack(string name, bool fileDatapack = true) : base("NoneExistingPath", name)
-        {
-            FileDatapack = fileDatapack;
-        }
-
-        /// <summary>
-        /// The name of the datapack used for refering to the datapack in game
-        /// </summary>
-        public override string IngameName
-        {
-            get
-            {
-                if (FileDatapack)
-                {
-                    return "\"file/" + Name + "\"";
-                }
-                else
-                {
-                    return Name;
-                }
-            }
-        }
-
-        /// <summary>
-        /// True if this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
-        /// </summary>
-        public bool FileDatapack { get; set; }
-
-        /// <summary>
-        /// Returns a new empty namespace
-        /// </summary>
-        /// <param name="packNamespace">The name of the namespace</param>
-        /// <returns>A new empty namespace</returns>
-        public EmptyNamespace Namespace(string packNamespace)
-        {
-            return Namespace<EmptyNamespace>(packNamespace);
         }
     }
 }

@@ -214,7 +214,7 @@ namespace SharpCraft.FunctionWriters
                 }
 
                 int usedNumbers = -1;
-                WriteCommands(function, endingValue, SharpCraftFiles.GetMathScoreObject(), ref usedNumbers);
+                WriteCommands(function, endingValue, function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject(), ref usedNumbers);
             }
 
             private ValueParameter WriteCommands(Function function, ScoreValue endingValue, Objective mathObjective, ref int usedNumbers)
@@ -328,7 +328,7 @@ namespace SharpCraft.FunctionWriters
                     }
                     else
                     {
-                        function.AddCommand(new ScoreboardOperationCommand(mathOnto, mathOnto, Operation, SharpCraftFiles.AddConstantNumber(secondScoreValue.IntValue!.Value), SharpCraftFiles.ConstantObjective!));
+                        function.AddCommand(new ScoreboardOperationCommand(mathOnto, mathOnto, Operation, function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().AddConstantNumber(secondScoreValue.IntValue!.Value), function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().ConstantObjective!));
                     }
                 }
 
@@ -459,7 +459,7 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException("IfWriter and elseWriter may not be null");
             }
 
-            Objective math = SharpCraftFiles.GetMathScoreObject();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
             GroupCommands((f) =>
             {
                 f.AddCommand(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 0));
@@ -526,7 +526,7 @@ namespace SharpCraft.FunctionWriters
             {
                 throw new ArgumentException("NextExecute may not have an ending command.", nameof(nextExecute));
             }
-            Objective math = SharpCraftFiles.GetMathScoreObject();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
             NameSelector loopSelector = new NameSelector("l_" + loopName);
             GroupCommands((f) =>
             {
@@ -621,11 +621,11 @@ namespace SharpCraft.FunctionWriters
         {
             ValidateRayParams(rayName, length, onHit);
 
-            Objective math = SharpCraftFiles.GetMathScoreObject();
-            var (raySetup, xRotation, yRotation, rayState, predicates) = SharpCraftFiles.GetRayFiles();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
+            var (raySetup, xRotation, yRotation, rayState, predicates) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRayFiles();
 
             //execute as ray entity
-            ForFunction.Execute.As(SharpCraftFiles.GetDummySelector());
+            ForFunction.Execute.As(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
             ForFunction.World.Function(ForFunction.NewSibling(rayName + "\\start", startRay => 
             {
                 startRay.World.Function(raySetup);
@@ -751,7 +751,7 @@ namespace SharpCraft.FunctionWriters
                     }));
                 }, true, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
             }));
-            ForFunction.Entity.Teleport(SharpCraftFiles.GetDummySelector(), SharpCraftSettings.OwnedChunk * 16);
+            ForFunction.Entity.Teleport(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector(), ForFunction.PackNamespace.Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
         }
 
         /// <summary>
@@ -907,7 +907,7 @@ namespace SharpCraft.FunctionWriters
                 {
                     throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
                 }
-                ForFunction.Execute.IfPredicate(SharpCraftFiles.GetRandomPredicate(chance), want);
+                ForFunction.Execute.IfPredicate(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomPredicate(chance), want);
                 return ForFunction;
             }
 
@@ -931,8 +931,8 @@ namespace SharpCraft.FunctionWriters
                 ScoreValue randomHolder = null!;
                 ForFunction.Custom.GroupCommands((g) =>
                 {
-                    g.World.Function(SharpCraftFiles.GetRandomNumberFunction());
-                    randomHolder = SharpCraftFiles.GetRandomHolder();
+                    g.World.Function(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomNumberFunction());
+                    randomHolder = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder();
                     g.Entity.Score.Operation(randomHolder, randomHolder, ID.Operation.Remainder, (int)difference);
                     g.Entity.Score.Add(randomHolder, randomHolder, from);
                 });
@@ -951,17 +951,17 @@ namespace SharpCraft.FunctionWriters
                     throw new ArgumentNullException(nameof(value), "Value may not be null");
                 }
 
-                var (function, location) = SharpCraftFiles.GetHashFunction();
+                var (function, location) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetHashFunction();
                 ForFunction.Custom.GroupCommands(g =>
                 {
                     g.Execute.Store(new BlockDataLocation(location, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DLootTableSeed)), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
                     g.World.Function(function);
                     g.Execute.IfScore(value, value, 0);
-                    g.Entity.Score.Set(SharpCraftFiles.GetRandomHolder(), SharpCraftFiles.GetRandomHolder(), 3631387);
+                    g.Entity.Score.Set(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder(), ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder(), 3631387);
                 });
 
-                return SharpCraftFiles.GetRandomHolder();
+                return ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder();
             }
         }
         #endregion

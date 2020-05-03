@@ -106,6 +106,11 @@ namespace SharpCraft
                 DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, new object?[0]);
                 return dataArray;
             }
+            else if(asType == ID.NBTTagType.TagFloatArray)
+            {
+                DataPartArray dataArray = new DataPartArray(new float[] { (float)Y, (float)X }, null, new object?[0]);
+                return dataArray;
+            }
             else
             {
                 throw new ArgumentException("Can only convert the rotation in a double array");
