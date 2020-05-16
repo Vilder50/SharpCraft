@@ -15110,6 +15110,12 @@
             </summary>
             <param name="datapack">the added datapack</param>
         </member>
+        <member name="T:SharpCraft.BaseDatapack.NamespaceListener">
+            <summary>
+            Used for calling methods when a new namespace is added
+            </summary>
+            <param name="namespace">the added namespace</param>
+        </member>
         <member name="M:SharpCraft.BaseDatapack.AddDatapackListener(SharpCraft.BaseDatapack.DatapackListener)">
             <summary>
             Makes the given <see cref="T:SharpCraft.BaseDatapack.DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
@@ -15213,6 +15219,12 @@
         <member name="M:SharpCraft.BaseDatapack.AddNewFileListener(SharpCraft.BaseFile.FileListener)">
             <summary>
             Calls the given method when a new file is added to a namespace in this datapack
+            </summary>
+            <param name="listener">The method to call</param>
+        </member>
+        <member name="M:SharpCraft.BaseDatapack.AddNewNamespaceListener(SharpCraft.BaseDatapack.NamespaceListener)">
+            <summary>
+            Calls the given method when a new namespace is added to the datapack
             </summary>
             <param name="listener">The method to call</param>
         </member>

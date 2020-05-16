@@ -23,6 +23,12 @@ namespace SharpCraft
         public delegate void DatapackListener(BaseDatapack datapack);
 
         /// <summary>
+        /// Used for calling methods when a new namespace is added
+        /// </summary>
+        /// <param name="namespace">the added namespace</param>
+        public delegate void NamespaceListener(BasePackNamespace @namespace);
+
+        /// <summary>
         /// Makes the given <see cref="DatapackListener"/> get called every time a new datapack is made and called with all existing datapacks
         /// </summary>
         /// <param name="listener">The listener to add</param>
@@ -62,7 +68,8 @@ namespace SharpCraft
         private string name = null!;
         private string path = null!;
         private readonly List<BasePackNamespace> namespaces = null!;
-        private BaseFile.FileListener fileListeners = null!;
+        private BaseFile.FileListener? fileListeners = null;
+        private NamespaceListener? namespaceListeners = null;
         private readonly List<IDatapackSetting> settings;
         private readonly List<IDatapackItems> items;
 
@@ -274,6 +281,7 @@ namespace SharpCraft
                 TNamespace space = new TNamespace();
                 space.Setup(this, name);
                 space.AddNewFileListener(NewFileAdded);
+                namespaceListeners?.Invoke(space);
                 return space;
             }
         }
@@ -290,6 +298,15 @@ namespace SharpCraft
         public void AddNewFileListener(BaseFile.FileListener listener)
         {
             fileListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given file listener may not be null");
+        }
+
+        /// <summary>
+        /// Calls the given method when a new namespace is added to the datapack
+        /// </summary>
+        /// <param name="listener">The method to call</param>
+        public void AddNewNamespaceListener(NamespaceListener listener)
+        {
+            namespaceListeners += listener ?? throw new ArgumentNullException(nameof(listener), "The given namespace listener may not be null");
         }
 
         /// <summary>
