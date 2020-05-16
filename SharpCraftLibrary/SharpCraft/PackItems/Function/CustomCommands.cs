@@ -411,7 +411,7 @@ namespace SharpCraft.FunctionWriters
         {
             if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                if (!forceExecute && (useFunction || ForFunction.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands())))
+                if (!forceExecute && (useFunction || ForFunction.PackNamespace.IsSettingSet(NamespaceSettings.GetSettings().FunctionGroupedCommands())))
                 {
                     ForFunction.World.Function(ForFunction.NewSibling(writer, ForFunction.Setting));
                 }

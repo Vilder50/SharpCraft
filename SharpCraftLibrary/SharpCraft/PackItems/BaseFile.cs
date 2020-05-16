@@ -69,7 +69,25 @@ namespace SharpCraft
         protected BaseFile(BasePackNamespace packNamespace, string? fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
-            Setting = writeSetting;
+            if (packNamespace.IsSettingSet(NamespaceSettings.GetSettings().ForceDisposeWriteFiles()))
+            {
+                if (writeSetting == WriteSetting.Auto)
+                {
+                    Setting = WriteSetting.OnDispose;
+                }
+                else if (writeSetting == WriteSetting.LockedAuto)
+                {
+                    Setting = WriteSetting.LockedOnDispose;
+                }
+                else
+                {
+                    Setting = writeSetting;
+                }
+            } 
+            else
+            {
+                Setting = writeSetting;
+            }
             FileType = fileType;
 
             string useName = fileName!;
@@ -79,7 +97,7 @@ namespace SharpCraft
             }
 
             FileId = useName;
-            if (PackNamespace.IsSettingSet(new NamespaceSettings().GenerateNames()) && useName == fileName)
+            if (PackNamespace.IsSettingSet(NamespaceSettings.GetSettings().GenerateNames()) && useName == fileName)
             {
                 WritePath = PackNamespace.GetID(this);
             }

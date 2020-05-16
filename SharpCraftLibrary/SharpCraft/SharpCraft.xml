@@ -23898,11 +23898,6 @@
             base class for pack namespaces
             </summary>
         </member>
-        <member name="F:SharpCraft.BasePackNamespace.Settings">
-            <summary>
-            List of settings namespaces can have
-            </summary>
-        </member>
         <member name="F:SharpCraft.BasePackNamespace.files">
             <summary>
             The files inside this namespace
@@ -23973,6 +23968,13 @@
             </summary>
             <param name="setting">The setting to test for</param>
             <returns>True if the setting is on</returns>
+        </member>
+        <member name="M:SharpCraft.BasePackNamespace.GetSetting``1">
+            <summary>
+            If the namespace has a setting of the given type, returns the setting.
+            </summary>
+            <typeparam name="T">The setting to get</typeparam>
+            <returns>The setting or null</returns>
         </member>
         <member name="M:SharpCraft.BasePackNamespace.AddFile(SharpCraft.BaseFile)">
             <summary>
@@ -24050,6 +24052,12 @@
             Holds settings <see cref="T:SharpCraft.BasePackNamespace"/> can have
             </summary>
         </member>
+        <member name="M:SharpCraft.NamespaceSettings.GetSettings">
+            <summary>
+            Returns a list of namespace settings
+            </summary>
+            <returns>The list of settings</returns>
+        </member>
         <member name="M:SharpCraft.NamespaceSettings.GenerateNames">
             <summary>
             Use this setting to force files to get a generated name
@@ -24059,6 +24067,12 @@
         <member name="M:SharpCraft.NamespaceSettings.FunctionGroupedCommands">
             <summary>
             Settting used for making the custom command group method make a function instead of using execute commands.
+            </summary>
+            <returns>The setting</returns>
+        </member>
+        <member name="M:SharpCraft.NamespaceSettings.ForceDisposeWriteFiles">
+            <summary>
+            Forces all files made by this namespace to be written when they are disposed instead of being auto files.
             </summary>
             <returns>The setting</returns>
         </member>

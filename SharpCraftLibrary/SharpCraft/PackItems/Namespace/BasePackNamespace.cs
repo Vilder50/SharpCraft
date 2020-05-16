@@ -12,11 +12,6 @@ namespace SharpCraft
     /// </summary>
     public abstract class BasePackNamespace : IDisposable
     {
-        /// <summary>
-        /// List of settings namespaces can have
-        /// </summary>
-        public static readonly NamespaceSettings Settings = new NamespaceSettings();
-
         private string name = null!;
 #pragma warning disable IDE0069
         private BaseDatapack datapack = null!;
@@ -190,6 +185,21 @@ namespace SharpCraft
                 throw new InvalidOperationException("Setup hasn't been run yet.");
             }
             return settings.Any(s => s.GetType() == setting.GetType());
+        }
+
+        /// <summary>
+        /// If the namespace has a setting of the given type, returns the setting.
+        /// </summary>
+        /// <typeparam name="T">The setting to get</typeparam>
+        /// <returns>The setting or null</returns>
+        public INamespaceSetting? GetSetting<T>() where T : INamespaceSetting
+        {
+            if (!IsSetup)
+            {
+                throw new InvalidOperationException("Setup hasn't been run yet.");
+            }
+            Type settingType = typeof(T);
+            return settings.SingleOrDefault(s => s.GetType() == settingType);
         }
 
         /// <summary>

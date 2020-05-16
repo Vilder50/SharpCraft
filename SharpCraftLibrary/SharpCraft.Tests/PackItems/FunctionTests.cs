@@ -312,7 +312,7 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("execute at @s run me 123", addedFunction.Commands[1].GetCommandString(), "Get second function grouped command string returned wrong string");
             Assert.AreEqual(2, addedFunction.Commands.Count, "function grouped command doesn't contain the correct amount of commands");
 
-            space.AddSetting(new NamespaceSettings().FunctionGroupedCommands());
+            space.AddSetting(NamespaceSettings.GetSettings().FunctionGroupedCommands());
             function.Commands.Clear();
             function.AddCommand(command1.ShallowClone());
             function.Custom.GroupCommands((f) =>

@@ -92,7 +92,7 @@ namespace SharpCraft.Tests.PackItems
                 Assert.AreEqual("1", file.FileId, "file name wasn't generated correctly");
             }
 
-            packNamespace.AddSetting(new NamespaceSettings().GenerateNames());
+            packNamespace.AddSetting(NamespaceSettings.GetSettings().GenerateNames());
             using (BaseFile file = new BaseFileTestClass(packNamespace, "folder\\ignored-name", BaseFile.WriteSetting.Auto))
             {
                 Assert.AreEqual("2", file.WritePath, "writepath wasn't forced to be generated");

@@ -30,7 +30,7 @@ namespace SharpCraft.Tests.PackItems
 
             public NamespaceTestClass(BaseDatapack datapack, string name) : base(datapack, name)
             {
-                settings.Add(Settings.FunctionGroupedCommands());
+                settings.Add(NamespaceSettings.GetSettings().FunctionGroupedCommands());
 
                 #pragma warning disable IDE0067
                 new BaseFileTestClass1(this, "file1", BaseFile.WriteSetting.OnDispose);
@@ -159,8 +159,8 @@ namespace SharpCraft.Tests.PackItems
             //setup
             using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
-            Assert.IsTrue(pack.IsSettingSet(BasePackNamespace.Settings.FunctionGroupedCommands()), "Failed to detect that the setting is set");
-            Assert.IsFalse(pack.IsSettingSet(BasePackNamespace.Settings.GenerateNames()), "Failed to detect that the setting isn't set");
+            Assert.IsTrue(pack.IsSettingSet(NamespaceSettings.GetSettings().FunctionGroupedCommands()), "Failed to detect that the setting is set");
+            Assert.IsFalse(pack.IsSettingSet(NamespaceSettings.GetSettings().GenerateNames()), "Failed to detect that the setting isn't set");
         }
 
         [TestMethod]
@@ -213,6 +213,56 @@ namespace SharpCraft.Tests.PackItems
             Assert.IsFalse(fileAdded, "file listener shouldn't have been called yet.");
             space.Function("test2");
             Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
+        }
+
+        class TestSetting : INamespaceSetting
+        {
+            public int ANumber;
+
+            public TestSetting(int aNumber)
+            {
+                ANumber = aNumber;
+            }
+        }
+
+        class OtherSetting : TestSetting
+        {
+            public OtherSetting(int aNumber) : base(aNumber)
+            {
+                
+            }
+        }
+
+        [TestMethod] 
+        public void TestGetSetting()
+        {
+            using Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator());
+            PackNamespace space = pack.Namespace("space");
+            Assert.IsNull(space.GetSetting<TestSetting>(), "Setting isn't added yet and should return null");
+
+            space.AddSetting(new OtherSetting(15));
+            space.AddSetting(new TestSetting(10));
+            TestSetting setting = space.GetSetting<TestSetting>() as TestSetting;
+            Assert.IsNotNull(space.GetSetting<TestSetting>(), "A setting should have been returned since there is one");
+            Assert.AreEqual(10, setting.ANumber, "The wrong setting returned");
+        }
+
+        [TestMethod]
+        public void TestDIsposeFileSetting()
+        {
+            using Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator());
+            PackNamespace space = pack.Namespace("space");
+            space.AddSetting(NamespaceSettings.GetSettings().ForceDisposeWriteFiles());
+
+            BaseFile file1 = space.Function("file1", BaseFile.WriteSetting.Auto);
+            BaseFile file2 = space.Function("file2", BaseFile.WriteSetting.LockedAuto);
+            BaseFile file3 = space.Function("file3", BaseFile.WriteSetting.LockedOnDispose);
+            BaseFile file4 = space.Function("file4", BaseFile.WriteSetting.OnDispose);
+
+            Assert.AreEqual(BaseFile.WriteSetting.OnDispose, file1.Setting, "Auto should have changed to OnDispose");
+            Assert.AreEqual(BaseFile.WriteSetting.LockedOnDispose, file2.Setting, "LockedAuto should have changed to LockedOnDispose");
+            Assert.AreEqual(BaseFile.WriteSetting.LockedOnDispose, file3.Setting, "LockedOnDispose shouldn't change");
+            Assert.AreEqual(BaseFile.WriteSetting.OnDispose, file4.Setting, "OnDispose shouldn't change");
         }
     }
 }
