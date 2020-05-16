@@ -73,5 +73,24 @@ namespace SharpCraft
         {
             return new Tag[] { tag };
         }
+
+        /// <summary>
+        /// Converts a <see cref="Tag"/> into a <see cref="Selector.EntityTag"/>
+        /// </summary>
+        /// <param name="tag">the <see cref="SharpCraft.Tag"/> to convert</param>
+        public static implicit operator Selector.EntityTag(Tag tag)
+        {
+            return new Selector.EntityTag(tag);
+        }
+
+        /// <summary>
+        /// Checks if the given tag doesn't exist on the selected entity.
+        /// </summary>
+        /// <param name="tag">The tag to check if doesn't exist</param>
+        /// <returns><see cref="Selector.EntityTag"/> used for checking if the tag doesn't exist</returns>
+        public static Selector.EntityTag operator !(Tag tag)
+        {
+            return new Selector.EntityTag(tag, false);
+        }
     }
 }

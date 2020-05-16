@@ -226,6 +226,16 @@ namespace SharpCraft.JsonText
         }
 
         /// <summary>
+        /// Intializes a new <see cref="Score"/>
+        /// </summary>
+        /// <param name="score">The score to display</param>
+        public Score(ScoreValue score)
+        {
+            Selector = score.Selector;
+            ScoreObject = score.ScoreObject;
+        }
+
+        /// <summary>
         /// Selects the entity to show the score for
         /// </summary>
         public BaseSelector Selector

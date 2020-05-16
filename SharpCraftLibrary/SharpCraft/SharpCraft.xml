@@ -9001,6 +9001,12 @@
             <param name="selector">Selects the entity to show the score for</param>
             <param name="scoreObject">The objective to get the score from</param>
         </member>
+        <member name="M:SharpCraft.JsonText.Score.#ctor(SharpCraft.ScoreValue)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.JsonText.Score"/>
+            </summary>
+            <param name="score">The score to display</param>
+        </member>
         <member name="P:SharpCraft.JsonText.Score.Selector">
             <summary>
             Selects the entity to show the score for
@@ -9733,12 +9739,6 @@
             </summary>
             <param name="tag">the <see cref="T:SharpCraft.Selector.EntityTag"/> to convert into an array</param>
         </member>
-        <member name="M:SharpCraft.Selector.EntityTag.op_Implicit(SharpCraft.Tag)~SharpCraft.Selector.EntityTag">
-            <summary>
-            Converts a <see cref="T:SharpCraft.Tag"/> into a <see cref="T:SharpCraft.Selector.EntityTag"/>
-            </summary>
-            <param name="tag">the <see cref="T:SharpCraft.Tag"/> to convert</param>
-        </member>
         <member name="T:SharpCraft.Selector.EntityScore">
             <summary>
             An object used to define a score an entity has to have
@@ -9982,6 +9982,19 @@
             Converts a <see cref="T:SharpCraft.Tag"/> into an <see cref="T:SharpCraft.Tag"/> array containing only that one <see cref="T:SharpCraft.Tag"/>
             </summary>
             <param name="tag">the <see cref="T:SharpCraft.Tag"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.Tag.op_Implicit(SharpCraft.Tag)~SharpCraft.Selector.EntityTag">
+            <summary>
+            Converts a <see cref="T:SharpCraft.Tag"/> into a <see cref="T:SharpCraft.Selector.EntityTag"/>
+            </summary>
+            <param name="tag">the <see cref="T:SharpCraft.Tag"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.Tag.op_LogicalNot(SharpCraft.Tag)">
+            <summary>
+            Checks if the given tag doesn't exist on the selected entity.
+            </summary>
+            <param name="tag">The tag to check if doesn't exist</param>
+            <returns><see cref="T:SharpCraft.Selector.EntityTag"/> used for checking if the tag doesn't exist</returns>
         </member>
         <member name="T:SharpCraft.Team">
             <summary>
@@ -15725,6 +15738,13 @@
             <param name="objective">The objective the score to change is in</param>
             <param name="value">The operation calculating the value the score should be set to</param>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.SetToScoreOperation(SharpCraft.ScoreValue,SharpCraft.ValueParameter)">
+            <summary>
+            Sets a score value to the value made by a calculation
+            </summary>
+            <param name="score">The score to set</param>
+            <param name="value">The operation calculating the value the score should be set to</param>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.GroupCommands(SharpCraft.Function.FunctionWriter,System.Boolean,System.Boolean)">
             <summary>
             If the last command is an unfinished execute command, every given command will be executed with a clone of the execute command. (All the given commands will only run if the execute command runs)
@@ -16021,12 +16041,26 @@
             <param name="objective">the <see cref="T:SharpCraft.Objective"/> to change the score in</param>
             <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Add(SharpCraft.ScoreValue,System.Int32)">
+            <summary>
+            adds the <paramref name="amount"/> to the score
+            </summary>
+            <param name="score">the score to add to</param>
+            <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Set(SharpCraft.BaseSelector,SharpCraft.Objective,System.Int32)">
             <summary>
             sets the selected entities' score in <paramref name="objective"/> to the specified <paramref name="amount"/>
             </summary>
             <param name="selector">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="objective">the <see cref="T:SharpCraft.Objective"/> to change the score in</param>
+            <param name="amount">the amount to set the score to</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Set(SharpCraft.ScoreValue,System.Int32)">
+            <summary>
+            sets the specified score to the specified <paramref name="amount"/>
+            </summary>
+            <param name="score">the score to set</param>
             <param name="amount">the amount to set the score to</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.ID.Operation,System.Int32)">
@@ -16036,6 +16070,14 @@
             <param name="mainSelector">The entity score to do math on (Result will be saved in here)</param>
             <param name="mainObjective">The <see cref="T:SharpCraft.Objective"/> to get the value from to do math on</param>
             <param name="operationType">The operation to do between the numbers</param>
+            <param name="number">The number to do math with</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.ScoreValue,SharpCraft.ID.Operation,System.Int32)">
+            <summary>
+            Does math with a score and a number and saves the result in the score
+            </summary>
+            <param name="score">The score to change</param>
+            <param name="operationType">The operation to do between the score and number</param>
             <param name="number">The number to do math with</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.ID.Operation,SharpCraft.BaseSelector,SharpCraft.Objective)">
@@ -16048,6 +16090,32 @@
             <param name="otherSelector">The other entity</param>
             <param name="otherObjective">The other entity's <see cref="T:SharpCraft.Objective"/></param>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.ScoreValue,SharpCraft.ID.Operation,SharpCraft.ScoreValue)">
+            <summary>
+            Does math with two scores and saves the result in the first score.
+            </summary>
+            <param name="score">The first score (The result will be stored in this score)</param>
+            <param name="operationType">The operation to do between the numbers</param>
+            <param name="otherScore">The other score</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.ScoreValue,SharpCraft.ID.Operation,SharpCraft.BaseSelector,SharpCraft.Objective)">
+            <summary>
+            Does math with two scores and saves the result in the first score.
+            </summary>
+            <param name="score">The first score (The result will be stored in this score)</param>
+            <param name="operationType">The operation to do between the numbers</param>
+            <param name="otherSelector">The other entity</param>
+            <param name="otherObjective">The other entity's <see cref="T:SharpCraft.Objective"/></param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Operation(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.ID.Operation,SharpCraft.ScoreValue)">
+            <summary>
+            Does math with two scores and saves the result in the first score.
+            </summary>
+            <param name="mainSelector">The first entity (The result will be stored in this entity's score)</param>
+            <param name="mainObjective">The first entity's <see cref="T:SharpCraft.Objective"/> (The result will be stored in here)</param>
+            <param name="operationType">The operation to do between the numbers</param>
+            <param name="otherScore">The other score</param>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Reset(SharpCraft.BaseSelector,SharpCraft.Objective)">
             <summary>
             Resets the selected entities scores
@@ -16055,12 +16123,24 @@
             <param name="selector">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="objective">if a <see cref="T:SharpCraft.Objective"/> is specified only the score in the specified <see cref="T:SharpCraft.Objective"/> will be reseted</param>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Reset(SharpCraft.ScoreValue)">
+            <summary>
+            Resets the given score
+            </summary>
+            <param name="score">the score to reset</param>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Get(SharpCraft.BaseSelector,SharpCraft.Objective)">
             <summary>
             Gets the selected entity's score and outputs it
             </summary>
             <param name="selector">the <see cref="T:SharpCraft.BaseSelector"/> to use</param>
             <param name="objective">the <see cref="T:SharpCraft.Objective"/> to take the score from</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.ClassScore.Get(SharpCraft.ScoreValue)">
+            <summary>
+            Gets the given score
+            </summary>
+            <param name="score">the score to get</param>
         </member>
         <member name="F:SharpCraft.FunctionWriters.EntityCommands.Effect">
             <summary>
@@ -16288,12 +16368,53 @@
             <param name="want">false if it should execute when it's false</param>
             <returns>The function running the command</returns>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfScore(SharpCraft.ScoreValue,SharpCraft.ID.IfScoreOperation,SharpCraft.ScoreValue,System.Boolean)">
+            <summary>
+            Executes if the score is <paramref name="operation"/> than the other score
+            </summary>
+            <param name="score">The first score</param>
+            <param name="operation">The operation used to check the scores</param>
+            <param name="otherScore">The second score</param>
+            <param name="want">false if it should execute when it's false</param>
+            <returns>The function running the command</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfScore(SharpCraft.ScoreValue,SharpCraft.ID.IfScoreOperation,SharpCraft.BaseSelector,SharpCraft.Objective,System.Boolean)">
+            <summary>
+            Executes if the score is <paramref name="operation"/> than the other score
+            </summary>
+            <param name="score">The first score</param>
+            <param name="operation">The operation used to check the scores</param>
+            <param name="otherSelector">The second <see cref="T:SharpCraft.BaseSelector"/></param>
+            <param name="otherObject">The second <see cref="T:SharpCraft.BaseSelector"/>'s <see cref="T:SharpCraft.Objective"/></param>
+            <param name="want">false if it should execute when it's false</param>
+            <returns>The function running the command</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfScore(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.ID.IfScoreOperation,SharpCraft.ScoreValue,System.Boolean)">
+            <summary>
+            Executes if the score is <paramref name="operation"/> than the other score
+            </summary>
+            <param name="mainSelector">The first <see cref="T:SharpCraft.BaseSelector"/></param>
+            <param name="mainObject">The first <see cref="T:SharpCraft.BaseSelector"/>'s <see cref="T:SharpCraft.Objective"/></param>
+            <param name="operation">The operation used to check the scores</param>
+            <param name="otherScore">The second score</param>
+            <param name="want">false if it should execute when it's false</param>
+            <returns>The function running the command</returns>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfScore(SharpCraft.BaseSelector,SharpCraft.Objective,SharpCraft.MCRange,System.Boolean)">
             <summary>
             Executes if the given <see cref="T:SharpCraft.BaseSelector"/>'s score is in the given <see cref="T:SharpCraft.MCRange"/>
             </summary>
             <param name="selector">the <see cref="T:SharpCraft.BaseSelector"/>'s score to check</param>
             <param name="scoreObject">the <see cref="T:SharpCraft.Objective"/> to containing the score</param>
+            <param name="range">the <see cref="T:SharpCraft.MCRange"/> the score should be in</param>
+            <param name="want">false if it should execute when it's false</param>
+            <returns>The function running the command</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfScore(SharpCraft.ScoreValue,SharpCraft.MCRange,System.Boolean)">
+            <summary>
+            Executes if the given score is in the given <see cref="T:SharpCraft.MCRange"/>
+            </summary>
+            <param name="score">the score to check</param>
             <param name="range">the <see cref="T:SharpCraft.MCRange"/> the score should be in</param>
             <param name="want">false if it should execute when it's false</param>
             <returns>The function running the command</returns>
@@ -16319,7 +16440,7 @@
             <param name="dataLocation">the location to store the result at</param>
             <param name="dataType">the path to the place to store the score</param>
             <param name="scale">the number the output should be multiplied with before being inserted</param>
-            <param name="storeSucces">true if it only should store if the command was successfull</param>
+            <param name="storeSuccess">true if it only should store if the command was successfull</param>
             <returns>The function running the command</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.BaseSelector,SharpCraft.Objective,System.Boolean)">
@@ -16328,7 +16449,15 @@
             </summary>
             <param name="entity">The <see cref="T:SharpCraft.Entity"/> to store in</param>
             <param name="scoreObject">The <see cref="T:SharpCraft.Objective"/> to store in</param>
-            <param name="storeSucces">true if it only should store if the command was successfull</param>
+            <param name="storeSuccess">true if it only should store if the command was successfull</param>
+            <returns>The function running the command</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.ScoreValue,System.Boolean)">
+            <summary>
+            Stores the command's success output inside the given score
+            </summary>
+            <param name="score">The score to store the result in</param>
+            <param name="storeSuccess">true if it only should store if the command was successfull</param>
             <returns>The function running the command</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.BossBar,System.Boolean,System.Boolean)">
@@ -16337,7 +16466,7 @@
             </summary>
             <param name="bossBar">The <see cref="T:SharpCraft.BossBar"/> to store the output in</param>
             <param name="value">true if it should store the output in the value, false if it should store it as maxvalue</param>
-            <param name="storeSucces">true if it only should store if the command was successfull</param>
+            <param name="storeSuccess">true if it only should store if the command was successfull</param>
             <returns>The function running the command</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Facing(SharpCraft.BaseSelector,SharpCraft.ID.FacingAnchor)">

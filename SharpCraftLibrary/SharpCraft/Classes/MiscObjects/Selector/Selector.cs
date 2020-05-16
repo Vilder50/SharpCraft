@@ -401,15 +401,6 @@ namespace SharpCraft
             {
                 return new EntityTag[] { tag };
             }
-
-            /// <summary>
-            /// Converts a <see cref="SharpCraft.Tag"/> into a <see cref="EntityTag"/>
-            /// </summary>
-            /// <param name="tag">the <see cref="SharpCraft.Tag"/> to convert</param>
-            public static implicit operator EntityTag(Tag tag)
-            {
-                return new EntityTag(tag);
-            }
         }
 
         /// <summary>

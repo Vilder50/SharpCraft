@@ -368,6 +368,16 @@ namespace SharpCraft.FunctionWriters
                 ForFunction.Entity.Score.Set(selector, objective, value.IntValue!.Value);
             }
         }
+
+        /// <summary>
+        /// Sets a score value to the value made by a calculation
+        /// </summary>
+        /// <param name="score">The score to set</param>
+        /// <param name="value">The operation calculating the value the score should be set to</param>
+        public void SetToScoreOperation(ScoreValue score, ValueParameter value)
+        {
+            SetToScoreOperation(score,score,value);
+        }
         #endregion
 
         #region command grouping

@@ -294,6 +294,16 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
+            /// adds the <paramref name="amount"/> to the score
+            /// </summary>
+            /// <param name="score">the score to add to</param>
+            /// <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
+            public void Add(ScoreValue score, int amount)
+            {
+                Add(score, score, amount);
+            }
+
+            /// <summary>
             /// sets the selected entities' score in <paramref name="objective"/> to the specified <paramref name="amount"/>
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
@@ -302,6 +312,16 @@ namespace SharpCraft.FunctionWriters
             public void Set(BaseSelector selector, Objective objective, int amount)
             {
                 ForFunction.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.set, amount));
+            }
+
+            /// <summary>
+            /// sets the specified score to the specified <paramref name="amount"/>
+            /// </summary>
+            /// <param name="score">the score to set</param>
+            /// <param name="amount">the amount to set the score to</param>
+            public void Set(ScoreValue score, int amount)
+            {
+                Set(score, score, amount);
             }
 
             /// <summary>
@@ -315,6 +335,17 @@ namespace SharpCraft.FunctionWriters
             {
                 mainSelector.LimitSelector();
                 ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().AddConstantNumber(number), ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().ConstantObjective!));
+            }
+
+            /// <summary>
+            /// Does math with a score and a number and saves the result in the score
+            /// </summary>
+            /// <param name="score">The score to change</param>
+            /// <param name="operationType">The operation to do between the score and number</param>
+            /// <param name="number">The number to do math with</param>
+            public void Operation(ScoreValue score, ID.Operation operationType, int number)
+            {
+                Operation(score, score, operationType, number);
             }
 
             /// <summary>
@@ -333,6 +364,41 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="score">The first score (The result will be stored in this score)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherScore">The other score</param>
+            public void Operation(ScoreValue score, ID.Operation operationType, ScoreValue otherScore)
+            {
+                Operation(score, score, operationType, otherScore, otherScore);
+            }
+
+            /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="score">The first score (The result will be stored in this score)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherSelector">The other entity</param>
+            /// <param name="otherObjective">The other entity's <see cref="Objective"/></param>
+            public void Operation(ScoreValue score, ID.Operation operationType, BaseSelector otherSelector, Objective otherObjective)
+            {
+                Operation(score, score, operationType, otherSelector, otherObjective);
+            }
+
+            /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="mainSelector">The first entity (The result will be stored in this entity's score)</param>
+            /// <param name="mainObjective">The first entity's <see cref="Objective"/> (The result will be stored in here)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherScore">The other score</param>
+            public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, ScoreValue otherScore)
+            {
+                Operation(mainSelector, mainObjective, operationType, otherScore, otherScore);
+            }
+
+            /// <summary>
             /// Resets the selected entities scores
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
@@ -340,6 +406,15 @@ namespace SharpCraft.FunctionWriters
             public void Reset(BaseSelector selector, Objective? objective = null)
             {
                 ForFunction.AddCommand(new ScoreboardResetCommand(selector, objective));
+            }
+
+            /// <summary>
+            /// Resets the given score
+            /// </summary>
+            /// <param name="score">the score to reset</param>
+            public void Reset(ScoreValue score)
+            {
+                Reset(score, score);
             }
 
             /// <summary>
@@ -351,6 +426,15 @@ namespace SharpCraft.FunctionWriters
             {
                 selector.LimitSelector();
                 ForFunction.AddCommand(new ScoreboardValueGetCommand(selector, objective));
+            }
+
+            /// <summary>
+            /// Gets the given score
+            /// </summary>
+            /// <param name="score">the score to get</param>
+            public void Get(ScoreValue score)
+            {
+                Get(score, score);
             }
         }
 

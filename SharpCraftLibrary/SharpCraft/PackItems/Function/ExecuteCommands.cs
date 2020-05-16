@@ -194,6 +194,47 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
+        /// Executes if the score is <paramref name="operation"/> than the other score
+        /// </summary>
+        /// <param name="score">The first score</param>
+        /// <param name="operation">The operation used to check the scores</param>
+        /// <param name="otherScore">The second score</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        /// <returns>The function running the command</returns>
+        public Function IfScore(ScoreValue score, ID.IfScoreOperation operation, ScoreValue otherScore, bool want = true)
+        {
+            return IfScore(score, score, operation, otherScore, otherScore, want);
+        }
+
+        /// <summary>
+        /// Executes if the score is <paramref name="operation"/> than the other score
+        /// </summary>
+        /// <param name="score">The first score</param>
+        /// <param name="operation">The operation used to check the scores</param>
+        /// <param name="otherSelector">The second <see cref="BaseSelector"/></param>
+        /// <param name="otherObject">The second <see cref="BaseSelector"/>'s <see cref="Objective"/></param>
+        /// <param name="want">false if it should execute when it's false</param>
+        /// <returns>The function running the command</returns>
+        public Function IfScore(ScoreValue score, ID.IfScoreOperation operation, BaseSelector otherSelector, Objective otherObject, bool want = true)
+        {
+            return IfScore(score, score, operation, otherSelector, otherObject, want);
+        }
+
+        /// <summary>
+        /// Executes if the score is <paramref name="operation"/> than the other score
+        /// </summary>
+        /// <param name="mainSelector">The first <see cref="BaseSelector"/></param>
+        /// <param name="mainObject">The first <see cref="BaseSelector"/>'s <see cref="Objective"/></param>
+        /// <param name="operation">The operation used to check the scores</param>
+        /// <param name="otherScore">The second score</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        /// <returns>The function running the command</returns>
+        public Function IfScore(BaseSelector mainSelector, Objective mainObject, ID.IfScoreOperation operation, ScoreValue otherScore, bool want = true)
+        {
+            return IfScore(mainSelector, mainObject, operation, otherScore, otherScore, want);
+        }
+
+        /// <summary>
         /// Executes if the given <see cref="BaseSelector"/>'s score is in the given <see cref="MCRange"/>
         /// </summary>
         /// <param name="selector">the <see cref="BaseSelector"/>'s score to check</param>
@@ -206,6 +247,18 @@ namespace SharpCraft.FunctionWriters
             selector.LimitSelector();
             ForFunction.AddCommand(new ExecuteIfScoreMatches(selector, scoreObject, range, want));
             return ForFunction;
+        }
+
+        /// <summary>
+        /// Executes if the given score is in the given <see cref="MCRange"/>
+        /// </summary>
+        /// <param name="score">the score to check</param>
+        /// <param name="range">the <see cref="MCRange"/> the score should be in</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        /// <returns>The function running the command</returns>
+        public Function IfScore(ScoreValue score, MCRange range, bool want = true)
+        {
+            return IfScore(score, score, range, want);
         }
 
         /// <summary>
@@ -236,11 +289,11 @@ namespace SharpCraft.FunctionWriters
         /// <param name="dataLocation">the location to store the result at</param>
         /// <param name="dataType">the path to the place to store the score</param>
         /// <param name="scale">the number the output should be multiplied with before being inserted</param>
-        /// <param name="storeSucces">true if it only should store if the command was successfull</param>
+        /// <param name="storeSuccess">true if it only should store if the command was successfull</param>
         /// <returns>The function running the command</returns>
-        public Function Store(IDataLocation dataLocation, ID.StoreTypes dataType, double scale = 1, bool storeSucces = false)
+        public Function Store(IDataLocation dataLocation, ID.StoreTypes dataType, double scale = 1, bool storeSuccess = false)
         {
-            ForFunction.AddCommand(new ExecuteStoreData(dataLocation, dataType, scale, !storeSucces));
+            ForFunction.AddCommand(new ExecuteStoreData(dataLocation, dataType, scale, !storeSuccess));
             return ForFunction;
         }
 
@@ -249,12 +302,23 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="entity">The <see cref="Entity"/> to store in</param>
         /// <param name="scoreObject">The <see cref="Objective"/> to store in</param>
-        /// <param name="storeSucces">true if it only should store if the command was successfull</param>
+        /// <param name="storeSuccess">true if it only should store if the command was successfull</param>
         /// <returns>The function running the command</returns>
-        public Function Store(BaseSelector entity, Objective scoreObject, bool storeSucces = false)
+        public Function Store(BaseSelector entity, Objective scoreObject, bool storeSuccess = false)
         {
-            ForFunction.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSucces));
+            ForFunction.AddCommand(new ExecuteStoreScore(entity, scoreObject, !storeSuccess));
             return ForFunction;
+        }
+
+        /// <summary>
+        /// Stores the command's success output inside the given score
+        /// </summary>
+        /// <param name="score">The score to store the result in</param>
+        /// <param name="storeSuccess">true if it only should store if the command was successfull</param>
+        /// <returns>The function running the command</returns>
+        public Function Store(ScoreValue score, bool storeSuccess = false)
+        {
+            return Store(score, score, storeSuccess);
         }
 
         /// <summary>
@@ -262,11 +326,11 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="bossBar">The <see cref="BossBar"/> to store the output in</param>
         /// <param name="value">true if it should store the output in the value, false if it should store it as maxvalue</param>
-        /// <param name="storeSucces">true if it only should store if the command was successfull</param>
+        /// <param name="storeSuccess">true if it only should store if the command was successfull</param>
         /// <returns>The function running the command</returns>
-        public Function Store(BossBar bossBar, bool value = true, bool storeSucces = false)
+        public Function Store(BossBar bossBar, bool value = true, bool storeSuccess = false)
         {
-            ForFunction.AddCommand(new ExecuteStoreBossbar(bossBar, value, !storeSucces));
+            ForFunction.AddCommand(new ExecuteStoreBossbar(bossBar, value, !storeSuccess));
             return ForFunction;
         }
 
