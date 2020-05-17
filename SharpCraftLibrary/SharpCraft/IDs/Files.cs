@@ -199,164 +199,152 @@ namespace SharpCraft
                     /// </summary>
                     tick
                 }
-
+                
                 /// <summary>
                 /// Block groups
                 /// </summary>
-                public static class Blocks
+                public enum Blocks
                 {
-                    /// <summary>
-                    /// Normal block groups made by the game. These groups has no real uses other than grouping blocks
-                    /// </summary>
-                    public enum Normal
-                    {
-                        #pragma warning disable 1591
-                        acacia_logs,
-                        birch_logs,
-                        buttons,
-                        carpets,
-                        coral_blocks,
-                        corals,
-                        dark_oak_logs,
-                        doors,
-                        flower_pots,
-                        ice,
-                        leaves,
-                        oak_logs,
-                        planks,
-                        sand,
-                        saplings,
-                        slabs,
-                        spruce_logs,
-                        stairs,
-                        stone_bricks,
-                        wall_corals,
-                        wooden_buttons,
-                        wooden_doors,
-                        wooden_pressure_plates,
-                        wooden_slabs,
-                        wooden_stairs,
-                        small_flowers,
-                        crops,
-                        tall_flowers,
-                        standing_signs,
-                        wall_signs,
-                        walls
-                        #pragma warning restore 1591
-                    }
+                    #pragma warning disable 1591
+                    acacia_logs,
+                    birch_logs,
+                    buttons,
+                    carpets,
+                    coral_blocks,
+                    corals,
+                    dark_oak_logs,
+                    doors,
+                    flower_pots,
+                    ice,
+                    leaves,
+                    oak_logs,
+                    planks,
+                    sand,
+                    saplings,
+                    slabs,
+                    spruce_logs,
+                    stairs,
+                    stone_bricks,
+                    wall_corals,
+                    wooden_buttons,
+                    wooden_doors,
+                    wooden_pressure_plates,
+                    wooden_slabs,
+                    wooden_stairs,
+                    small_flowers,
+                    crops,
+                    tall_flowers,
+                    standing_signs,
+                    wall_signs,
+                    walls,
+                    #pragma warning restore 1591
 
                     /// <summary>
-                    /// Special block groups which has special properties
+                    /// Endermen can only pick up blocks in this group
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// Endermen can only pick up blocks in this group
-                        /// </summary>
-                        enderman_holdable,
+                    enderman_holdable,
 
-                        /// <summary>
-                        /// This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
-                        /// Changes the death message caused by the block as a falling block landing on and killing a player
-                        /// </summary>
-                        anvil,
+                    /// <summary>
+                    /// This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
+                    /// Changes the death message caused by the block as a falling block landing on and killing a player
+                    /// </summary>
+                    anvil,
 
-                        /// <summary>
-                        /// Right clicking these blocks with a map marks it on the map
-                        /// </summary>
-                        banners,
+                    /// <summary>
+                    /// Right clicking these blocks with a map marks it on the map
+                    /// </summary>
+                    banners,
 
-                        /// <summary>
-                        /// Blocks cats can sit on.
-                        /// Blocks which can be slept in
-                        /// </summary>
-                        beds,
+                    /// <summary>
+                    /// Blocks cats can sit on.
+                    /// Blocks which can be slept in
+                    /// </summary>
+                    beds,
 
-                        /// <summary>
-                        /// Blocks in this groups does not allow water and honey to drip through them
-                        /// </summary>
-                        impermeable,
+                    /// <summary>
+                    /// Blocks in this groups does not allow water and honey to drip through them
+                    /// </summary>
+                    impermeable,
 
-                        /// <summary>
-                        /// Blocks leads can attach to
-                        /// Blocks which mobs see as fences while pathfinding
-                        /// </summary>
-                        fences,
+                    /// <summary>
+                    /// Blocks leads can attach to
+                    /// Blocks which mobs see as fences while pathfinding
+                    /// </summary>
+                    fences,
 
-                        /// <summary>
-                        /// Leaves wont decay around these blocks
-                        /// Trees can grow into blocks with this tag
-                        /// </summary>
-                        logs,
+                    /// <summary>
+                    /// Leaves wont decay around these blocks
+                    /// Trees can grow into blocks with this tag
+                    /// </summary>
+                    logs,
 
-                        /// <summary>
-                        /// When one of these blocks are bonemealed under water in a warm water biome the block duplicates
-                        /// </summary>
-                        underwater_bonemeals,
+                    /// <summary>
+                    /// When one of these blocks are bonemealed under water in a warm water biome the block duplicates
+                    /// </summary>
+                    underwater_bonemeals,
 
-                        /// <summary>
-                        /// Blocks in this group allows players to spawn on them
-                        /// </summary>
-                        valid_spawn,
+                    /// <summary>
+                    /// Blocks in this group allows players to spawn on them
+                    /// </summary>
+                    valid_spawn,
 
-                        /// <summary>
-                        /// Blocks in this group can be broken using shears
-                        /// If a block in this group is under a note block it will sound like a guitar
-                        /// </summary>
-                        wool,
+                    /// <summary>
+                    /// Blocks in this group can be broken using shears
+                    /// If a block in this group is under a note block it will sound like a guitar
+                    /// </summary>
+                    wool,
 
-                        /// <summary>
-                        /// Blocks in this group allows bamboo to be planted ontop
-                        /// </summary>
-                        bamboo_plantable,
+                    /// <summary>
+                    /// Blocks in this group allows bamboo to be planted ontop
+                    /// </summary>
+                    bamboo_plantable,
 
-                        /// <summary>
-                        /// Blocks the wither wont have easy to break
-                        /// </summary>
-                        wither_immune,
+                    /// <summary>
+                    /// Blocks the wither wont have easy to break
+                    /// </summary>
+                    wither_immune,
 
-                        /// <summary>
-                        /// Blocks the enderdragon wont destroy
-                        /// </summary>
-                        dragon_immune,
+                    /// <summary>
+                    /// Blocks the enderdragon wont destroy
+                    /// </summary>
+                    dragon_immune,
 
-                        /// <summary>
-                        /// Blocks bees can make grow
-                        /// </summary>
-                        bee_growables,
+                    /// <summary>
+                    /// Blocks bees can make grow
+                    /// </summary>
+                    bee_growables,
 
-                        /// <summary>
-                        /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
-                        /// </summary>
-                        beehives,
+                    /// <summary>
+                    /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
+                    /// </summary>
+                    beehives,
 
-                        /// <summary>
-                        /// Blocks bees can pollinate and remember
-                        /// </summary>
-                        flowers,
+                    /// <summary>
+                    /// Blocks bees can pollinate and remember
+                    /// </summary>
+                    flowers,
 
-                        /// <summary>
-                        /// Blocks fences doesn't connect to
-                        /// </summary>
-                        shulker_boxes,
+                    /// <summary>
+                    /// Blocks fences doesn't connect to
+                    /// </summary>
+                    shulker_boxes,
 
-                        /// <summary>
-                        /// Blocks cocoa beans can be placed on
-                        /// </summary>
-                        jungle_logs,
+                    /// <summary>
+                    /// Blocks cocoa beans can be placed on
+                    /// </summary>
+                    jungle_logs,
 
-                        /// <summary>
-                        /// Blocks mobs can't spawn on.
-                        /// Blocks minecarts can be dispenced on to.
-                        /// Blocks tnt minecarts doesn't destroy.
-                        /// </summary>
-                        rails,
+                    /// <summary>
+                    /// Blocks mobs can't spawn on.
+                    /// Blocks minecarts can be dispenced on to.
+                    /// Blocks tnt minecarts doesn't destroy.
+                    /// </summary>
+                    rails,
 
-                        /// <summary>
-                        /// Water doesn't break these blocks
-                        /// </summary>
-                        signs
-                    }
+                    /// <summary>
+                    /// Water doesn't break these blocks
+                    /// </summary>
+                    signs
                 }
 
                 /// <summary>
@@ -388,156 +376,133 @@ namespace SharpCraft
                 }
 
                 /// <summary>
-                /// item groups
+                /// Item groups
                 /// </summary>
-                public static class Items
+                public enum Items
                 {
-                    /// <summary>
-                    /// Normal item groups made by the game. These groups has no real uses other than grouping items
-                    /// </summary>
-                    public enum Normal
-                    {
-                        #pragma warning disable 1591
-                        acacia_logs,
-                        anvil,
-                        birch_logs,
-                        buttons,
-                        dark_oak_logs,
-                        doors,
-                        jungle_logs,
-                        leaves,
-                        oak_logs,
-                        rails,
-                        sand,
-                        slabs,
-                        spruce_logs,
-                        stairs,
-                        stone_bricks,
-                        tall_flowers
-                        #pragma warning restore 1591
-                    }
+#pragma warning disable 1591
+                    acacia_logs,
+                    anvil,
+                    birch_logs,
+                    buttons,
+                    dark_oak_logs,
+                    doors,
+                    jungle_logs,
+                    leaves,
+                    oak_logs,
+                    rails,
+                    sand,
+                    slabs,
+                    spruce_logs,
+                    stairs,
+                    stone_bricks,
+                    tall_flowers,
+#pragma warning restore 1591
 
                     /// <summary>
-                    /// special item groups which has special properties
+                    /// Items in this group can be used to repeair wooden tools and shields.
+                    /// Items which burns in a furnace for 300 ticks
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// Items in this group can be used to repeair wooden tools and shields.
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        planks,
-                        /// <summary>
-                        /// Dolphins swims to players with this item
-                        /// Can be feet to dolphins
-                        /// </summary>
-                        fishes,
-                        /// <summary>
-                        /// Items which can be used to breed bees
-                        /// </summary>
-                        flowers,
-                        /// <summary>
-                        /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
-                        /// </summary>
-                        lectern_books,
-                        /// <summary>
-                        /// Items which can be shot from a bow/crossbow
-                        /// </summary>
-                        arrows,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        banners,
-                        /// <summary>
-                        /// Items which burns in a furnace for 1200 ticks
-                        /// </summary>
-                        boats,
-                        /// <summary>
-                        /// Items which can be placed on llamas.
-                        /// Items which burns in a furnace for 67 ticks
-                        /// </summary>
-                        carpets,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        logs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        saplings,
-                        /// <summary>
-                        /// Items which burns in a furnace for 200 ticks
-                        /// </summary>
-                        signs,
-                        /// <summary>
-                        /// Items used for crafting suspicious stew.
-                        /// Items which can be fed to brown mushrooms.
-                        /// Items which bees follows
-                        /// </summary>
-                        small_flowers,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        wooden_buttons,
-                        /// <summary>
-                        /// Items which burns in a furnace for 200 ticks
-                        /// </summary>
-                        wooden_doors,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_pressure_plates,
-                        /// <summary>
-                        /// Items which burns in a furnace for 150 ticks
-                        /// </summary>
-                        wooden_slabs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_stairs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_trapdoors,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        wool,
-                    }
+                    planks,
+                    /// <summary>
+                    /// Dolphins swims to players with this item
+                    /// Can be feet to dolphins
+                    /// </summary>
+                    fishes,
+                    /// <summary>
+                    /// Items which can be used to breed bees
+                    /// </summary>
+                    flowers,
+                    /// <summary>
+                    /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
+                    /// </summary>
+                    lectern_books,
+                    /// <summary>
+                    /// Items which can be shot from a bow/crossbow
+                    /// </summary>
+                    arrows,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    banners,
+                    /// <summary>
+                    /// Items which burns in a furnace for 1200 ticks
+                    /// </summary>
+                    boats,
+                    /// <summary>
+                    /// Items which can be placed on llamas.
+                    /// Items which burns in a furnace for 67 ticks
+                    /// </summary>
+                    carpets,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    logs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    saplings,
+                    /// <summary>
+                    /// Items which burns in a furnace for 200 ticks
+                    /// </summary>
+                    signs,
+                    /// <summary>
+                    /// Items used for crafting suspicious stew.
+                    /// Items which can be fed to brown mushrooms.
+                    /// Items which bees follows
+                    /// </summary>
+                    small_flowers,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    wooden_buttons,
+                    /// <summary>
+                    /// Items which burns in a furnace for 200 ticks
+                    /// </summary>
+                    wooden_doors,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_pressure_plates,
+                    /// <summary>
+                    /// Items which burns in a furnace for 150 ticks
+                    /// </summary>
+                    wooden_slabs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_stairs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_trapdoors,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    wool,
                 }
 
                 /// <summary>
                 /// entity groups
                 /// </summary>
-                public static class Entities
+                public enum Entities
                 {
-                    /// <summary>
-                    /// Normal entity groups made by the game. These groups has no real uses other than grouping entities for advancements
-                    /// </summary>
-                    public enum Normal
-                    {
+                    
 #pragma warning disable 1591
-                        skeletons,
-                        arrows
+                    skeletons,
+                    arrows,
 #pragma warning restore 1591
-                    }
 
                     /// <summary>
-                    /// special entity groups which has special properties
+                    /// entities which can be in beehives
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// entities which can be in beehives
-                        /// </summary>
-                        beehive_inhabitors,
+                    beehive_inhabitors,
 
-                        /// <summary>
-                        /// Entities which glows when the bell rings.
-                        /// Entities which don't override ravager AI when riding on one
-                        /// </summary>
-                        raiders
-                    }
+                    /// <summary>
+                    /// Entities which glows when the bell rings.
+                    /// Entities which don't override ravager AI when riding on one
+                    /// </summary>
+                    raiders
                 }
             }
         }

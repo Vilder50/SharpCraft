@@ -11701,119 +11701,109 @@
             Block groups
             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Blocks.Normal">
-            <summary>
-            Normal block groups made by the game. These groups has no real uses other than grouping blocks
-            </summary>
-        </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Blocks.Special">
-            <summary>
-            Special block groups which has special properties
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.enderman_holdable">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.enderman_holdable">
             <summary>
             Endermen can only pick up blocks in this group
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.anvil">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.anvil">
             <summary>
             This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
             Changes the death message caused by the block as a falling block landing on and killing a player
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.banners">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.banners">
             <summary>
             Right clicking these blocks with a map marks it on the map
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.beds">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.beds">
             <summary>
             Blocks cats can sit on.
             Blocks which can be slept in
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.impermeable">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.impermeable">
             <summary>
             Blocks in this groups does not allow water and honey to drip through them
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.fences">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.fences">
             <summary>
             Blocks leads can attach to
             Blocks which mobs see as fences while pathfinding
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.logs">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.logs">
             <summary>
             Leaves wont decay around these blocks
             Trees can grow into blocks with this tag
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.underwater_bonemeals">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.underwater_bonemeals">
             <summary>
             When one of these blocks are bonemealed under water in a warm water biome the block duplicates
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.valid_spawn">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.valid_spawn">
             <summary>
             Blocks in this group allows players to spawn on them
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wool">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wool">
             <summary>
             Blocks in this group can be broken using shears
             If a block in this group is under a note block it will sound like a guitar
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.bamboo_plantable">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.bamboo_plantable">
             <summary>
             Blocks in this group allows bamboo to be planted ontop
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.wither_immune">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wither_immune">
             <summary>
             Blocks the wither wont have easy to break
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.dragon_immune">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.dragon_immune">
             <summary>
             Blocks the enderdragon wont destroy
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.bee_growables">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.bee_growables">
             <summary>
             Blocks bees can make grow
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.beehives">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.beehives">
             <summary>
             Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.flowers">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.flowers">
             <summary>
             Blocks bees can pollinate and remember
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.shulker_boxes">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.shulker_boxes">
             <summary>
             Blocks fences doesn't connect to
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.jungle_logs">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.jungle_logs">
             <summary>
             Blocks cocoa beans can be placed on
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.rails">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.rails">
             <summary>
             Blocks mobs can't spawn on.
             Blocks minecarts can be dispenced on to.
             Blocks tnt minecarts doesn't destroy.
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.Special.signs">
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.signs">
             <summary>
             Water doesn't break these blocks
             </summary>
@@ -11847,115 +11837,105 @@
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Items">
             <summary>
-            item groups
+            Item groups
             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Items.Normal">
-            <summary>
-            Normal item groups made by the game. These groups has no real uses other than grouping items
-            </summary>
-        </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Items.Special">
-            <summary>
-            special item groups which has special properties
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.planks">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.planks">
             <summary>
             Items in this group can be used to repeair wooden tools and shields.
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.fishes">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.fishes">
             <summary>
             Dolphins swims to players with this item
             Can be feet to dolphins
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.flowers">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.flowers">
             <summary>
             Items which can be used to breed bees
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.lectern_books">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.lectern_books">
             <summary>
             Items which can be placed on a lectern (only accepts <see cref="F:SharpCraft.ID.Item.writable_book"/> and <see cref="F:SharpCraft.ID.Item.written_book"/>)
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.arrows">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.arrows">
             <summary>
             Items which can be shot from a bow/crossbow
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.banners">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.banners">
             <summary>
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.boats">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.boats">
             <summary>
             Items which burns in a furnace for 1200 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.carpets">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.carpets">
             <summary>
             Items which can be placed on llamas.
             Items which burns in a furnace for 67 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.logs">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.logs">
             <summary>
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.saplings">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.saplings">
             <summary>
             Items which burns in a furnace for 100 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.signs">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.signs">
             <summary>
             Items which burns in a furnace for 200 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.small_flowers">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.small_flowers">
             <summary>
             Items used for crafting suspicious stew.
             Items which can be fed to brown mushrooms.
             Items which bees follows
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_buttons">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_buttons">
             <summary>
             Items which burns in a furnace for 100 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_doors">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_doors">
             <summary>
             Items which burns in a furnace for 200 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_pressure_plates">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_pressure_plates">
             <summary>
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_slabs">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_slabs">
             <summary>
             Items which burns in a furnace for 150 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_stairs">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_stairs">
             <summary>
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wooden_trapdoors">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_trapdoors">
             <summary>
             Items which burns in a furnace for 300 ticks
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.Special.wool">
+        <member name="F:SharpCraft.ID.Files.Groups.Items.wool">
             <summary>
             Items which burns in a furnace for 100 ticks
             </summary>
@@ -11965,22 +11945,12 @@
             entity groups
             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Entities.Normal">
-            <summary>
-            Normal entity groups made by the game. These groups has no real uses other than grouping entities for advancements
-            </summary>
-        </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Entities.Special">
-            <summary>
-            special entity groups which has special properties
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Entities.Special.beehive_inhabitors">
+        <member name="F:SharpCraft.ID.Files.Groups.Entities.beehive_inhabitors">
             <summary>
             entities which can be in beehives
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Entities.Special.raiders">
+        <member name="F:SharpCraft.ID.Files.Groups.Entities.raiders">
             <summary>
             Entities which glows when the bell rings.
             Entities which don't override ravager AI when riding on one
