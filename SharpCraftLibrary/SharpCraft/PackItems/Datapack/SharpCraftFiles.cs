@@ -13,12 +13,12 @@ namespace SharpCraft
         public BaseDatapack Datapack { get => datapack; set => datapack ??= value; }
 
         private const string setupFunctionName = "setup";
-        //private const string tickFunctionName = "tick";
+        private const string tickFunctionName = "tick";
 
         public PackNamespace? MinecraftNamespace { get; private set; }
         public PackNamespace? SharpCraftNamespace { get; private set; }
         public Function? SetupFunction { get; private set; }
-        //public Function TickFunction { get; private set; }
+        public Function? TickFunction { get; private set; }
 
         public bool IsChild()
         {
@@ -36,15 +36,15 @@ namespace SharpCraft
                     MinecraftNamespace = Datapack.Namespace<PackNamespace>("minecraft");
                     #pragma warning disable IDE0067
                     FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-                    //FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
+                    FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
                     #pragma warning restore IDE0067
 
                     SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
                     SetupFunction.World.LoadSquare.ForceLoad(Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
                     loadGroup.Items.Insert(0, SetupFunction);
 
-                    //TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
-                    //tickGroup.Items.Insert(0, TickFunction);
+                    TickFunction = SharpCraftNamespace.Function(tickFunctionName, BaseFile.WriteSetting.OnDispose);
+                    tickGroup.Items.Insert(0, TickFunction);
                 }
                 isSetup = true;
             }
@@ -376,6 +376,79 @@ namespace SharpCraft
                 #pragma warning restore IDE0067
             }
             return shulkerLootItem;
+        }
+        #endregion
+
+        #region objective events
+        private FunctionGroup? playerObjectiveEventChecker;
+        private Function? setupObjectiveEventsFunction;
+        private Dictionary<string,FunctionGroup>? objectiveEventFunctions;
+        public void AddObjectiveEventFunction(Function addEventToFunction, string objective, bool executeForeach)
+        {
+#pragma warning disable IDE0068
+            SetupFiles();
+            if (playerObjectiveEventChecker is null)
+            {
+                playerObjectiveEventChecker = SharpCraftNamespace!.Group("objectiveEvents/base", new List<IFunction>());
+
+                if (!IsChild())
+                {
+                    TickFunction!.Execute.As(ID.Selector.a);
+                    TickFunction.Execute.At(ID.Selector.s);
+                    TickFunction.World.Function(playerObjectiveEventChecker);
+                }
+            }
+            if (objectiveEventFunctions is null)
+            {
+                objectiveEventFunctions = new Dictionary<string, FunctionGroup>();
+            }
+
+            string dictionaryName = objective + (executeForeach ? "T" : "F");
+            if (objectiveEventFunctions.ContainsKey(dictionaryName))
+            {
+                objectiveEventFunctions[dictionaryName].Items.Add(addEventToFunction);
+                return;
+            }
+
+            //create event function
+            string objectiveName = objective.Replace("minecraft", "").Replace(".", "").Replace(":", "").Replace("_", "");
+            if (objectiveName.Length > 14)
+            {
+                objectiveName = objectiveName.Substring(0,14);
+            }
+            if (setupObjectiveEventsFunction is null)
+            {
+                setupObjectiveEventsFunction = SharpCraftNamespace!.Function("objectiveEvents/setup");
+                FunctionGroup setupObjectiveFunction = SharpCraftNamespace.Group("objectiveEvents/setup", new List<IFunction>() { setupObjectiveEventsFunction });
+                if (!IsChild())
+                {
+                    SetupFunction!.World.Function(setupObjectiveFunction);
+                }
+            }
+            Objective scoreObjective = setupObjectiveEventsFunction.World.Objective.Add("SE" + objectiveName, objective, "Sharpcraft event objective");
+            FunctionGroup eventGroup = SharpCraftNamespace!.Group("objectiveEvents/events/" + objectiveName, new List<IFunction>() { addEventToFunction });
+            Function eventFunction = SharpCraftNamespace!.Function("objectiveEvents/events/R" + objectiveName, f => 
+            { 
+                if (executeForeach)
+                {
+                    f.Entity.Score.Add(ID.Selector.s, scoreObjective, -1);
+                    f.Execute.IfScore(ID.Selector.s, scoreObjective, 1..);
+                    f.World.Function(f);
+                }
+                else
+                {
+                    f.Entity.Score.Set(ID.Selector.s, scoreObjective, 0);
+                }
+                f.World.Function(eventGroup);
+            });
+            Function shouldRunEventCheck = SharpCraftNamespace!.Function("objectiveEvents/events/C" + objectiveName, f =>
+            {
+                f.Execute.IfScore(ID.Selector.s, scoreObjective, 1..);
+                f.World.Function(eventFunction);
+            });
+            playerObjectiveEventChecker.Items.Add(shouldRunEventCheck);
+            objectiveEventFunctions.Add(objective, eventGroup);
+#pragma warning restore IDE0068
         }
         #endregion
     }

@@ -156,6 +156,39 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Creates a function which runs on a player if they have they get a score of the given type
+        /// </summary>
+        /// <param name="objectiveType">The score objective type. (See <see cref="ID.Objective"/> for a list of objectives)</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="setting">The setting used for writing the function file</param>
+        /// <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(string objectiveType, bool runForEachScore = false, string? functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function outFunction = Function(functionName, setting);
+            Datapack.GetItems<SharpCraftFiles>().AddObjectiveEventFunction(outFunction, objectiveType, runForEachScore);
+
+            return outFunction;
+        }
+
+        /// <summary>
+        /// Creates a function which runs on a player if they have they get a score of the given type
+        /// </summary>
+        /// <param name="objectiveType">The score objective type. (See <see cref="ID.Objective"/> for a list of objectives)</param>
+        /// <param name="creater">The function writer</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="setting">The setting used for writing the function file</param>
+        /// <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(string objectiveType, Function.FunctionWriter creater, bool runForEachScore = false, string? functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function outFunction = EventFunction(objectiveType, runForEachScore, functionName, setting);
+            creater(outFunction);
+
+            return outFunction;
+        }
+
+        /// <summary>
         /// Creates a new crafting table recipe with the given parameters
         /// </summary>
         /// <param name="name">The recipe's name</param>

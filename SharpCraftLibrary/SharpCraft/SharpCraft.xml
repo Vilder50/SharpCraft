@@ -15382,6 +15382,12 @@
             Class holding a list of datapack settings
             </summary>
         </member>
+        <member name="M:SharpCraft.DatapackSettings.GetSettings">
+            <summary>
+            Returns a list of settings a datapack can have
+            </summary>
+            <returns>The list of settings</returns>
+        </member>
         <member name="M:SharpCraft.DatapackSettings.LoadedChunkSetting(SharpCraft.IntVector)">
             <summary>
             Setting which choses what chunk sharpcraft can use for random things
@@ -24153,6 +24159,27 @@
             <param name="functionName">The name of the function</param>
             <param name="advancementName">The name of the advancement</param>
             <param name="setting">The settings for how to write the file</param>
+            <returns>The newly created function</returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.EventFunction(System.String,System.Boolean,System.String,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates a function which runs on a player if they have they get a score of the given type
+            </summary>
+            <param name="objectiveType">The score objective type. (See <see cref="T:SharpCraft.ID.Objective"/> for a list of objectives)</param>
+            <param name="functionName">The name of the function</param>
+            <param name="setting">The setting used for writing the function file</param>
+            <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
+            <returns>The newly created function</returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.EventFunction(System.String,SharpCraft.Function.FunctionWriter,System.Boolean,System.String,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates a function which runs on a player if they have they get a score of the given type
+            </summary>
+            <param name="objectiveType">The score objective type. (See <see cref="T:SharpCraft.ID.Objective"/> for a list of objectives)</param>
+            <param name="creater">The function writer</param>
+            <param name="functionName">The name of the function</param>
+            <param name="setting">The setting used for writing the function file</param>
+            <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
             <returns>The newly created function</returns>
         </member>
         <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.ItemType[0:,0:],SharpCraft.ID.Item,System.Int32,System.String,SharpCraft.BaseFile.WriteSetting)">

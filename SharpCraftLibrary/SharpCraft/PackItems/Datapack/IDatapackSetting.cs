@@ -18,6 +18,23 @@ namespace SharpCraft
     /// </summary>
     public class DatapackSettings
     {
+        private static DatapackSettings? singleton;
+
+        /// <summary>
+        /// Returns a list of settings a datapack can have
+        /// </summary>
+        /// <returns>The list of settings</returns>
+        public static DatapackSettings GetSettings()
+        {
+            singleton ??= new DatapackSettings();
+            return singleton;
+        }
+
+        private DatapackSettings()
+        {
+
+        }
+
         /// <summary>
         /// Setting which choses what chunk sharpcraft can use for random things
         /// </summary>
