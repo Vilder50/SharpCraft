@@ -100,5 +100,13 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.IsTrue(Utils.ValidateName("123", true, true, 3), "Name is 3 chars long");
             Assert.IsFalse(Utils.ValidateName("1234", true, true, 3), "Name is 4 chars long and shouldn't be allowed");
         }
+
+        [TestMethod]
+        public void TestValidateSingleSelectSelector()
+        {
+            Utils.ValidateSingleSelectSelector(ID.Selector.s, "a", "b");
+            Assert.ThrowsException<ArgumentException>(() => Utils.ValidateSingleSelectSelector(ID.Selector.a, "a", "b"));
+            Assert.ThrowsException<ArgumentNullException>(() => Utils.ValidateSingleSelectSelector(null, "a", "b"));
+        }
     }
 }

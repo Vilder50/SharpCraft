@@ -243,11 +243,14 @@ namespace SharpCraft.JsonText
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "JsonText Selector may not be null.")).IsLimited() && !(value is AllSelector))
+                if (value is AllSelector)
                 {
-                    throw new ArgumentException("JsonText doesn't allow selector which selects multiple entities", nameof(Selector));
+                    selector = value;
                 }
-                selector = value;
+                else
+                {
+                    selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(Score));
+                }
             }
         }
 

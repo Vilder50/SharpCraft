@@ -107,11 +107,7 @@ namespace SharpCraft
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(EntityDataLocation));
             }
         }
 

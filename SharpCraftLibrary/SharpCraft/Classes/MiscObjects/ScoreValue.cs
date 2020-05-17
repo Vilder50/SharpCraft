@@ -48,11 +48,7 @@ namespace SharpCraft
             get => selector;
             protected set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Selector may only select one score.", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreValue));
             }
         }
 

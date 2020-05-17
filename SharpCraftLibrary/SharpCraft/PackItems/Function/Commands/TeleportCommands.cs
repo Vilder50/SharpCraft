@@ -77,11 +77,7 @@ namespace SharpCraft.Commands
             get => toSelector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(ToSelector), "ToSelector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(ToSelector));
-                }
-                toSelector = value;
+                toSelector = Utils.ValidateSingleSelectSelector(value, nameof(ToSelector), nameof(TeleportToEntityCommand));
             }
         }
 
@@ -160,11 +156,7 @@ namespace SharpCraft.Commands
             get => facingSelector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(FacingSelector), "FacingSelector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(FacingSelector));
-                }
-                facingSelector = value;
+                facingSelector = Utils.ValidateSingleSelectSelector(value, nameof(FacingSelector), nameof(TeleportToFacingEntityCommand));
             }
         }
 

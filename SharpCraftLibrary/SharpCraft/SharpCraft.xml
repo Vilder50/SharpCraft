@@ -10198,6 +10198,17 @@
             <param name="maxLength">The maximum length of the name</param>
             <returns>True if the name is valid</returns>
         </member>
+        <member name="M:SharpCraft.Utils.ValidateSingleSelectSelector(SharpCraft.BaseSelector,System.String,System.String)">
+            <summary>
+            Throws an exception if the given selector either is null or selects more than one entity
+            </summary>
+            <param name="selector">The selector to check</param>
+            <param name="selectorName">The name of the selector variable</param>
+            <param name="classHolderName">The name of the class holding the selector variable</param>
+            <exception cref="T:System.ArgumentNullException">If the selector is null</exception>
+            <exception cref="T:System.ArgumentException">If the selector selects too many entities</exception>
+            <returns>The checked selector</returns>
+        </member>
         <member name="T:SharpCraft.UUID">
             <summary>
             An object used for UUID's

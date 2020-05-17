@@ -83,7 +83,7 @@ namespace SharpCraft
         {
             if (item is null)
             {
-                return "0";
+                return "air";
             }
             return item.Value.ToString().ToLower();
         }
@@ -204,6 +204,25 @@ namespace SharpCraft
                 return false;
             }
             return Regex.IsMatch(checkString, namePattern);
+        }
+
+        /// <summary>
+        /// Throws an exception if the given selector either is null or selects more than one entity
+        /// </summary>
+        /// <param name="selector">The selector to check</param>
+        /// <param name="selectorName">The name of the selector variable</param>
+        /// <param name="classHolderName">The name of the class holding the selector variable</param>
+        /// <exception cref="ArgumentNullException">If the selector is null</exception>
+        /// <exception cref="ArgumentException">If the selector selects too many entities</exception>
+        /// <returns>The checked selector</returns>
+        public static BaseSelector ValidateSingleSelectSelector(BaseSelector selector, string selectorName, string classHolderName)
+        {
+            if (!(selector ?? throw new ArgumentNullException(selectorName, selectorName + " may not be null.")).IsLimited())
+            {
+                throw new ArgumentException(classHolderName + " doesn't allow " + selectorName + " to select multiple entities", selectorName);
+            }
+
+            return selector;
         }
     }
 }
