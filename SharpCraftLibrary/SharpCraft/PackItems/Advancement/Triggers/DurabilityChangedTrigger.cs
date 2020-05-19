@@ -21,18 +21,18 @@ namespace SharpCraft.AdvancementObjects
         /// The item which was changed
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The amount of durability used
         /// </summary>
         [DataTag("conditions.delta","min","max",ID.NBTTagType.TagInt,true, JsonTag = true)]
-        public MCRange DurabilityUsed { get; set; }
+        public MCRange? DurabilityUsed { get; set; }
 
         /// <summary>
         /// The amount of durability left on the item
         /// </summary>
         [DataTag("conditions.durability", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public MCRange DurabilityLeft { get; set; }
+        public MCRange? DurabilityLeft { get; set; }
     }
 }

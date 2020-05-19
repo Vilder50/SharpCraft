@@ -12,8 +12,8 @@ namespace SharpCraft
     /// </summary>
     public class Storage
     {
-        private BasePackNamespace packNamespace;
-        private string name;
+        private BasePackNamespace packNamespace = null!;
+        private string name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="Storage"/>
@@ -44,11 +44,11 @@ namespace SharpCraft
                     throw new ArgumentException(nameof(Name), "Name may not be null or whitespace");
                 }
                 string loweredString = value.ToLower();
-                if (!Utils.ValidateName(loweredString,false,true))
+                if (!Utils.ValidateName(loweredString,false,true, null))
                 {
                     throw new ArgumentException("Storage name is invalid. Only accepts letters, numbers and /-._");
                 }
-                name = loweredString;
+                name = loweredString.Replace("\\", "/");
             }
         }
 
@@ -58,7 +58,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this storage</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + Name.Replace("\\", "/");
+            return PackNamespace.Name + ":" + Name;
         }
     }
 }

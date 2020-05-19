@@ -22,7 +22,7 @@ namespace SharpCraft
                 /// <returns>A loot table file name</returns>
                 public static string Block(Block block)
                 {
-                    return "blocks\\" + block;
+                    return "blocks/" + block;
                 }
 
                 /// <summary>
@@ -32,7 +32,7 @@ namespace SharpCraft
                 /// <returns>A loot table file name</returns>
                 public static string Entity(Entity entity)
                 {
-                    return "entities\\" + entity;
+                    return "entities/" + entity;
                 }
 
                 /// <summary>
@@ -42,7 +42,7 @@ namespace SharpCraft
                 /// <returns>A loot table file name</returns>
                 public static string EntitySheep(Color color)
                 {
-                    return "entities\\sheep\\" + color;
+                    return "entities/sheep/" + color;
                 }
 
                 /// <summary>
@@ -57,7 +57,7 @@ namespace SharpCraft
                     {
                         get
                         {
-                            return "gameplay\\fishing";
+                            return "gameplay/fishing";
                         }
                     }
 
@@ -69,7 +69,7 @@ namespace SharpCraft
                     {
                         get
                         {
-                            return "gameplay\\fishing\\fish";
+                            return "gameplay/fishing/fish";
                         }
                     }
 
@@ -81,7 +81,7 @@ namespace SharpCraft
                     {
                         get
                         {
-                            return "gameplay\\fishing\\junk";
+                            return "gameplay/fishing/junk";
                         }
                     }
 
@@ -93,7 +93,7 @@ namespace SharpCraft
                     {
                         get
                         {
-                            return "gameplay\\fishing\\treasure";
+                            return "gameplay/fishing/treasure";
                         }
                     }
                 }
@@ -104,26 +104,26 @@ namespace SharpCraft
                 public static class VillagerGifts
                 {
 #pragma warning disable 1591
-                    public static string ArmorerGift { get { return "gameplay\\hero_of_the_village\\armorer_gift"; } }
-                    public static string ButcherGift { get { return "gameplay\\hero_of_the_village\\butcher_gift"; } }
-                    public static string CartographerGift { get { return "gameplay\\hero_of_the_village\\cartographer_gift"; } }
-                    public static string ClericGift { get { return "gameplay\\hero_of_the_village\\cleric_gift"; } }
-                    public static string FarmerGift { get { return "gameplay\\hero_of_the_village\\farmer_gift"; } }
-                    public static string FishermanGift { get { return "gameplay\\hero_of_the_village\\fisherman_gift"; } }
-                    public static string FletcherGift { get { return "gameplay\\hero_of_the_village\\fletcher_gift"; } }
-                    public static string LeatherWorkerGift { get { return "gameplay\\hero_of_the_village\\leatherworker_gift"; } }
-                    public static string LibrarianGift { get { return "gameplay\\hero_of_the_village\\librarian_gift"; } }
-                    public static string MasonGift { get { return "gameplay\\hero_of_the_village\\mason_gift"; } }
-                    public static string ShepherdGift { get { return "gameplay\\hero_of_the_village\\shepherd_gift"; } }
-                    public static string ToolSmithGift { get { return "gameplay\\hero_of_the_village\\toolsmith_gift"; } }
-                    public static string WeaponsmithGift { get { return "gameplay\\hero_of_the_village\\weaponsmith_gift"; } }
+                    public static string ArmorerGift { get { return "gameplay/hero_of_the_village/armorer_gift"; } }
+                    public static string ButcherGift { get { return "gameplay/hero_of_the_village/butcher_gift"; } }
+                    public static string CartographerGift { get { return "gameplay/hero_of_the_village/cartographer_gift"; } }
+                    public static string ClericGift { get { return "gameplay/hero_of_the_village/cleric_gift"; } }
+                    public static string FarmerGift { get { return "gameplay/hero_of_the_village/farmer_gift"; } }
+                    public static string FishermanGift { get { return "gameplay/hero_of_the_village/fisherman_gift"; } }
+                    public static string FletcherGift { get { return "gameplay/hero_of_the_village/fletcher_gift"; } }
+                    public static string LeatherWorkerGift { get { return "gameplay/hero_of_the_village/leatherworker_gift"; } }
+                    public static string LibrarianGift { get { return "gameplay/hero_of_the_village/librarian_gift"; } }
+                    public static string MasonGift { get { return "gameplay/hero_of_the_village/mason_gift"; } }
+                    public static string ShepherdGift { get { return "gameplay/hero_of_the_village/shepherd_gift"; } }
+                    public static string ToolSmithGift { get { return "gameplay/hero_of_the_village/toolsmith_gift"; } }
+                    public static string WeaponsmithGift { get { return "gameplay/hero_of_the_village/weaponsmith_gift"; } }
 #pragma warning restore 1591
                 }
 
                 /// <summary>
                 /// A random item dropped by cats at the morning
                 /// </summary>
-                public static string CatMorningGift { get => "gameplay\\cat_morning_gift"; }
+                public static string CatMorningGift { get => "gameplay/cat_morning_gift"; }
 
                 /// <summary>
                 /// Loot tables Minecraft uses for chest loot
@@ -131,47 +131,47 @@ namespace SharpCraft
                 public static class Chest
                 {
                     #pragma warning disable 1591
-                    public static string AbandonedMineshaft { get => "chests\\abandoned_mineshaft"; }
-                    public static string BuriedTreasure { get => "chests\\buried_treasure"; }
-                    public static string DesertPyramid { get => "chests\\desert_pyramid"; }
-                    public static string EndCityTreasure { get => "chests\\end_city_treasure"; }
-                    public static string IglooChest { get => "chests\\igloo_chest"; }
-                    public static string JungleTemple { get => "chests\\jungle_temple"; }
-                    public static string JungleTempleDispenser { get => "chests\\jungle_temple_dispenser"; }
-                    public static string NetherBridge { get => "chests\\nether_bridge"; }
-                    public static string ShipwreckMap { get => "chests\\shipwreck_map"; }
-                    public static string ShipwreckSupply { get => "chests\\shipwreck_supply"; }
-                    public static string ShipwreckTreasure { get => "chests\\shipwreck_treasure"; }
-                    public static string SimpleDungeon { get => "chests\\simple_dungeon"; }
-                    public static string SpawnBonusChest { get => "chests\\spawn_bonus_chest"; }
-                    public static string StrongholdCorridor { get => "chests\\stronghold_corridor"; }
-                    public static string StrongholdCrossing { get => "chests\\stronghold_crossing"; }
-                    public static string StrongholdLibrary { get => "chests\\stronghold_library"; }
-                    public static string UnderwaterRuinBig { get => "chests\\underwater_ruin_big"; }
-                    public static string UnderwaterRuinSmall { get => "chests\\underwater_ruin_small"; }
-                    public static string WoodlandMansion { get => "chests\\woodland_mansion"; }
+                    public static string AbandonedMineshaft { get => "chests/abandoned_mineshaft"; }
+                    public static string BuriedTreasure { get => "chests/buried_treasure"; }
+                    public static string DesertPyramid { get => "chests/desert_pyramid"; }
+                    public static string EndCityTreasure { get => "chests/end_city_treasure"; }
+                    public static string IglooChest { get => "chests/igloo_chest"; }
+                    public static string JungleTemple { get => "chests/jungle_temple"; }
+                    public static string JungleTempleDispenser { get => "chests/jungle_temple_dispenser"; }
+                    public static string NetherBridge { get => "chests/nether_bridge"; }
+                    public static string ShipwreckMap { get => "chests/shipwreck_map"; }
+                    public static string ShipwreckSupply { get => "chests/shipwreck_supply"; }
+                    public static string ShipwreckTreasure { get => "chests/shipwreck_treasure"; }
+                    public static string SimpleDungeon { get => "chests/simple_dungeon"; }
+                    public static string SpawnBonusChest { get => "chests/spawn_bonus_chest"; }
+                    public static string StrongholdCorridor { get => "chests/stronghold_corridor"; }
+                    public static string StrongholdCrossing { get => "chests/stronghold_crossing"; }
+                    public static string StrongholdLibrary { get => "chests/stronghold_library"; }
+                    public static string UnderwaterRuinBig { get => "chests/underwater_ruin_big"; }
+                    public static string UnderwaterRuinSmall { get => "chests/underwater_ruin_small"; }
+                    public static string WoodlandMansion { get => "chests/woodland_mansion"; }
 
                     /// <summary>
                     /// Loot tables for chests in villagers
                     /// </summary>
                     public static class Village 
                     {
-                        public static string Armorer { get => "chests\\village\\village_armorer"; }
-                        public static string Butcher { get => "chests\\village\\village_butcher"; }
-                        public static string Cartographer { get => "chests\\village\\village_cartographer"; }
-                        public static string DesertHouse { get => "chests\\village\\village_desert_house"; }
-                        public static string Fisher { get => "chests\\village\\village_fisher"; }
-                        public static string Fletcher { get => "chests\\village\\village_fletcher"; }
-                        public static string Mason { get => "chests\\village\\village_mason"; }
-                        public static string PlainsHouse { get => "chests\\village\\village_plains_house"; }
-                        public static string SavannaHouse { get => "chests\\village\\village_savanna_house"; }
-                        public static string Shepherd { get => "chests\\village\\village_shepherd"; }
-                        public static string SnowyHouse { get => "chests\\village\\village_snowy_house"; }
-                        public static string TaigaHouse { get => "chests\\village\\village_taiga_house"; }
-                        public static string Tannery { get => "chests\\village\\village_tannery"; }
-                        public static string Temple { get => "chests\\village\\village_temple"; }
-                        public static string Toolsmith { get => "chests\\village\\village_toolsmith"; }
-                        public static string Weaponsmith { get => "chests\\village\\village_weaponsmith"; }
+                        public static string Armorer { get => "chests/village/village_armorer"; }
+                        public static string Butcher { get => "chests/village/village_butcher"; }
+                        public static string Cartographer { get => "chests/village/village_cartographer"; }
+                        public static string DesertHouse { get => "chests/village/village_desert_house"; }
+                        public static string Fisher { get => "chests/village/village_fisher"; }
+                        public static string Fletcher { get => "chests/village/village_fletcher"; }
+                        public static string Mason { get => "chests/village/village_mason"; }
+                        public static string PlainsHouse { get => "chests/village/village_plains_house"; }
+                        public static string SavannaHouse { get => "chests/village/village_savanna_house"; }
+                        public static string Shepherd { get => "chests/village/village_shepherd"; }
+                        public static string SnowyHouse { get => "chests/village/village_snowy_house"; }
+                        public static string TaigaHouse { get => "chests/village/village_taiga_house"; }
+                        public static string Tannery { get => "chests/village/village_tannery"; }
+                        public static string Temple { get => "chests/village/village_temple"; }
+                        public static string Toolsmith { get => "chests/village/village_toolsmith"; }
+                        public static string Weaponsmith { get => "chests/village/village_weaponsmith"; }
                     }
 
                     #pragma warning restore 1591
@@ -199,164 +199,152 @@ namespace SharpCraft
                     /// </summary>
                     tick
                 }
-
+                
                 /// <summary>
                 /// Block groups
                 /// </summary>
-                public static class Blocks
+                public enum Blocks
                 {
-                    /// <summary>
-                    /// Normal block groups made by the game. These groups has no real uses other than grouping blocks
-                    /// </summary>
-                    public enum Normal
-                    {
-                        #pragma warning disable 1591
-                        acacia_logs,
-                        birch_logs,
-                        buttons,
-                        carpets,
-                        coral_blocks,
-                        corals,
-                        dark_oak_logs,
-                        doors,
-                        flower_pots,
-                        ice,
-                        leaves,
-                        oak_logs,
-                        planks,
-                        sand,
-                        saplings,
-                        slabs,
-                        spruce_logs,
-                        stairs,
-                        stone_bricks,
-                        wall_corals,
-                        wooden_buttons,
-                        wooden_doors,
-                        wooden_pressure_plates,
-                        wooden_slabs,
-                        wooden_stairs,
-                        small_flowers,
-                        crops,
-                        tall_flowers,
-                        standing_signs,
-                        wall_signs,
-                        walls
-                        #pragma warning restore 1591
-                    }
+                    #pragma warning disable 1591
+                    acacia_logs,
+                    birch_logs,
+                    buttons,
+                    carpets,
+                    coral_blocks,
+                    corals,
+                    dark_oak_logs,
+                    doors,
+                    flower_pots,
+                    ice,
+                    leaves,
+                    oak_logs,
+                    planks,
+                    sand,
+                    saplings,
+                    slabs,
+                    spruce_logs,
+                    stairs,
+                    stone_bricks,
+                    wall_corals,
+                    wooden_buttons,
+                    wooden_doors,
+                    wooden_pressure_plates,
+                    wooden_slabs,
+                    wooden_stairs,
+                    small_flowers,
+                    crops,
+                    tall_flowers,
+                    standing_signs,
+                    wall_signs,
+                    walls,
+                    #pragma warning restore 1591
 
                     /// <summary>
-                    /// Special block groups which has special properties
+                    /// Endermen can only pick up blocks in this group
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// Endermen can only pick up blocks in this group
-                        /// </summary>
-                        enderman_holdable,
+                    enderman_holdable,
 
-                        /// <summary>
-                        /// This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
-                        /// Changes the death message caused by the block as a falling block landing on and killing a player
-                        /// </summary>
-                        anvil,
+                    /// <summary>
+                    /// This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
+                    /// Changes the death message caused by the block as a falling block landing on and killing a player
+                    /// </summary>
+                    anvil,
 
-                        /// <summary>
-                        /// Right clicking these blocks with a map marks it on the map
-                        /// </summary>
-                        banners,
+                    /// <summary>
+                    /// Right clicking these blocks with a map marks it on the map
+                    /// </summary>
+                    banners,
 
-                        /// <summary>
-                        /// Blocks cats can sit on.
-                        /// Blocks which can be slept in
-                        /// </summary>
-                        beds,
+                    /// <summary>
+                    /// Blocks cats can sit on.
+                    /// Blocks which can be slept in
+                    /// </summary>
+                    beds,
 
-                        /// <summary>
-                        /// Blocks in this groups does not allow water and honey to drip through them
-                        /// </summary>
-                        impermeable,
+                    /// <summary>
+                    /// Blocks in this groups does not allow water and honey to drip through them
+                    /// </summary>
+                    impermeable,
 
-                        /// <summary>
-                        /// Blocks leads can attach to
-                        /// Blocks which mobs see as fences while pathfinding
-                        /// </summary>
-                        fences,
+                    /// <summary>
+                    /// Blocks leads can attach to
+                    /// Blocks which mobs see as fences while pathfinding
+                    /// </summary>
+                    fences,
 
-                        /// <summary>
-                        /// Leaves wont decay around these blocks
-                        /// Trees can grow into blocks with this tag
-                        /// </summary>
-                        logs,
+                    /// <summary>
+                    /// Leaves wont decay around these blocks
+                    /// Trees can grow into blocks with this tag
+                    /// </summary>
+                    logs,
 
-                        /// <summary>
-                        /// When one of these blocks are bonemealed under water in a warm water biome the block duplicates
-                        /// </summary>
-                        underwater_bonemeals,
+                    /// <summary>
+                    /// When one of these blocks are bonemealed under water in a warm water biome the block duplicates
+                    /// </summary>
+                    underwater_bonemeals,
 
-                        /// <summary>
-                        /// Blocks in this group allows players to spawn on them
-                        /// </summary>
-                        valid_spawn,
+                    /// <summary>
+                    /// Blocks in this group allows players to spawn on them
+                    /// </summary>
+                    valid_spawn,
 
-                        /// <summary>
-                        /// Blocks in this group can be broken using shears
-                        /// If a block in this group is under a note block it will sound like a guitar
-                        /// </summary>
-                        wool,
+                    /// <summary>
+                    /// Blocks in this group can be broken using shears
+                    /// If a block in this group is under a note block it will sound like a guitar
+                    /// </summary>
+                    wool,
 
-                        /// <summary>
-                        /// Blocks in this group allows bamboo to be planted ontop
-                        /// </summary>
-                        bamboo_plantable,
+                    /// <summary>
+                    /// Blocks in this group allows bamboo to be planted ontop
+                    /// </summary>
+                    bamboo_plantable,
 
-                        /// <summary>
-                        /// Blocks the wither wont have easy to break
-                        /// </summary>
-                        wither_immune,
+                    /// <summary>
+                    /// Blocks the wither wont have easy to break
+                    /// </summary>
+                    wither_immune,
 
-                        /// <summary>
-                        /// Blocks the enderdragon wont destroy
-                        /// </summary>
-                        dragon_immune,
+                    /// <summary>
+                    /// Blocks the enderdragon wont destroy
+                    /// </summary>
+                    dragon_immune,
 
-                        /// <summary>
-                        /// Blocks bees can make grow
-                        /// </summary>
-                        bee_growables,
+                    /// <summary>
+                    /// Blocks bees can make grow
+                    /// </summary>
+                    bee_growables,
 
-                        /// <summary>
-                        /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
-                        /// </summary>
-                        beehives,
+                    /// <summary>
+                    /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
+                    /// </summary>
+                    beehives,
 
-                        /// <summary>
-                        /// Blocks bees can pollinate and remember
-                        /// </summary>
-                        flowers,
+                    /// <summary>
+                    /// Blocks bees can pollinate and remember
+                    /// </summary>
+                    flowers,
 
-                        /// <summary>
-                        /// Blocks fences doesn't connect to
-                        /// </summary>
-                        shulker_boxes,
+                    /// <summary>
+                    /// Blocks fences doesn't connect to
+                    /// </summary>
+                    shulker_boxes,
 
-                        /// <summary>
-                        /// Blocks cocoa beans can be placed on
-                        /// </summary>
-                        jungle_logs,
+                    /// <summary>
+                    /// Blocks cocoa beans can be placed on
+                    /// </summary>
+                    jungle_logs,
 
-                        /// <summary>
-                        /// Blocks mobs can't spawn on.
-                        /// Blocks minecarts can be dispenced on to.
-                        /// Blocks tnt minecarts doesn't destroy.
-                        /// </summary>
-                        rails,
+                    /// <summary>
+                    /// Blocks mobs can't spawn on.
+                    /// Blocks minecarts can be dispenced on to.
+                    /// Blocks tnt minecarts doesn't destroy.
+                    /// </summary>
+                    rails,
 
-                        /// <summary>
-                        /// Water doesn't break these blocks
-                        /// </summary>
-                        signs
-                    }
+                    /// <summary>
+                    /// Water doesn't break these blocks
+                    /// </summary>
+                    signs
                 }
 
                 /// <summary>
@@ -388,156 +376,133 @@ namespace SharpCraft
                 }
 
                 /// <summary>
-                /// item groups
+                /// Item groups
                 /// </summary>
-                public static class Items
+                public enum Items
                 {
-                    /// <summary>
-                    /// Normal item groups made by the game. These groups has no real uses other than grouping items
-                    /// </summary>
-                    public enum Normal
-                    {
-                        #pragma warning disable 1591
-                        acacia_logs,
-                        anvil,
-                        birch_logs,
-                        buttons,
-                        dark_oak_logs,
-                        doors,
-                        jungle_logs,
-                        leaves,
-                        oak_logs,
-                        rails,
-                        sand,
-                        slabs,
-                        spruce_logs,
-                        stairs,
-                        stone_bricks,
-                        tall_flowers
-                        #pragma warning restore 1591
-                    }
+#pragma warning disable 1591
+                    acacia_logs,
+                    anvil,
+                    birch_logs,
+                    buttons,
+                    dark_oak_logs,
+                    doors,
+                    jungle_logs,
+                    leaves,
+                    oak_logs,
+                    rails,
+                    sand,
+                    slabs,
+                    spruce_logs,
+                    stairs,
+                    stone_bricks,
+                    tall_flowers,
+#pragma warning restore 1591
 
                     /// <summary>
-                    /// special item groups which has special properties
+                    /// Items in this group can be used to repeair wooden tools and shields.
+                    /// Items which burns in a furnace for 300 ticks
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// Items in this group can be used to repeair wooden tools and shields.
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        planks,
-                        /// <summary>
-                        /// Dolphins swims to players with this item
-                        /// Can be feet to dolphins
-                        /// </summary>
-                        fishes,
-                        /// <summary>
-                        /// Items which can be used to breed bees
-                        /// </summary>
-                        flowers,
-                        /// <summary>
-                        /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
-                        /// </summary>
-                        lectern_books,
-                        /// <summary>
-                        /// Items which can be shot from a bow/crossbow
-                        /// </summary>
-                        arrows,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        banners,
-                        /// <summary>
-                        /// Items which burns in a furnace for 1200 ticks
-                        /// </summary>
-                        boats,
-                        /// <summary>
-                        /// Items which can be placed on llamas.
-                        /// Items which burns in a furnace for 67 ticks
-                        /// </summary>
-                        carpets,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        logs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        saplings,
-                        /// <summary>
-                        /// Items which burns in a furnace for 200 ticks
-                        /// </summary>
-                        signs,
-                        /// <summary>
-                        /// Items used for crafting suspicious stew.
-                        /// Items which can be fed to brown mushrooms.
-                        /// Items which bees follows
-                        /// </summary>
-                        small_flowers,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        wooden_buttons,
-                        /// <summary>
-                        /// Items which burns in a furnace for 200 ticks
-                        /// </summary>
-                        wooden_doors,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_pressure_plates,
-                        /// <summary>
-                        /// Items which burns in a furnace for 150 ticks
-                        /// </summary>
-                        wooden_slabs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_stairs,
-                        /// <summary>
-                        /// Items which burns in a furnace for 300 ticks
-                        /// </summary>
-                        wooden_trapdoors,
-                        /// <summary>
-                        /// Items which burns in a furnace for 100 ticks
-                        /// </summary>
-                        wool,
-                    }
+                    planks,
+                    /// <summary>
+                    /// Dolphins swims to players with this item
+                    /// Can be feet to dolphins
+                    /// </summary>
+                    fishes,
+                    /// <summary>
+                    /// Items which can be used to breed bees
+                    /// </summary>
+                    flowers,
+                    /// <summary>
+                    /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
+                    /// </summary>
+                    lectern_books,
+                    /// <summary>
+                    /// Items which can be shot from a bow/crossbow
+                    /// </summary>
+                    arrows,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    banners,
+                    /// <summary>
+                    /// Items which burns in a furnace for 1200 ticks
+                    /// </summary>
+                    boats,
+                    /// <summary>
+                    /// Items which can be placed on llamas.
+                    /// Items which burns in a furnace for 67 ticks
+                    /// </summary>
+                    carpets,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    logs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    saplings,
+                    /// <summary>
+                    /// Items which burns in a furnace for 200 ticks
+                    /// </summary>
+                    signs,
+                    /// <summary>
+                    /// Items used for crafting suspicious stew.
+                    /// Items which can be fed to brown mushrooms.
+                    /// Items which bees follows
+                    /// </summary>
+                    small_flowers,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    wooden_buttons,
+                    /// <summary>
+                    /// Items which burns in a furnace for 200 ticks
+                    /// </summary>
+                    wooden_doors,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_pressure_plates,
+                    /// <summary>
+                    /// Items which burns in a furnace for 150 ticks
+                    /// </summary>
+                    wooden_slabs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_stairs,
+                    /// <summary>
+                    /// Items which burns in a furnace for 300 ticks
+                    /// </summary>
+                    wooden_trapdoors,
+                    /// <summary>
+                    /// Items which burns in a furnace for 100 ticks
+                    /// </summary>
+                    wool,
                 }
 
                 /// <summary>
                 /// entity groups
                 /// </summary>
-                public static class Entities
+                public enum Entities
                 {
-                    /// <summary>
-                    /// Normal entity groups made by the game. These groups has no real uses other than grouping entities for advancements
-                    /// </summary>
-                    public enum Normal
-                    {
+                    
 #pragma warning disable 1591
-                        skeletons,
-                        arrows
+                    skeletons,
+                    arrows,
 #pragma warning restore 1591
-                    }
 
                     /// <summary>
-                    /// special entity groups which has special properties
+                    /// entities which can be in beehives
                     /// </summary>
-                    public enum Special
-                    {
-                        /// <summary>
-                        /// entities which can be in beehives
-                        /// </summary>
-                        beehive_inhabitors,
+                    beehive_inhabitors,
 
-                        /// <summary>
-                        /// Entities which glows when the bell rings.
-                        /// Entities which don't override ravager AI when riding on one
-                        /// </summary>
-                        raiders
-                    }
+                    /// <summary>
+                    /// Entities which glows when the bell rings.
+                    /// Entities which don't override ravager AI when riding on one
+                    /// </summary>
+                    raiders
                 }
             }
         }

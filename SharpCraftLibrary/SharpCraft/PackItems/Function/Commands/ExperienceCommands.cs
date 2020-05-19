@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceModifyCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceModifyCommand"/>
@@ -63,7 +63,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExperienceGetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExperienceGetCommand"/>
@@ -84,11 +84,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ExperienceGetCommand));
             }
         }
 

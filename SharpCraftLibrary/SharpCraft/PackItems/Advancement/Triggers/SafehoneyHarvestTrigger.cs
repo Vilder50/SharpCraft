@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The item the player used for harvisting
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The block the honey was harvested from
         /// </summary>
         [DataTag("conditions.block", "block", "tag", "nbt", "state", true, JsonTag = true)]
-        public Block Block { get; set; }
+        public Block? Block { get; set; }
     }
 }

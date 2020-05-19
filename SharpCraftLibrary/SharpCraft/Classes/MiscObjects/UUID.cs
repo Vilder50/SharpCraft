@@ -67,11 +67,13 @@ namespace SharpCraft
         /// <summary>
         /// the UUIDLeast
         /// </summary>
+        [CompoundPath(1)]
         public long Least { get; protected set; }
 
         /// <summary>
         /// the UUIDMost
         /// </summary>
+        [CompoundPath(0)]
         public long Most { get; protected set; }
 
         /// <summary>
@@ -95,8 +97,13 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: UUIDMost path, 1: UUIDLeast path</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
+
             if (conversionData.Length != 2)
             {
                 throw new ArgumentException("There has to be exacly 2 conversion params to convert a UUID to a data object.");
@@ -123,7 +130,7 @@ namespace SharpCraft
         /// <param name="asType">The type to convert the uuid into</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagString)
             {

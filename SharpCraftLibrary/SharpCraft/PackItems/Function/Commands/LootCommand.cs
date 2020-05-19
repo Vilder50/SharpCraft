@@ -29,7 +29,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class SpawnTarget : ILootTarget
         {
-            private Vector coordinates;
+            private Vector coordinates = null!;
 
             /// <summary>
             /// Intializes a new <see cref="SpawnTarget"/>
@@ -67,8 +67,8 @@ namespace SharpCraft.Commands
         /// </summary>
         public class EntityTarget : ILootTarget
         {
-            private BaseSelector selector;
-            private IItemSlot slot;
+            private BaseSelector selector = null!;
+            private IItemSlot slot = null!;
 
             /// <summary>
             /// Intializes a new <see cref="EntityTarget"/>
@@ -120,8 +120,8 @@ namespace SharpCraft.Commands
         /// </summary>
         public class BlockTarget : ILootTarget
         {
-            private Vector coordinates;
-            private IItemSlot slot;
+            private Vector coordinates = null!;
+            private IItemSlot slot = null!;
 
             /// <summary>
             /// Intializes a new <see cref="BlockTarget"/>
@@ -173,7 +173,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class GiveTarget : ILootTarget
         {
-            private BaseSelector selector;
+            private BaseSelector selector = null!;
 
             /// <summary>
             /// Intializes a new <see cref="EntityTarget"/>
@@ -211,7 +211,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class InsertTarget : ILootTarget
         {
-            private Vector coordinates;
+            private Vector coordinates = null!;
 
             /// <summary>
             /// Intializes a new <see cref="InsertTarget"/>
@@ -267,8 +267,8 @@ namespace SharpCraft.Commands
         /// </summary>
         public class FishHandSource : ILootSource
         {
-            private ILootTable loottable;
-            private Vector fishLocation;
+            private ILootTable loottable = null!;
+            private Vector fishLocation = null!;
 
             /// <summary>
             /// Intailizes a new <see cref="FishHandSource"/>
@@ -320,9 +320,9 @@ namespace SharpCraft.Commands
         /// </summary>
         public class FishItemSource : ILootSource
         {
-            private ILootTable loottable;
-            private Vector fishLocation;
-            private Item usedItem;
+            private ILootTable loottable = null!;
+            private Vector fishLocation = null!;
+            private Item usedItem = null!;
 
             /// <summary>
             /// Intializes a new <see cref="FishItemSource"/>
@@ -378,7 +378,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class LoottableSource : ILootSource
         {
-            private ILootTable loottable;
+            private ILootTable loottable = null!;
 
             /// <summary>
             /// Intializes a new <see cref="LoottableSource"/>
@@ -413,7 +413,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class KillSource : ILootSource
         {
-            private BaseSelector selector;
+            private BaseSelector selector = null!;
 
             /// <summary>
             /// Intializes a new <see cref="KillSource"/>
@@ -432,11 +432,7 @@ namespace SharpCraft.Commands
                 get => selector;
                 set
                 {
-                    if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                    {
-                        throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                    }
-                    selector = value;
+                    selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(KillSource));
                 }
             }
 
@@ -455,7 +451,7 @@ namespace SharpCraft.Commands
         /// </summary>
         public class MineHandSource : ILootSource
         {
-            private Vector coordinates;
+            private Vector coordinates = null!;
 
             /// <summary>
             /// Intializes a new <see cref="MineHandSource"/>
@@ -500,8 +496,8 @@ namespace SharpCraft.Commands
         /// </summary>
         public class MineItemSource : ILootSource
         {
-            private Vector coordinates;
-            private Item usedItem;
+            private Vector coordinates = null!;
+            private Item usedItem = null!;
 
             /// <summary>
             /// Intializes a new <see cref="MineHandSource"/>
@@ -551,8 +547,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class LootCommand : BaseCommand
     {
-        private LootSources.ILootSource source;
-        private LootTargets.ILootTarget target;
+        private LootSources.ILootSource source = null!;
+        private LootTargets.ILootTarget target = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LootCommand"/>

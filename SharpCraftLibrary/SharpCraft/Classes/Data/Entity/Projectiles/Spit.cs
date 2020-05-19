@@ -1,25 +1,22 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// An object for llama spit entities
+    /// </summary>
+    public class LlamaSpit : BasicEntity
     {
         /// <summary>
-        /// An object for llama spit entities
+        /// Creates new llama spit
         /// </summary>
-        public class LlamaSpit : EntityBasic
-        {
-            /// <summary>
-            /// Creates new llama spit
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public LlamaSpit(ID.Entity? type = ID.Entity.llama_spit) : base(type) { }
+        /// <param name="type">the type of entity</param>
+        public LlamaSpit(ID.Entity? type = ID.Entity.llama_spit) : base(type) { }
 
-            /// <summary>
-            /// The owner of the spit
-            /// </summary>
-            [Data.DataTag("Owner","OwnerUUIDMost","OwnerUUIDLeast")]
-            public UUID OwnerUUID { get; set; }
-        }
+        /// <summary>
+        /// The owner of the spit
+        /// </summary>
+        [Data.DataTag("Owner", "OwnerUUIDMost", "OwnerUUIDLeast")]
+        public UUID? OwnerUUID { get; set; }
     }
 }

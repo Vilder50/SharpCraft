@@ -17,7 +17,7 @@ namespace SharpCraft
         /// <param name="amount">The amount to modify with</param>
         /// <param name="operation">The way to modify</param>
         /// <param name="uuid">The UUID of the modifier. Leave null to generate a UUID.</param>
-        public AttributeModifier(double amount, ID.AttributeOperation operation, string name = null, UUID uuid = null)
+        public AttributeModifier(double amount, ID.AttributeOperation operation, string? name = null, UUID? uuid = null)
         {
             Amount = amount;
             Operation = operation;
@@ -37,7 +37,7 @@ namespace SharpCraft
         /// The name of the modifier
         /// </summary>
         [DataTag]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The amount to modify with
@@ -55,6 +55,6 @@ namespace SharpCraft
         /// The UUID of the modifier
         /// </summary>
         [DataTag((object)"UUIDMost", "UUIDLeast", Merge = true)]
-        public UUID UUID { get; set; }
+        public UUID? UUID { get; set; }
     }
 }

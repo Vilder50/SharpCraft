@@ -12,9 +12,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ReplaceitemBlockCommand : BaseCommand
     {
-        private IItemSlot slot;
-        private Vector coordinates;
-        private Item item;
+        private IItemSlot slot = null!;
+        private Vector coordinates = null!;
+        private Item item = null!;
         private int count;
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ReplaceitemEntityCommand : BaseCommand
     {
-        private IItemSlot slot;
-        private BaseSelector selector;
-        private Item item;
+        private IItemSlot slot = null!;
+        private BaseSelector selector = null!;
+        private Item item = null!;
         private int count;
 
         /// <summary>

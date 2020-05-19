@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectGiveCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
         private int seconds;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SharpCraft.Commands
             get => seconds; 
             set
             {
-                if (value < 0 || value > 1000000)
+                if (value < 0 || value > SharpCraft.Effect.MaxEffectGiveTime)
                 {
                     throw new ArgumentOutOfRangeException(nameof(Seconds), "Seconds may not be less than 0 or higher than 1000000");
                 }
@@ -110,7 +110,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EffectClearCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EffectClearCommand"/>

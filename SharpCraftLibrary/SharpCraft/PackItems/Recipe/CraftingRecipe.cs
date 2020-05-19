@@ -12,7 +12,7 @@ namespace SharpCraft
     /// </summary>
     public class CraftingRecipe : BaseRecipe
     {
-        private ItemType[,] recipe;
+        private ItemType[,] recipe = null!;
         private ID.Item result;
         private int count;
 
@@ -27,7 +27,7 @@ namespace SharpCraft
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected CraftingRecipe(bool _, BasePackNamespace packNamespace, string fileName, ItemType[,] recipe, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shaped")
+        protected CraftingRecipe(bool _, BasePackNamespace packNamespace, string? fileName, ItemType[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shaped")
         {
             Recipe = recipe;
             Result = result;
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <param name="recipe">The recipe for crafting the item. Use <see cref="ID.Item.air"/> or null for empty slots</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public CraftingRecipe(BasePackNamespace packNamespace, string fileName, ItemType[,] recipe, ID.Item result, int count = 1, string group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipe, result, count, group, writeSetting)
+        public CraftingRecipe(BasePackNamespace packNamespace, string? fileName, ItemType[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipe, result, count, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -178,7 +178,7 @@ namespace SharpCraft
         protected override void AfterDispose()
         {
             base.AfterDispose();
-            recipe = null;
+            recipe = null!;
         }
     }
 }

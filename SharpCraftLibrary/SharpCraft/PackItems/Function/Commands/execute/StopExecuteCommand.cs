@@ -15,7 +15,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>NULL</returns>
-        public override string GetCommandString()
+        public override string? GetCommandString()
         {
             return null;
         }

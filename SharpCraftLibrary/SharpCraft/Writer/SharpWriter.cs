@@ -69,7 +69,7 @@ namespace SharpCraft.Writer
                     {
                         if (type.IsClass && !type.IsAbstract && tWriterType.IsAssignableFrom(type))
                         {
-                            writers.Add((TWriter)Activator.CreateInstance(type));
+                            writers.Add((TWriter)Activator.CreateInstance(type)!);
                         }
                     }
                 }

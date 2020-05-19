@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft.IBlock
+namespace SharpCraft.Blocks.Interfaces
 {
     /// <summary>
     /// Defines the block states for the directions the block is connected to

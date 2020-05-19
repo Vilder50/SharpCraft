@@ -1,25 +1,22 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// Entity data for snowmen
+    /// </summary>
+    public class Snowman : Mob
     {
         /// <summary>
-        /// Entity data for snowmen
+        /// Creates a new snowman
         /// </summary>
-        public class Snowman : BaseMob
-        {
-            /// <summary>
-            /// Creates a new snowman
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public Snowman(ID.Entity? type = ID.Entity.snow_golem) : base(type) { }
+        /// <param name="type">the type of entity</param>
+        public Snowman(ID.Entity? type = ID.Entity.snow_golem) : base(type) { }
 
-            /// <summary>
-            /// True if the snowman has a pumpkin on
-            /// </summary>
-            [Data.DataTag]
-            public bool? Pumpkin { get; set; }
-        }
+        /// <summary>
+        /// True if the snowman has a pumpkin on
+        /// </summary>
+        [Data.DataTag]
+        public bool? Pumpkin { get; set; }
     }
 }

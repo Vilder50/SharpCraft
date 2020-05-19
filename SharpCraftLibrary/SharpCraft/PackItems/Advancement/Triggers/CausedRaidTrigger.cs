@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The location the player triggered the raid
         /// </summary>
         [DataTag("conditions", JsonTag = true)]
-        public JSONObjects.Location Location { get; set; }
+        public JsonObjects.Location? Location { get; set; }
     }
 }

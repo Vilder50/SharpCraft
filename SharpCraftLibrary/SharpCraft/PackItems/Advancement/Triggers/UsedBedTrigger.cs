@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The location the player entered the bed
         /// </summary>
         [DataTag("conditions.location", JsonTag = true)]
-        public JSONObjects.Location Location { get; set; }
+        public JsonObjects.Location? Location { get; set; }
     }
 }

@@ -28,8 +28,8 @@ namespace SharpCraft
     /// </summary>
     public class BlockDataLocation : IDataLocation
     {
-        private Vector coordinates;
-        private string dataPath;
+        private Vector coordinates = null!;
+        private string dataPath = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BlockDataLocation"/>
@@ -85,8 +85,8 @@ namespace SharpCraft
     /// </summary>
     public class EntityDataLocation : IDataLocation
     {
-        private BaseSelector selector;
-        private string dataPath;
+        private BaseSelector selector = null!;
+        private string dataPath = null!;
 
         /// <summary>
         /// Intializes a new <see cref="BlockDataLocation"/>
@@ -107,11 +107,7 @@ namespace SharpCraft
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(EntityDataLocation));
             }
         }
 
@@ -146,8 +142,8 @@ namespace SharpCraft
     /// </summary>
     public class StorageDataLocation : IDataLocation
     {
-        private Storage storage;
-        private string dataPath;
+        private Storage storage = null!;
+        private string dataPath = null!;
 
         /// <summary>
         /// Intializes a new <see cref="StorageDataLocation"/>

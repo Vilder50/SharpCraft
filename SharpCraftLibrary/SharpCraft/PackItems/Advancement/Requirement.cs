@@ -25,7 +25,7 @@ namespace SharpCraft.AdvancementObjects
     public class Requirement : IRequirementItem
     {
         private int nextGeneratedNumber = 0;
-        private IRequirementItem[] requirementItems;
+        private IRequirementItem[] requirementItems = null!;
 
         /// <summary>
         /// Intializes a new <see cref="Requirement"/>
@@ -45,7 +45,7 @@ namespace SharpCraft.AdvancementObjects
         /// Returns the string used for inserting the item into a requirement
         /// </summary>
         /// <param name="requirement">The requirement to get the string for. Null if this is the parent.</param>
-        public string GetRequirementString(Requirement requirement)
+        public string GetRequirementString(Requirement? requirement)
         {
             Requirement getNamesFrom = requirement ?? this;
 

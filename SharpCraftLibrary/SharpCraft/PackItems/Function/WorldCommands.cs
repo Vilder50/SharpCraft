@@ -6,16 +6,11 @@ namespace SharpCraft.FunctionWriters
     /// <summary>
     /// All commands for the world
     /// </summary>
-    public class WorldCommands
+    public class WorldCommands : CommandList
     {
-        /// <summary>
-        /// The function to write onto
-        /// </summary>
-        public Function ToFunction { get; private set; }
 
-        internal WorldCommands(Function function)
+        internal WorldCommands(Function function) : base(function)
         {
-            this.ToFunction = function;
             Objective = new ClassObjective(function);
             Team = new ClassTeam(function);
             Datapack = new ClassDatapack(function);
@@ -23,6 +18,7 @@ namespace SharpCraft.FunctionWriters
             Border = new ClassBorder(function);
             BossBar = new ClassBossBar(function);
             LoadSquare = new ClassLoadSquare(function);
+            Data = new ClassData(function);
         }
 
         /// <summary>
@@ -31,7 +27,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="coords">The new location of the world spawnpoint</param>
         public void Spawn(Vector coords)
         {
-            ToFunction.AddCommand(new SetWorldSpawnCommand(coords));
+            ForFunction.AddCommand(new SetWorldSpawnCommand(coords));
         }
 
         /// <summary>
@@ -113,7 +109,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="text">the text to say in chat</param>
         public void Say(string text)
         {
-            ToFunction.AddCommand(new SayCommand(text));
+            ForFunction.AddCommand(new SayCommand(text));
         }
 
         /// <summary>
@@ -122,7 +118,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="gamemode">the new default gamemode</param>
         public void DefaultGamemode(ID.Gamemode gamemode)
         {
-            ToFunction.AddCommand(new DefaultGamemodeCommand(gamemode));
+            ForFunction.AddCommand(new DefaultGamemodeCommand(gamemode));
         }
 
         /// <summary>
@@ -131,7 +127,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="difficulty">the new difficulty</param>
         public void Difficulty(ID.Difficulty difficulty)
         {
-            ToFunction.AddCommand(new DifficultyCommand(difficulty));
+            ForFunction.AddCommand(new DifficultyCommand(difficulty));
         }
 
         /// <summary>
@@ -141,7 +137,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loot">the <see cref="LootTable"/> to spawn in</param>
         public void Loot(Vector coords, ILootTable loot)
         {
-            ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.LoottableSource(loot)));
+            ForFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.LoottableSource(loot)));
         }
         /// <summary>
         /// Spawns loot into the world at the given location
@@ -150,7 +146,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="kill">the entity whose "when killed loot" should be dropped</param>
         public void Loot(Vector coords, BaseSelector kill)
         {
-            ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.KillSource(kill)));
+            ForFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.KillSource(kill)));
         }
         /// <summary>
         /// Spawns loot into the world at the given location
@@ -162,11 +158,11 @@ namespace SharpCraft.FunctionWriters
         {
             if (breakWith is null)
             {
-                ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.MineHandSource(breakBlock, true)));
+                ForFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.MineHandSource(breakBlock, true)));
             }
             else
             {
-                ToFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.MineItemSource(breakBlock, breakWith)));
+                ForFunction.AddCommand(new LootCommand(new LootTargets.SpawnTarget(coords), new LootSources.MineItemSource(breakBlock, breakWith)));
             }
         }
 
@@ -178,15 +174,15 @@ namespace SharpCraft.FunctionWriters
         /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
         /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
         /// <returns>The ran function</returns>
-        public IFunction Function(IFunction runFunction, Time delay = null, bool append = true)
+        public IFunction Function(IFunction runFunction, NoneNegativeTime<int>? delay = null, bool append = true)
         {
             if (delay == null)
             {
-                ToFunction.AddCommand(new RunFunctionCommand(runFunction));
+                ForFunction.AddCommand(new RunFunctionCommand(runFunction));
             }
             else
             {
-                ToFunction.AddCommand(new ScheduleAddCommand(runFunction, delay, append));
+                ForFunction.AddCommand(new ScheduleAddCommand(runFunction, delay, append));
             }
 
             return runFunction;
@@ -198,7 +194,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="function">The function to clear the schedule for</param>
         public void StopSchedule(IFunction function)
         {
-            this.ToFunction.AddCommand(new ScheduleClearCommand(function));
+            ForFunction.AddCommand(new ScheduleClearCommand(function));
         }
 
         /// <summary>
@@ -206,9 +202,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="SetTo">The new type of weather</param>
         /// <param name="WeatherTime">The number of ticks the weather should be going. Null means the game chose</param>
-        public void Weather(ID.WeatherType SetTo, Time WeatherTime)
+        public void Weather(ID.WeatherType SetTo, NoneNegativeTime<int> WeatherTime)
         {
-            ToFunction.AddCommand(new WeatherCommand(SetTo, WeatherTime));
+            ForFunction.AddCommand(new WeatherCommand(SetTo, WeatherTime));
         }
 
         /// <summary>
@@ -218,7 +214,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="setValue">The value to change the gamerule to. Null returns the gamerule value instead</param>
         public void Gamerule(ID.BoolGamerule gamerule, bool? setValue)
         {
-            ToFunction.AddCommand(new GameruleSetBoolCommand(gamerule, setValue));
+            ForFunction.AddCommand(new GameruleSetBoolCommand(gamerule, setValue));
         }
 
         /// <summary>
@@ -228,7 +224,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="setValue">The value to change the gamerule to. Null returns the gamerule value instead</param>
         public void Gamerule(ID.IntGamerule gamerule, int? setValue)
         {
-            ToFunction.AddCommand(new GameruleSetIntCommand(gamerule, setValue));
+            ForFunction.AddCommand(new GameruleSetIntCommand(gamerule, setValue));
         }
 
         /// <summary>
@@ -334,15 +330,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for scoreboards
         /// </summary>
-        public class ClassObjective
+        public class ClassObjective : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassObjective(Function function)
+            internal ClassObjective(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds the specified <see cref="SharpCraft.Objective"/> to the world
@@ -351,10 +343,10 @@ namespace SharpCraft.FunctionWriters
             /// <param name="type">the type of the scoreboard. See <see cref="ID.Objective"/> for a list of types</param>
             /// <param name="displayName">The name to display when the scoreboard is viewed in the sidebar</param>
             /// <returns>the newly created <see cref="SharpCraft.Objective"/></returns>
-            public Objective Add(string scoreName, string type = "dummy", JsonText displayName = null)
+            public Objective Add(string scoreName, string type = "dummy", BaseJsonText? displayName = null)
             {
                 Objective newObject = new Objective(scoreName);
-                Function.AddCommand(new ScoreboardObjectiveAddCommand(newObject, type, displayName));
+                ForFunction.AddCommand(new ScoreboardObjectiveAddCommand(newObject, type, displayName));
                 return newObject;
             }
 
@@ -364,7 +356,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="objective">the <see cref="SharpCraft.Objective"/> to remove</param>
             public void Remove(Objective objective)
             {
-                Function.AddCommand(new ScoreboardObjectiveRemoveCommand(objective));
+                ForFunction.AddCommand(new ScoreboardObjectiveRemoveCommand(objective));
             }
 
             /// <summary>
@@ -378,11 +370,11 @@ namespace SharpCraft.FunctionWriters
             {
                 if (display == ID.ScoreDisplay.sidebar && !(teamColor is null))
                 {
-                    Function.AddCommand(new ScoreboardSetTeamDisplayCommand(objective, teamColor.Value));
+                    ForFunction.AddCommand(new ScoreboardSetTeamDisplayCommand(objective, teamColor.Value));
                 }
                 else
                 {
-                    Function.AddCommand(new ScoreboardSetDisplayCommand(objective, display));
+                    ForFunction.AddCommand(new ScoreboardSetDisplayCommand(objective, display));
                 }
             }
             /// <summary>
@@ -394,11 +386,11 @@ namespace SharpCraft.FunctionWriters
             {
                 if (display == ID.ScoreDisplay.sidebar && !(teamColor is null))
                 {
-                    Function.AddCommand(new ScoreboardSetTeamDisplayCommand(null, teamColor.Value));
+                    ForFunction.AddCommand(new ScoreboardSetTeamDisplayCommand(null, teamColor.Value));
                 }
                 else
                 {
-                    Function.AddCommand(new ScoreboardSetDisplayCommand(null, display));
+                    ForFunction.AddCommand(new ScoreboardSetDisplayCommand(null, display));
                 }
             }
             /// <summary>
@@ -406,9 +398,9 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="objective">the <see cref="SharpCraft.Objective"/> to change</param>
             /// <param name="name">The new display name</param>
-            public void DisplayName(Objective objective, JsonText name)
+            public void DisplayName(Objective objective, BaseJsonText name)
             {
-                Function.AddCommand(new ScoreboardObjectiveChangeNameCommand(objective, name));
+                ForFunction.AddCommand(new ScoreboardObjectiveChangeNameCommand(objective, name));
             }
             /// <summary>
             /// Changes the way the <see cref="SharpCraft.Objective"/> is rendered in the <see cref="ID.ScoreDisplay.list"/> display slot
@@ -417,7 +409,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="render">The way it should be rendered</param>
             public void Render(Objective objective, ID.ObjectiveRender render)
             {
-                Function.AddCommand(new ScoreboardObjectiveChangeRenderCommand(objective, render));
+                ForFunction.AddCommand(new ScoreboardObjectiveChangeRenderCommand(objective, render));
             }
         }
 
@@ -428,15 +420,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for teams
         /// </summary>
-        public class ClassTeam
+        public class ClassTeam : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassTeam(Function function)
+            internal ClassTeam(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds the specified <see cref="Team"/> to the world
@@ -445,23 +433,21 @@ namespace SharpCraft.FunctionWriters
             /// <param name="displayName">the displayed name of the <see cref="Team"/></param>
             /// <param name="teamColor">the color of the <see cref="Team"/>. If null the <see cref="Team"/> will have the default color (white)</param>
             /// <returns>the newly created <see cref="Team"/></returns>
-            public Team Add(string teamName, JsonText displayName, ID.MinecraftColor? teamColor = null)
+            public Team Add(string teamName, BaseJsonText displayName, ID.MinecraftColor? teamColor = null)
             {
                 Team creating = new Team(teamName);
 
-                BaseCommand executeCommand = null;
-                if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (teamColor is null)
                 {
-                    executeCommand = Function.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new TeamAddCommand(creating, displayName));
                 }
-                Function.AddCommand(new TeamAddCommand(creating, displayName));
-                if (!(teamColor is null))
+                else
                 {
-                    if (!(executeCommand is null))
+                    ForFunction.Custom.GroupCommands((g) =>
                     {
-                        Function.AddCommand(executeCommand);
-                    }
-                    Function.AddCommand(new TeamModifyColorCommand(creating, teamColor.Value));
+                        g.AddCommand(new TeamAddCommand(creating, displayName));
+                        g.AddCommand(new TeamModifyColorCommand(creating, teamColor.Value));
+                    });
                 }
 
                 return creating;
@@ -472,7 +458,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="removeTeam">the <see cref="Team"/> to remove</param>
             public void Remove(Team removeTeam)
             {
-                Function.AddCommand(new TeamRemoveCommand(removeTeam));
+                ForFunction.AddCommand(new TeamRemoveCommand(removeTeam));
             }
             /// <summary>
             /// Changes the color of the specified <see cref="Team"/>
@@ -481,7 +467,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="color">The new color</param>
             public void Color(Team changeTeam, ID.MinecraftColor color)
             {
-                Function.AddCommand(new TeamModifyColorCommand(changeTeam, color));
+                ForFunction.AddCommand(new TeamModifyColorCommand(changeTeam, color));
             }
             /// <summary>
             /// Changes how the specified <see cref="Team"/>'s death messages are displayed
@@ -490,7 +476,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="visible">the visibility rule</param>
             public void DeathMessage(Team changeTeam, ID.TeamVisibility visible)
             {
-                Function.AddCommand(new TeamModifyDeathMessageCommand(changeTeam, visible));
+                ForFunction.AddCommand(new TeamModifyDeathMessageCommand(changeTeam, visible));
             }
             /// <summary>
             /// Changes how the specified <see cref="Team"/> collides things
@@ -499,7 +485,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="collision">the collision rule</param>
             public void Collision(Team changeTeam, ID.TeamCollision collision)
             {
-                Function.AddCommand(new TeamModifyCollisionCommand(changeTeam, collision));
+                ForFunction.AddCommand(new TeamModifyCollisionCommand(changeTeam, collision));
             }
             /// <summary>
             /// Changes if the specified <see cref="Team"/> can damage players on their own team or not
@@ -508,7 +494,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="friendlyFire">If the team should be able to damage their own team or not</param>
             public void FriendlyFire(Team changeTeam, bool friendlyFire)
             {
-                Function.AddCommand(new TeamModifyFriendlyFireCommand(changeTeam, friendlyFire));
+                ForFunction.AddCommand(new TeamModifyFriendlyFireCommand(changeTeam, friendlyFire));
             }
             /// <summary>
             /// Changes how the specified <see cref="Team"/> is displayed when invisible
@@ -517,7 +503,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="see">the visibility rule</param>
             public void SeeInvisibleFriends(Team changeTeam, bool see)
             {
-                Function.AddCommand(new TeamModifyInvisibilityCommand(changeTeam, see));
+                ForFunction.AddCommand(new TeamModifyInvisibilityCommand(changeTeam, see));
             }
             /// <summary>
             /// Changes how the specified <see cref="Team"/>'s nametags are visible
@@ -526,16 +512,16 @@ namespace SharpCraft.FunctionWriters
             /// <param name="visible">the visibility tule</param>
             public void Nametag(Team changeTeam, ID.TeamVisibility visible)
             {
-                Function.AddCommand(new TeamModifyNameVisibilityCommand(changeTeam, visible));
+                ForFunction.AddCommand(new TeamModifyNameVisibilityCommand(changeTeam, visible));
             }
             /// <summary>
             /// Changes the display name of the specified <see cref="Team"/>
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="name">The new name of the team</param>
-            public void DisplayName(Team changeTeam, JsonText name)
+            public void DisplayName(Team changeTeam, BaseJsonText name)
             {
-                Function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.displayName, name));
+                ForFunction.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.displayName, name));
             }
             /// <summary>
             /// Removes all players from the specified <see cref="Team"/>
@@ -543,25 +529,25 @@ namespace SharpCraft.FunctionWriters
             /// <param name="clearTeam">the <see cref="Team"/> to remove players from</param>
             public void Clear(Team clearTeam)
             {
-                Function.AddCommand(new TeamEmptyCommand(clearTeam));
+                ForFunction.AddCommand(new TeamEmptyCommand(clearTeam));
             }
             /// <summary>
             /// Changes the prefix shown before the name of players in the specified <see cref="Team"/>
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="preffixJson">The new prefix to show</param>
-            public void Prefix(Team changeTeam, JsonText preffixJson)
+            public void Prefix(Team changeTeam, BaseJsonText preffixJson)
             {
-                Function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.prefix, preffixJson));
+                ForFunction.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.prefix, preffixJson));
             }
             /// <summary>
             /// Changes the suffix shown after the name of players in the specified <see cref="Team"/>
             /// </summary>
             /// <param name="changeTeam">the <see cref="Team"/> to change</param>
             /// <param name="suffixJson">the new prefix to show</param>
-            public void Suffix(Team changeTeam, JsonText suffixJson)
+            public void Suffix(Team changeTeam, BaseJsonText suffixJson)
             {
-                Function.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.suffix, suffixJson));
+                ForFunction.AddCommand(new TeamModifyDisplayCommand(changeTeam, ID.TeamDisplayName.suffix, suffixJson));
             }
         }
 
@@ -572,15 +558,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for datapacks
         /// </summary>
-        public class ClassDatapack
+        public class ClassDatapack : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassDatapack(Function function)
+            internal ClassDatapack(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Disables the specified <see cref="SharpCraft.Datapack"/>
@@ -588,7 +570,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="datapack">the <see cref="SharpCraft.Datapack"/> to disable</param>
             public void Disable(BaseDatapack datapack)
             {
-                Function.AddCommand(new DatapackDisableCommand(datapack));
+                ForFunction.AddCommand(new DatapackDisableCommand(datapack));
             }
             /// <summary>
             /// Enables the specified <see cref="SharpCraft.Datapack"/>
@@ -596,15 +578,15 @@ namespace SharpCraft.FunctionWriters
             /// <param name="datapack">the <see cref="SharpCraft.Datapack"/> to enable</param>
             /// <param name="placeAt">choses where the <see cref="SharpCraft.Datapack"/> should be placed relative to other enabled <see cref="SharpCraft.Datapack"/>s</param>
             /// <param name="otherPack">the <see cref="SharpCraft.Datapack"/> the <paramref name="datapack"/> is placed relative to</param>
-            public void Enable(BaseDatapack datapack, ID.DatapackPlace placeAt, Datapack otherPack = null)
+            public void Enable(BaseDatapack datapack, ID.DatapackPlace placeAt, Datapack? otherPack = null)
             {
                 if (otherPack is null)
                 {
-                    Function.AddCommand(new DatapackEnableCommand(datapack, placeAt == ID.DatapackPlace.first));
+                    ForFunction.AddCommand(new DatapackEnableCommand(datapack, placeAt == ID.DatapackPlace.first));
                 }
                 else
                 {
-                    Function.AddCommand(new DatapackEnableAtCommand(datapack, placeAt == ID.DatapackPlace.after, otherPack));
+                    ForFunction.AddCommand(new DatapackEnableAtCommand(datapack, placeAt == ID.DatapackPlace.after, otherPack));
                 }
             }
         }
@@ -616,38 +598,34 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for time
         /// </summary>
-        public class ClassTime
+        public class ClassTime : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassTime(Function function)
+            internal ClassTime(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds the specified amount of <see cref="Time"/> to the time of day
             /// </summary>
             /// <param name="time">the <see cref="Time"/> to add</param>
-            public void Add(Time time)
+            public void Add(NoneNegativeTime<int> time)
             {
-                Function.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.add));
+                ForFunction.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.add));
             }
             /// <summary>
             /// Sets the time of day to the specified <see cref="Time"/>
             /// </summary>
             /// <param name="time">the <see cref="Time"/> to set it to</param>
-            public void Set(Time time)
+            public void Set(NoneNegativeTime<int> time)
             {
-                Function.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.set));
+                ForFunction.AddCommand(new TimeModifyCommand(time, ID.AddSetModifier.set));
             }
             /// <summary>
             /// Gets the amount of days which has gone by
             /// </summary>
             public void GetDay()
             {
-                Function.AddCommand(new TimeQueryCommand(ID.QueryTime.day));
+                ForFunction.AddCommand(new TimeQueryCommand(ID.QueryTime.day));
             }
             /// <summary>
             /// Gets the time of day it is in ticks
@@ -655,7 +633,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             public void GetDayTime()
             {
-                Function.AddCommand(new TimeQueryCommand(ID.QueryTime.daytime));
+                ForFunction.AddCommand(new TimeQueryCommand(ID.QueryTime.daytime));
             }
             /// <summary>
             /// Gets the time of the world
@@ -663,7 +641,7 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             public void GetTime()
             {
-                Function.AddCommand(new TimeQueryCommand(ID.QueryTime.gametime));
+                ForFunction.AddCommand(new TimeQueryCommand(ID.QueryTime.gametime));
             }
         }
 
@@ -674,15 +652,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for the world border
         /// </summary>
-        public class ClassBorder
+        public class ClassBorder : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassBorder(Function function)
+            internal ClassBorder(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds blocks to the world border size
@@ -691,9 +665,9 @@ namespace SharpCraft.FunctionWriters
             /// Note: the blocks are spread out from the center, so adding 1 block adds a half block to all sides
             /// Note: if the number is negative blocks will be removed</param>
             /// <param name="time">The amount of time it should take to add the blocks</param>
-            public void Add(double add, Time time = null)
+            public void Add(double add, NoneNegativeTime<int>? time = null)
             {
-                Function.AddCommand(new WorldborderSizeCommand(add, ID.AddSetModifier.add, time));
+                ForFunction.AddCommand(new WorldborderSizeCommand(add, ID.AddSetModifier.add, time));
             }
             /// <summary>
             /// Changes the center of the world border
@@ -701,7 +675,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="coords">the location of the new center</param>
             public void Center(Vector coords)
             {
-                Function.AddCommand(new WorldborderCenterCommand(coords));
+                ForFunction.AddCommand(new WorldborderCenterCommand(coords));
             }
             /// <summary>
             /// Changes the amount of damage the world border does
@@ -715,30 +689,26 @@ namespace SharpCraft.FunctionWriters
                     throw new System.ArgumentException("Both arguments may not be null at the same time");
                 }
 
-                BaseCommand executeCommand = null;
-                if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (amountPerBlock is null)
                 {
-                    executeCommand = Function.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new WorldborderDamageBufferCommand(buffer!.Value));
                 }
-                if (!(amountPerBlock is null))
+                if (buffer is null)
                 {
-                    Function.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock.Value));
-                    if (!(buffer is null))
-                    {
-                        Function.AddCommand(executeCommand);
-                    }
+                    ForFunction.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock!.Value));
                 }
-                if (!(amountPerBlock is null))
+                ForFunction.Custom.GroupCommands((g) =>
                 {
-                    Function.AddCommand(new WorldborderDamageBufferCommand(buffer.Value));
-                }
+                    g.AddCommand(new WorldborderDamageAmountCommand(amountPerBlock!.Value));
+                    g.AddCommand(new WorldborderDamageBufferCommand(buffer!.Value));
+                });
             }
             /// <summary>
             /// Gets the worldborder's current size in blocks
             /// </summary>
             public void Get()
             {
-                Function.AddCommand(new WorldborderGetCommand());
+                ForFunction.AddCommand(new WorldborderGetCommand());
             }
             /// <summary>
             /// Changes when the worldborder starts to show red on the players' screens
@@ -746,39 +716,35 @@ namespace SharpCraft.FunctionWriters
             /// <param name="distance">the maximum distance in blocks the player has be away from the border for the red to show</param>
             /// <param name="time">The maximum amount of time the player is away from the border for the red to show.
             /// (Time as in: "the world border will be at the player in X seconds")</param>
-            public void Warning(int? distance = null, Time time = null)
+            public void Warning(int? distance = null, NoneNegativeTime<int>? time = null)
             {
                 if (distance is null && time is null)
                 {
                     throw new System.ArgumentException("Both arguments may not be null at the same time");
                 }
 
-                BaseCommand executeCommand = null;
-                if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+                if (distance is null)
                 {
-                    executeCommand = Function.Commands.Last().ShallowClone();
+                    ForFunction.AddCommand(new WorldborderWarningTimeCommand(time!));
                 }
-                if (!(distance is null))
+                if (time is null)
                 {
-                    Function.AddCommand(new WorldborderWarningDistanceCommand(distance.Value));
-                    if (!(time is null))
-                    {
-                        Function.AddCommand(executeCommand);
-                    }
+                    ForFunction.AddCommand(new WorldborderWarningDistanceCommand(distance!.Value));
                 }
-                if (!(time is null))
+                ForFunction.Custom.GroupCommands((g) =>
                 {
-                    Function.AddCommand(new WorldborderWarningTimeCommand(time));
-                }
+                    g.AddCommand(new WorldborderWarningDistanceCommand(distance!.Value));
+                    g.AddCommand(new WorldborderWarningTimeCommand(time!));
+                });
             }
             /// <summary>
             /// Sets the world border's size in blocks
             /// </summary>
             /// <param name="set">The amount of blocks wide the border is</param>
             /// <param name="time">The time it should take for the border to get there</param>
-            public void Set(double set, Time time = null)
+            public void Set(double set, NoneNegativeTime<int>? time = null)
             {
-                Function.AddCommand(new WorldborderSizeCommand(set, ID.AddSetModifier.set, time));
+                ForFunction.AddCommand(new WorldborderSizeCommand(set, ID.AddSetModifier.set, time));
             }
         }
 
@@ -789,15 +755,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for boss bars
         /// </summary>
-        public class ClassBossBar
+        public class ClassBossBar : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassBossBar(Function function)
+            internal ClassBossBar(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds a <see cref="SharpCraft.BossBar"/> with the specified name to the world
@@ -805,10 +767,10 @@ namespace SharpCraft.FunctionWriters
             /// <param name="name">the name of the <see cref="SharpCraft.BossBar"/></param>
             /// <param name="showName">The name to show ontop of the <see cref="SharpCraft.BossBar"/></param>
             /// <returns>the newly created <see cref="SharpCraft.BossBar"/></returns>
-            public BossBar Add(string name, JsonText showName)
+            public BossBar Add(string name, BaseJsonText showName)
             {
-                BossBar addBar = new BossBar(Function.PackNamespace, name.ToLower());
-                Function.AddCommand(new BossBarAddCommand(addBar, showName));
+                BossBar addBar = new BossBar(ForFunction.PackNamespace, name.ToLower());
+                ForFunction.AddCommand(new BossBarAddCommand(addBar, showName));
                 return addBar;
             }
             /// <summary>
@@ -817,7 +779,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="removeThis">the <see cref="SharpCraft.BossBar"/> to remove</param>
             public void Remove(BossBar removeThis)
             {
-                Function.AddCommand(new BossBarRemoveCommand(removeThis));
+                ForFunction.AddCommand(new BossBarRemoveCommand(removeThis));
             }
 
 
@@ -828,7 +790,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="setTo">the new value</param>
             public void SetValue(BossBar bossBar, int setTo)
             {
-                Function.AddCommand(new BossBarChangeValueCommand(bossBar, setTo));
+                ForFunction.AddCommand(new BossBarChangeValueCommand(bossBar, setTo));
             }
             /// <summary>
             /// Sets the maximum value the specified <see cref="SharpCraft.BossBar"/> can display
@@ -837,16 +799,16 @@ namespace SharpCraft.FunctionWriters
             /// <param name="setTo">the new max value</param>
             public void SetMax(BossBar bossBar, int setTo)
             {
-                Function.AddCommand(new BossBarChangeMaxValueCommand(bossBar, setTo));
+                ForFunction.AddCommand(new BossBarChangeMaxValueCommand(bossBar, setTo));
             }
             /// <summary>
             /// Changes the specified <see cref="SharpCraft.BossBar"/>'s display name
             /// </summary>
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to change</param>
             /// <param name="newName">the new display name for the bar</param>
-            public void SetName(BossBar bossBar, JsonText newName)
+            public void SetName(BossBar bossBar, BaseJsonText newName)
             {
-                Function.AddCommand(new BossBarChangeNameCommand(bossBar, newName));
+                ForFunction.AddCommand(new BossBarChangeNameCommand(bossBar, newName));
             }
             /// <summary>
             /// Changes if the specified <see cref="SharpCraft.BossBar"/> is visible
@@ -855,7 +817,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="visible">If it should be visible or not</param>
             public void SetVisible(BossBar bossBar, bool visible)
             {
-                Function.AddCommand(new BossBarChangeVisibilityCommand(bossBar, visible));
+                ForFunction.AddCommand(new BossBarChangeVisibilityCommand(bossBar, visible));
             }
             /// <summary>
             /// Changes the style of the specified <see cref="SharpCraft.BossBar"/>
@@ -864,7 +826,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="style">the new style of the <see cref="SharpCraft.BossBar"/></param>
             public void SetStyle(BossBar bossBar, ID.BossBarStyle style)
             {
-                Function.AddCommand(new BossBarChangeStyleCommand(bossBar, style));
+                ForFunction.AddCommand(new BossBarChangeStyleCommand(bossBar, style));
             }
             /// <summary>
             /// Changes the color of the specified <see cref="SharpCraft.BossBar"/>
@@ -873,7 +835,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="color">the new color</param>
             public void SetColor(BossBar bossBar, ID.BossBarColor color)
             {
-                Function.AddCommand(new BossBarChangeColorCommand(bossBar, color));
+                ForFunction.AddCommand(new BossBarChangeColorCommand(bossBar, color));
             }
             /// <summary>
             /// Makes the selected players see the specified <see cref="SharpCraft.BossBar"/>
@@ -882,7 +844,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="players">the <see cref="BaseSelector"/> to use</param>
             public void SetPlayers(BossBar bossBar, BaseSelector players)
             {
-                Function.AddCommand(new BossBarChangePlayersCommand(bossBar, players));
+                ForFunction.AddCommand(new BossBarChangePlayersCommand(bossBar, players));
             }
 
 
@@ -892,7 +854,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to get from</param>
             public void GetValue(BossBar bossBar)
             {
-                Function.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.value));
+                ForFunction.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.value));
             }
             /// <summary>
             /// Gets the specified <see cref="SharpCraft.BossBar"/>'s max value
@@ -900,7 +862,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to get from</param>
             public void GetMax(BossBar bossBar)
             {
-                Function.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.max));
+                ForFunction.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.max));
             }
             /// <summary>
             /// Gets the specified <see cref="SharpCraft.BossBar"/>'s visibility value
@@ -908,7 +870,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to get from</param>
             public void GetVisible(BossBar bossBar)
             {
-                Function.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.visible));
+                ForFunction.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.visible));
             }
             /// <summary>
             /// Gets a number stating how many players can see the specified <see cref="SharpCraft.BossBar"/>
@@ -916,7 +878,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="bossBar">the <see cref="SharpCraft.BossBar"/> to get from</param>
             public void GetPlayers(BossBar bossBar)
             {
-                Function.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.players));
+                ForFunction.AddCommand(new BossBarGetValueCommand(bossBar, ID.BossBarValue.players));
             }
         }
     }

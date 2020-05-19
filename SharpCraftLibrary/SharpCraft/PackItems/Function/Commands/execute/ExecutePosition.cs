@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecutePosition : BaseExecuteCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecutePosition"/> command

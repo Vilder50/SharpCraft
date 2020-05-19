@@ -16,7 +16,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="command">The command to change</param>
         /// <returns>The changed command. Returning null will mean the command won't be changed anymore and also wont be added to the function</returns>
-        ICommand ChangeCommand(ICommand command);
+        ICommand? ChangeCommand(ICommand command);
 
         /// <summary>
         /// Bool marking if the <see cref="ICommandChanger"/> is done chaning commands

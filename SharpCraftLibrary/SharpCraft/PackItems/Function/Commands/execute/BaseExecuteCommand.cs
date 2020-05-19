@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The command this execute command is going to execute
         /// </summary>
-        public ICommand ExecuteCommand { get; set; }
+        public ICommand? ExecuteCommand { get; set; }
 
         /// <summary>
         /// True if this execute command is done changing commands.
@@ -57,7 +57,7 @@ namespace SharpCraft.Commands
         /// </summary>
         /// <param name="command">The command to add</param>
         /// <returns>Information about the adding</returns>
-        public ICommand ChangeCommand(ICommand command)
+        public ICommand? ChangeCommand(ICommand command)
         {
             if (!HasEndCommand())
             {

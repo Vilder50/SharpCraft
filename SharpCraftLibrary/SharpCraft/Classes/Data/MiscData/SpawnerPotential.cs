@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="Entity">The entity to spawn</param>
         /// <param name="Weight">The weight of the entity</param>
-        public SpawnerPotential(Entity.BaseEntity Entity, int Weight)
+        public SpawnerPotential(Entity Entity, int Weight)
         {
             this.Entity = Entity;
             this.Weight = Weight;
@@ -28,7 +28,7 @@
         /// The entity this spawner potential is for
         /// </summary>
         [Data.DataTag]
-        public Entity.BaseEntity Entity { get; set; }
+        public Entity? Entity { get; set; }
 
         /// <summary>
         /// The weight for this potential to be selected

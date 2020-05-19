@@ -2,73 +2,70 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for chest blocks
+    /// </summary>
+    public class Chest : BaseContainer, Interfaces.IFacing, Interfaces.IWaterLogged
     {
+        private Item[]? _dItems;
+
         /// <summary>
-        /// An object for chest blocks
+        /// Creates a chest block
         /// </summary>
-        public class Chest : BaseContainer, IBlock.IFacing, IBlock.IWaterLogged
+        /// <param name="type">The type of block</param>
+        public Chest(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a chest block
+        /// </summary>
+        /// <param name="type">The type of block</param>
+        public Chest(ID.Block type = SharpCraft.ID.Block.chest) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private Item[] _dItems;
+            return block == SharpCraft.ID.Block.chest || block == SharpCraft.ID.Block.trapped_chest;
+        }
 
-            /// <summary>
-            /// Creates a chest block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Chest(BlockType type) : base(type) { }
+        /// <summary>
+        /// If the chest is water logged
+        /// </summary>
+        [BlockState("waterlogged")]
+        public bool? SWaterLogged { get; set; }
 
-            /// <summary>
-            /// Creates a chest block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Chest(ID.Block type = SharpCraft.ID.Block.chest) : base(type) { }
+        /// <summary>
+        /// The direction the chest is facing
+        /// </summary>
+        [BlockState("facing")]
+        public ID.Facing? SFacing { get; set; }
 
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// How the chest is connected to another chest
+        /// </summary>
+        [BlockState("type")]
+        public ID.StateChestType? SConnectionType { get; set; }
+
+        /// <summary>
+        /// The item's inside the chest.
+        /// (0-26)
+        /// </summary>
+        [Data.DataTag("Items")]
+        public override Item[]? DItems
+        {
+            get => _dItems;
+            set
             {
-                return block == SharpCraft.ID.Block.chest || block == SharpCraft.ID.Block.trapped_chest;
-            }
-
-            /// <summary>
-            /// If the chest is water logged
-            /// </summary>
-            [BlockState("waterlogged")]
-            public bool? SWaterLogged { get; set; }
-
-            /// <summary>
-            /// The direction the chest is facing
-            /// </summary>
-            [BlockState("facing")]
-            public ID.Facing? SFacing { get; set; }
-
-            /// <summary>
-            /// How the chest is connected to another chest
-            /// </summary>
-            [BlockState("type")]
-            public ID.StateChestType? SConnectionType { get; set; }
-
-            /// <summary>
-            /// The item's inside the chest.
-            /// (0-26)
-            /// </summary>
-            [Data.DataTag("Items")]
-            public override Item[] DItems
-            {
-                get => _dItems;
-                set
+                if (!(DItems is null) && DItems.Length > 27)
                 {
-                    if (DItems != null && DItems.Length > 27)
-                    {
-                        throw new ArgumentException("Too many slots specified");
-                    }
-                    _dItems = value;
+                    throw new ArgumentException("Too many slots specified");
                 }
+                _dItems = value;
             }
         }
     }

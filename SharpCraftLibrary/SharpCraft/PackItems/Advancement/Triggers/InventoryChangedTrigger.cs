@@ -21,24 +21,24 @@ namespace SharpCraft.AdvancementObjects
         /// The items in the players inventory
         /// </summary>
         [DataTag("conditions.items", JsonTag = true)]
-        public JSONObjects.Item[] Items { get; set; }
+        public JsonObjects.Item[]? Items { get; set; }
 
         /// <summary>
         /// The amount of empty slots
         /// </summary>
         [DataTag("conditions.slots.empty","min","max",ID.NBTTagType.TagInt,true, JsonTag = true)]
-        public MCRange EmptySlots { get; set; }
+        public MCRange? EmptySlots { get; set; }
 
         /// <summary>
         /// The amount of full slots
         /// </summary>
         [DataTag("conditions.slots.full", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public MCRange FullSlots { get; set; }
+        public MCRange? FullSlots { get; set; }
 
         /// <summary>
         /// The amount of occupied slots
         /// </summary>
         [DataTag("conditions.slots.occupied", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-        public MCRange OccupiedSlots { get; set; }
+        public MCRange? OccupiedSlots { get; set; }
     }
 }

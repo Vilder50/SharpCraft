@@ -173,5 +173,20 @@ namespace SharpCraft.Tests.PackItems
             space.Function("test2");
             Assert.IsTrue(fileAdded, "file listener should have been called after file was added.");
         }
+
+        [TestMethod]
+        public void TestAddNamespaceListener()
+        {
+            using Datapack pack = new Datapack("a path", "name", ".", 4, new NoneFileCreator());
+            int spacesAdded = 0;
+            pack.AddNewNamespaceListener((file) =>
+            {
+                spacesAdded++;
+            });
+            _ = pack.Namespace("space");
+            Assert.AreEqual(1, spacesAdded, "Namespace listener should have been called after namespace was added.");
+            _ = pack.Namespace("space");
+            Assert.AreEqual(1, spacesAdded, "Namespace listener shouldn't have been called since a new namespace wasn't added.");
+        }
     }
 }

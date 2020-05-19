@@ -6,12 +6,8 @@ namespace SharpCraft.FunctionWriters
     /// <summary>
     /// All the player commands
     /// </summary>
-    public class PlayerCommands
+    public class PlayerCommands : CommandList
     {
-        /// <summary>
-        /// The function to write onto
-        /// </summary>
-        public Function Function { get; private set; }
         /// <summary>
         /// All commands for levels and xp
         /// </summary>
@@ -19,15 +15,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for levels and xp
         /// </summary>
-        public class ClassXP
+        public class ClassXP : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassXP(Function function)
+            internal ClassXP(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
             /// <summary>
             /// Adds the specified amount of levels to the selected players
@@ -36,7 +28,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="levels">The amount of levels to add. If this is negative levels will be removed</param>
             public void LevelsAdd(BaseSelector player, int levels)
             {
-                Function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
+                ForFunction.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.add, levels));
             }
             /// <summary>
             /// Sets the selected players' levels to the specified amount
@@ -45,7 +37,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="levels">The amount to set the levels to</param>
             public void LevelsSet(BaseSelector player, int levels)
             {
-                Function.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
+                ForFunction.AddCommand(new ExperienceModifyCommand(player, true, ID.AddSetModifier.set, levels));
             }
             /// <summary>
             /// Outputs the amount of levels the selected player has
@@ -54,7 +46,7 @@ namespace SharpCraft.FunctionWriters
             public void LevelsGet(BaseSelector player)
             {
                 player.LimitSelector();
-                Function.AddCommand(new ExperienceGetCommand(player, true));
+                ForFunction.AddCommand(new ExperienceGetCommand(player, true));
             }
             /// <summary>
             /// Adds the specified amount of points to the selected players
@@ -63,7 +55,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="points">The amount of points to add. If this is negative points will be removed</param>
             public void PointsAdd(BaseSelector player, int points)
             {
-                Function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
+                ForFunction.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.add, points));
             }
             /// <summary>
             /// Sets the selected players' points to the specified amount
@@ -72,7 +64,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="points">The amount to set the points to</param>
             public void PointsSet(BaseSelector player, int points)
             {
-                Function.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
+                ForFunction.AddCommand(new ExperienceModifyCommand(player, false, ID.AddSetModifier.set, points));
             }
             /// <summary>
             /// Outputs the amount of points the selected player has
@@ -81,12 +73,11 @@ namespace SharpCraft.FunctionWriters
             public void PointsGet(BaseSelector player)
             {
                 player.LimitSelector();
-                Function.AddCommand(new ExperienceGetCommand(player, false));
+                ForFunction.AddCommand(new ExperienceGetCommand(player, false));
             }
         }
-        internal PlayerCommands(Function function)
+        internal PlayerCommands(Function function) : base(function)
         {
-            this.Function = function;
             XP = new ClassXP(function);
             Particle = new ClassParticle(function);
             Item = new ClassItem(function);
@@ -103,7 +94,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="mode">the gamemode to change to</param>
         public void Gamemode(BaseSelector player, ID.Gamemode mode)
         {
-            Function.AddCommand(new GamemodeCommand(player, mode));
+            ForFunction.AddCommand(new GamemodeCommand(player, mode));
         }
 
         /// <summary>
@@ -115,13 +106,13 @@ namespace SharpCraft.FunctionWriters
         {
             if (spectate is null)
             {
-                Function.AddCommand(new SpectateStopCommand());
+                ForFunction.AddCommand(new SpectateStopCommand());
             }
             else
             {
                 spectate.LimitSelector();
                 spectator.LimitSelector();
-                Function.AddCommand(new SpectateCommand(spectate, spectator));
+                ForFunction.AddCommand(new SpectateCommand(spectate, spectator));
             }
         }
 
@@ -133,7 +124,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="set">If the score should be set to the given number. If false it will be added instead</param>
         public void Trigger(Objective scoreObject, int number, bool set = true)
         {
-            Function.AddCommand(new TriggerCommand(scoreObject, set, number));
+            ForFunction.AddCommand(new TriggerCommand(scoreObject, set, number));
         }
 
         /// <summary>
@@ -143,7 +134,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="message">The message to tell the player</param>
         public void Tell(BaseSelector player, string message)
         {
-            Function.AddCommand(new MsgCommand(player, message));
+            ForFunction.AddCommand(new MsgCommand(player, message));
         }
 
         /// <summary>
@@ -151,9 +142,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="spawn">The new spawnpoint location</param>
-        public void Spawnpoint(BaseSelector player, Vector spawn = null)
+        public void Spawnpoint(BaseSelector player, Vector? spawn = null)
         {
-            Function.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
+            ForFunction.AddCommand(new SpawnPointCommand(spawn ?? new Coords(), player));
         }
 
         /// <summary>
@@ -163,7 +154,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="objective">The trigger (<see cref="Objective"/>) to enable</param>
         public void EnableTrigger(BaseSelector player, Objective objective)
         {
-            Function.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
+            ForFunction.AddCommand(new ScoreboardEnableTriggerCommand(player, objective));
         }
 
         /// <summary>
@@ -171,9 +162,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to tell the players</param>
-        public void Tellraw(BaseSelector player, JsonText message)
+        public void Tellraw(BaseSelector player, BaseJsonText message)
         {
-            Function.AddCommand(new TellrawCommand(player, message));
+            ForFunction.AddCommand(new TellrawCommand(player, message));
         }
 
         /// <summary>
@@ -181,9 +172,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="player">the <see cref="BaseSelector"/> to use</param>
         /// <param name="message">The message to show</param>
-        public void Actionbar(BaseSelector player, JsonText message)
+        public void Actionbar(BaseSelector player, BaseJsonText message)
         {
-            Function.AddCommand(new TitleActionbarCommand(player, message));
+            ForFunction.AddCommand(new TitleActionbarCommand(player, message));
         }
 
         /// <summary>
@@ -193,15 +184,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for particles
         /// </summary>
-        public class ClassParticle
+        public class ClassParticle : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassParticle(Function function)
+            internal ClassParticle(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -214,9 +201,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Normal(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
-                Function.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
+                ForFunction.AddCommand(new ParticleNormalCommand(particle, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -230,9 +217,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void ColoredDust(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
-                Function.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
+                ForFunction.AddCommand(new ParticleColoredDustCommand(color, particleSize, displayCoords, size, speed, count, force, player));
             }
 
             /// <summary>
@@ -246,9 +233,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dust">If it should be dust or squares</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector player = null)
+            public void Block(Block block, Vector displayCoords, Vector size, double speed, int count, bool dust = false, bool force = false, BaseSelector? player = null)
             {
-                Function.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
+                ForFunction.AddCommand(new ParticleBlockCommand(block, displayCoords, size, speed, count, dust, force, player));
             }
 
             /// <summary>
@@ -261,9 +248,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="count">The amount of particles</param>
             /// <param name="force">If the particles should be shown no mater what</param>
             /// <param name="player">The players to show the particles to. If null the particles are shown to everyone</param>
-            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector player = null)
+            public void Item(Item item, Vector displayCoords, Vector size, double speed, int count, bool force = false, BaseSelector? player = null)
             {
-                Function.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
+                ForFunction.AddCommand(new ParticleItemCommand(item, displayCoords, size, speed, count, force, player));
             }
         }
 
@@ -274,15 +261,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for items
         /// </summary>
-        public class ClassItem
+        public class ClassItem : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassItem(Function function)
+            internal ClassItem(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -294,11 +277,11 @@ namespace SharpCraft.FunctionWriters
             {
                 if (giveItem.Slot is null)
                 {
-                    Function.AddCommand(new GiveCommand(player, giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new GiveCommand(player, giveItem, giveItem.Count ?? 1));
                 }
                 else
                 {
-                    Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.InventorySlot((int)giveItem.Slot), giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new ReplaceitemEntityCommand(player, new Slots.InventorySlot((int)giveItem.Slot), giveItem, giveItem.Count ?? 1));
                 }
             }
 
@@ -309,7 +292,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="loot">the <see cref="LootTable"/> to give the player</param>
             public void GiveItem(BaseSelector player, ILootTable loot)
             {
-                Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
+                ForFunction.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
@@ -320,7 +303,7 @@ namespace SharpCraft.FunctionWriters
             public void GiveItem(BaseSelector player, BaseSelector kill)
             {
                 kill.LimitSelector();
-                Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
+                ForFunction.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.KillSource(kill)));
             }
 
             /// <summary>
@@ -329,15 +312,15 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
-            public void GiveItem(BaseSelector player, Vector breakBlock, Item breakWith)
+            public void GiveItem(BaseSelector player, Vector breakBlock, Item? breakWith)
             {
                 if (breakWith is null)
                 {
-                    Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineHandSource(breakBlock, true)));
+                    ForFunction.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineHandSource(breakBlock, true)));
                 }
                 else
                 {
-                    Function.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineItemSource(breakBlock, breakWith)));
+                    ForFunction.AddCommand(new LootCommand(new LootTargets.GiveTarget(player), new LootSources.MineItemSource(breakBlock, breakWith)));
                 }
             }
 
@@ -348,7 +331,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="giveItem">The item to insert into the enderchest. <see cref="Item.Slot"/> choses the slot.</param>
             public void GiveEnderChest(BaseSelector player, Item giveItem)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(player, new Slots.EnderChestSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Puts an item into the selected players' hotbars
@@ -357,7 +340,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="giveItem">The item to insert into the hotbar. <see cref="Item.Slot"/> choses the slot.</param>
             public void GiveHotbar(BaseSelector player, Item giveItem)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(player, new Slots.HotbarSlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
             }
 
             /// <summary>
@@ -368,7 +351,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="slot">The hotbar slot to put the item in</param>
             public void GiveHotbar(BaseSelector player, ILootTable loot, int slot)
             {
-                Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
+                ForFunction.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.LoottableSource(loot)));
             }
 
             /// <summary>
@@ -378,15 +361,15 @@ namespace SharpCraft.FunctionWriters
             /// <param name="breakBlock">the coords of the block</param>
             /// <param name="breakWith">the item used to break the block</param>
             /// <param name="slot">The hotbar slot to put the item in</param>
-            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item breakWith, int slot)
+            public void GiveHotbar(BaseSelector player, Vector breakBlock, Item? breakWith, int slot)
             {
                 if (breakWith is null)
                 {
-                    Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineHandSource(breakBlock, true)));
+                    ForFunction.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineHandSource(breakBlock, true)));
                 }
                 else
                 {
-                    Function.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineItemSource(breakBlock, breakWith)));
+                    ForFunction.AddCommand(new LootCommand(new LootTargets.EntityTarget(player, new Slots.HotbarSlot(slot)), new LootSources.MineItemSource(breakBlock, breakWith)));
                 }
             }
 
@@ -398,7 +381,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="offHand">If it should insert into the offhand instead</param>
             public void GiveWeapon(BaseSelector selector, Item giveItem, bool offHand = false)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
             }
             /// <summary>
             /// Clears an item from the selected players' inventories
@@ -406,9 +389,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="item">The item to clear</param>
             /// <param name="amount">The maximum amount of the item to clear. null clears all</param>
-            public void Clear(BaseSelector player, Item item = null, int? amount = null)
+            public void Clear(BaseSelector player, Item? item = null, int? amount = null)
             {
-                Function.AddCommand(new ClearCommand(player, item, amount));
+                ForFunction.AddCommand(new ClearCommand(player, item, amount));
             }
         }
 
@@ -419,15 +402,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for sounds
         /// </summary>
-        public class ClassSound
+        public class ClassSound : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassSound(Function function)
+            internal ClassSound(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -442,7 +421,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="minValue">the minimum volume of the sound (0-2)</param>
             public void Play(BaseSelector player, string sound, ID.SoundSource source, Vector location, double volume = 1, double speed = 1, double minValue = 0)
             {
-                Function.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
+                ForFunction.AddCommand(new PlaySoundCommand(sound, source, player, location, volume, speed, minValue));
             }
 
             /// <summary>
@@ -452,9 +431,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="source">the source to stop sounds at. Null will stop the sound from any source</param>
             /// <param name="sound">the sound to stop. Null will stop any sound in the given source</param>
-            public void Stop(BaseSelector player, ID.SoundSource? source = null, string sound = null)
+            public void Stop(BaseSelector player, ID.SoundSource? source = null, string? sound = null)
             {
-                Function.AddCommand(new StopSoundCommand(player, sound, source));
+                ForFunction.AddCommand(new StopSoundCommand(player, sound, source));
             }
         }
 
@@ -465,15 +444,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for titles
         /// </summary>
-        public class ClassTitle
+        public class ClassTitle : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassTitle(Function function)
+            internal ClassTitle(Function function): base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -481,9 +456,9 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void Title(BaseSelector player, JsonText message)
+            public void Title(BaseSelector player, BaseJsonText message)
             {
-                Function.AddCommand(new TitleCommand(player, message));
+                ForFunction.AddCommand(new TitleCommand(player, message));
             }
 
             /// <summary>
@@ -492,9 +467,9 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             /// <param name="message">The message to show the players</param>
-            public void SubTitle(BaseSelector player, JsonText message)
+            public void SubTitle(BaseSelector player, BaseJsonText message)
             {
-                Function.AddCommand(new TitleSubtitleCommand(player, message));
+                ForFunction.AddCommand(new TitleSubtitleCommand(player, message));
             }
 
             /// <summary>
@@ -504,9 +479,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void Time(BaseSelector player, Time startFade, Time stay, Time endFade)
+            public void Time(BaseSelector player, NoneNegativeTime<int> startFade, NoneNegativeTime<int> stay, NoneNegativeTime<int> endFade)
             {
-                Function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
+                ForFunction.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
             }
 
             /// <summary>
@@ -515,7 +490,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             public void Clear(BaseSelector player)
             {
-                Function.AddCommand(new TitleClearCommand(player));
+                ForFunction.AddCommand(new TitleClearCommand(player));
             }
 
             /// <summary>
@@ -524,7 +499,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             public void Reset(BaseSelector player)
             {
-                Function.AddCommand(new TitleResetCommand(player));
+                ForFunction.AddCommand(new TitleResetCommand(player));
             }
 
             /// <summary>
@@ -536,22 +511,22 @@ namespace SharpCraft.FunctionWriters
             /// <param name="startFade">The amount of ticks it takes for the title to fade in</param>
             /// <param name="stay">The amount of ticks the title stays on screen</param>
             /// <param name="endFade">The amount of ticks it takes for the title to fade out</param>
-            public void FullTitle(BaseSelector player, JsonText topMessage, JsonText bottomMessage, Time startFade, Time stay, Time endFade)
+            public void FullTitle(BaseSelector player, BaseJsonText topMessage, BaseJsonText bottomMessage, NoneNegativeTime<int> startFade, NoneNegativeTime<int> stay, NoneNegativeTime<int> endFade)
             {
-                Function.Custom.GroupCommands(f => 
+                ForFunction.Custom.GroupCommands(f => 
                 {
-                    Function.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
+                    ForFunction.AddCommand(new TitleTimesCommand(player, startFade, stay, endFade));
                     if (!(bottomMessage is null))
                     {
-                        Function.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
+                        ForFunction.AddCommand(new TitleSubtitleCommand(player, bottomMessage));
                     }
                     if (topMessage is null)
                     {
-                        Function.AddCommand(new TitleCommand(player, new JsonText.Text("")));
+                        ForFunction.AddCommand(new TitleCommand(player, new JsonText.Text("")));
                     }
                     else
                     {
-                        Function.AddCommand(new TitleCommand(player, topMessage));
+                        ForFunction.AddCommand(new TitleCommand(player, topMessage));
                     }
                 });
             }
@@ -564,15 +539,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for recipes
         /// </summary>
-        public class ClassRecipe
+        public class ClassRecipe : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassRecipe(Function function)
+            internal ClassRecipe(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -582,7 +553,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="giveRecipe">The recipe to give</param>
             public void Give(BaseSelector player, IRecipe giveRecipe)
             {
-                Function.AddCommand(new RecipeCommand(giveRecipe, player, true));
+                ForFunction.AddCommand(new RecipeCommand(giveRecipe, player, true));
             }
             /// <summary>
             /// Gives all recipes to the selected players
@@ -590,7 +561,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             public void GiveAll(BaseSelector player)
             {
-                Function.AddCommand(new RecipeAllCommand(player, true));
+                ForFunction.AddCommand(new RecipeAllCommand(player, true));
             }
             /// <summary>
             /// Removes a recipe from the selected players
@@ -599,7 +570,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="giveRecipe">the recipe to remove</param>
             public void Remove(BaseSelector player, IRecipe giveRecipe)
             {
-                Function.AddCommand(new RecipeCommand(giveRecipe, player, false));
+                ForFunction.AddCommand(new RecipeCommand(giveRecipe, player, false));
             }
             /// <summary>
             /// removes all recipes from the selected players
@@ -607,7 +578,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="player">the <see cref="BaseSelector"/> to use</param>
             public void RemoveAll(BaseSelector player)
             {
-                Function.AddCommand(new RecipeAllCommand(player, false));
+                ForFunction.AddCommand(new RecipeAllCommand(player, false));
             }
         }
 
@@ -618,15 +589,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for advancements
         /// </summary>
-        public class ClassAdvancement
+        public class ClassAdvancement : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassAdvancement(Function function)
+            internal ClassAdvancement(Function function) : base(function)
             {
-                this.Function = function;
+               
             }
             /// <summary>
             /// grants/evokes all advancements for the selected players
@@ -635,7 +602,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             public void Everything(BaseSelector player, bool revoke = false)
             {
-                Function.AddCommand(new AdvancementAllCommand(player, !revoke));
+                ForFunction.AddCommand(new AdvancementAllCommand(player, !revoke));
             }
             /// <summary>
             /// Grants/revokes all advancements up to the specified advancement for the selected players
@@ -646,7 +613,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             public void Until(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
+                ForFunction.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.until, !revoke));
             }
             /// <summary>
             /// grants/revokes all advancements after the specified advancement for the selected players
@@ -657,7 +624,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             public void From(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
+                ForFunction.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.from, !revoke));
             }
 
             /// <summary>
@@ -669,7 +636,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             public void Branch(BaseSelector player, IAdvancement advancement, bool revoke = false)
             {
-                Function.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
+                ForFunction.AddCommand(new AdvancementSomeCommand(player, advancement, ID.RelativeAdvancement.through, !revoke));
             }
 
             /// <summary>
@@ -680,9 +647,9 @@ namespace SharpCraft.FunctionWriters
             /// <param name="advancement">the advancement to grant/revoke</param>
             /// <param name="revoke">if the advancement should be revoked instead of granted</param>
             /// <param name="trigger">the trigger in the advancement to revoke/grant. Null means the advancement itself will be granted/revoked</param>
-            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger trigger = null)
+            public void Only(BaseSelector player, IAdvancement advancement, bool revoke = false, AdvancementObjects.ITrigger? trigger = null)
             {
-                Function.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
+                ForFunction.AddCommand(new AdvancementSingleCommand(player, advancement, trigger, !revoke));
             }
         }
     }

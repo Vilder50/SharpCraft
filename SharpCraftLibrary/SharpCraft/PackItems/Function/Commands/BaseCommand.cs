@@ -15,7 +15,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>The command as a string</returns>
-        string GetCommandString();
+        string? GetCommandString();
 
         /// <summary>
         /// Returns a shallow clone of the command
@@ -33,7 +33,7 @@ namespace SharpCraft.Commands
         /// Returns the command as a string
         /// </summary>
         /// <returns>The command as a string</returns>
-        public abstract string GetCommandString();
+        public abstract string? GetCommandString();
 
         /// <summary>
         /// Returns a shallow clone of this command

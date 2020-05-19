@@ -8,7 +8,7 @@ namespace SharpCraft
     /// </summary>
     public class Tag : IConvertableToDataTag
     {
-        private string name;
+        private string name = null!;
         /// <summary>
         /// Creates a new tag with the given name
         /// </summary>
@@ -30,7 +30,7 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Tag name may not be null or whitespace", nameof(Name));
                 }
-                if (!Utils.ValidateName(value, true, false))
+                if (!Utils.ValidateName(value, true, false, null))
                 {
                     throw new ArgumentException("Tag name is invalid. Only accepts letters, numbers and -._");
                 }
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <param name="extraConversionData">set to <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="asType">The type of tag</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagString)
             {
@@ -72,6 +72,25 @@ namespace SharpCraft
         public static implicit operator Tag[](Tag tag)
         {
             return new Tag[] { tag };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="Tag"/> into a <see cref="Selector.EntityTag"/>
+        /// </summary>
+        /// <param name="tag">the <see cref="SharpCraft.Tag"/> to convert</param>
+        public static implicit operator Selector.EntityTag(Tag tag)
+        {
+            return new Selector.EntityTag(tag);
+        }
+
+        /// <summary>
+        /// Checks if the given tag doesn't exist on the selected entity.
+        /// </summary>
+        /// <param name="tag">The tag to check if doesn't exist</param>
+        /// <returns><see cref="Selector.EntityTag"/> used for checking if the tag doesn't exist</returns>
+        public static Selector.EntityTag operator !(Tag tag)
+        {
+            return new Selector.EntityTag(tag, false);
         }
     }
 }

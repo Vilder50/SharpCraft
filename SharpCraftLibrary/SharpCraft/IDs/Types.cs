@@ -83,7 +83,7 @@ namespace SharpCraft
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>This <see cref="BlockType"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (!(asType is null) && asType != ID.NBTTagType.TagString) 
             {
@@ -99,7 +99,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="obj">The object to check if equal</param>
         /// <returns>True if equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is BlockType type &&
                    Name == type.Name;
@@ -119,8 +119,13 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
         /// <returns></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
+
             if (conversionData.Length != 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(conversionData),"Need to get 3 conversion data.");
@@ -134,11 +139,11 @@ namespace SharpCraft
             DataPartObject returnObject = new DataPartObject();
             if (Value is BaseGroup<BlockType> || Value is EmptyGroup<BlockType>)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
             else
             {
-                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[0]!.ToString()!, new DataPartTag(Name, isJson: json.Value), json.Value));
             }
             return returnObject;
         }
@@ -283,7 +288,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="obj">The object to check if equal</param>
         /// <returns>True if equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return obj is ItemType type &&
                    Name == type.Name;
@@ -304,7 +309,7 @@ namespace SharpCraft
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>This <see cref="ItemType"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (!(asType is null) && asType != ID.NBTTagType.TagString)
             {
@@ -319,8 +324,13 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
         /// <returns></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
+
             if (conversionData.Length != 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
@@ -334,11 +344,11 @@ namespace SharpCraft
             DataPartObject returnObject = new DataPartObject();
             if (Value is BaseGroup<ItemType> || Value is EmptyGroup<ItemType>)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
             else
             {
-                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[0]!.ToString()!, new DataPartTag(Name, isJson: json.Value), json.Value));
             }
             return returnObject;
         }
@@ -420,7 +430,7 @@ namespace SharpCraft
         /// <param name="asType">The type of tag to get. Set to null or <see cref="ID.NBTTagType.TagString"/></param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>This <see cref="EntityType"/> as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (!(asType is null) && asType != ID.NBTTagType.TagString)
             {
@@ -435,8 +445,12 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
         /// <returns></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
             if (conversionData.Length != 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
@@ -450,11 +464,11 @@ namespace SharpCraft
             DataPartObject returnObject = new DataPartObject();
             if (Value is BaseGroup<EntityType> || Value is EmptyGroup<EntityType>)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
             else
             {
-                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[0]!.ToString()!, new DataPartTag(Name, isJson: json.Value), json.Value));
             }
             return returnObject;
         }
@@ -555,8 +569,12 @@ namespace SharpCraft
         /// </summary>
         /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
         /// <returns></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
             if (conversionData.Length != 3)
             {
                 throw new ArgumentOutOfRangeException(nameof(conversionData), "Need to get 3 conversion data.");
@@ -570,11 +588,11 @@ namespace SharpCraft
             DataPartObject returnObject = new DataPartObject();
             if (Value is BaseGroup<LiquidType> || Value is EmptyGroup<LiquidType>)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[1].ToString(), new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
             else
             {
-                returnObject.AddValue(new DataPartPath(conversionData[0].ToString(), new DataPartTag(Name, isJson: json.Value), json.Value));
+                returnObject.AddValue(new DataPartPath(conversionData[0]!.ToString()!, new DataPartTag(Name, isJson: json.Value), json.Value));
             }
             return returnObject;
         }

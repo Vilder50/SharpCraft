@@ -12,27 +12,29 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class LocationCondition : BaseCondition
     {
-        private JSONObjects.Location location;
+        private JsonObjects.Location location = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LocationCondition"/>
         /// </summary>
         /// <param name="location">The location to test for</param>
-        public LocationCondition(JSONObjects.Location location) : base("minecraft:location_check")
+        /// <param name="offset">Offset to check at</param>
+        public LocationCondition(JsonObjects.Location location, IntVector? offset) : base("minecraft:location_check")
         {
             Location = location;
+            Offset = offset;
         }
 
         /// <summary>
         /// The location to test for
         /// </summary>
         [DataTag("predicate", JsonTag = true)]
-        public JSONObjects.Location Location { get => location; set => location = value ?? throw new ArgumentNullException(nameof(Location), "Location may not be null"); }
+        public JsonObjects.Location Location { get => location; set => location = value ?? throw new ArgumentNullException(nameof(Location), "Location may not be null"); }
 
         /// <summary>
         /// Offset to check at
         /// </summary>
         [DataTag((object)"offsetX", "offsetY", "offsetZ", true, Merge = true, JsonTag = true)]
-        public IntVector Offset { get; set; }
+        public IntVector? Offset { get; set; }
     }
 }

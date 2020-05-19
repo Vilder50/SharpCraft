@@ -21,7 +21,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected FunctionGroup(bool _, BasePackNamespace packNamespace, string fileName, List<IFunction> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "function")
+        protected FunctionGroup(bool _, BasePackNamespace packNamespace, string? fileName, List<IFunction> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "function")
         {
             
         }
@@ -34,7 +34,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public FunctionGroup(BasePackNamespace packNamespace, string fileName, List<IFunction> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
+        public FunctionGroup(BasePackNamespace packNamespace, string? fileName, List<IFunction> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
             FinishedConstructing();
         }
@@ -53,8 +53,8 @@ namespace SharpCraft
         /// <returns>The stream for this file</returns>
         protected override TextWriter GetStream()
         {
-            CreateDirectory("tags\\functions");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\functions\\" + WritePath + ".json");
+            CreateDirectory("tags/functions");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags/functions/" + WritePath + ".json");
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new Data.DataPartTag(GetNamespacedName());
         }

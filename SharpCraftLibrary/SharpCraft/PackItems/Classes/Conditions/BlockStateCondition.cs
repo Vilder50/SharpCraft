@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class BlockStateCondition : BaseCondition
     {
-        private Block block;
+        private Block block= null!;
 
         /// <summary>
         /// Intializes a new <see cref="BlockStateCondition"/>

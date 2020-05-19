@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class EnchantRandomlyChange : BaseChange
     {
-        private MCRange levels;
+        private MCRange levels = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EnchantRandomlyChange"/>

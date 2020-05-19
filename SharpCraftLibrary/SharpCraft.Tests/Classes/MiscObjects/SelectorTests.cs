@@ -53,8 +53,8 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual("@s[distance=..1]", new SharpCraft.Selector() { Distance = new MCRange(null, 1) }.GetSelectorString(), "Selector distance doesn't return correct string");
             Assert.AreEqual("@s[level=..1]", new SharpCraft.Selector() { Level = new MCRange(null, 1) }.GetSelectorString(), "Selector level doesn't return correct string");
             Assert.AreEqual("@s[sort=random]", new SharpCraft.Selector() { Sort = ID.Sort.random }.GetSelectorString(), "Selector sort doesn't return correct string");
-            Assert.AreEqual("@s[nbt={Size:1}]", new SharpCraft.Selector() { NBT = new Entity.Slime(null) { Size = 1 } }.GetSelectorString(), "Selector nbt doesn't return correct string");
-            Assert.AreEqual("@s[nbt=!{Size:1}]", new SharpCraft.Selector() { NBT = new Entity.Slime(null) { Size = 1 }, NotNBT = true }.GetSelectorString(), "Selector nbt not doesn't return correct string");
+            Assert.AreEqual("@s[nbt={Size:1}]", new SharpCraft.Selector() { NBT = new Entities.Slime(null) { Size = 1 } }.GetSelectorString(), "Selector nbt doesn't return correct string");
+            Assert.AreEqual("@s[nbt=!{Size:1}]", new SharpCraft.Selector() { NBT = new Entities.Slime(null) { Size = 1 }, NotNBT = true }.GetSelectorString(), "Selector nbt not doesn't return correct string");
 
             Assert.AreEqual("@e[name=\"test\",type=minecraft:creeper,tag=tagtag,predicate=space:name,scores={objective=1..2},gamemode=creative,team=myteam]", new SharpCraft.Selector(ID.Selector.e)
             {

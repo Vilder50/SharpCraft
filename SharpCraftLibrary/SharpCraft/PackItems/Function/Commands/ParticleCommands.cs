@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleNormalCommand : BaseCommand
     {
-        private Vector displayCoords;
-        private Vector size;
+        private Vector displayCoords = null!;
+        private Vector size = null!;
         private double speed;
         private int count;
 
@@ -26,7 +26,7 @@ namespace SharpCraft.Commands
         /// <param name="count">The amount of particles</param>
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
-        public ParticleNormalCommand(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleNormalCommand(ID.Particle particle, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector? selector)
         {
             Particle = particle;
             DisplayCoords = displayCoords;
@@ -92,7 +92,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to show the particles to. Leave null to show particles to everyone
         /// </summary>
-        public BaseSelector Selector { get; set; }
+        public BaseSelector? Selector { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -123,11 +123,11 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleColoredDustCommand : BaseCommand
     {
-        private Vector displayCoords;
-        private Vector size;
+        private Vector displayCoords = null!;
+        private Vector size = null!;
         private double speed;
         private int count;
-        private RGBColor color;
+        private RGBColor color = null!;
         private double particleSize;
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace SharpCraft.Commands
         /// <param name="count">The amount of particles</param>
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
-        public ParticleColoredDustCommand(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleColoredDustCommand(RGBColor color, double particleSize, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector? selector)
         {
             Color = color;
             ParticleSize = particleSize;
@@ -225,7 +225,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to show the particles to. Leave null to show particles to everyone
         /// </summary>
-        public BaseSelector Selector { get; set; }
+        public BaseSelector? Selector { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -258,11 +258,11 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleBlockCommand : BaseCommand
     {
-        private Vector displayCoords;
-        private Vector size;
+        private Vector displayCoords = null!;
+        private Vector size = null!;
         private double speed;
         private int count;
-        private Block block;
+        private Block block = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ParticleBlockCommand"/>
@@ -275,7 +275,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
         /// <param name="asBlockDust">True if the particles should be in dust form. False if they should be squares</param>
         /// <param name="block">The block the particles should look like</param>
-        public ParticleBlockCommand(Block block, Vector displayCoords, Vector size, double speed, int count, bool asBlockDust, bool force, BaseSelector selector)
+        public ParticleBlockCommand(Block block, Vector displayCoords, Vector size, double speed, int count, bool asBlockDust, bool force, BaseSelector? selector)
         {
             Block = block;
             AsBlockDust = asBlockDust;
@@ -347,7 +347,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to show the particles to. Leave null to show particles to everyone
         /// </summary>
-        public BaseSelector Selector { get; set; }
+        public BaseSelector? Selector { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -379,11 +379,11 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ParticleItemCommand : BaseCommand
     {
-        private Vector displayCoords;
-        private Vector size;
+        private Vector displayCoords = null!;
+        private Vector size = null!;
         private double speed;
         private int count;
-        private Item item;
+        private Item item = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ParticleItemCommand"/>
@@ -395,7 +395,7 @@ namespace SharpCraft.Commands
         /// <param name="force">True if particles always should be shown. False if particles shouldn't</param>
         /// <param name="selector">Selector selecting players to show the particles to. Leave null to show particles to everyone</param>
         /// <param name="item">The item the particles should look like</param>
-        public ParticleItemCommand(Item item, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector selector)
+        public ParticleItemCommand(Item item, Vector displayCoords, Vector size, double speed, int count, bool force, BaseSelector? selector)
         {
             Item = item;
             DisplayCoords = displayCoords;
@@ -461,7 +461,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// Selector selecting players to show the particles to. Leave null to show particles to everyone
         /// </summary>
-        public BaseSelector Selector { get; set; }
+        public BaseSelector? Selector { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command

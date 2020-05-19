@@ -16,19 +16,19 @@ namespace SharpCraft.AdvancementObjects
         /// The recipes to reward
         /// </summary>
         [DataTag("recipes", ForceType = ID.NBTTagType.TagStringArray, JsonTag = true)]
-        public IRecipe[] Recipes { get; set; }
+        public IRecipe[]? Recipes { get; set; }
 
         /// <summary>
         /// The function to run as a reward
         /// </summary>
         [DataTag("function", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public Function Function { get; set; }
+        public Function? Function { get; set; }
 
         /// <summary>
         /// The loot to reward
         /// </summary>
         [DataTag("loot", ForceType = ID.NBTTagType.TagStringArray, JsonTag = true)]
-        public LootTable[] LootTables { get; set; }
+        public LootTable[]? LootTables { get; set; }
 
         /// <summary>
         /// The amount of experience to reward

@@ -12,13 +12,13 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class ToolCondition : BaseCondition
     {
-        private JSONObjects.Item item;
+        private JsonObjects.Item item = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ToolCondition"/>
         /// </summary>
         /// <param name="item">The item to test for</param>
-        public ToolCondition(JSONObjects.Item item) : base("minecraft:match_tool")
+        public ToolCondition(JsonObjects.Item item) : base("minecraft:match_tool")
         {
             Item = item;
         }
@@ -27,6 +27,6 @@ namespace SharpCraft.Conditions
         /// The location to test for
         /// </summary>
         [DataTag("predicate", JsonTag = true)]
-        public JSONObjects.Item Item { get => item; set => item = value ?? throw new ArgumentNullException(nameof(Item), "Item may not be null"); }
+        public JsonObjects.Item Item { get => item; set => item = value ?? throw new ArgumentNullException(nameof(Item), "Item may not be null"); }
     }
 }

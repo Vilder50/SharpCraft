@@ -55,7 +55,7 @@
             public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item.MinecraftValue(); }
 
             /// <summary>
-            /// Goes up by one when the player crafts the specified item
+            /// Goes up by one for each of the specified item the player drops
             /// </summary>
             /// <param name="Item">the item to check for</param>
             public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item.MinecraftValue(); }

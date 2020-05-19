@@ -2,52 +2,49 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for sapling blocks
+    /// </summary>
+    public class Sapling : Block, Interfaces.IStage
     {
+        private int? _sStage;
+
         /// <summary>
-        /// An object for sapling blocks
+        /// Creates a new sapling block
         /// </summary>
-        public class Sapling : Block, IBlock.IStage
+        /// <param name="type">The type of block</param>
+        public Sapling(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private int? _sStage;
+            string blockName = block.ToString();
+            return (blockName.Contains("sapling"));
+        }
 
-            /// <summary>
-            /// Creates a new sapling block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public Sapling(BlockType type) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// The stage of the sapling
+        /// (0-1)
+        /// 1 = sapling will grow soon.
+        /// </summary>
+        [BlockState("stage")]
+        [BlockIntStateRange(0, 1)]
+        public int? SStage
+        {
+            get => _sStage;
+            set
             {
-                string blockName = block.ToString();
-                return (blockName.Contains("sapling"));
-            }
-
-            /// <summary>
-            /// The stage of the sapling
-            /// (0-1)
-            /// 1 = sapling will grow soon.
-            /// </summary>
-            [BlockState("stage")]
-            [BlockIntStateRange(0, 1)]
-            public int? SStage
-            {
-                get => _sStage;
-                set
+                if (!(value == 0 || value == 1 || value == null))
                 {
-                    if (!(value == 0 || value == 1 || value == null))
-                    {
-                        throw new ArgumentException(nameof(SStage) + "Only allows the numbers 0 and 1");
-                    }
-                    _sStage = value;
+                    throw new ArgumentException(nameof(SStage) + "Only allows the numbers 0 and 1");
                 }
+                _sStage = value;
             }
         }
     }

@@ -19,7 +19,7 @@ namespace SharpCraft
         /// <param name="amount">The amount to modify with</param>
         /// <param name="operation">The way to modify</param>
         /// <param name="uuid">The UUID of the modifier. Leave null to generate a UUID.</param>
-        public ItemAttribute(ID.AttributeType attribute, ID.AttributeSlot slot, double amount, ID.AttributeOperation operation, string name = null, UUID uuid = null)
+        public ItemAttribute(ID.AttributeType attribute, ID.AttributeSlot slot, double amount, ID.AttributeOperation operation, string? name = null, UUID? uuid = null)
         {
             Attribute = attribute;
             Slot = slot;

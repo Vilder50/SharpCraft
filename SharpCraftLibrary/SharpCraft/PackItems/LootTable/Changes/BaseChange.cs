@@ -31,7 +31,7 @@ namespace SharpCraft.LootObjects
         /// An array conditions which has to be true for the change to take place
         /// </summary>
         [DataTag("conditions", JsonTag = true)]
-        public Conditions.BaseCondition[] Conditions { get; set; }
+        public Conditions.BaseCondition[]? Conditions { get; set; }
 
         /// <summary>
         /// Converts a single change into an array

@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadChunkCommand : BaseCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadChunkCommand"/>
@@ -56,8 +56,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadChunksCommand : BaseCommand
     {
-        private Vector corner1;
-        private Vector corner2;
+        private Vector corner1 = null!;
+        private Vector corner2 = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadChunksCommand"/>
@@ -146,7 +146,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ForceloadQueryChunkCommand : BaseCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ForceloadQueryChunkCommand"/>

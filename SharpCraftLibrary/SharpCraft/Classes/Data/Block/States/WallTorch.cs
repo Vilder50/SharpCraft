@@ -2,42 +2,39 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for wall torch blocks
+    /// </summary>
+    public class WallTorch : Block, Interfaces.IFacing
     {
         /// <summary>
-        /// An object for wall torch blocks
+        /// Creates a torch block
         /// </summary>
-        public class WallTorch : Block, IBlock.IFacing
+        /// <param name="type">The type of block</param>
+        public WallTorch(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a torch block
+        /// </summary>
+        /// <param name="type">The type of block</param>
+        public WallTorch(ID.Block type = SharpCraft.ID.Block.wall_torch) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            /// <summary>
-            /// Creates a torch block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public WallTorch(BlockType type) : base(type) { }
-
-            /// <summary>
-            /// Creates a torch block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public WallTorch(ID.Block type = SharpCraft.ID.Block.wall_torch) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
-            {
-                return block == SharpCraft.ID.Block.wall_torch;
-            }
-
-            /// <summary>
-            /// The way the torch is facing. (The way it points)
-            /// </summary>
-            [BlockState("facing")]
-            public ID.Facing? SFacing { get; set; }
+            return block == SharpCraft.ID.Block.wall_torch;
         }
+
+        /// <summary>
+        /// The way the torch is facing. (The way it points)
+        /// </summary>
+        [BlockState("facing")]
+        public ID.Facing? SFacing { get; set; }
     }
 }

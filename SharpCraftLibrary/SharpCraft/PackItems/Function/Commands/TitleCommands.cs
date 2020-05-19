@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleClearCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleClearCommand"/>
@@ -42,7 +42,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleResetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleResetCommand"/>
@@ -73,15 +73,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private BaseJsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting players to show the title for</param>
         /// <param name="text">The text to show</param>
-        public TitleCommand(BaseSelector selector, JsonText text)
+        public TitleCommand(BaseSelector selector, BaseJsonText text)
         {
             Selector = selector;
             Text = text;
@@ -95,7 +95,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public BaseJsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -112,15 +112,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleSubtitleCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private BaseJsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleSubtitleCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players whose sub title to change</param>
         /// <param name="text">The text to show</param>
-        public TitleSubtitleCommand(BaseSelector selector, JsonText text)
+        public TitleSubtitleCommand(BaseSelector selector, BaseJsonText text)
         {
             Selector = selector;
             Text = text;
@@ -134,7 +134,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public BaseJsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -151,15 +151,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleActionbarCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private JsonText text;
+        private BaseSelector selector = null!;
+        private BaseJsonText text = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleActionbarCommand"/>
         /// </summary>
         /// <param name="selector">Selector selecting the players to show the action bar text for</param>
         /// <param name="text">The text to show</param>
-        public TitleActionbarCommand(BaseSelector selector, JsonText text)
+        public TitleActionbarCommand(BaseSelector selector, BaseJsonText text)
         {
             Selector = selector;
             Text = text;
@@ -173,7 +173,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text to show
         /// </summary>
-        public JsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
+        public BaseJsonText Text { get => text; set => text = value ?? throw new ArgumentNullException(nameof(Text), "Text may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -190,10 +190,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TitleTimesCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private Time fadeIn;
-        private Time stay;
-        private Time fadeOut;
+        private BaseSelector selector = null!;
+        private NoneNegativeTime<int> fadeIn = null!;
+        private NoneNegativeTime<int> stay = null!;
+        private NoneNegativeTime<int> fadeOut = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TitleTimesCommand"/>
@@ -202,7 +202,7 @@ namespace SharpCraft.Commands
         /// <param name="fadeIn">How long it takes for the title to fade in</param>
         /// <param name="stay">How long the title stays</param>
         /// <param name="fadeOut">How long it takes for the title to fade out</param>
-        public TitleTimesCommand(BaseSelector selector, Time fadeIn, Time stay, Time fadeOut)
+        public TitleTimesCommand(BaseSelector selector, NoneNegativeTime<int> fadeIn, NoneNegativeTime<int> stay, NoneNegativeTime<int> fadeOut)
         {
             Selector = selector;
             FadeIn = fadeIn;
@@ -218,17 +218,17 @@ namespace SharpCraft.Commands
         /// <summary>
         /// How long it takes for the title to fade in
         /// </summary>
-        public Time FadeIn { get => fadeIn; set => fadeIn = value ?? throw new ArgumentNullException(nameof(FadeIn), "FadeIn may not be null"); }
+        public NoneNegativeTime<int> FadeIn { get => fadeIn; set => fadeIn = value ?? throw new ArgumentNullException(nameof(FadeIn), "FadeIn may not be null"); }
 
         /// <summary>
         /// How long the title stays
         /// </summary>
-        public Time Stay { get => stay; set => stay = value ?? throw new ArgumentNullException(nameof(Stay), "Stay may not be null"); }
+        public NoneNegativeTime<int> Stay { get => stay; set => stay = value ?? throw new ArgumentNullException(nameof(Stay), "Stay may not be null"); }
 
         /// <summary>
         /// How long it takes for the title to fade out
         /// </summary>
-        public Time FadeOut { get => fadeOut; set => fadeOut = value ?? throw new ArgumentNullException(nameof(FadeOut), "FadeOut may not be null"); }
+        public NoneNegativeTime<int> FadeOut { get => fadeOut; set => fadeOut = value ?? throw new ArgumentNullException(nameof(FadeOut), "FadeOut may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -236,7 +236,7 @@ namespace SharpCraft.Commands
         /// <returns>title [Selector] times [FadeIn] [Stay] [FadeOut]</returns>
         public override string GetCommandString()
         {
-            return $"title {Selector.GetSelectorString()} times {FadeIn.AsTicks()} {Stay.AsTicks()} {FadeOut.AsTicks()}";
+            return $"title {Selector.GetSelectorString()} times {FadeIn.GetAsTicks()} {Stay.GetAsTicks()} {FadeOut.GetAsTicks()}";
         }
     }
 }

@@ -21,16 +21,16 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             space.Function("myfunction");
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\"), "Directory wasn't created");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\myfunction.mcfunction"), "File wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/"), "Directory wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/functions/myfunction.mcfunction"), "File wasn't created");
 
             space.Function("folder/otherFunction", BaseFile.WriteSetting.OnDispose);
-            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't supposed to be created yet since its OnDispose");
-            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\otherfunction.mcfunction"), "File wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/folder/"), "Directory wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/functions/folder/otherfunction.mcfunction"), "File wasn't supposed to be created yet since its OnDispose");
 
             pack.Dispose();
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "Directory wasn't created for file with directory in name");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\otherfunction.mcfunction"), "File is supposed to have been created now since Dispose was ran");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/folder/"), "Directory wasn't created for file with directory in name");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/functions/folder/otherfunction.mcfunction"), "File is supposed to have been created now since Dispose was ran");
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace SharpCraft.Tests.PackItems
             using Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator());
             PackNamespace space = pack.Namespace("space");
             Function autoFunction = space.Function("autofunction");
-            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction.mcfunction").writer;
+            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer;
             Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
 
             //test
@@ -51,7 +51,7 @@ namespace SharpCraft.Tests.PackItems
 
             //text execute
             autoFunction = space.Function("autofunction2");
-            autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction2.mcfunction").writer;
+            autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction2.mcfunction").writer;
             autoFunction.AddCommand(new ExecuteAs(ID.Selector.s));
             Assert.AreEqual("", autoFunctionWriter.ToString(), "Execute command with no end shouldn't write anything yet");
             autoFunction.AddCommand(new ExecuteAt(ID.Selector.s));
@@ -68,14 +68,14 @@ namespace SharpCraft.Tests.PackItems
             PackNamespace space = pack.Namespace("space");
             Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
             Function autoFunction = space.Function("autofunction", BaseFile.WriteSetting.Auto);
-            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\autofunction.mcfunction").writer;
+            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer;
 
             //test
             onDisposeFunction.AddCommand(new SayCommand("hello world"));
             onDisposeFunction.AddCommand(new ExecuteAs(ID.Selector.a));
             Assert.AreEqual(2, onDisposeFunction.Commands.Count, "Commands wasn't added to command list");
             onDisposeFunction.Dispose();
-            TextWriter onDisposeFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks\\pack\\data\\space\\functions\\disposefunction.mcfunction").writer;
+            TextWriter onDisposeFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/disposefunction.mcfunction").writer;
             Assert.AreEqual("say hello world" + Environment.NewLine + "execute as @a" + Environment.NewLine, onDisposeFunctionWriter.ToString(), "Dispose function isn't writing commands correctly on dispose");
             Assert.IsNull(onDisposeFunction.Commands, "Commands wasn't cleared");
 
@@ -99,8 +99,8 @@ namespace SharpCraft.Tests.PackItems
                 f.AddCommand(new SayCommand("hello"));
             }, BaseFile.WriteSetting.Auto);
 
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\"), "Child directory wasn't created correctly");
-            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks\\pack\\data\\space\\functions\\1.mcfunction").writer;
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/"), "Child directory wasn't created correctly");
+            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/1.mcfunction").writer;
             Assert.IsNotNull(writer, "Child file wasn't created");
             Assert.AreEqual("say hello" + Environment.NewLine, writer.ToString(), "FunctionCreator didn't run correctly");
         }
@@ -119,8 +119,8 @@ namespace SharpCraft.Tests.PackItems
                 f.AddCommand(new SayCommand("hello"));
             }, BaseFile.WriteSetting.Auto);
 
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\functions\\folder\\"), "sibling directory wasn't created correctly");
-            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks\\pack\\data\\space\\functions\\folder\\file.mcfunction").writer;
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/folder/"), "sibling directory wasn't created correctly");
+            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/folder/file.mcfunction").writer;
             Assert.IsNotNull(writer, "sibling file wasn't created");
             Assert.AreEqual("say hello" + Environment.NewLine, writer.ToString(), "FunctionCreator didn't run correctly");
         }
@@ -142,7 +142,7 @@ namespace SharpCraft.Tests.PackItems
                 9
                 );
 
-            var treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks\\pack\\data\\space\\functions\\")).ToList();
+            var treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks/pack/data/space/functions/")).ToList();
             Assert.AreEqual(4, treeWriters.Count, "The correct amount of writers wasn't created");
             Assert.AreEqual("execute if score #s scores matches 5..6 run function space:function/5-6" + Environment.NewLine +
                 "execute if score #s scores matches 7..9 run function space:function/7-9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("function.mcfunction")).writer.ToString(), "Tree base wasn't written correctly");
@@ -150,7 +150,7 @@ namespace SharpCraft.Tests.PackItems
                 "execute if score #s scores matches 8..9 run function space:function/8-9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("7-9.mcfunction")).writer.ToString(), "Tree branch wasn't written correctly");
 
             //4 branches
-            Function fourBranches = space.Function("four\\function", BaseFile.WriteSetting.Auto);
+            Function fourBranches = space.Function("four/function", BaseFile.WriteSetting.Auto);
             fourBranches.Custom.TreeSearch(
                 (min, max) => new ExecuteIfScoreMatches("#s", new Objective("scores"), new MCRange(min, max)),
                 (number) => new SayCommand(number.ToString()),
@@ -158,7 +158,7 @@ namespace SharpCraft.Tests.PackItems
                 9,
                 4
                 );
-            treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks\\pack\\data\\space\\functions\\four")).ToList();
+            treeWriters = pack.FileCreator.GetWriters().Where(w => w.path.StartsWith("datapacks/pack/data/space/functions/four")).ToList();
             Assert.AreEqual(2, treeWriters.Count, "The correct amount of writers wasn't created for a 4 tree search");
             Assert.AreEqual("execute if score #s scores matches 8 run say 8" + Environment.NewLine +
                 "execute if score #s scores matches 9 run say 9" + Environment.NewLine, treeWriters.Single(w => w.path.EndsWith("8-9.mcfunction")).writer.ToString(), "4 Tree branch wasn't written correctly");
@@ -210,15 +210,15 @@ namespace SharpCraft.Tests.PackItems
             Function function = space.Function("function", BaseFile.WriteSetting.Auto);
 
             //test
-            function.Custom.SummonExecute(new Entity.Armorstand() { Tags = new Tag[] { "ATag" } }, new Coords(1, 2, 3), "execute", (f) =>
+            function.Custom.SummonExecute(new Entities.Armorstand() { Tags = new Tag[] { "ATag" } }, new Coords(1, 2, 3), "execute", (f) =>
               {
                   f.World.Say("hello");
               });
 
             Assert.AreEqual("summon armor_stand ~1 ~2 ~3 {Tags:[\"ATag\",\"SharpSummon\"]}" + Environment.NewLine +
-                "execute as @e[tag=SharpSummon] at @s run function space:execute" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\function.mcfunction").writer.ToString(), "Summon and execute file written correctly");
+                "execute as @e[tag=SharpSummon] at @s run function space:execute" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/functions/function.mcfunction").writer.ToString(), "Summon and execute file written correctly");
             Assert.AreEqual("tag @s remove SharpSummon" + Environment.NewLine +
-                "say hello" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\execute.mcfunction").writer.ToString(), "executing file written correctly");
+                "say hello" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/functions/execute.mcfunction").writer.ToString(), "executing file written correctly");
         }
 
         [TestMethod]
@@ -260,12 +260,6 @@ namespace SharpCraft.Tests.PackItems
             function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), (value1 + 5) * (value2 + 10));
             Assert.AreEqual(6, function.Commands.Count, "Operation didn't add the correct amount of commands to the function");
             Assert.AreEqual("Score", (function.Commands[5] as ScoreboardOperationCommand).Objective1.Name, "Operation didn't end up setting the correct score");
-
-            function.Custom.SetToScoreOperation(ID.Selector.s, new Objective("Score"), value1 + 5);
-            Assert.AreEqual("Score", (function.Commands[6] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't set correct score");
-            Assert.AreEqual("Cakes", (function.Commands[6] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't get the correct score");
-            Assert.AreEqual("Score", (function.Commands[7] as ScoreboardOperationCommand).Objective1.Name, "Simple operation didn't add to the correct score");
-            Assert.AreEqual("constants", (function.Commands[7] as ScoreboardOperationCommand).Objective2.Name, "Simple operation didn't add with correct number");
         }
 
         [TestMethod]
@@ -318,7 +312,7 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("execute at @s run me 123", addedFunction.Commands[1].GetCommandString(), "Get second function grouped command string returned wrong string");
             Assert.AreEqual(2, addedFunction.Commands.Count, "function grouped command doesn't contain the correct amount of commands");
 
-            space.AddSetting(new NamespaceSettings().FunctionGroupedCommands());
+            space.AddSetting(NamespaceSettings.GetSettings().FunctionGroupedCommands());
             function.Commands.Clear();
             function.AddCommand(command1.ShallowClone());
             function.Custom.GroupCommands((f) =>
@@ -353,8 +347,8 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("execute if score #ifelse math matches 0 run function space:else", function.Commands[2].GetCommandString(), "Base function commands aren't generated correctly");
 
             Assert.AreEqual("say block!" + Environment.NewLine
-                + "scoreboard players set #ifelse math 1" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\if.mcfunction").writer.ToString());
-            Assert.AreEqual("say no block!" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\functions\\else.mcfunction").writer.ToString());
+                + "scoreboard players set #ifelse math 1" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/functions/if.mcfunction").writer.ToString());
+            Assert.AreEqual("say no block!" + Environment.NewLine, pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/functions/else.mcfunction").writer.ToString());
         }
     }
 }

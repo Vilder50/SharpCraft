@@ -22,6 +22,6 @@ namespace SharpCraft.AdvancementObjects
         /// Note: block data is not supported.
         /// </summary>
         [DataTag("conditions.block", "conditions.block", "conditions.state", true, JsonTag = true, Merge = true)]
-        public Block Block { get; set; }
+        public Block? Block { get; set; }
     }
 }

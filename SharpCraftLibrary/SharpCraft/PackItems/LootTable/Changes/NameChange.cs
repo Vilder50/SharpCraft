@@ -12,12 +12,12 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class NameChange : BaseChange
     {
-        private JsonText name;
+        private BaseJsonText name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="NameChange"/>
         /// </summary>
-        public NameChange(JsonText name, ID.LootTarget? target = null) : base("set_name")
+        public NameChange(BaseJsonText name, ID.LootTarget? target = null) : base("set_name")
         {
             Name = name;
             Target = target;
@@ -33,6 +33,6 @@ namespace SharpCraft.LootObjects
         /// The name
         /// </summary>
         [DataTag("name", ForceType = ID.NBTTagType.TagCompound, JsonTag = true)]
-        public JsonText Name { get => name; set => name = value ?? throw new ArgumentNullException(nameof(Name), "Name may not be null"); }
+        public BaseJsonText Name { get => name; set => name = value ?? throw new ArgumentNullException(nameof(Name), "Name may not be null"); }
     }
 }

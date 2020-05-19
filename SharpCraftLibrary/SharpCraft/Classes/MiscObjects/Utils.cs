@@ -34,6 +34,10 @@ namespace SharpCraft
         /// <returns>The converted double</returns>
         public static string ToMinecraftDouble(this double? Double)
         {
+            if (Double is null)
+            {
+                return "0";
+            }
             return Double.Value.ToString().Replace(",", ".");
         }
 
@@ -53,6 +57,10 @@ namespace SharpCraft
         /// <returns>The converted float</returns>
         public static string ToMinecraftFloat(this float? Float)
         {
+            if (Float is null)
+            {
+                return "0";
+            }
             return Float.Value.ToString().Replace(",", ".");
         }
 
@@ -73,6 +81,10 @@ namespace SharpCraft
         /// <returns>The converted item</returns>
         public static string MinecraftValue(this ID.Item? item)
         {
+            if (item is null)
+            {
+                return "air";
+            }
             return item.Value.ToString().ToLower();
         }
 
@@ -93,6 +105,10 @@ namespace SharpCraft
         /// <returns>The converted bool</returns>
         public static string ToMinecraftBool(this bool? Bool)
         {
+            if (Bool is null)
+            {
+                return "false";
+            }
             return Bool.Value.ToString().ToLower();
         }
 
@@ -165,8 +181,9 @@ namespace SharpCraft
         /// <param name="name">The name to check</param>
         /// <param name="allowCapitialized">If capitialized letters are allowed</param>
         /// <param name="allowSlash">If / is allowed</param>
+        /// <param name="maxLength">The maximum length of the name</param>
         /// <returns>True if the name is valid</returns>
-        public static bool ValidateName(string name, bool allowCapitialized, bool allowSlash)
+        public static bool ValidateName(string name, bool allowCapitialized, bool allowSlash, int? maxLength)
         {
             if (name is null)
             {
@@ -182,7 +199,30 @@ namespace SharpCraft
             {
                 return false;
             }
+            if (!(maxLength is null) && name.Length > maxLength)
+            {
+                return false;
+            }
             return Regex.IsMatch(checkString, namePattern);
+        }
+
+        /// <summary>
+        /// Throws an exception if the given selector either is null or selects more than one entity
+        /// </summary>
+        /// <param name="selector">The selector to check</param>
+        /// <param name="selectorName">The name of the selector variable</param>
+        /// <param name="classHolderName">The name of the class holding the selector variable</param>
+        /// <exception cref="ArgumentNullException">If the selector is null</exception>
+        /// <exception cref="ArgumentException">If the selector selects too many entities</exception>
+        /// <returns>The checked selector</returns>
+        public static BaseSelector ValidateSingleSelectSelector(BaseSelector selector, string selectorName, string classHolderName)
+        {
+            if (!(selector ?? throw new ArgumentNullException(selectorName, selectorName + " may not be null.")).IsLimited())
+            {
+                throw new ArgumentException(classHolderName + " doesn't allow " + selectorName + " to select multiple entities", selectorName);
+            }
+
+            return selector;
         }
     }
 }

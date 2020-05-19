@@ -59,10 +59,10 @@ namespace SharpCraft.Tests.Data
             public bool? Boolean { get; set; }
 
             [DataTag]
-            public JsonText[] Name { get; set; }
+            public BaseJsonText[] Name { get; set; }
 
             [DataTag("JsonTag")]
-            public JsonText[] JsonTag { get; set; }
+            public BaseJsonText[] JsonTag { get; set; }
 
             [DataTag("Fake", ForceType = ID.NBTTagType.TagCompound)]
             public string Fake { get; set; }
@@ -140,7 +140,7 @@ namespace SharpCraft.Tests.Data
             }
         }
 
-        private class CustomDataArray : IConvertableToDataArray
+        private class CustomDataArray : IConvertableToDataArray<double>
         {
             public DataPartArray GetAsArray(ID.NBTTagType? asType = null, object[] extraConversionData = null)
             {
@@ -156,6 +156,11 @@ namespace SharpCraft.Tests.Data
                 {
                     throw new Exception();
                 }
+            }
+
+            public double[] PathArray()
+            {
+                throw new NotImplementedException();
             }
         }
 
@@ -278,9 +283,9 @@ namespace SharpCraft.Tests.Data
                     SmallNumberArray = new byte[] { 10, 5 },
                     Text = "hey",
                     TextArray = new string[] { "hello", "world" },
-                    Name = new JsonText[] { "1", "2" },
+                    Name = new BaseJsonText[] { "1", "2" },
                     Fake = "{hey:1}",
-                    JsonTag = new JsonText[] { "1", "2" }
+                    JsonTag = new BaseJsonText[] { "1", "2" }
                 }
             };
             Assert.AreEqual("{Inside:{" +

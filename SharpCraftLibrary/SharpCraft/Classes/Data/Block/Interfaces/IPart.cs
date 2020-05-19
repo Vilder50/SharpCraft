@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft.IBlock
+namespace SharpCraft.Blocks.Interfaces
 {
     /// <summary>
     /// Defines a block state for what part this block is

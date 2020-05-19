@@ -57,12 +57,12 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void TitleTimesCommandTest()
         {
-            Assert.AreEqual("title @a times 20 40 60", new TitleTimesCommand(ID.Selector.a, new Time(1, ID.TimeType.seconds), new Time(2, ID.TimeType.seconds), new Time(3, ID.TimeType.seconds)).GetCommandString());
+            Assert.AreEqual("title @a times 20 40 60", new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(null, new Time(1, ID.TimeType.seconds), new Time(2, ID.TimeType.seconds), new Time(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, null, new Time(2, ID.TimeType.seconds), new Time(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new Time(1, ID.TimeType.seconds), null, new Time(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new Time(1, ID.TimeType.seconds), new Time(2, ID.TimeType.seconds), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(null, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, null, new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), null, new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), null));
         }
     }
 }
