@@ -20,16 +20,16 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             space.Advancement("myadvancement");
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\"), "Directory wasn't created");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\myadvancement.json"), "File wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/advancements/"), "Directory wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/advancements/myadvancement.json"), "File wasn't created");
 
             space.Advancement("folder/otherAdvancement", new BredAnimalsTrigger(), null, BaseFile.WriteSetting.OnDispose);
-            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\folder\\"), "Directory wasn't supposed to be created yet since its OnDispose");
-            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\folder\\otheradvancement.json"), "File wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/advancements/folder/"), "Directory wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/advancements/folder/otheradvancement.json"), "File wasn't supposed to be created yet since its OnDispose");
 
             pack.Dispose();
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\folder\\"), "Directory wasn't created for file with directory in name");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\folder\\otheradvancement.json"), "File is supposed to have been created now since Dispose was ran");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/advancements/folder/"), "Directory wasn't created for file with directory in name");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/advancements/folder/otheradvancement.json"), "File is supposed to have been created now since Dispose was ran");
         }
 
         private ChildAdvancement GetChildAdvancement(PackNamespace space)
@@ -46,7 +46,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             ChildAdvancement childAdvancement = GetChildAdvancement(space);
-            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\child.json").writer.ToString();
+            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/advancements/child.json").writer.ToString();
             Assert.AreEqual("{\"requirements\":[[\"trigger_0\"]],\"criteria\":" +
                                 "{\"trigger_0\":{\"conditions\":{\"item\":{\"item\":\"minecraft:wooden_sword\"},\"levels\":{\"max\":5,\"min\":5}},\"trigger\":\"minecraft:enchanted_item\"}}" +
                             ",\"display\":{\"icon\":{\"item\":\"minecraft:stone\"},\"title\":{\"text\":\"Name\"},\"description\":{\"text\":\"Description\"},\"frame\":\"goal\",\"show_toast\":false,\"announce_to_chat\":true,\"hidden\":true},\"parent\":\"space:parent\"}", advancementString, "Child file wasn't written correctly");
@@ -70,7 +70,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             ParentAdvancement parentAdvancement = GetParentAdvancement(space);
-            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\parent.json").writer.ToString();
+            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/advancements/parent.json").writer.ToString();
             Assert.AreEqual("{\"requirements\":[[\"trigger_0\"]],\"criteria\":" +
                                 "{\"trigger_0\":{\"conditions\":{\"levels\":{\"max\":5,\"min\":5}},\"trigger\":\"minecraft:enchanted_item\"}}" +
                             ",\"rewards\":{\"experience\":5},\"display\":{\"icon\":{\"item\":\"minecraft:string\"},\"title\":{\"text\":\"Name\"},\"description\":{\"text\":\"Description\"},\"frame\":\"task\",\"show_toast\":true,\"announce_to_chat\":false,\"hidden\":false,\"background\":\"background\"}}", advancementString, "parent file wasn't written correctly");
@@ -90,7 +90,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             _ = space.Advancement("hidden", new Requirement(new IRequirementItem[] { new EnchantedItemTrigger() { Levels = 5 }, new BredAnimalsTrigger() }), null);
-            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\hidden.json").writer.ToString();
+            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/advancements/hidden.json").writer.ToString();
             Assert.AreEqual("{\"requirements\":[[\"trigger_0\",\"trigger_1\"]],\"criteria\":" +
                                 "{\"trigger_0\":{\"conditions\":{\"levels\":{\"max\":5,\"min\":5}},\"trigger\":\"minecraft:enchanted_item\"},\"trigger_1\":{\"trigger\":\"minecraft:bred_animals\"}}" +
                             "}", advancementString, "hidden file wasn't written correctly");
@@ -105,7 +105,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             space.Advancement("invalid");
-            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\advancements\\invalid.json").writer.ToString();
+            string advancementString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/advancements/invalid.json").writer.ToString();
             Assert.AreEqual("{\"invalid\":true}", advancementString);
         }
 
@@ -141,8 +141,8 @@ namespace SharpCraft.Tests.PackItems
             //test
             ChildAdvancement advancement = GetChildAdvancement(space);
             advancement.NewSibling("sibling", new EnchantedItemTrigger() { Levels = 5 }, null, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.stone);
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\"), "Directory wasn't created");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\sibling.json"), "File wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/advancements/"), "Directory wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/advancements/sibling.json"), "File wasn't created");
         }
 
         [TestMethod]
@@ -155,8 +155,8 @@ namespace SharpCraft.Tests.PackItems
             //test
             ChildAdvancement advancement = GetChildAdvancement(space);
             advancement.NewChild("childchild", new EnchantedItemTrigger() { Levels = 5 }, null, new JsonText.Text("Name"), new JsonText.Text("Description"), ID.Item.stone);
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\advancements\\"), "Directory wasn't created");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\advancements\\childchild.json"), "File wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/advancements/"), "Directory wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/advancements/childchild.json"), "File wasn't created");
         }
 
         [TestMethod]

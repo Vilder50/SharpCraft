@@ -48,7 +48,7 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Storage name is invalid. Only accepts letters, numbers and /-._");
                 }
-                name = loweredString;
+                name = loweredString.Replace("\\", "/");
             }
         }
 
@@ -58,7 +58,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this storage</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + Name.Replace("\\", "/");
+            return PackNamespace.Name + ":" + Name;
         }
     }
 }

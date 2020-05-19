@@ -102,7 +102,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public new string GetNamespacedName()
         {
-            return "#" + PackNamespace.Name + ":" + WritePath.Replace("\\", "/");
+            return "#" + PackNamespace.Name + ":" + WritePath;
         }
 
         /// <summary>

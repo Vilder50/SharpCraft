@@ -20,16 +20,16 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             space.Recipe("myrecipe");
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\recipes\\"), "Directory wasn't created");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\recipes\\myrecipe.json"), "File wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/recipes/"), "Directory wasn't created");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/recipes/myrecipe.json"), "File wasn't created");
 
             space.Recipe("folder/otherrecipe", SmeltRecipe.SmeltType.smelting, ID.Item.dirt, ID.Item.coarse_dirt, 2, null, null, BaseFile.WriteSetting.OnDispose);
-            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\recipes\\folder\\"), "Directory wasn't supposed to be created yet since its OnDispose");
-            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\recipes\\folder\\otherrecipe.json"), "File wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/recipes/folder/"), "Directory wasn't supposed to be created yet since its OnDispose");
+            Assert.IsFalse(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/recipes/folder/otherrecipe.json"), "File wasn't supposed to be created yet since its OnDispose");
 
             pack.Dispose();
-            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks\\pack\\data\\space\\recipes\\folder\\"), "Directory wasn't created for file with directory in name");
-            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks\\pack\\data\\space\\recipes\\folder\\otherrecipe.json"), "File is supposed to have been created now since Dispose was ran");
+            Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/recipes/folder/"), "Directory wasn't created for file with directory in name");
+            Assert.IsTrue(pack.FileCreator.GetWriters().Any(w => w.path == "datapacks/pack/data/space/recipes/folder/otherrecipe.json"), "File is supposed to have been created now since Dispose was ran");
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace SharpCraft.Tests.PackItems
                     { ID.Item.slime_ball, woolGroup },
                     { ID.Item.String, ID.Item.air },
             }, ID.Item.cobweb, 8, "web");
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:crafting_shaped\",\"group\":\"web\",\"pattern\":[\"0 \",\"12\",\"0 \"],\"key\":{\"0\":{\"item\":\"minecraft:string\"},\"1\":{\"item\":\"minecraft:slime_ball\"},\"2\":{\"tag\":\"space:wool\"}},\"result\":{\"item\":\"minecraft:cobweb\",\"count\":8}}", recipeString, "recipe file wasn't written correctly");
             Assert.IsNull(recipe.Recipe, "Recipe wasn't cleared");
 
@@ -70,7 +70,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             ShapelessRecipe recipe = space.Recipe("recipe", new ItemType[] { ID.Item.dirt, ID.Item.gravel }, ID.Item.coarse_dirt, 1, null);
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:crafting_shapeless\",\"ingredients\":[{\"item\":\"minecraft:dirt\"},{\"item\":\"minecraft:gravel\"}],\"result\":{\"item\":\"minecraft:coarse_dirt\"}}", recipeString, "recipe file wasn't written correctly");
             Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
@@ -94,12 +94,12 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             CuttingRecipe recipe = space.Recipe("recipe1", new ItemType[] { ID.Item.oak_planks, ID.Item.oak_door }, ID.Item.oak_slab, 2, BaseFile.WriteSetting.LockedAuto);
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe1.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe1.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:stonecutting\",\"ingredient\":[{\"item\":\"minecraft:oak_planks\"},{\"item\":\"minecraft:oak_door\"}],\"result\":\"minecraft:oak_slab\",\"count\":2}", recipeString, "recipe file with multiple choises wasn't written correctly");
             Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
             space.Recipe("recipe2", ID.Item.oak_planks, ID.Item.oak_trapdoor, 1, BaseFile.WriteSetting.LockedAuto);
-            recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe2.json").writer.ToString();
+            recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe2.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:stonecutting\",\"ingredient\":{\"item\":\"minecraft:oak_planks\"},\"result\":\"minecraft:oak_trapdoor\",\"count\":1}", recipeString, "recipe file with single choise wasn't written correctly");
 
             //exceptions
@@ -120,7 +120,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             space.Recipe("recipe");
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:invalid\"}", recipeString, "recipe file wasn't written correctly");
         }
 
@@ -133,12 +133,12 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             SmeltRecipe recipe = space.Recipe("recipe1", SmeltRecipe.SmeltType.smelting, new ItemType[] { ID.Item.oak_sapling, ID.Item.spruce_sapling }, ID.Item.stick, 10);
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe1.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe1.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:smelting\",\"ingredient\":[{\"item\":\"minecraft:oak_sapling\"},{\"item\":\"minecraft:spruce_sapling\"}],\"result\":\"minecraft:stick\",\"experience\":10}", recipeString, "recipe file with multiple choises wasn't written correctly");
             Assert.IsNull(recipe.Ingredients, "Ingredients weren't cleared");
 
             space.Recipe("recipe2", SmeltRecipe.SmeltType.smoking, ID.Item.obsidian, ID.Item.black_stained_glass, 5.4, 100);
-            recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe2.json").writer.ToString();
+            recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe2.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:smoking\",\"ingredient\":{\"item\":\"minecraft:obsidian\"},\"result\":\"minecraft:black_stained_glass\",\"experience\":5.4,\"cookingtime\":100}", recipeString, "recipe file with single choise wasn't written correctly");
 
             //exceptions
@@ -159,7 +159,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             new SpecialRecipe(space, "recipe", SpecialRecipe.SpecialType.armordye).Dispose();
-            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks\\pack\\data\\space\\recipes\\recipe.json").writer.ToString();
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe.json").writer.ToString();
             Assert.AreEqual("{\"type\":\"minecraft:crafting_special_armordye\"}", recipeString, "recipe file wasn't written correctly");
         }
 

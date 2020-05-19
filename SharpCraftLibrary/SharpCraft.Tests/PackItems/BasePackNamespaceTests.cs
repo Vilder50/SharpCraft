@@ -150,7 +150,7 @@ namespace SharpCraft.Tests.PackItems
             //setup
             using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
-            Assert.AreEqual("a folder path\\pack\\data\\namespace\\", pack.GetPath());
+            Assert.AreEqual("a folder path/pack/data/namespace/", pack.GetPath());
         }
 
         [TestMethod]

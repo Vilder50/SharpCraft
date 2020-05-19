@@ -65,7 +65,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("predicates");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates\\" + WritePath + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "predicates/" + WritePath + ".json");
         }
 
         /// <summary>

@@ -50,8 +50,8 @@ namespace SharpCraft
         /// <param name="settings">Datapack settings</param>
         protected Datapack(string path, string packName, string description, int packFormat, IFileCreator fileCreator, IDatapackSetting[]? settings, bool _) : base(path, packName, fileCreator, settings)
         {
-            FileCreator.CreateDirectory(Path + "\\" + Name);
-            using TextWriter metaWriter = FileCreator.CreateWriter(Path + "\\" + Name + "\\pack.mcmeta");
+            FileCreator.CreateDirectory(Path + "/" + Name);
+            using TextWriter metaWriter = FileCreator.CreateWriter(Path + "/" + Name + "/pack.mcmeta");
             metaWriter.Write("{\"pack\":{\"pack_format\":" + packFormat + ",\"description\":\"" + description + "\"}}");
         }
 

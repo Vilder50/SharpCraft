@@ -145,14 +145,14 @@ namespace SharpCraft
                 }
 
                 //fix name and validate
-                string fixedName = value.ToLower().Replace("/", "\\");
+                string fixedName = value.ToLower();
 
                 if (!ValidateFileName(fixedName))
                 {
                     throw new ArgumentException("FileId is an invalid file name. Make sure it only contains letters, numbers - and / or \\", nameof(fileId));
                 }
 
-                fileId = fixedName;
+                fileId = fixedName.Replace("\\","/");
             }
         }
 
@@ -171,14 +171,14 @@ namespace SharpCraft
                 }
 
                 //fix name and validate
-                string fixedName = value.ToLower().Replace("/", "\\");
+                string fixedName = value.ToLower();
 
                 if (!ValidateFileName(fixedName))
                 {
                     throw new ArgumentException("WritePath is an invalid file path and name. Make sure it only contains letters, numbers - and / or \\", nameof(WritePath));
                 }
 
-                writePath = fixedName;
+                writePath = fixedName.Replace("\\","/");
             }
         }
 
@@ -236,7 +236,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + WritePath.Replace("\\", "/");
+            return PackNamespace.Name + ":" + WritePath;
         }
 
         /// <summary>
@@ -328,13 +328,13 @@ namespace SharpCraft
         /// <param name="folderPath">The base folder the file should be in</param>
         protected void CreateDirectory(string folderPath)
         {
-            if (WritePath.Contains("\\"))
+            if (WritePath.Contains("/"))
             {
-                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\" + WritePath.Substring(0, WritePath.LastIndexOf("\\")) + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "/" + WritePath.Substring(0, WritePath.LastIndexOf("/")) + "/");
             }
             else
             {
-                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "/");
             }
         }
     }

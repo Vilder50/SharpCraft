@@ -58,8 +58,8 @@ namespace SharpCraft
         /// <returns>The stream for this file</returns>
         protected override TextWriter GetStream()
         {
-            CreateDirectory("tags\\fluids");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags\\fluids\\" + WritePath + ".json");
+            CreateDirectory("tags/fluids");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags/fluids/" + WritePath + ".json");
         }
 
         /// <summary>

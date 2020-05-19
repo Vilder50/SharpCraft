@@ -140,7 +140,7 @@ namespace SharpCraft
             {
                 throw new InvalidOperationException("Setup hasn't been run yet.");
             }
-            return Datapack.GetDataPath() + Name + "\\";
+            return Datapack.GetDataPath() + Name + "/";
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace SharpCraft
         /// <returns>The file with the name or null</returns>
         public BaseFile? GetFile(string fileType, string fileName)
         {
-            string name = fileName.ToLower().Replace("/", "\\");
+            string name = fileName.ToLower();
 
             if (!IsSetup)
             {

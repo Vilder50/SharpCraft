@@ -82,7 +82,7 @@ namespace SharpCraft.Tests.PackItems
             using (BaseFile file = new BaseFileTestClass(packNamespace, "My/File", BaseFile.WriteSetting.Auto))
             {
                 //test
-                Assert.AreEqual("my\\file", file.FileId, "file name is not getting set by constructor");
+                Assert.AreEqual("my/file", file.FileId, "file name is not getting set by constructor");
                 Assert.AreEqual(packNamespace, file.PackNamespace, "Packnamespace is not getting set by the constructor");
                 Assert.AreEqual(file, packNamespace.GetFile("filetest", file.FileId), "Constructor is not adding the file to the namespace");
             }
@@ -96,7 +96,7 @@ namespace SharpCraft.Tests.PackItems
             using (BaseFile file = new BaseFileTestClass(packNamespace, "folder\\ignored-name", BaseFile.WriteSetting.Auto))
             {
                 Assert.AreEqual("2", file.WritePath, "writepath wasn't forced to be generated");
-                Assert.AreEqual("folder\\ignored-name", file.FileId, "filename wasn't kept after forced path generation");
+                Assert.AreEqual("folder/ignored-name", file.FileId, "filename wasn't kept after forced path generation");
             }
         }
 

@@ -144,7 +144,7 @@ namespace SharpCraft
             CreateDirectory("functions");
             if (StreamWriter is null)
             {
-                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + WritePath + ".mcfunction");
+                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions/" + WritePath + ".mcfunction");
             }
             return StreamWriter;
         }
@@ -194,7 +194,7 @@ namespace SharpCraft
             }
             else
             {
-                return new Function(PackNamespace, FileId + "\\" + functionName.ToLower(), writeSetting);
+                return new Function(PackNamespace, FileId + "/" + functionName.ToLower(), writeSetting);
             }
         }
         /// <summary>
@@ -231,7 +231,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(string? name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            if (FileId.Contains("\\"))
+            if (FileId.Contains("/"))
             {
                 if (name is null)
                 {
@@ -239,7 +239,7 @@ namespace SharpCraft
                 }
                 else
                 {
-                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
+                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("/") + 1) + name.ToLower(), writeSetting);
                 }
             }
             else

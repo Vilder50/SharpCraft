@@ -154,7 +154,7 @@ namespace SharpCraft
                 {
                     throw new ArgumentException("Path is not valid (Make sure it doesn't end with \\ or /)", nameof(Path));
                 }
-                path = value.Replace("/", "\\");
+                path = value.Replace("\\", "/");
             }
         }
 
@@ -205,7 +205,7 @@ namespace SharpCraft
         /// <returns>the path to the data folder in the datapack</returns>
         public virtual string GetDataPath()
         {
-            return Path + "\\" + Name + "\\data\\";
+            return Path + "/" + Name + "/data/";
         }
 
         /// <summary>

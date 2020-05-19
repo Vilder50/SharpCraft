@@ -636,7 +636,7 @@ namespace SharpCraft.FunctionWriters
 
             //execute as ray entity
             ForFunction.Execute.As(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
-            ForFunction.World.Function(ForFunction.NewSibling(rayName + "\\start", startRay => 
+            ForFunction.World.Function(ForFunction.NewSibling(rayName + "/start", startRay => 
             {
                 startRay.World.Function(raySetup);
                 startRay.Custom.ForLoop(0, length - 1, "rStep", (step, stepValue) =>
@@ -701,7 +701,7 @@ namespace SharpCraft.FunctionWriters
 
                     checkCondition |= !cornerConditions;
 
-                    using (Predicate checkPredicate = new Predicate(step.PackNamespace, "ray\\" + rayName + "\\check", checkCondition))
+                    using (Predicate checkPredicate = new Predicate(step.PackNamespace, "ray/" + rayName + "/check", checkCondition))
                     {
                         step.Execute.IfPredicate(checkPredicate);
                     }
@@ -783,7 +783,7 @@ namespace SharpCraft.FunctionWriters
             int boxes = 2;
             Function getStep(double number, int depth)
             {
-                Function outFunction = ForFunction.NewSibling(rayName + "\\r" + depth);
+                Function outFunction = ForFunction.NewSibling(rayName + "/r" + depth);
 
                 if (number > boxes)
                 {
@@ -853,7 +853,7 @@ namespace SharpCraft.FunctionWriters
             }
             else
             {
-                ForFunction.World.Function(ForFunction.NewSibling(rayName + "\\start", start =>
+                ForFunction.World.Function(ForFunction.NewSibling(rayName + "/start", start =>
                 {
                     start.Entity.Tag.Add(ID.Selector.s, rayShooterTag);
                     if (!(hit is null))

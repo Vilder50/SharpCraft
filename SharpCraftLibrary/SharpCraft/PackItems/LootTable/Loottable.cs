@@ -105,7 +105,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("loot_tables");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + WritePath + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables/" + WritePath + ".json");
         }
 
         /// <summary>
