@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// base class for pack namespaces
     /// </summary>
-    public abstract class BasePackNamespace : IDisposable
+    public abstract class BasePackNamespace
     {
         private string name = null!;
 #pragma warning disable IDE0069

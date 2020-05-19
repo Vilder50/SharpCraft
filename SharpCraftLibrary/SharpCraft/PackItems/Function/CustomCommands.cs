@@ -701,10 +701,10 @@ namespace SharpCraft.FunctionWriters
 
                     checkCondition |= !cornerConditions;
 
-                    using (Predicate checkPredicate = new Predicate(step.PackNamespace, "ray/" + rayName + "/check", checkCondition))
-                    {
-                        step.Execute.IfPredicate(checkPredicate);
-                    }
+                    Predicate checkPredicate = new Predicate(step.PackNamespace, "ray/" + rayName + "/check", checkCondition);
+                    step.Execute.IfPredicate(checkPredicate);
+                    checkPredicate.Dispose();
+                    
                     #endregion
 
                     step.Execute.Positioned(new LocalCoords(0, 0, -1));

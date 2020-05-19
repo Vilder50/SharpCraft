@@ -104,35 +104,34 @@ namespace SharpCraft.Tests.PackItems
         {
             //setup
             BaseDatapack datapack = new DatapackTestClass("a folder path", "pack");
-            using (BasePackNamespace space = new NamespaceTestClass(datapack, "namespace"))
-            {
-                //test
-                Assert.IsTrue(space.IsSetup);
-                Assert.AreEqual(datapack, space.Datapack, "datapack is not getting set by the constructor");
-                Assert.AreEqual("namespace", space.Name, "name is not getting set by the constructor");
-                new BaseFileTestClass1(space, "file3", BaseFile.WriteSetting.Auto).Dispose();
-            }
+            BasePackNamespace space = new NamespaceTestClass(datapack, "namespace");
+            
+            //test
+            Assert.IsTrue(space.IsSetup);
+            Assert.AreEqual(datapack, space.Datapack, "datapack is not getting set by the constructor");
+            Assert.AreEqual("namespace", space.Name, "name is not getting set by the constructor");
+            new BaseFileTestClass1(space, "file3", BaseFile.WriteSetting.Auto).Dispose();
+            space.Dispose();
 
             //test none setup pack
-            using (BasePackNamespace space = new NamespaceTestClass())
-            {
-                //test
-                Assert.IsFalse(space.IsSetup, "Empty constructor was called so it shouldn't have been setup already");
-                Assert.ThrowsException<InvalidOperationException>(() => _ = space.Name, "Name didn't throw exception even though it isn't setup");
-                Assert.ThrowsException<InvalidOperationException>(() => _ = space.Datapack, "Datapack didn't throw exception even though it isn't setup");
+            space = new NamespaceTestClass();
+            //test
+            Assert.IsFalse(space.IsSetup, "Empty constructor was called so it shouldn't have been setup already");
+            Assert.ThrowsException<InvalidOperationException>(() => _ = space.Name, "Name didn't throw exception even though it isn't setup");
+            Assert.ThrowsException<InvalidOperationException>(() => _ = space.Datapack, "Datapack didn't throw exception even though it isn't setup");
 
-                space.Setup(datapack, "namespace2");
-                Assert.IsTrue(space.IsSetup, "Setup has been called so it should have been setup");
-                Assert.AreEqual(datapack, space.Datapack, "datapack is not getting set by bysetup");
-                Assert.AreEqual("namespace2", space.Name, "name is not getting set by setup");
-            }
+            space.Setup(datapack, "namespace2");
+            Assert.IsTrue(space.IsSetup, "Setup has been called so it should have been setup");
+            Assert.AreEqual(datapack, space.Datapack, "datapack is not getting set by bysetup");
+            Assert.AreEqual("namespace2", space.Name, "name is not getting set by setup");
+            space.Dispose();
         }
 
         [TestMethod]
         public void TestGetFile()
         {
             //setup
-            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
             Assert.AreEqual("file1", pack.GetFile("test1", "file1").FileId, "GetFile failed to get the file with the correct name");
             Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
@@ -142,25 +141,28 @@ namespace SharpCraft.Tests.PackItems
             //test exception on extra file with same name and same type
             Assert.ThrowsException<ArgumentException>(() => new BaseFileTestClass1(pack, "file1", BaseFile.WriteSetting.Auto), "Adding 2 files with the same name and same type should cast an exception");
             Assert.ThrowsException<InvalidOperationException>(() => pack.GetFile("test2", "file3"), "should not be able to get locked file");
+            pack.Dispose();
         }
 
         [TestMethod]
         public void TestGetPath()
         {
             //setup
-            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
             Assert.AreEqual("a folder path/pack/data/namespace/", pack.GetPath());
+            pack.Dispose();
         }
 
         [TestMethod]
         public void TestIsSettingSet()
         {
             //setup
-            using BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
+            BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
             Assert.IsTrue(pack.IsSettingSet(NamespaceSettings.GetSettings().FunctionGroupedCommands()), "Failed to detect that the setting is set");
             Assert.IsFalse(pack.IsSettingSet(NamespaceSettings.GetSettings().GenerateNames()), "Failed to detect that the setting isn't set");
+            pack.Dispose();
         }
 
         [TestMethod]

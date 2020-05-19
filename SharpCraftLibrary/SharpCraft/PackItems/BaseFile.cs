@@ -11,7 +11,7 @@ namespace SharpCraft
     /// <summary>
     /// The base class used for files in a datapack
     /// </summary>
-    public abstract class BaseFile : IDisposable
+    public abstract class BaseFile
     {
         private const string FileLocationPattern = @"^(([a-zA-Z0-9_-]+)([\\/]{1}[a-zA-Z0-9_-])*)*$";
 
