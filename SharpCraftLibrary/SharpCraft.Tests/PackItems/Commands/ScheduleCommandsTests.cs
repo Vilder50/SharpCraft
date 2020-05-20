@@ -16,10 +16,10 @@ namespace SharpCraft.Tests.Commands
         {
             using EmptyDatapack datapack = new EmptyDatapack("pack");
             EmptyFunction function = new EmptyFunction(datapack.Namespace("space"), "function");
-            Assert.AreEqual("schedule function space:function 100d", new ScheduleAddCommand(function, new Time(100, ID.TimeType.days)).GetCommandString());
-            Assert.AreEqual("schedule function space:function 100d append", new ScheduleAddCommand(function, new Time(100, ID.TimeType.days), true).GetCommandString());
+            Assert.AreEqual("schedule function space:function 100d", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days)).GetCommandString());
+            Assert.AreEqual("schedule function space:function 100d append", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days), true).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(null, new Time(100, ID.TimeType.days)));
+            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(null, new NoneNegativeTime<int>(100, ID.TimeType.days)));
             Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(function, null));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ScheduleAddCommand(function, -10));
         }

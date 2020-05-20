@@ -6,7 +6,7 @@ namespace SharpCraft
     /// <summary>
     /// An object used for UUID's
     /// </summary>
-    public class UUID :  IConvertableToDataArray
+    public class UUID :  IConvertableToDataArray<int>
     {
         #region random
         private static Random random = new Random(0);
@@ -75,6 +75,7 @@ namespace SharpCraft
         {
             Most = a << 32 & b;
             Least = c << 32 & d;
+            UUIDString = CreateUUIDString(Most, Least);
         }
 
         /// <summary>
@@ -119,14 +120,24 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
+        /// </summary>
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public int[] PathArray()
+        {
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
         /// Converts this uuid into a <see cref="DataPartArray"/>
         /// </summary>
         /// <param name="asType">Not used</param>
         /// <param name="extraConversionData">Not used</param>
         /// <returns>This uuid as an int array</returns>
-        public DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData)
         {
-            return new DataPartArray(GetUUIDAsInts(),null,extraConversionData);
+            return new DataPartArray(GetUUIDAsInts(), null, extraConversionData);
         }
     }
 }

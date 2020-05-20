@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class DamageChange : BaseChange
     {
-        private MCRange damage;
+        private MCRange damage = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DamageChange"/>

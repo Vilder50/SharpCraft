@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SayMeCommand : BaseCommand
     {
-        private string text;
+        private string text = null!;
 
         /// <summary>
         /// intializes a new <see cref="SayMeCommand"/>
@@ -53,7 +53,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class Comment : BaseCommand
     {
-        private string text;
+        private string text = null!;
 
         /// <summary>
         /// intializes a new <see cref="Comment"/>
@@ -84,7 +84,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SayCommand : BaseCommand
     {
-        private string text;
+        private string text = null!;
 
         /// <summary>
         /// intializes a new <see cref="SayCommand"/>
@@ -126,8 +126,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class MsgCommand : BaseCommand
     {
-        private string text;
-        private BaseSelector selector;
+        private string text = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// intializes a new <see cref="MsgCommand"/>
@@ -183,7 +183,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeamMsgCommand : BaseCommand
     {
-        private string text;
+        private string text = null!;
 
         /// <summary>
         /// intializes a new <see cref="TeamMsgCommand"/>
@@ -299,7 +299,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TriggerCommand : BaseCommand
     {
-        private Objective objective;
+        private Objective objective = null!;
 
         /// <summary>
         /// intializes a new <see cref="TriggerCommand"/>
@@ -425,7 +425,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class EnchantCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
         private int level;
 
         /// <summary>
@@ -490,7 +490,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class RunFunctionCommand : BaseCommand
     {
-        private IFunction function;
+        private IFunction function = null!;
 
         /// <summary>
         /// Intializes a new <see cref="RunFunctionCommand"/>
@@ -528,7 +528,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class GamemodeCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// intializes a new <see cref="GamemodeCommand"/>
@@ -573,7 +573,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class KillCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// intializes a new <see cref="KillCommand"/>
@@ -611,8 +611,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SetblockCommand : BaseCommand
     {
-        private Vector coordinates;
-        private Block block;
+        private Vector coordinates = null!;
+        private Block block = null!;
 
         /// <summary>
         /// Intializes a new <see cref="SetblockCommand"/>
@@ -671,7 +671,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SetWorldSpawnCommand : BaseCommand
     {
-        private Vector coordinates;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// intializes a new <see cref="SetWorldSpawnCommand"/>
@@ -709,8 +709,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpreadPlayersCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private Vector coordinates;
+        private BaseSelector selector = null!;
+        private Vector coordinates = null!;
         private double distance;
         private double maxRange;
         private bool doTogetherCheck;
@@ -837,26 +837,24 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SummonCommand : BaseCommand
     {
-        private Entity.BaseEntity entity;
-        private Vector coordinates;
+        private Entity entity = null!;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// intializes a new <see cref="SummonCommand"/>
         /// </summary>
         /// <param name="entity">The entity to summon</param>
         /// <param name="coordinates">The coordinates the summon the entity at</param>
-        public SummonCommand(Entity.BaseEntity entity, Vector coordinates)
+        public SummonCommand(Entity entity, Vector coordinates)
         {
             Entity = entity;
             Coordinates = coordinates;
         }
 
-
-
         /// <summary>
         /// The entity to summon
         /// </summary>
-        public Entity.BaseEntity Entity
+        public Entity Entity
         {
             get => entity;
             set
@@ -900,15 +898,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TellrawCommand : BaseCommand
     {
-        private JsonText text;
-        private BaseSelector selector;
+        private BaseJsonText text = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// intializes a new <see cref="TellrawCommand"/>
         /// </summary>
         /// <param name="text">The text it should display</param>
         /// <param name="selector">Selector for selecting players to private message</param>
-        public TellrawCommand(BaseSelector selector, JsonText text)
+        public TellrawCommand(BaseSelector selector, BaseJsonText text)
         {
             Text = text;
             Selector = selector;
@@ -917,7 +915,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The text it should display
         /// </summary>
-        public JsonText Text
+        public BaseJsonText Text
         {
             get => text;
             set
@@ -957,8 +955,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ClearCommand : BaseCommand
     {
-        private Item item;
-        private BaseSelector selector;
+        private Item? item;
+        private BaseSelector selector = null!;
         private int? maxCount;
 
         /// <summary>
@@ -967,7 +965,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector for selecting players to clear</param>
         /// <param name="item">The item to clear. Leave null to clear all items</param>
         /// <param name="maxCount">The maximum amount of items to clear. An item has to be set to use this</param>
-        public ClearCommand(BaseSelector selector, Item item = null, int? maxCount = null)
+        public ClearCommand(BaseSelector selector, Item? item = null, int? maxCount = null)
         {
             Selector = selector;
             Item = item;
@@ -977,7 +975,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The item to clear. Leave null to clear all items
         /// </summary>
-        public Item Item 
+        public Item? Item 
         { 
             get => item;
             set 
@@ -1048,8 +1046,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class GiveCommand : BaseCommand
     {
-        private Item item;
-        private BaseSelector selector;
+        private Item item = null!;
+        private BaseSelector selector = null!;
         private int count;
 
         /// <summary>
@@ -1127,12 +1125,12 @@ namespace SharpCraft.Commands
     /// </summary>
     public class PlaySoundCommand : BaseCommand
     {
-        private string sound;
+        private string sound = null!;
         private double volume;
         private double pitch;
         private double minimumVolume;
-        private BaseSelector selector;
-        private Vector coordinates;
+        private BaseSelector selector = null!;
+        private Vector coordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="PlaySoundCommand"/>
@@ -1254,8 +1252,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpawnPointCommand : BaseCommand
     {
-        private Vector coordinates;
-        private BaseSelector selector;
+        private Vector coordinates = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="SpawnPointCommand"/>
@@ -1300,7 +1298,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class StopSoundCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="StopSoundCommand"/>
@@ -1308,7 +1306,7 @@ namespace SharpCraft.Commands
         /// <param name="selector">Selector selecting the players to stop the sound for</param>
         /// <param name="sound">The sound to stop. Leave null to stop all sounds</param>
         /// <param name="source">The category to stop sounds in. Leave null to stop sound in all categories</param>
-        public StopSoundCommand(BaseSelector selector, string sound, ID.SoundSource? source)
+        public StopSoundCommand(BaseSelector selector, string? sound, ID.SoundSource? source)
         {
             Selector = selector;
             Sound = sound;
@@ -1330,7 +1328,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The sound to stop. Leave null to stop all sounds
         /// </summary>
-        public string Sound { get; set; }
+        public string? Sound { get; set; }
 
         /// <summary>
         /// The category to stop sounds in. Leave null to stop sound in all categories
@@ -1373,14 +1371,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class WeatherCommand : BaseCommand
     {
-        private Time time;
+        private NoneNegativeTime<int>? time;
 
         /// <summary>
         /// Intializes a new <see cref="WeatherCommand"/>
         /// </summary>
         /// <param name="time">The amount of time the weather is there for</param>
         /// <param name="weather">The weather to change the weather to</param>
-        public WeatherCommand(ID.WeatherType weather, Time time)
+        public WeatherCommand(ID.WeatherType weather, NoneNegativeTime<int>? time)
         {
             Time = time;
             Weather = weather;
@@ -1389,7 +1387,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The amount of time the weather is there for
         /// </summary>
-        public Time Time { get => time; set => time = value; }
+        public NoneNegativeTime<int>? Time { get => time; set => time = value; }
 
         /// <summary>
         /// The weather to change the weather to
@@ -1408,7 +1406,7 @@ namespace SharpCraft.Commands
             }
             else
             {
-                return $"weather {Weather} {Time.AsTicks()}";
+                return $"weather {Weather} {Time.GetAsTicks()}";
             }
         }
     }

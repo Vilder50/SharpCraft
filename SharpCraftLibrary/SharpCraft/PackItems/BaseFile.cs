@@ -11,7 +11,7 @@ namespace SharpCraft
     /// <summary>
     /// The base class used for files in a datapack
     /// </summary>
-    public abstract class BaseFile : IDisposable
+    public abstract class BaseFile
     {
         private const string FileLocationPattern = @"^(([a-zA-Z0-9_-]+)([\\/]{1}[a-zA-Z0-9_-])*)*$";
 
@@ -47,15 +47,17 @@ namespace SharpCraft
             LockedOnDispose,
         }
 
-        BasePackNamespace packNamespace;
-        string fileId;
-        string writePath;
-        private string fileType;
+#pragma warning disable IDE0069
+        BasePackNamespace packNamespace = null!;
+#pragma warning restore IDE0069
+        string fileId = null!;
+        string writePath = null!;
+        private string fileType = null!;
 
         /// <summary>
         /// Listeners to call when the file gets disposed
         /// </summary>
-        protected FileListener disposeListener;
+        protected FileListener? disposeListener;
 
         /// <summary>
         /// Intializes a new <see cref="BaseFile"/> with the given values
@@ -64,20 +66,38 @@ namespace SharpCraft
         /// <param name="fileName">The name of the file</param>
         /// <param name="writeSetting">The setting for the file</param>
         /// <param name="fileType">The type of file</param>
-        protected BaseFile(BasePackNamespace packNamespace, string fileName, WriteSetting writeSetting, string fileType)
+        protected BaseFile(BasePackNamespace packNamespace, string? fileName, WriteSetting writeSetting, string fileType)
         {
             PackNamespace = packNamespace;
-            Setting = writeSetting;
+            if (packNamespace.IsSettingSet(NamespaceSettings.GetSettings().ForceDisposeWriteFiles()))
+            {
+                if (writeSetting == WriteSetting.Auto)
+                {
+                    Setting = WriteSetting.OnDispose;
+                }
+                else if (writeSetting == WriteSetting.LockedAuto)
+                {
+                    Setting = WriteSetting.LockedOnDispose;
+                }
+                else
+                {
+                    Setting = writeSetting;
+                }
+            } 
+            else
+            {
+                Setting = writeSetting;
+            }
             FileType = fileType;
 
-            string useName = fileName;
+            string useName = fileName!;
             if (string.IsNullOrWhiteSpace(useName))
             {
                 useName = PackNamespace.GetID(this);
             }
 
             FileId = useName;
-            if (PackNamespace.IsSettingSet(new NamespaceSettings().GenerateNames()) && useName == fileName)
+            if (PackNamespace.IsSettingSet(NamespaceSettings.GetSettings().GenerateNames()) && useName == fileName)
             {
                 WritePath = PackNamespace.GetID(this);
             }
@@ -95,7 +115,8 @@ namespace SharpCraft
             PackNamespace.AddFile(this);
             if (IsAuto())
             {
-                WriteFile(GetStream());
+                StreamWriter = GetStream();
+                WriteFile(StreamWriter);
                 Dispose();
             }
         }
@@ -124,14 +145,14 @@ namespace SharpCraft
                 }
 
                 //fix name and validate
-                string fixedName = value.ToLower().Replace("/", "\\");
+                string fixedName = value.ToLower();
 
                 if (!ValidateFileName(fixedName))
                 {
                     throw new ArgumentException("FileId is an invalid file name. Make sure it only contains letters, numbers - and / or \\", nameof(fileId));
                 }
 
-                fileId = fixedName;
+                fileId = fixedName.Replace("\\","/");
             }
         }
 
@@ -150,14 +171,14 @@ namespace SharpCraft
                 }
 
                 //fix name and validate
-                string fixedName = value.ToLower().Replace("/", "\\");
+                string fixedName = value.ToLower();
 
                 if (!ValidateFileName(fixedName))
                 {
                     throw new ArgumentException("WritePath is an invalid file path and name. Make sure it only contains letters, numbers - and / or \\", nameof(WritePath));
                 }
 
-                writePath = fixedName;
+                writePath = fixedName.Replace("\\","/");
             }
         }
 
@@ -188,7 +209,7 @@ namespace SharpCraft
         /// <summary>
         /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
         /// </summary>
-        protected TextWriter StreamWriter { get; set; }
+        protected TextWriter? StreamWriter { get; set; }
 
         /// <summary>
         /// States if the file has been written and shouldn't be able to be written again.
@@ -215,7 +236,7 @@ namespace SharpCraft
         /// <returns>The namespaced name of this file</returns>
         public string GetNamespacedName()
         {
-            return PackNamespace.Name + ":" + WritePath.Replace("\\", "/");
+            return PackNamespace.Name + ":" + WritePath;
         }
 
         /// <summary>
@@ -307,13 +328,13 @@ namespace SharpCraft
         /// <param name="folderPath">The base folder the file should be in</param>
         protected void CreateDirectory(string folderPath)
         {
-            if (WritePath.Contains("\\"))
+            if (WritePath.Contains("/"))
             {
-                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\" + WritePath.Substring(0, WritePath.LastIndexOf("\\")) + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "/" + WritePath.Substring(0, WritePath.LastIndexOf("/")) + "/");
             }
             else
             {
-                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "\\");
+                PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "/");
             }
         }
     }

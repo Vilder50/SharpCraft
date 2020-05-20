@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteStoreScore : BaseExecuteStoreCommand
     {
-        private BaseSelector selector;
-        private Objective objective;
+        private BaseSelector selector = null!;
+        private Objective objective = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteStoreScore"/> command
@@ -34,11 +34,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ExecuteStoreScore));
             }
         }
 

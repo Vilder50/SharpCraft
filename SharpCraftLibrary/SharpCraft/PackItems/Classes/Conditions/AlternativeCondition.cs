@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class AlternativeCondition : BaseCondition
     {
-        private BaseCondition[] conditions;
+        private BaseCondition[] conditions = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AlternativeCondition"/>

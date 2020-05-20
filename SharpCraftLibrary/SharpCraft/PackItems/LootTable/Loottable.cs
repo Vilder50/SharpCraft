@@ -47,7 +47,7 @@ namespace SharpCraft
             generic
         }
 
-        private List<LootPool> pools;
+        private List<LootPool> pools = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LootTable"/> with the given parameters. Inherite from this constructor.
@@ -58,7 +58,7 @@ namespace SharpCraft
         /// <param name="pools">The loot pools in the loot table</param>
         /// <param name="type">The type of loot table</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected LootTable(bool _, BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting, "loot_table")
+        protected LootTable(bool _, BasePackNamespace packNamespace, string? fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : base(packNamespace, fileName, writeSetting, "loot_table")
         {
             Type = type;
             Pools = pools.ToList();
@@ -72,7 +72,7 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="pools">The loot pools in the loot table</param>
         /// <param name="type">The type of loot table</param>
-        public LootTable(BasePackNamespace packNamespace, string fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : this(true, packNamespace, fileName, pools, type, writeSetting)
+        public LootTable(BasePackNamespace packNamespace, string? fileName, LootPool[] pools, TableType? type = null, WriteSetting writeSetting = WriteSetting.OnDispose) : this(true, packNamespace, fileName, pools, type, writeSetting)
         {
             FinishedConstructing();
         }
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
         }
@@ -105,7 +105,7 @@ namespace SharpCraft
         protected override TextWriter GetStream()
         {
             CreateDirectory("loot_tables");
-            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables\\" + WritePath + ".json");
+            return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "loot_tables/" + WritePath + ".json");
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace SharpCraft
         /// </summary>
         protected override void AfterDispose()
         {
-            pools = null;
+            pools = null!;
         }
     }
 

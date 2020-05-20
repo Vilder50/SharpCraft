@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void WorldborderSizeCommandTest()
         {
-            Assert.AreEqual("worldborder add -1.1 400", new WorldborderSizeCommand(-1.1, ID.AddSetModifier.add, new Time(20, ID.TimeType.seconds)).GetCommandString());
+            Assert.AreEqual("worldborder add -1.1 400", new WorldborderSizeCommand(-1.1, ID.AddSetModifier.add, new NoneNegativeTime<int>(20, ID.TimeType.seconds)).GetCommandString());
             Assert.AreEqual("worldborder set 1.1", new WorldborderSizeCommand(1.1, ID.AddSetModifier.set, null).GetCommandString());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new WorldborderSizeCommand(-0.9, ID.AddSetModifier.set, null));
@@ -62,7 +62,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void WorldborderWarningTimeCommandTest()
         {
-            Assert.AreEqual("worldborder warning time 20", new WorldborderWarningTimeCommand(new Time(1, ID.TimeType.seconds)).GetCommandString());
+            Assert.AreEqual("worldborder warning time 20", new WorldborderWarningTimeCommand(new NoneNegativeTime<int>(1, ID.TimeType.seconds)).GetCommandString());
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new WorldborderWarningTimeCommand(-1));
         }

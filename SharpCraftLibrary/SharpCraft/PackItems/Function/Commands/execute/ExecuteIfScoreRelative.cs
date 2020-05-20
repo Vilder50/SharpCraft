@@ -11,10 +11,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfScoreRelative : BaseExecuteIfCommand
     {
-        private BaseSelector selector1;
-        private Objective objective1;
-        private BaseSelector selector2;
-        private Objective objective2;
+        private BaseSelector selector1 = null!;
+        private Objective objective1 = null!;
+        private BaseSelector selector2 = null!;
+        private Objective objective2 = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfScoreRelative"/> command
@@ -42,11 +42,7 @@ namespace SharpCraft.Commands
             get => selector1;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector1), "Selector1 may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector1));
-                }
-                selector1 = value;
+                selector1 = Utils.ValidateSingleSelectSelector(value, nameof(Selector1), nameof(ExecuteIfScoreRelative));
             }
         }
 
@@ -70,11 +66,7 @@ namespace SharpCraft.Commands
             get => selector2;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector2), "Selector2 may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector2));
-                }
-                selector2 = value;
+                selector2 = Utils.ValidateSingleSelectSelector(value, nameof(Selector2), nameof(ExecuteIfScoreRelative));
             }
         }
 

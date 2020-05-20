@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The redstone length the target outputs
         /// </summary>
         [DataTag("conditions.signal_strength", JsonTag = true)]
-        public int SignalLength { get; set; }
+        public int? SignalLength { get; set; }
 
         /// <summary>
         /// The entity which hit the target
         /// </summary>
         [DataTag("conditions.projectile", JsonTag = true)]
-        public Conditions.EntityCondition[] Projectile { get; set; }
+        public Conditions.EntityCondition[]? Projectile { get; set; }
     }
 }

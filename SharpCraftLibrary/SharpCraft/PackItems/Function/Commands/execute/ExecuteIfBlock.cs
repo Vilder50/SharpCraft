@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfBlock : BaseExecuteIfCommand
     {
-        private Vector coordinates;
-        private Block block;
+        private Vector coordinates = null!;
+        private Block block = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfBlock"/> command

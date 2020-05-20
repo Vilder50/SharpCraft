@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class SpectateCommand : BaseCommand
     {
-        private BaseSelector spectate;
-        private BaseSelector spectator;
+        private BaseSelector spectate = null!;
+        private BaseSelector spectator = null!;
 
         /// <summary>
         /// Intializes a new <see cref="SpectateCommand"/>
@@ -33,11 +33,7 @@ namespace SharpCraft.Commands
             get => spectate;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Spectate), "Spectate may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(BaseSelector));
-                }
-                spectate = value;
+                spectate = Utils.ValidateSingleSelectSelector(value, nameof(Spectate), nameof(SpectateCommand));
             }
         }
 
@@ -49,11 +45,7 @@ namespace SharpCraft.Commands
             get => spectator;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Spectator), "Spectator may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(BaseSelector));
-                }
-                spectator = value;
+                spectator = Utils.ValidateSingleSelectSelector(value, nameof(Spectator), nameof(SpectateCommand));
             }
         }
 

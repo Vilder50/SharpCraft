@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using SharpCraft.Data;
 using System.Linq;
+using System.Reflection;
+using System.Linq.Expressions;
 
 namespace SharpCraft
 {
-    public partial class Item : DataHolderBase
+    /// <summary>
+    /// Class for items
+    /// </summary>
+    public class Item : DataHolderBase
     {
         /// <summary>
         /// Creates an item without an id or anything but which can have data
@@ -20,7 +25,7 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ItemType itemID, sbyte? count = null, sbyte? slot = null)
+        public Item(ItemType? itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
@@ -46,7 +51,7 @@ namespace SharpCraft
         /// If null the item isnt any item type
         /// </summary>
         [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public ItemType ID { get; set; }
+        public ItemType? ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
@@ -66,12 +71,12 @@ namespace SharpCraft
             /// <summary>
             /// Creates a new enchantment
             /// </summary>
-            /// <param name="ID">The enchantment type</param>
-            /// <param name="Level">The enchantment level</param>
-            public Enchantment(ID.Enchant? ID = null, int? Level = null)
+            /// <param name="id">The enchantment type</param>
+            /// <param name="level">The enchantment level</param>
+            public Enchantment(ID.Enchant? id = null, int? level = null)
             {
-                this.ID = ID;
-                LVL = Level;
+                ID = id;
+                LVL = level;
             }
         }
 
@@ -129,7 +134,7 @@ namespace SharpCraft
             /// <param name="asType">Not used</param>
             /// <param name="extraConversionData">Not used</param>
             /// <returns>the made <see cref="DataPartTag"/></returns>
-            public DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
             {
                 return new DataPartTag(HideFlagsNumber);
             }
@@ -144,12 +149,12 @@ namespace SharpCraft
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
         [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[] CanDestroy { get; set; }
+        public BlockType[]? CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
         [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[] CanPlaceOn { get; set; }
+        public BlockType[]? CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
@@ -159,64 +164,53 @@ namespace SharpCraft
         /// The data the block will have when the item is placed
         /// </summary>
         [DataTag("tag.BlockEntityTag")]
-        public Block BlockData { get; set; }
+        public Block? BlockData { get; set; }
         /// <summary>
         /// The data the entity will have when the item is placed
         /// </summary>
         [DataTag("tag.EntityTag")]
-        public Entity.BaseEntity EntityTag { get; set; }
+        public Entity? EntityTag { get; set; }
         /// <summary>
         /// The enchants the item has on
         /// </summary>
         [DataTag("tag.Enchantments")]
-        public Enchantment[] Enchants { get; set; }
+        public Enchantment?[]? Enchants { get; set; }
         /// <summary>
         /// Number of levels to add to the base levels when using an anvil
         /// </summary>
         [DataTag("tag.RepairCost")]
         public int? RepairCost { get; set; }
         /// <summary>
-        /// The color of the leather armor
-        /// </summary>
-        [DataTag("tag.display.color")]
-        public RGBColor LeatherColor { get; set; }
-        /// <summary>
-        /// The color the map item has.
-        /// (The small black text like things on the paper)
-        /// </summary>
-        [DataTag("tag.display.MapColor")]
-        public RGBColor MapColor { get; set; }
-        /// <summary>
         /// The item's shown name
         /// </summary>
         [DataTag("tag.display.Name", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public JsonText Name { get; set; }
+        public BaseJsonText? Name { get; set; }
         /// <summary>
         /// The item's lore.
         /// Each index in the first array means a new line.
         /// </summary>
         [DataTag("tag.display.Lore", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public JsonText[] Lore { get; set; }
+        public BaseJsonText[]? Lore { get; set; }
         /// <summary>
         /// The things to hide on the item.
         /// </summary>
         [DataTag("tag.HideFlags")]
-        public HideFlags HiddenFlags { get; set; }
+        public HideFlags? HiddenFlags { get; set; }
         /// <summary>
         /// The attributes the item has
         /// </summary>
         [DataTag("tag.AttributeModifiers")]
-        public ItemAttribute[] Attributes { get; set; }
+        public ItemAttribute[]? Attributes { get; set; }
         /// <summary>
         /// A fake tag. A place to write directly in the item's data.
         /// </summary>
         [DataTag("tag.Data", ForceType = SharpCraft.ID.NBTTagType.TagCompound)]
-        public string FakeTag { get; set; }
+        public string? FakeTag { get; set; }
         /// <summary>
         /// Extra data for this item to hold
         /// </summary>
-        [DataTag("tag.Data")]
-        public DataHolderBase ExtraTags { get; set; }
+        [DataTag("tag")]
+        public ExtraDataList? ExtraData { get; set; }
         /// <summary>
         /// The item's model ID
         /// </summary>
@@ -224,13 +218,39 @@ namespace SharpCraft
         public int? CustomModelData { get; set; }
 
         /// <summary>
+        /// Clones the item and change the count of the item
+        /// </summary>
+        /// <param name="count">The new count of the item</param>
+        /// <returns>The new cloned item</returns>
+        public Item Clone(sbyte count)
+        {
+            Item newItem = (Item)Clone();
+            newItem.Count = count;
+            return newItem;
+        }
+
+        /// <summary>
+        /// Clones the item and change the count and slot of the item
+        /// </summary>
+        /// <param name="count">The new count of the item</param>
+        /// <param name="slot">The new slot the item is in</param>
+        /// <returns>The new cloned item</returns>
+        public Item Clone(sbyte count, sbyte slot)
+        {
+            Item newItem = (Item)Clone();
+            newItem.Count = count;
+            newItem.Slot = slot;
+            return newItem;
+        }
+
+        /// <summary>
         /// Returns the item's data from the .tag tag
         /// </summary>
         /// <returns>the .tag data. Null if there is not data there</returns>
-        public string GetItemTagString()
+        public string? GetItemTagString()
         {
             DataPartObject tree = GetDataTree();
-            DataPartObject tagTag = (DataPartObject)tree.GetValues().SingleOrDefault(o => o.PathName == "tag")?.PathValue;
+            DataPartObject? tagTag = (DataPartObject?)tree.GetValues().SingleOrDefault(o => o.PathName == "tag")?.PathValue;
             if (tagTag is null)
             {
                 return null;
@@ -253,10 +273,20 @@ namespace SharpCraft
             }
 
             string outputString = ID.Name;
-            string tagData = GetItemTagString();
+            string? tagData = GetItemTagString();
             if (!string.IsNullOrEmpty(tagData)) { outputString += tagData; }
 
             return outputString;
+        }
+
+        /// <summary>
+        /// Adds extra data to this item
+        /// </summary>
+        /// <param name="data">The data to add to the item</param>
+        public void AddExtraData(params DataHolderBase[] data)
+        {
+            ExtraData ??= new ExtraDataList();
+            ExtraData.AddData(data);
         }
 
         /// <summary>
@@ -266,6 +296,94 @@ namespace SharpCraft
         public static implicit operator Item(ID.Item item)
         {
             return new Item(item);
+        }
+
+        /// <summary>
+        /// A list of <see cref="SimpleDataHolder"/>
+        /// </summary>
+        public class ExtraDataList : IConvertableToDataObject
+        {
+            private List<DataHolderBase> data = null!;
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            public ExtraDataList()
+            {
+                Data = new List<DataHolderBase>();
+            }
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            /// <param name="startData">Data which is in the list from the start</param>
+            public ExtraDataList(params DataHolderBase[] startData)
+            {
+                Data = startData.ToList();
+            }
+
+            /// <summary>
+            /// Intializes a new <see cref="ExtraDataList"/>
+            /// </summary>
+            /// <param name="data">Data the list should start with</param>
+            public ExtraDataList(List<DataHolderBase> data)
+            {
+                Data = data;
+            }
+
+            /// <summary>
+            /// Data this list is holding
+            /// </summary>
+            public List<DataHolderBase> Data { get => data; set => data = value ?? throw new ArgumentNullException(nameof(Data), "Data may not be null"); }
+
+            /// <summary>
+            /// Adds the given data to the list
+            /// </summary>
+            /// <param name="data">The data to add</param>
+            public void AddData(params DataHolderBase[] data)
+            {
+                Data.AddRange(data);
+            }
+
+            /// <summary>
+            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator"/>.
+            /// </summary>
+            /// <typeparam name="T">The type of <see cref="DataHolderBase"/> to get the path for</typeparam>
+            [GeneratePath("ContinuePathGenerator", SharpCraft.ID.SimpleNBTTagType.Compound)]
+            public T ContinuePath<T>() where T : DataHolderBase
+            {
+                _ = ContinuePathGenerator(null!, null!, null!);
+                throw new PathGettingMethodCallException();
+            }
+
+            private static string ContinuePathGenerator(DataConvertionAttribute convertionInfo, MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+            {
+                _ = convertionInfo;
+                _ = caller;
+                _ = arguments;
+                return "";
+            }
+
+            /// <summary>
+            /// Converts this <see cref="SimpleDataHolder"/> into a <see cref="DataPartObject"/>
+            /// </summary>
+            /// <param name="conversionData">Not used</param>
+            /// <returns>This as a <see cref="DataPartObject"/></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
+            {
+                DataPartObject outObject = new DataPartObject();
+
+                foreach(DataHolderBase dataHolder in data)
+                {
+                    if (dataHolder is null)
+                    {
+                        throw new ArgumentNullException("Extra item data may not contain null");
+                    }
+                    outObject.MergeDataPartObject(dataHolder.GetDataTree());
+                }
+
+                return outObject;
+            }
         }
     }
 }

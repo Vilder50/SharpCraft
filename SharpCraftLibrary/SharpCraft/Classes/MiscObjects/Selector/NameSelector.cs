@@ -27,7 +27,7 @@ namespace SharpCraft
             IsHidden = isHidden;
         }
 
-        private string name;
+        private string name = null!;
 
         /// <summary>
         /// The name to select

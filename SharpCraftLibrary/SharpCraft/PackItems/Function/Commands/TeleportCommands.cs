@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToCommand : BaseCommand
     {
-        private Vector coordinates;
-        private BaseSelector selector;
+        private Vector coordinates = null!;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToCommand"/>
@@ -50,8 +50,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToEntityCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private BaseSelector toSelector;
+        private BaseSelector selector = null!;
+        private BaseSelector toSelector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToEntityCommand"/>
@@ -77,11 +77,7 @@ namespace SharpCraft.Commands
             get => toSelector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(ToSelector), "ToSelector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(ToSelector));
-                }
-                toSelector = value;
+                toSelector = Utils.ValidateSingleSelectSelector(value, nameof(ToSelector), nameof(TeleportToEntityCommand));
             }
         }
 
@@ -100,7 +96,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToFacingCommand : TeleportToCommand
     {
-        private Vector facingCoordinates;
+        private Vector facingCoordinates = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToFacingCommand"/>
@@ -135,7 +131,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToFacingEntityCommand : TeleportToCommand
     {
-        private BaseSelector facingSelector;
+        private BaseSelector facingSelector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToFacingEntityCommand"/>
@@ -160,11 +156,7 @@ namespace SharpCraft.Commands
             get => facingSelector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(FacingSelector), "FacingSelector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(FacingSelector));
-                }
-                facingSelector = value;
+                facingSelector = Utils.ValidateSingleSelectSelector(value, nameof(FacingSelector), nameof(TeleportToFacingEntityCommand));
             }
         }
 
@@ -188,7 +180,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TeleportToRotationCommand : TeleportToCommand
     {
-        private Rotation rotation;
+        private Rotation rotation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TeleportToRotationCommand"/>

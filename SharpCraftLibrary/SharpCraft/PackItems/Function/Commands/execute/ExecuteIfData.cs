@@ -12,7 +12,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class ExecuteIfData : BaseExecuteIfCommand
     {
-        private IDataLocation dataLocation;
+        private IDataLocation dataLocation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ExecuteIfData"/> command
@@ -27,7 +27,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The location and datapath to check for
         /// </summary>
-        public IDataLocation DataLocation { get => dataLocation; set => dataLocation = value; }
+        public IDataLocation DataLocation { get => dataLocation; set => dataLocation = value ?? throw new ArgumentNullException(nameof(DataLocation), "DataLocation may not be null"); }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command

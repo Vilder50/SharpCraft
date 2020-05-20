@@ -9,7 +9,7 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestGetDataWithoutID()
         {
-            Entity.BaseEntity entity = new Entity.Creeper(ID.Entity.creeper) { Charged = true };
+            Entity entity = new Entities.Creeper(ID.Entity.creeper) { Charged = true };
             Assert.AreEqual("{id:\"minecraft:creeper\",powered:1b}", entity.GetDataString());
             Assert.AreEqual("{powered:1b}", entity.GetDataWithoutID());
         }

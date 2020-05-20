@@ -11,106 +11,54 @@ namespace SharpCraft.Tests.Data
     [TestClass]
     public class DataPathTests
     {
-        private class NestedArraysTestClass : DataHolderBase
+        [TestMethod]
+        public void TestGetSimpleDataPath()
         {
-            [DataTag("arrays.nested")]
-            public int[][][] Nested { get; set; }
+            Assert.AreEqual("tag.Damage", DataPathCreator.GetPath<Item>(i => i.Damage));
+            Assert.AreEqual("tag.EntityTag.id", DataPathCreator.GetPath<Item>(i => i.EntityTag.EntityType));
 
-            [DataTag]
-            public string OtherData { get; set; }
+            Assert.ThrowsException<PathCreatorException>(() => DataPathCreator.GetPath<Item>(i => null));
         }
 
         [TestMethod]
-        public void TestGetDataPath()
+        public void TestGetCheckedDataPath()
         {
-            //Test simple path
-            DataPath path = DataPath.GetDataPath<Block.Furnace>(f => f.DLock);
-            Assert.AreEqual("Lock", path.ToString());
+            Assert.AreEqual("{tag:{Damage:1}}.Count", DataPathCreator.GetPath<Item>(i => DataPathCreator.AddCompoundCheck(i, new Item() { Damage = 1 }).Count));
+            Assert.AreEqual("tag.EntityTag{id:\"minecraft:armor_stand\"}.CustomName", DataPathCreator.GetPath<Item>(i => DataPathCreator.AddCompoundCheck(i.EntityTag as Entities.Armorstand, new Entities.Armorstand(ID.Entity.armor_stand)).CustomName));
 
-            //Test not getting a data tag property
-            Assert.ThrowsException<ArgumentException>(() => { DataPath.GetDataPath<Block.Furnace>(f => f.SLit); });
-
-            //test get nested array
-            path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested);
-            Assert.AreEqual(3, path.ArrayCount);
-            Assert.IsTrue(path.IsArray);
-
-            //test getting tag in tag
-            path = DataPath.GetDataPath<Entity.ItemFrame>(f => f.FrameItem.Damage);
+            Assert.ThrowsException<PathCreatorException>(() => DataPathCreator.GetPath<Item>(i => DataPathCreator.AddCompoundCheck(DataPathCreator.AddCompoundCheck(i, new Item() { Count = 3 }), new Item() { Damage = 1 }).Count));
         }
 
         [TestMethod]
-        public void TestCondition()
+        public void TestGetIndexDataPath()
         {
-            DataPath path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested);
-            path.Condition(1, "{raw:\"Data\"}", new NestedArraysTestClass());
+            Assert.AreEqual("tag.Enchantments", DataPathCreator.GetPath<Item>(i => i.Enchants));
+            Assert.AreEqual("tag.Enchantments[10].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[10].LVL));
+            Assert.AreEqual("tag.Enchantments[{id:\"minecraft:aqua_infinity\"}].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[DataPathCreator.AddArrayFilter(new Item.Enchantment(ID.Enchant.aqua_infinity, null))].LVL));
+            Assert.AreEqual("tag.Enchantments[].lvl", DataPathCreator.GetPath<Item>(i => i.Enchants[DataPathCreator.AddArrayFilter(null)].LVL));
 
-            DataPath otherPath = DataPath.GetDataPath<NestedArraysTestClass>(t => t.OtherData);
-            otherPath.Condition("{raw:\"Data\"}");
-            otherPath.Condition(new NestedArraysTestClass());
-
-            //exceptions
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => path.Condition(1,1));
-
-            Assert.ThrowsException<ArgumentException>(() => otherPath.Condition(1));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => otherPath.Condition("{a:1}","{b:1}"));
-
-            Assert.ThrowsException<ArgumentNullException>(() => otherPath.Condition(conditions: null ));
-            Assert.ThrowsException<ArgumentNullException>(() => otherPath.Condition(null));
-
+            Assert.ThrowsException<PathCreatorException>(() => DataPathCreator.GetPath<Item>(i => DataPathCreator.AddCompoundCheck(i.Enchants[DataPathCreator.AddArrayFilter(null)], new Item.Enchantment(ID.Enchant.aqua_infinity, null)).LVL));
         }
 
         [TestMethod]
-        public void TestSetGetNextpath()
+        public void TestIConvertableArrayPath()
         {
-            DataPath path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested);
-            DataPath otherPath = DataPath.GetDataPath<NestedArraysTestClass>(t => t.OtherData);
-            path.SetNextPath(otherPath);
-
-            Assert.AreEqual(otherPath, path.GetNextpath());
+            Assert.AreEqual("Pos[0]", DataPathCreator.GetPath<Entities.BasicEntity>(e => e.Coords.PathArray()[0]));
+            Assert.AreEqual("Pos[1]", DataPathCreator.GetPath<Entities.BasicEntity>(e => e.Coords.Y));
         }
 
         [TestMethod]
-        public void TestToString()
+        public void TestIConvertableCompoundPath()
         {
-            DataPath path = DataPath.GetDataPath<NestedArraysTestClass>(t => t.Nested).SetNextPath(DataPath.GetDataPath<NestedArraysTestClass>(t => t.OtherData));
-            Assert.AreEqual("arrays.nested[][][].OtherData", path.ToString());
-            path.Condition(1, "{raw:\"Data\"}", new NestedArraysTestClass() { OtherData = "hello world" });
-            path.GetNextpath().Condition("{raw:\"Other Data\"}");
-            Assert.AreEqual("arrays.nested[1][{raw:\"Data\"}][].OtherData{raw:\"Other Data\"}", path.ToString());
+            Assert.AreEqual("Target.Z", DataPathCreator.GetPath<Entities.ShulkerBullet>(e => e.TargetCoords.Z));
+            Assert.AreEqual("TZD", DataPathCreator.GetPath<Entities.ShulkerBullet>(e => e.OffsetTarget.Z));
         }
 
         [TestMethod]
-        public void TestDataPathCondition()
+        public void TestGeneratorPath()
         {
-            DataPathCondition condition = new DataPathCondition(1);
-            Assert.AreEqual(DataPathCondition.ConditionType.Index, condition.Type);
-            Assert.AreEqual("1", condition.GetConditionString());
-
-            condition = new DataPathCondition((int?)null);
-            Assert.AreEqual(DataPathCondition.ConditionType.Index, condition.Type);
-            Assert.AreEqual(string.Empty, condition.GetConditionString());
-
-            condition = new DataPathCondition("{data:1b}");
-            Assert.AreEqual(DataPathCondition.ConditionType.RawData, condition.Type);
-            Assert.AreEqual("{data:1b}", condition.GetConditionString());
-
-            condition = new DataPathCondition(new NestedArraysTestClass());
-            Assert.AreEqual(DataPathCondition.ConditionType.Data, condition.Type);
-
-            //test implicit convertsion
-            condition = -1;
-            Assert.AreEqual(DataPathCondition.ConditionType.Index, condition.Type);
-
-            condition = "{data:[{i:0}]}";
-            Assert.AreEqual(DataPathCondition.ConditionType.RawData, condition.Type);
-
-            condition = new NestedArraysTestClass();
-            Assert.AreEqual(DataPathCondition.ConditionType.Data, condition.Type);
-
-            //test exceptions
-            Assert.ThrowsException<ArgumentException>(() => new DataPathCondition((string)null));
-            Assert.ThrowsException<ArgumentNullException>(() => new DataPathCondition((DataHolderBase)null));
+            Assert.AreEqual("BlockState.Properties", DataPathCreator.GetPath<Entities.FallingBlock>(f => f.TheBlock.GetStatePath()));
+            Assert.AreEqual("BlockState.Properties.powered", DataPathCreator.GetPath<Entities.FallingBlock>(f => f.TheBlock.GetStatePath<Blocks.Door>(d => d.SPowered)));
         }
     }
 }

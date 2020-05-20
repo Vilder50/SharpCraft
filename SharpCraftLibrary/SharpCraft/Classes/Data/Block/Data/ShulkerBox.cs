@@ -2,56 +2,53 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for shulker box and barral blocks
+    /// </summary>
+    public class ShulkerBox : BaseContainer, Interfaces.IFacingFull
     {
+        private Item[]? _dItems;
+
         /// <summary>
-        /// An object for shulker box and barral blocks
+        /// Creates a new shulker box
         /// </summary>
-        public class ShulkerBox : BaseContainer, IBlock.IFacingFull
+        /// <param name="type">The type of block</param>
+        public ShulkerBox(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private Item[] _dItems;
+            string blockName = block.ToString();
+            return (blockName.Contains("shulker"));
+        }
 
-            /// <summary>
-            /// Creates a new shulker box
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public ShulkerBox(BlockType type) : base(type) { }
+        /// <summary>
+        /// The direction the shulker box is facing (the way it opens out into )
+        /// </summary>
+        [BlockState("facing")]
+        public ID.FacingFull? SFacing { get; set; }
 
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// The item's inside the shulker box.
+        /// (0-26)
+        /// </summary>
+        [Data.DataTag("Items")]
+        public override Item[]? DItems
+        {
+            get => _dItems;
+            set
             {
-                string blockName = block.ToString();
-                return (blockName.Contains("shulker"));
-            }
-
-            /// <summary>
-            /// The direction the shulker box is facing (the way it opens out into )
-            /// </summary>
-            [BlockState("facing")]
-            public ID.FacingFull? SFacing { get; set; }
-
-            /// <summary>
-            /// The item's inside the shulker box.
-            /// (0-26)
-            /// </summary>
-            [Data.DataTag("Items")]
-            public override Item[] DItems
-            {
-                get => _dItems;
-                set
+                if (DItems != null && DItems.Length > 27)
                 {
-                    if (DItems != null && DItems.Length > 27)
-                    {
-                        throw new ArgumentException("Too many slots specified");
-                    }
-                    _dItems = value;
+                    throw new ArgumentException("Too many slots specified");
                 }
+                _dItems = value;
             }
         }
     }

@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
-    {
         /// <summary>
         /// Entity data for striders
         /// </summary>
-        public class Strider : BaseBreedable
+        public class Strider : BreedableMob
         {
             /// <summary>
             /// Creates a new strider
@@ -21,5 +19,4 @@ namespace SharpCraft
             [Data.DataTag]
             public bool? Saddle { get; set; }
         }
-    }
 }

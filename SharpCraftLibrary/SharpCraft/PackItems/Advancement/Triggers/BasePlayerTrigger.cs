@@ -24,6 +24,6 @@ namespace SharpCraft.AdvancementObjects
         /// The player triggering the trigger
         /// </summary>
         [DataTag("conditions.player", JsonTag = true)]
-        public JSONObjects.Entity Player { get; set; }
+        public JsonObjects.Entity? Player { get; set; }
     }
 }

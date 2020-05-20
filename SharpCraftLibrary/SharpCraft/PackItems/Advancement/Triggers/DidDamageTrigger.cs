@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The type of damage
         /// </summary>
         [DataTag("conditions.damage", JsonTag = true)]
-        public JSONObjects.Damage Damage { get; set; }
+        public JsonObjects.Damage? Damage { get; set; }
 
         /// <summary>
         /// The entity which got damaged
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public Conditions.EntityCondition[] Entity { get; set; }
+        public Conditions.EntityCondition[]? Entity { get; set; }
     }
 }

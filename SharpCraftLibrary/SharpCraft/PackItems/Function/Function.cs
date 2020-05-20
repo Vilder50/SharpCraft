@@ -23,9 +23,9 @@ namespace SharpCraft
         /// <param name="command">The command its writing</param>
         public delegate void CommandWriteListener(Function file, ICommand command);
 
-        private List<ICommand> commands;
+        private List<ICommand> commands = null!;
 
-        private CommandWriteListener writeCommandListener;
+        private CommandWriteListener? writeCommandListener;
 
         /// <summary>
         /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
@@ -34,7 +34,7 @@ namespace SharpCraft
         /// <param name="fileName">The name of the function</param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected Function(bool _, BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
+        protected Function(bool _, BasePackNamespace space, string? fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(space, fileName, writeSetting, "function")
         {
             if (IsAuto())
             {
@@ -57,7 +57,7 @@ namespace SharpCraft
         /// <param name="space">The namespace the function is in</param>
         /// <param name="fileName">The name of the function</param>
         /// <param name="writeSetting">The setting for writing the file</param>
-        public Function(BasePackNamespace space, string fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, space, fileName, writeSetting)
+        public Function(BasePackNamespace space, string? fileName, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, space, fileName, writeSetting)
         {
             FinishedConstructing();
         }
@@ -89,14 +89,14 @@ namespace SharpCraft
             {
                 throw new ArgumentNullException(nameof(command), "Command may not be null");
             }
-            ICommand addCommand = command;
+            ICommand? addCommand = command;
 
             //run changers
             for (int i = 0; i < commands.Count; i++)
             {
                 if (commands[i] is ICommandChanger changer && !changer.DoneChanging)
                 {
-                    addCommand = changer.ChangeCommand(addCommand);
+                    addCommand = changer.ChangeCommand(addCommand!);
                 }
             }
 
@@ -116,10 +116,10 @@ namespace SharpCraft
                     }
 
                     writeCommandListener?.Invoke(this, commands[i]);
-                    string commandString = commands[i].GetCommandString();
+                    string? commandString = commands[i].GetCommandString();
                     if (!(commandString is null))
                     {
-                        StreamWriter.WriteLine(commandString);
+                        StreamWriter!.WriteLine(commandString);
                     }
                     commands.RemoveAt(i);
                     i--;
@@ -144,7 +144,7 @@ namespace SharpCraft
             CreateDirectory("functions");
             if (StreamWriter is null)
             {
-                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions\\" + WritePath + ".mcfunction");
+                StreamWriter = PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "functions/" + WritePath + ".mcfunction");
             }
             return StreamWriter;
         }
@@ -185,16 +185,16 @@ namespace SharpCraft
         /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(string? name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            string functionName = name;
-            if (name is null)
+            string? functionName = name;
+            if (functionName is null)
             {
                 return new Function(PackNamespace, null, writeSetting);
             }
             else
             {
-                return new Function(PackNamespace, FileId + "\\" + functionName.ToLower(), writeSetting);
+                return new Function(PackNamespace, FileId + "/" + functionName.ToLower(), writeSetting);
             }
         }
         /// <summary>
@@ -204,7 +204,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewChild(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewChild(string? name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewChild(name, writeSetting);
             creater(function);
@@ -218,7 +218,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewChild(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            Function function = NewChild((string)null, writeSetting);
+            Function function = NewChild((string?)null, writeSetting);
             creater(function);
             return function;
         }
@@ -229,9 +229,9 @@ namespace SharpCraft
         /// <param name="name">The name of the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(string name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(string? name = null, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            if (FileId.Contains("\\"))
+            if (FileId.Contains("/"))
             {
                 if (name is null)
                 {
@@ -239,7 +239,7 @@ namespace SharpCraft
                 }
                 else
                 {
-                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("\\") + 1) + name.ToLower(), writeSetting);
+                    return new Function(PackNamespace, FileId.Substring(0, FileId.LastIndexOf("/") + 1) + name.ToLower(), writeSetting);
                 }
             }
             else
@@ -254,7 +254,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the new <see cref="Function"/></param>
         /// <param name="writeSetting">The setting for writing the file</param>
         /// <returns>The new <see cref="Function"/></returns>
-        public Function NewSibling(string name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
+        public Function NewSibling(string? name, FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
             Function function = NewSibling(name, writeSetting);
             creater(function);
@@ -268,7 +268,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            Function function = NewSibling((string)null, writeSetting);
+            Function function = NewSibling((string?)null, writeSetting);
             creater(function);
             return function;
         }
@@ -291,9 +291,9 @@ namespace SharpCraft
             {
                 disposeListener?.Invoke(this);
                 GetStream();
-                WriteFile(StreamWriter);
+                WriteFile(StreamWriter!);
                 AfterDispose();
-                StreamWriter.Dispose();
+                StreamWriter!.Dispose();
                 Disposed = true;
             }
         }
@@ -307,7 +307,7 @@ namespace SharpCraft
             for (int i = 0; i < commands.Count; i++)
             {
                 writeCommandListener?.Invoke(this, commands[i]);
-                string command = commands[i].GetCommandString();
+                string? command = commands[i].GetCommandString();
                 if (!(command is null))
                 {
                     stream.WriteLine(command);
@@ -320,13 +320,13 @@ namespace SharpCraft
         /// </summary>
         protected override void AfterDispose()
         {
-            commands = null;
-            Block = null;
-            Entity = null;
-            Custom = null;
-            Execute = null;
-            World = null;
-            Player = null;
+            commands = null!;
+            Block = null!;
+            Entity = null!;
+            Custom = null!;
+            Execute = null!;
+            World = null!;
+            Player = null!;
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new Data.DataPartTag(GetNamespacedName());
         }
@@ -404,7 +404,7 @@ namespace SharpCraft
         /// <param name="asType">Not in use</param>
         /// <param name="extraConversionData">Not in use</param>
         /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object[] extraConversionData)
+        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new Data.DataPartTag(GetNamespacedName());
         }

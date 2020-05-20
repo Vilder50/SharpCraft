@@ -9,7 +9,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeGetCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeGetCommand"/>
@@ -72,7 +72,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeGetBaseCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeGetBaseCommand"/>
@@ -135,7 +135,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeSetBaseCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeSetBaseCommand"/>
@@ -191,9 +191,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeAddModifierCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private UUID uUID;
-        private string name;
+        private BaseSelector selector = null!;
+        private UUID uUID = null!;
+        private string name = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeAddModifierCommand"/>
@@ -248,7 +248,7 @@ namespace SharpCraft.Commands
             get => name;
             set 
             {
-                if (!Utils.ValidateName(value, true, false))
+                if (!Utils.ValidateName(value, true, false, null))
                 {
                     throw new ArgumentException("Name contains invalid characters. Only allows letters, numbers and .-_", nameof(Name));
                 }
@@ -289,8 +289,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeRemoveModifierCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private UUID uUID;
+        private BaseSelector selector = null!;
+        private UUID uUID = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeRemoveModifierCommand"/>
@@ -347,8 +347,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AttributeGetModifierCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private UUID uUID;
+        private BaseSelector selector = null!;
+        private UUID uUID = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AttributeGetModifierCommand"/>

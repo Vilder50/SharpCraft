@@ -12,15 +12,15 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataGetCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
-        private double scale;
+        private IDataLocation dataLocation = null!;
+        private double? scale;
 
         /// <summary>
         /// Intializes a new <see cref="DataGetCommand"/>
         /// </summary>
         /// <param name="dataLocation">The place to get the data from</param>
         /// <param name="scale">A number to multiply the data with</param>
-        public DataGetCommand(IDataLocation dataLocation, double scale)
+        public DataGetCommand(IDataLocation dataLocation, double? scale)
         {
             DataLocation = dataLocation;
             Scale = scale;
@@ -38,7 +38,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// A number to multiply the data with
         /// </summary>
-        public double Scale { get => scale; set => scale = value; }
+        public double? Scale { get => scale; set => scale = value; }
 
         /// <summary>
         /// Returns the command as a string
@@ -46,7 +46,14 @@ namespace SharpCraft.Commands
         /// <returns>data get [DataLocation] [Scale]</returns>
         public override string GetCommandString()
         {
-            return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
+            if (Scale is null)
+            {
+                return $"data get {DataLocation.GetLocationString()}";
+            }
+            else
+            {
+                return $"data get {DataLocation.GetLocationString()} {Scale.ToMinecraftDouble()}";
+            }
         }
     }
 
@@ -55,8 +62,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeStorageCommand : BaseCommand
     {
-        private Storage storage;
-        private SimpleDataHolder data;
+        private Storage storage = null!;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataMergeStorageCommand"/>
@@ -105,8 +112,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeBlockCommand : BaseCommand
     {
-        private Vector coordinates;
-        private SimpleDataHolder data;
+        private Vector coordinates = null!;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataMergeBlockCommand"/>
@@ -155,8 +162,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataMergeEntityCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private SimpleDataHolder data;
+        private BaseSelector selector = null!;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataMergeEntityCommand"/>
@@ -177,11 +184,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Command doesn't allow selectors which selects multiple entities", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(DataMergeEntityCommand));
             }
         }
 
@@ -209,8 +212,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataModifyWithLocationCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
-        private IDataLocation fromDataLocation;
+        private IDataLocation dataLocation = null!;
+        private IDataLocation fromDataLocation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyWithLocationCommand"/>
@@ -263,8 +266,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataModifyWithDataCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
-        private SimpleDataHolder data;
+        private IDataLocation dataLocation = null!;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyWithDataCommand"/>
@@ -317,8 +320,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataModifyInsertLocationCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
-        private IDataLocation fromDataLocation;
+        private IDataLocation dataLocation = null!;
+        private IDataLocation fromDataLocation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyInsertLocationCommand"/>
@@ -371,8 +374,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataModifyInsertDataCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
-        private SimpleDataHolder data;
+        private IDataLocation dataLocation = null!;
+        private SimpleDataHolder data = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataModifyInsertDataCommand"/>
@@ -425,7 +428,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DataDeleteCommand : BaseCommand
     {
-        private IDataLocation dataLocation;
+        private IDataLocation dataLocation = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DataDeleteCommand"/>

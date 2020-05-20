@@ -21,13 +21,13 @@ namespace SharpCraft.AdvancementObjects
         /// The item the player used to break the nest with
         /// </summary>
         [DataTag("conditions.item", JsonTag = true)]
-        public JSONObjects.Item Item { get; set; }
+        public JsonObjects.Item? Item { get; set; }
 
         /// <summary>
         /// The block which was destroyed
         /// </summary>
         [DataTag("conditions.block", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public BlockType Id { get; set; }
+        public BlockType? Id { get; set; }
 
         /// <summary>
         /// The amount of bees in the nest

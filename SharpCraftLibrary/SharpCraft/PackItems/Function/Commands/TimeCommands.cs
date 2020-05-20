@@ -11,14 +11,14 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TimeModifyCommand : BaseCommand
     {
-        private Time time;
+        private NoneNegativeTime<int> time = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TimeModifyCommand"/>
         /// </summary>
         /// <param name="time">The value to modify with</param>
         /// <param name="modifier">The way to use the modify value</param>
-        public TimeModifyCommand(Time time, ID.AddSetModifier modifier)
+        public TimeModifyCommand(NoneNegativeTime<int> time, ID.AddSetModifier modifier)
         {
             Time = time;
             Modifier = modifier;
@@ -27,7 +27,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The value to modify with
         /// </summary>
-        public Time Time
+        public NoneNegativeTime<int> Time
         {
             get => time;
             set 
@@ -35,10 +35,6 @@ namespace SharpCraft.Commands
                 if (value is null)
                 {
                     throw new ArgumentNullException(nameof(Time), "Time may not be null");
-                }
-                if (value.AsTicks() < 0)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(Time), "Time may not be negative");
                 }
                 time = value; 
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
     /// <summary>
     /// An attribute used to mark a block's state properties

@@ -2,50 +2,47 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SharpCraft
+namespace SharpCraft.Blocks
 {
-    public partial class Block
+    /// <summary>
+    /// An object for beetroot, berry bush and nether wart blocks
+    /// </summary>
+    public class BeetrootNetherWartBerryBush : Block, Interfaces.IAge
     {
+        private int? _sAge;
+
         /// <summary>
-        /// An object for beetroot, berry bush and nether wart blocks
+        /// Creates a new beetroot, berry bush or nether wart block
         /// </summary>
-        public class BeetrootNetherWartBerryBush : Block, IBlock.IAge
+        /// <param name="type">The type of block</param>
+        public BeetrootNetherWartBerryBush(BlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            private int? _sAge;
+            return block == SharpCraft.ID.Block.beetroots || block == SharpCraft.ID.Block.nether_wart || block == SharpCraft.ID.Block.sweet_berry_bush;
+        }
 
-            /// <summary>
-            /// Creates a new beetroot, berry bush or nether wart block
-            /// </summary>
-            /// <param name="type">The type of block</param>
-            public BeetrootNetherWartBerryBush(BlockType type) : base(type) { }
-
-            /// <summary>
-            /// Tests if the given block type fits this type of block object
-            /// </summary>
-            /// <param name="block">The block to test</param>
-            /// <returns>true if the block fits</returns>
-            public new static bool FitsBlock(ID.Block block)
+        /// <summary>
+        /// How far the beetroot / berry bush / nether wart has grown
+        /// (0-3. 3 == fully grown)
+        /// </summary>
+        [BlockState("age")]
+        [BlockIntStateRange(0, 3)]
+        public int? SAge
+        {
+            get => _sAge;
+            set
             {
-                return block == SharpCraft.ID.Block.beetroots || block == SharpCraft.ID.Block.nether_wart || block == SharpCraft.ID.Block.sweet_berry_bush;
-            }
-
-            /// <summary>
-            /// How far the beetroot / berry bush / nether wart has grown
-            /// (0-3. 3 == fully grown)
-            /// </summary>
-            [BlockState("age")]
-            [BlockIntStateRange(0, 3)]
-            public int? SAge
-            {
-                get => _sAge;
-                set
+                if (value != null && (value < 0 || value > 3))
                 {
-                    if (value != null && (value < 0 || value > 3))
-                    {
-                        throw new ArgumentException(nameof(SAge) + " has to be equel to or between 0 and 3");
-                    }
-                    _sAge = value;
+                    throw new ArgumentException(nameof(SAge) + " has to be equel to or between 0 and 3");
                 }
+                _sAge = value;
             }
         }
     }

@@ -1,49 +1,46 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// Entity data for piglins
+    /// </summary>
+    public class Piglin : Mob
     {
         /// <summary>
-        /// Entity data for piglins
+        /// Creates a new piglin
         /// </summary>
-        public class Piglin : BaseMob
-        {
-            /// <summary>
-            /// Creates a new piglin
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public Piglin(ID.Entity? type = ID.Entity.piglin) : base(type) { }
+        /// <param name="type">the type of entity</param>
+        public Piglin(ID.Entity? type = ID.Entity.piglin) : base(type) { }
 
-            /// <summary>
-            /// If its a baby
-            /// </summary>
-            [Data.DataTag]
-            public bool? IsBaby { get; set; }
+        /// <summary>
+        /// If its a baby
+        /// </summary>
+        [Data.DataTag]
+        public bool? IsBaby { get; set; }
 
-            /// <summary>
-            /// True if it shouldn't turn into a <see cref="ID.Entity.zombified_piglin"/> when in the overworld
-            /// </summary>
-            [Data.DataTag]
-            public bool? IsImmuneToZombification { get; set; }
+        /// <summary>
+        /// True if it shouldn't turn into a <see cref="ID.Entity.zombified_piglin"/> when in the overworld
+        /// </summary>
+        [Data.DataTag]
+        public bool? IsImmuneToZombification { get; set; }
 
-            /// <summary>
-            /// The items in the piglins inventory
-            /// </summary>
-            [Data.DataTag]
-            public Item[] Inventory { get; set; }
+        /// <summary>
+        /// The items in the piglins inventory
+        /// </summary>
+        [Data.DataTag]
+        public Item[]? Inventory { get; set; }
 
-            /// <summary>
-            /// True if it shouldn't hunt hoglins
-            /// </summary>
-            [Data.DataTag]
-            public bool? CannotHunt { get; set; }
+        /// <summary>
+        /// True if it shouldn't hunt hoglins
+        /// </summary>
+        [Data.DataTag]
+        public bool? CannotHunt { get; set; }
 
-            /// <summary>
-            /// Time the piglin has been in the overworld. It transforms after 15 seconds.
-            /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time TimeInOverworld { get; set; }
-        }
+        /// <summary>
+        /// Time the piglin has been in the overworld. It transforms after 15 seconds.
+        /// </summary>
+        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
+        public Time<int>? TimeInOverworld { get; set; }
     }
 }

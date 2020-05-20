@@ -15,8 +15,8 @@ namespace SharpCraft.Tests.Data
         public void TestGetFullBlock()
         {
             //make sure blocks gets into their correct categori
-            Assert.IsTrue(Block.GetFullBlock(ID.Block.blue_bed) is Block.Bed, "fits type doesn't work correct");
-            Assert.IsFalse(Block.GetFullBlock(ID.Block.stone) is Block.Bed, "fits type doesn't work correct");
+            Assert.IsTrue(Block.GetFullBlock(ID.Block.blue_bed) is Blocks.Bed, "fits type doesn't work correct");
+            Assert.IsFalse(Block.GetFullBlock(ID.Block.stone) is Blocks.Bed, "fits type doesn't work correct");
 
             //make sure a normal block like stone doesn't get anything else than block
             Type normalTestType = Block.GetFullBlock(ID.Block.stone).GetType();
@@ -61,7 +61,7 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestHasStates()
         {
-            Block.Anvil anvil = new Block.Anvil(ID.Block.anvil);
+            Blocks.Anvil anvil = new Blocks.Anvil(ID.Block.anvil);
             Assert.IsFalse(anvil.HasState);
             anvil.SFacing = ID.Facing.east;
             Assert.IsTrue(anvil.HasState);
@@ -71,7 +71,7 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestClearStates()
         {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            Blocks.Furnace furnace = new Blocks.Furnace(ID.Block.furnace)
             {
                 SFacing = ID.Facing.east,
                 DItems = new Item[] { new Item(ID.Item.stone, 10) }
@@ -84,7 +84,7 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestGetStateProperties()
         {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            Blocks.Furnace furnace = new Blocks.Furnace(ID.Block.furnace)
             {
                 SFacing = ID.Facing.east,
                 DItems = new Item[] { new Item(ID.Item.stone, 10) }
@@ -102,12 +102,12 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestFullCloneBlock()
         {
-            Block.Furnace furnace = new Block.Furnace(ID.Block.furnace)
+            Blocks.Furnace furnace = new Blocks.Furnace(ID.Block.furnace)
             {
                 SFacing = ID.Facing.east,
                 DItems = new Item[] { new Item(ID.Item.stone, 10) }
             };
-            Block.Furnace furnaceCopy = (Block.Furnace)furnace.FullClone();
+            Blocks.Furnace furnaceCopy = (Blocks.Furnace)furnace.FullClone();
             Assert.AreNotEqual(furnace, furnaceCopy);
             Assert.AreEqual(furnace.SFacing, furnaceCopy.SFacing);
             Assert.AreEqual(furnace.DItems, furnaceCopy.DItems);
@@ -121,7 +121,7 @@ namespace SharpCraft.Tests.Data
             Assert.IsNull(furnace.SLit);
 
             //can copy blocks with auto id givers
-            new Block.BrewingStand().FullClone();
+            new Blocks.BrewingStand().FullClone();
         }
 
         [TestMethod]
@@ -133,19 +133,19 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestGetAsDataObject()
         {
-            IConvertableToDataObject convertable = new Block.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            IConvertableToDataObject convertable = new Blocks.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
             Assert.AreEqual("{i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s" }).GetDataString());
             Assert.AreEqual("{\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s", true }).GetDataString());
 
             Assert.AreEqual("{d:\"{Lock:\\\"locked\\\"}\",i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
             Assert.AreEqual("{\"d\":\"{Lock:\\\"locked\\\"}\",\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", true }).GetDataString());
-            Assert.AreEqual("{g:\"a:b\"}", new Block.Chest(new BlockType(new EmptyGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
+            Assert.AreEqual("{g:\"a:b\"}", new Blocks.Chest(new BlockType(new EmptyGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
         }
 
         [TestMethod]
         public void TestGetStateData()
         {
-            Block block = new Block.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            Block block = new Blocks.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
             Assert.AreEqual("{facing:\"north\"}", block.GetStateData(false).GetDataString());
             Assert.AreEqual("{\"facing\":\"north\"}", block.GetStateData(true).GetDataString());
         }

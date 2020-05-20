@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpCraft.Data;
 
-namespace SharpCraft.IEntity
+namespace SharpCraft.Entities.Interfaces
 {
     /// <summary>
     /// Interface for villager like mobs
@@ -34,13 +34,13 @@ namespace SharpCraft.IEntity
         /// The gossips the villager has
         /// </summary>
         [DataTag]
-        Gossip[] Gossips { get; set; }
+        Gossip[]? Gossips { get; set; }
 
         /// <summary>
         /// The villager's trades
         /// </summary>
         [DataTag("Offers.Recipes")]
-        Trade[] Trades { get; set; }
+        Trade[]? Trades { get; set; }
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ namespace SharpCraft.IEntity
         /// (If its a <see cref="ID.GossipType.golem"/> then its the villager who started the gossip)
         /// </summary>
         [Data.DataTag("Target",ForceType = ID.NBTTagType.TagIntArray)]
-        public UUID TartgetUUID { get; set; }
+        public UUID? TartgetUUID { get; set; }
     }
 
     /// <summary>
@@ -95,18 +95,18 @@ namespace SharpCraft.IEntity
         /// The first item the villager is buying in this trade
         /// </summary>
         [DataTag("buy")]
-        public Item BuyItem1 { get; set; }
+        public Item? BuyItem1 { get; set; }
 
         /// <summary>
         /// The second item the villager is buying in this trade
         /// </summary>
         [DataTag("buyB")]
-        public Item BuyItem2 { get; set; }
+        public Item? BuyItem2 { get; set; }
 
         /// <summary>
         /// The item the villager is selling in this trade
         /// </summary>
         [DataTag("sell")]
-        public Item SellItem { get; set; }
+        public Item? SellItem { get; set; }
     }
 }

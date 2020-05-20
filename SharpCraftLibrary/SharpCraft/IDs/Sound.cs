@@ -59,14 +59,45 @@ namespace SharpCraft
             /// </summary>
             public static class Block
             {
-                public static class Chain
+                public class BlockSound
                 {
-                    public static string Break { get; } = "block.chain.break";
-                    public static string Fall { get; } = "block.chain.fall";
-                    public static string Hit { get; } = "block.chain.hit";
-                    public static string Place { get; } = "block.chain.place";
-                    public static string Step { get; } = "block.chain.step";
+                    private readonly string blockName;
+                    internal BlockSound(string blockName)
+                    {
+                        this.blockName = blockName;
+                    }
+
+                    public string Break { get => "block." + blockName + ".break"; }
+                    public string Fall { get => "block." + blockName + ".break"; }
+                    public string Hit { get => "block." + blockName + ".break"; }
+                    public string Place { get => "block." + blockName + ".break"; }
+                    public string Step { get => "block." + blockName + ".break"; }
                 }
+                public class ClickSound
+                {
+                    private readonly string blockName;
+                    internal ClickSound(string blockName)
+                    {
+                        this.blockName = blockName;
+                    }
+
+                    public string ClickOn { get => "block." + blockName + ".click_on"; }
+                    public string ClickOff { get => "block." + blockName + ".click_off"; }
+                }
+                public class OpenSound
+                {
+                    private readonly string blockName;
+                    internal OpenSound(string blockName)
+                    {
+                        this.blockName = blockName;
+                    }
+
+                    public string Close { get => "block." + blockName + ".close"; }
+                    public string Open { get => "block." + blockName + ".open"; }
+                }
+
+                public static readonly BlockSound Chain = new BlockSound("chain");
+
                 public static class RespawnAnchor
                 {
                     public static string Ambient { get; } = "block.respawn_anchor.ambient";
@@ -76,142 +107,24 @@ namespace SharpCraft
                 }
                 public static string VineClimb { get; } = "block.vine.step";
                 public static string SmithingTableUse { get; } = "block.smithing_table.use";
-                public static class Lodestone
-                {
-                    public static string Break { get; } = "block.lodestone.break";
-                    public static string Fall { get; } = "block.lodestone.fall";
-                    public static string Hit { get; } = "block.lodestone.hit";
-                    public static string Place { get; } = "block.lodestone.place";
-                    public static string Step { get; } = "block.lodestone.step";
-                }
-                public static class WeepingVine
-                {
-                    public static string Break { get; } = "block.weeping_vines.break";
-                    public static string Fall { get; } = "block.weeping_vines.fall";
-                    public static string Hit { get; } = "block.weeping_vines.hit";
-                    public static string Place { get; } = "block.weeping_vines.place";
-                    public static string Step { get; } = "block.weeping_vines.step";
-                }
-                public static class Stem
-                {
-                    public static string Break { get; } = "block.stem.break";
-                    public static string Fall { get; } = "block.stem.fall";
-                    public static string Hit { get; } = "block.stem.hit";
-                    public static string Place { get; } = "block.stem.place";
-                    public static string Step { get; } = "block.stem.step";
-                }
-                public static class SoulSoul
-                {
-                    public static string Break { get; } = "block.soul_soul.break";
-                    public static string Fall { get; } = "block.soul_soul.fall";
-                    public static string Hit { get; } = "block.soul_soul.hit";
-                    public static string Place { get; } = "block.soul_soul.place";
-                    public static string Step { get; } = "block.soul_soul.step";
-                }
-                public static class SoulSand
-                {
-                    public static string Break { get; } = "block.soul_sand.break";
-                    public static string Fall { get; } = "block.soul_sand.fall";
-                    public static string Hit { get; } = "block.soul_sand.hit";
-                    public static string Place { get; } = "block.soul_sand.place";
-                    public static string Step { get; } = "block.soul_sand.step";
-                }
-                public static class Shroomlight
-                {
-                    public static string Break { get; } = "block.shroomlight.break";
-                    public static string Fall { get; } = "block.shroomlight.fall";
-                    public static string Hit { get; } = "block.shroomlight.hit";
-                    public static string Place { get; } = "block.shroomlight.place";
-                    public static string Step { get; } = "block.shroomlight.step";
-                }
-                public static class Roots
-                {
-                    public static string Break { get; } = "block.roots.break";
-                    public static string Fall { get; } = "block.roots.fall";
-                    public static string Hit { get; } = "block.roots.hit";
-                    public static string Place { get; } = "block.roots.place";
-                    public static string Step { get; } = "block.roots.step";
-                }
-                public static class Nylium
-                {
-                    public static string Break { get; } = "block.nylium.break";
-                    public static string Fall { get; } = "block.nylium.fall";
-                    public static string Hit { get; } = "block.nylium.hit";
-                    public static string Place { get; } = "block.nylium.place";
-                    public static string Step { get; } = "block.nylium.step";
-                }
-                public static class WartBlock
-                {
-                    public static string Break { get; } = "block.wart_block.break";
-                    public static string Fall { get; } = "block.wart_block.fall";
-                    public static string Hit { get; } = "block.wart_block.hit";
-                    public static string Place { get; } = "block.wart_block.place";
-                    public static string Step { get; } = "block.wart_block.step";
-                }
-                public static class Netherrack
-                {
-                    public static string Break { get; } = "block.netherrack.break";
-                    public static string Fall { get; } = "block.netherrack.fall";
-                    public static string Hit { get; } = "block.netherrack.hit";
-                    public static string Place { get; } = "block.netherrack.place";
-                    public static string Step { get; } = "block.netherrack.step";
-                }
-                public static class Netherite
-                {
-                    public static string Break { get; } = "block.netherite.break";
-                    public static string Fall { get; } = "block.netherite.fall";
-                    public static string Hit { get; } = "block.netherite.hit";
-                    public static string Place { get; } = "block.netherite.place";
-                    public static string Step { get; } = "block.netherite.step";
-                }
-                public static class NetherOre
-                {
-                    public static string Break { get; } = "block.nether_ore.break";
-                    public static string Fall { get; } = "block.nether_ore.fall";
-                    public static string Hit { get; } = "block.nether_ore.hit";
-                    public static string Place { get; } = "block.nether_ore.place";
-                    public static string Step { get; } = "block.nether_ore.step";
-                }
-                public static class NetherBricks
-                {
-                    public static string Break { get; } = "block.nether_brick.break";
-                    public static string Fall { get; } = "block.nether_brick.fall";
-                    public static string Hit { get; } = "block.nether_brick.hit";
-                    public static string Place { get; } = "block.nether_brick.place";
-                    public static string Step { get; } = "block.nether_brick.step";
-                }
-                public static class Fungus
-                {
-                    public static string Break { get; } = "block.fungus.break";
-                    public static string Fall { get; } = "block.fungus.fall";
-                    public static string Hit { get; } = "block.fungus.hit";
-                    public static string Place { get; } = "block.fungus.place";
-                    public static string Step { get; } = "block.fungus.step";
-                }
-                public static class BoneBlock
-                {
-                    public static string Break { get; } = "block.bone_block.break";
-                    public static string Fall { get; } = "block.bone_block.fall";
-                    public static string Hit { get; } = "block.bone_block.hit";
-                    public static string Place { get; } = "block.bone_block.place";
-                    public static string Step { get; } = "block.bone_block.step";
-                }
-                public static class Basalt
-                {
-                    public static string Break { get; } = "block.basalt.break";
-                    public static string Fall { get; } = "block.basalt.fall";
-                    public static string Hit { get; } = "block.basalt.hit";
-                    public static string Place { get; } = "block.basalt.place";
-                    public static string Step { get; } = "block.basalt.step";
-                }
-                public static class AncientDebris
-                {
-                    public static string Break { get; } = "block.ancient_debris.break";
-                    public static string Fall { get; } = "block.ancient_debris.fall";
-                    public static string Hit { get; } = "block.ancient_debris.hit";
-                    public static string Place { get; } = "block.ancient_debris.place";
-                    public static string Step { get; } = "block.ancient_debris.step";
-                }
+
+                public static readonly BlockSound Lodestone = new BlockSound("lodestone");
+                public static readonly BlockSound WeepingVine = new BlockSound("weeping_vines");
+                public static readonly BlockSound Stem = new BlockSound("stem");
+                public static readonly BlockSound SoulSoil = new BlockSound("soul_soil");
+                public static readonly BlockSound SoulSand = new BlockSound("soul_sand");
+                public static readonly BlockSound Shroomlight = new BlockSound("shroomlight");
+                public static readonly BlockSound Roots = new BlockSound("roots");
+                public static readonly BlockSound Nylium = new BlockSound("nylium");
+                public static readonly BlockSound WartBlock = new BlockSound("wart_block");
+                public static readonly BlockSound Netherrack = new BlockSound("netherrack");
+                public static readonly BlockSound Netherite = new BlockSound("netherite");
+                public static readonly BlockSound NetherOre = new BlockSound("nether_ore");
+                public static readonly BlockSound NetherBricks = new BlockSound("nether_brick");
+                public static readonly BlockSound Fungus = new BlockSound("fungus");
+                public static readonly BlockSound BoneBlock = new BlockSound("bone_block");
+                public static readonly BlockSound Basalt = new BlockSound("basalt");
+                public static readonly BlockSound AncientDebris = new BlockSound("ancient_debris");
                 public static class BeeHive
                 {
                     public static string Drip { get; } = "block.beehive.drip";
@@ -246,22 +159,8 @@ namespace SharpCraft
                     public static string ShortAmbient { get; } = "block.conduit.ambient.short";
                     public static string Attack { get; } = "block.conduit.attack.target";
                 }
-                public static class Coral
-                {
-                    public static string Break { get; } = "block.coral_block.break";
-                    public static string Fall { get; } = "block.coral_block.fall";
-                    public static string Hit { get; } = "block.coral_block.hit";
-                    public static string Place { get; } = "block.coral_block.place";
-                    public static string Step { get; } = "block.coral_block.step";
-                }
-                public static class WetGrass
-                {
-                    public static string Break { get; } = "block.wet_grass.break";
-                    public static string Fall { get; } = "block.wet_grass.fall";
-                    public static string Hit { get; } = "block.wet_grass.hit";
-                    public static string Place { get; } = "block.wet_grass.place";
-                    public static string Step { get; } = "block.wet_grass.step";
-                }
+                public static readonly BlockSound Coral = new BlockSound("coral_block");
+                public static readonly BlockSound WetGrass = new BlockSound("wet_grass");
                 public static class BubbleColumn
                 {
                     public static string BubblePop { get; } = "block.bubble_column.bubble_pop";
@@ -291,11 +190,7 @@ namespace SharpCraft
                     public static string Locked { get; } = "block.chest.locked";
                     public static string Open { get; } = "block.chest.open";
                 }
-                public static class Barrel
-                {
-                    public static string Close { get; } = "block.barrel.close";
-                    public static string Open { get; } = "block.barrel.open";
-                }
+                public static readonly OpenSound Barrel = new OpenSound("barrel");
                 public static class Chorus
                 {
                     public static string Death { get; } = "block.chorus_flower.death";
@@ -309,22 +204,8 @@ namespace SharpCraft
                     public static string Ready { get; } = "block.composter.ready";
                     public static string Click { get; } = "block.composter.click";
                 }
-                public static class Cloth
-                {
-                    public static string Break { get; } = "block.wool.break";
-                    public static string Fall { get; } = "block.wool.fall";
-                    public static string Hit { get; } = "block.wool.hit";
-                    public static string Place { get; } = "block.wool.place";
-                    public static string Step { get; } = "block.wool.step";
-                }
-                public static class Scaffolding
-                {
-                    public static string Break { get; } = "block.scaffolding.break";
-                    public static string Fall { get; } = "block.scaffolding.fall";
-                    public static string Hit { get; } = "block.scaffolding.hit";
-                    public static string Place { get; } = "block.scaffolding.place";
-                    public static string Step { get; } = "block.scaffolding.step";
-                }
+                public static readonly BlockSound Wool = new BlockSound("wool");
+                public static readonly BlockSound Scaffolding = new BlockSound("scaffolding");
                 public static string Comparator { get; } = "block.comparator.click";
                 public static class Dispenser
                 {
@@ -338,67 +219,23 @@ namespace SharpCraft
                     public static string Spawn { get; } = "block.end_portal.spawn";
                     public static string Fill { get; } = "block.end_portal.fill";
                 }
-                public static class EnderChest
-                {
-                    public static string Close { get; } = "block.ender_chest.close";
-                    public static string Open { get; } = "block.ender_chest.open";
-                }
-                public static class FenceGate
-                {
-                    public static string Close { get; } = "block.fence_gate.close";
-                    public static string Open { get; } = "block.fence_gate.open";
-                }
+                public static readonly OpenSound EnderChest = new OpenSound("ender_chest");
+                public static readonly OpenSound FenceGate = new OpenSound("fence_gate");
                 public static string Furnace { get; } = "block.furnace.fire_cracle";
                 public static string BlastFurnace { get; } = "block.blastfurnace.fire_cracle";
                 public static string Smoker { get; } = "block.smoker.smoke";
                 public static string Grindstone { get; } = "block.grindstone.use";
-                public static class Glass
-                {
-                    public static string Break { get; } = "block.glass.break";
-                    public static string Fall { get; } = "block.glass.fall";
-                    public static string Hit { get; } = "block.glass.hit";
-                    public static string Place { get; } = "block.glass.place";
-                    public static string Step { get; } = "block.glass.step";
-                }
+                public static readonly BlockSound Glass = new BlockSound("glass");
                 public static class SweetBerryBush
                 {
                     public static string Break { get; } = "block.sweet_berry_bush.break";
                     public static string Place { get; } = "block.sweet_berry_bush.place";
                 }
-                public static class Grass
-                {
-                    public static string Break { get; } = "block.grass.break";
-                    public static string Fall { get; } = "block.grass.fall";
-                    public static string Hit { get; } = "block.grass.hit";
-                    public static string Place { get; } = "block.grass.place";
-                    public static string Step { get; } = "block.grass.step";
-                }
-                public static class Gravel
-                {
-                    public static string Break { get; } = "block.gravel.break";
-                    public static string Fall { get; } = "block.gravel.fall";
-                    public static string Hit { get; } = "block.gravel.hit";
-                    public static string Place { get; } = "block.gravel.place";
-                    public static string Step { get; } = "block.gravel.step";
-                }
-                public static class IronDoor
-                {
-                    public static string Close { get; } = "block.iron_door.close";
-                    public static string Open { get; } = "block.iron_door.open";
-                }
-                public static class IronTrapdoor
-                {
-                    public static string Close { get; } = "block.iron_trapdoor.close";
-                    public static string Open { get; } = "block.iron_trapdoor.open";
-                }
-                public static class Ladder
-                {
-                    public static string Break { get; } = "block.ladder.break";
-                    public static string Fall { get; } = "block.ladder.fall";
-                    public static string Hit { get; } = "block.ladder.hit";
-                    public static string Place { get; } = "block.ladder.place";
-                    public static string Step { get; } = "block.ladder.step";
-                }
+                public static readonly BlockSound Grass = new BlockSound("grass");
+                public static readonly BlockSound Gravel = new BlockSound("gravel");
+                public static readonly OpenSound IronDoor = new OpenSound("iron_door");
+                public static readonly OpenSound IronTrapdoor = new OpenSound("iron_trapdoor");
+                public static readonly BlockSound Ladder = new BlockSound("ladder");
                 public static class Lava
                 {
                     public static string Ambient { get; } = "block.lava.ambiant";
@@ -406,19 +243,8 @@ namespace SharpCraft
                     public static string Pop { get; } = "block.lava.pop";
                 }
                 public static string Lever { get; } = "block.lever.click";
-                public static class Metal
-                {
-                    public static string Break { get; } = "block.metal.break";
-                    public static string Fall { get; } = "block.metal.fall";
-                    public static string Hit { get; } = "block.metal.hit";
-                    public static string Place { get; } = "block.metal.place";
-                    public static string Step { get; } = "block.metal.step";
-                }
-                public static class MetalPlate
-                {
-                    public static string ClickOn { get; } = "block.metal_pressure_plate.click_on";
-                    public static string ClickOff { get; } = "block.metal_pressure_plate.click_off";
-                }
+                public static readonly BlockSound Metal = new BlockSound("metal");
+                public static readonly ClickSound MetalPlate = new ClickSound("metal_pressure_plate");
                 public static class Note
                 {
                     public static string Basedrum { get; } = "block.note_block.basedrum";
@@ -443,53 +269,13 @@ namespace SharpCraft
                     public static string Travel { get; } = "block.portal.travel";
                     public static string Trigger { get; } = "block.portal.trigger";
                 }
-                public static class Sand
-                {
-                    public static string Break { get; } = "block.sand.break";
-                    public static string Fall { get; } = "block.sand.fall";
-                    public static string Hit { get; } = "block.sand.hit";
-                    public static string Place { get; } = "block.sand.place";
-                    public static string Step { get; } = "block.sand.step";
-                }
-                public static class Shulker
-                {
-                    public static string Close { get; } = "block.shulker.close";
-                    public static string Open { get; } = "block.shulker.open";
-                }
-                public static class Slime
-                {
-                    public static string Break { get; } = "block.slime_block.break";
-                    public static string Fall { get; } = "block.slime_block.fall";
-                    public static string Hit { get; } = "block.slime_block.hit";
-                    public static string Place { get; } = "block.slime_block.place";
-                    public static string Step { get; } = "block.slime_block.step";
-                }
-                public static class Snow
-                {
-                    public static string Break { get; } = "block.snow.break";
-                    public static string Fall { get; } = "block.snow.fall";
-                    public static string Hit { get; } = "block.snow.hit";
-                    public static string Place { get; } = "block.snow.place";
-                    public static string Step { get; } = "block.snow.step";
-                }
-                public static class Stone
-                {
-                    public static string Break { get; } = "block.stone.break";
-                    public static string Fall { get; } = "block.stone.fall";
-                    public static string Hit { get; } = "block.stone.hit";
-                    public static string Place { get; } = "block.stone.place";
-                    public static string Step { get; } = "block.stone.step";
-                }
-                public static class StoneButton
-                {
-                    public static string ClickOn { get; } = "block.stone_button.click_on";
-                    public static string ClickOff { get; } = "block.stone_button.click_off";
-                }
-                public static class StonePlate
-                {
-                    public static string ClickOn { get; } = "block.stone_pressureplate.click_on";
-                    public static string ClickOff { get; } = "block.stone_pressureplate.click_off";
-                }
+                public static readonly BlockSound Sand = new BlockSound("sand");
+                public static readonly OpenSound Shulker = new OpenSound("shulker");
+                public static readonly BlockSound Slime = new BlockSound("slime_block");
+                public static readonly BlockSound Snow = new BlockSound("snow");
+                public static readonly BlockSound Stone = new BlockSound("stone");
+                public static readonly ClickSound StoneButton = new ClickSound("stone_button");
+                public static readonly ClickSound StonePlate = new ClickSound("stone_pressure_plate");
                 public static class Tripwire
                 {
                     public static string ClickOn { get; } = "block.tripwire.click_on";
@@ -498,34 +284,11 @@ namespace SharpCraft
                 }
                 public static string Water { get; } = "block.water.ambient";
                 public static string LilyPad { get; } = "block.lily_pad.place";
-                public static class Wood
-                {
-                    public static string Break { get; } = "block.wood.break";
-                    public static string Fall { get; } = "block.wood.fall";
-                    public static string Hit { get; } = "block.wood.hit";
-                    public static string Place { get; } = "block.wood.place";
-                    public static string Step { get; } = "block.wood.step";
-                }
-                public static class WoodenButton
-                {
-                    public static string ClickOn { get; } = "block.wooden_button.click_on";
-                    public static string ClickOff { get; } = "block.wooden_button.click_off";
-                }
-                public static class WoodenPlate
-                {
-                    public static string ClickOn { get; } = "block.wooden_pressure_plate.click_on";
-                    public static string ClickOff { get; } = "block.wooden_pressure_plate.click_off";
-                }
-                public static class WoodenDoor
-                {
-                    public static string ClickOn { get; } = "block.wooden_door.click_on";
-                    public static string ClickOff { get; } = "block.wooden_door.click_off";
-                }
-                public static class WoodenTrapdoor
-                {
-                    public static string ClickOn { get; } = "block.wooden_trapdoor.click_on";
-                    public static string ClickOff { get; } = "block.wooden_trapdoor.click_off";
-                }
+                public static readonly BlockSound Wood = new BlockSound("wood");
+                public static readonly ClickSound WoodenButton = new ClickSound("wooden_button");
+                public static readonly ClickSound WoodenPlate = new ClickSound("wooden_pressure_plate");
+                public static readonly ClickSound WoodenDoor = new ClickSound("wooden_door");
+                public static readonly ClickSound WoodenTrapdoor = new ClickSound("wooden_trapdoor");
             }
 
             public static string EnchantThorns { get; } = "enchant.thorns.hit";
@@ -535,6 +298,20 @@ namespace SharpCraft
             /// </summary>
             public static class Entity
             {
+                public class EntitySound
+                {
+                    private readonly string entityName;
+                    internal EntitySound(string entityName)
+                    {
+                        this.entityName = entityName;
+                    }
+
+                    public string Ambient { get => "entity." + entityName + ".ambient"; }
+                    public string Death { get => "entity." + entityName + ".death"; }
+                    public string Hurt { get => "entity." + entityName + ".hurt"; }
+                    public string Step { get => "entity." + entityName + ".step"; }
+                }
+
                 public static class Piglin
                 {
                     public static string Admire { get; } = "entity.piglin.admiring_item";
@@ -787,13 +564,7 @@ namespace SharpCraft
                     public static string Stare { get; } = "entity.enderman.stare";
                     public static string Teleport { get; } = "entity.enderman.teleport";
                 }
-                public static class Endermite
-                {
-                    public static string Ambient { get; } = "entity.endermite.ambient";
-                    public static string Death { get; } = "entity.endermite.death";
-                    public static string Hurt { get; } = "entity.endermite.hurt";
-                    public static string Step { get; } = "entity.endermite.step";
-                }
+                public static readonly EntitySound Endermite = new EntitySound("endermite");
                 public static string EvocationFangs { get; } = "entity.evocation_fangs.attack";
                 public static class EvocationIllager
                 {
@@ -1080,13 +851,7 @@ namespace SharpCraft
                     public static string Hit { get; } = "entity.shulker_bullet.hit";
                     public static string Hurt { get; } = "entity.shulker_bullet.hurt";
                 }
-                public static class Silverfish
-                {
-                    public static string Ambient { get; } = "entity.silverfish.ambient";
-                    public static string Death { get; } = "entity.silverfish.death";
-                    public static string Hurt { get; } = "entity.silverfish.hurt";
-                    public static string Step { get; } = "entity.silverfish.step";
-                }
+                public static readonly EntitySound Silverfish = new EntitySound("silverfish");
                 public static class Skeleton
                 {
                     public static string Ambient { get; } = "entity.skeleton.ambient";
@@ -1095,13 +860,7 @@ namespace SharpCraft
                     public static string Step { get; } = "entity.skeleton.step";
                     public static string Shoot { get; } = "entity.skeleton.shoot";
                 }
-                public static class SkeletonHorse
-                {
-                    public static string Ambient { get; } = "entity.skeleton_horse.ambient";
-                    public static string Death { get; } = "entity.skeleton_horse.death";
-                    public static string Hurt { get; } = "entity.skeleton_horse.hurt";
-                    public static string Step { get; } = "entity.skeleton_horse.step";
-                }
+                public static readonly EntitySound SkeletonHorse = new EntitySound("skeleton_horse");
                 public static class Slime
                 {
                     public static string Death { get; } = "entity.slime.death";
@@ -1136,20 +895,8 @@ namespace SharpCraft
                     public static string Throw { get; } = "entity.splash_potion.throw";
                     public static string Break { get; } = "entity.splash_potion.break";
                 }
-                public static class Squid
-                {
-                    public static string Ambient { get; } = "entity.squid.ambient";
-                    public static string Death { get; } = "entity.squid.death";
-                    public static string Hurt { get; } = "entity.squid.hurt";
-                    public static string Squirt { get; } = "entity.squid.squirt";
-                }
-                public static class Stray
-                {
-                    public static string Ambient { get; } = "entity.stray.ambient";
-                    public static string Death { get; } = "entity.stray.death";
-                    public static string Hurt { get; } = "entity.stray.hurt";
-                    public static string Step { get; } = "entity.stray.step";
-                }
+                public static readonly EntitySound Squid = new EntitySound("squid");
+                public static readonly EntitySound Stray = new EntitySound("stray");
                 public static string TNT { get; } = "entity.tnt.primed";
                 public static class Vex
                 {
@@ -1199,13 +946,7 @@ namespace SharpCraft
                     public static string Shoot { get; } = "entity.wither.shoot";
                     public static string Spawn { get; } = "entity.wither.spawn";
                 }
-                public static class WitherSkeleton
-                {
-                    public static string Ambient { get; } = "entity.wither_skeleton.ambient";
-                    public static string Death { get; } = "entity.wither_skeleton.death";
-                    public static string Hurt { get; } = "entity.wither_skeleton.hurt";
-                    public static string Step { get; } = "entity.wither_skeleton.step";
-                }
+                public static readonly EntitySound WitherSkeleton = new EntitySound("wither_skeleton");
                 public static class Wolf
                 {
                     public static string Ambient { get; } = "entity.wolf.ambient";

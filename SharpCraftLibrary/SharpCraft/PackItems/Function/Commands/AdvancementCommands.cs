@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementAllCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementAllCommand"/>
@@ -56,8 +56,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementSingleCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private IAdvancement advancement;
+        private BaseSelector selector = null!;
+        private IAdvancement advancement = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementSingleCommand"/>
@@ -66,7 +66,7 @@ namespace SharpCraft.Commands
         /// <param name="grant">True if the advancement should be granted. False if it should be revoked</param>
         /// <param name="advancement">The advancement to grant/revoke</param>
         /// <param name="criterion">The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement</param>
-        public AdvancementSingleCommand(BaseSelector selector, IAdvancement advancement, AdvancementObjects.ITrigger criterion, bool grant = true)
+        public AdvancementSingleCommand(BaseSelector selector, IAdvancement advancement, AdvancementObjects.ITrigger? criterion, bool grant = true)
         {
             Selector = selector;
             Grant = grant;
@@ -101,7 +101,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The advancement criterion to grant/revoke. Leave null to only grant/revoke the advancement
         /// </summary>
-        public AdvancementObjects.ITrigger Criterion { get; set; }
+        public AdvancementObjects.ITrigger? Criterion { get; set; }
 
         /// <summary>
         /// True if the advancement should be granted. False if it should be revoked
@@ -123,8 +123,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class AdvancementSomeCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private IAdvancement advancement;
+        private BaseSelector selector = null!;
+        private IAdvancement advancement = null!;
 
         /// <summary>
         /// Intializes a new <see cref="AdvancementSomeCommand"/>

@@ -11,7 +11,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DatapackDisableCommand : BaseCommand
     {
-        private BaseDatapack datapack;
+        private BaseDatapack datapack = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DatapackDisableCommand"/>
@@ -46,7 +46,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DatapackEnableCommand : BaseCommand
     {
-        private BaseDatapack datapack;
+        private BaseDatapack datapack = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DatapackEnableCommand"/>
@@ -88,8 +88,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class DatapackEnableAtCommand : BaseCommand
     {
-        private BaseDatapack datapack;
-        private BaseDatapack otherDatapack;
+        private BaseDatapack datapack = null!;
+        private BaseDatapack otherDatapack = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DatapackEnableAtCommand"/>

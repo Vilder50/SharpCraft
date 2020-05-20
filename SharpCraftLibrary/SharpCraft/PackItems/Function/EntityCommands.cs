@@ -7,16 +7,10 @@ namespace SharpCraft.FunctionWriters
     /// <summary>
     /// All the entity commands
     /// </summary>
-    public class EntityCommands
+    public class EntityCommands : CommandList
     {
-        /// <summary>
-        /// The function to write onto
-        /// </summary>
-        public Function Function { get; private set; }
-
-        internal EntityCommands(Function function)
+        internal EntityCommands(Function function) : base(function)
         {
-            Function = function;
             Data = new ClassData(function);
             Tag = new ClassTag(function);
             Score = new ClassScore(function);
@@ -30,9 +24,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="addEntity">The entity to add to the world</param>
         /// <param name="coords">The coords to add the entity at</param>
-        public void Add(Vector coords, Entity.BaseEntity addEntity)
+        public void Add(Vector? coords, Entity addEntity)
         {
-            Function.AddCommand(new SummonCommand(addEntity, coords ?? new Coords()));
+            ForFunction.AddCommand(new SummonCommand(addEntity, coords ?? new Coords()));
         }
 
         /// <summary>
@@ -41,7 +35,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         public void Kill(BaseSelector selector)
         {
-            Function.AddCommand(new KillCommand(selector));
+            ForFunction.AddCommand(new KillCommand(selector));
         }
 
         /// <summary>
@@ -54,7 +48,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="spreadTeams">If teams should be placed close to each other</param>
         public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false)
         {
-            Function.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams));
+            ForFunction.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams));
         }
 
         /// <summary>
@@ -62,15 +56,15 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="team">The team they should join. Leave null to make them leave their team</param>
-        public void JoinTeam(BaseSelector selector, Team team)
+        public void JoinTeam(BaseSelector selector, Team? team)
         {
             if (team != null)
             {
-                Function.AddCommand(new TeamJoinCommand(team, selector));
+                ForFunction.AddCommand(new TeamJoinCommand(team, selector));
             }
             else
             {
-                Function.AddCommand(new TeamLeaveCommand(selector));
+                ForFunction.AddCommand(new TeamLeaveCommand(selector));
             }
         }
 
@@ -82,7 +76,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="level">the level of the enchantment</param>
         public void Enchant(BaseSelector selector, ID.Enchant enchant, int level)
         {
-            Function.AddCommand(new EnchantCommand(selector, level, enchant));
+            ForFunction.AddCommand(new EnchantCommand(selector, level, enchant));
         }
 
         /// <summary>
@@ -90,9 +84,9 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to. Leave null to teleport to executed position</param>
-        public void Teleport(BaseSelector selector, Vector tpTo = null)
+        public void Teleport(BaseSelector selector, Vector? tpTo = null)
         {
-            Function.AddCommand(new TeleportToCommand(tpTo ?? new Coords(), selector));
+            ForFunction.AddCommand(new TeleportToCommand(tpTo ?? new Coords(), selector));
         }
 
         /// <summary>
@@ -101,9 +95,9 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="rotation">The rotation to teleport the selected entities to</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, Rotation rotation)
+        public void Teleport(BaseSelector selector, Vector? tpTo, Rotation? rotation)
         {
-            Function.AddCommand(new TeleportToRotationCommand(tpTo ?? new Coords(), selector, rotation ?? new Rotation(true, 0, 0)));
+            ForFunction.AddCommand(new TeleportToRotationCommand(tpTo ?? new Coords(), selector, rotation ?? new Rotation(true, 0, 0)));
         }
         /// <summary>
         /// Teleports the selected entities to the specified location facing another entity
@@ -112,10 +106,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The selector the entities should look at</param>
         /// <param name="facingPart">The part of the entity to look at</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
+        public void Teleport(BaseSelector selector, Vector? tpTo, BaseSelector facing, ID.FacingAnchor facingPart = ID.FacingAnchor.feet)
         {
             facing.LimitSelector();
-            Function.AddCommand(new TeleportToFacingEntityCommand(tpTo ?? new Coords(), selector, facing, facingPart));
+            ForFunction.AddCommand(new TeleportToFacingEntityCommand(tpTo ?? new Coords(), selector, facing, facingPart));
         }
 
         /// <summary>
@@ -124,9 +118,9 @@ namespace SharpCraft.FunctionWriters
         /// <param name="selector">The <see cref="BaseSelector"/> to use</param>
         /// <param name="tpTo">The location to teleport the entities to</param>
         /// <param name="facing">The block to look at</param>
-        public void Teleport(BaseSelector selector, Vector tpTo, Vector facing)
+        public void Teleport(BaseSelector selector, Vector? tpTo, Vector? facing)
         {
-            Function.AddCommand(new TeleportToFacingCommand(tpTo ?? new Coords(), selector, facing ?? new Coords()));
+            ForFunction.AddCommand(new TeleportToFacingCommand(tpTo ?? new Coords(), selector, facing ?? new Coords()));
         }
 
         /// <summary>
@@ -137,7 +131,7 @@ namespace SharpCraft.FunctionWriters
         public void Teleport(BaseSelector selector, BaseSelector toSelector)
         {
             toSelector.LimitSelector();
-            Function.AddCommand(new TeleportToEntityCommand(selector, toSelector));
+            ForFunction.AddCommand(new TeleportToEntityCommand(selector, toSelector));
         }
 
         /// <summary>
@@ -147,15 +141,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands using entity data
         /// </summary>
-        public class ClassData
+        public class ClassData : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassData(Function function)
+            internal ClassData(Function function) : base(function)
             {
-                this.Function = function;
+               
             }
 
             /// <summary>
@@ -166,7 +156,7 @@ namespace SharpCraft.FunctionWriters
             public void Change(BaseSelector selector, Data.SimpleDataHolder newEntity)
             {
                 selector.LimitSelector();
-                Function.AddCommand(new DataMergeEntityCommand(selector, newEntity));
+                ForFunction.AddCommand(new DataMergeEntityCommand(selector, newEntity));
             }
 
             /// <summary>
@@ -179,7 +169,7 @@ namespace SharpCraft.FunctionWriters
             public void Change(BaseSelector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, Data.SimpleDataHolder copyData)
             {
                 toSelector.LimitSelector();
-                Function.AddCommand(new DataModifyWithDataCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, copyData));
+                ForFunction.AddCommand(new DataModifyWithDataCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, copyData));
             }
 
             /// <summary>
@@ -192,7 +182,7 @@ namespace SharpCraft.FunctionWriters
             public void Change(BaseSelector toSelector, string toDataPath, int index, Data.SimpleDataHolder copyData)
             {
                 toSelector.LimitSelector();
-                Function.AddCommand(new DataModifyInsertDataCommand(new EntityDataLocation(toSelector, toDataPath), index, copyData));
+                ForFunction.AddCommand(new DataModifyInsertDataCommand(new EntityDataLocation(toSelector, toDataPath), index, copyData));
             }
 
             /// <summary>
@@ -204,7 +194,7 @@ namespace SharpCraft.FunctionWriters
             public void Get(BaseSelector selector, string dataPath, double scale = 1)
             {
                 selector.LimitSelector();
-                Function.AddCommand(new DataGetCommand(new EntityDataLocation(selector, dataPath), scale));
+                ForFunction.AddCommand(new DataGetCommand(new EntityDataLocation(selector, dataPath), scale));
             }
 
             /// <summary>
@@ -214,7 +204,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="dataPath">The datapath</param>
             public void Remove(BaseSelector selector, string dataPath)
             {
-                Function.AddCommand(new DataDeleteCommand(new EntityDataLocation(selector, dataPath)));
+                ForFunction.AddCommand(new DataDeleteCommand(new EntityDataLocation(selector, dataPath)));
             }
 
             /// <summary>
@@ -227,7 +217,7 @@ namespace SharpCraft.FunctionWriters
             public void Copy(BaseSelector toSelector, string toDataPath, ID.EntityDataModifierType modifierType, IDataLocation dataLocation)
             {
                 toSelector.LimitSelector();
-                Function.AddCommand(new DataModifyWithLocationCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, dataLocation));
+                ForFunction.AddCommand(new DataModifyWithLocationCommand(new EntityDataLocation(toSelector, toDataPath), modifierType, dataLocation));
             }
 
             /// <summary>
@@ -240,7 +230,7 @@ namespace SharpCraft.FunctionWriters
             public void Copy(BaseSelector toSelector, string toDataPath, IDataLocation dataLocation, int index)
             {
                 toSelector.LimitSelector();
-                Function.AddCommand(new DataModifyInsertLocationCommand(new EntityDataLocation(toSelector, toDataPath), index, dataLocation));
+                ForFunction.AddCommand(new DataModifyInsertLocationCommand(new EntityDataLocation(toSelector, toDataPath), index, dataLocation));
             }
         }
 
@@ -251,16 +241,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for entity tags
         /// </summary>
-        public class ClassTag
+        public class ClassTag : CommandList
         {
-
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassTag(Function function)
+            internal ClassTag(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -270,7 +255,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="tagName">The <see cref="Tag"/> to add</param>
             public void Add(BaseSelector selector, Tag tagName)
             {
-                Function.AddCommand(new TagCommand(selector, tagName, true));
+                ForFunction.AddCommand(new TagCommand(selector, tagName, true));
             }
 
             /// <summary>
@@ -280,7 +265,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="tagName">The <see cref="Tag"/> to remove</param>
             public void Remove(BaseSelector selector, Tag tagName)
             {
-                Function.AddCommand(new TagCommand(selector, tagName, false));
+                ForFunction.AddCommand(new TagCommand(selector, tagName, false));
             }
         }
 
@@ -291,15 +276,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for entity scores
         /// </summary>
-        public class ClassScore
+        public class ClassScore : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassScore(Function function)
+            internal ClassScore(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -310,7 +291,17 @@ namespace SharpCraft.FunctionWriters
             /// <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
             public void Add(BaseSelector selector, Objective objective, int amount)
             {
-                Function.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.add, amount));
+                ForFunction.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.add, amount));
+            }
+
+            /// <summary>
+            /// adds the <paramref name="amount"/> to the score
+            /// </summary>
+            /// <param name="score">the score to add to</param>
+            /// <param name="amount">the amount to add to the score. If the number is negative its removed instead</param>
+            public void Add(ScoreValue score, int amount)
+            {
+                Add(score, score, amount);
             }
 
             /// <summary>
@@ -321,7 +312,17 @@ namespace SharpCraft.FunctionWriters
             /// <param name="amount">the amount to set the score to</param>
             public void Set(BaseSelector selector, Objective objective, int amount)
             {
-                Function.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.set, amount));
+                ForFunction.AddCommand(new ScoreboardValueChangeCommand(selector, objective, ID.ScoreChange.set, amount));
+            }
+
+            /// <summary>
+            /// sets the specified score to the specified <paramref name="amount"/>
+            /// </summary>
+            /// <param name="score">the score to set</param>
+            /// <param name="amount">the amount to set the score to</param>
+            public void Set(ScoreValue score, int amount)
+            {
+                Set(score, score, amount);
             }
 
             /// <summary>
@@ -334,7 +335,18 @@ namespace SharpCraft.FunctionWriters
             public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, int number)
             {
                 mainSelector.LimitSelector();
-                Function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, SharpCraftFiles.AddConstantNumber(number), SharpCraftFiles.ConstantObjective));
+                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().AddConstantNumber(number), ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().ConstantObjective!));
+            }
+
+            /// <summary>
+            /// Does math with a score and a number and saves the result in the score
+            /// </summary>
+            /// <param name="score">The score to change</param>
+            /// <param name="operationType">The operation to do between the score and number</param>
+            /// <param name="number">The number to do math with</param>
+            public void Operation(ScoreValue score, ID.Operation operationType, int number)
+            {
+                Operation(score, score, operationType, number);
             }
 
             /// <summary>
@@ -349,7 +361,42 @@ namespace SharpCraft.FunctionWriters
             {
                 mainSelector.LimitSelector();
                 otherSelector.LimitSelector();
-                Function.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, otherSelector, otherObjective));
+                ForFunction.AddCommand(new ScoreboardOperationCommand(mainSelector, mainObjective, operationType, otherSelector, otherObjective));
+            }
+
+            /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="score">The first score (The result will be stored in this score)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherScore">The other score</param>
+            public void Operation(ScoreValue score, ID.Operation operationType, ScoreValue otherScore)
+            {
+                Operation(score, score, operationType, otherScore, otherScore);
+            }
+
+            /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="score">The first score (The result will be stored in this score)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherSelector">The other entity</param>
+            /// <param name="otherObjective">The other entity's <see cref="Objective"/></param>
+            public void Operation(ScoreValue score, ID.Operation operationType, BaseSelector otherSelector, Objective otherObjective)
+            {
+                Operation(score, score, operationType, otherSelector, otherObjective);
+            }
+
+            /// <summary>
+            /// Does math with two scores and saves the result in the first score.
+            /// </summary>
+            /// <param name="mainSelector">The first entity (The result will be stored in this entity's score)</param>
+            /// <param name="mainObjective">The first entity's <see cref="Objective"/> (The result will be stored in here)</param>
+            /// <param name="operationType">The operation to do between the numbers</param>
+            /// <param name="otherScore">The other score</param>
+            public void Operation(BaseSelector mainSelector, Objective mainObjective, ID.Operation operationType, ScoreValue otherScore)
+            {
+                Operation(mainSelector, mainObjective, operationType, otherScore, otherScore);
             }
 
             /// <summary>
@@ -357,9 +404,18 @@ namespace SharpCraft.FunctionWriters
             /// </summary>
             /// <param name="selector">the <see cref="BaseSelector"/> to use</param>
             /// <param name="objective">if a <see cref="Objective"/> is specified only the score in the specified <see cref="Objective"/> will be reseted</param>
-            public void Reset(BaseSelector selector, Objective objective = null)
+            public void Reset(BaseSelector selector, Objective? objective = null)
             {
-                Function.AddCommand(new ScoreboardResetCommand(selector, objective));
+                ForFunction.AddCommand(new ScoreboardResetCommand(selector, objective));
+            }
+
+            /// <summary>
+            /// Resets the given score
+            /// </summary>
+            /// <param name="score">the score to reset</param>
+            public void Reset(ScoreValue score)
+            {
+                Reset(score, score);
             }
 
             /// <summary>
@@ -370,7 +426,16 @@ namespace SharpCraft.FunctionWriters
             public void Get(BaseSelector selector, Objective objective)
             {
                 selector.LimitSelector();
-                Function.AddCommand(new ScoreboardValueGetCommand(selector, objective));
+                ForFunction.AddCommand(new ScoreboardValueGetCommand(selector, objective));
+            }
+
+            /// <summary>
+            /// Gets the given score
+            /// </summary>
+            /// <param name="score">the score to get</param>
+            public void Get(ScoreValue score)
+            {
+                Get(score, score);
             }
         }
 
@@ -381,15 +446,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for effects
         /// </summary>
-        public class ClassEffect
+        public class ClassEffect : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassEffect(Function function)
+            internal ClassEffect(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -399,7 +460,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="effect">the effect to remove</param>
             public void Clear(BaseSelector selector, ID.Effect? effect = null)
             {
-                Function.AddCommand(new EffectClearCommand(selector, effect));
+                ForFunction.AddCommand(new EffectClearCommand(selector, effect));
             }
 
             /// <summary>
@@ -412,7 +473,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="hideParticles">if the particles from the effect should be hidden or not</param>
             public void Give(BaseSelector selector, ID.Effect effect, int time, byte amplifier = 0, bool hideParticles = true)
             {
-                Function.AddCommand(new EffectGiveCommand(selector,effect, time, amplifier, hideParticles));
+                ForFunction.AddCommand(new EffectGiveCommand(selector,effect, time, amplifier, hideParticles));
             }
         }
 
@@ -423,15 +484,10 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// All commands for items
         /// </summary>
-        public class ClassItem
+        public class ClassItem : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassItem(Function function)
+            internal ClassItem(Function function) : base(function)
             {
-                this.Function = function;
                 Horse = new ClassHorse(function);
             }
 
@@ -443,7 +499,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="armorSlot">the armor slot to put the item in</param>
             public void Armor(BaseSelector selector, Item giveItem, ID.ArmorSlot armorSlot)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.ArmorSlot(armorSlot), giveItem, giveItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.ArmorSlot(armorSlot), giveItem, giveItem.Count ?? 1));
             }
 
             /// <summary>
@@ -454,7 +510,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="offHand">If its the offhand weapon which should change</param>
             public void Weapon(BaseSelector selector, Item giveItem, bool offHand = false)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.WeaponSlot(!offHand), giveItem, giveItem.Count ?? 1));
             }
 
             /// <summary>
@@ -464,7 +520,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="addItem">the item to add to the entities. <see cref="Item.Slot"/> is used to specify the slot</param>
             public void Container(BaseSelector selector, Item addItem)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.ContainerSlot(addItem.Slot ?? 0), addItem, addItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.ContainerSlot(addItem.Slot ?? 0), addItem, addItem.Count ?? 1));
             }
 
             /// <summary>
@@ -474,7 +530,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="addItem">the item to add to the villager. <see cref="Item.Slot"/> is used to specify the slot</param>
             public void VillagerInventory(BaseSelector selector, Item addItem)
             {
-                Function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.VillagerInventorySlot(addItem.Slot ?? 0), addItem, addItem.Count ?? 1));
+                ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.VillagerInventorySlot(addItem.Slot ?? 0), addItem, addItem.Count ?? 1));
             }
 
             /// <summary>
@@ -484,12 +540,11 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// all commands for items in horses
             /// </summary>
-            public class ClassHorse
+            public class ClassHorse : CommandList
             {
-                readonly Function function;
-                internal ClassHorse(Function function)
+                internal ClassHorse(Function function) : base(function)
                 {
-                    this.function = function;
+                    
                 }
 
                 /// <summary>
@@ -499,7 +554,7 @@ namespace SharpCraft.FunctionWriters
                 /// <param name="giveItem">the item to add to the horses. <see cref="Item.Slot"/> is used to specify the slot</param>
                 public void Inventory(BaseSelector selector, Item giveItem)
                 {
-                    function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseInventorySlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseInventorySlot(giveItem.Slot ?? 0), giveItem, giveItem.Count ?? 1));
                 }
 
                 /// <summary>
@@ -509,7 +564,7 @@ namespace SharpCraft.FunctionWriters
                 /// <param name="giveItem">the item to add to the horses.</param>
                 public void Saddle(BaseSelector selector, Item giveItem)
                 {
-                    function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.saddle), giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.saddle), giveItem, giveItem.Count ?? 1));
                 }
                 /// <summary>
                 /// Makes the specified item the selected horses' armor
@@ -518,7 +573,7 @@ namespace SharpCraft.FunctionWriters
                 /// <param name="giveItem">the item to add to the horses.</param>
                 public void Armor(BaseSelector selector, Item giveItem)
                 {
-                    function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.armor), giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.armor), giveItem, giveItem.Count ?? 1));
                 }
                 /// <summary>
                 /// Makes the specified item the selected horses' chest
@@ -527,7 +582,7 @@ namespace SharpCraft.FunctionWriters
                 /// <param name="giveItem">the item to add to the horses.</param>
                 public void Chest(BaseSelector selector, Item giveItem)
                 {
-                    function.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.chest), giveItem, giveItem.Count ?? 1));
+                    ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.chest), giveItem, giveItem.Count ?? 1));
                 }
             }
         }

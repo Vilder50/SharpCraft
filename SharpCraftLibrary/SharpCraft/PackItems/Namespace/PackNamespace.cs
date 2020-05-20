@@ -50,12 +50,12 @@ namespace SharpCraft
         /// <param name="condition">The condition</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created predicate</returns>
-        public Predicate Predicate(string name, Conditions.BaseCondition condition, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Predicate Predicate(string? name, Conditions.BaseCondition condition, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Predicate existingFile = null;
+            Predicate? existingFile = null;
             if (!(name is null)) 
             {
-                existingFile = (Predicate)GetFile("predicate", name); 
+                existingFile = (Predicate?)GetFile("predicate", name); 
             }
 
             if (existingFile is null)
@@ -74,14 +74,14 @@ namespace SharpCraft
         /// <param name="functionName">The function's name. If null will get random name</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function Function(string functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(string? functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             if (string.IsNullOrWhiteSpace(functionName))
             {
                 return new Function(this, null, setting);
             }
 
-            Function returnFunction = (Function)GetFile("function", functionName);
+            Function? returnFunction = (Function?)GetFile("function", functionName);
             if (returnFunction is null)
             {
                 return new Function(this, functionName, setting);
@@ -99,7 +99,7 @@ namespace SharpCraft
         /// <param name="creater">a method creating the function</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function Function(string functionName, Function.FunctionWriter creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function Function(string? functionName, Function.FunctionWriter creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function function = Function(functionName, setting);
             creater(function);
@@ -115,7 +115,7 @@ namespace SharpCraft
         /// <returns>The newly created function</returns>
         public Function Function(Function.FunctionWriter creater, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            Function function = Function((string)null, setting);
+            Function function = Function((string?)null, setting);
             creater(function);
 
             return function;
@@ -129,7 +129,7 @@ namespace SharpCraft
         /// <param name="advancementName">The name of the advancement</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function EventFunction(BaseTrigger[] triggers, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function EventFunction(BaseTrigger[] triggers, string? functionName = null, string? advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function function = Function(functionName, setting);
             HiddenAdvancement trigger = Advancement(advancementName, triggers.Select(t => (Requirement)t).ToArray(), new Reward { Function = function }, setting);
@@ -147,9 +147,42 @@ namespace SharpCraft
         /// <param name="advancementName">The name of the advancement</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created function</returns>
-        public Function EventFunction(BaseTrigger[] triggers, Function.FunctionWriter creater, string functionName = null, string advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public Function EventFunction(BaseTrigger[] triggers, Function.FunctionWriter creater, string? functionName = null, string? advancementName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             Function outFunction = EventFunction(triggers, functionName, advancementName, setting);
+            creater(outFunction);
+
+            return outFunction;
+        }
+
+        /// <summary>
+        /// Creates a function which runs on a player if they have they get a score of the given type
+        /// </summary>
+        /// <param name="objectiveType">The score objective type. (See <see cref="ID.Objective"/> for a list of objectives)</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="setting">The setting used for writing the function file</param>
+        /// <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(string objectiveType, bool runForEachScore = false, string? functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function outFunction = Function(functionName, setting);
+            Datapack.GetItems<SharpCraftFiles>().AddObjectiveEventFunction(outFunction, objectiveType, runForEachScore);
+
+            return outFunction;
+        }
+
+        /// <summary>
+        /// Creates a function which runs on a player if they have they get a score of the given type
+        /// </summary>
+        /// <param name="objectiveType">The score objective type. (See <see cref="ID.Objective"/> for a list of objectives)</param>
+        /// <param name="creater">The function writer</param>
+        /// <param name="functionName">The name of the function</param>
+        /// <param name="setting">The setting used for writing the function file</param>
+        /// <param name="runForEachScore">True if it should run the function for each number in the score. False if it only should run the function once when the score is higher than 1.</param>
+        /// <returns>The newly created function</returns>
+        public Function EventFunction(string objectiveType, Function.FunctionWriter creater, bool runForEachScore = false, string? functionName = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Function outFunction = EventFunction(objectiveType, runForEachScore, functionName, setting);
             creater(outFunction);
 
             return outFunction;
@@ -165,12 +198,12 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CraftingRecipe Recipe(string name, ItemType[,] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CraftingRecipe Recipe(string? name, ItemType[,] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -193,12 +226,12 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public ShapelessRecipe Recipe(string name, ItemType[] recipe, ID.Item output, int outputCount = 1, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public ShapelessRecipe Recipe(string? name, ItemType[] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -223,12 +256,12 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, int? cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -253,12 +286,12 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, Time cookTime = null, string group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -280,12 +313,12 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CuttingRecipe Recipe(string name, ItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CuttingRecipe Recipe(string? name, ItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -307,12 +340,12 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CuttingRecipe Recipe(string name, ItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CuttingRecipe Recipe(string? name, ItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseRecipe existingFile = null;
+            BaseRecipe? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
             }
 
             if (!(existingFile is null))
@@ -331,11 +364,12 @@ namespace SharpCraft
         /// <param name="name">The recipe's name</param>
         public void Recipe(string name)
         {
-            BaseRecipe existingFile = null;
             if (name is null)
             {
-                existingFile = (BaseRecipe)GetFile("recipe", name);
+                throw new ArgumentNullException(nameof(name), "Name may not be null");
             }
+
+            BaseRecipe? existingFile = (BaseRecipe?)GetFile("recipe", name);
 
             if (!(existingFile is null))
             {
@@ -355,12 +389,12 @@ namespace SharpCraft
         /// <param name="type">The type of loot table</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The newly created <see cref="LootTable"/></returns>
-        public LootTable Loottable(string tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public LootTable Loottable(string? tableName, LootPool[] lootPools, LootTable.TableType? type = null, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LootTable existingFile = null;
+            LootTable? existingFile = null;
             if (!(tableName is null))
             {
-                existingFile = (LootTable)GetFile("loot_table", tableName);
+                existingFile = (LootTable?)GetFile("loot_table", tableName);
             }
 
             if (!(existingFile is null))
@@ -403,12 +437,12 @@ namespace SharpCraft
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="background">The background in the advancement gui. Example: minecraft:textures/gui/advancements/backgrounds/end.png.</param>
         /// <returns>The advancement</returns>
-        public ParentAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, JsonText name, JsonText description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public ParentAdvancement Advancement(string? fileName, Requirement[] requirements, Reward reward, BaseJsonText name, BaseJsonText description, Item icon, string background, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = null;
+            BaseAdvancement? existingFile = null;
             if (!(fileName is null))
             {
-                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+                existingFile = (BaseAdvancement?)GetFile("advancement", fileName);
             }
             if (!(existingFile is null))
             {
@@ -434,12 +468,12 @@ namespace SharpCraft
         /// <param name="showToast">True if when the advancement is unlocked it will display a toast in the top right corner. False if not</param>
         /// <param name="parent">The parent advancement</param>
         /// <returns>The advancement</returns>
-        public ChildAdvancement Advancement(string fileName, IAdvancement parent, Requirement[] requirements, Reward reward, JsonText name, JsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public ChildAdvancement Advancement(string? fileName, IAdvancement parent, Requirement[] requirements, Reward reward, BaseJsonText name, BaseJsonText description, Item icon, ID.AdvancementFrame frame = ID.AdvancementFrame.task, bool announceInChat = false, bool showToast = true, bool hidden = false, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = null;
+            BaseAdvancement? existingFile = null;
             if (!(fileName is null))
             {
-                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+                existingFile = (BaseAdvancement?)GetFile("advancement", fileName);
             }
             if (!(existingFile is null))
             {
@@ -457,12 +491,12 @@ namespace SharpCraft
         /// <param name="requirements">The requirements for getting the advancement</param>
         /// <param name="reward">The rewards to get for getting the advancement</param>
         /// <returns>The advancement</returns>
-        public HiddenAdvancement Advancement(string fileName, Requirement[] requirements, Reward reward, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public HiddenAdvancement Advancement(string? fileName, Requirement[] requirements, Reward reward, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
-            BaseAdvancement existingFile = null;
+            BaseAdvancement? existingFile = null;
             if (!(fileName is null))
             {
-                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+                existingFile = (BaseAdvancement?)GetFile("advancement", fileName);
             }
             if (!(existingFile is null))
             {
@@ -478,11 +512,12 @@ namespace SharpCraft
         /// <param name="fileName">The name of the file to make invalid</param>
         public void Advancement(string fileName)
         {
-            BaseAdvancement existingFile = null;
-            if (!(fileName is null))
+            if (fileName is null)
             {
-                existingFile = (BaseAdvancement)GetFile("advancement", fileName);
+                throw new ArgumentNullException(nameof(fileName), "FileName may not be null");
             }
+
+            BaseAdvancement? existingFile = (BaseAdvancement?)GetFile("advancement", fileName);
             if (!(existingFile is null))
             {
                 throw new ArgumentException("There already exists an advancement with the name: " + existingFile.FileId + ". Use GetFile(\"advancement\",\"" + existingFile.FileId + "\") to get it.");
@@ -499,12 +534,12 @@ namespace SharpCraft
         /// <param name="append">If the functions should be appended to existing functions from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="FunctionGroup"/></returns>
-        public FunctionGroup Group(string name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public FunctionGroup Group(string? name, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            FunctionGroup existingFile = null;
+            FunctionGroup? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (FunctionGroup)GetFile("group_function", name);
+                existingFile = (FunctionGroup?)GetFile("group_function", name);
             }
             if (!(existingFile is null))
             {
@@ -527,12 +562,12 @@ namespace SharpCraft
         /// <param name="append">If the <see cref="BlockType"/>s should be appended to existing <see cref="BlockType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="BlockGroup"/></returns>
-        public BlockGroup Group(string name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public BlockGroup Group(string? name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            BlockGroup existingFile = null;
+            BlockGroup? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (BlockGroup)GetFile("group_block", name);
+                existingFile = (BlockGroup?)GetFile("group_block", name);
             }
             if (!(existingFile is null))
             {
@@ -555,12 +590,12 @@ namespace SharpCraft
         /// <param name="append">If the <see cref="ItemType"/>s should be appended to existing <see cref="ItemType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="ItemGroup"/></returns>
-        public ItemGroup Group(string name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public ItemGroup Group(string? name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            ItemGroup existingFile = null;
-            if (!(existingFile is null))
+            ItemGroup? existingFile = null;
+            if (!(name is null))
             {
-                existingFile = (ItemGroup)GetFile("group_item", name);
+                existingFile = (ItemGroup?)GetFile("group_item", name);
             }
             if (!(existingFile is null))
             {
@@ -583,12 +618,12 @@ namespace SharpCraft
         /// <param name="append">If the <see cref="EntityType"/>s should be appended to existing <see cref="EntityType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="EntityGroup"/></returns>
-        public EntityGroup Group(string name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public EntityGroup Group(string? name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            EntityGroup existingFile = null;
-            if (!(existingFile is null))
+            EntityGroup? existingFile = null;
+            if (!(name is null))
             {
-                existingFile = (EntityGroup)GetFile("group_entity", name);
+                existingFile = (EntityGroup?)GetFile("group_entity", name);
             }
             if (!(existingFile is null))
             {
@@ -611,12 +646,12 @@ namespace SharpCraft
         /// <param name="append">If the <see cref="LiquidType"/>s should be appended to existing <see cref="LiquidType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="LiquidGroup"/></returns>
-        public LiquidGroup Group(string name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public LiquidGroup Group(string? name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LiquidGroup existingFile = null;
+            LiquidGroup? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (LiquidGroup)GetFile("group_liquid", name);
+                existingFile = (LiquidGroup?)GetFile("group_liquid", name);
             }
             if (!(existingFile is null))
             {
@@ -656,59 +691,6 @@ namespace SharpCraft
         public void AddSetting(INamespaceSetting setting)
         {
             settings.Add(setting);
-        }
-    }
-
-    /// <summary>
-    /// A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
-    /// </summary>
-    public class EmptyNamespace : BasePackNamespace
-    {
-        /// <summary>
-        /// Returns a reference to the minecraft namespace
-        /// </summary>
-        /// <returns>A reference to the minecraft namespace</returns>
-        public static EmptyNamespace GetMinecraftNamespace()
-        {
-            return EmptyDatapack.GetPack().Namespace("minecraft");
-        }
-
-        /// <summary>
-        /// Returns a reference to the namespace
-        /// </summary>
-        /// <param name="namespace">The namespace to get</param>
-        /// <returns>The namespace</returns>
-        public static EmptyNamespace GetNamespace(string @namespace)
-        {
-            return EmptyDatapack.GetPack().Namespace(@namespace);
-        }
-
-        /// <summary>
-        /// Intializes a new empty namespace. Make sure to call <see cref="BasePackNamespace.Setup(BaseDatapack, string)"/> after using this. Suggested to use <see cref="EmptyNamespace.GetNamespace(string)"/> instead.
-        /// </summary>
-        public EmptyNamespace() : base()
-        {
-
-        }
-
-        /// <summary>
-        /// Creates a new namespace in a datapack. Suggested to use <see cref="EmptyNamespace.GetNamespace(string)"/> instead
-        /// </summary>
-        /// <param name="datapack">The datapack to add the namespace to</param>
-        /// <param name="namespaceName">the name of the namespace</param>
-        public EmptyNamespace(BaseDatapack datapack, string namespaceName) : base(datapack, namespaceName)
-        {
-            
-        }
-
-        /// <summary>
-        /// Not used. Makes no sense to generate names for empty namespace.
-        /// </summary>
-        /// <param name="getIdFor">Not used</param>
-        /// <returns>Not used</returns>
-        public override string GetID(object getIdFor)
-        {
-            throw new InvalidOperationException("Empty namespace shouldn't generate file names");
         }
     }
 }

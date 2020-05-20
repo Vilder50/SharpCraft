@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class StewChange : BaseChange
     {
-        private StewEffect[] effects;
+        private StewEffect[] effects = null!;
 
         /// <summary>
         /// Intializes a new <see cref="StewChange"/>

@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The entities hit by the lightning
         /// </summary>
         [DataTag("conditions.victims", JsonTag = true)]
-        public Conditions.EntityCondition[][] HitEntities { get; set; }
+        public Conditions.EntityCondition[][]? HitEntities { get; set; }
     }
 }

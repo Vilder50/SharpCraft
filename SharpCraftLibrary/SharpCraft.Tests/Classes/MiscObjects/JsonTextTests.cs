@@ -70,7 +70,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Text(null), "Text should throw exception when null");
 
             //translate
-            Assert.AreEqual("{\"translate\":\"hel\\\"lo\",with:[{\"text\":\"insert1\"},{\"text\":\"insert2\"}]}", new JsonText.Translate("hel\"lo",new JsonText[] {new JsonText.Text("insert1"), new JsonText.Text("insert2") }).GetJsonString(), "Translate doesn't return correct string");
+            Assert.AreEqual("{\"translate\":\"hel\\\"lo\",with:[{\"text\":\"insert1\"},{\"text\":\"insert2\"}]}", new JsonText.Translate("hel\"lo",new BaseJsonText[] {new JsonText.Text("insert1"), new JsonText.Text("insert2") }).GetJsonString(), "Translate doesn't return correct string");
             Assert.AreEqual("{\"translate\":\"hello\"}", new JsonText.Translate("hello").GetJsonString(), "Translate doesn't return correct string when only translate is specified");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Translate(null), "Translate should throw exception if translate is null");
 
@@ -99,9 +99,9 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestAdding()
         {
             //setup
-            JsonText text1 = "hello";
-            JsonText text2 = " ";
-            JsonText text3 = " world";
+            BaseJsonText text1 = "hello";
+            BaseJsonText text2 = " ";
+            BaseJsonText text3 = " world";
 
             //test
             Assert.AreEqual("{\"extra\":[{\"text\":\" \"},{\"text\":\" world\"}],\"text\":\"hello\"}", (text1+text2+text3).GetJsonString(), "text isn't added together correctly");

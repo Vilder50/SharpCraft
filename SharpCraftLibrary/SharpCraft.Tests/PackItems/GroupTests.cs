@@ -64,7 +64,7 @@ namespace SharpCraft.Tests.PackItems
             //setup
             TestGroupClass.WriterToUse = new StringWriter();
             using DatapackTestClass pack = new DatapackTestClass("path", "pack");
-            using NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
+            NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
             List<GroupItemClass> items = new List<GroupItemClass>
                     {
                         new GroupItemClass("test"),
@@ -74,7 +74,7 @@ namespace SharpCraft.Tests.PackItems
             bool append = true;
 
             //test
-            using TestGroupClass group = new TestGroupClass(packNamespace, "name", items, append, BaseFile.WriteSetting.LockedOnDispose);
+            TestGroupClass group = new TestGroupClass(packNamespace, "name", items, append, BaseFile.WriteSetting.LockedOnDispose);
             Assert.AreEqual(items, group.Items, "Items were not set correctly by the constructor");
             Assert.AreEqual(append, group.AppendGroup, "AppendGroup was not set correctly by the constructor");
         }
@@ -84,20 +84,17 @@ namespace SharpCraft.Tests.PackItems
         {
             //setup
             using DatapackTestClass pack = new DatapackTestClass("path", "pack");
-            using NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
+            NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
             //test
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedOnDispose))
-            {
-                Assert.ThrowsException<ArgumentNullException>(() => group.Items = null, "Items should not be able to be null");
-                group.Items = new List<GroupItemClass>() { };
-            }
+            TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedOnDispose);
+            Assert.ThrowsException<ArgumentNullException>(() => group.Items = null, "Items should not be able to be null");
+            group.Items = new List<GroupItemClass>() { };
+            group.Dispose();
 
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto))
-            {
-                Assert.ThrowsException<InvalidOperationException>(() => group.Items = new List<GroupItemClass>() { }, "Items should not be changeable because the file is auto");
-            }
+            group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto);
+            Assert.ThrowsException<InvalidOperationException>(() => group.Items = new List<GroupItemClass>() { }, "Items should not be changeable because the file is auto");
         }
 
         [TestMethod]
@@ -105,19 +102,20 @@ namespace SharpCraft.Tests.PackItems
         {
             //setup
             using DatapackTestClass pack = new DatapackTestClass("path", "pack");
-            using NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
+            NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
             //test
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedOnDispose))
+            TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedOnDispose)
             {
-                group.AppendGroup = true;
-            }
+                AppendGroup = true
+            };
+            group.Dispose();
+
 
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto))
-            {
-                Assert.ThrowsException<InvalidOperationException>(() => group.AppendGroup = true, "AppendGroup should not be changeable because the file is auto");
-            }
+            group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto);
+            Assert.ThrowsException<InvalidOperationException>(() => group.AppendGroup = true, "AppendGroup should not be changeable because the file is auto");
+            
         }
 
         [TestMethod]
@@ -125,24 +123,22 @@ namespace SharpCraft.Tests.PackItems
         {
             //setup
             using DatapackTestClass pack = new DatapackTestClass("path", "pack");
-            using NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
+            NamespaceTestClass packNamespace = new NamespaceTestClass(pack, "namespace");
             //test
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, true, BaseFile.WriteSetting.LockedOnDispose))
-            {
-                group.Items.Add(new GroupItemClass("test2"));
-                group.Items.Add(new GroupItemClass("test3"));
-                Assert.AreEqual("", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group shouldn't have been written yet");
-            }
+            TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, true, BaseFile.WriteSetting.LockedOnDispose);
+            group.Items.Add(new GroupItemClass("test2"));
+            group.Items.Add(new GroupItemClass("test3"));
+            Assert.AreEqual("", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group shouldn't have been written yet");
+            group.Dispose();
             Assert.AreEqual("{\"values\":[\"test\",\"test2\",\"test3\"]}", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group wasn't written correctly");
 
             TestGroupClass.WriterToUse = new StringWriter();
-            using (TestGroupClass group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto))
-            {
-                Assert.IsTrue(group.Disposed);
-                Assert.AreEqual("{\"replace\":true,\"values\":[\"test\"]}", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group didn't write AppendFile correctly");
-                Assert.IsNull(group.Items, "Items wasn't cleared");
-            }
+            group = new TestGroupClass(packNamespace, "name2", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedAuto);
+            group.Dispose();
+            Assert.IsTrue(group.Disposed);
+            Assert.AreEqual("{\"replace\":true,\"values\":[\"test\"]}", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group didn't write AppendFile correctly");
+            Assert.IsNull(group.Items, "Items wasn't cleared");
         }
 
         [TestMethod]

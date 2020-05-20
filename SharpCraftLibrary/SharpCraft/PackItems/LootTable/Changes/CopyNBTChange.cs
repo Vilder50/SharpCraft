@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class CopyNBTChange : BaseChange
     {
-        private CopyOperation[] operations;
+        private CopyOperation[] operations = null!;
 
         /// <summary>
         /// Intializes a new <see cref="CopyNBTChange"/>
@@ -42,8 +42,8 @@ namespace SharpCraft.LootObjects
         /// </summary>
         public class CopyOperation : DataHolderBase
         {
-            private string toDataPath;
-            private string fromDataPath;
+            private string toDataPath = null!;
+            private string fromDataPath = null!;
 
             /// <summary>
             /// Intializes a new <see cref="CopyOperation"/>
@@ -51,7 +51,7 @@ namespace SharpCraft.LootObjects
             /// <param name="fromDataPath">The datapath to copy from</param>
             /// <param name="toDataPath">The datapath on the item to copy to. Starting from the Item's "Tag" tag</param>
             /// <param name="copyType">The way to copy the data</param>
-            public CopyOperation(string fromDataPath, string toDataPath, ID.EntityDataModifierType copyType)
+            public CopyOperation(string fromDataPath, string toDataPath, ID.LootDataModifierType copyType)
             {
                 FromDataPath = fromDataPath;
                 ToDataPath = toDataPath;
@@ -73,8 +73,8 @@ namespace SharpCraft.LootObjects
             /// <summary>
             /// The way to copy the data
             /// </summary>
-            [DataTag("source", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-            public ID.EntityDataModifierType CopyType { get; set; }
+            [DataTag("op", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+            public ID.LootDataModifierType CopyType { get; set; }
         }
     }
 }

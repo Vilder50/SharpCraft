@@ -12,7 +12,7 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class PredicateCondition : BaseCondition
     {
-        private IPredicate predicate;
+        private IPredicate predicate = null!;
 
         /// <summary>
         /// Intializes a new <see cref="PredicateCondition"/>

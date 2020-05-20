@@ -33,7 +33,7 @@ namespace SharpCraft.LootObjects
         /// All conditions have to be true for this entry to be used
         /// </summary>
         [DataTag("conditions", JsonTag = true)]
-        public Conditions.BaseCondition[] Conditions { get; set; }
+        public Conditions.BaseCondition[]? Conditions { get; set; }
 
         /// <summary>
         /// The weight of this entry

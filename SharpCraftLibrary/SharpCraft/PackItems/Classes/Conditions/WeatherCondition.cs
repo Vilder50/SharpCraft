@@ -8,14 +8,14 @@ using SharpCraft.Data;
 namespace SharpCraft.Conditions
 {
     /// <summary>
-    /// Condition which returns true if the item has the given enchants
+    /// Condition which returns true if the weather is of the given type
     /// </summary>
     public class WeatherCondition : BaseCondition
     {
         /// <summary>
         /// Intializes a new <see cref="WeatherCondition"/>
         /// </summary>
-        public WeatherCondition(bool raining, bool? thundering) : base("minecraft:tool_enchantment")
+        public WeatherCondition(bool raining, bool? thundering) : base("minecraft:weather_check")
         {
             Raining = raining;
             Thundering = thundering;

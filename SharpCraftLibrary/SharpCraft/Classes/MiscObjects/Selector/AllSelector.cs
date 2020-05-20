@@ -7,7 +7,7 @@ namespace SharpCraft
     /// </summary>
     public class AllSelector : BaseSelector
     {
-        private static AllSelector singleton;
+        private static AllSelector? singleton;
 
         /// <summary>
         /// Returns a singleton <see cref="AllSelector"/>

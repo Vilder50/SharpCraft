@@ -1,30 +1,27 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// Entity data for cats
+    /// </summary>
+    public class Cat : TameableMob
     {
         /// <summary>
-        /// Entity data for cats
+        /// Creates a new cat
         /// </summary>
-        public class Cat : BaseTameable
-        {
-            /// <summary>
-            /// Creates a new cat
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public Cat(ID.Entity? type = ID.Entity.cat) : base(type) { }
+        /// <param name="type">the type of entity</param>
+        public Cat(ID.Entity? type = ID.Entity.cat) : base(type) { }
 
-            /// <summary>
-            /// The cat's skin
-            /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public ID.Cat? CatType { get; set; }
-            /// <summary>
-            /// The color of the cat's collar
-            /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
-            public ID.Color? CollarColor { get; set; }
-        }
+        /// <summary>
+        /// The cat's skin
+        /// </summary>
+        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
+        public ID.Cat? CatType { get; set; }
+        /// <summary>
+        /// The color of the cat's collar
+        /// </summary>
+        [Data.DataTag(ForceType = ID.NBTTagType.TagByte)]
+        public ID.Color? CollarColor { get; set; }
     }
 }

@@ -3,294 +3,288 @@ using SharpCraft.Data;
 using System;
 using SharpCraft.AdvancementObjects;
 
-namespace SharpCraft
+namespace SharpCraft.JsonObjects
 {
     /// <summary>
-    /// <see cref="object"/>s used in <see cref="LootTable"/>s and <see cref="IAdvancement"/>s
+    /// a <see cref="object"/> defining an <see cref="SharpCraft.Entity"/>
     /// </summary>
-    public static partial class JSONObjects
+    public class Entity : DataHolderBase
     {
         /// <summary>
-        /// a <see cref="object"/> defining an <see cref="SharpCraft.Entity"/>
+        /// The <see cref="SharpCraft.Entity"/> type
         /// </summary>
-        public class Entity : DataHolderBase
+        [DataTag("type", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+        public EntityType? Type { get; set; }
+
+        /// <summary>
+        /// the <see cref="Distance"/> to the <see cref="SharpCraft.Entity"/>
+        /// </summary>
+        [DataTag("distance", JsonTag = true)]
+        public Distance? Distance { get; set; }
+
+        /// <summary>
+        /// the <see cref="Location"/> of the <see cref="SharpCraft.Entity"/>
+        /// </summary>
+        [DataTag("location", JsonTag = true)]
+        public Location? Location { get; set; }
+
+        /// <summary>
+        /// the <see cref="JsonObjects.Effects"/>s the <see cref="SharpCraft.Entity"/> should have
+        /// </summary>
+        [DataTag("effects", JsonTag = true)]
+        public Effects? Effects { get; set; }
+
+        /// <summary>
+        /// If the fishing hook is in "open water"
+        /// </summary>
+        [DataTag("fishing_hook.in_open_water", JsonTag = true)]
+        public bool FishingHookInOpenWater { get; set; }
+
+        /// <summary>
+        /// the nbt the <see cref="SharpCraft.Entity"/> should have
+        /// </summary>
+        [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+        public SimpleDataHolder? NBT { get; set; }
+
+        /// <summary>
+        /// the amount of levels the player has
+        /// </summary>
+        [DataTag("player.level", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
+        public MCRange? Levels { get; set; }
+
+        /// <summary>
+        /// The gamemode the player is in
+        /// </summary>
+        [DataTag("player.gamemode", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+        public ID.Gamemode? Gamemode { get; set; }
+
+        /// <summary>
+        /// Player recipes to check for
+        /// </summary>
+        [DataTag("player.recipes", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
+        public RecipeList? Recipes { get; set; }
+
+        /// <summary>
+        /// Player advancements to check for
+        /// </summary>
+        [DataTag("player.advancements", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
+        public AdvancementList? Advancements { get; set; }
+
+        /// <summary>
+        /// The entity's team
+        /// </summary>
+        [DataTag(JsonTag = true, ForceType = ID.NBTTagType.TagString)]
+        public Team? Team { get; set; }
+
+        /// <summary>
+        /// A list of <see cref="CheckRecipe"/>
+        /// </summary>
+        public class RecipeList : IConvertableToDataObject
         {
-            /// <summary>
-            /// The <see cref="SharpCraft.Entity"/> type
-            /// </summary>
-            [DataTag("type", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public EntityType Type { get; set; }
+            private CheckRecipe[] recipes = null!;
 
             /// <summary>
-            /// the <see cref="Distance"/> to the <see cref="SharpCraft.Entity"/>
+            /// The recipes
             /// </summary>
-            [DataTag("distance", JsonTag = true)]
-            public Distance Distance { get; set; }
+            public CheckRecipe[] Recipes { get => recipes; set => recipes = value ?? throw new ArgumentNullException(nameof(Recipes), "Recipes may not be null"); }
 
             /// <summary>
-            /// the <see cref="Location"/> of the <see cref="SharpCraft.Entity"/>
+            /// Converts this object into a <see cref="DataPartObject"/>
             /// </summary>
-            [DataTag("location", JsonTag = true)]
-            public Location Location { get; set; }
-
-            /// <summary>
-            /// the <see cref="JSONObjects.Effects"/>s the <see cref="SharpCraft.Entity"/> should have
-            /// </summary>
-            [DataTag("effects", JsonTag = true)]
-            public Effects Effects { get; set; }
-
-            /// <summary>
-            /// If the fishing hook is in "open water"
-            /// </summary>
-            [DataTag("fishing_hook.in_open_water", JsonTag = true)]
-            public bool FishingHookInOpenWater { get; set; }
-
-            /// <summary>
-            /// the nbt the <see cref="SharpCraft.Entity"/> should have
-            /// </summary>
-            [DataTag("nbt", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public SimpleDataHolder NBT { get; set; }
-
-            /// <summary>
-            /// the amount of levels the player has
-            /// </summary>
-            [DataTag("player.level", "min", "max", ID.NBTTagType.TagInt, true, JsonTag = true)]
-            public MCRange Levels { get; set; }
-
-            /// <summary>
-            /// The gamemode the player is in
-            /// </summary>
-            [DataTag("player.gamemode", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public ID.Gamemode? Gamemode { get; set; }
-
-            /// <summary>
-            /// Player recipes to check for
-            /// </summary>
-            [DataTag("player.recipes", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
-            public RecipeList Recipes { get; set; }
-
-            /// <summary>
-            /// Player advancements to check for
-            /// </summary>
-            [DataTag("player.advancements", JsonTag = true, ForceType = ID.NBTTagType.TagCompound)]
-            public AdvancementList Advancements { get; set; }
-
-            /// <summary>
-            /// The entity's team
-            /// </summary>
-            [DataTag(JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-            public Team Team { get; set; }
-
-            /// <summary>
-            /// A list of <see cref="CheckRecipe"/>
-            /// </summary>
-            public class RecipeList : IConvertableToDataObject
+            /// <param name="conversionData">Unused</param>
+            /// <returns>This object as a <see cref="DataPartObject"/></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
             {
-                private CheckRecipe[] recipes;
+                DataPartObject returnObject = new DataPartObject();
 
-                /// <summary>
-                /// The recipes
-                /// </summary>
-                public CheckRecipe[] Recipes { get => recipes; set => recipes = value ?? throw new ArgumentNullException(nameof(Recipes), "Recipes may not be null"); }
-
-                /// <summary>
-                /// Converts this object into a <see cref="DataPartObject"/>
-                /// </summary>
-                /// <param name="conversionData">Unused</param>
-                /// <returns>This object as a <see cref="DataPartObject"/></returns>
-                public DataPartObject GetAsDataObject(object[] conversionData)
+                foreach (CheckRecipe recipe in Recipes)
                 {
-                    DataPartObject returnObject = new DataPartObject();
-
-                    foreach(CheckRecipe recipe in Recipes)
-                    {
-                        returnObject.AddValue(new DataPartPath(recipe.Recipe.GetNamespacedName(), new DataPartTag(recipe.IsUnlocked, isJson: true), true));
-                    }
-
-                    return returnObject;
+                    returnObject.AddValue(new DataPartPath(recipe.Recipe.GetNamespacedName(), new DataPartTag(recipe.IsUnlocked, isJson: true), true));
                 }
 
-                /// <summary>
-                /// A recipe to check for
-                /// </summary>
-                public class CheckRecipe
-                {
-                    private IRecipe recipe;
-
-                    /// <summary>
-                    /// Intializes a new <see cref="CheckRecipe"/>
-                    /// </summary>
-                    /// <param name="recipe">The recipe to check for</param>
-                    /// <param name="isUnlocked">True if the recipe should be unlocked</param>
-                    public CheckRecipe(IRecipe recipe, bool isUnlocked = true)
-                    {
-                        Recipe = recipe;
-                        IsUnlocked = isUnlocked;
-                    }
-
-                    /// <summary>
-                    /// The recipe to check for
-                    /// </summary>
-                    public IRecipe Recipe { get => recipe; set => recipe = value ?? throw new ArgumentNullException(nameof(Recipe), "Recipe may not be null"); }
-
-                    /// <summary>
-                    /// True if the recipe should be unlocked
-                    /// </summary>
-                    public bool IsUnlocked { get; set; }
-                }
+                return returnObject;
             }
 
             /// <summary>
-            /// A list of <see cref="BaseCheckAdvancement"/>
+            /// A recipe to check for
             /// </summary>
-            public class AdvancementList : IConvertableToDataObject
+            public class CheckRecipe
             {
-                private BaseCheckAdvancement[] advancements;
+                private IRecipe recipe = null!;
 
                 /// <summary>
-                /// The advancements
+                /// Intializes a new <see cref="CheckRecipe"/>
                 /// </summary>
-                public BaseCheckAdvancement[] Advancements { get => advancements; set => advancements = value ?? throw new ArgumentNullException(nameof(Advancements),"Advancements may not be null"); }
-
-                /// <summary>
-                /// Converts this object into a <see cref="DataPartObject"/>
-                /// </summary>
-                /// <param name="conversionData">Unused</param>
-                /// <returns>This object as a <see cref="DataPartObject"/></returns>
-                public DataPartObject GetAsDataObject(object[] conversionData)
+                /// <param name="recipe">The recipe to check for</param>
+                /// <param name="isUnlocked">True if the recipe should be unlocked</param>
+                public CheckRecipe(IRecipe recipe, bool isUnlocked = true)
                 {
-                    DataPartObject returnObject = new DataPartObject();
-
-                    foreach (BaseCheckAdvancement advancement in Advancements)
-                    {
-                        returnObject.AddValue(new DataPartPath(advancement.Advancement.GetNamespacedName(), new DataPartTag(advancement.GetValue(), isJson: true), true));
-                    }
-
-                    return returnObject;
+                    Recipe = recipe;
+                    IsUnlocked = isUnlocked;
                 }
 
                 /// <summary>
-                /// Interface for advancement checks
+                /// The recipe to check for
                 /// </summary>
-                public abstract class BaseCheckAdvancement
+                public IRecipe Recipe { get => recipe; set => recipe = value ?? throw new ArgumentNullException(nameof(Recipe), "Recipe may not be null"); }
+
+                /// <summary>
+                /// True if the recipe should be unlocked
+                /// </summary>
+                public bool IsUnlocked { get; set; }
+            }
+        }
+
+        /// <summary>
+        /// A list of <see cref="BaseCheckAdvancement"/>
+        /// </summary>
+        public class AdvancementList : IConvertableToDataObject
+        {
+            private BaseCheckAdvancement[] advancements = null!;
+
+            /// <summary>
+            /// The advancements
+            /// </summary>
+            public BaseCheckAdvancement[] Advancements { get => advancements; set => advancements = value ?? throw new ArgumentNullException(nameof(Advancements), "Advancements may not be null"); }
+
+            /// <summary>
+            /// Converts this object into a <see cref="DataPartObject"/>
+            /// </summary>
+            /// <param name="conversionData">Unused</param>
+            /// <returns>This object as a <see cref="DataPartObject"/></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
+            {
+                DataPartObject returnObject = new DataPartObject();
+
+                foreach (BaseCheckAdvancement advancement in Advancements)
                 {
-                    private IAdvancement advancement;
+                    returnObject.AddValue(new DataPartPath(advancement.Advancement.GetNamespacedName(), new DataPartTag(advancement.GetValue(), isJson: true), true));
+                }
 
-                    /// <summary>
-                    /// The advancement to check for
-                    /// </summary>
-                    public IAdvancement Advancement { get => advancement; set => advancement = value ?? throw new ArgumentNullException(nameof(Advancement), "Advancement may not be null"); }
+                return returnObject;
+            }
 
-                    /// <summary>
-                    /// The value to check for
-                    /// </summary>
-                    /// <returns>The value to check for</returns>
-                    public abstract object GetValue();
+            /// <summary>
+            /// Interface for advancement checks
+            /// </summary>
+            public abstract class BaseCheckAdvancement
+            {
+                private IAdvancement advancement = null!;
+
+                /// <summary>
+                /// The advancement to check for
+                /// </summary>
+                public IAdvancement Advancement { get => advancement; set => advancement = value ?? throw new ArgumentNullException(nameof(Advancement), "Advancement may not be null"); }
+
+                /// <summary>
+                /// The value to check for
+                /// </summary>
+                /// <returns>The value to check for</returns>
+                public abstract object GetValue();
+            }
+
+            /// <summary>
+            /// Checks if the player has the given advancement criteria
+            /// </summary>
+            public class CheckAdvancementCriteria : BaseCheckAdvancement
+            {
+                private BaseTrigger criteria = null!;
+
+                /// <summary>
+                /// Intializes a new <see cref="CheckAdvancementCriteria"/>
+                /// </summary>
+                /// <param name="advancement">The advancement to check for</param>
+                /// <param name="criteria">The criteria to check for</param>
+                public CheckAdvancementCriteria(IAdvancement advancement, BaseTrigger criteria)
+                {
+                    Advancement = advancement;
+                    Criteria = criteria;
                 }
 
                 /// <summary>
-                /// Checks if the player has the given advancement criteria
+                /// The criteria to check for
                 /// </summary>
-                public class CheckAdvancementCriteria : BaseCheckAdvancement
-                {
-                    private BaseTrigger criteria;
-
-                    /// <summary>
-                    /// Intializes a new <see cref="CheckAdvancementCriteria"/>
-                    /// </summary>
-                    /// <param name="advancement">The advancement to check for</param>
-                    /// <param name="criteria">The criteria to check for</param>
-                    public CheckAdvancementCriteria(IAdvancement advancement, BaseTrigger criteria)
-                    {
-                        Advancement = advancement;
-                        Criteria = criteria;
-                    }
-
-                    /// <summary>
-                    /// The criteria to check for
-                    /// </summary>
-                    public BaseTrigger Criteria { get => criteria; set => criteria = value; }
-
-                    /// <summary>
-                    /// The value to check for
-                    /// </summary>
-                    /// <returns>The value to check for</returns>
-                    public override object GetValue()
-                    {
-                        return Criteria.Name;
-                    }
-                }
+                public BaseTrigger Criteria { get => criteria; set => criteria = value; }
 
                 /// <summary>
-                /// Checks if the player has the advancement
+                /// The value to check for
                 /// </summary>
-                public class CheckAdvancement : BaseCheckAdvancement
+                /// <returns>The value to check for</returns>
+                public override object GetValue()
                 {
-                    /// <summary>
-                    /// Intializes a new <see cref="CheckAdvancement"/>
-                    /// </summary>
-                    /// <param name="advancement">The advancement to check for</param>
-                    /// <param name="isCompleted">True if the advancement is completed</param>
-                    public CheckAdvancement(IAdvancement advancement, bool isCompleted)
-                    {
-                        Advancement = advancement;
-                        IsCompleted = isCompleted;
-                    }
-
-                    /// <summary>
-                    /// True if the advancement is completed
-                    /// </summary>
-                    public bool IsCompleted { get; set; }
-
-                    /// <summary>
-                    /// The value to check for
-                    /// </summary>
-                    /// <returns>The value to check for</returns>
-                    public override object GetValue()
-                    {
-                        return IsCompleted;
-                    }
+                    return Criteria.Name!;
                 }
             }
 
             /// <summary>
-            /// Implicit converts <see cref="EntityType"/> into an <see cref="Entity"/> object
+            /// Checks if the player has the advancement
             /// </summary>
-            /// <param name="type">the <see cref="EntityType"/> to convert</param>
-            public static implicit operator Entity(EntityType type)
+            public class CheckAdvancement : BaseCheckAdvancement
             {
-                return new Entity() { Type = type };
-            }
-
-            /// <summary>
-            /// Implicit converts <see cref="ID.Entity"/> into an <see cref="Entity"/> object
-            /// </summary>
-            /// <param name="type">the <see cref="ID.Entity"/> to convert</param>
-            public static implicit operator Entity(ID.Entity type)
-            {
-                return new Entity() { Type = type };
-            }
-
-            /// <summary>
-            /// Converts a <see cref="SharpCraft.Entity.BaseEntity"/> into an <see cref="Entity"/> object
-            /// </summary>
-            /// <param name="entity">The <see cref="SharpCraft.Entity.BaseEntity"/> to convert</param>
-            public static implicit operator Entity(SharpCraft.Entity.BaseEntity entity)
-            {
-                return new Entity() { Type = entity.EntityType, NBT = entity };
-            }
-
-            /// <summary>
-            /// Converts a <see cref="Entity"/> to an array of <see cref="Conditions.EntityCondition"/>
-            /// </summary>
-            /// <param name="entity">The entity to convert</param>
-            public static implicit operator Conditions.EntityCondition[](Entity entity)
-            {
-                return new Conditions.EntityCondition[]
+                /// <summary>
+                /// Intializes a new <see cref="CheckAdvancement"/>
+                /// </summary>
+                /// <param name="advancement">The advancement to check for</param>
+                /// <param name="isCompleted">True if the advancement is completed</param>
+                public CheckAdvancement(IAdvancement advancement, bool isCompleted)
                 {
-                    new Conditions.EntityCondition(ID.LootTarget.This, entity)
-                };
+                    Advancement = advancement;
+                    IsCompleted = isCompleted;
+                }
+
+                /// <summary>
+                /// True if the advancement is completed
+                /// </summary>
+                public bool IsCompleted { get; set; }
+
+                /// <summary>
+                /// The value to check for
+                /// </summary>
+                /// <returns>The value to check for</returns>
+                public override object GetValue()
+                {
+                    return IsCompleted;
+                }
             }
+        }
+
+        /// <summary>
+        /// Implicit converts <see cref="EntityType"/> into an <see cref="Entity"/> object
+        /// </summary>
+        /// <param name="type">the <see cref="EntityType"/> to convert</param>
+        public static implicit operator Entity(EntityType type)
+        {
+            return new Entity() { Type = type };
+        }
+
+        /// <summary>
+        /// Implicit converts <see cref="ID.Entity"/> into an <see cref="Entity"/> object
+        /// </summary>
+        /// <param name="type">the <see cref="ID.Entity"/> to convert</param>
+        public static implicit operator Entity(ID.Entity type)
+        {
+            return new Entity() { Type = type };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="SharpCraft.Entity"/> into an <see cref="Entity"/> object
+        /// </summary>
+        /// <param name="entity">The <see cref="SharpCraft.Entity"/> to convert</param>
+        public static implicit operator Entity(SharpCraft.Entity entity)
+        {
+            return new Entity() { Type = entity.EntityType, NBT = entity };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="Entity"/> to an array of <see cref="Conditions.EntityCondition"/>
+        /// </summary>
+        /// <param name="entity">The entity to convert</param>
+        public static implicit operator Conditions.EntityCondition[](Entity entity)
+        {
+            return new Conditions.EntityCondition[]
+            {
+                new Conditions.EntityCondition(ID.LootTarget.This, entity)
+            };
         }
     }
 }

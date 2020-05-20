@@ -12,12 +12,12 @@ namespace SharpCraft.Conditions
     /// </summary>
     public class EnchantmentCondition : BaseCondition
     {
-        private JSONObjects.Item.Enchantment[] enchantments;
+        private JsonObjects.Item.Enchantment[] enchantments = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EnchantmentCondition"/>
         /// </summary>
-        public EnchantmentCondition(JSONObjects.Item.Enchantment[] enchantments) : base("minecraft:tool_enchantment")
+        public EnchantmentCondition(JsonObjects.Item.Enchantment[] enchantments) : base("minecraft:tool_enchantment")
         {
             Enchantments = enchantments;
         }
@@ -26,6 +26,6 @@ namespace SharpCraft.Conditions
         /// the enchants to test for
         /// </summary>
         [DataTag("enchantments", JsonTag = true)]
-        public JSONObjects.Item.Enchantment[] Enchantments { get => enchantments; set => enchantments = value ?? throw new ArgumentNullException(nameof(Enchantments), "Enchantments may not be null"); }
+        public JsonObjects.Item.Enchantment[] Enchantments { get => enchantments; set => enchantments = value ?? throw new ArgumentNullException(nameof(Enchantments), "Enchantments may not be null"); }
     }
 }

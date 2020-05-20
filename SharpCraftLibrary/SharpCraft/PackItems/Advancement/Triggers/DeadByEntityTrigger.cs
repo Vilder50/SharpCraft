@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The type of hit the last hit was
         /// </summary>
         [DataTag("conditions.killing_blow", JsonTag = true)]
-        public JSONObjects.Damage KillingBlow { get; set; }
+        public JsonObjects.Damage? KillingBlow { get; set; }
 
         /// <summary>
         /// The entity who did the last hit
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public Conditions.EntityCondition[] Entity { get; set; }
+        public Conditions.EntityCondition[]? Entity { get; set; }
     }
 }

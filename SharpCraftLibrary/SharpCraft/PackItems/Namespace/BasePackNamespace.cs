@@ -10,16 +10,13 @@ namespace SharpCraft
     /// <summary>
     /// base class for pack namespaces
     /// </summary>
-    public abstract class BasePackNamespace : IDisposable
+    public abstract class BasePackNamespace
     {
-        /// <summary>
-        /// List of settings namespaces can have
-        /// </summary>
-        public static readonly NamespaceSettings Settings = new NamespaceSettings();
-
-        private string name;
-        private BaseDatapack datapack;
-        private BaseFile.FileListener fileListeners;
+        private string name = null!;
+#pragma warning disable IDE0069
+        private BaseDatapack datapack = null!;
+#pragma warning restore IDE0069
+        private BaseFile.FileListener fileListeners = null!;
 
         /// <summary>
         /// The files inside this namespace
@@ -143,7 +140,7 @@ namespace SharpCraft
             {
                 throw new InvalidOperationException("Setup hasn't been run yet.");
             }
-            return Datapack.GetDataPath() + Name + "\\";
+            return Datapack.GetDataPath() + Name + "/";
         }
 
         /// <summary>
@@ -152,9 +149,9 @@ namespace SharpCraft
         /// <param name="fileType">The type of file to get</param>
         /// <param name="fileName">The name of the file</param>
         /// <returns>The file with the name or null</returns>
-        public BaseFile GetFile(string fileType, string fileName)
+        public BaseFile? GetFile(string fileType, string fileName)
         {
-            string name = fileName.ToLower().Replace("/", "\\");
+            string name = fileName.ToLower();
 
             if (!IsSetup)
             {
@@ -188,6 +185,21 @@ namespace SharpCraft
                 throw new InvalidOperationException("Setup hasn't been run yet.");
             }
             return settings.Any(s => s.GetType() == setting.GetType());
+        }
+
+        /// <summary>
+        /// If the namespace has a setting of the given type, returns the setting.
+        /// </summary>
+        /// <typeparam name="T">The setting to get</typeparam>
+        /// <returns>The setting or null</returns>
+        public INamespaceSetting? GetSetting<T>() where T : INamespaceSetting
+        {
+            if (!IsSetup)
+            {
+                throw new InvalidOperationException("Setup hasn't been run yet.");
+            }
+            Type settingType = typeof(T);
+            return settings.SingleOrDefault(s => s.GetType() == settingType);
         }
 
         /// <summary>
@@ -246,9 +258,19 @@ namespace SharpCraft
             }
             if (!Disposed)
             {
-                foreach(BaseFile file in files)
+                bool disposing = false;
+                try
                 {
-                    file.Dispose();
+                    foreach (BaseFile file in files)
+                    {
+                        disposing = true;
+                        file.Dispose();
+                        disposing = false;
+                    }
+                }
+                catch (InvalidOperationException) when (!disposing)
+                {
+                    throw new InvalidOperationException("A new file was added while the namespace was trying to dispose. (Might be possible a WriteOnDispose file created a new file)");
                 }
                 AfterDispose();
                 Disposed = true;

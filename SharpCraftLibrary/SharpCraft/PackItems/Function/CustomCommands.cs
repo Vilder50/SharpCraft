@@ -10,17 +10,11 @@ namespace SharpCraft.FunctionWriters
     /// <summary>
     /// All custom commands
     /// </summary>
-    public class CustomCommands
+    public class CustomCommands : CommandList
     {
-        /// <summary>
-        /// The function to write onto
-        /// </summary>
-        public Function Function { get; private set; }
-
-        internal CustomCommands(Function parentFunction)
+        internal CustomCommands(Function parentFunction) : base(parentFunction)
         {
-            Function = parentFunction;
-            Random = new ClassRandom(Function);
+            Random = new ClassRandom(ForFunction);
         }
 
         #region tree search
@@ -70,7 +64,7 @@ namespace SharpCraft.FunctionWriters
 
             GroupCommands(f => 
             { 
-                WriteTreeSearch(Function, method, command, minimum, maximum, branches, true);
+                WriteTreeSearch(ForFunction, method, command, minimum, maximum, branches, true);
             });
         }
 
@@ -119,7 +113,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="executeAt">True if it should run the commands at the entity's location</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity entity, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             return SummonExecute(entity, new Coords(), functionName, runCommands, executeAt, writeSetting);
         }
@@ -134,7 +128,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="spawnCoords">The place to spawn the entity at</param>
         /// <param name="writeSetting">The setting for writing the function file</param>
         /// <returns>The function the entity runs</returns>
-        public Function SummonExecute(Entity.EntityBasic entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        public Function SummonExecute(Entity entity, Vector spawnCoords, string functionName, Function.FunctionWriter runCommands, bool executeAt = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
         {
             if (runCommands is null)
             {
@@ -143,13 +137,13 @@ namespace SharpCraft.FunctionWriters
 
             //add tag to find the summoned entity
             Tag findTag = new Tag("SharpSummon");
-            Entity.EntityBasic createEntity = (Entity.EntityBasic)entity.Clone();
+            Entities.BasicEntity createEntity = (Entities.BasicEntity)entity.Clone();
             List<Tag> tags = createEntity.Tags?.ToList() ?? new List<Tag>();
             tags.Add(findTag);
             createEntity.Tags = tags.ToArray();
 
             //summon entity and execute as it
-            Function executeAs = null;
+            Function? executeAs = null;
             GroupCommands(f =>
             {
                 f.Entity.Add(spawnCoords, createEntity);
@@ -162,7 +156,7 @@ namespace SharpCraft.FunctionWriters
                 executeAs.Entity.Tag.Remove(new Selector(), findTag);
                 runCommands(executeAs);
             });
-            return executeAs;
+            return executeAs!;
         }
         #endregion
 
@@ -172,8 +166,8 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         public class ScoreOperation : ScoreValue
         {
-            private ScoreValue score1;
-            private ScoreValue score2;
+            private ValueParameter score1;
+            private ValueParameter score2;
 
             /// <summary>
             /// Intializes a new <see cref="ScoreOperation"/>
@@ -181,7 +175,7 @@ namespace SharpCraft.FunctionWriters
             /// <param name="score1">First score to do math on</param>
             /// <param name="operation">The math operation to do</param>
             /// <param name="score2">Second score to do math on</param>
-            public ScoreOperation(ScoreValue score1, ID.Operation operation, ScoreValue score2) : base(new NameSelector("undefined",true), new Objective("undefined"))
+            public ScoreOperation(ValueParameter score1, ID.Operation operation, ValueParameter score2) : base(new NameSelector("undefined", true), new Objective("undefined"))
             {
                 Score1 = score1;
                 Score2 = score2;
@@ -191,12 +185,12 @@ namespace SharpCraft.FunctionWriters
             /// <summary>
             /// First score to do math on
             /// </summary>
-            public ScoreValue Score1 { get => score1; private set => score1 = value; }
+            public ValueParameter Score1 { get => score1; private set => score1 = value; }
 
             /// <summary>
             /// The math operation to do
             /// </summary>
-            public ScoreValue Score2 { get => score2; private set => score2 = value; }
+            public ValueParameter Score2 { get => score2; private set => score2 = value; }
 
             /// <summary>
             /// Second score to do math on
@@ -220,10 +214,10 @@ namespace SharpCraft.FunctionWriters
                 }
 
                 int usedNumbers = -1;
-                WriteCommands(function, endingValue, SharpCraftFiles.GetMathScoreObject(), ref usedNumbers);
+                WriteCommands(function, endingValue, function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject(), ref usedNumbers);
             }
 
-            private ScoreValue WriteCommands(Function function, ScoreValue endingValue, Objective mathObjective, ref int usedNumbers)
+            private ValueParameter WriteCommands(Function function, ScoreValue endingValue, Objective mathObjective, ref int usedNumbers)
             {
                 bool makeLastCommand = false;
                 if (usedNumbers == -1)
@@ -233,25 +227,23 @@ namespace SharpCraft.FunctionWriters
                 }
 
                 ScoreObject = mathObjective;
-                ScoreValue firstScoreValue;
-                ScoreValue secondScoreValue;
+                ValueParameter firstScoreValue;
+                ValueParameter secondScoreValue;
 
                 //Calculate value of child operations
-                if (Score1 is ScoreOperation operation1)
+                if (Score1.IsScore() && score1.ScoreValue is ScoreOperation operation1)
                 {
                     firstScoreValue = operation1.WriteCommands(function, endingValue, mathObjective, ref usedNumbers);
-                    Selector = firstScoreValue;
                 }
                 else
                 {
                     firstScoreValue = score1;
                 }
-                if (Score2 is ScoreOperation operation2)
+                if (Score2.IsScore() && score2.ScoreValue is ScoreOperation operation2)
                 {
                     secondScoreValue = operation2.WriteCommands(function, endingValue, mathObjective, ref usedNumbers);
                     if (Operation == ID.Operation.Add || Operation == ID.Operation.Multiply)
                     {
-                        Selector = secondScoreValue;
                         (firstScoreValue, secondScoreValue) = (secondScoreValue, firstScoreValue);
                     }
                 }
@@ -259,24 +251,93 @@ namespace SharpCraft.FunctionWriters
                 {
                     secondScoreValue = score2;
                 }
+                if (secondScoreValue.IsScore() && secondScoreValue.ScoreValue!.Selector.GetSelectorString() == "#undefined")
+                {
+                    throw new ArgumentNullException();
+                }
+
+                if (firstScoreValue.IsInt() && secondScoreValue.IsInt())
+                {
+                    int outValue = firstScoreValue.IntValue!.Value;
+                    int secondValue = secondScoreValue.IntValue!.Value;
+                    switch(Operation)
+                    {
+                        case ID.Operation.Add:
+                            outValue += secondValue;
+                            break;
+                        case ID.Operation.Subtract:
+                            outValue -= secondValue;
+                            break;
+                        case ID.Operation.Remainder:
+                            outValue %= secondValue;
+                            break;
+                        case ID.Operation.Divide:
+                            outValue /= secondValue;
+                            break;
+                        case ID.Operation.Multiply:
+                            outValue *= secondValue;
+                            break;
+                        case ID.Operation.GetHigher:
+                            outValue = Math.Max(secondValue,outValue);
+                            break;
+                        case ID.Operation.GetLowest:
+                            outValue = Math.Min(secondValue, outValue);
+                            break;
+                    }
+                    if (makeLastCommand)
+                    {
+                        function.AddCommand(new ScoreboardValueChangeCommand(endingValue, endingValue, ID.ScoreChange.set, outValue));
+                    }
+                    return outValue;
+                }
 
                 //Calculate value of this operation
-                if (makeLastCommand)
+                ScoreValue? mathOnto = null;
+                if (firstScoreValue.IsScore() && firstScoreValue.ScoreValue!.Selector is NameSelector nameSelector && nameSelector.Name.StartsWith("MathValue") && nameSelector.IsHidden && firstScoreValue.ScoreValue.ScoreObject == mathObjective)
                 {
-                    function.AddCommand(new ScoreboardOperationCommand(endingValue, endingValue, ID.Operation.Equel, firstScoreValue, firstScoreValue));
-                    function.AddCommand(new ScoreboardOperationCommand(endingValue, endingValue, Operation, secondScoreValue, secondScoreValue));
+                    mathOnto = firstScoreValue.ScoreValue;
+                }
+                
+                if (mathOnto is null)
+                {
+                    mathOnto = new ScoreValue(new NameSelector("MathValue" + usedNumbers, true), mathObjective);
+                    usedNumbers++;
+                    if (firstScoreValue.IsScore())
+                    {
+                        function.AddCommand(new ScoreboardOperationCommand(mathOnto, mathOnto, ID.Operation.Equel, firstScoreValue.ScoreValue!, firstScoreValue.ScoreValue!));
+                    }
+                    else
+                    {
+                        function.AddCommand(new ScoreboardValueChangeCommand(mathOnto, mathOnto, ID.ScoreChange.set, firstScoreValue.IntValue!.Value));
+                    }
+                }
+
+                if (secondScoreValue.IsScore())
+                {
+                    function.AddCommand(new ScoreboardOperationCommand(mathOnto, mathOnto, Operation, secondScoreValue.ScoreValue!, secondScoreValue.ScoreValue!));
                 }
                 else
                 {
-                    if (Selector is NameSelector nameSelector && nameSelector.Name == "undefined")
+                    if (Operation == ID.Operation.Add)
                     {
-                        (Selector as NameSelector).Name = "Value" + usedNumbers;
-                        usedNumbers++;
-                        function.AddCommand(new ScoreboardOperationCommand(Selector, mathObjective, ID.Operation.Equel, firstScoreValue, firstScoreValue));
+                        function.AddCommand(new ScoreboardValueChangeCommand(mathOnto, mathOnto, ID.ScoreChange.add, secondScoreValue.IntValue!.Value));
                     }
-                    function.AddCommand(new ScoreboardOperationCommand(Selector, mathObjective, Operation, secondScoreValue, secondScoreValue));
+                    else if (Operation == ID.Operation.Subtract)
+                    {
+                        function.AddCommand(new ScoreboardValueChangeCommand(mathOnto, mathOnto, ID.ScoreChange.remove, secondScoreValue.IntValue!.Value));
+                    }
+                    else
+                    {
+                        function.AddCommand(new ScoreboardOperationCommand(mathOnto, mathOnto, Operation, function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().AddConstantNumber(secondScoreValue.IntValue!.Value), function.PackNamespace.Datapack.GetItems<SharpCraftFiles>().ConstantObjective!));
+                    }
                 }
-                return this;
+
+                if (makeLastCommand)
+                {
+                    function.AddCommand(new ScoreboardOperationCommand(endingValue, endingValue, ID.Operation.Equel, mathOnto, mathOnto));
+                }
+
+                return mathOnto;
             }
         }
 
@@ -285,56 +346,58 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="selector">The selector for selecting the score</param>
         /// <param name="objective">The objective the score to change is in</param>
-        /// <param name="operation">The operation calculating the value the score should be set to</param>
-        public void SetToScoreOperation(BaseSelector selector, Objective objective, ScoreOperation operation)
+        /// <param name="value">The operation calculating the value the score should be set to</param>
+        public void SetToScoreOperation(BaseSelector selector, Objective objective, ValueParameter value)
         {
-            GroupCommands(f =>
+            if (value.IsScore())
             {
-                operation.WriteCommands(Function, new ScoreValue(selector, objective));
-            });
+                if (value.ScoreValue is ScoreOperation operation)
+                {
+                    GroupCommands(f =>
+                    {
+                        operation.WriteCommands(ForFunction, new ScoreValue(selector, objective));
+                    });
+                }
+                else
+                {
+                    ForFunction.Entity.Score.Operation(selector, objective, ID.Operation.Equel, value.ScoreValue!, value.ScoreValue!);
+                }
+            }
+            else
+            {
+                ForFunction.Entity.Score.Set(selector, objective, value.IntValue!.Value);
+            }
+        }
+
+        /// <summary>
+        /// Sets a score value to the value made by a calculation
+        /// </summary>
+        /// <param name="score">The score to set</param>
+        /// <param name="value">The operation calculating the value the score should be set to</param>
+        public void SetToScoreOperation(ScoreValue score, ValueParameter value)
+        {
+            SetToScoreOperation(score,score,value);
         }
         #endregion
 
         #region command grouping
         private class ExecutePrefixer : ICommandChanger
         {
-            private readonly BaseExecuteCommand prefixCommand;
-            private readonly Function writeToFunction;
-
-            public ExecutePrefixer(BaseExecuteCommand prefixCommand, Function writeToFunction)
-            {
-                this.prefixCommand = prefixCommand;
-                this.writeToFunction = writeToFunction;
-            }
-
             public bool DoneChanging { get; set; }
 
             public ICommand ChangeCommand(ICommand command)
             {
-                bool foundThis = false;
-                foreach (ICommand functionCommand in writeToFunction.Commands)
-                {
-                    if (functionCommand == this)
-                    {
-                        foundThis = true;
-                    }
-                    else if (foundThis && functionCommand is BaseExecuteCommand execute && !execute.DoneChanging)
-                    {
-                        return command;
-                    }
-                }
-                BaseExecuteCommand prefixer = (BaseExecuteCommand)prefixCommand.ShallowClone();
-                return prefixer.AddCommand(command);
+                return command;
             }
 
-            public string GetCommandString()
+            public string? GetCommandString()
             {
                 return null;
             }
 
             public BaseCommand ShallowClone()
             {
-                return prefixCommand.ShallowClone();
+                return new Comment("ExecutePrefix");
             }
         }
 
@@ -342,30 +405,44 @@ namespace SharpCraft.FunctionWriters
         /// If the last command is an unfinished execute command, every given command will be executed with a clone of the execute command. (All the given commands will only run if the execute command runs)
         /// </summary>
         /// <param name="writer">Writer for writing the commands</param>
-        /// <param name="forceFunction">Use a function instead of multiple execute commands</param>
-        public void GroupCommands(Function.FunctionWriter writer, bool forceFunction = false)
+        /// <param name="useFunction">Use a function instead of multiple execute commands</param>
+        /// <param name="forceExecute">Don't use function no matter what</param>
+        public void GroupCommands(Function.FunctionWriter writer, bool useFunction = false, bool forceExecute = false)
         {
-            if (Function.Commands.Count != 0 && Function.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
+            if (ForFunction.Commands.Count != 0 && ForFunction.Commands.Last() is BaseExecuteCommand execute && !execute.DoneChanging)
             {
-                if (forceFunction || Function.PackNamespace.IsSettingSet(new NamespaceSettings().FunctionGroupedCommands()))
+                if (!forceExecute && (useFunction || ForFunction.PackNamespace.IsSettingSet(NamespaceSettings.GetSettings().FunctionGroupedCommands())))
                 {
-                    Function.World.Function(Function.NewSibling(writer, Function.Setting));
+                    ForFunction.World.Function(ForFunction.NewSibling(writer, ForFunction.Setting));
                 }
                 else
                 {
                     BaseExecuteCommand executeCommand = (BaseExecuteCommand)execute.ShallowClone();
-                    int prefixLocation = Function.Commands.Count - 1;
-                    Function.Commands.RemoveAt(prefixLocation);
-                    ExecutePrefixer prefixer = new ExecutePrefixer(executeCommand, Function);
-                    Function.AddCommand(new ExecutePrefixer(executeCommand, Function));
-                    writer(Function);
+                    int prefixLocation = ForFunction.Commands.Count - 1;
+                    ForFunction.Commands.RemoveAt(prefixLocation);
+                    ExecutePrefixer prefixer = new ExecutePrefixer();
+                    ForFunction.AddCommand(prefixer);
+                    writer(ForFunction);
+                    bool foundPrefixer = false;
+                    for (int i = 0; i < ForFunction.Commands.Count; i++)
+                    {
+                        if (foundPrefixer)
+                        {
+                            BaseExecuteCommand prefixWith = (BaseExecuteCommand)executeCommand.ShallowClone();
+                            ForFunction.Commands[i] = prefixWith.AddCommand(ForFunction.Commands[i]);
+                        }
+                        else if (ForFunction.Commands[i] == prefixer)
+                        {
+                            foundPrefixer = true;
+                        }
+                    }
                     prefixer.DoneChanging = true;
-                    Function.Commands.RemoveAt(prefixLocation);
+                    ForFunction.Commands.RemoveAt(prefixLocation);
                 }
             }
             else
             {
-                writer(Function);
+                writer(ForFunction);
             }
         }
         #endregion
@@ -381,7 +458,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="elseWriter">The commands to run if the test isn't successfully</param>
         /// <param name="ifFunctionName">The name of the function for running the if commands</param>
         /// <param name="elseFunctionName">The name of the function for running the else commands</param>
-        public void IfElse(BaseExecuteCommand testCommand, Function.FunctionWriter ifWriter, Function.FunctionWriter elseWriter, string ifFunctionName = null, string elseFunctionName = null)
+        public void IfElse(BaseExecuteCommand testCommand, Function.FunctionWriter ifWriter, Function.FunctionWriter elseWriter, string? ifFunctionName = null, string? elseFunctionName = null)
         {
             if (testCommand.HasEndCommand())
             {
@@ -392,17 +469,17 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException("IfWriter and elseWriter may not be null");
             }
 
-            Objective math = SharpCraftFiles.GetMathScoreObject();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
             GroupCommands((f) =>
             {
                 f.AddCommand(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 0));
                 f.AddCommand(testCommand);
-                Function ifFunction = f.World.Function(Function.NewSibling(ifFunctionName, ifWriter)) as Function;
+                Function ifFunction = (f.World.Function(ForFunction.NewSibling(ifFunctionName, ifWriter)) as Function)!;
                 ifFunction.Commands.Add(new ScoreboardValueChangeCommand(ifElseSelector, math, ID.ScoreChange.set, 1));
                 ifFunction.Dispose();
 
                 f.AddCommand(new ExecuteIfScoreMatches(ifElseSelector, math, 0));
-                Function elseFunction = f.World.Function(Function.NewSibling(elseFunctionName, elseWriter)) as Function;
+                Function elseFunction = (f.World.Function(ForFunction.NewSibling(elseFunctionName, elseWriter)) as Function)!;
                 elseFunction.Dispose();
             });
         }
@@ -416,7 +493,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="loopWriter">The commands the loop should run</param>
         /// <param name="loopName">The name of the loop file</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string loopName = null, BaseExecuteCommand nextExecute = null)
+        public void WhileLoop(BaseExecuteCommand testCommand, Function.FunctionWriter loopWriter, string? loopName = null, BaseExecuteCommand? nextExecute = null)
         {
             if (testCommand.HasEndCommand())
             {
@@ -431,8 +508,8 @@ namespace SharpCraft.FunctionWriters
                 throw new ArgumentNullException(nameof(loopWriter), "LoopWriter may not be null");
             }
 
-            Function.AddCommand(testCommand.ShallowClone());
-            Function loopFunction = Function.World.Function(Function.NewSibling(loopName, loopWriter)) as Function;
+            ForFunction.AddCommand(testCommand.ShallowClone());
+            Function loopFunction = (ForFunction.World.Function(ForFunction.NewSibling(loopName, loopWriter)) as Function)!;
             loopFunction.Commands.Add(testCommand.AddCommand(new RunFunctionCommand(loopFunction)));
         }
 
@@ -450,102 +527,46 @@ namespace SharpCraft.FunctionWriters
         /// <param name="to">The ending value</param>
         /// <param name="loopName">The name of the loop (used for function name and score name)</param>
         /// <param name="writer">Writer for writing commands to loop over</param>
-        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(int from, int to, string loopName, ForLoopDelegate writer, BaseExecuteCommand nextExecute = null)
-        {
-            if (from == to)
-            {
-                throw new ArgumentException("From and To has the same value so a loop isn't needed.");
-            }
-            CreateForLoop(from, null, to, null, loopName, writer, from < to, nextExecute);
-        }
-
-        /// <summary>
-        /// Loops through every value from "from" to and with "to"
-        /// </summary>
-        /// <param name="from">The start value</param>
-        /// <param name="to">The ending value</param>
-        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
-        /// <param name="writer">Writer for writing commands to loop over</param>
         /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
         /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(ScoreValue from, int to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
-        {
-            CreateForLoop(0, from, to, null, loopName, writer, positive, nextExecute);
-        }
-
-
-        /// <summary>
-        /// Loops through every value from "from" to and with "to"
-        /// </summary>
-        /// <param name="from">The start value</param>
-        /// <param name="to">The ending value</param>
-        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
-        /// <param name="writer">Writer for writing commands to loop over</param>
-        /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(int from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
-        {
-            CreateForLoop(from, null, 0, to, loopName, writer, positive, nextExecute);
-        }
-
-        /// <summary>
-        /// Loops through every value from "from" to and with "to"
-        /// </summary>
-        /// <param name="from">The start value</param>
-        /// <param name="to">The ending value</param>
-        /// <param name="loopName">The name of the loop (used for function name and score name)</param>
-        /// <param name="writer">Writer for writing commands to loop over</param>
-        /// <param name="positive">If the loop is going from a small number to a high number. False if it's going from high to small</param>
-        /// <param name="nextExecute">Runs the next loop cycle with the given execute command. Leave null for no commands</param>
-        public void ForLoop(ScoreValue from, ScoreValue to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand nextExecute = null)
-        {
-            CreateForLoop(0, from, 0, to, loopName, writer, positive, nextExecute);
-        }
-
-        private void CreateForLoop(int from, ScoreValue fromValue, int to, ScoreValue toValue, string loopName, ForLoopDelegate writer, bool positive, BaseExecuteCommand nextExecute)
+        /// <param name="stopAtTo">If the loop should stop before running with the "to" number</param>
+        public void ForLoop(ValueParameter from, ValueParameter to, string loopName, ForLoopDelegate writer, bool positive = true, BaseExecuteCommand? nextExecute = null, bool stopAtTo = false)
         {
             if (!(nextExecute is null) && nextExecute.HasEndCommand())
             {
                 throw new ArgumentException("NextExecute may not have an ending command.", nameof(nextExecute));
             }
-            Objective math = SharpCraftFiles.GetMathScoreObject();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
             NameSelector loopSelector = new NameSelector("l_" + loopName);
             GroupCommands((f) =>
             {
                 //start loop
-                if (fromValue is null)
+                if (from.IsInt())
                 {
-                    f.Entity.Score.Set(loopSelector, math, from);
+                    f.Entity.Score.Set(loopSelector, math, from.IntValue!.Value);
                 }
                 else
                 {
-                    f.Entity.Score.Operation(loopSelector, math, ID.Operation.Equel, fromValue, fromValue);
+                    f.Entity.Score.Operation(loopSelector, math, ID.Operation.Equel, from.ScoreValue!, from.ScoreValue!);
                 }
                 BaseCommand testCommand;
-                if (toValue is null)
+                if (to.IsInt())
                 {
                     if (positive)
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(null, to));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(null, to.IntValue!.Value - (stopAtTo ? 1 : 0)));
                     }
                     else
                     {
-                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(to, null));
+                        testCommand = new ExecuteIfScoreMatches(loopSelector, math, new MCRange(to.IntValue!.Value + (stopAtTo ? 1 : 0), null));
                     }
                 }
                 else
                 {
-                    if (positive)
-                    {
-                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.SmallerOrEquel, toValue, toValue);
-                    }
-                    else
-                    {
-                        testCommand = new ExecuteIfScoreRelative(loopSelector, math, ID.IfScoreOperation.HigherOrEquel, toValue, toValue);
-                    }
+                    ID.IfScoreOperation useOperator = (positive ? (stopAtTo ? ID.IfScoreOperation.Smaller : ID.IfScoreOperation.SmallerOrEquel) : (stopAtTo ? ID.IfScoreOperation.Higher : ID.IfScoreOperation.HigherOrEquel));
+                    testCommand = new ExecuteIfScoreRelative(loopSelector, math, useOperator, to.ScoreValue!, to.ScoreValue!);
                 }
-                if (!(fromValue is null && toValue is null))
+                if (from.IsScore() || to.IsScore())
                 {
                     f.AddCommand(testCommand.ShallowClone());
                 }
@@ -606,16 +627,16 @@ namespace SharpCraft.FunctionWriters
         /// <remarks>
         /// Running ray cast from within a ray cast might lead to unexpected behavior.
         /// </remarks>
-        public void RayCast(string rayName, Block hit, Block ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter stepCommands = null)
+        public void RayCast(string rayName, Block? hit, Block? ignore, int length, Function.FunctionWriter onHit, Function.FunctionWriter? stepCommands = null)
         {
             ValidateRayParams(rayName, length, onHit);
 
-            Objective math = SharpCraftFiles.GetMathScoreObject();
-            var (raySetup, xRotation, yRotation, rayState, predicates) = SharpCraftFiles.GetRayFiles();
+            Objective math = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
+            var (raySetup, xRotation, yRotation, rayState, predicates) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRayFiles();
 
             //execute as ray entity
-            Function.Execute.As(SharpCraftFiles.GetDummySelector());
-            Function.World.Function(Function.NewSibling(rayName + "\\start", startRay => 
+            ForFunction.Execute.As(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
+            ForFunction.World.Function(ForFunction.NewSibling(rayName + "/start", startRay => 
             {
                 startRay.World.Function(raySetup);
                 startRay.Custom.ForLoop(0, length - 1, "rStep", (step, stepValue) =>
@@ -638,14 +659,14 @@ namespace SharpCraft.FunctionWriters
                     #region check predicate
                     BaseCondition getIfBlockCondition(IntVector location)
                     {
-                        BaseCondition blockCondition = null;
+                        BaseCondition blockCondition = null!;
                         if (!(ignore is null))
                         {
-                            blockCondition = !new LocationCondition(new JSONObjects.Location() { Block = ignore }) { Offset = location };
+                            blockCondition = !new LocationCondition(new JsonObjects.Location() { Block = ignore }, location);
                         }
                         if (!(hit is null))
                         {
-                            BaseCondition hitCondition = new LocationCondition(new JSONObjects.Location() { Block = hit }) { Offset = location };
+                            BaseCondition hitCondition = new LocationCondition(new JsonObjects.Location() { Block = hit }, location);
                             if (blockCondition is null)
                             {
                                 blockCondition = hitCondition;
@@ -680,10 +701,10 @@ namespace SharpCraft.FunctionWriters
 
                     checkCondition |= !cornerConditions;
 
-                    using (Predicate checkPredicate = new Predicate(step.PackNamespace, "ray\\" + rayName + "\\check", checkCondition))
-                    {
-                        step.Execute.IfPredicate(checkPredicate);
-                    }
+                    Predicate checkPredicate = new Predicate(step.PackNamespace, "ray/" + rayName + "/check", checkCondition);
+                    step.Execute.IfPredicate(checkPredicate);
+                    checkPredicate.Dispose();
+                    
                     #endregion
 
                     step.Execute.Positioned(new LocalCoords(0, 0, -1));
@@ -736,11 +757,11 @@ namespace SharpCraft.FunctionWriters
                             smallStep.Execute.Positioned(new Coords(0, 0, -0.02));
                             smallStep.AddCommand(hitCheck.ShallowClone());
 
-                        }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 0.02))));
+                        }, true, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 0.02))));
                     }));
-                }, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
+                }, true, new ExecuteIfScoreMatches(rayState, rayState, 0).AddCommand(new ExecutePosition(new LocalCoords(0, 0, 1))));
             }));
-            Function.Entity.Teleport(SharpCraftFiles.GetDummySelector(), SharpCraftSettings.OwnedChunk * 16);
+            ForFunction.Entity.Teleport(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector(), ForFunction.PackNamespace.Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
         }
 
         /// <summary>
@@ -752,7 +773,7 @@ namespace SharpCraft.FunctionWriters
         /// <param name="length">The amount of blocks he ray should travel.</param>
         /// <param name="onHit">The commands to run when the ray hits an entity</param>
         /// <param name="hitSelfAble">If the ray should be able to hit the executor</param>
-        public void RayCast(string rayName, Selector hit, Selector ignore, double length, Function.FunctionWriter onHit, bool hitSelfAble = false)
+        public void RayCast(string rayName, Selector? hit, Selector? ignore, double length, Function.FunctionWriter onHit, bool hitSelfAble = false)
         {
             ValidateRayParams(rayName, length, onHit);
 
@@ -762,7 +783,7 @@ namespace SharpCraft.FunctionWriters
             int boxes = 2;
             Function getStep(double number, int depth)
             {
-                Function outFunction = Function.NewSibling(rayName + "\\r" + depth);
+                Function outFunction = ForFunction.NewSibling(rayName + "/r" + depth);
 
                 if (number > boxes)
                 {
@@ -816,23 +837,23 @@ namespace SharpCraft.FunctionWriters
             {
                 if (!(hit is null))
                 {
-                    Function.Execute.As(hit);
+                    ForFunction.Execute.As(hit);
                 }
                 else
                 {
-                    Function.Execute.As(ID.Selector.e);
+                    ForFunction.Execute.As(ID.Selector.e);
                 }
                 if (!(ignore is null))
                 {
                     Selector selector = ignore.ShallowClone();
                     selector.SelectorType = ID.Selector.s;
-                    Function.Execute.IfEntity(selector, false);
+                    ForFunction.Execute.IfEntity(selector, false);
                 }
-                Function.World.Function(getStep(length, 0));
+                ForFunction.World.Function(getStep(length, 0));
             }
             else
             {
-                Function.World.Function(Function.NewSibling(rayName + "\\start", start =>
+                ForFunction.World.Function(ForFunction.NewSibling(rayName + "/start", start =>
                 {
                     start.Entity.Tag.Add(ID.Selector.s, rayShooterTag);
                     if (!(hit is null))
@@ -877,15 +898,11 @@ namespace SharpCraft.FunctionWriters
         /// <summary>
         /// Commands for randomness
         /// </summary>
-        public class ClassRandom
+        public class ClassRandom : CommandList
         {
-            /// <summary>
-            /// The function to write onto
-            /// </summary>
-            public Function Function { get; private set; }
-            internal ClassRandom(Function function)
+            internal ClassRandom(Function function) : base(function)
             {
-                this.Function = function;
+                
             }
 
             /// <summary>
@@ -900,8 +917,8 @@ namespace SharpCraft.FunctionWriters
                 {
                     throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
                 }
-                Function.Execute.IfPredicate(SharpCraftFiles.GetRandomPredicate(chance), want);
-                return Function;
+                ForFunction.Execute.IfPredicate(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomPredicate(chance), want);
+                return ForFunction;
             }
 
             /// <summary>
@@ -921,11 +938,11 @@ namespace SharpCraft.FunctionWriters
                 {
                     throw new ArgumentOutOfRangeException("To generate a number the difference between From and To may not be higher than int max value.");
                 }
-                ScoreValue randomHolder = null;
-                Function.Custom.GroupCommands((g) =>
+                ScoreValue randomHolder = null!;
+                ForFunction.Custom.GroupCommands((g) =>
                 {
-                    g.World.Function(SharpCraftFiles.GetRandomNumberFunction());
-                    randomHolder = SharpCraftFiles.GetRandomHolder();
+                    g.World.Function(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomNumberFunction());
+                    randomHolder = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder();
                     g.Entity.Score.Operation(randomHolder, randomHolder, ID.Operation.Remainder, (int)difference);
                     g.Entity.Score.Add(randomHolder, randomHolder, from);
                 });
@@ -944,17 +961,17 @@ namespace SharpCraft.FunctionWriters
                     throw new ArgumentNullException(nameof(value), "Value may not be null");
                 }
 
-                var (function, location) = SharpCraftFiles.GetHashFunction();
-                Function.Custom.GroupCommands(g =>
+                var (function, location) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetHashFunction();
+                ForFunction.Custom.GroupCommands(g =>
                 {
-                    g.Execute.Store(location, Data.DataPath.GetDataPath<Block.ShulkerBox>(b => b.DLootTableSeed).ToString(), ID.StoreTypes.Int);
+                    g.Execute.Store(new BlockDataLocation(location, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DLootTableSeed)), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
                     g.World.Function(function);
                     g.Execute.IfScore(value, value, 0);
-                    g.Entity.Score.Set(SharpCraftFiles.GetRandomHolder(), SharpCraftFiles.GetRandomHolder(), 3631387);
+                    g.Entity.Score.Set(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder(), ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder(), 3631387);
                 });
 
-                return SharpCraftFiles.GetRandomHolder();
+                return ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomHolder();
             }
         }
         #endregion

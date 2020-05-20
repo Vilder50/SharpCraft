@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class AttributeChange : BaseChange
     {
-        private Attribute[] attributes;
+        private Attribute[] attributes = null!;
 
         /// <summary>
         /// Intializes a new <see cref="DecayChange"/>
@@ -34,7 +34,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         public class Attribute : DataHolderBase
         {
-            private MCRange valueRange;
+            private MCRange valueRange = null!;
 
             /// <summary>
             /// Intializes a new <see cref="Attribute"/>
@@ -94,7 +94,7 @@ namespace SharpCraft.LootObjects
             /// The UUID of the attribute. Leave empty to generate random one
             /// </summary>
             [Data.DataTag("UUID", ForceType = ID.NBTTagType.TagIntArray)]
-            public UUID UUID { get; set; }
+            public UUID? UUID { get; set; }
 
             /// <summary>
             /// Choses a random slot from the array the attribute effect works in

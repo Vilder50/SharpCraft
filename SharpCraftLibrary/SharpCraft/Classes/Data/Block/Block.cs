@@ -4,12 +4,16 @@ using System.Text;
 using System.Reflection;
 using System.Linq;
 using SharpCraft.Data;
+using System.Linq.Expressions;
 
 namespace SharpCraft
 {
-    public partial class Block : DataHolderBase, IConvertableToDataObject
+    /// <summary>
+    /// Base class for blocks
+    /// </summary>
+    public class Block : DataHolderBase, IConvertableToDataObject
     {
-        private BlockType id;
+        private BlockType? id;
 
         /// <summary>
         /// Intilizes a new block object
@@ -23,7 +27,7 @@ namespace SharpCraft
         /// Creates a new block which is the given type of block
         /// </summary>
         /// <param name="type">The block's ID/Type</param>
-        public Block(BlockType type)
+        public Block(BlockType? type)
         {
             ID = type;
         }
@@ -46,8 +50,8 @@ namespace SharpCraft
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
-                if (attribute != null)
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
+                if (!(attribute is null))
                 {
                     yield return property;
                 }
@@ -57,12 +61,87 @@ namespace SharpCraft
         /// <summary>
         /// The block's ID
         /// </summary>
-        public BlockType ID
+        [CompoundPath(0)]
+        public BlockType? ID
         {
             get => id;
             set
             {
                 id = value;
+            }
+        }
+
+        /// <summary>
+        /// Used for getting the path to block states
+        /// </summary>
+        [GeneratePath(nameof(Block.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+        public string GetStatePath()
+        {
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
+        /// Used for getting the path to a specific block state
+        /// </summary>
+        /// <typeparam name="T">The type of block to get state from</typeparam>
+        /// <param name="stateProperty">The state to get</param>
+        [GeneratePath(nameof(Block.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
+        public string GetStatePath<T>(Expression<Func<T,object?>> stateProperty) where T : Block
+        {
+            _ = stateProperty;
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
+        /// Used for generating state datapaths.
+        /// </summary>
+        /// <param name="convertionInfo">Data on how the paths should be generated</param>
+        /// <param name="caller">The method/property calling this method</param>
+        /// <param name="arguments">Arguments from the calling method</param>
+        protected static string StatePathGenerator(DataConvertionAttribute convertionInfo, MemberInfo caller, IReadOnlyCollection<Expression>? arguments)
+        {
+            _ = caller;
+            if (convertionInfo.ConversionParams.Length < 2)
+            {
+                throw new PathCreatorException("Not enough conversion params.");
+            }
+            if (!(convertionInfo.ConversionParams[1] is string basePath))
+            {
+                throw new PathCreatorException("2nd conversion param was expected to be a string.");
+            }
+            if (arguments is null)
+            {
+                throw new PathCreatorException("Path generator expected to be called by a method.");
+            }
+
+            if (arguments.Count == 0)
+            {
+                return "." + basePath;
+            }
+            else
+            {
+                Expression? stateParameter = null;
+                stateParameter ??= (arguments.ElementAt(0) as LambdaExpression);
+                stateParameter ??= ((arguments.ElementAt(0) as UnaryExpression)!.Operand as LambdaExpression)?.Body;
+                if (stateParameter is null)
+                {
+                    throw new PathCreatorException("Failed to get state property from " + nameof(GetStatePath) + ".");
+                }
+
+                MemberExpression? memberExpression = stateParameter as MemberExpression;
+                UnaryExpression? unaryExpression = stateParameter as UnaryExpression;
+                PropertyInfo? property = (PropertyInfo?)(memberExpression ?? unaryExpression!.Operand as MemberExpression)?.Member;
+
+                if (property is null)
+                {
+                    throw new PathCreatorException("Failed to get state parameter from " + nameof(GetStatePath) + ".");
+                }
+                Blocks.BlockStateAttribute? stateAttribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
+                if (stateAttribute is null)
+                {
+                    throw new PathCreatorException("Failed to get state parameter. The given path doesn't end with a state property.");
+                }
+                return "." + basePath + "." + stateAttribute.DataName;
             }
         }
 
@@ -105,10 +184,10 @@ namespace SharpCraft
 
             foreach (PropertyInfo property in properties)
             {
-                object value = property.GetValue(this);
+                object? value = property.GetValue(this);
                 if (!(value is null))
                 {
-                    BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                    Blocks.BlockStateAttribute attribute = (Blocks.BlockStateAttribute)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute))!;
                     states.Add(attribute.DataName + "=" + GetStateValue(property));
                 }
             }
@@ -121,12 +200,12 @@ namespace SharpCraft
         /// </summary>
         /// <param name="stateProperty">the property holding the state</param>
         /// <returns></returns>
-        public string GetStateValue(PropertyInfo stateProperty)
+        public string? GetStateValue(PropertyInfo stateProperty)
         {
-            object value = stateProperty.GetValue(this);
+            object? value = stateProperty.GetValue(this);
             if (!(value is null))
             {
-                BlockStateAttribute attribute = (BlockStateAttribute)stateProperty.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)stateProperty.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
                 if (attribute is null)
                 {
                     throw new ArgumentException("The given property is not a state holding property", nameof(stateProperty));
@@ -185,10 +264,10 @@ namespace SharpCraft
             IEnumerable<PropertyInfo> properties = GetType().GetRuntimeProperties();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute? attribute = (Blocks.BlockStateAttribute?)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute));
                 if (!(attribute is null))
                 {
-                    object value = property.GetValue(this);
+                    object? value = property.GetValue(this);
                     property.SetValue(baseClone, value);
                 }
             }
@@ -226,7 +305,7 @@ namespace SharpCraft
             return new Block(type);
         }
 
-        private static List<(MethodInfo method, Type block)> fitBlockMethods;
+        private static List<(MethodInfo method, Type block)>? fitBlockMethods;
 
         /// <summary>
         /// Converts a block id into the correct block for the given id
@@ -239,10 +318,10 @@ namespace SharpCraft
             {
                 fitBlockMethods = new List<(MethodInfo method, Type block)>();
                 Type blockType = typeof(Block);
-                Type[] types = Assembly.GetAssembly(typeof(Block)).GetTypes().Where(t => t.IsSubclassOf(blockType) && !t.IsAbstract).ToArray();
+                Type[] types = Assembly.GetAssembly(typeof(Block))!.GetTypes().Where(t => t.IsSubclassOf(blockType) && !t.IsAbstract).ToArray();
                 foreach (Type classType in types)
                 {
-                    MethodInfo fitBlockMethod = classType.GetMethod("FitsBlock", BindingFlags.Public | BindingFlags.Static);
+                    MethodInfo? fitBlockMethod = classType.GetMethod("FitsBlock", BindingFlags.Public | BindingFlags.Static);
                     if (!(fitBlockMethod is null))
                     {
                         fitBlockMethods.Add((fitBlockMethod, classType));
@@ -252,22 +331,28 @@ namespace SharpCraft
 
             foreach((MethodInfo method, Type block) method in fitBlockMethods)
             {
-                if ((bool)method.method.Invoke(null, new object[] { type }))
+                if ((bool)method.method.Invoke(null, new object[] { type })!)
                 {
-                    return (Block)Activator.CreateInstance(method.block, (BlockType)type);
+                    return (Block)Activator.CreateInstance(method.block, (BlockType)type)!;
                 }
             }
 
             return new Block(type);
         }
 
+        
+
         /// <summary>
         /// Converts this block into a <see cref="DataPartObject"/>
         /// </summary>
         /// <param name="conversionData">0: the path to the block id, 1: the path to the state holding <see cref="DataPartObject"/>, 2: if it should return in json format. Or: 0: the path if block is an id, 1: path if block is group, 2: nbt path, 3: state path, 4: isjson</param>
         /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object[] conversionData)
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
+            if (conversionData is null)
+            {
+                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
+            }
             if (conversionData.Length == 5)
             {
                 return GetAsFullObject(conversionData);
@@ -280,7 +365,7 @@ namespace SharpCraft
             bool isJson = false;
             if (conversionData.Length == 3)
             {
-                isJson = (bool)conversionData[2];
+                isJson = (bool?)conversionData[2] ?? false;
             }
 
             if (conversionData[0] is string idPath && conversionData[1] is string statePath)
@@ -303,10 +388,10 @@ namespace SharpCraft
             }
         }
 
-        private DataPartObject GetAsFullObject(object[] conversionData)
+        private DataPartObject GetAsFullObject(object?[] conversionData)
         {
             //validate
-            string[] paths = new string[4];
+            string?[] paths = new string?[4];
             bool json;
             if (conversionData[4] is bool isJson)
             {
@@ -331,18 +416,18 @@ namespace SharpCraft
 
             if (!(ID is null))
             {
-                returnObject.MergeDataPartObject(ID.GetAsDataObject(new object[] { paths[0], paths[1], json }));
+                returnObject.MergeDataPartObject(ID.GetAsDataObject(new object[] { paths[0]!, paths[1]!, json }));
             }
 
             
             if (HasState)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[3].ToString(), GetStateData(json), json));
+                returnObject.AddValue(new DataPartPath(conversionData[3]!.ToString()!, GetStateData(json), json));
             }
 
             if (HasData)
             {
-                returnObject.AddValue(new DataPartPath(conversionData[2].ToString(), new DataPartTag(GetDataString(), isJson: json), json));
+                returnObject.AddValue(new DataPartPath(conversionData[2]!.ToString()!, new DataPartTag(GetDataString(), isJson: json), json));
             }
 
             return returnObject;
@@ -361,7 +446,7 @@ namespace SharpCraft
             PropertyInfo[] properties = GetStateProperties().ToArray();
             foreach (PropertyInfo property in properties)
             {
-                BlockStateAttribute attribute = (BlockStateAttribute)property.GetCustomAttribute(typeof(BlockStateAttribute));
+                Blocks.BlockStateAttribute attribute = (Blocks.BlockStateAttribute)property.GetCustomAttribute(typeof(Blocks.BlockStateAttribute))!;
                 states.AddValue(new DataPartPath(attribute.DataName, new DataPartTag(GetStateValue(property), isJson: true), isJson));
             }
 

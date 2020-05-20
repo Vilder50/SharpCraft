@@ -1,52 +1,53 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// An object for evoker fangs entities
+    /// </summary>
+    public class EvokerFangs : BasicEntity
     {
         /// <summary>
-        /// An object for evoker fangs entities
+        /// Creates a new evoker fangs
         /// </summary>
-        public class EvokerFangs : EntityBasic
+        /// <param name="type">the type of entity</param>
+        public EvokerFangs(ID.Entity? type = ID.Entity.evoker_fangs) : base(type) { }
+
+        /// <summary>
+        /// The amount of time before the fangs appear
+        /// </summary>
+        [Data.DataTag]
+        public Time<int>? Warmup { get; set; }
+
+        /// <summary>
+        /// The <see cref="UUID"/> of the entity who summoned the fangs
+        /// </summary>
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
+        public UUID? OwnerUUID { get; set; }
+
+        /// <summary>
+        /// Makes the fang into a marker entity
+        /// (Sets <see cref="Warmup"/> to its max value which makes the entity invisible)
+        /// </summary>
+        public bool Marker
         {
-            /// <summary>
-            /// Creates a new evoker fangs
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public EvokerFangs(ID.Entity? type = ID.Entity.evoker_fangs) : base(type) { }
-
-            /// <summary>
-            /// The amount of time before the fangs appear
-            /// </summary>
-            [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public Time Warmup { get; set; }
-
-            /// <summary>
-            /// The <see cref="UUID"/> of the entity who summoned the fangs
-            /// </summary>
-            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
-            public UUID OwnerUUID { get; set; }
-
-            /// <summary>
-            /// Makes the fang into a marker entity
-            /// (Sets <see cref="Warmup"/> to its max value which makes the entity invisible)
-            /// </summary>
-            public bool Marker
+            get
             {
-                get
+                if (Warmup is null)
                 {
-                    return Warmup.AsTicks() == int.MaxValue;
+                    return false;
                 }
-                set
+                return Warmup.GetAsTicks() == int.MaxValue;
+            }
+            set
+            {
+                if (value)
                 {
-                    if (value)
-                    {
-                        Warmup = int.MaxValue;
-                    }
-                    else
-                    {
-                        Warmup = null;
-                    }
+                    Warmup = int.MaxValue;
+                }
+                else
+                {
+                    Warmup = null;
                 }
             }
         }

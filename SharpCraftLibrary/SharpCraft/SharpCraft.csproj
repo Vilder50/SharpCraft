@@ -10,6 +10,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>C:\Users\Morten\source\repos\git\SharpCraft\SharpCraftLibrary\SharpCraft\SharpCraft.xml</DocumentationFile>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>

@@ -25,7 +25,7 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestGetAsArray()
         {
-            SharpCraft.Data.IConvertableToDataArray convertable = new UUID("f6b1914d-b176-4850-8a06-b50380412b85");
+            SharpCraft.Data.IConvertableToDataArray<int> convertable = new UUID("f6b1914d-b176-4850-8a06-b50380412b85");
             Assert.AreEqual("[I;-156135091,-1317648304,-1979271933,-2143212667]", convertable.GetAsArray(ID.NBTTagType.TagString, null).GetDataString());
         }
 

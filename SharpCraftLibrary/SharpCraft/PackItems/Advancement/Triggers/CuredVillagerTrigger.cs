@@ -21,12 +21,12 @@ namespace SharpCraft.AdvancementObjects
         /// The new cured villager
         /// </summary>
         [DataTag("conditions.villager", JsonTag = true)]
-        public Conditions.EntityCondition[] Villager { get; set; }
+        public Conditions.EntityCondition[]? Villager { get; set; }
 
         /// <summary>
         /// The zombie which was cured
         /// </summary>
         [DataTag("conditions.zombie", JsonTag = true)]
-        public Conditions.EntityCondition[] Zombie { get; set; }
+        public Conditions.EntityCondition[]? Zombie { get; set; }
     }
 }

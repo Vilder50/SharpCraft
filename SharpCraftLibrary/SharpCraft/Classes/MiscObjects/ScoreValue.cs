@@ -11,8 +11,23 @@ namespace SharpCraft
     /// </summary>
     public class ScoreValue
     {
-        private Objective scoreObject;
-        private BaseSelector selector;
+        private static int nextVarName = 0;
+        private Objective scoreObject = null!;
+        private BaseSelector selector = null!;
+
+        /// <summary>
+        /// Intializes a new <see cref="ScoreValue"/> for holding a value.
+        /// </summary>
+        public ScoreValue()
+        {
+            if (BaseDatapack.MakeForDatapack.GetItems<SharpCraftFiles>().IsChild())
+            {
+                throw new InvalidOperationException("Cannot create random score value for child datapack");
+            }
+            ScoreObject = BaseDatapack.MakeForDatapack.GetItems<SharpCraftFiles>().GetMathScoreObject();
+            Selector = new NameSelector("Variable_" + nextVarName, true);
+            nextVarName++;
+        }
 
         /// <summary>
         /// Intializes a new <see cref="ScoreValue"/>
@@ -33,11 +48,7 @@ namespace SharpCraft
             get => selector;
             protected set
             {
-                if (!(value ?? throw new ArgumentNullException(nameof(Selector), "Selector may not be null.")).IsLimited())
-                {
-                    throw new ArgumentException("Selector may only select one score.", nameof(Selector));
-                }
-                selector = value;
+                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreValue));
             }
         }
 
@@ -72,9 +83,9 @@ namespace SharpCraft
         /// <param name="value1">One of the numbers to add together</param>
         /// <param name="value2">One of the numbers to add together</param>
         /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator +(ScoreValue value1, int value2)
+        public static FunctionWriters.CustomCommands.ScoreOperation operator +(ScoreValue value1, ValueParameter value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Add, SharpCraftFiles.AddConstantNumber(value2));
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Add, value2);
         }
 
         /// <summary>
@@ -84,17 +95,6 @@ namespace SharpCraft
         /// <param name="value2">One of the numbers to add together</param>
         /// <returns>The score operation for doing the math</returns>
         public static FunctionWriters.CustomCommands.ScoreOperation operator +(int value1, ScoreValue value2)
-        {
-            return new FunctionWriters.CustomCommands.ScoreOperation(SharpCraftFiles.AddConstantNumber(value1), ID.Operation.Add, value2);
-        }
-
-        /// <summary>
-        /// Adds the two values together into a <see cref="FunctionWriters.CustomCommands.ScoreOperation"/>
-        /// </summary>
-        /// <param name="value1">One of the numbers to add together</param>
-        /// <param name="value2">One of the numbers to add together</param>
-        /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator +(ScoreValue value1, ScoreValue value2)
         {
             return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Add, value2);
         }
@@ -106,9 +106,9 @@ namespace SharpCraft
         /// <param name="value1">The number to subtract from</param>
         /// <param name="value2">The number to subtract with</param>
         /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator -(ScoreValue value1, int value2)
+        public static FunctionWriters.CustomCommands.ScoreOperation operator -(ScoreValue value1, ValueParameter value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Subtract, SharpCraftFiles.AddConstantNumber(value2));
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Subtract, value2);
         }
 
         /// <summary>
@@ -118,17 +118,6 @@ namespace SharpCraft
         /// <param name="value2">The number to subtract with</param>
         /// <returns>The score operation for doing the math</returns>
         public static FunctionWriters.CustomCommands.ScoreOperation operator -(int value1, ScoreValue value2)
-        {
-            return new FunctionWriters.CustomCommands.ScoreOperation(SharpCraftFiles.AddConstantNumber(value1), ID.Operation.Subtract, value2);
-        }
-
-        /// <summary>
-        /// subtracts the two values from each other into a <see cref="FunctionWriters.CustomCommands.ScoreOperation"/>
-        /// </summary>
-        /// <param name="value1">The number to subtract from</param>
-        /// <param name="value2">The number to subtract with</param>
-        /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator -(ScoreValue value1, ScoreValue value2)
         {
             return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Subtract, value2);
         }
@@ -140,9 +129,9 @@ namespace SharpCraft
         /// <param name="value1">One of the values to multiply with</param>
         /// <param name="value2">One of the values to multiply with</param>
         /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator *(ScoreValue value1, int value2)
+        public static FunctionWriters.CustomCommands.ScoreOperation operator *(ScoreValue value1, ValueParameter value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, SharpCraftFiles.AddConstantNumber(value2));
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, value2);
         }
 
         /// <summary>
@@ -152,17 +141,6 @@ namespace SharpCraft
         /// <param name="value2">One of the values to multiply with</param>
         /// <returns>The score operation for doing the math</returns>
         public static FunctionWriters.CustomCommands.ScoreOperation operator *(int value1, ScoreValue value2)
-        {
-            return new FunctionWriters.CustomCommands.ScoreOperation(SharpCraftFiles.AddConstantNumber(value1), ID.Operation.Multiply, value2);
-        }
-
-        /// <summary>
-        /// multiplies the two values together into a <see cref="FunctionWriters.CustomCommands.ScoreOperation"/>
-        /// </summary>
-        /// <param name="value1">One of the values to multiply with</param>
-        /// <param name="value2">One of the values to multiply with</param>
-        /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator *(ScoreValue value1, ScoreValue value2)
         {
             return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, value2);
         }
@@ -174,9 +152,9 @@ namespace SharpCraft
         /// <param name="value1">The number to divide</param>
         /// <param name="value2">The number to divide with</param>
         /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator /(ScoreValue value1, int value2)
+        public static FunctionWriters.CustomCommands.ScoreOperation operator /(ScoreValue value1, ValueParameter value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, SharpCraftFiles.AddConstantNumber(value2));
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Divide, value2);
         }
 
         /// <summary>
@@ -187,18 +165,7 @@ namespace SharpCraft
         /// <returns>The score operation for doing the math</returns>
         public static FunctionWriters.CustomCommands.ScoreOperation operator /(int value1, ScoreValue value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(SharpCraftFiles.AddConstantNumber(value1), ID.Operation.Multiply, value2);
-        }
-
-        /// <summary>
-        /// divides the two values by each other into a <see cref="FunctionWriters.CustomCommands.ScoreOperation"/>
-        /// </summary>
-        /// <param name="value1">The number to divide</param>
-        /// <param name="value2">The number to divide with</param>
-        /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator /(ScoreValue value1, ScoreValue value2)
-        {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, value2);
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Divide, value2);
         }
         #endregion
         #region moduloing
@@ -208,9 +175,9 @@ namespace SharpCraft
         /// <param name="value1">The number to divide</param>
         /// <param name="value2">The number to divide with</param>
         /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator %(ScoreValue value1, int value2)
+        public static FunctionWriters.CustomCommands.ScoreOperation operator %(ScoreValue value1, ValueParameter value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, SharpCraftFiles.AddConstantNumber(value2));
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Remainder, value2);
         }
 
         /// <summary>
@@ -221,18 +188,7 @@ namespace SharpCraft
         /// <returns>The score operation for doing the math</returns>
         public static FunctionWriters.CustomCommands.ScoreOperation operator %(int value1, ScoreValue value2)
         {
-            return new FunctionWriters.CustomCommands.ScoreOperation(SharpCraftFiles.AddConstantNumber(value1), ID.Operation.Multiply, value2);
-        }
-
-        /// <summary>
-        /// modulos the two values into a <see cref="FunctionWriters.CustomCommands.ScoreOperation"/>
-        /// </summary>
-        /// <param name="value1">The number to divide</param>
-        /// <param name="value2">The number to divide with</param>
-        /// <returns>The score operation for doing the math</returns>
-        public static FunctionWriters.CustomCommands.ScoreOperation operator %(ScoreValue value1, ScoreValue value2)
-        {
-            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Multiply, value2);
+            return new FunctionWriters.CustomCommands.ScoreOperation(value1, ID.Operation.Remainder, value2);
         }
         #endregion
         #endregion

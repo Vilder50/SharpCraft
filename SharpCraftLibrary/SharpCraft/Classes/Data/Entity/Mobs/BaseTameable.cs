@@ -1,42 +1,27 @@
 ﻿using System.Collections.Generic;
 
-namespace SharpCraft
+namespace SharpCraft.Entities
 {
-    public static partial class Entity
+    /// <summary>
+    /// The basic entity data for tameable
+    /// </summary>
+    public class TameableMob : BreedableMob
     {
         /// <summary>
-        /// The basic entity data for tameable
+        /// Creates a new entity
         /// </summary>
-        public abstract class BaseTameable : BaseBreedable
-        {
-            /// <summary>
-            /// Creates a new entity
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public BaseTameable(ID.Entity? type) : base(type) { }
-
-            /// <summary>
-            /// If the mob is sitting (wont follow / tp to its owner)
-            /// </summary>
-            [Data.DataTag]
-            public bool? Sitting { get; set; }
-            /// <summary>
-            /// the <see cref="UUID"/> of the owner
-            /// </summary>
-            [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
-            public UUID OwnerUUID { get; set; }
-        }
+        /// <param name="type">the type of entity</param>
+        public TameableMob(ID.Entity? type) : base(type) { }
 
         /// <summary>
-        /// Entity data for tameable mobs
+        /// If the mob is sitting (wont follow / tp to its owner)
         /// </summary>
-        public class Tameable : BaseTameable
-        {
-            /// <summary>
-            /// Creates a new tameable mob
-            /// </summary>
-            /// <param name="type">the type of entity</param>
-            public Tameable(ID.Entity? type) : base(type) { }
-        }
+        [Data.DataTag]
+        public bool? Sitting { get; set; }
+        /// <summary>
+        /// the <see cref="UUID"/> of the owner
+        /// </summary>
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
+        public UUID? OwnerUUID { get; set; }
     }
 }

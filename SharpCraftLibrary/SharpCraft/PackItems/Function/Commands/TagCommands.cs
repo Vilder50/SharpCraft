@@ -11,8 +11,8 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TagCommand : BaseCommand
     {
-        private BaseSelector selector;
-        private Tag tag;
+        private BaseSelector selector = null!;
+        private Tag tag = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TagCommand"/>
@@ -57,7 +57,7 @@ namespace SharpCraft.Commands
     /// </summary>
     public class TagListCommand : BaseCommand
     {
-        private BaseSelector selector;
+        private BaseSelector selector = null!;
 
         /// <summary>
         /// Intializes a new <see cref="TagListCommand"/>

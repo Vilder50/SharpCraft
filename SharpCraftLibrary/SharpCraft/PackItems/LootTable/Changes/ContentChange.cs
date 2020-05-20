@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class ContentChange : BaseChange
     {
-        private BaseEntry[] entries;
+        private BaseEntry[] entries = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ContentChange"/>

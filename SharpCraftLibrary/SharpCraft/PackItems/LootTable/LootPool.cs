@@ -13,8 +13,8 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class LootPool : DataHolderBase
     {
-        private BaseEntry[] entries;
-        private MCRange rolls;
+        private BaseEntry[] entries = null!;
+        private MCRange rolls = null!;
 
         /// <summary>
         /// Intializes a new <see cref="LootPool"/>
@@ -23,7 +23,7 @@ namespace SharpCraft.LootObjects
         /// <param name="luckyRolls">The amount of extra rolls to take based on luck</param>
         /// <param name="conditions">All conditions have to be true for this pool to be used</param>
         /// <param name="entries">Entries in this pool</param>
-        public LootPool(BaseEntry[] entries, MCRange rolls, BaseCondition[] conditions = null, MCRange luckyRolls = null)
+        public LootPool(BaseEntry[] entries, MCRange rolls, BaseCondition[]? conditions = null, MCRange? luckyRolls = null)
         {
             Rolls = rolls;
             LuckyRolls = luckyRolls;
@@ -41,13 +41,13 @@ namespace SharpCraft.LootObjects
         /// The amount of extra rolls to take based on luck
         /// </summary>
         [DataTag("bonus_rolls", "min", "max", ID.NBTTagType.TagFloat, true, JsonTag = true)]
-        public MCRange LuckyRolls { get; set; }
+        public MCRange? LuckyRolls { get; set; }
 
         /// <summary>
         /// All conditions have to be true for this pool to be used
         /// </summary>
         [DataTag("conditions", JsonTag = true)]
-        public BaseCondition[] Conditions { get; set; }
+        public BaseCondition[]? Conditions { get; set; }
 
         /// <summary>
         /// Entries in this pool

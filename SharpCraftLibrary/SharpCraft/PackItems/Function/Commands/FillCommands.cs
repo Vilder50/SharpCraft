@@ -11,9 +11,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FillCommand : BaseCommand
     {
-        private Vector corner1;
-        private Vector corner2;
-        private Block block;
+        private Vector corner1 = null!;
+        private Vector corner2 = null!;
+        private Block block = null!;
 
         /// <summary>
         /// Intializes a new <see cref="FillCommand"/>
@@ -93,10 +93,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FillReplaceCommand : BaseCommand
     {
-        private Vector corner1;
-        private Vector corner2;
-        private Block block;
-        private Block replaceBlock;
+        private Vector corner1 = null!;
+        private Vector corner2 = null!;
+        private Block block = null!;
+        private Block replaceBlock = null!;
 
         /// <summary>
         /// Intializes a new <see cref="FillReplaceCommand"/>

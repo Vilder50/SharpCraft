@@ -11,9 +11,9 @@ namespace SharpCraft.Commands
     /// </summary>
     public class CloneCommand : BaseCommand
     {
-        private Vector corner1;
-        private Vector corner2;
-        private Vector location;
+        private Vector corner1 = null!;
+        private Vector corner2 = null!;
+        private Vector location = null!;
 
         /// <summary>
         /// Intializes a new <see cref="CloneCommand"/>
@@ -93,10 +93,10 @@ namespace SharpCraft.Commands
     /// </summary>
     public class FilteredCloneCommand : BaseCommand
     {
-        private Vector corner1;
-        private Vector corner2;
-        private Vector location;
-        private Block filterBlock;
+        private Vector corner1 = null!;
+        private Vector corner2 = null!;
+        private Vector location = null!;
+        private Block filterBlock = null!;
 
         /// <summary>
         /// Intializes a new <see cref="FilteredCloneCommand"/>

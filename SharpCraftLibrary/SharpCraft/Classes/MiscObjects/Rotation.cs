@@ -6,14 +6,11 @@ namespace SharpCraft
     /// <summary>
     /// An object for rotations
     /// </summary>
-    public class Rotation : IConvertableToDataArray
+    public class Rotation : IConvertableToDataArray<double>
     {
-        /// <summary>
-        /// The rotation
-        /// </summary>
         private double y;
-
         private bool yRelative;
+
         private double x;
         private bool xRelative;
 
@@ -45,11 +42,13 @@ namespace SharpCraft
         /// <summary>
         /// The vertical rotation
         /// </summary>
+        [ArrayPath(0)]
         public double X { get => x; set => x = value; }
 
         /// <summary>
         /// The horizontal rotation
         /// </summary>
+        [ArrayPath(1)]
         public double Y { get => y; set => y = value; }
 
         /// <summary>
@@ -100,17 +99,32 @@ namespace SharpCraft
         /// <param name="extraConversionData">Not used</param>
         /// <param name="asType">The type of array</param>
         /// <returns>the made <see cref="DataPartArray"/></returns>
-        public DataPartArray GetAsArray(ID.NBTTagType? asType, object[] extraConversionData)
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             if (asType == ID.NBTTagType.TagDoubleArray)
             {
-                DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, null);
+                DataPartArray dataArray = new DataPartArray(new double[] { Y, X }, null, new object?[0]);
+                return dataArray;
+            }
+            else if(asType == ID.NBTTagType.TagFloatArray)
+            {
+                DataPartArray dataArray = new DataPartArray(new float[] { (float)Y, (float)X }, null, new object?[0]);
                 return dataArray;
             }
             else
             {
                 throw new ArgumentException("Can only convert the rotation in a double array");
             }
+        }
+
+        /// <summary>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
+        /// </summary>
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public double[] PathArray()
+        {
+            throw new PathGettingMethodCallException();
         }
     }
 }
