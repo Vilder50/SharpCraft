@@ -421,6 +421,11 @@ namespace SharpCraft
                     /// Piglins will be angry if any of these blocks are broken
                     /// </summary>
                     guarded_by_piglins,
+
+                    /// <summary>
+                    /// Mobs cannot spawn in these blocks
+                    /// </summary>
+                    prevent_mob_spawning_inside
                 }
 
                 /// <summary>
@@ -480,94 +485,120 @@ namespace SharpCraft
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     planks,
+
                     /// <summary>
                     /// Dolphins swims to players with this item
                     /// Can be feet to dolphins
                     /// </summary>
                     fishes,
+
                     /// <summary>
                     /// Items which can be used to breed bees
                     /// </summary>
                     flowers,
+
                     /// <summary>
                     /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
                     /// </summary>
                     lectern_books,
+
                     /// <summary>
                     /// Items which can be shot from a bow/crossbow
                     /// </summary>
                     arrows,
+
                     /// <summary>
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     banners,
+
                     /// <summary>
                     /// Items which burns in a furnace for 1200 ticks
                     /// </summary>
                     boats,
+
                     /// <summary>
                     /// Items which can be placed on llamas.
                     /// Items which burns in a furnace for 67 ticks
                     /// </summary>
                     carpets,
+
                     /// <summary>
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     logs,
+
                     /// <summary>
                     /// Items which burns in a furnace for 100 ticks
                     /// </summary>
                     saplings,
+
                     /// <summary>
                     /// Items which burns in a furnace for 200 ticks
                     /// </summary>
                     signs,
+
                     /// <summary>
                     /// Items used for crafting suspicious stew.
                     /// Items which can be fed to brown mushrooms.
                     /// Items which bees follows
                     /// </summary>
                     small_flowers,
+
                     /// <summary>
                     /// Items which burns in a furnace for 100 ticks
                     /// </summary>
                     wooden_buttons,
+
                     /// <summary>
                     /// Items which burns in a furnace for 200 ticks
                     /// </summary>
                     wooden_doors,
+
                     /// <summary>
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     wooden_pressure_plates,
+
                     /// <summary>
                     /// Items which burns in a furnace for 150 ticks
                     /// </summary>
                     wooden_slabs,
+
                     /// <summary>
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     wooden_stairs,
+
                     /// <summary>
                     /// Items which burns in a furnace for 300 ticks
                     /// </summary>
                     wooden_trapdoors,
+
                     /// <summary>
                     /// Items which burns in a furnace for 100 ticks
                     /// </summary>
                     wool,
+
                     /// <summary>
                     /// Items which can be used for activating beacons.
                     /// </summary>
                     beacon_payment_items,
+
                     /// <summary>
                     /// Items piglins wont pickup
                     /// </summary>
                     piglin_repellents,
+
                     /// <summary>
                     /// Won't be able to be used as furnace fuel
                     /// </summary>
                     non_flammable_wood,
+
+                    /// <summary>
+                    /// Items piglins pickup.
+                    /// </summary>
+                    piglin_loved,
                 }
 
                 /// <summary>

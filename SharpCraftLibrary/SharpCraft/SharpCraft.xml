@@ -8539,6 +8539,57 @@
             </summary>
             <returns>A string used in commands for getting the data</returns>
         </member>
+        <member name="T:SharpCraft.Dimension">
+            <summary>
+            An object used for Dimensions
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.Overworld">
+            <summary>
+            The vanilla overworld dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.Nether">
+            <summary>
+            The vanilla nether dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.End">
+            <summary>
+            The vanilla end dimension
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Dimension.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Creates a new <see cref="T:SharpCraft.Dimension"/> object.
+            </summary>
+            <param name="dimensionName">The name of the dimension</param>
+            <param name="namespace">The namespace the dimension is in.</param>
+        </member>
+        <member name="P:SharpCraft.Dimension.Name">
+            <summary>
+            The name of the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Dimension.Namespace">
+            <summary>
+            The namespace the dimension is in.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Dimension.GetFullName">
+            <summary>
+            Get string used for refering this dimension
+            </summary>
+            <returns>String used for refering this dimension</returns>
+        </member>
+        <member name="M:SharpCraft.Dimension.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this dimension into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
         <member name="T:SharpCraft.Slots.IItemSlot">
             <summary>
             Interface for slots which can hold items
@@ -12235,6 +12286,11 @@
             Piglins will be angry if any of these blocks are broken
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Blocks.prevent_mob_spawning_inside">
+            <summary>
+            Mobs cannot spawn in these blocks
+            </summary>
+        </member>
         <member name="T:SharpCraft.ID.Files.Groups.Fluid">
             <summary>
             fluid groups used by Minecraft
@@ -12380,6 +12436,11 @@
         <member name="F:SharpCraft.ID.Files.Groups.Items.non_flammable_wood">
             <summary>
             Won't be able to be used as furnace fuel
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Items.piglin_loved">
+            <summary>
+            Items piglins pickup.
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Entities">
@@ -12605,6 +12666,11 @@
         <member name="P:SharpCraft.ID.Objective.Movement.RideHorse">
             <summary>
             Distance ridden on horses
+            </summary>
+        </member>
+        <member name="P:SharpCraft.ID.Objective.Movement.RideStrider">
+            <summary>
+            Distance ridden on striders
             </summary>
         </member>
         <member name="P:SharpCraft.ID.Objective.Movement.RideMinecart">
@@ -13794,6 +13860,21 @@
             The item the player got from filling a bucket
             </summary>
         </member>
+        <member name="T:SharpCraft.AdvancementObjects.GeneratedContainerLootTrigger">
+            <summary>
+            Gets triggered the player opens a container which generates loot from a loot table
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.GeneratedContainerLootTrigger.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.GeneratedContainerLootTrigger"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.GeneratedContainerLootTrigger.LootTable">
+            <summary>
+            The loot table which generated the container's items
+            </summary>
+        </member>
         <member name="T:SharpCraft.AdvancementObjects.HurtTrigger">
             <summary>
             Gets triggered when the player gets hurt
@@ -13863,6 +13944,26 @@
         <member name="P:SharpCraft.AdvancementObjects.InventoryChangedTrigger.OccupiedSlots">
             <summary>
             The amount of occupied slots
+            </summary>
+        </member>
+        <member name="T:SharpCraft.AdvancementObjects.ItemUsedOnBlockTrigger">
+            <summary>
+            Gets triggered when the player uses an item on a block
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.ItemUsedOnBlockTrigger.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.ItemUsedOnBlockTrigger"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.ItemUsedOnBlockTrigger.Item">
+            <summary>
+            The item the player used on the block
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.ItemUsedOnBlockTrigger.BlockLocation">
+            <summary>
+            The location of the block the item was used on
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.KilledEntityTrigger">
@@ -13996,26 +14097,6 @@
             The new recipe
             </summary>
         </member>
-        <member name="T:SharpCraft.AdvancementObjects.SafeHoneyHarvestTrigger">
-            <summary>
-            Gets triggered when the player safely harvest honey from a nest
-            </summary>
-        </member>
-        <member name="M:SharpCraft.AdvancementObjects.SafeHoneyHarvestTrigger.#ctor">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.SafeHoneyHarvestTrigger"/>
-            </summary>
-        </member>
-        <member name="P:SharpCraft.AdvancementObjects.SafeHoneyHarvestTrigger.Item">
-            <summary>
-            The item the player used for harvisting
-            </summary>
-        </member>
-        <member name="P:SharpCraft.AdvancementObjects.SafeHoneyHarvestTrigger.Block">
-            <summary>
-            The block the honey was harvested from
-            </summary>
-        </member>
         <member name="T:SharpCraft.AdvancementObjects.ShotCrossbowTrigger">
             <summary>
             Gets triggered when the player shoots with a crossbow
@@ -14094,6 +14175,26 @@
         <member name="P:SharpCraft.AdvancementObjects.TargetHitTrigger.Projectile">
             <summary>
             The entity which hit the target
+            </summary>
+        </member>
+        <member name="T:SharpCraft.AdvancementObjects.ThrownItemPickedUp">
+            <summary>
+            Gets triggered when the player throws an item which gets picked up by another entity
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.ThrownItemPickedUp.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.ThrownItemPickedUp"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.ThrownItemPickedUp.Item">
+            <summary>
+            The thrown item
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.ThrownItemPickedUp.PickedUpBy">
+            <summary>
+            The entity which picked up the item
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.TickTrigger">
@@ -15225,6 +15326,16 @@
             the <see cref="T:SharpCraft.JsonObjects.Effects"/>s the <see cref="T:SharpCraft.Entity"/> should have
             </summary>
         </member>
+        <member name="P:SharpCraft.JsonObjects.Entity.Vehicle">
+            <summary>
+            the vehicle the entity is riding
+            </summary>
+        </member>
+        <member name="P:SharpCraft.JsonObjects.Entity.TargetedEntity">
+            <summary>
+            the entity this entity is targeting
+            </summary>
+        </member>
         <member name="P:SharpCraft.JsonObjects.Entity.FishingHookInOpenWater">
             <summary>
             If the fishing hook is in "open water"
@@ -15495,6 +15606,11 @@
             the structure to detect
             </summary>
         </member>
+        <member name="P:SharpCraft.JsonObjects.Location.Smokey">
+            <summary>
+            If the location should be smokey from a fireplace
+            </summary>
+        </member>
         <member name="P:SharpCraft.JsonObjects.Location.X">
             <summary>
             the x coordinate to detect
@@ -15537,11 +15653,11 @@
             </summary>
             <param name="structure">The <see cref="T:SharpCraft.ID.Structure"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.ID.Dimension)~SharpCraft.JsonObjects.Location">
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.Dimension)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="T:SharpCraft.ID.Dimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
+            Converts a <see cref="P:SharpCraft.JsonObjects.Location.Dimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
-            <param name="dimension">The <see cref="T:SharpCraft.ID.Dimension"/> to convert</param>
+            <param name="dimension">The <see cref="P:SharpCraft.JsonObjects.Location.Dimension"/> to convert</param>
         </member>
         <member name="T:SharpCraft.BaseDatapack">
             <summary>
@@ -16329,7 +16445,7 @@
             </summary>
             <param name="selector">The <see cref="T:SharpCraft.BaseSelector"/> to use</param>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Spread(SharpCraft.BaseSelector,SharpCraft.Vector,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:SharpCraft.FunctionWriters.EntityCommands.Spread(SharpCraft.BaseSelector,SharpCraft.Vector,System.Int32,System.Int32,System.Boolean,System.Nullable{System.Int32})">
             <summary>
             Spreads all entities selected by the selector around the specified location
             </summary>
@@ -16338,6 +16454,7 @@
             <param name="minDistance">the minimum distance the player can be spreaded away from each other</param>
             <param name="spreadDistanceMax">the maximum distance the player can be spreaded from the <paramref name="center"/></param>
             <param name="spreadTeams">If teams should be placed close to each other</param>
+            <param name="underHeight">The height the players will be spread under. Leave null to use maximum height.</param>
         </member>
         <member name="M:SharpCraft.FunctionWriters.EntityCommands.JoinTeam(SharpCraft.BaseSelector,SharpCraft.Team)">
             <summary>
@@ -17027,7 +17144,7 @@
             <param name="entity">the <see cref="T:SharpCraft.Entity"/> to execute rotated as</param>
             <returns>The function running the command</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Dimension(SharpCraft.ID.Dimension)">
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Dimension(SharpCraft.Dimension)">
             <summary>
             Executes in the given dimension
             </summary>
@@ -17584,6 +17701,16 @@
             (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
             <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
             <returns>The ran function</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Function(SharpCraft.Function.FunctionWriter,SharpCraft.NoneNegativeTime{System.Int32},System.Boolean)">
+            <summary>
+            Runs the given commands as a function (The function is made as a sibling function)
+            </summary>
+            <param name="writer">the commands to run</param>
+            <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
+            (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
+            <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
+            <returns>The function</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.WorldCommands.StopSchedule(SharpCraft.IFunction)">
             <summary>
@@ -19472,7 +19599,7 @@
             Execute command used for changing the dimension the command is being executed in
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ExecuteDimension.#ctor(SharpCraft.ID.Dimension)">
+        <member name="M:SharpCraft.Commands.ExecuteDimension.#ctor(SharpCraft.Dimension)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ExecuteDimension"/> command
             </summary>
@@ -21870,7 +21997,7 @@
             Command which spreads entities around a location
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.SpreadPlayersCommand.#ctor(SharpCraft.Vector,SharpCraft.BaseSelector,System.Double,System.Double,System.Boolean)">
+        <member name="M:SharpCraft.Commands.SpreadPlayersCommand.#ctor(SharpCraft.Vector,SharpCraft.BaseSelector,System.Double,System.Double,System.Boolean,System.Nullable{System.Int32})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.SpreadPlayersCommand"/>
             </summary>
@@ -21879,6 +22006,7 @@
             <param name="distance">The minimum distance between spreaded entities</param>
             <param name="maxRange">The max distance the entities can be spread</param>
             <param name="respectTeams">True if teams should be grouped together. False if they shouldn't</param>
+            <param name="underHeight">The height the players will be spread under. Leave null to use maximum height.</param>
         </member>
         <member name="M:SharpCraft.Commands.SpreadPlayersCommand.ChangeRanges(System.Double,System.Double)">
             <summary>
@@ -21910,6 +22038,11 @@
         <member name="P:SharpCraft.Commands.SpreadPlayersCommand.RespectTeams">
             <summary>
             True if teams should be grouped together. False if they shouldn't
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Commands.SpreadPlayersCommand.UnderHeight">
+            <summary>
+            The height the players will be spread under. Leave null to use maximum height.
             </summary>
         </member>
         <member name="M:SharpCraft.Commands.SpreadPlayersCommand.GetCommandString">
@@ -24659,6 +24792,14 @@
             Converts a string of the format NAMESPACE:LOOTTABLE into an <see cref="T:SharpCraft.EmptyLoottable"/>
             </summary>
             <param name="loottable">The string to convert</param>
+        </member>
+        <member name="M:SharpCraft.EmptyLoottable.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this loot table into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
         <member name="T:SharpCraft.BasePackNamespace">
             <summary>

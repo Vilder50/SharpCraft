@@ -27,7 +27,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute anchored feet", new ExecuteAnchored(ID.FacingAnchor.feet).GetCommandString(), "ExecuteAnchored does not return correct GetCommandString");
             Assert.AreEqual("execute as @s[level=1..2]", new ExecuteAs(new SharpCraft.Selector() { Level = new MCRange(1, 2) }).GetCommandString(), "ExecuteAs does not return correct GetCommandString");
             Assert.AreEqual("execute at @s[level=1..2]", new ExecuteAt(new SharpCraft.Selector() { Level = new MCRange(1, 2) }).GetCommandString(), "ExecuteAt does not return correct GetCommandString");
-            Assert.AreEqual("execute in the_end", new ExecuteDimension(ID.Dimension.the_end).GetCommandString(), "ExecuteDimension does not return correct GetCommandString");
+            Assert.AreEqual("execute in minecraft:the_end", new ExecuteDimension(Dimension.End).GetCommandString(), "ExecuteDimension does not return correct GetCommandString");
             Assert.AreEqual("execute facing ~3 ~4 ~5", new ExecuteFacingCoord(new Coords(3,4,5)).GetCommandString(), "ExecuteFacingCoord does not return correct GetCommandString");
             Assert.AreEqual("execute facing entity @s[level=1..2] feet", new ExecuteFacingEntity(new SharpCraft.Selector() { Level = new MCRange(1, 2) }, ID.FacingAnchor.feet).GetCommandString(), "ExecuteFacingEntity does not return correct GetCommandString");
             Assert.AreEqual("execute if block ~ ~ ~ minecraft:anvil[facing=north]", new ExecuteIfBlock(new Coords(), new Blocks.Anvil(ID.Block.anvil) {SFacing = ID.Facing.north }).GetCommandString(), "ExecuteIfBlock does not return correct GetCommandString");

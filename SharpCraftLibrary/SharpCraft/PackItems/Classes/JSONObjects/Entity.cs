@@ -35,6 +35,18 @@ namespace SharpCraft.JsonObjects
         public Effects? Effects { get; set; }
 
         /// <summary>
+        /// the vehicle the entity is riding
+        /// </summary>
+        [DataTag("vehicle", JsonTag = true)]
+        public Entity[]? Vehicle { get; set; }
+
+        /// <summary>
+        /// the entity this entity is targeting
+        /// </summary>
+        [DataTag("targetedEntity", JsonTag = true)]
+        public Entity[]? TargetedEntity { get; set; }
+
+        /// <summary>
         /// If the fishing hook is in "open water"
         /// </summary>
         [DataTag("fishing_hook.in_open_water", JsonTag = true)]

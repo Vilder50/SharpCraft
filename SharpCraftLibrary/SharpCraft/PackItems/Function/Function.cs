@@ -27,6 +27,8 @@ namespace SharpCraft
 
         private CommandWriteListener? writeCommandListener;
 
+        private int siblings = 0;
+
         /// <summary>
         /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
         /// </summary>
@@ -268,7 +270,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            Function function = NewSibling((string?)null, writeSetting);
+            Function function = NewSibling("-" + (siblings++), writeSetting);
             creater(function);
             return function;
         }

@@ -17,14 +17,20 @@ namespace SharpCraft.JsonObjects
         /// <summary>
         /// the dimension to detect
         /// </summary>
-        [DataTag("dimension", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
-        public ID.Dimension? Dimension { get; set; }
+        [DataTag("dimension", JsonTag = true)]
+        public Dimension? Dimension { get; set; }
 
         /// <summary>
         /// the structure to detect
         /// </summary>
         [DataTag("feature", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
         public ID.Structure? Structure { get; set; }
+
+        /// <summary>
+        /// If the location should be smokey from a fireplace
+        /// </summary>
+        [DataTag("smokey", JsonTag = true)]
+        public bool? Smokey { get; set; }
 
         /// <summary>
         /// the x coordinate to detect
@@ -81,10 +87,10 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Converts a <see cref="ID.Dimension"/> into a <see cref="Location"/>
+        /// Converts a <see cref="Dimension"/> into a <see cref="Location"/>
         /// </summary>
-        /// <param name="dimension">The <see cref="ID.Dimension"/> to convert</param>
-        public static implicit operator Location(ID.Dimension dimension)
+        /// <param name="dimension">The <see cref="Dimension"/> to convert</param>
+        public static implicit operator Location(Dimension dimension)
         {
             return new Location() { Dimension = dimension };
         }

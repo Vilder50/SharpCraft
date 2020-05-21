@@ -89,7 +89,6 @@
             the_void,
             BiomeEnumEnd
         }
-        public enum Dimension { overworld, the_end, the_nether = -1 }
         public enum Structure
         {
             Desert_pyramid,

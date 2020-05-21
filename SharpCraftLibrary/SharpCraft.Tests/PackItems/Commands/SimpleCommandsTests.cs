@@ -153,12 +153,15 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void SpreadPlayersCommandTest()
         {
-            Assert.AreEqual("spreadplayers ~1 ~3 3 10 true @a", new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true).GetCommandString());
+            Assert.AreEqual("spreadplayers ~1 ~3 3 10 true @a", new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true, null).GetCommandString());
+            Assert.AreEqual("spreadplayers ~1 ~3 3 10 under 100 true @a", new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true, 100).GetCommandString());
 
-            Assert.ThrowsException<ArgumentException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, 10.1, 10, true));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, -0.1, 10, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(null, ID.Selector.a, 3, 10, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), null, 3, 10, true));
+            Assert.ThrowsException<ArgumentException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, 10.1, 10, true, null));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), ID.Selector.a, -0.1, 10, true, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(null, ID.Selector.a, 3, 10, true, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpreadPlayersCommand(new Vector(1, 2, 3), null, 3, 10, true, null));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true, -1));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new SpreadPlayersCommand(new Coords(1, 2, 3), ID.Selector.a, 3, 10, true, 256));
         }
 
         [TestMethod]

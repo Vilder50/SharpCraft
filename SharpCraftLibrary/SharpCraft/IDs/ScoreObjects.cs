@@ -127,50 +127,67 @@
                 /// Distance flown with Elytra
                 /// </summary>
                 public static string Aviate { get; } = "minecraft.custom:minecraft.aviate_one_cm";
+
                 /// <summary>
                 /// Distance ridden in boats
                 /// </summary>
                 public static string RideBoat { get; } = "minecraft.custom:minecraft.boat_one_cm";
+
                 /// <summary>
                 /// Distance climbed on ladders/leaves
                 /// </summary>
                 public static string Climb { get; } = "minecraft.custom:minecraft.climb_one_cm";
+
                 /// <summary>
                 /// Distance crouched / shifted / sneaking
                 /// </summary>
                 public static string Crouch { get; } = "minecraft.custom:minecraft.crouch_one_cm";
+
                 /// <summary>
                 /// Distance walked under water (not swum)
                 /// </summary>
                 public static string Dive { get; } = "minecraft.custom:minecraft.dive_one_cm";
+
                 /// <summary>
                 /// Distance falled
                 /// </summary>
                 public static string Fall { get; } = "minecraft.custom:minecraft.fall_one_cm";
+
                 /// <summary>
                 /// Distance flown in creative/spectator mode
                 /// </summary>
                 public static string Fly { get; } = "minecraft.custom:minecraft.fly_one_cm";
+
                 /// <summary>
                 /// Distance ridden on horses
                 /// </summary>
                 public static string RideHorse { get; } = "minecraft.custom:minecraft.horse_one_cm";
+
+                /// <summary>
+                /// Distance ridden on striders
+                /// </summary>
+                public static string RideStrider { get; } = "minecraft.custom:minecraft.strider_one_cm";
+
                 /// <summary>
                 /// Distance ridden minecarts
                 /// </summary>
                 public static string RideMinecart { get; } = "minecraft.custom:minecraft.minecart_one_cm";
+
                 /// <summary>
                 /// Distance ridden on pigs
                 /// </summary>
                 public static string RidePig { get; } = "minecraft.custom:minecraft.pig_one_cm";
+
                 /// <summary>
                 /// Distance sprinted/ran
                 /// </summary>
                 public static string Sprint { get; } = "minecraft.custom:minecraft.sprint_one_cm";
+
                 /// <summary>
                 /// Distance swum
                 /// </summary>
                 public static string Swim { get; } = "minecraft.custom:minecraft.swim_one_cm";
+
                 /// <summary>
                 /// Distance walked
                 /// </summary>

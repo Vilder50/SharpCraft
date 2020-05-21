@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for loot table files
     /// </summary>
-    public class LootTable : BaseFile, ILootTable, IConvertableToDataTag
+    public class LootTable : BaseFile, ILootTable
     {
         /// <summary>
         /// Loot table types
@@ -186,6 +186,17 @@ namespace SharpCraft
                 throw new System.InvalidCastException("String for creating empty loottable has to contain a single :");
             }
             return new EmptyLoottable(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+        }
+
+        /// <summary>
+        /// Converts this loot table into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Not in use</param>
+        /// <param name="extraConversionData">Not in use</param>
+        /// <returns>the made <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
         }
     }
 }

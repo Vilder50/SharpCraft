@@ -46,9 +46,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="minDistance">the minimum distance the player can be spreaded away from each other</param>
         /// <param name="spreadDistanceMax">the maximum distance the player can be spreaded from the <paramref name="center"/></param>
         /// <param name="spreadTeams">If teams should be placed close to each other</param>
-        public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false)
+        /// <param name="underHeight">The height the players will be spread under. Leave null to use maximum height.</param>
+        public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false, int? underHeight = null)
         {
-            ForFunction.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams));
+            ForFunction.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams, underHeight));
         }
 
         /// <summary>
