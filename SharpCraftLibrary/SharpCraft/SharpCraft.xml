@@ -4265,7 +4265,12 @@
         </member>
         <member name="P:SharpCraft.Data.DataTagAttribute.JsonTag">
             <summary>
-            True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
+            True if the path name should be encapsulated in "'s. False if it shouldn't (Default).
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataTagAttribute.ForceWriteEmptyCompoundTag">
+            <summary>
+            Forces a compound tag to still be written even though its empty
             </summary>
         </member>
         <member name="M:SharpCraft.Data.DataTagAttribute.Clone``1(``0,``0)">
@@ -4429,9 +4434,14 @@
             A part of a data tag tree for holding data objects
             </summary>
         </member>
-        <member name="M:SharpCraft.Data.DataPartObject.#ctor">
+        <member name="M:SharpCraft.Data.DataPartObject.#ctor(System.Boolean)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataPartObject.IgnoreEmptiness">
+            <summary>
+            If true and the object is empty <see cref="M:SharpCraft.Data.DataPartObject.IsEmpty"/> will return false
             </summary>
         </member>
         <member name="M:SharpCraft.Data.DataPartObject.AddValue(SharpCraft.Data.DataPartPath)">
@@ -8539,57 +8549,6 @@
             </summary>
             <returns>A string used in commands for getting the data</returns>
         </member>
-        <member name="T:SharpCraft.Dimension">
-            <summary>
-            An object used for Dimensions
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Dimension.Overworld">
-            <summary>
-            The vanilla overworld dimension
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Dimension.Nether">
-            <summary>
-            The vanilla nether dimension
-            </summary>
-        </member>
-        <member name="F:SharpCraft.Dimension.End">
-            <summary>
-            The vanilla end dimension
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Dimension.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Creates a new <see cref="T:SharpCraft.Dimension"/> object.
-            </summary>
-            <param name="dimensionName">The name of the dimension</param>
-            <param name="namespace">The namespace the dimension is in.</param>
-        </member>
-        <member name="P:SharpCraft.Dimension.Name">
-            <summary>
-            The name of the dimension
-            </summary>
-        </member>
-        <member name="P:SharpCraft.Dimension.Namespace">
-            <summary>
-            The namespace the dimension is in.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.Dimension.GetFullName">
-            <summary>
-            Get string used for refering this dimension
-            </summary>
-            <returns>String used for refering this dimension</returns>
-        </member>
-        <member name="M:SharpCraft.Dimension.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this dimension into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
         <member name="T:SharpCraft.Slots.IItemSlot">
             <summary>
             Interface for slots which can hold items
@@ -10567,6 +10526,52 @@
             <exception cref="T:System.ArgumentException">If the selector selects too many entities</exception>
             <returns>The checked selector</returns>
         </member>
+        <member name="M:SharpCraft.Utils.ValidateNoneNullArray``1(``0[],System.String,System.String)">
+            <summary>
+            Throws an exception if the array either is null or it contains null
+            </summary>
+            <typeparam name="T">The type of array</typeparam>
+            <param name="array">The array to check</param>
+            <param name="arrayName">The name of the array variable</param>
+            <param name="classHolderName">The name of the class holding the array</param>
+            <exception cref="T:System.ArgumentNullException">If the array is null or contains null</exception>
+            <returns>The checked array</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ValidateNoneNullList``1(System.Collections.Generic.List{``0},System.String,System.String)">
+            <summary>
+            Throws an exception if the list either is null or it contains null
+            </summary>
+            <typeparam name="T">The type of list</typeparam>
+            <param name="list">The list to check</param>
+            <param name="listName">The name of the list variable</param>
+            <param name="classHolderName">The name of the class holding the list</param>
+            <exception cref="T:System.ArgumentNullException">If the list is null or contains null</exception>
+            <returns>The checked list</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ValidateRange(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Throws an exception if the given value is outside of the range
+            </summary>
+            <param name="value">The value to check</param>
+            <param name="minimum">The minimum the value can be</param>
+            <param name="maximum">The maximum the value can be</param>
+            <param name="valueName">The name of the value variable</param>
+            <param name="classHolderName">The name of the class holding the value</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the value it outside the range</exception>
+            <returns>The checked value</returns>
+        </member>
+        <member name="M:SharpCraft.Utils.ValidateRange(System.Double,System.Double,System.Double,System.String,System.String)">
+            <summary>
+            Throws an exception if the given value is outside of the range
+            </summary>
+            <param name="value">The value to check</param>
+            <param name="minimum">The minimum the value can be</param>
+            <param name="maximum">The maximum the value can be</param>
+            <param name="valueName">The name of the value variable</param>
+            <param name="classHolderName">The name of the class holding the value</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the value it outside the range</exception>
+            <returns>The checked value</returns>
+        </member>
         <member name="T:SharpCraft.UUID">
             <summary>
             An object used for UUID's
@@ -11687,6 +11692,16 @@
             If players should take fire damage
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.forgiveDeadPlayers">
+            <summary>
+            If angered neutral mobs should stop being angry when the player dies
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.BoolGamerule.universalAnger">
+            <summary>
+            If angered neutral mobs should attack everyone
+            </summary>
+        </member>
         <member name="F:SharpCraft.ID.IntGamerule.maxEntityCramming">
             <summary>
             The amount of entities there can be in a crammed space before they start taking damage
@@ -12443,6 +12458,11 @@
             Items piglins pickup.
             </summary>
         </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Items.unstable_bottom_center">
+            <summary>
+            Bells and lanterns cannot be placed on the bottom of these blocks
+            </summary>
+        </member>
         <member name="T:SharpCraft.ID.Files.Groups.Entities">
             <summary>
             entity groups
@@ -12523,6 +12543,41 @@
         <member name="F:SharpCraft.ID.SimpleNBTTagType.Unknown">
             <summary>
             Unknown tag type
+            </summary>
+        </member>
+        <member name="T:SharpCraft.ID.NoiseGeneratorSetting">
+            <summary>
+            Options for <see cref="T:SharpCraft.DimensionObjects.VanillaNoiseGenerator"/>
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.overworld">
+            <summary>
+            Normal overworld generation
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.amplified">
+            <summary>
+            Amplified generation
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.nether">
+            <summary>
+            Normal nether generation
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.caves">
+            <summary>
+            Nether generation but with overworld features
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.end">
+            <summary>
+            Generation used for generating the end island
+            </summary>
+        </member>
+        <member name="F:SharpCraft.ID.NoiseGeneratorSetting.floating_islands">
+            <summary>
+            End floating island generation
             </summary>
         </member>
         <member name="T:SharpCraft.ID.ScoreDisplay">
@@ -15655,9 +15710,15 @@
         </member>
         <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.Dimension)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="P:SharpCraft.JsonObjects.Location.Dimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
+            Converts a <see cref="T:SharpCraft.Dimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
-            <param name="dimension">The <see cref="P:SharpCraft.JsonObjects.Location.Dimension"/> to convert</param>
+            <param name="dimension">The <see cref="T:SharpCraft.Dimension"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.EmptyDimension)~SharpCraft.JsonObjects.Location">
+            <summary>
+            Converts a <see cref="T:SharpCraft.EmptyDimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
+            </summary>
+            <param name="dimension">The <see cref="T:SharpCraft.EmptyDimension"/> to convert</param>
         </member>
         <member name="T:SharpCraft.BaseDatapack">
             <summary>
@@ -15968,6 +16029,790 @@
             </summary>
             <param name="isChild">True if the datapack is a child of another datapack which generates all the SharpCraft items</param>
             <returns>The setting</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.BaseBiomeGenerator">
+            <summary>
+            Base class for biome generators
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.BaseBiomeGenerator.#ctor(System.String)">
+            <summary>
+            Intializes a new biome generator
+            </summary>
+            <param name="generatorType">The type of generator</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.BaseBiomeGenerator.GeneratorType">
+            <summary>
+            The type of biome generator
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.BaseBiomeGenerator.Seed">
+            <summary>
+            The seed used for generation the biomes
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.CheckerBiomeGenerator">
+            <summary>
+            Generates biomes in a checker pattern
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.CheckerBiomeGenerator.#ctor(SharpCraft.ID.Biome[],System.Int32)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.CheckerBiomeGenerator"/>
+            </summary>
+            <param name="biomes">The biomes to generate</param>
+            <param name="scale">The scale of the biome squares</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CheckerBiomeGenerator.Biomes">
+            <summary>
+            The biomes to generate
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CheckerBiomeGenerator.Scale">
+            <summary>
+            The scale of the biome squares
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.NetherBiomeGenerator">
+            <summary>
+            Generates nether biomes
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.NetherBiomeGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.NetherBiomeGenerator"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NetherBiomeGenerator.Preset">
+            <summary>
+            Used for chosing nether generation
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.EndBiomeGenerator">
+            <summary>
+            Generates end biomes
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.EndBiomeGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.EndBiomeGenerator"/>
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.CustomBiomeGenerator">
+            <summary>
+            Generates biomes in a custom way
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.CustomBiomeGenerator.#ctor(SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome[])">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.CustomBiomeGenerator"/>
+            </summary>
+            <param name="biomes">Information about the biomes to generate</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biomes">
+            <summary>
+            Information about the biomes to generate
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome">
+            <summary>
+            Class for biome generation information
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.BiomeType">
+            <summary>
+            The biome to generate
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Temperature">
+            <summary>
+            Affects snow and rain. 0.15 = snow. 0.15 - 0.95 for rain. Temperature goes down 0.0016 per block above sea level.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.SingleBiomeGenerator">
+            <summary>
+            Generates a single biome
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.SingleBiomeGenerator.#ctor(SharpCraft.ID.Biome)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.SingleBiomeGenerator"/>
+            </summary>
+            <param name="biome">The biome to generate</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SingleBiomeGenerator.Biome">
+            <summary>
+            The biome to generate
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.VanillaBiomeGenerator">
+            <summary>
+            Generates vanilla biomes
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.VanillaBiomeGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.VanillaBiomeGenerator"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.VanillaBiomeGenerator.LargeBiomes">
+            <summary>
+            If the biomes should be large
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.DimensionTypeObject">
+            <summary>
+            Class for dimension types
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.UltraWarm">
+            <summary>
+            Makes everything hot as nether (water evaporates and lava spreads further)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.Natural">
+            <summary>
+            If false makes compasses and clocks spin randomly
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.Shrunk">
+            <summary>
+            If true 1 block = 8 blocks (like in the nether)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.HasSkylight">
+            <summary>
+            If the sun makes light
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.HasCeiling">
+            <summary>
+            If lava should spread faster. Has nothing to do with ceilings...
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.AbmbientLight">
+            <summary>
+            The amount of ambient lighting in the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.FixedTime">
+            <summary>
+            Makes the time of day fixed to specific time if set.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.HasEnderDragon">
+            <summary>
+            If an ender dragon should spawn in the dimension
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.DimensionTypeObject.GetDataTree">
+            <summary>
+            Returns the data in this object as a data part object
+            </summary>
+            <returns>The data converted</returns>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.DimensionTypeObject.GetDimensionTypeString">
+            <summary>
+            Returns the string used for chosen this dimension type
+            </summary>
+            <returns>String for chosing this</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.BaseGenerator">
+            <summary>
+            Base object for terrain generators
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.BaseGenerator.#ctor(System.String)">
+            <summary>
+            Intializes a new generator
+            </summary>
+            <param name="generatorType">The type of generator</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.BaseGenerator.GeneratorType">
+            <summary>
+            The type of generator
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.CustomNoiseGenerator">
+            <summary>
+            Generator which generates the a world with noise
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.CustomNoiseGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.CustomNoiseGenerator"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.Seed">
+            <summary>
+            The seed used for generation
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.BedrockRoofPosition">
+            <summary>
+            The position of the bedrock roof (0-255). 0 = layer 255. A number outside the range results in no roof.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.BedrockFloorPosition">
+            <summary>
+            The position of the bedrock floor (0-255). 0 = layer 0. A number outside the range results in no floor
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.DisableMobGeneration">
+            <summary>
+            Stops mobs from spawning when the world is being generated
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.SeaLevel">
+            <summary>
+            The level of the sea (0-255).
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.Structures">
+            <summary>
+            The structures which can generate
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.TopNoise">
+            <summary>
+            Sets the noise used for the top part of the world
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.BottomNoise">
+            <summary>
+            Sets the noise used for the bottom part of the world
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.Sampling">
+            <summary>
+            Changes the noise
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.SquashHeight">
+            <summary>
+            Squashes the world so it fits a specific height. (eg a world which normally is 64 blocks high with a SquashHeight of 128 makes the world 32 blocks high)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.DensityOffset">
+            <summary>
+            Changes the average of land level. (-1 to 1)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.IslandNoiseOverride">
+            <summary>
+            Causes the world to generate like the end
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.Amplified">
+            <summary>
+            Generates amplified terrain
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.DefaultBlock">
+            <summary>
+            The default block the world is made out of
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.DefaultFluid">
+            <summary>
+            The default block the default fluid is made out of
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.BiomeGenerator">
+            <summary>
+            The generator used for generating biomes
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.DebugGenerator">
+            <summary>
+            Generator which generates the debug world
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.DebugGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.DebugGenerator"/>
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.SuperflatGenerator">
+            <summary>
+            Generator which generates the a world with noise
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.SuperflatGenerator.#ctor(SharpCraft.DimensionObjects.SuperflatGenerator.Layer[],SharpCraft.ID.Biome,SharpCraft.DimensionObjects.StructureList)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.SuperflatGenerator"/>
+            </summary>
+            <param name="biome">The biome to use</param>
+            <param name="layers">The layers to generate</param>
+            <param name="structures">The structures which can spawn</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SuperflatGenerator.Layers">
+            <summary>
+            The layers to generate
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SuperflatGenerator.Biome">
+            <summary>
+            The biome to use
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SuperflatGenerator.Structures">
+            <summary>
+            The structures which can spawn
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.SuperflatGenerator.Layer">
+            <summary>
+            Class for superflat layers
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.SuperflatGenerator.Layer.#ctor(System.Int32,SharpCraft.ID.Block)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.SuperflatGenerator.Layer"/>
+            </summary>
+            <param name="height">The height of the layer</param>
+            <param name="block">The block the layer is made out of</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SuperflatGenerator.Layer.Height">
+            <summary>
+            The height of the layer
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.SuperflatGenerator.Layer.Block">
+            <summary>
+            The block the layer is made out of
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.VanillaNoiseGenerator">
+            <summary>
+            Generator which generates the a world with noise
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.VanillaNoiseGenerator.#ctor(SharpCraft.ID.NoiseGeneratorSetting,System.Int32,SharpCraft.DimensionObjects.BaseBiomeGenerator)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.VanillaNoiseGenerator"/>
+            </summary>
+            <param name="generator">The generator to use</param>
+            <param name="seed">The seed used for generation</param>
+            <param name="biomeGenerator">The generator used for generating biomes</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.VanillaNoiseGenerator.Seed">
+            <summary>
+            The seed used for generation
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.VanillaNoiseGenerator.Generator">
+            <summary>
+            The generator to use
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.VanillaNoiseGenerator.BiomeGenerator">
+            <summary>
+            The generator used for generating biomes
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.IDimension">
+            <summary>
+            Interface for dimensions
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.IDimension.FileId">
+            <summary>
+            The file name of the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.IDimension.PackNamespace">
+            <summary>
+            The namespace the dimension is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.IDimension.GetNamespacedName">
+            <summary>
+            Should return the string used for using the dimension
+            </summary>
+            <returns>string for using the dimension</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.IDimensionType">
+            <summary>
+            Interface for dimension types
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.IDimensionType.GetDimensionTypeString">
+            <summary>
+            Returns the string used for chosen the dimension type
+            </summary>
+            <returns>String for chosing the type</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.IDimensionTypeFile">
+            <summary>
+            Interface for dimension types
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.IDimensionTypeFile.FileId">
+            <summary>
+            The file name of the dimension type
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.IDimensionTypeFile.PackNamespace">
+            <summary>
+            The namespace the dimension type is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.IDimensionTypeFile.GetNamespacedName">
+            <summary>
+            Should return the string used for using the dimension type
+            </summary>
+            <returns>string for using the dimension type</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.NoiseCurveSetting">
+            <summary>
+            Setting used for setting a part of a noise curve... or something...
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.NoiseCurveSetting.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.NoiseCurveSetting"/>
+            </summary>
+            <param name="target">How "smooth" it should be. Negative numbers = perfect for the bottom of islands and mountain tops. Positive numbers = perfect for ground and cave roofs.</param>
+            <param name="size">The size of the effected area.</param>
+            <param name="offset">Offsets the effected area. positive numbers when used for bottom part moves the thing up while positive numbers in top part moves down.</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseCurveSetting.Target">
+            <summary>
+            How "smooth" it should be. Negative numbers = perfect for the bottom of islands and mountain tops. Positive numbers = perfect for ground and cave roofs.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseCurveSetting.Size">
+            <summary>
+            The size of the effected area.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseCurveSetting.Offset">
+            <summary>
+            Offsets the effected area. positive numbers when used for bottom part moves the thing up while positive numbers in top part moves down.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.NoiseSamplingSetting">
+            <summary>
+            Settings used for scaling noise
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.XZFactor">
+            <summary>
+            Smoothes the noise on the horizontal axis
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.YFactor">
+            <summary>
+            Smoothes the noise on the vertical axis
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.Structure">
+            <summary>
+            Class for holding data about a structure used for dimension generation.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.Structure.#ctor(SharpCraft.ID.Structure,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.Structure"/>
+            </summary>
+            <param name="structure">The type of structure</param>
+            <param name="spacing">The maximum distance in chunks between the structures</param>
+            <param name="separation">The minimum distance in chunks between the structures</param>
+            <param name="salt">A random number added to the seed to make structures random</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.Structure.StructureType">
+            <summary>
+            The type of structure
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.Structure.Spacing">
+            <summary>
+            The maximum distance in chunks between the structures
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.Structure.Separation">
+            <summary>
+            The minimum distance in chunks between the structures
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.Structure.Salt">
+            <summary>
+            A random number added to the seed to make structures random over multiple seeds
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.Structure.SetSpacingAndSeperation(System.Int32,System.Int32)">
+            <summary>
+            Sets both <see cref="P:SharpCraft.DimensionObjects.Structure.Spacing"/> and <see cref="P:SharpCraft.DimensionObjects.Structure.Separation"/>
+            </summary>
+            <param name="spacing">The new spacing value</param>
+            <param name="separation">The new seperation value</param>
+            <returns>The set values</returns>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.StructureList">
+            <summary>
+            Class for a list of structures
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(System.Collections.Generic.List{SharpCraft.DimensionObjects.Structure})">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            </summary>
+            <param name="structures">The list of structures</param>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(SharpCraft.DimensionObjects.Structure[])">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            </summary>
+            <param name="structures">The list of structures</param>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.StructureList.Structures">
+            <summary>
+            The list of structures
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.StructureList.GetDataTree">
+            <summary>
+            Returns the data from the list
+            </summary>
+            <returns>The list's data</returns>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(System.Collections.Generic.List{SharpCraft.DimensionObjects.Structure})~SharpCraft.DimensionObjects.StructureList">
+            <summary>
+            Converts a list of <see cref="T:SharpCraft.DimensionObjects.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            </summary>
+            <param name="structures">The list to convert</param>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(SharpCraft.DimensionObjects.Structure[])~SharpCraft.DimensionObjects.StructureList">
+            <summary>
+            Converts an array of <see cref="T:SharpCraft.DimensionObjects.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            </summary>
+            <param name="structures">The array to convert</param>
+        </member>
+        <member name="T:SharpCraft.Dimension">
+            <summary>
+            Class for dimension files
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.Overworld">
+            <summary>
+            The vanilla overworld dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.Nether">
+            <summary>
+            The vanilla nether dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Dimension.End">
+            <summary>
+            The vanilla end dimension
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Dimension.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.DimensionObjects.BaseGenerator,SharpCraft.DimensionObjects.IDimensionType,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Dimension"/>. Inherite from this constructor.
+            </summary>
+            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+            <param name="packNamespace">The namespace the dimension is in</param>
+            <param name="fileName">The name of the dimension file</param>
+            <param name="generator">The generator used for generating the terrain for the dimension</param>
+            <param name="dimensionType">Data about the type of dimension</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="M:SharpCraft.Dimension.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.DimensionObjects.BaseGenerator,SharpCraft.DimensionObjects.IDimensionType,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Dimension"/>.
+            </summary>
+            <param name="packNamespace">The namespace the dimension is in</param>
+            <param name="fileName">The name of the dimension file</param>
+            <param name="generator">The generator used for generating the terrain for the dimension</param>
+            <param name="dimensionType">Data about the type of dimension</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="P:SharpCraft.Dimension.Generator">
+            <summary>
+            The generator used for generating the terrain for the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Dimension.DimensionType">
+            <summary>
+            Data about the type of dimension
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Dimension.GetStream">
+            <summary>
+            Returns the stream this file is going to use for writing it's file
+            </summary>
+            <returns>The stream for this file</returns>
+        </member>
+        <member name="M:SharpCraft.Dimension.AfterDispose">
+            <summary>
+            Clears the things in the file.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Dimension.WriteFile(System.IO.TextWriter)">
+            <summary>
+            Writes the file
+            </summary>
+            <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="M:SharpCraft.Dimension.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this dimension into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.EmptyDimension">
+            <summary>
+            Used for calling dimensions outside this program
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyDimension.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.EmptyDimension"/>
+            </summary>
+            <param name="packNamespace">The namespace the dimension is in</param>
+            <param name="fileName">The name of the dimension</param>
+        </member>
+        <member name="P:SharpCraft.EmptyDimension.FileId">
+            <summary>
+            The name of the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EmptyDimension.PackNamespace">
+            <summary>
+            The namespace the dimension is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyDimension.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this dimension into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="M:SharpCraft.EmptyDimension.GetNamespacedName">
+            <summary>
+            Returns the string used for selecting the dimension
+            </summary>
+            <returns>The string used for selecting the dimension</returns>
+        </member>
+        <member name="M:SharpCraft.EmptyDimension.op_Implicit(System.String)~SharpCraft.EmptyDimension">
+            <summary>
+            Converts a string of the format NAMESPACE:DIMENSION into an <see cref="T:SharpCraft.EmptyDimension"/>
+            </summary>
+            <param name="dimension">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.DimensionType">
+            <summary>
+            Class for dimension type files
+            </summary>
+        </member>
+        <member name="F:SharpCraft.DimensionType.Overworld">
+            <summary>
+            The vanilla overworld dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.DimensionType.Nether">
+            <summary>
+            The vanilla nether dimension
+            </summary>
+        </member>
+        <member name="F:SharpCraft.DimensionType.End">
+            <summary>
+            The vanilla end dimension
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionType.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.DimensionObjects.DimensionTypeObject,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionType"/>. Inherite from this constructor.
+            </summary>
+            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+            <param name="packNamespace">The namespace the type is in</param>
+            <param name="fileName">The name of the dimension type file</param>
+            <param name="dimensionTypeObject">The information about the type</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="M:SharpCraft.DimensionType.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.DimensionObjects.DimensionTypeObject,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionType"/>
+            </summary>
+            <param name="packNamespace">The namespace the type is in</param>
+            <param name="fileName">The name of the dimensiotn type file</param>
+            <param name="dimensionTypeObject">The information about the type</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="P:SharpCraft.DimensionType.DimensionTypeObject">
+            <summary>
+            The information about the type
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionType.GetStream">
+            <summary>
+            Returns the stream this file is going to use for writing it's file
+            </summary>
+            <returns>The stream for this file</returns>
+        </member>
+        <member name="M:SharpCraft.DimensionType.AfterDispose">
+            <summary>
+            Clears the things in the file.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionType.WriteFile(System.IO.TextWriter)">
+            <summary>
+            Writes the file
+            </summary>
+            <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="M:SharpCraft.DimensionType.GetDimensionTypeString">
+            <summary>
+            Returns the string used for chosen this dimension type
+            </summary>
+            <returns>String for chosing this</returns>
+        </member>
+        <member name="T:SharpCraft.EmptyDimensionType">
+            <summary>
+            Used for calling dimension types outside this program
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyDimensionType.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.EmptyDimension"/>
+            </summary>
+            <param name="packNamespace">The namespace the dimension is in</param>
+            <param name="fileName">The name of the dimension</param>
+        </member>
+        <member name="P:SharpCraft.EmptyDimensionType.FileId">
+            <summary>
+            The name of the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EmptyDimensionType.PackNamespace">
+            <summary>
+            The namespace the dimension is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyDimensionType.GetDimensionTypeString">
+            <summary>
+            Returns the string used for chosen this dimension type
+            </summary>
+            <returns>String for chosing this</returns>
+        </member>
+        <member name="M:SharpCraft.EmptyDimensionType.GetNamespacedName">
+            <summary>
+            Returns the string used for selecting the dimension
+            </summary>
+            <returns>The string used for selecting the dimension</returns>
+        </member>
+        <member name="M:SharpCraft.EmptyDimensionType.op_Implicit(System.String)~SharpCraft.EmptyDimensionType">
+            <summary>
+            Converts a string of the format NAMESPACE:DIMENSIONTYPE into an <see cref="T:SharpCraft.EmptyDimensionType"/>
+            </summary>
+            <param name="dimensionType">The string to convert</param>
         </member>
         <member name="T:SharpCraft.IFileCreator">
             <summary>
@@ -17144,7 +17989,7 @@
             <param name="entity">the <see cref="T:SharpCraft.Entity"/> to execute rotated as</param>
             <returns>The function running the command</returns>
         </member>
-        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Dimension(SharpCraft.Dimension)">
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Dimension(SharpCraft.DimensionObjects.IDimension)">
             <summary>
             Executes in the given dimension
             </summary>
@@ -19599,7 +20444,7 @@
             Execute command used for changing the dimension the command is being executed in
             </summary>
         </member>
-        <member name="M:SharpCraft.Commands.ExecuteDimension.#ctor(SharpCraft.Dimension)">
+        <member name="M:SharpCraft.Commands.ExecuteDimension.#ctor(SharpCraft.DimensionObjects.IDimension)">
             <summary>
             Intializes a new <see cref="T:SharpCraft.Commands.ExecuteDimension"/> command
             </summary>
@@ -25158,6 +26003,17 @@
             <param name="setting">The settings for how to write the file</param>
             <returns>The newly created recipe</returns>
         </member>
+        <member name="M:SharpCraft.PackNamespace.Recipe(System.String,SharpCraft.ItemType,SharpCraft.ItemType,SharpCraft.ID.Item,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates a new smithing recipe
+            </summary>
+            <param name="name">The recipe's name</param>
+            <param name="baseItem">The first item in the recipe (NBT will be copied from this item to the output item)</param>
+            <param name="modifierItem">The second item in the recipe</param>
+            <param name="output">The item the recipe outputs (Note that it will copy nbt from <paramref name="baseItem"/>)</param>
+            <param name="setting">The settings for how to write the file</param>
+            <returns>The newly created recipe</returns>
+        </member>
         <member name="M:SharpCraft.PackNamespace.Recipe(System.String)">
             <summary>
             Overwrites the recipe with the given name with an invalid recipe
@@ -25225,6 +26081,25 @@
             Makes the advancement with the file name invalid... which also makes all its children invalid
             </summary>
             <param name="fileName">The name of the file to make invalid</param>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.Dimension(System.String,SharpCraft.DimensionObjects.BaseGenerator,SharpCraft.DimensionObjects.IDimensionType,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates a new dimension
+            </summary>
+            <param name="fileName">The name of the dimension</param>
+            <param name="generator">The generator used for generating the terrain</param>
+            <param name="type">Information about the dimension</param>
+            <param name="writeSetting">The setting for writing the file</param>
+            <returns>The new dimension</returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.DimensionType(System.String,SharpCraft.DimensionObjects.DimensionTypeObject,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates a new dimension type
+            </summary>
+            <param name="fileName">The name of the dimension type</param>
+            <param name="type">Information about the type</param>
+            <param name="writeSetting">The setting for writing the file</param>
+            <returns>The new dimension type</returns>
         </member>
         <member name="M:SharpCraft.PackNamespace.Group(System.String,System.Collections.Generic.List{SharpCraft.IFunction},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
@@ -25849,6 +26724,60 @@
             <param name="stream">The stream used for writing the file</param>
         </member>
         <member name="M:SharpCraft.SmeltRecipe.AfterDispose">
+            <summary>
+            Clears the things in the file.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.SmithingRecipe">
+            <summary>
+            Class for stone cutter recipe files
+            </summary>
+        </member>
+        <member name="M:SharpCraft.SmithingRecipe.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.ItemType,SharpCraft.ItemType,SharpCraft.ID.Item,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.SmithingRecipe"/>
+            </summary>
+            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+            <param name="packNamespace">The namespace the file should be added to</param>
+            <param name="fileName">The name of the file</param>
+            <param name="baseItem">The first item in the recipe (NBT will be copied from this item to the output item)</param>
+            <param name="modifierItem">The second item in the recipe</param>
+            <param name="output">The item the recipe outputs (Note that it will copy nbt from <see cref="P:SharpCraft.SmithingRecipe.BaseItem"/>)</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="M:SharpCraft.SmithingRecipe.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.ItemType,SharpCraft.ItemType,SharpCraft.ID.Item,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.SmithingRecipe"/>
+            </summary>
+            <param name="packNamespace">The namespace the file should be added to</param>
+            <param name="fileName">The name of the file</param>
+            <param name="baseItem">The first item in the recipe (NBT will be copied from this item to the output item)</param>
+            <param name="modifierItem">The second item in the recipe</param>
+            <param name="output">The item the recipe outputs (Note that it will copy nbt from <see cref="P:SharpCraft.SmithingRecipe.BaseItem"/>)</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+        </member>
+        <member name="P:SharpCraft.SmithingRecipe.BaseItem">
+            <summary>
+            The first item in the recipe (NBT will be copied from this item to the output item)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.SmithingRecipe.ModifierItem">
+            <summary>
+            The second item in the recipe
+            </summary>
+        </member>
+        <member name="P:SharpCraft.SmithingRecipe.Output">
+            <summary>
+            The item the recipe outputs (Note that it will copy nbt from <see cref="P:SharpCraft.SmithingRecipe.BaseItem"/>)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.SmithingRecipe.WriteFile(System.IO.TextWriter)">
+            <summary>
+            Writes the file
+            </summary>
+            <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="M:SharpCraft.SmithingRecipe.AfterDispose">
             <summary>
             Clears the things in the file.
             </summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace SharpCraft
@@ -255,6 +256,85 @@ namespace SharpCraft
             }
 
             return selector;
+        }
+
+        /// <summary>
+        /// Throws an exception if the array either is null or it contains null
+        /// </summary>
+        /// <typeparam name="T">The type of array</typeparam>
+        /// <param name="array">The array to check</param>
+        /// <param name="arrayName">The name of the array variable</param>
+        /// <param name="classHolderName">The name of the class holding the array</param>
+        /// <exception cref="ArgumentNullException">If the array is null or contains null</exception>
+        /// <returns>The checked array</returns>
+        public static T[] ValidateNoneNullArray<T>(T[] array, string arrayName, string classHolderName)
+        {
+            if (array is null)
+            {
+                throw new ArgumentNullException(arrayName, classHolderName + " doesn't allow " + arrayName + " to be null.");
+            }
+            foreach(T element in array)
+            {
+                if (element is null)
+                {
+                    throw new ArgumentNullException(arrayName, classHolderName + " doesn't allow element inside of " + arrayName + " to be null.");
+                }
+            }
+            return array;
+        }
+
+        /// <summary>
+        /// Throws an exception if the list either is null or it contains null
+        /// </summary>
+        /// <typeparam name="T">The type of list</typeparam>
+        /// <param name="list">The list to check</param>
+        /// <param name="listName">The name of the list variable</param>
+        /// <param name="classHolderName">The name of the class holding the list</param>
+        /// <exception cref="ArgumentNullException">If the list is null or contains null</exception>
+        /// <returns>The checked list</returns>
+        public static List<T> ValidateNoneNullList<T>(List<T> list, string listName, string classHolderName)
+        {
+            ValidateNoneNullArray(list.ToArray(), listName, classHolderName);
+
+            return list;
+        }
+
+        /// <summary>
+        /// Throws an exception if the given value is outside of the range
+        /// </summary>
+        /// <param name="value">The value to check</param>
+        /// <param name="minimum">The minimum the value can be</param>
+        /// <param name="maximum">The maximum the value can be</param>
+        /// <param name="valueName">The name of the value variable</param>
+        /// <param name="classHolderName">The name of the class holding the value</param>
+        /// <exception cref="ArgumentOutOfRangeException">If the value it outside the range</exception>
+        /// <returns>The checked value</returns>
+        public static int ValidateRange(int value, int minimum, int maximum, string valueName, string classHolderName)
+        {
+            if (value < minimum || value > maximum)
+            {
+                throw new ArgumentOutOfRangeException(valueName, classHolderName + " does not allow " + valueName + " to be outside the range " + minimum + " - " + maximum + ".");
+            }
+            return value;
+        }
+
+        /// <summary>
+        /// Throws an exception if the given value is outside of the range
+        /// </summary>
+        /// <param name="value">The value to check</param>
+        /// <param name="minimum">The minimum the value can be</param>
+        /// <param name="maximum">The maximum the value can be</param>
+        /// <param name="valueName">The name of the value variable</param>
+        /// <param name="classHolderName">The name of the class holding the value</param>
+        /// <exception cref="ArgumentOutOfRangeException">If the value it outside the range</exception>
+        /// <returns>The checked value</returns>
+        public static double ValidateRange(double value, double minimum, double maximum, string valueName, string classHolderName)
+        {
+            if (value < minimum || value > maximum)
+            {
+                throw new ArgumentOutOfRangeException(valueName, classHolderName + " does not allow " + valueName + " to be outside the range " + minimum + " - " + maximum + ".");
+            }
+            return value;
         }
     }
 }

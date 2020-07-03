@@ -32,10 +32,16 @@ namespace SharpCraft.Data
         /// <summary>
         /// Intializes a new <see cref="DataPartObject"/>
         /// </summary>
-        public DataPartObject()
+        public DataPartObject(bool ignoreEmptiness = false)
         {
+            IgnoreEmptiness = ignoreEmptiness;
             values = new List<DataPartPath>();
         }
+
+        /// <summary>
+        /// If true and the object is empty <see cref="IsEmpty"/> will return false
+        /// </summary>
+        public bool IgnoreEmptiness { get; set; }
 
         /// <summary>
         /// Adds a value to this object
@@ -155,6 +161,10 @@ namespace SharpCraft.Data
         /// <returns>True if its empty</returns>
         public bool IsEmpty()
         {
+            if (IgnoreEmptiness)
+            {
+                return false;
+            }
             return values.All(i => i.PathValue.IsEmpty());
         }
     }

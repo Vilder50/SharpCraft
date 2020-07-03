@@ -18,7 +18,7 @@ namespace SharpCraft.JsonObjects
         /// the dimension to detect
         /// </summary>
         [DataTag("dimension", JsonTag = true)]
-        public Dimension? Dimension { get; set; }
+        public DimensionObjects.IDimension? Dimension { get; set; }
 
         /// <summary>
         /// the structure to detect
@@ -87,10 +87,19 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Converts a <see cref="Dimension"/> into a <see cref="Location"/>
+        /// Converts a <see cref="SharpCraft.Dimension"/> into a <see cref="Location"/>
         /// </summary>
-        /// <param name="dimension">The <see cref="Dimension"/> to convert</param>
+        /// <param name="dimension">The <see cref="SharpCraft.Dimension"/> to convert</param>
         public static implicit operator Location(Dimension dimension)
+        {
+            return new Location() { Dimension = dimension };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="EmptyDimension"/> into a <see cref="Location"/>
+        /// </summary>
+        /// <param name="dimension">The <see cref="EmptyDimension"/> to convert</param>
+        public static implicit operator Location(EmptyDimension dimension)
         {
             return new Location() { Dimension = dimension };
         }

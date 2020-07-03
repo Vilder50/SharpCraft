@@ -359,6 +359,33 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Creates a new smithing recipe
+        /// </summary>
+        /// <param name="name">The recipe's name</param>
+        /// <param name="baseItem">The first item in the recipe (NBT will be copied from this item to the output item)</param>
+        /// <param name="modifierItem">The second item in the recipe</param>
+        /// <param name="output">The item the recipe outputs (Note that it will copy nbt from <paramref name="baseItem"/>)</param>
+        /// <param name="setting">The settings for how to write the file</param>
+        /// <returns>The newly created recipe</returns>
+        public SmithingRecipe Recipe(string? name, ItemType baseItem, ItemType modifierItem, ID.Item output, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        {
+            BaseRecipe? existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (BaseRecipe?)GetFile("recipe", name);
+            }
+
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a recipe with the name: " + existingFile.FileId + ". Use GetFile(\"recipe\",\"" + existingFile.FileId + "\") to get it.");
+            }
+            else
+            {
+                return new SmithingRecipe(this, name, baseItem, modifierItem, output, setting);
+            }
+        }
+
+        /// <summary>
         /// Overwrites the recipe with the given name with an invalid recipe
         /// </summary>
         /// <param name="name">The recipe's name</param>
@@ -524,6 +551,57 @@ namespace SharpCraft
             }
 
             new InvalidAdvancement(this, fileName).Dispose();
+        }
+
+        /// <summary>
+        /// Creates a new dimension
+        /// </summary>
+        /// <param name="fileName">The name of the dimension</param>
+        /// <param name="generator">The generator used for generating the terrain</param>
+        /// <param name="type">Information about the dimension</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <returns>The new dimension</returns>
+        public Dimension Dimension(string? fileName, DimensionObjects.BaseGenerator generator, DimensionObjects.IDimensionType type, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        {
+            BaseRecipe? existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseRecipe?)GetFile("dimension", fileName);
+            }
+
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a dimension with the name: " + existingFile.FileId + ". Use GetFile(\"dimension\",\"" + existingFile.FileId + "\") to get it.");
+            }
+            else
+            {
+                return new Dimension(this, fileName, generator, type, writeSetting);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new dimension type
+        /// </summary>
+        /// <param name="fileName">The name of the dimension type</param>
+        /// <param name="type">Information about the type</param>
+        /// <param name="writeSetting">The setting for writing the file</param>
+        /// <returns>The new dimension type</returns>
+        public DimensionType DimensionType(string? fileName, DimensionObjects.DimensionTypeObject type, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        {
+            BaseRecipe? existingFile = null;
+            if (!(fileName is null))
+            {
+                existingFile = (BaseRecipe?)GetFile("dimension_type", fileName);
+            }
+
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a dimension type with the name: " + existingFile.FileId + ". Use GetFile(\"dimension_type\",\"" + existingFile.FileId + "\") to get it.");
+            }
+            else
+            {
+                return new DimensionType(this, fileName, type, writeSetting);
+            }
         }
 
         /// <summary>

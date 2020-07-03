@@ -109,6 +109,43 @@
             Bastion_Remnant,
             Ruined_Portal
         }
+
+        public enum BiomeZoomer
+        {
+            FuzzyOffsetConstantColumnBiomeZoomer,
+            FuzzyOffsetBiomeZoomer,
+        }
 #pragma warning restore 1591
+
+        /// <summary>
+        /// Options for <see cref="DimensionObjects.VanillaNoiseGenerator"/>
+        /// </summary>
+        public enum NoiseGeneratorSetting
+        {
+            /// <summary>
+            /// Normal overworld generation
+            /// </summary>
+            overworld,
+            /// <summary>
+            /// Amplified generation
+            /// </summary>
+            amplified,
+            /// <summary>
+            /// Normal nether generation
+            /// </summary>
+            nether,
+            /// <summary>
+            /// Nether generation but with overworld features
+            /// </summary>
+            caves,
+            /// <summary>
+            /// Generation used for generating the end island
+            /// </summary>
+            end,
+            /// <summary>
+            /// End floating island generation
+            /// </summary>
+            floating_islands
+        }
     }
 }

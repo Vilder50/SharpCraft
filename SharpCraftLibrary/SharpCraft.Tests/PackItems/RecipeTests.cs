@@ -169,5 +169,24 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual("name:reci", new EmptyRecipe(EmptyDatapack.GetPack().Namespace("name"), "reci").GetNamespacedName(), "EmptyRecipe doesn't reutrn correct string");
             Assert.AreEqual("space:name", ((EmptyRecipe)"space:name").GetNamespacedName(), "Implicit string to recipe conversion converts incorrectly");
         }
+
+        [TestMethod]
+        public void TestSmithingRecipe()
+        {
+            //setup
+            using Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator());
+            PackNamespace space = pack.Namespace("space");
+
+            //test
+            SmithingRecipe recipe = space.Recipe("recipe1", ID.Item.dirt, ID.Item.gravel, ID.Item.coarse_dirt, BaseFile.WriteSetting.LockedAuto);
+            string recipeString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/recipes/recipe1.json").writer.ToString();
+            Assert.AreEqual("{\"type\":\"minecraft:smithing\",\"base\":{\"item\":\"minecraft:dirt\"},\"addition\":{\"item\":\"minecraft:gravel\"},\"result\":{\"item\":\"minecraft:coarse_dirt\"}}", recipeString, "smithing recipe file wasn't written correctly");
+            Assert.IsNull(recipe.BaseItem, "BaseItem wasn't cleared");
+            Assert.IsNull(recipe.ModifierItem, "ModifierItem wasn't cleared");
+
+            //exceptions
+            Assert.ThrowsException<ArgumentNullException>(() => space.Recipe("recipe2", null, ID.Item.stone, ID.Item.diamond_sword, BaseFile.WriteSetting.LockedAuto), "Recipe BaseItem may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => space.Recipe("recipe3", ID.Item.diorite, null, ID.Item.diamond_sword, BaseFile.WriteSetting.LockedAuto), "Recipe ModifierItem may not be null");
+        }
     }
 }

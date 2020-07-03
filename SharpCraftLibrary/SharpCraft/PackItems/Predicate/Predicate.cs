@@ -74,7 +74,20 @@ namespace SharpCraft
         /// <param name="stream">The stream used for writing the file</param>
         protected override void WriteFile(TextWriter stream)
         {
-            stream.Write(condition.GetDataString());
+            if (condition is AllCondition andCondition)
+            {
+                List<string> parts = new List<string>();
+
+                foreach (var innerCondition in andCondition.Conditions) {
+                    parts.Add(innerCondition.GetDataString());
+                }
+
+                stream.Write("[" + string.Join(",", parts) + "]");
+            } 
+            else
+            {
+                stream.Write(condition.GetDataString());
+            }
         }
 
         /// <summary>

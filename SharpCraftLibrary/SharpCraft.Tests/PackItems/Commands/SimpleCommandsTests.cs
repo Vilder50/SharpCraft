@@ -61,7 +61,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void LocateCommandTest()
         {
-            Assert.AreEqual("locate EndCity", new LocateStructureCommand(ID.Structure.EndCity).GetCommandString());
+            Assert.AreEqual("locate endcity", new LocateStructureCommand(ID.Structure.EndCity).GetCommandString());
         }
 
         [TestMethod]

@@ -346,6 +346,11 @@ namespace SharpCraft
 
         internal void AddNamespace(BasePackNamespace space)
         {
+            if (space is EmptyNamespace)
+            {
+                return;
+            }
+
             if (namespaces.Any(n => n.Name == space.Name))
             {
                 throw new ArgumentException("Cannot add a namespace to this datapack with the same name as another namespace in this pack");

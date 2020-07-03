@@ -25,7 +25,7 @@ namespace SharpCraft.Items
         /// The dimension of the lodestone the compass is tracking
         /// </summary>
         [Data.DataTag("tag.LodestoneDimension")]
-        public Dimension? LodestoneDimension { get; set; }
+        public DimensionObjects.IDimension? LodestoneDimension { get; set; }
 
         /// <summary>
         /// If the compass is tracking a lodestone

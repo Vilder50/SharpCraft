@@ -474,6 +474,7 @@ namespace SharpCraft
                     public static string Sleep { get; } = "entity.fox.sleep";
                     public static string Spit { get; } = "entity.fox.spit";
                     public static string Sniff { get; } = "entity.fox.sniff";
+                    public static string Teleport { get; } = "entity.fox.teleport";
                 }
                 public static class Chicken
                 {

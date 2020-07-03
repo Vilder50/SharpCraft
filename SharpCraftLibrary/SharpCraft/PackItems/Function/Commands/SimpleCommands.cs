@@ -260,7 +260,7 @@ namespace SharpCraft.Commands
         /// <returns>locate [Structure]</returns>
         public override string GetCommandString()
         {
-            return $"locate {Structure}";
+            return $"locate {Structure.ToString().ToLower()}";
         }
     }
 
@@ -835,11 +835,11 @@ namespace SharpCraft.Commands
             {
                 if (value is null)
                 {
-                    UnderHeight = null;
+                    underHeight = null;
                 }
                 else
                 {
-                    if (UnderHeight < 0 || UnderHeight > 255)
+                    if (value < 0 || value > 255)
                     {
                         throw new ArgumentOutOfRangeException(nameof(UnderHeight), "UnderHeight cannot be smaller than 0 or higher than 255");
                     }

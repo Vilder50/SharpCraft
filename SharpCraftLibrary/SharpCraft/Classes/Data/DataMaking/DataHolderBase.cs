@@ -140,7 +140,7 @@ namespace SharpCraft.Data
         public virtual DataPartObject GetDataTree()
         {
             List<PropertyInfo> dataProperties = GetDataProperties().ToList();
-            DataPartObject rootObject = new DataPartObject();
+            DataPartObject rootObject = new DataPartObject(false);
             foreach (PropertyInfo property in dataProperties)
             {
                 object? data = property.GetValue(this);
@@ -296,7 +296,7 @@ namespace SharpCraft.Data
                         if (addToPath is null)
                         {
                             //If the path doesn't exist yet
-                            DataPartObject continueAt = new DataPartObject();
+                            DataPartObject continueAt = new DataPartObject(dataTagInformation.ForceWriteEmptyCompoundTag);
                             pathAtLocation.AddValue(new DataPartPath(pathParts[i], continueAt, dataTagInformation.JsonTag));
                             pathAtLocation = continueAt;
                         }
@@ -308,6 +308,10 @@ namespace SharpCraft.Data
                                 throw new ArgumentException("The data path " + addToPath.PathName + " is trying to be an object and not an object at the same time.");
                             }
 
+                            if (dataTagInformation.ForceWriteEmptyCompoundTag) 
+                            {
+                                continueAt.IgnoreEmptiness = true;
+                            }
                             pathAtLocation = continueAt;
                         }
                     }

@@ -71,7 +71,7 @@ namespace SharpCraft.Entities
         /// The dimension the entity is in
         /// </summary>
         [Data.DataTag]
-        public Dimension? Dimension { get; set; }
+        public DimensionObjects.IDimension? Dimension { get; set; }
 
         /// <summary>
         /// If the entity is Invulnerable.

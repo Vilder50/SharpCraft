@@ -478,6 +478,7 @@ namespace SharpCraft
                     stairs,
                     stone_bricks,
                     tall_flowers,
+                    fence_gates,
 #pragma warning restore 1591
 
                     /// <summary>
@@ -599,6 +600,11 @@ namespace SharpCraft
                     /// Items piglins pickup.
                     /// </summary>
                     piglin_loved,
+
+                    /// <summary>
+                    /// Bells and lanterns cannot be placed on the bottom of these blocks
+                    /// </summary>
+                    unstable_bottom_center,
                 }
 
                 /// <summary>

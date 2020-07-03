@@ -384,7 +384,7 @@ namespace SharpCraft.FunctionWriters
         /// </summary>
         /// <param name="dimension">The dimension</param>
         /// <returns>The function running the command</returns>
-        public Function Dimension(Dimension dimension)
+        public Function Dimension(DimensionObjects.IDimension dimension)
         {
             ForFunction.AddCommand(new ExecuteDimension(dimension));
             return ForFunction;
