@@ -13029,6 +13029,77 @@
             weather sounds
             </summary>
         </member>
+        <member name="T:SharpCraft.MapColors">
+            <summary>
+            Holds all the different map colors
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MapColors.GetMapColors">
+            <summary>
+            Returns a list of all the map colors
+            </summary>
+            <returns>A list of all map colors</returns>
+        </member>
+        <member name="M:SharpCraft.MapColors.GetClosestColor(SharpCraft.RGBColor,SharpCraft.MapColors.MapColor[])">
+            <summary>
+            Finds the closest map color to the given color
+            </summary>
+            <param name="findColor">The color to find</param>
+            <param name="colorList">An array of map colors to search in</param>
+            <returns>The closest color</returns>
+        </member>
+        <member name="T:SharpCraft.MapColors.MapColor">
+            <summary>
+            Class for map colors
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MapColors.MapColor.#ctor(System.Int32,SharpCraft.ID.Block,System.Byte,System.Byte,System.Byte,System.Int32,System.Nullable{SharpCraft.ID.Block})">
+            <summary>
+            Intializes a new map color
+            </summary>
+            <param name="blue">The blue color part</param>
+            <param name="green">The green color part</param>
+            <param name="red">The red color part</param>
+            <param name="block">The block which has the color</param>
+            <param name="supportBlock">A block which has to be under the actual block</param>
+            <param name="id">The id of the color</param>
+            <param name="height">0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the north direction.</param>
+        </member>
+        <member name="M:SharpCraft.MapColors.MapColor.#ctor(System.Int32,SharpCraft.ID.Block,SharpCraft.RGBColor,System.Int32,System.Nullable{SharpCraft.ID.Block})">
+            <summary>
+            Intializes a new map color
+            </summary>
+            <param name="color">The color of the block</param>
+            <param name="block">The block which has the color</param>
+            <param name="supportBlock">A block which has to be under the actual block</param>
+            <param name="id">The id of the color</param>
+            <param name="height">0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the north direction.</param>
+        </member>
+        <member name="P:SharpCraft.MapColors.MapColor.Color">
+            <summary>
+            The color of the block
+            </summary>
+        </member>
+        <member name="P:SharpCraft.MapColors.MapColor.Block">
+            <summary>
+            The block which has the color
+            </summary>
+        </member>
+        <member name="P:SharpCraft.MapColors.MapColor.SupportBlock">
+            <summary>
+            A block which has to be under the actual block
+            </summary>
+        </member>
+        <member name="P:SharpCraft.MapColors.MapColor.Id">
+            <summary>
+            The id of the color
+            </summary>
+        </member>
+        <member name="P:SharpCraft.MapColors.MapColor.Height">
+            <summary>
+            0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the north direction.
+            </summary>
+        </member>
         <member name="T:SharpCraft.IBlockType">
             <summary>
             Interface for classes which can be converted into <see cref="T:SharpCraft.BlockType"/>
@@ -14015,6 +14086,26 @@
             <summary>
             The block the player is in.
             Note: block data is not supported.
+            </summary>
+        </member>
+        <member name="T:SharpCraft.AdvancementObjects.InteractedWithEntityTrigger">
+            <summary>
+            Gets triggered when 2 animals are bred together
+            </summary>
+        </member>
+        <member name="M:SharpCraft.AdvancementObjects.InteractedWithEntityTrigger.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.AdvancementObjects.InteractedWithEntityTrigger"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.InteractedWithEntityTrigger.Item">
+            <summary>
+            The item which the player used for interacting with the entity
+            </summary>
+        </member>
+        <member name="P:SharpCraft.AdvancementObjects.InteractedWithEntityTrigger.Entity">
+            <summary>
+            The entity the player interacted with
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.InventoryChangedTrigger">
@@ -16265,9 +16356,34 @@
             Makes the time of day fixed to specific time if set.
             </summary>
         </member>
-        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.HasEnderDragon">
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.PiglinSafe">
             <summary>
-            If an ender dragon should spawn in the dimension
+            If piglins are save in the dimension (dont get converted to zombiefied)
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.BedWorks">
+            <summary>
+            If players can sleep in beds in the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.RespawnAnchorWorks">
+            <summary>
+            If players can use respawn anchors in the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.HasRaids">
+            <summary>
+            If players can cause villager raids to happen in the dimension
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.LogicalHeight">
+            <summary>
+            Height used for some things like max height players can teleport with chorus fruit
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.DimensionTypeObject.InfiniteBurningBlocks">
+            <summary>
+            Blocks which burns forever in the dimension
             </summary>
         </member>
         <member name="M:SharpCraft.DimensionObjects.DimensionTypeObject.GetDataTree">
