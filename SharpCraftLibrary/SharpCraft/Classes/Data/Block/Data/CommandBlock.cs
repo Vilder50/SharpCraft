@@ -92,9 +92,9 @@ namespace SharpCraft.Blocks
         public bool? DConditionMet { get; set; }
 
         /// <summary>
-        /// If the command block should be able to run multiple times in the same tick.
+        /// False if the command block should be able to run multiple times in the same tick. True if it should only be able to run once.
         /// </summary>
         [Data.DataTag("UpdateLastExecution", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public bool? DCanRunMultipleTimes { get; set; }
+        public bool? DCanOnlyRunOnce { get; set; }
     }
 }

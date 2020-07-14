@@ -109,12 +109,6 @@
             Bastion_Remnant,
             Ruined_Portal
         }
-
-        public enum BiomeZoomer
-        {
-            FuzzyOffsetConstantColumnBiomeZoomer,
-            FuzzyOffsetBiomeZoomer,
-        }
 #pragma warning restore 1591
 
         /// <summary>

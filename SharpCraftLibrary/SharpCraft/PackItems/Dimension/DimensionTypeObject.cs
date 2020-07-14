@@ -52,13 +52,40 @@ namespace SharpCraft.DimensionObjects
         public int? FixedTime { get; set; }
 
         /// <summary>
-        /// If an ender dragon should spawn in the dimension
+        /// If piglins are save in the dimension (dont get converted to zombiefied)
         /// </summary>
-        [DataTag("ender_dragon", JsonTag = true)]
-        public bool? HasEnderDragon { get; set; }
+        [DataTag("piglin_safe", JsonTag = true)]
+        public bool? PiglinSafe { get; set; }
 
-        [DataTag("biome_zoomer", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-        public ID.BiomeZoomer? BiomeZoomer { get; set; }
+        /// <summary>
+        /// If players can sleep in beds in the dimension
+        /// </summary>
+        [DataTag("bed_works", JsonTag = true)]
+        public bool? BedWorks { get; set; }
+
+        /// <summary>
+        /// If players can use respawn anchors in the dimension
+        /// </summary>
+        [DataTag("respawn_anchor_works", JsonTag = true)]
+        public bool? RespawnAnchorWorks { get; set; }
+
+        /// <summary>
+        /// If players can cause villager raids to happen in the dimension
+        /// </summary>
+        [DataTag("has_raids", JsonTag = true)]
+        public bool? HasRaids { get; set; }
+
+        /// <summary>
+        /// Height used for some things like max height players can teleport with chorus fruit
+        /// </summary>
+        [DataTag("logical_height", JsonTag = true)]
+        public int? LogicalHeight { get; set; }
+
+        /// <summary>
+        /// Blocks which burns forever in the dimension
+        /// </summary>
+        [DataTag("infiniburn", JsonTag = true)]
+        public IGroup<BlockType>? InfiniteBurningBlocks { get; set; }
 
         /// <summary>
         /// Returns the data in this object as a data part object
@@ -70,11 +97,11 @@ namespace SharpCraft.DimensionObjects
 
             if (FixedTime is null)
             {
-                baseTree.AddValue(new DataPartPath("fixed_time", new DataPartTag(false,null,true), true));
-            } 
+                baseTree.AddValue(new DataPartPath("fixed_time", new DataPartTag(false, null, true), true));
+            }
             else
             {
-                baseTree.AddValue(new DataPartPath("fixed_time", new DataPartTag(FixedTime,null,true), true));
+                baseTree.AddValue(new DataPartPath("fixed_time", new DataPartTag(FixedTime, null, true), true));
             }
 
             return baseTree;

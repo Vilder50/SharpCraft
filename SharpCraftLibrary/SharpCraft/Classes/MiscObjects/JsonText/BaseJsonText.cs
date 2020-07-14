@@ -80,7 +80,7 @@ namespace SharpCraft
         /// Gets the raw JSON string
         /// </summary>
         /// <returns>the raw JSON string used by the game</returns>
-        public string GetJsonString()
+        public virtual string GetJsonString()
         {
             List<string> outString = new List<string>();
 
@@ -207,6 +207,33 @@ namespace SharpCraft
         public static implicit operator BaseJsonText(ID.Key key)
         {
             return new KeyBind(key);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(BlockDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(EntityDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(StorageDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
         }
     }
 }

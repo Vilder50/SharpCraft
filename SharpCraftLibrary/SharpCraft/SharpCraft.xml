@@ -711,9 +711,9 @@
             If the command block ran last time
             </summary>
         </member>
-        <member name="P:SharpCraft.Blocks.CommandBlock.DCanRunMultipleTimes">
+        <member name="P:SharpCraft.Blocks.CommandBlock.DCanOnlyRunOnce">
             <summary>
-            If the command block should be able to run multiple times in the same tick.
+            False if the command block should be able to run multiple times in the same tick. True if it should only be able to run once.
             </summary>
         </member>
         <member name="T:SharpCraft.Blocks.Comparator">
@@ -8898,6 +8898,24 @@
             </summary>
             <param name="key">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
         </member>
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.BlockDataLocation)~SharpCraft.BaseJsonText">
+            <summary>
+            Converts a data location into a <see cref="T:SharpCraft.BaseJsonText"/> object
+            </summary>
+            <param name="dataLocation">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.EntityDataLocation)~SharpCraft.BaseJsonText">
+            <summary>
+            Converts a data location into a <see cref="T:SharpCraft.BaseJsonText"/> object
+            </summary>
+            <param name="dataLocation">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
+        </member>
+        <member name="M:SharpCraft.BaseJsonText.op_Implicit(SharpCraft.StorageDataLocation)~SharpCraft.BaseJsonText">
+            <summary>
+            Converts a data location into a <see cref="T:SharpCraft.BaseJsonText"/> object
+            </summary>
+            <param name="dataLocation">the <see cref="T:SharpCraft.ID.Key"/> to convert</param>
+        </member>
         <member name="T:SharpCraft.JsonText.BaseClickEvent">
             <summary>
             Base class for click events in json text
@@ -9149,6 +9167,34 @@
             Returns the value of the event
             </summary>
             <returns>The value of the event</returns>
+        </member>
+        <member name="T:SharpCraft.JsonText.UnformattedText">
+            <summary>
+            Class for displaying unformatted json text. Note that this cannot be formatted or contain extra json text.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.JsonText.UnformattedText.#ctor(System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.JsonText.UnformattedText"/>
+            </summary>
+            <param name="displayText">The text to display</param>
+        </member>
+        <member name="P:SharpCraft.JsonText.UnformattedText.DisplayText">
+            <summary>
+            The text to display
+            </summary>
+        </member>
+        <member name="M:SharpCraft.JsonText.UnformattedText.GetSpecificJsonString">
+            <summary>
+            returns the raw string specific for this class
+            </summary>
+            <returns>The raw string specific for this class</returns>
+        </member>
+        <member name="M:SharpCraft.JsonText.UnformattedText.GetJsonString">
+            <summary>
+            Gets the raw JSON string
+            </summary>
+            <returns>the raw JSON string used by the game</returns>
         </member>
         <member name="T:SharpCraft.JsonText.Text">
             <summary>
@@ -15954,6 +16000,25 @@
             The datapack the items are for
             </summary>
         </member>
+        <member name="T:SharpCraft.ItemGetter">
+            <summary>
+            For making it easier to make items. (Returns the item if it already exists. Creates one if it doesn't)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ItemGetter.#ctor">
+            <summary>
+            Intializes a new item getter
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ItemGetter.GetItem``1(System.String,System.Func{``0})">
+            <summary>
+            Creates a new item if it doesn't exist already
+            </summary>
+            <typeparam name="T">The type of item to get/create</typeparam>
+            <param name="name">The unique name of the item</param>
+            <param name="itemMaker">A function for creating the item if it doesn't exist</param>
+            <returns>The item</returns>
+        </member>
         <member name="T:SharpCraft.LoadedBlockItems">
             <summary>
             Used for getting locations which a force loaded. (Use a datapack to get this item)
@@ -18551,6 +18616,17 @@
             <summary>
             Runs the given commands as a function (The function is made as a sibling function)
             </summary>
+            <param name="writer">the commands to run</param>
+            <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
+            (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
+            <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
+            <returns>The function</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.WorldCommands.Function(System.String,SharpCraft.Function.FunctionWriter,SharpCraft.NoneNegativeTime{System.Int32},System.Boolean)">
+            <summary>
+            Runs the given commands as a function (The function is made as a sibling function)
+            </summary>
+            <param name="name">The name of the sibling function</param>
             <param name="writer">the commands to run</param>
             <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
             (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
