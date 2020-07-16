@@ -10,7 +10,7 @@ namespace SharpCraft.DimensionObjects
     /// </summary>
     public class VanillaNoiseGenerator : BaseGenerator
     {
-        private BaseBiomeGenerator biomeGenerator;
+        private BaseBiomeGenerator biomeGenerator = null!;
 
         /// <summary>
         /// Intializes a new <see cref="VanillaNoiseGenerator"/>

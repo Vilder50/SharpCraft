@@ -41,7 +41,7 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass : BaseFile
+        class BaseFileTestClass : BaseFile<TextWriter>
         {
             public static TextWriter WriterToUse;
             public bool RandomValue = false;

@@ -346,7 +346,7 @@ namespace SharpCraft
 
         internal void AddNamespace(BasePackNamespace space)
         {
-            if (space is EmptyNamespace)
+            if (space is EmptyNamespace && !(this is EmptyDatapack))
             {
                 return;
             }

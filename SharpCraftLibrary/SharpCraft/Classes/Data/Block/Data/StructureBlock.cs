@@ -19,7 +19,7 @@ namespace SharpCraft.Blocks
         /// Creates a structure block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public StructureBlock(ID.Block type = SharpCraft.ID.Block.barrel) : base(type) { }
+        public StructureBlock(ID.Block type = SharpCraft.ID.Block.structure_block) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -39,14 +39,14 @@ namespace SharpCraft.Blocks
 
 
         /// <summary>
-        /// The name of the structure
+        /// The structure the structure block should place/save
         /// </summary>
         [Data.DataTag("name")]
-        public string? DName { get; set; }
+        public IStructure? DStructure { get; set; }
+
         /// <summary>
         /// The name of the structure's creator
         /// </summary>
-
         [Data.DataTag("metadata")]
         public string? DMetadata { get; set; }
 
@@ -78,7 +78,7 @@ namespace SharpCraft.Blocks
         /// The mode the structure block is in
         /// </summary>
         [Data.DataTag("mode", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public ID.StructureMode? DMode { get; set; }
+        public ID.StructureDataMode? DMode { get; set; }
 
         /// <summary>
         /// If the structure block should ignore entities

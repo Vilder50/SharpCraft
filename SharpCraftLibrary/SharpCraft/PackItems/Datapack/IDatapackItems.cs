@@ -20,7 +20,7 @@ namespace SharpCraft
     /// </summary>
     public class ItemGetter
     {
-        Dictionary<string, object> items;
+        readonly Dictionary<string, object> items;
 
         /// <summary>
         /// Intializes a new item getter

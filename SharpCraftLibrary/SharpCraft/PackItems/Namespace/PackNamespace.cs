@@ -744,6 +744,49 @@ namespace SharpCraft
             }
         }
 
+        /// <summary>
+        /// Creates and returns a structure
+        /// </summary>
+        /// <param name="name">The name of the predicate file</param>
+        /// <param name="blockPalettes">The pallete used for the structure</param>
+        /// <param name="blocksInStructure">The blocks in the structure</param>
+        /// <param name="entities">Entities in the structure</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The created structure</returns>
+        public Structure Structure(string? name, Block[][] blockPalettes, Structure.Block[] blocksInStructure, Entities.BasicEntity[] entities, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Structure? existingFile = null;
+            if (!(name is null))
+            {
+                existingFile = (Structure?)GetFile("structure", name);
+            }
+            if (!(existingFile is null))
+            {
+                throw new ArgumentException("There already exists a structure with the name: " + existingFile.FileId + ". Use GetFile(\"structure\",\"" + existingFile.FileId + "\") to get it.");
+            }
+            else
+            {
+                return new Structure(this, name, blockPalettes, blocksInStructure, entities, writeSetting);
+            }
+        }
+
+        /// <summary>
+        /// Creates and returns a structure
+        /// </summary>
+        /// <param name="name">The name of the predicate file</param>
+        /// <param name="blocks">The blocks in the structure. 0:y, 1: x, 2: z</param>
+        /// <param name="entities">Entities in the structure</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The created structure</returns>
+        public Structure Structure(string? name, Block?[,,]? blocks, Entities.BasicEntity[]? entities, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.LockedAuto)
+        {
+            Entities.BasicEntity[] entityArray = entities ?? new Entities.BasicEntity[] { };
+            Block?[,,] blockArray = blocks ?? new Block[,,] { };
+            var convertedBlocks = SharpCraft.Structure.ConvertBlocksToStructure(blockArray);
+
+            return Structure(name, new Block[][] { convertedBlocks.blockPalette }, convertedBlocks.blocksInStructure, entityArray, writeSetting);
+        }
+
         private void ThrowExceptionOnGroupStacking<TItem>(BaseGroup<TItem> existingFile, bool append, BaseFile.WriteSetting writeSetting) where TItem : IGroupable
         {
             if (existingFile.Disposed)

@@ -11,7 +11,7 @@ namespace SharpCraft
     /// <summary>
     /// Base class for recipe files
     /// </summary>
-    public abstract class BaseRecipe : BaseFile, IRecipe, IConvertableToDataTag
+    public abstract class BaseRecipe : BaseFile<TextWriter>, IRecipe, IConvertableToDataTag
     {
         /// <summary>
         /// Intializes a new <see cref="BaseRecipe"/>

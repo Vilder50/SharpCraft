@@ -16,7 +16,7 @@ namespace SharpCraft
     /// Abstract class for Groups of an item.
     /// </summary>
     /// <typeparam name="TItem">The item the group is for</typeparam>
-    public abstract class BaseGroup<TItem> : BaseFile, IGroup<TItem> where TItem : IGroupable
+    public abstract class BaseGroup<TItem> : BaseFile<TextWriter>, IGroup<TItem> where TItem : IGroupable
     {
         private List<TItem> items = null!;
         private bool appendGroup;

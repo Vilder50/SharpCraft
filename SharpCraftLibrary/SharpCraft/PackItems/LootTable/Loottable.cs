@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for loot table files
     /// </summary>
-    public class LootTable : BaseFile, ILootTable
+    public class LootTable : BaseFile<TextWriter>, ILootTable
     {
         /// <summary>
         /// Loot table types

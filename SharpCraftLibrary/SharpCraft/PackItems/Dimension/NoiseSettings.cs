@@ -52,6 +52,9 @@ namespace SharpCraft.DimensionObjects
         private double xZFactor;
         private double xZScale;
 
+        /// <summary>
+        /// Scales the noise on the horizontal axis
+        /// </summary>
         [DataTag("xz_scale", JsonTag = true)]
         public double XZScale { get => xZScale; set => xZScale = Utils.ValidateRange(value, 0.001, 1000, nameof(XZScale), nameof(NoiseSamplingSetting)); }
 
@@ -61,6 +64,9 @@ namespace SharpCraft.DimensionObjects
         [DataTag("xz_factor", JsonTag = true)]
         public double XZFactor { get => xZFactor; set => xZFactor = Utils.ValidateRange(value, 0.001, 1000, nameof(XZFactor), nameof(NoiseSamplingSetting)); }
 
+        /// <summary>
+        /// Scales the noise on the vertical axis
+        /// </summary>
         [DataTag("y_scale", JsonTag = true)]
         public double YScale { get => yScale; set => yScale = Utils.ValidateRange(value, 0.001, 1000, nameof(YScale), nameof(NoiseSamplingSetting)); }
 

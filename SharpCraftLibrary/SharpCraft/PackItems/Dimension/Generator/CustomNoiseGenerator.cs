@@ -19,6 +19,7 @@ namespace SharpCraft.DimensionObjects
         private Block defaultBlock = null!;
         private int sizeVertical;
         private int sizeHorizontal;
+        private double densityOffset;
 
         /// <summary>
         /// Intializes a new <see cref="CustomNoiseGenerator"/>
@@ -82,9 +83,15 @@ namespace SharpCraft.DimensionObjects
         [DataTag("settings.noise.sampling", JsonTag = true)]
         public NoiseSamplingSetting Sampling { get => sampling; set => sampling = value ?? throw new ArgumentNullException(nameof(Sampling), "Sampling may not be null"); }
 
+        /// <summary>
+        /// Changes the x/z scale of the landmass
+        /// </summary>
         [DataTag("settings.noise.size_horizontal", JsonTag = true)]
         public int SizeHorizontal { get => sizeHorizontal; set => sizeHorizontal = Utils.ValidateRange(value, 1, 4, nameof(sizeHorizontal), nameof(CustomNoiseGenerator)); }
 
+        /// <summary>
+        /// The y scale of the landmass.
+        /// </summary>
         [DataTag("settings.noise.size_vertical", JsonTag = true)]
         public int SizeVertical { get => sizeVertical; set => sizeVertical = Utils.ValidateRange(value, 1, 4, nameof(SizeVertical), nameof(CustomNoiseGenerator)); }
 
@@ -101,7 +108,7 @@ namespace SharpCraft.DimensionObjects
         /// Changes the average of land level. (-1 to 1)
         /// </summary>
         [DataTag("settings.noise.density_offset", JsonTag = true)]
-        public double DensityOffset { get; set; }
+        public double DensityOffset { get => densityOffset; set => densityOffset = Utils.ValidateRange(value, -1, 1, nameof(DensityFactor), nameof(CustomNoiseGenerator)); }
 
         [DataTag("settings.noise.random_density_offset", JsonTag = true)]
         public bool? RandomDensityOffset { get; set; }

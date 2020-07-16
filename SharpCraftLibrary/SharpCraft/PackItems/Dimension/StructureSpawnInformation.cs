@@ -9,7 +9,7 @@ namespace SharpCraft.DimensionObjects
     /// <summary>
     /// Class for holding data about a structure used for dimension generation.
     /// </summary>
-    public class Structure : DataHolderBase
+    public class StructureSpawnInformation : DataHolderBase
     {
         private int spacing;
         private int separation;
@@ -21,7 +21,7 @@ namespace SharpCraft.DimensionObjects
         /// <param name="spacing">The maximum distance in chunks between the structures</param>
         /// <param name="separation">The minimum distance in chunks between the structures</param>
         /// <param name="salt">A random number added to the seed to make structures random</param>
-        public Structure(ID.Structure structure, int spacing, int separation, int salt)
+        public StructureSpawnInformation(ID.Structure structure, int spacing, int separation, int salt)
         {
             StructureType = structure;
             SetSpacingAndSeperation(spacing, separation);
@@ -84,13 +84,13 @@ namespace SharpCraft.DimensionObjects
     /// </summary>
     public class StructureList : DataHolderBase
     {
-        private List<Structure> structures = new List<Structure>();
+        private List<StructureSpawnInformation> structures = new List<StructureSpawnInformation>();
 
         /// <summary>
         /// Intializes a new <see cref="StructureList"/>
         /// </summary>
         /// <param name="structures">The list of structures</param>
-        public StructureList(List<Structure> structures)
+        public StructureList(List<StructureSpawnInformation> structures)
         {
             Structures = structures;
         }
@@ -99,7 +99,7 @@ namespace SharpCraft.DimensionObjects
         /// Intializes a new <see cref="StructureList"/>
         /// </summary>
         /// <param name="structures">The list of structures</param>
-        public StructureList(params Structure[] structures)
+        public StructureList(params StructureSpawnInformation[] structures)
         {
             Structures = structures.ToList();
         }
@@ -107,7 +107,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// The list of structures
         /// </summary>
-        public List<Structure> Structures { get => structures; set => structures = Utils.ValidateNoneNullList(value, nameof(Structures), nameof(StructureList)); }
+        public List<StructureSpawnInformation> Structures { get => structures; set => structures = Utils.ValidateNoneNullList(value, nameof(Structures), nameof(StructureList)); }
 
         /// <summary>
         /// Returns the data from the list
@@ -117,7 +117,7 @@ namespace SharpCraft.DimensionObjects
         {
             DataPartObject baseObject = new DataPartObject(true);
 
-            foreach (Structure structure in Structures)
+            foreach (StructureSpawnInformation structure in Structures)
             {
                 baseObject.AddValue(new DataPartPath("minecraft:" + structure.StructureType.ToString().ToLower(), structure.GetDataTree(), true));
             }
@@ -129,7 +129,7 @@ namespace SharpCraft.DimensionObjects
         /// Converts a list of <see cref="Structure"/>s into a <see cref="StructureList"/>
         /// </summary>
         /// <param name="structures">The list to convert</param>
-        public static implicit operator StructureList(List<Structure> structures)
+        public static implicit operator StructureList(List<StructureSpawnInformation> structures)
         {
             return new StructureList(structures);
         }
@@ -138,7 +138,7 @@ namespace SharpCraft.DimensionObjects
         /// Converts an array of <see cref="Structure"/>s into a <see cref="StructureList"/>
         /// </summary>
         /// <param name="structures">The array to convert</param>
-        public static implicit operator StructureList(Structure[] structures)
+        public static implicit operator StructureList(StructureSpawnInformation[] structures)
         {
             return new StructureList(structures);
         }

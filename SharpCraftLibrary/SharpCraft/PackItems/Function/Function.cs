@@ -8,7 +8,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for function files
     /// </summary>
-    public class Function : BaseFile, IFunction
+    public class Function : BaseFile<TextWriter>, IFunction
     {
         /// <summary>
         /// Used to add commands to the given function

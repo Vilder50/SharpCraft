@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.IO;
 
 namespace SharpCraft.Data
 {
@@ -20,6 +21,17 @@ namespace SharpCraft.Data
         /// </summary>
         /// <returns>The data in this object</returns>
         string GetDataString();
+
+        /// <summary>
+        /// Writes the type of nbt data to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        void WriteTypeNbtToStream(BinaryWriter stream);
+        /// <summary>
+        /// Writes the data as nbt to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        void WriteNbtToStream(BinaryWriter stream);
     }
 
     /// <summary>
@@ -167,6 +179,28 @@ namespace SharpCraft.Data
             }
             return values.All(i => i.PathValue.IsEmpty());
         }
+
+        /// <summary>
+        /// Writes the type of nbt data to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteTypeNbtToStream(BinaryWriter stream)
+        {
+            stream.Write((byte)10);
+        }
+
+        /// <summary>
+        /// Writes the data as nbt to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteNbtToStream(BinaryWriter stream)
+        {
+            values.ForEach(value =>
+            {
+                value.WriteNbtToStream(stream);
+            });
+            stream.Write((byte)0);
+        }
     }
 
     /// <summary>
@@ -284,9 +318,27 @@ namespace SharpCraft.Data
         }
 
         /// <summary>
+        /// Intializes a new <see cref="DataPartArray"/> with the given value
+        /// </summary>
+        /// <param name="data">The thing which is inside the array</param>
+        /// <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
+        /// <param name="forceArrayType">The type of array. Used for marking the type of array in case the array contains 0 items</param>
+        /// <param name="forceType">a type used for converting the thing in the array correctly</param>
+        /// <param name="isJson">If the datatags in the array should be in json format</param>
+        public DataPartArray(object data, ID.NBTTagType? forceArrayType, ID.NBTTagType? forceType, object?[] conversionParams, bool isJson = false): this(data, forceType, conversionParams, isJson)
+        {
+            ArrayType = forceArrayType;
+        }
+
+        /// <summary>
         /// If the datatags in the array should be in json format
         /// </summary>
         public bool IsJson { get; set; }
+
+        /// <summary>
+        /// Forces the array to be a tag list when converted to nbt
+        /// </summary>
+        public bool ForceAsTagList { get; set; }
 
         /// <summary>
         /// Adds an item to this array
@@ -405,6 +457,100 @@ namespace SharpCraft.Data
         public bool IsEmpty()
         {
             return isEmpty;
+        }
+
+        /// <summary>
+        /// Writes the type of nbt data to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteTypeNbtToStream(BinaryWriter stream)
+        {
+            if (ForceAsTagList)
+            {
+                stream.Write((byte)9);
+                return;
+            }
+            switch (ArrayType)
+            {
+                case ID.NBTTagType.TagByteArray:
+                    stream.Write((byte)7);
+                    break;
+                case ID.NBTTagType.TagIntArray:
+                    stream.Write((byte)11);
+                    break;
+                case ID.NBTTagType.TagLongArray:
+                    stream.Write((byte)12);
+                    break;
+                case ID.NBTTagType.TagStringArray:
+                case ID.NBTTagType.TagNamespacedStringArray:
+                    stream.Write((byte)9);
+                    break;
+                default:
+                    stream.Write((byte)9);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Writes the data as nbt to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteNbtToStream(BinaryWriter stream)
+        {
+            switch (ArrayType)
+            {
+                case ID.NBTTagType.TagByteArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)1);
+                    }
+                    break;
+                case ID.NBTTagType.TagIntArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)3);
+                    }
+                    break;
+                case ID.NBTTagType.TagLongArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)4);
+                    }
+                    break;
+                case ID.NBTTagType.TagFloatArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)5);
+                    }
+                    break;
+                case ID.NBTTagType.TagShortArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)2);
+                    }
+                    break;
+                case ID.NBTTagType.TagDoubleArray:
+                    if (ForceAsTagList)
+                    {
+                        stream.Write((byte)6);
+                    }
+                    break;
+                case ID.NBTTagType.TagStringArray:
+                case ID.NBTTagType.TagNamespacedStringArray:
+                    stream.Write((byte)8);
+                    break;
+                case ID.NBTTagType.TagArrayArray:
+                    stream.Write((byte)9);
+                    break;
+                default:
+                    stream.Write((byte)10);
+                    break;
+            }
+            stream.Write(BitConverter.GetBytes(items.Count).Reverse().ToArray());
+            items.ForEach(item =>
+            {
+                item.WriteNbtToStream(stream);
+            });
         }
     }
 
@@ -654,6 +800,81 @@ namespace SharpCraft.Data
                 };
             }
         }
+
+        /// <summary>
+        /// Writes the type of nbt data to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteTypeNbtToStream(BinaryWriter stream)
+        {
+            switch (TagType)
+            {
+                case ID.NBTTagType.TagByte:
+                    stream.Write((byte)1);
+                    break;
+                case ID.NBTTagType.TagShort:
+                    stream.Write((byte)2);
+                    break;
+                case ID.NBTTagType.TagInt:
+                    stream.Write((byte)3);
+                    break;
+                case ID.NBTTagType.TagLong:
+                    stream.Write((byte)4);
+                    break;
+                case ID.NBTTagType.TagFloat:
+                    stream.Write((byte)5);
+                    break;
+                case ID.NBTTagType.TagDouble:
+                    stream.Write((byte)6);
+                    break;
+                case ID.NBTTagType.TagString:
+                case ID.NBTTagType.TagNamespacedString:
+                    stream.Write((byte)8);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Writes the data as nbt to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteNbtToStream(BinaryWriter stream)
+        {
+            switch (TagType)
+            {
+                case ID.NBTTagType.TagByte:
+                    if (value is bool)
+                    {
+                        stream.Write((bool)value!? (sbyte)1 : (sbyte)0);
+                    }
+                    else
+                    {
+                        stream.Write((sbyte)value!);
+                    }
+                    break;
+                case ID.NBTTagType.TagShort:
+                    stream.Write(BitConverter.GetBytes((short)value!).Reverse().ToArray());
+                    break;
+                case ID.NBTTagType.TagInt:
+                    stream.Write(BitConverter.GetBytes((int)value!).Reverse().ToArray());
+                    break;
+                case ID.NBTTagType.TagLong:
+                    stream.Write(BitConverter.GetBytes((long)value!).Reverse().ToArray());
+                    break;
+                case ID.NBTTagType.TagFloat:
+                    stream.Write(BitConverter.GetBytes((float)value!).Reverse().ToArray());
+                    break;
+                case ID.NBTTagType.TagDouble:
+                    stream.Write(BitConverter.GetBytes((double)value!).Reverse().ToArray());
+                    break;
+                case ID.NBTTagType.TagString:
+                    DataPartPath.WriteStringToStream((string)value!, stream);
+                    break;
+                case ID.NBTTagType.TagNamespacedString:
+                    DataPartPath.WriteStringToStream("minecraft:" + value!.ToString(), stream);
+                    break;
+            }
+        }
     }
 
     /// <summary>
@@ -707,5 +928,30 @@ namespace SharpCraft.Data
         /// The value with the path
         /// </summary>
         public IDataPartPathEnding PathValue { get; set; }
+
+        /// <summary>
+        /// Writes the data as nbt to a binary stream
+        /// </summary>
+        /// <param name="stream">The stream to write to</param>
+        public void WriteNbtToStream(BinaryWriter stream)
+        {
+            if (!PathValue.IsEmpty())
+            {
+                PathValue.WriteTypeNbtToStream(stream);
+                WriteStringToStream(pathName, stream);
+                PathValue.WriteNbtToStream(stream);
+            }
+        }
+
+        /// <summary>
+        /// Writes a string to a binary stream
+        /// </summary>
+        /// <param name="text">The string to write</param>
+        /// <param name="stream">The stream</param>
+        public static void WriteStringToStream(string text, BinaryWriter stream)
+        {
+            stream.Write(BitConverter.GetBytes((ushort)text.Length).Reverse().ToArray());
+            stream.Write(System.Text.Encoding.UTF8.GetBytes(text));
+        }
     }
 }

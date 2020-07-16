@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for dimension files
     /// </summary>
-    public class Dimension : BaseFile, IDimension
+    public class Dimension : BaseFile<TextWriter>, IDimension
     {
         /// <summary>
         /// The vanilla overworld dimension

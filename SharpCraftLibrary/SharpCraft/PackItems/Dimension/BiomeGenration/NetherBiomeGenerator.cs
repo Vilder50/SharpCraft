@@ -31,28 +31,44 @@ namespace SharpCraft.DimensionObjects
         /// </summary>
         public class Biome : DataHolderBase
         {
+            private float altitude;
+            private float weirdness;
+            private float offset;
+
             /// <summary>
             /// The biome to generate
             /// </summary>
             [DataTag("biome", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
             public ID.Biome BiomeType { get; set; }
 
-            [DataTag("altitude", JsonTag = true)]
-            public float Altitude { get; set; }
-
-            [DataTag("weirdness", JsonTag = true)]
-            public float Weirdness { get; set; }
-
-            [DataTag("offset", JsonTag = true)]
-            public float Offset { get; set; }
+            /// <summary>
+            /// Used for placing similar biomes together
+            /// </summary>
+            [DataTag("parameters.altitude", JsonTag = true)]
+            public float Altitude { get => altitude; set => altitude = (float)Utils.ValidateRange(value, -2.0, 2.0, nameof(Altitude), nameof(CustomBiomeGenerator)); }
 
             /// <summary>
-            /// Affects snow and rain. 0.15 = snow. 0.15 - 0.95 for rain. Temperature goes down 0.0016 per block above sea level.
+            /// Used for placing similar biomes together
             /// </summary>
-            [DataTag("temperature", JsonTag = true)]
+            [DataTag("parameters.weirdness", JsonTag = true)]
+            public float Weirdness { get => weirdness; set => weirdness = (float)Utils.ValidateRange(value, -2.0, 2.0, nameof(Weirdness), nameof(CustomBiomeGenerator)); }
+
+            /// <summary>
+            /// Used for placing similar biomes together
+            /// </summary>
+            [DataTag("parameters.offset", JsonTag = true)]
+            public float Offset { get => offset; set => offset = (float)Utils.ValidateRange(value, 0, 1.0, nameof(Offset), nameof(CustomBiomeGenerator)); }
+
+            /// <summary>
+            /// Used for placing similar biomes together
+            /// </summary>
+            [DataTag("parameters.temperature", JsonTag = true)]
             public float Temperature { get; set; }
 
-            [DataTag("humidity", JsonTag = true)]
+            /// <summary>
+            /// Used for placing similar biomes together
+            /// </summary>
+            [DataTag("parameters.humidity", JsonTag = true)]
             public float Humidity { get; set; }
         }
     }

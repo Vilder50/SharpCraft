@@ -52,7 +52,7 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass1 : BaseFile
+        class BaseFileTestClass1 : BaseFile<TextWriter>
         {
             public BaseFileTestClass1(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test1")
             {
@@ -75,7 +75,7 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass2 : BaseFile
+        class BaseFileTestClass2 : BaseFile<TextWriter>
         {
             public BaseFileTestClass2(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test2")
             {

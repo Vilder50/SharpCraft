@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Base class for advancement files
     /// </summary>
-    public abstract class BaseAdvancement : BaseFile, IAdvancement
+    public abstract class BaseAdvancement : BaseFile<TextWriter>, IAdvancement
     {
         private Requirement[] requirements = null!;
 

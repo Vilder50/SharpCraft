@@ -12,7 +12,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for predicate files
     /// </summary>
-    public class Predicate : BaseFile, IPredicate
+    public class Predicate : BaseFile<TextWriter>, IPredicate
     {
         private PredicateCondition? thisCondition;
         private BaseCondition condition = null!;

@@ -766,6 +766,7 @@
         }
         public enum StructureRotation { NONE, CLOCKWISE_90, CLOCKWISE_180, COUNTERCLOCKWISE_90 }
         public enum StructureMirror { NONE, LEFT_RIGHT, FRONT_BACK }
+        public enum StructureDataMode { DATA, SAVE, LOAD, CORNER }
         public enum StructureMode { data, save, load, corner }
         public enum FacingFull { down, up, north, south, west, east }
         public enum PistonType { normal, sticky }

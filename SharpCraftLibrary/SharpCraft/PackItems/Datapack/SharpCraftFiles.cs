@@ -14,6 +14,7 @@ namespace SharpCraft
 
         private const string setupFunctionName = "setup";
         private const string tickFunctionName = "tick";
+        private readonly ItemGetter itemGetter = new ItemGetter();
 
         public PackNamespace? MinecraftNamespace { get; private set; }
         public PackNamespace? SharpCraftNamespace { get; private set; }
@@ -449,6 +450,16 @@ namespace SharpCraft
             playerObjectiveEventChecker.Items.Add(shouldRunEventCheck);
             objectiveEventFunctions.Add(objective, eventGroup);
 #pragma warning restore IDE0068
+        }
+        #endregion
+
+        #region structures
+        public Vector GetStructureBlocksLocation()
+        {
+            return itemGetter.GetItem("structure blocks location", () =>
+            {
+                return (Vector?)Datapack.GetItems<LoadedBlockItems>().ClaimLoadedCoordsSquare(new IntVector(2, 1, 1)) ?? throw new Exception("Not able to claim blocks for holding blocks");
+            });
         }
         #endregion
     }

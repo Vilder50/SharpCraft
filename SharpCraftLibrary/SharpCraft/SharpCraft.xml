@@ -1462,9 +1462,9 @@
             The way the block should display
             </summary>
         </member>
-        <member name="P:SharpCraft.Blocks.StructureBlock.DName">
+        <member name="P:SharpCraft.Blocks.StructureBlock.DStructure">
             <summary>
-            The name of the structure
+            The structure the structure block should place/save
             </summary>
         </member>
         <member name="P:SharpCraft.Blocks.StructureBlock.DMetadata">
@@ -4429,6 +4429,18 @@
             </summary>
             <returns>The data in this object</returns>
         </member>
+        <member name="M:SharpCraft.Data.IDataPartPathEnding.WriteTypeNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the type of nbt data to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
+        <member name="M:SharpCraft.Data.IDataPartPathEnding.WriteNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the data as nbt to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
         <member name="T:SharpCraft.Data.DataPartObject">
             <summary>
             A part of a data tag tree for holding data objects
@@ -4473,6 +4485,18 @@
             </summary>
             <returns>True if its empty</returns>
         </member>
+        <member name="M:SharpCraft.Data.DataPartObject.WriteTypeNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the type of nbt data to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartObject.WriteNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the data as nbt to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
         <member name="T:SharpCraft.Data.DataPartArray">
             <summary>
             A part of a data tag tree for holding data arrays
@@ -4487,9 +4511,24 @@
             <param name="forceType">a type used for converting the thing in the array correctly</param>
             <param name="isJson">If the datatags in the array should be in json format</param>
         </member>
+        <member name="M:SharpCraft.Data.DataPartArray.#ctor(System.Object,System.Nullable{SharpCraft.ID.NBTTagType},System.Nullable{SharpCraft.ID.NBTTagType},System.Object[],System.Boolean)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Data.DataPartArray"/> with the given value
+            </summary>
+            <param name="data">The thing which is inside the array</param>
+            <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
+            <param name="forceArrayType">The type of array. Used for marking the type of array in case the array contains 0 items</param>
+            <param name="forceType">a type used for converting the thing in the array correctly</param>
+            <param name="isJson">If the datatags in the array should be in json format</param>
+        </member>
         <member name="P:SharpCraft.Data.DataPartArray.IsJson">
             <summary>
             If the datatags in the array should be in json format
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Data.DataPartArray.ForceAsTagList">
+            <summary>
+            Forces the array to be a tag list when converted to nbt
             </summary>
         </member>
         <member name="M:SharpCraft.Data.DataPartArray.AddItem(SharpCraft.Data.IDataPartPathEnding)">
@@ -4520,6 +4559,18 @@
             If the tree part's tags are all empty
             </summary>
             <returns>True if its empty</returns>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartArray.WriteTypeNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the type of nbt data to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartArray.WriteNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the data as nbt to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
         </member>
         <member name="T:SharpCraft.Data.DataPartTag">
             <summary>
@@ -4568,6 +4619,18 @@
             <param name="type">The type to get the ending letter for</param>
             <returns>The ending letter</returns>
         </member>
+        <member name="M:SharpCraft.Data.DataPartTag.WriteTypeNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the type of nbt data to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartTag.WriteNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the data as nbt to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
         <member name="T:SharpCraft.Data.DataPartPath">
             <summary>
             A part of a data tag tree for given branches names
@@ -4595,6 +4658,19 @@
             <summary>
             The value with the path
             </summary>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartPath.WriteNbtToStream(System.IO.BinaryWriter)">
+            <summary>
+            Writes the data as nbt to a binary stream
+            </summary>
+            <param name="stream">The stream to write to</param>
+        </member>
+        <member name="M:SharpCraft.Data.DataPartPath.WriteStringToStream(System.String,System.IO.BinaryWriter)">
+            <summary>
+            Writes a string to a binary stream
+            </summary>
+            <param name="text">The string to write</param>
+            <param name="stream">The stream</param>
         </member>
         <member name="T:SharpCraft.Data.IConvertableToDataTag">
             <summary>
@@ -13097,7 +13173,7 @@
         </member>
         <member name="P:SharpCraft.MapColors.MapColor.Height">
             <summary>
-            0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the north direction.
+            0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the south direction (positive z).
             </summary>
         </member>
         <member name="T:SharpCraft.IBlockType">
@@ -14728,11 +14804,6 @@
             <param name="writeSetting">The setting for the file</param>
             <param name="fileType">The type of file</param>
         </member>
-        <member name="M:SharpCraft.BaseFile.FinishedConstructing">
-            <summary>
-            Call when constructors are done
-            </summary>
-        </member>
         <member name="P:SharpCraft.BaseFile.PackNamespace">
             <summary>
             The namespace this file is for
@@ -14769,11 +14840,6 @@
             If the file has been disposed
             </summary>
         </member>
-        <member name="P:SharpCraft.BaseFile.StreamWriter">
-            <summary>
-            The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
-            </summary>
-        </member>
         <member name="P:SharpCraft.BaseFile.FileIsWritten">
             <summary>
             States if the file has been written and shouldn't be able to be written again.
@@ -14792,27 +14858,10 @@
             </summary>
             <returns>The namespaced name of this file</returns>
         </member>
-        <member name="M:SharpCraft.BaseFile.GetStream">
-            <summary>
-            Returns the stream this file is going to use for writing it's file
-            </summary>
-            <returns>The stream for this file</returns>
-        </member>
-        <member name="M:SharpCraft.BaseFile.Dispose">
-            <summary>
-            Disposes this file. If the write setting is OnDispose it will write the file
-            </summary>
-        </member>
         <member name="M:SharpCraft.BaseFile.AfterDispose">
             <summary>
             Extra things to do after dispose was ran. (Clear the file for none needed things)
             </summary>
-        </member>
-        <member name="M:SharpCraft.BaseFile.WriteFile(System.IO.TextWriter)">
-            <summary>
-            Writes the file
-            </summary>
-            <param name="stream">The stream used for writing the file</param>
         </member>
         <member name="M:SharpCraft.BaseFile.Finalize">
             <summary>
@@ -14842,6 +14891,53 @@
             Creates the directory for the given file
             </summary>
             <param name="folderPath">The base folder the file should be in</param>
+        </member>
+        <member name="M:SharpCraft.BaseFile.Dispose">
+            <summary>
+            Disposes this file. If the write setting is OnDispose it will write the file
+            </summary>
+        </member>
+        <member name="T:SharpCraft.BaseFile`1">
+            <summary>
+            The base class used for files in a datapack
+            </summary>
+            <typeparam name="T">A stream used for writing the file</typeparam>
+        </member>
+        <member name="M:SharpCraft.BaseFile`1.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.BaseFile.WriteSetting,System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.BaseFile"/> with the given values
+            </summary>
+            <param name="packNamespace">The namespace this file is for</param>
+            <param name="fileName">The name of the file</param>
+            <param name="writeSetting">The setting for the file</param>
+            <param name="fileType">The type of file</param>
+        </member>
+        <member name="P:SharpCraft.BaseFile`1.StreamWriter">
+            <summary>
+            The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BaseFile`1.Dispose">
+            <summary>
+            Disposes this file. If the write setting is OnDispose it will write the file
+            </summary>
+        </member>
+        <member name="M:SharpCraft.BaseFile`1.WriteFile(`0)">
+            <summary>
+            Writes the file
+            </summary>
+            <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="M:SharpCraft.BaseFile`1.GetStream">
+            <summary>
+            Returns the stream this file is going to use for writing it's file
+            </summary>
+            <returns>The stream for this file</returns>
+        </member>
+        <member name="M:SharpCraft.BaseFile`1.FinishedConstructing">
+            <summary>
+            Call when constructors are done
+            </summary>
         </member>
         <member name="T:SharpCraft.Conditions.AllCondition">
             <summary>
@@ -16280,9 +16376,29 @@
             The biome to generate
             </summary>
         </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Altitude">
+            <summary>
+            Used for placing similar biomes together
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Weirdness">
+            <summary>
+            Used for placing similar biomes together
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Offset">
+            <summary>
+            Used for placing similar biomes together
+            </summary>
+        </member>
         <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Temperature">
             <summary>
-            Affects snow and rain. 0.15 = snow. 0.15 - 0.95 for rain. Temperature goes down 0.0016 per block above sea level.
+            Used for placing similar biomes together
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Humidity">
+            <summary>
+            Used for placing similar biomes together
             </summary>
         </member>
         <member name="T:SharpCraft.DimensionObjects.SingleBiomeGenerator">
@@ -16467,6 +16583,16 @@
         <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.Sampling">
             <summary>
             Changes the noise
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.SizeHorizontal">
+            <summary>
+            Changes the x/z scale of the landmass
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.SizeVertical">
+            <summary>
+            The y scale of the landmass.
             </summary>
         </member>
         <member name="P:SharpCraft.DimensionObjects.CustomNoiseGenerator.SquashHeight">
@@ -16678,9 +16804,19 @@
             Settings used for scaling noise
             </summary>
         </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.XZScale">
+            <summary>
+            Scales the noise on the horizontal axis
+            </summary>
+        </member>
         <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.XZFactor">
             <summary>
             Smoothes the noise on the horizontal axis
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.YScale">
+            <summary>
+            Scales the noise on the vertical axis
             </summary>
         </member>
         <member name="P:SharpCraft.DimensionObjects.NoiseSamplingSetting.YFactor">
@@ -16688,43 +16824,43 @@
             Smoothes the noise on the vertical axis
             </summary>
         </member>
-        <member name="T:SharpCraft.DimensionObjects.Structure">
+        <member name="T:SharpCraft.DimensionObjects.StructureSpawnInformation">
             <summary>
             Class for holding data about a structure used for dimension generation.
             </summary>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.Structure.#ctor(SharpCraft.ID.Structure,System.Int32,System.Int32,System.Int32)">
+        <member name="M:SharpCraft.DimensionObjects.StructureSpawnInformation.#ctor(SharpCraft.ID.Structure,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.DimensionObjects.Structure"/>
+            Intializes a new <see cref="T:SharpCraft.Structure"/>
             </summary>
             <param name="structure">The type of structure</param>
             <param name="spacing">The maximum distance in chunks between the structures</param>
             <param name="separation">The minimum distance in chunks between the structures</param>
             <param name="salt">A random number added to the seed to make structures random</param>
         </member>
-        <member name="P:SharpCraft.DimensionObjects.Structure.StructureType">
+        <member name="P:SharpCraft.DimensionObjects.StructureSpawnInformation.StructureType">
             <summary>
             The type of structure
             </summary>
         </member>
-        <member name="P:SharpCraft.DimensionObjects.Structure.Spacing">
+        <member name="P:SharpCraft.DimensionObjects.StructureSpawnInformation.Spacing">
             <summary>
             The maximum distance in chunks between the structures
             </summary>
         </member>
-        <member name="P:SharpCraft.DimensionObjects.Structure.Separation">
+        <member name="P:SharpCraft.DimensionObjects.StructureSpawnInformation.Separation">
             <summary>
             The minimum distance in chunks between the structures
             </summary>
         </member>
-        <member name="P:SharpCraft.DimensionObjects.Structure.Salt">
+        <member name="P:SharpCraft.DimensionObjects.StructureSpawnInformation.Salt">
             <summary>
             A random number added to the seed to make structures random over multiple seeds
             </summary>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.Structure.SetSpacingAndSeperation(System.Int32,System.Int32)">
+        <member name="M:SharpCraft.DimensionObjects.StructureSpawnInformation.SetSpacingAndSeperation(System.Int32,System.Int32)">
             <summary>
-            Sets both <see cref="P:SharpCraft.DimensionObjects.Structure.Spacing"/> and <see cref="P:SharpCraft.DimensionObjects.Structure.Separation"/>
+            Sets both <see cref="P:SharpCraft.DimensionObjects.StructureSpawnInformation.Spacing"/> and <see cref="P:SharpCraft.DimensionObjects.StructureSpawnInformation.Separation"/>
             </summary>
             <param name="spacing">The new spacing value</param>
             <param name="separation">The new seperation value</param>
@@ -16735,13 +16871,13 @@
             Class for a list of structures
             </summary>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(System.Collections.Generic.List{SharpCraft.DimensionObjects.Structure})">
+        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(System.Collections.Generic.List{SharpCraft.DimensionObjects.StructureSpawnInformation})">
             <summary>
             Intializes a new <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
             </summary>
             <param name="structures">The list of structures</param>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(SharpCraft.DimensionObjects.Structure[])">
+        <member name="M:SharpCraft.DimensionObjects.StructureList.#ctor(SharpCraft.DimensionObjects.StructureSpawnInformation[])">
             <summary>
             Intializes a new <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
             </summary>
@@ -16758,15 +16894,15 @@
             </summary>
             <returns>The list's data</returns>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(System.Collections.Generic.List{SharpCraft.DimensionObjects.Structure})~SharpCraft.DimensionObjects.StructureList">
+        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(System.Collections.Generic.List{SharpCraft.DimensionObjects.StructureSpawnInformation})~SharpCraft.DimensionObjects.StructureList">
             <summary>
-            Converts a list of <see cref="T:SharpCraft.DimensionObjects.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            Converts a list of <see cref="T:SharpCraft.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
             </summary>
             <param name="structures">The list to convert</param>
         </member>
-        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(SharpCraft.DimensionObjects.Structure[])~SharpCraft.DimensionObjects.StructureList">
+        <member name="M:SharpCraft.DimensionObjects.StructureList.op_Implicit(SharpCraft.DimensionObjects.StructureSpawnInformation[])~SharpCraft.DimensionObjects.StructureList">
             <summary>
-            Converts an array of <see cref="T:SharpCraft.DimensionObjects.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
+            Converts an array of <see cref="T:SharpCraft.Structure"/>s into a <see cref="T:SharpCraft.DimensionObjects.StructureList"/>
             </summary>
             <param name="structures">The array to convert</param>
         </member>
@@ -17025,6 +17161,14 @@
             </summary>
             <returns>A list of all the created directories</returns>
         </member>
+        <member name="M:SharpCraft.IFileCreator.CreateBinaryWriter(System.String,System.Boolean)">
+            <summary>
+            Creates a new binary writer and returns it
+            </summary>
+            <param name="path">The path of the file to write to</param>
+            <param name="compress">If the data should be compressed</param>
+            <returns>The writer</returns>
+        </member>
         <member name="T:SharpCraft.FileCreator">
             <summary>
             Class for normal file creation
@@ -17041,6 +17185,14 @@
             </summary>
             <param name="path">The path to write at</param>
             <returns>Stream writer for writing at the path</returns>
+        </member>
+        <member name="M:SharpCraft.FileCreator.CreateBinaryWriter(System.String,System.Boolean)">
+            <summary>
+            Creates a new binary writer and returns it
+            </summary>
+            <param name="path">The path of the file to write to</param>
+            <param name="compress">If the data should be compressed</param>
+            <returns>The writer</returns>
         </member>
         <member name="M:SharpCraft.FileCreator.CreateDirectory(System.String)">
             <summary>
@@ -17077,6 +17229,14 @@
             <param name="path">The path to write at</param>
             <returns>text writer for writing at the path</returns>
         </member>
+        <member name="M:SharpCraft.NoneFileCreator.CreateBinaryWriter(System.String,System.Boolean)">
+            <summary>
+            Creates a new binary writer and returns it
+            </summary>
+            <param name="path">The path of the file to write to</param>
+            <param name="compress">If the data should be compressed</param>
+            <returns>The writer</returns>
+        </member>
         <member name="M:SharpCraft.NoneFileCreator.CreateDirectory(System.String)">
             <summary>
             Creates a directory with the given path
@@ -17107,6 +17267,64 @@
             <param name="addBlock">the <see cref="T:SharpCraft.Block"/> to add</param>
             <param name="blockCoords">the coords to add it at</param>
             <param name="type">how to place the block</param>
+        </member>
+        <member name="F:SharpCraft.FunctionWriters.BlockCommands.Structure">
+            <summary>
+            Commands for working with structures
+            </summary>
+        </member>
+        <member name="T:SharpCraft.FunctionWriters.BlockCommands.ClassStructure">
+            <summary>
+            Commands for working with structures
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Place(SharpCraft.Vector,SharpCraft.IStructure,SharpCraft.Vector,SharpCraft.ID.FacingFull,SharpCraft.Blocks.StructureBlock)">
+            <summary>
+            Places a structure in the world and replaces the placed structure block with the block which was there before the structure block was placed
+            </summary>
+            <param name="structureLocation">The location to place the structure at</param>
+            <param name="structure">The structure to place</param>
+            <param name="structureBlockLocation">The location of the structure block which places the structure</param>
+            <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            <param name="structurePlaceInformation">Extra information on how the structure should be placed</param>
+            <returns>The placed structure</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Place(SharpCraft.Vector,SharpCraft.IStructure,SharpCraft.Vector,SharpCraft.Block,SharpCraft.Block,SharpCraft.ID.FacingFull,SharpCraft.Blocks.StructureBlock)">
+            <summary>
+            Places a structure in the world
+            </summary>
+            <param name="structureLocation">The location to place the structure at</param>
+            <param name="structure">The structure to place</param>
+            <param name="structureBlockLocation">The location of the structure block which places the structure</param>
+            <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            <param name="replaceStructureBlock">A block to replace the structure block with once the structure is placed</param>
+            <param name="replaceRedstoneBlock">A block to replace the redstone block with once the structure is placed</param>
+            <param name="structurePlaceInformation">Extra information on how the structure should be placed</param>
+            <returns>The placed structure</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Save(System.String,SharpCraft.Vector,SharpCraft.IntVector,SharpCraft.Vector,SharpCraft.ID.FacingFull)">
+            <summary>
+            Saves blocks into a structure
+            </summary>
+            <param name="name">The name of the structure</param>
+            <param name="structureLocation">The location of the blocks to save</param>
+            <param name="size">The size of the structure to save</param>
+            <param name="structureBlockLocation">The location of the structure block which saves the structure</param>
+            <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            <returns>A reference to the saved structure</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Save(System.String,SharpCraft.Vector,SharpCraft.IntVector,SharpCraft.Vector,SharpCraft.Block,SharpCraft.Block,SharpCraft.ID.FacingFull)">
+            <summary>
+            Saves blocks into a structure
+            </summary>
+            <param name="name">The name of the structure</param>
+            <param name="structureLocation">The location of the blocks to save</param>
+            <param name="size">The size of the structure to save</param>
+            <param name="structureBlockLocation">The location of the structure block which saves the structure</param>
+            <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            <param name="replaceStructureBlock">A block to replace the structure block with once the structure is placed</param>
+            <param name="replaceRedstoneBlock">A block to replace the redstone block with once the structure is placed</param>
+            <returns>A reference to the saved structure</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.BlockCommands.Fill(SharpCraft.Vector,SharpCraft.Vector,SharpCraft.Block,SharpCraft.ID.BlockFill,SharpCraft.Block)">
             <summary>
@@ -26343,6 +26561,27 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The <see cref="T:SharpCraft.LiquidGroup"/></returns>
         </member>
+        <member name="M:SharpCraft.PackNamespace.Structure(System.String,SharpCraft.Block[][],SharpCraft.Structure.Block[],SharpCraft.Entities.BasicEntity[],SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates and returns a structure
+            </summary>
+            <param name="name">The name of the predicate file</param>
+            <param name="blockPalettes">The pallete used for the structure</param>
+            <param name="blocksInStructure">The blocks in the structure</param>
+            <param name="entities">Entities in the structure</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The created structure</returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.Structure(System.String,SharpCraft.Block[0:,0:,0:],SharpCraft.Entities.BasicEntity[],SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Creates and returns a structure
+            </summary>
+            <param name="name">The name of the predicate file</param>
+            <param name="blocks">The blocks in the structure. 0:y, 1: x, 2: z</param>
+            <param name="entities">Entities in the structure</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The created structure</returns>
+        </member>
         <member name="M:SharpCraft.PackNamespace.AddSetting(SharpCraft.INamespaceSetting)">
             <summary>
             Adds the given setting to this namespace
@@ -27070,6 +27309,182 @@
             Writes the file
             </summary>
             <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="T:SharpCraft.IStructure">
+            <summary>
+            Interface for structures
+            </summary>
+        </member>
+        <member name="P:SharpCraft.IStructure.FileId">
+            <summary>
+            The file name of the structure
+            </summary>
+        </member>
+        <member name="P:SharpCraft.IStructure.PackNamespace">
+            <summary>
+            The namespace the structure is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.IStructure.GetNamespacedName">
+            <summary>
+            Should return the string used for using the structure
+            </summary>
+            <returns>string for using the structure</returns>
+        </member>
+        <member name="T:SharpCraft.Structure">
+            <summary>
+            Class for structure files
+            </summary>
+        </member>
+        <member name="F:SharpCraft.Structure.StructureMaxSize">
+            <summary>
+            The maximum size a structure can have
+            </summary>
+        </member>
+        <member name="T:SharpCraft.Structure.Block">
+            <summary>
+            Class for blocks in structures
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Structure.Block.#ctor(System.Int32,SharpCraft.IntVector,SharpCraft.Block)">
+            <summary>
+            Intializes a new block for a structure
+            </summary>
+            <param name="blockId">The of the block to use in the palette.</param>
+            <param name="location">The location to place the block at</param>
+            <param name="blockData">The data the block has</param>
+        </member>
+        <member name="P:SharpCraft.Structure.Block.BlockId">
+            <summary>
+            The of the block to use in the palette.
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Structure.Block.Location">
+            <summary>
+            The location to place the block at
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Structure.Block.BlockData">
+            <summary>
+            The data the block has
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Structure.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,SharpCraft.Block[][],SharpCraft.Structure.Block[],SharpCraft.Entities.BasicEntity[],SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Structure"/>. Inherite from this constructor.
+            </summary>
+            <param name="packNamespace">The namespace the predicate is in</param>
+            <param name="fileName">The name of the predicate file</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+            <param name="blockPalettes">The pallete used for the structure</param>
+            <param name="blocksInStructure">The blocks in the structure</param>
+            <param name="entities">Entities in the structure</param>
+            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        </member>
+        <member name="M:SharpCraft.Structure.#ctor(SharpCraft.BasePackNamespace,System.String,SharpCraft.Block[][],SharpCraft.Structure.Block[],SharpCraft.Entities.BasicEntity[],SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.Structure"/>
+            </summary>
+            <param name="packNamespace">The namespace the predicate is in</param>
+            <param name="fileName">The name of the predicate file</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+            <param name="blockPalettes">The pallete used for the structure</param>
+            <param name="blocksInStructure">The blocks in the structure</param>
+            <param name="entities">Entities in the structure</param>
+        </member>
+        <member name="P:SharpCraft.Structure.BlocksInStructure">
+            <summary>
+            The blocks in the structure
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Structure.BlockPalettes">
+            <summary>
+            The pallete used for the structure
+            </summary>
+        </member>
+        <member name="P:SharpCraft.Structure.Entities">
+            <summary>
+            Entities in the structure
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Structure.GetStream">
+            <summary>
+            Returns the stream this file is going to use for writing it's file
+            </summary>
+            <returns>The stream for this file</returns>
+        </member>
+        <member name="M:SharpCraft.Structure.WriteFile(System.IO.BinaryWriter)">
+            <summary>
+            Writes the file
+            </summary>
+            <param name="stream">The stream used for writing the file</param>
+        </member>
+        <member name="M:SharpCraft.Structure.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this structure into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Unused</param>
+            <param name="extraConversionData">Unused</param>
+            <returns>This structure as a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="M:SharpCraft.Structure.AfterDispose">
+            <summary>
+            Clears the things in the file.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.Structure.ConvertBlocksToStructure(SharpCraft.Block[0:,0:,0:])">
+            <summary>
+            Converts the given 3d array of blocks into a block palette and a list of block locations. 0:y, 1: x, 2: z
+            </summary>
+            <param name="blocks">The blocks to convert</param>
+            <returns>The converted blocks</returns>
+        </member>
+        <member name="T:SharpCraft.EmptyStructure">
+            <summary>
+            Class for structures which should be placeable.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyStructure.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.EmptyStructure"/>
+            </summary>
+            <param name="packNamespace">The namespace the structure is in</param>
+            <param name="name">The name of the structure</param>
+        </member>
+        <member name="P:SharpCraft.EmptyStructure.FileId">
+            <summary>
+            The name of the structure
+            </summary>
+        </member>
+        <member name="P:SharpCraft.EmptyStructure.PackNamespace">
+            <summary>
+            The namespace the structure is in
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyStructure.GetNamespacedName">
+            <summary>
+            Returns the string used for placing this structure
+            </summary>
+            <returns>The string used for placing this structure</returns>
+        </member>
+        <member name="P:SharpCraft.EmptyStructure.Name">
+            <summary>
+            Returns <see cref="M:SharpCraft.BaseFile.GetNamespacedName"/>
+            </summary>
+        </member>
+        <member name="M:SharpCraft.EmptyStructure.op_Implicit(System.String)~SharpCraft.EmptyStructure">
+            <summary>
+            Converts a string of the format NAMESPACE:FUNCTION into an <see cref="T:SharpCraft.EmptyStructure"/>
+            </summary>
+            <param name="structure">The string to convert</param>
+        </member>
+        <member name="M:SharpCraft.EmptyStructure.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this structure into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            </summary>
+            <param name="asType">Not in use</param>
+            <param name="extraConversionData">Not in use</param>
+            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
         <member name="T:SharpCraft.Writer.ISharpWriter">
             <summary>

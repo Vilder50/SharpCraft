@@ -40,7 +40,7 @@ namespace SharpCraft.Tests.PackItems
             using Datapack pack = new Datapack("datapacks", "pack", "a pack", 0, new NoneFileCreator());
             PackNamespace space = pack.Namespace("space");
             Function autoFunction = space.Function("autofunction");
-            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer;
+            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer as TextWriter;
             Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
 
             //test
@@ -51,7 +51,7 @@ namespace SharpCraft.Tests.PackItems
 
             //text execute
             autoFunction = space.Function("autofunction2");
-            autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction2.mcfunction").writer;
+            autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction2.mcfunction").writer as TextWriter;
             autoFunction.AddCommand(new ExecuteAs(ID.Selector.s));
             Assert.AreEqual("", autoFunctionWriter.ToString(), "Execute command with no end shouldn't write anything yet");
             autoFunction.AddCommand(new ExecuteAt(ID.Selector.s));
@@ -68,14 +68,14 @@ namespace SharpCraft.Tests.PackItems
             PackNamespace space = pack.Namespace("space");
             Function onDisposeFunction = space.Function("disposefunction", BaseFile.WriteSetting.OnDispose);
             Function autoFunction = space.Function("autofunction", BaseFile.WriteSetting.Auto);
-            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer;
+            TextWriter autoFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/autofunction.mcfunction").writer as TextWriter;
 
             //test
             onDisposeFunction.AddCommand(new SayCommand("hello world"));
             onDisposeFunction.AddCommand(new ExecuteAs(ID.Selector.a));
             Assert.AreEqual(2, onDisposeFunction.Commands.Count, "Commands wasn't added to command list");
             onDisposeFunction.Dispose();
-            TextWriter onDisposeFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/disposefunction.mcfunction").writer;
+            TextWriter onDisposeFunctionWriter = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/functions/disposefunction.mcfunction").writer as TextWriter;
             Assert.AreEqual("say hello world" + Environment.NewLine + "execute as @a" + Environment.NewLine, onDisposeFunctionWriter.ToString(), "Dispose function isn't writing commands correctly on dispose");
             Assert.IsNull(onDisposeFunction.Commands, "Commands wasn't cleared");
 
@@ -100,7 +100,7 @@ namespace SharpCraft.Tests.PackItems
             }, BaseFile.WriteSetting.Auto);
 
             Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/"), "Child directory wasn't created correctly");
-            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/1.mcfunction").writer;
+            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/1.mcfunction").writer as TextWriter;
             Assert.IsNotNull(writer, "Child file wasn't created");
             Assert.AreEqual("say hello" + Environment.NewLine, writer.ToString(), "FunctionCreator didn't run correctly");
         }
@@ -120,7 +120,7 @@ namespace SharpCraft.Tests.PackItems
             }, BaseFile.WriteSetting.Auto);
 
             Assert.IsTrue(pack.FileCreator.GetDirectories().Any(d => d == "datapacks/pack/data/space/functions/folder/"), "sibling directory wasn't created correctly");
-            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/folder/file.mcfunction").writer;
+            TextWriter writer = pack.FileCreator.GetWriters().SingleOrDefault(w => w.path == "datapacks/pack/data/space/functions/folder/file.mcfunction").writer as TextWriter;
             Assert.IsNotNull(writer, "sibling file wasn't created");
             Assert.AreEqual("say hello" + Environment.NewLine, writer.ToString(), "FunctionCreator didn't run correctly");
         }

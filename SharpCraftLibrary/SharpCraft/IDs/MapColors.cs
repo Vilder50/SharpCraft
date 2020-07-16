@@ -83,7 +83,7 @@ namespace SharpCraft
             {
                 List<MapColor> allColors = new List<MapColor>();
 
-                byte multiplyColor(int color, int value)
+                static byte multiplyColor(int color, int value)
                 {
                     return Convert.ToByte(color * value / 255);
                 }
@@ -151,6 +151,8 @@ namespace SharpCraft
                 Color = new RGBColor(red, green, blue);
                 Block = block;
                 SupportBlock = supportBlock;
+                Height = height;
+                Id = id;
             }
 
             /// <summary>
@@ -166,6 +168,8 @@ namespace SharpCraft
                 Color = color;
                 Block = block;
                 SupportBlock = supportBlock;
+                Height = height;
+                Id = id;
             }
 
             /// <summary>
@@ -189,7 +193,7 @@ namespace SharpCraft
             public int Id { get; private set; }
 
             /// <summary>
-            /// 0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the north direction.
+            /// 0 If the block can be placed on same height as last block. -1 if lower and +1 if higher. The height thing should go in the south direction (positive z).
             /// </summary>
             public int Height { get; private set; }
         }
