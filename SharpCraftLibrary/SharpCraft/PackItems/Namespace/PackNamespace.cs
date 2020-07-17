@@ -782,9 +782,9 @@ namespace SharpCraft
         {
             Entities.BasicEntity[] entityArray = entities ?? new Entities.BasicEntity[] { };
             Block?[,,] blockArray = blocks ?? new Block[,,] { };
-            var convertedBlocks = SharpCraft.Structure.ConvertBlocksToStructure(blockArray);
+            var (blocksInStructure, blockPalette) = SharpCraft.Structure.ConvertBlocksToStructure(blockArray);
 
-            return Structure(name, new Block[][] { convertedBlocks.blockPalette }, convertedBlocks.blocksInStructure, entityArray, writeSetting);
+            return Structure(name, new Block[][] { blockPalette }, blocksInStructure, entityArray, writeSetting);
         }
 
         private void ThrowExceptionOnGroupStacking<TItem>(BaseGroup<TItem> existingFile, bool append, BaseFile.WriteSetting writeSetting) where TItem : IGroupable

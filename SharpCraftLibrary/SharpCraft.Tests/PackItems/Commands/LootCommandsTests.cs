@@ -68,7 +68,7 @@ namespace SharpCraft.Tests.Commands
         public void FishHandSourcePartTest()
         {
             using EmptyDatapack datapack = new EmptyDatapack("pack");
-            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            FileMocks.MockLootTable table = new FileMocks.MockLootTable(datapack.Namespace("test"), "loot");
             Assert.AreEqual("fish test:loot ~1 ~2 ~3 mainhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), true).GetSourceString());
             Assert.AreEqual("fish test:loot ~1 ~2 ~3 offhand", new LootSources.FishHandSource(table, new Coords(1, 2, 3), false).GetSourceString());
 
@@ -80,7 +80,7 @@ namespace SharpCraft.Tests.Commands
         public void FishItemSourcePartTest()
         {
             using EmptyDatapack datapack = new EmptyDatapack("pack");
-            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            FileMocks.MockLootTable table = new FileMocks.MockLootTable(datapack.Namespace("test"), "loot");
             Assert.AreEqual("fish test:loot ~1 ~2 ~3 minecraft:dirt", new LootSources.FishItemSource(table, new Coords(1, 2, 3), ID.Item.dirt).GetSourceString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new LootSources.FishItemSource(null, new Vector(1, 2, 3), ID.Item.dirt));
@@ -92,7 +92,7 @@ namespace SharpCraft.Tests.Commands
         public void LoottableSourcePartTest()
         {
             using EmptyDatapack datapack = new EmptyDatapack("pack");
-            EmptyLoottable table = new EmptyLoottable(datapack.Namespace("test"), "loot");
+            FileMocks.MockLootTable table = new FileMocks.MockLootTable(datapack.Namespace("test"), "loot");
             Assert.AreEqual("loot test:loot", new LootSources.LoottableSource(table).GetSourceString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new LootSources.LoottableSource(null));

@@ -96,10 +96,10 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Converts a <see cref="EmptyDimension"/> into a <see cref="Location"/>
+        /// Converts a <see cref="FileMocks.MockDimension"/> into a <see cref="Location"/>
         /// </summary>
-        /// <param name="dimension">The <see cref="EmptyDimension"/> to convert</param>
-        public static implicit operator Location(EmptyDimension dimension)
+        /// <param name="dimension">The <see cref="FileMocks.MockDimension"/> to convert</param>
+        public static implicit operator Location(FileMocks.MockDimension dimension)
         {
             return new Location() { Dimension = dimension };
         }

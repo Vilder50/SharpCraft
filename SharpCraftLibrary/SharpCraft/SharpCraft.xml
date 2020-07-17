@@ -14589,40 +14589,6 @@
             </summary>
             <returns>The new sibling</returns>
         </member>
-        <member name="T:SharpCraft.EmptyAdvancement">
-            <summary>
-            Used for calling advancements outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyAdvancement"/>
-            </summary>
-            <param name="packNamespace">The namespace the advancement is in</param>
-            <param name="fileName">The name of the advancement</param>
-        </member>
-        <member name="P:SharpCraft.EmptyAdvancement.FileId">
-            <summary>
-            The name of the advancement
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyAdvancement.PackNamespace">
-            <summary>
-            The namespace the advancement is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyAdvancement.GetNamespacedName">
-            <summary>
-            Returns the string used for evoking this advancement
-            </summary>
-            <returns>The string used for evoking this advancement</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyAdvancement.op_Implicit(System.String)~SharpCraft.EmptyAdvancement">
-            <summary>
-            Converts a string of the format NAMESPACE:ADVANCEMENT into an <see cref="T:SharpCraft.EmptyAdvancement"/>
-            </summary>
-            <param name="advancement">The string to convert</param>
-        </member>
         <member name="T:SharpCraft.HiddenAdvancement">
             <summary>
             Class for hidden advancements files
@@ -15947,11 +15913,11 @@
             </summary>
             <param name="dimension">The <see cref="T:SharpCraft.Dimension"/> to convert</param>
         </member>
-        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.EmptyDimension)~SharpCraft.JsonObjects.Location">
+        <member name="M:SharpCraft.JsonObjects.Location.op_Implicit(SharpCraft.FileMocks.MockDimension)~SharpCraft.JsonObjects.Location">
             <summary>
-            Converts a <see cref="T:SharpCraft.EmptyDimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
+            Converts a <see cref="T:SharpCraft.FileMocks.MockDimension"/> into a <see cref="T:SharpCraft.JsonObjects.Location"/>
             </summary>
-            <param name="dimension">The <see cref="T:SharpCraft.EmptyDimension"/> to convert</param>
+            <param name="dimension">The <see cref="T:SharpCraft.FileMocks.MockDimension"/> to convert</param>
         </member>
         <member name="T:SharpCraft.BaseDatapack">
             <summary>
@@ -16325,31 +16291,6 @@
             The scale of the biome squares
             </summary>
         </member>
-        <member name="T:SharpCraft.DimensionObjects.NetherBiomeGenerator">
-            <summary>
-            Generates nether biomes
-            </summary>
-        </member>
-        <member name="M:SharpCraft.DimensionObjects.NetherBiomeGenerator.#ctor">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.DimensionObjects.NetherBiomeGenerator"/>
-            </summary>
-        </member>
-        <member name="P:SharpCraft.DimensionObjects.NetherBiomeGenerator.Preset">
-            <summary>
-            Used for chosing nether generation
-            </summary>
-        </member>
-        <member name="T:SharpCraft.DimensionObjects.EndBiomeGenerator">
-            <summary>
-            Generates end biomes
-            </summary>
-        </member>
-        <member name="M:SharpCraft.DimensionObjects.EndBiomeGenerator.#ctor">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.DimensionObjects.EndBiomeGenerator"/>
-            </summary>
-        </member>
         <member name="T:SharpCraft.DimensionObjects.CustomBiomeGenerator">
             <summary>
             Generates biomes in a custom way
@@ -16399,6 +16340,31 @@
         <member name="P:SharpCraft.DimensionObjects.CustomBiomeGenerator.Biome.Humidity">
             <summary>
             Used for placing similar biomes together
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.EndBiomeGenerator">
+            <summary>
+            Generates end biomes
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.EndBiomeGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.EndBiomeGenerator"/>
+            </summary>
+        </member>
+        <member name="T:SharpCraft.DimensionObjects.NetherBiomeGenerator">
+            <summary>
+            Generates nether biomes
+            </summary>
+        </member>
+        <member name="M:SharpCraft.DimensionObjects.NetherBiomeGenerator.#ctor">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.DimensionObjects.NetherBiomeGenerator"/>
+            </summary>
+        </member>
+        <member name="P:SharpCraft.DimensionObjects.NetherBiomeGenerator.Preset">
+            <summary>
+            Used for chosing nether generation
             </summary>
         </member>
         <member name="T:SharpCraft.DimensionObjects.SingleBiomeGenerator">
@@ -16982,48 +16948,6 @@
             <param name="extraConversionData">Not in use</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="T:SharpCraft.EmptyDimension">
-            <summary>
-            Used for calling dimensions outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDimension.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyDimension"/>
-            </summary>
-            <param name="packNamespace">The namespace the dimension is in</param>
-            <param name="fileName">The name of the dimension</param>
-        </member>
-        <member name="P:SharpCraft.EmptyDimension.FileId">
-            <summary>
-            The name of the dimension
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyDimension.PackNamespace">
-            <summary>
-            The namespace the dimension is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDimension.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this dimension into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
-        <member name="M:SharpCraft.EmptyDimension.GetNamespacedName">
-            <summary>
-            Returns the string used for selecting the dimension
-            </summary>
-            <returns>The string used for selecting the dimension</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyDimension.op_Implicit(System.String)~SharpCraft.EmptyDimension">
-            <summary>
-            Converts a string of the format NAMESPACE:DIMENSION into an <see cref="T:SharpCraft.EmptyDimension"/>
-            </summary>
-            <param name="dimension">The string to convert</param>
-        </member>
         <member name="T:SharpCraft.DimensionType">
             <summary>
             Class for dimension type files
@@ -17090,46 +17014,6 @@
             Returns the string used for chosen this dimension type
             </summary>
             <returns>String for chosing this</returns>
-        </member>
-        <member name="T:SharpCraft.EmptyDimensionType">
-            <summary>
-            Used for calling dimension types outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDimensionType.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyDimension"/>
-            </summary>
-            <param name="packNamespace">The namespace the dimension is in</param>
-            <param name="fileName">The name of the dimension</param>
-        </member>
-        <member name="P:SharpCraft.EmptyDimensionType.FileId">
-            <summary>
-            The name of the dimension
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyDimensionType.PackNamespace">
-            <summary>
-            The namespace the dimension is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDimensionType.GetDimensionTypeString">
-            <summary>
-            Returns the string used for chosen this dimension type
-            </summary>
-            <returns>String for chosing this</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyDimensionType.GetNamespacedName">
-            <summary>
-            Returns the string used for selecting the dimension
-            </summary>
-            <returns>The string used for selecting the dimension</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyDimensionType.op_Implicit(System.String)~SharpCraft.EmptyDimensionType">
-            <summary>
-            Converts a string of the format NAMESPACE:DIMENSIONTYPE into an <see cref="T:SharpCraft.EmptyDimensionType"/>
-            </summary>
-            <param name="dimensionType">The string to convert</param>
         </member>
         <member name="T:SharpCraft.IFileCreator">
             <summary>
@@ -24709,53 +24593,6 @@
             <param name="extraConversionData">Not in use</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
-        <member name="T:SharpCraft.EmptyFunction">
-            <summary>
-            Class for functions which should be callable.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyFunction.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyFunction"/>
-            </summary>
-            <param name="packNamespace">The namespace the function is in</param>
-            <param name="name">The name of the function</param>
-        </member>
-        <member name="P:SharpCraft.EmptyFunction.FileId">
-            <summary>
-            The name of the function
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyFunction.PackNamespace">
-            <summary>
-            The namespace the function is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyFunction.GetNamespacedName">
-            <summary>
-            Returns the string used for running this function
-            </summary>
-            <returns>The string used for running this function</returns>
-        </member>
-        <member name="P:SharpCraft.EmptyFunction.Name">
-            <summary>
-            Returns <see cref="M:SharpCraft.BaseFile.GetNamespacedName"/>
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyFunction.op_Implicit(System.String)~SharpCraft.EmptyFunction">
-            <summary>
-            Converts a string of the format NAMESPACE:FUNCTION into an <see cref="T:SharpCraft.EmptyFunction"/>
-            </summary>
-            <param name="function">The string to convert</param>
-        </member>
-        <member name="M:SharpCraft.EmptyFunction.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this recipe into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
         <member name="T:SharpCraft.IFunction">
             <summary>
             Interface for functions
@@ -24883,57 +24720,6 @@
             implicit converts a <see cref="T:SharpCraft.BlockGroup"/> into a <see cref="T:SharpCraft.BlockType"/> object
             </summary>
             <param name="group">The group to convert</param>
-        </member>
-        <member name="T:SharpCraft.EmptyGroup`1">
-            <summary>
-            Used for calling groups outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyGroup`1.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyGroup`1"/>
-            </summary>
-            <param name="packNamespace">The namespace the group is in</param>
-            <param name="fileName">The name of the group</param>
-        </member>
-        <member name="P:SharpCraft.EmptyGroup`1.FileName">
-            <summary>
-            The name of the group
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyGroup`1.PackNamespace">
-            <summary>
-            The namespace the group is in
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyGroup`1.Value">
-            <summary>
-            This
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyGroup`1.Name">
-            <summary>
-            The name of this group
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyGroup`1.FileId">
-            <summary>
-            The name of this group
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyGroup`1.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this recipe into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
-        <member name="M:SharpCraft.EmptyGroup`1.GetNamespacedName">
-            <summary>
-            Returns the string used for refering this group
-            </summary>
-            <returns>The string used for refering this group</returns>
         </member>
         <member name="T:SharpCraft.EntityGroup">
             <summary>
@@ -26014,47 +25800,244 @@
             Clears the things in the file.
             </summary>
         </member>
-        <member name="T:SharpCraft.EmptyLoottable">
+        <member name="T:SharpCraft.FileMocks.BaseMockFile">
             <summary>
-            Used for calling loot tables outside this program
+            Base class for empty/none existing files (Usefull for refering files outside of the datapack)
             </summary>
         </member>
-        <member name="M:SharpCraft.EmptyLoottable.#ctor(SharpCraft.BasePackNamespace,System.String)">
+        <member name="M:SharpCraft.FileMocks.BaseMockFile.#ctor(System.String)">
             <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyLoottable"/>
+            Intializes a new <see cref="T:SharpCraft.FileMocks.BaseMockFile"/>
             </summary>
-            <param name="packNamespace">The namespace the loot table is in</param>
-            <param name="fileName">The name of the loot table</param>
+            <param name="fileName">A string in the format format NAMESPACE:NAME to make into a mock file</param>
         </member>
-        <member name="P:SharpCraft.EmptyLoottable.FileId">
+        <member name="M:SharpCraft.FileMocks.BaseMockFile.#ctor(SharpCraft.BasePackNamespace,System.String)">
             <summary>
-            The name of the loot table
+            Intializes a new <see cref="T:SharpCraft.FileMocks.BaseMockFile"/>
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="P:SharpCraft.FileMocks.BaseMockFile.FileId">
+            <summary>
+            The name of the fil
             </summary>
         </member>
-        <member name="P:SharpCraft.EmptyLoottable.PackNamespace">
+        <member name="P:SharpCraft.FileMocks.BaseMockFile.PackNamespace">
             <summary>
-            The namespace the loot table is in
+            The namespace the file is in
             </summary>
         </member>
-        <member name="M:SharpCraft.EmptyLoottable.GetNamespacedName">
+        <member name="M:SharpCraft.FileMocks.BaseMockFile.GetNamespacedName">
             <summary>
-            Returns the string used for evoking this loot table
+            Returns the string used for refering the file
             </summary>
-            <returns>The string used for evoking this loot table</returns>
+            <returns>The string used for refering the file</returns>
         </member>
-        <member name="M:SharpCraft.EmptyLoottable.op_Implicit(System.String)~SharpCraft.EmptyLoottable">
+        <member name="P:SharpCraft.FileMocks.BaseMockFile.Name">
             <summary>
-            Converts a string of the format NAMESPACE:LOOTTABLE into an <see cref="T:SharpCraft.EmptyLoottable"/>
+            Returns <see cref="M:SharpCraft.BaseFile.GetNamespacedName"/>
             </summary>
-            <param name="loottable">The string to convert</param>
         </member>
-        <member name="M:SharpCraft.EmptyLoottable.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+        <member name="M:SharpCraft.FileMocks.BaseMockFile.GetNamespaceAndNameFromString(System.String)">
             <summary>
-            Converts this loot table into a <see cref="T:SharpCraft.Data.DataPartTag"/>
+            Converts a string of the format NAMESPACE:NAME into a namespace object and a string containing the name
+            </summary>
+            <param name="fileName">The string to convert</param>
+            <returns>The things from the string</returns>
+        </member>
+        <member name="M:SharpCraft.FileMocks.BaseMockFile.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts this structure into a <see cref="T:SharpCraft.Data.DataPartTag"/>
             </summary>
             <param name="asType">Not in use</param>
             <param name="extraConversionData">Not in use</param>
             <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockStructure">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockStructure.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockStructure.op_Implicit(System.String)~SharpCraft.FileMocks.MockStructure">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockRecipe">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockRecipe.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockRecipe.op_Implicit(System.String)~SharpCraft.FileMocks.MockRecipe">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockPredicate">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockPredicate.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockPredicate.op_Implicit(System.String)~SharpCraft.FileMocks.MockPredicate">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockPredicate.GetCondition">
+            <summary>
+            Returns a condition checking this predicate
+            </summary>
+            <returns>A condition checking this predicate</returns>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockLootTable">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockLootTable.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockLootTable.op_Implicit(System.String)~SharpCraft.FileMocks.MockLootTable">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockDimension">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockDimension.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockDimension.op_Implicit(System.String)~SharpCraft.FileMocks.MockDimension">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockDimensionType">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockDimensionType.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockDimensionType.GetDimensionTypeString">
+            <summary>
+            Returns the string used for chosen this dimension type
+            </summary>
+            <returns>String for chosing this</returns>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockDimensionType.op_Implicit(System.String)~SharpCraft.FileMocks.MockDimensionType">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockAdvancement">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockAdvancement.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockAdvancement.op_Implicit(System.String)~SharpCraft.FileMocks.MockAdvancement">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockFunction">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockFunction.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockFunction.op_Implicit(System.String)~SharpCraft.FileMocks.MockFunction">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="T:SharpCraft.FileMocks.MockGroup`1">
+            <summary>
+            Class for empty/none existing files (Usefull for refering files outside of the datapack)
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockGroup`1.#ctor(SharpCraft.BasePackNamespace,System.String)">
+            <summary>
+            Intializes a new mock file
+            </summary>
+            <param name="packNamespace">The namespace the file is in</param>
+            <param name="name">The name of the file</param>
+        </member>
+        <member name="P:SharpCraft.FileMocks.MockGroup`1.Value">
+            <summary>
+            This
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockGroup`1.op_Implicit(System.String)~SharpCraft.FileMocks.MockGroup{`0}">
+            <summary>
+            Converts a string of the format NAMESPACE:Name into an mock file
+            </summary>
+            <param name="name">The string to convert</param>
+        </member>
+        <member name="M:SharpCraft.FileMocks.MockGroup`1.GetNamespacedName">
+            <summary>
+            Returns the string used for refering this group
+            </summary>
+            <returns>The string used for refering this group</returns>
         </member>
         <member name="T:SharpCraft.BasePackNamespace">
             <summary>
@@ -26675,54 +26658,6 @@
             </summary>
             <returns>A condition checking this predicate</returns>
         </member>
-        <member name="T:SharpCraft.EmptyPredicate">
-            <summary>
-            Used for calling predicates outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyPredicate.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyPredicate"/>
-            </summary>
-            <param name="packNamespace">The namespace the predicate is in</param>
-            <param name="fileName">The name of the predicate</param>
-        </member>
-        <member name="P:SharpCraft.EmptyPredicate.FileId">
-            <summary>
-            The name of the predicate
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyPredicate.PackNamespace">
-            <summary>
-            The namespace the predicate is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyPredicate.GetNamespacedName">
-            <summary>
-            Returns the string used for checking the predicate
-            </summary>
-            <returns>The string used for checking the predicate</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyPredicate.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this predicate into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Unused</param>
-            <param name="extraConversionData">Unused</param>
-            <returns>This predicate into a <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
-        <member name="M:SharpCraft.EmptyPredicate.op_Implicit(System.String)~SharpCraft.EmptyPredicate">
-            <summary>
-            Converts a string of the format NAMESPACE:PREDICATE into an <see cref="T:SharpCraft.EmptyPredicate"/>
-            </summary>
-            <param name="predicate">The string to convert</param>
-        </member>
-        <member name="M:SharpCraft.EmptyPredicate.GetCondition">
-            <summary>
-            Returns a condition checking this predicate
-            </summary>
-            <returns>A condition checking this predicate</returns>
-        </member>
         <member name="T:SharpCraft.BaseRecipe">
             <summary>
             Base class for recipe files
@@ -26785,48 +26720,6 @@
             <summary>
             Clears the things in the file.
             </summary>
-        </member>
-        <member name="T:SharpCraft.EmptyRecipe">
-            <summary>
-            Used for giving recipes outside this program
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyRecipe.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyRecipe"/>
-            </summary>
-            <param name="packNamespace">The namespace the recipe is in</param>
-            <param name="fileName">The name of the recipe</param>
-        </member>
-        <member name="P:SharpCraft.EmptyRecipe.FileId">
-            <summary>
-            The name of the recipe
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyRecipe.PackNamespace">
-            <summary>
-            The namespace the recipe is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyRecipe.GetNamespacedName">
-            <summary>
-            Returns the string used for evoking this recipe
-            </summary>
-            <returns>The string used for evoking this recipe</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyRecipe.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this recipe into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
-        </member>
-        <member name="M:SharpCraft.EmptyRecipe.op_Implicit(System.String)~SharpCraft.EmptyRecipe">
-            <summary>
-            Converts a string of the format NAMESPACE:RECIPE into an <see cref="T:SharpCraft.EmptyRecipe"/>
-            </summary>
-            <param name="recipe">The string to convert</param>
         </member>
         <member name="T:SharpCraft.CraftingRecipe">
             <summary>
@@ -27438,53 +27331,6 @@
             </summary>
             <param name="blocks">The blocks to convert</param>
             <returns>The converted blocks</returns>
-        </member>
-        <member name="T:SharpCraft.EmptyStructure">
-            <summary>
-            Class for structures which should be placeable.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyStructure.#ctor(SharpCraft.BasePackNamespace,System.String)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyStructure"/>
-            </summary>
-            <param name="packNamespace">The namespace the structure is in</param>
-            <param name="name">The name of the structure</param>
-        </member>
-        <member name="P:SharpCraft.EmptyStructure.FileId">
-            <summary>
-            The name of the structure
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyStructure.PackNamespace">
-            <summary>
-            The namespace the structure is in
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyStructure.GetNamespacedName">
-            <summary>
-            Returns the string used for placing this structure
-            </summary>
-            <returns>The string used for placing this structure</returns>
-        </member>
-        <member name="P:SharpCraft.EmptyStructure.Name">
-            <summary>
-            Returns <see cref="M:SharpCraft.BaseFile.GetNamespacedName"/>
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyStructure.op_Implicit(System.String)~SharpCraft.EmptyStructure">
-            <summary>
-            Converts a string of the format NAMESPACE:FUNCTION into an <see cref="T:SharpCraft.EmptyStructure"/>
-            </summary>
-            <param name="structure">The string to convert</param>
-        </member>
-        <member name="M:SharpCraft.EmptyStructure.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
-            <summary>
-            Converts this structure into a <see cref="T:SharpCraft.Data.DataPartTag"/>
-            </summary>
-            <param name="asType">Not in use</param>
-            <param name="extraConversionData">Not in use</param>
-            <returns>the made <see cref="T:SharpCraft.Data.DataPartTag"/></returns>
         </member>
         <member name="T:SharpCraft.Writer.ISharpWriter">
             <summary>

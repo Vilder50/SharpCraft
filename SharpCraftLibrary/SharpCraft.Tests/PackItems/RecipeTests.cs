@@ -166,8 +166,8 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyRecipe()
         {
-            Assert.AreEqual("name:reci", new EmptyRecipe(EmptyDatapack.GetPack().Namespace("name"), "reci").GetNamespacedName(), "EmptyRecipe doesn't reutrn correct string");
-            Assert.AreEqual("space:name", ((EmptyRecipe)"space:name").GetNamespacedName(), "Implicit string to recipe conversion converts incorrectly");
+            Assert.AreEqual("name:reci", new FileMocks.MockRecipe(EmptyDatapack.GetPack().Namespace("name"), "reci").GetNamespacedName(), "EmptyRecipe doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((FileMocks.MockRecipe)"space:name").GetNamespacedName(), "Implicit string to recipe conversion converts incorrectly");
         }
 
         [TestMethod]

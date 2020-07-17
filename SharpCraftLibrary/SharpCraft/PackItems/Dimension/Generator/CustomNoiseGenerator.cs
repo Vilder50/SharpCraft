@@ -145,5 +145,23 @@ namespace SharpCraft.DimensionObjects
         /// </summary>
         [DataTag("biome_source", JsonTag = true)]
         public BaseBiomeGenerator BiomeGenerator { get => biomeGenerator; set => biomeGenerator = value ?? throw new ArgumentNullException(nameof(BiomeGenerator), "BiomeGenerator may not be null"); }
+
+        /// <summary>
+        /// The distance between the strongholds (This either effects how many strongholds there is in each circle or how much space there is between the circles)
+        /// </summary>
+        [DataTag("structures.stronghold.distance", JsonTag = true)]
+        public int StrongholdDistance { get; set; }
+
+        /// <summary>
+        /// The amount of strongholds
+        /// </summary>
+        [DataTag("structures.stronghold.distance", JsonTag = true)]
+        public int StrongholdCount { get; set; }
+
+        /// <summary>
+        /// More distance between the strongholds (This either effects how many strongholds there is in each circle or how much space there is between the circles)
+        /// </summary>
+        [DataTag("structures.stronghold.distance", JsonTag = true)]
+        public int StrongholdSpread { get; set; }
     }
 }

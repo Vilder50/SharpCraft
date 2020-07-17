@@ -139,7 +139,7 @@ namespace SharpCraft.Tests.Data
 
             Assert.AreEqual("{d:\"{Lock:\\\"locked\\\"}\",i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
             Assert.AreEqual("{\"d\":\"{Lock:\\\"locked\\\"}\",\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", true }).GetDataString());
-            Assert.AreEqual("{g:\"a:b\"}", new Blocks.Chest(new BlockType(new EmptyGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
+            Assert.AreEqual("{g:\"a:b\"}", new Blocks.Chest(new BlockType(new FileMocks.MockGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
         }
 
         [TestMethod]

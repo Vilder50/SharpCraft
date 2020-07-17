@@ -13,6 +13,17 @@ namespace SharpCraft
     }
 
     /// <summary>
+    /// Interface for items which can be in a Minecraft group
+    /// </summary>
+    public interface IGroupable
+    {
+        /// <summary>
+        /// The name Minecraft uses for the item
+        /// </summary>
+        string Name { get; }
+    }
+
+    /// <summary>
     /// Abstract class for Groups of an item.
     /// </summary>
     /// <typeparam name="TItem">The item the group is for</typeparam>
@@ -112,16 +123,5 @@ namespace SharpCraft
         {
             items = null!;
         }
-    }
-
-    /// <summary>
-    /// Interface for items which can be in a Minecraft group
-    /// </summary>
-    public interface IGroupable
-    {
-        /// <summary>
-        /// The name Minecraft uses for the item
-        /// </summary>
-        string Name { get; }
     }
 }

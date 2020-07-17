@@ -122,23 +122,23 @@ namespace SharpCraft
             ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
             if (IsChild())
             {
-                rayFiles = (new EmptyFunction(SharpCraftNamespace!, "raycast/block/setup"), new Objective("x" + rotationObjectiveString), new Objective("y" + rotationObjectiveString), rayState, new IPredicate[] 
+                rayFiles = (new FileMocks.MockFunction(SharpCraftNamespace!, "raycast/block/setup"), new Objective("x" + rotationObjectiveString), new Objective("y" + rotationObjectiveString), rayState, new IPredicate[] 
                 {
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/py"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/ny"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/py"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/ny"),
                                                                          
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cnz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpx"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cnx"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cny"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpy"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cnz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpx"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cnx"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cny"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpy"),
                                                                           
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/xyz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d0"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d1"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d2"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d3"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/xyz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d0"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d1"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d2"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d3"),
                 });
                 return rayFiles!;
             }
@@ -250,7 +250,7 @@ namespace SharpCraft
 
             if (IsChild())
             {
-                randomNumberFunction = new EmptyFunction(SharpCraftNamespace!, "random/generate");
+                randomNumberFunction = new FileMocks.MockFunction(SharpCraftNamespace!, "random/generate");
                 return randomNumberFunction;
             }
 
@@ -278,7 +278,7 @@ namespace SharpCraft
 
             if (IsChild())
             {
-                hashLoottable = new EmptyLoottable(SharpCraftNamespace!, "random/hashing");
+                hashLoottable = new FileMocks.MockLootTable(SharpCraftNamespace!, "random/hashing");
             }
 
             hashLoottable = SharpCraftNamespace!.Loottable("random/hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)

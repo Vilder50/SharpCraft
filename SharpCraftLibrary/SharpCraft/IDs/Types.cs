@@ -137,7 +137,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<BlockType> || Value is EmptyGroup<BlockType>)
+            if (Value is BaseGroup<BlockType> || Value is FileMocks.MockGroup<BlockType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -342,7 +342,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<ItemType> || Value is EmptyGroup<ItemType>)
+            if (Value is BaseGroup<ItemType> || Value is FileMocks.MockGroup<ItemType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -462,7 +462,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<EntityType> || Value is EmptyGroup<EntityType>)
+            if (Value is BaseGroup<EntityType> || Value is FileMocks.MockGroup<EntityType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }
@@ -586,7 +586,7 @@ namespace SharpCraft
             }
 
             DataPartObject returnObject = new DataPartObject();
-            if (Value is BaseGroup<LiquidType> || Value is EmptyGroup<LiquidType>)
+            if (Value is BaseGroup<LiquidType> || Value is FileMocks.MockGroup<LiquidType>)
             {
                 returnObject.AddValue(new DataPartPath(conversionData[1]!.ToString()!, new DataPartTag(Name.Substring(1), isJson: json.Value), json.Value));
             }

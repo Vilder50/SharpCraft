@@ -70,8 +70,8 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyLoottable()
         {
-            Assert.AreEqual("name:loot", new EmptyLoottable(EmptyDatapack.GetPack().Namespace("name"), "loot").GetNamespacedName(), "EmptyLoottable doesn't reutrn correct string");
-            Assert.AreEqual("space:name", ((EmptyLoottable)"space:name").GetNamespacedName(), "Implicit string to loottable conversion converts incorrectly");
+            Assert.AreEqual("name:loot", new FileMocks.MockLootTable(EmptyDatapack.GetPack().Namespace("name"), "loot").GetNamespacedName(), "EmptyLoottable doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((FileMocks.MockLootTable)"space:name").GetNamespacedName(), "Implicit string to loottable conversion converts incorrectly");
         }
     }
 }

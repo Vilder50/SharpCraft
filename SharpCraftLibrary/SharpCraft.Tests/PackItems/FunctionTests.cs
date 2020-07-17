@@ -224,8 +224,8 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyFunction()
         {
-            Assert.AreEqual("name:func", new EmptyFunction(EmptyDatapack.GetPack().Namespace("name"), "func").GetNamespacedName(), "EmptyFunction doesn't reutrn correct string");
-            Assert.AreEqual("space:name", ((EmptyFunction)"space:name").GetNamespacedName(), "Implicit string to function conversion converts incorrectly");
+            Assert.AreEqual("name:func", new FileMocks.MockFunction(EmptyDatapack.GetPack().Namespace("name"), "func").GetNamespacedName(), "EmptyFunction doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((FileMocks.MockFunction)"space:name").GetNamespacedName(), "Implicit string to function conversion converts incorrectly");
         }
 
         [TestMethod]

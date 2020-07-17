@@ -111,7 +111,7 @@ namespace SharpCraft.Tests.Commands
         public void RunFunctionCommandTest()
         {
             using EmptyDatapack datapack = new EmptyDatapack("pack");
-            EmptyFunction function = new EmptyFunction(datapack.Namespace("space"), "function");
+            FileMocks.MockFunction function = new FileMocks.MockFunction(datapack.Namespace("space"), "function");
             Assert.AreEqual("function space:function", new RunFunctionCommand(function).GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new RunFunctionCommand(null));

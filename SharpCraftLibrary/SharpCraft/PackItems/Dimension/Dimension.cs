@@ -15,17 +15,17 @@ namespace SharpCraft
         /// <summary>
         /// The vanilla overworld dimension
         /// </summary>
-        public static readonly IDimension Overworld = new EmptyDimension(EmptyNamespace.GetMinecraftNamespace(), "overworld");
+        public static readonly IDimension Overworld = new FileMocks.MockDimension(EmptyNamespace.GetMinecraftNamespace(), "overworld");
 
         /// <summary>
         /// The vanilla nether dimension
         /// </summary>
-        public static readonly IDimension Nether = new EmptyDimension(EmptyNamespace.GetMinecraftNamespace(), "the_nether");
+        public static readonly IDimension Nether = new FileMocks.MockDimension(EmptyNamespace.GetMinecraftNamespace(), "the_nether");
 
         /// <summary>
         /// The vanilla end dimension
         /// </summary>
-        public static readonly IDimension End = new EmptyDimension(EmptyNamespace.GetMinecraftNamespace(), "the_end");
+        public static readonly IDimension End = new FileMocks.MockDimension(EmptyNamespace.GetMinecraftNamespace(), "the_end");
         private BaseGenerator generator = null!;
         private IDimensionType dimensionType = null!;
 
@@ -124,67 +124,6 @@ namespace SharpCraft
         public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
         {
             return new DataPartTag(GetNamespacedName());
-        }
-    }
-
-    /// <summary>
-    /// Used for calling dimensions outside this program
-    /// </summary>
-    public class EmptyDimension : IDimension
-    {
-        /// <summary>
-        /// Intializes a new <see cref="EmptyDimension"/>
-        /// </summary>
-        /// <param name="packNamespace">The namespace the dimension is in</param>
-        /// <param name="fileName">The name of the dimension</param>
-        public EmptyDimension(BasePackNamespace packNamespace, string fileName)
-        {
-            PackNamespace = packNamespace;
-            FileId = fileName;
-        }
-
-        /// <summary>
-        /// The name of the dimension
-        /// </summary>
-        public string FileId { get; private set; }
-
-        /// <summary>
-        /// The namespace the dimension is in
-        /// </summary>
-        public BasePackNamespace PackNamespace { get; private set; }
-
-        /// <summary>
-        /// Converts this dimension into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
-
-        /// <summary>
-        /// Returns the string used for selecting the dimension
-        /// </summary>
-        /// <returns>The string used for selecting the dimension</returns>
-        public string GetNamespacedName()
-        {
-            return PackNamespace.Name + ":" + FileId;
-        }
-
-        /// <summary>
-        /// Converts a string of the format NAMESPACE:DIMENSION into an <see cref="EmptyDimension"/>
-        /// </summary>
-        /// <param name="dimension">The string to convert</param>
-        public static implicit operator EmptyDimension(string dimension)
-        {
-            string[] parts = dimension.Split(':');
-            if (parts.Length != 2)
-            {
-                throw new InvalidCastException("String for creating empty dimension has to contain a single :");
-            }
-            return new EmptyDimension(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
     }
 }
