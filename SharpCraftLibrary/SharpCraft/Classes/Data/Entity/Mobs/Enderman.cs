@@ -12,7 +12,12 @@ namespace SharpCraft.Entities
         /// Creates a new enderman
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Enderman(ID.Entity? type = ID.Entity.endermite) : base(type) { }
+        public Enderman(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Enderman() : base(SharpCraft.ID.Entity.enderman) { }
 
         /// <summary>
         /// The block the enderman is holding.

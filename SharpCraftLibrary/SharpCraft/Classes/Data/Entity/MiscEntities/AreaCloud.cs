@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new area effect cloud
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public AreaCloud(ID.Entity? type = ID.Entity.area_effect_cloud) : base(type) { }
+        public AreaCloud(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public AreaCloud() : base(SharpCraft.ID.Entity.area_effect_cloud) { }
 
         /// <summary>
         /// The amount of time before the cloud disapears after the <see cref="WaitTime"/> is over

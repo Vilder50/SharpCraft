@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new tnt minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartTNT(ID.Entity? type = ID.Entity.tnt_minecart) : base(type) { }
+        public MinecartTNT(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartTNT() : base(SharpCraft.ID.Entity.tnt_minecart) { }
 
         /// <summary>
         /// Time till it explodes

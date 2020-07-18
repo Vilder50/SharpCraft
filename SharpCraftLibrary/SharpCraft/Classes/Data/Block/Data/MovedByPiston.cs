@@ -13,7 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a new block being moved by a piston
         /// </summary>
         /// <param name="type">The type of block</param>
-        public MovedByPiston(BlockType? type) : base(type) { }
+        public MovedByPiston(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

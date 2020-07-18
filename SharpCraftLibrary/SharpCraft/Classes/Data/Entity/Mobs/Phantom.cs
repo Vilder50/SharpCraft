@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new phantom
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Phantom(ID.Entity? type = ID.Entity.phantom) : base(type) { }
+        public Phantom(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Phantom() : base(SharpCraft.ID.Entity.phantom) { }
 
         /// <summary>
         /// The phantom will circle around this location when not attacking

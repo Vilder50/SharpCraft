@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a farmland block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Farmland(BlockType? type) : base(type) { }
+        public Farmland(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a farmland block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Farmland(ID.Block type = SharpCraft.ID.Block.farmland) : base(type) { }
+        public Farmland() : base(SharpCraft.ID.Block.farmland) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

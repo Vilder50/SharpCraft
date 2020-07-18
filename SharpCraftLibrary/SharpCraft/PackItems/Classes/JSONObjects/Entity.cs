@@ -14,7 +14,7 @@ namespace SharpCraft.JsonObjects
         /// The <see cref="SharpCraft.Entity"/> type
         /// </summary>
         [DataTag("type", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-        public EntityType? Type { get; set; }
+        public IEntityType? Type { get; set; }
 
         /// <summary>
         /// the <see cref="Distance"/> to the <see cref="SharpCraft.Entity"/>
@@ -261,10 +261,10 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Implicit converts <see cref="EntityType"/> into an <see cref="Entity"/> object
+        /// Implicit converts <see cref="EntityGroup"/> into an <see cref="Entity"/> object
         /// </summary>
-        /// <param name="type">the <see cref="EntityType"/> to convert</param>
-        public static implicit operator Entity(EntityType type)
+        /// <param name="type">the <see cref="EntityGroup"/> to convert</param>
+        public static implicit operator Entity(EntityGroup type)
         {
             return new Entity() { Type = type };
         }

@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new wolf
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Wolf(ID.Entity? type = ID.Entity.wolf) : base(type) { }
+        public Wolf(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Wolf() : base(SharpCraft.ID.Entity.wolf) { }
 
         /// <summary>
         /// The color of the wolf's collar

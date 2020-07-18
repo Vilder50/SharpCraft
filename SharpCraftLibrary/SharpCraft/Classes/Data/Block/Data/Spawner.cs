@@ -13,20 +13,18 @@ namespace SharpCraft.Blocks
         /// Creates a spawner block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Spawner(BlockType? type) : base(type) { }
+        public Spawner(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a spawner block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Spawner(ID.Block type = SharpCraft.ID.Block.spawner) : base(type) { }
+        public Spawner() : base(SharpCraft.ID.Block.spawner) { }
 
         /// <summary>
         /// Creates a spawner with the specified entity inside. The entity wont move and the spawner wont spawn the entity
         /// </summary>
         /// <param name="display">The entity to display</param>
-        /// <param name="type">The type of block</param>
-        public Spawner(Entity display, ID.Block? type = SharpCraft.ID.Block.spawner) : base(type)
+        public Spawner(Entity display) : base(SharpCraft.ID.Block.spawner)
         {
             DPotentials = new SpawnerPotential[]
             {

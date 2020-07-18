@@ -14,6 +14,11 @@ namespace SharpCraft.Entities
         public Zombie(ID.Entity? type) : base(type) { }
 
         /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Zombie() : base(SharpCraft.ID.Entity.zombie) { }
+
+        /// <summary>
         /// If its a baby
         /// </summary>
         [Data.DataTag]

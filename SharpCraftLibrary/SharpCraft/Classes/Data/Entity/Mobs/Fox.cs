@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new fox
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Fox(ID.Entity? type = ID.Entity.fox) : base(type) { }
+        public Fox(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Fox() : base(SharpCraft.ID.Entity.fox) { }
 
         /// <summary>
         /// The fox' skin

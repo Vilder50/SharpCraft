@@ -114,16 +114,5 @@ namespace SharpCraft
 
             stream.Write("}");
         }
-
-        /// <summary>
-        /// Converts this dimension into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
     }
 }

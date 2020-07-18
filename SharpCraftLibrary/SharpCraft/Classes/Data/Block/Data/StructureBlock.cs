@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a structure block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public StructureBlock(BlockType? type) : base(type) { }
+        public StructureBlock(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a structure block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public StructureBlock(ID.Block type = SharpCraft.ID.Block.structure_block) : base(type) { }
+        public StructureBlock() : base(SharpCraft.ID.Block.structure_block) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new end crystal
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public EndCrystal(ID.Entity? type = ID.Entity.end_crystal) : base(type) { }
+        public EndCrystal(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public EndCrystal() : base(SharpCraft.ID.Entity.end_crystal) { }
 
         /// <summary>
         /// If the bedrock should be shown under the crystal

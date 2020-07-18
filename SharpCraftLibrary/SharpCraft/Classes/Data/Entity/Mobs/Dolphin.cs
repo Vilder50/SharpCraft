@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new dolphin
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Dolphin(ID.Entity? type = ID.Entity.dolphin) : base(type) { }
+        public Dolphin(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Dolphin() : base(SharpCraft.ID.Entity.dolphin) { }
 
         /// <summary>
         /// The location of the treasure the dolphin will lead the player to

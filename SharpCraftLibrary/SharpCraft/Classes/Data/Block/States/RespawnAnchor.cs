@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a respawn anchor block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public RespawnAnchor(BlockType type) : base(type) { }
+        public RespawnAnchor(IBlockType type) : base(type) { }
 
         /// <summary>
-        /// Creates a respawn anchor block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public RespawnAnchor(ID.Block type = SharpCraft.ID.Block.respawn_anchor) : base(type) { }
+        public RespawnAnchor() : base(SharpCraft.ID.Block.respawn_anchor) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

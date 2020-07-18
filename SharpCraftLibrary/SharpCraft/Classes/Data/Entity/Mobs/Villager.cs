@@ -15,7 +15,12 @@ namespace SharpCraft.Entities
         /// Creates a new villager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Villager(ID.Entity? type = ID.Entity.villager) : base(type) { }
+        public Villager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Villager() : base(SharpCraft.ID.Entity.villager) { }
 
         /// <summary>
         /// The villager's level (~Amount of trades)

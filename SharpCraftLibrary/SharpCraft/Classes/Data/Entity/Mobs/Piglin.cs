@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new piglin
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Piglin(ID.Entity? type = ID.Entity.piglin) : base(type) { }
+        public Piglin(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Piglin() : base(SharpCraft.ID.Entity.piglin) { }
 
         /// <summary>
         /// If its a baby

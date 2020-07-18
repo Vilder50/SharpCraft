@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a vine block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Vine(BlockType? type) : base(type) { }
+        public Vine(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a vine block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Vine(ID.Block type = SharpCraft.ID.Block.vine) : base(type) { }
+        public Vine() : base(SharpCraft.ID.Block.vine) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

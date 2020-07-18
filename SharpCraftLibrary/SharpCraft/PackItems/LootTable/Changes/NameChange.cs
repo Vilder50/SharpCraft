@@ -17,7 +17,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="NameChange"/>
         /// </summary>
-        public NameChange(BaseJsonText name, ID.LootTarget? target = null) : base("set_name")
+        public NameChange(BaseJsonText name, ID.LootTarget? target = null) : base("minecraft:set_name")
         {
             Name = name;
             Target = target;

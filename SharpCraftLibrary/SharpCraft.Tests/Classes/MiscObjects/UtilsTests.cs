@@ -34,16 +34,6 @@ namespace SharpCraft.Tests.MiscObjects
         }
 
         [TestMethod]
-        public void TestMinecraftValue()
-        {
-            ID.Item value = ID.Item.String;
-            Assert.AreEqual("string", value.FixEnum());
-
-            ID.Item? nullAble = ID.Item.structure_void;
-            Assert.AreEqual("structure_void", nullAble.FixEnum());
-        }
-
-        [TestMethod]
         public void TestToMinecraftBool()
         {
             bool value = true;
@@ -54,59 +44,27 @@ namespace SharpCraft.Tests.MiscObjects
         }
 
         [TestMethod]
-        public void TestConvertToBlock()
-        {
-            //setup
-            ID.Item value = ID.Item.dirt;
-            ID.Item? nullAble = ID.Item.stone;
-            ID.Item? isNull = null;
-            ID.Item noneConvertable = ID.Item.stick;
-
-            //test
-            Assert.AreEqual(ID.Block.dirt, value.ConvertToBlock(), "Item to block convert didn't work correctly");
-            Assert.AreEqual(ID.Block.stone, nullAble.ConvertToBlock(), "Nullable item to block convert didn't work correctly");
-            Assert.IsNull(isNull.ConvertToBlock(), "Null wasn't converted");
-            Assert.ThrowsException<InvalidCastException>(() => noneConvertable.ConvertToBlock(), "Unconvertable item should throw exception");
-        }
-
-        [TestMethod]
-        public void TestConvertToItem()
-        {
-            //setup
-            ID.Block value = ID.Block.dirt;
-            ID.Block? nullAble = ID.Block.stone;
-            ID.Block? isNull = null;
-            ID.Block noneConvertable = ID.Block.fire;
-
-            //test
-            Assert.AreEqual(ID.Item.dirt, value.ConvertToItem(), "Block to item convert didn't work correctly");
-            Assert.AreEqual(ID.Item.stone, nullAble.ConvertToItem(), "Nullable block to item convert didn't work correctly");
-            Assert.IsNull(isNull.ConvertToItem(), "Null wasn't converted");
-            Assert.ThrowsException<InvalidCastException>(() => noneConvertable.ConvertToItem(), "Unconvertable block should throw exception");
-        }
-
-        [TestMethod]
         public void TestValidateName()
         {
-            Assert.IsFalse(Utils.ValidateName(null,true,true, null), "Null is not a valid name");
-            Assert.IsTrue(Utils.ValidateName("...__---",false,false, null), "Name should accept / . _ and -");
-            Assert.IsTrue(Utils.ValidateName("as0ds9az564xxcy12", false, false, null), "Name should accept letters and numbers");
-            Assert.IsFalse(Utils.ValidateName("test:test", false, false, null), "Name should not accept :");
-            Assert.IsFalse(Utils.ValidateName("", false, false, null), "Name may not be empty");
-            Assert.IsFalse(Utils.ValidateName("ASD", false, false, null), "Name may not contain capitialized letters");
-            Assert.IsTrue(Utils.ValidateName("ASD", true, false, null), "Name may contain capitialized letters if specified");
-            Assert.IsFalse(Utils.ValidateName("/", false, false, null), "Name may not /");
-            Assert.IsTrue(Utils.ValidateName("/", true, true, null), "Name may contain / if specified");
-            Assert.IsTrue(Utils.ValidateName("123", true, true, 3), "Name is 3 chars long");
-            Assert.IsFalse(Utils.ValidateName("1234", true, true, 3), "Name is 4 chars long and shouldn't be allowed");
+            Assert.IsFalse(Validators.ValidateName(null!,true,true, null), "Null is not a valid name");
+            Assert.IsTrue(Validators.ValidateName("...__---",false,false, null), "Name should accept / . _ and -");
+            Assert.IsTrue(Validators.ValidateName("as0ds9az564xxcy12", false, false, null), "Name should accept letters and numbers");
+            Assert.IsFalse(Validators.ValidateName("test:test", false, false, null), "Name should not accept :");
+            Assert.IsFalse(Validators.ValidateName("", false, false, null), "Name may not be empty");
+            Assert.IsFalse(Validators.ValidateName("ASD", false, false, null), "Name may not contain capitialized letters");
+            Assert.IsTrue(Validators.ValidateName("ASD", true, false, null), "Name may contain capitialized letters if specified");
+            Assert.IsFalse(Validators.ValidateName("/", false, false, null), "Name may not /");
+            Assert.IsTrue(Validators.ValidateName("/", true, true, null), "Name may contain / if specified");
+            Assert.IsTrue(Validators.ValidateName("123", true, true, 3), "Name is 3 chars long");
+            Assert.IsFalse(Validators.ValidateName("1234", true, true, 3), "Name is 4 chars long and shouldn't be allowed");
         }
 
         [TestMethod]
         public void TestValidateSingleSelectSelector()
         {
-            Utils.ValidateSingleSelectSelector(ID.Selector.s, "a", "b");
-            Assert.ThrowsException<ArgumentException>(() => Utils.ValidateSingleSelectSelector(ID.Selector.a, "a", "b"));
-            Assert.ThrowsException<ArgumentNullException>(() => Utils.ValidateSingleSelectSelector(null, "a", "b"));
+            Validators.ValidateSingleSelectSelector(ID.Selector.s, "a", "b");
+            Assert.ThrowsException<ArgumentException>(() => Validators.ValidateSingleSelectSelector(ID.Selector.a, "a", "b"));
+            Assert.ThrowsException<ArgumentNullException>(() => Validators.ValidateSingleSelectSelector(null!, "a", "b"));
         }
     }
 }

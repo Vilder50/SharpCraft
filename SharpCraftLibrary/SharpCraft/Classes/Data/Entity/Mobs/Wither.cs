@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new wither
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Wither(ID.Entity? type = ID.Entity.wither) : base(type) { }
+        public Wither(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Wither() : base(SharpCraft.ID.Entity.wither) { }
 
         /// <summary>
         /// The time before the wither actually spawns / can be fought

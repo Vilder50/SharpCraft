@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a jukebox block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Jukebox(BlockType? type) : base(type) { }
+        public Jukebox(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a jukebox block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Jukebox(ID.Block type = SharpCraft.ID.Block.jukebox) : base(type) { }
+        public Jukebox() : base(SharpCraft.ID.Block.jukebox) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

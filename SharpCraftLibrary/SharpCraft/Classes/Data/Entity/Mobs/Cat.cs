@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new cat
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Cat(ID.Entity? type = ID.Entity.cat) : base(type) { }
+        public Cat(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Cat() : base(SharpCraft.ID.Entity.cat) { }
 
         /// <summary>
         /// The cat's skin

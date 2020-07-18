@@ -360,7 +360,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreboardValueGetCommand));
+                selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreboardValueGetCommand));
             }
         }
 
@@ -489,7 +489,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreboardListCommand));
+                selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreboardListCommand));
             }
         }
 

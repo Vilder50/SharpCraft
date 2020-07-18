@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new spawner minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartSpawner(ID.Entity? type = ID.Entity.spawner_minecart) : base(type) { }
+        public MinecartSpawner(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartSpawner() : base(SharpCraft.ID.Entity.spawner_minecart) { }
 
         /// <summary>
         /// The entities the spawner can spawn

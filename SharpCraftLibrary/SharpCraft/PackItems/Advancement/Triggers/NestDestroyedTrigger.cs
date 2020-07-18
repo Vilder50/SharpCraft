@@ -27,7 +27,7 @@ namespace SharpCraft.AdvancementObjects
         /// The block which was destroyed
         /// </summary>
         [DataTag("conditions.block", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public BlockType? Id { get; set; }
+        public IBlockType? Id { get; set; }
 
         /// <summary>
         /// The amount of bees in the nest

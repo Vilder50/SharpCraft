@@ -15,7 +15,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="DecayChange"/>
         /// </summary>
-        public DecayChange() : base("explosion_decay")
+        public DecayChange() : base("minecraft:explosion_decay")
         {
             
         }

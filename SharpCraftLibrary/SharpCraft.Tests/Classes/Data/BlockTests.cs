@@ -24,28 +24,30 @@ namespace SharpCraft.Tests.Data
 
             //make sure all catagories are in use
             List<(MethodInfo method, Type block, bool used)> fitBlockMethods = new List<(MethodInfo method, Type block, bool used)>();
-            if (fitBlockMethods is null)
+            Type blockType = typeof(Block);
+            Type[] types = Assembly.GetAssembly(typeof(Block))!.GetTypes().Where(t => t.IsSubclassOf(blockType) && !t.IsAbstract).ToArray();
+            foreach (Type classType in types)
             {
-                Type blockType = typeof(Block);
-                Type[] types = Assembly.GetAssembly(typeof(Block)).GetTypes().Where(t => t.IsSubclassOf(blockType) && !t.IsAbstract).ToArray();
-                foreach (Type classType in types)
+                MethodInfo? fitBlockMethod = classType.GetMethod("FitsBlock", BindingFlags.Public | BindingFlags.Static);
+                if (!(fitBlockMethod is null))
                 {
-                    MethodInfo fitBlockMethod = classType.GetMethod("FitsBlock", BindingFlags.Public | BindingFlags.Static);
-                    if (!(fitBlockMethod is null))
-                    {
-                        fitBlockMethods.Add((fitBlockMethod, classType, false));
-                    }
+                    fitBlockMethods.Add((fitBlockMethod, classType, false));
+                } 
+                else
+                {
+                    Assert.Fail(classType.FullName + " doenst have a FitsBlock method");
                 }
             }
 
-            for (int i = 0; i < (int)ID.Block.BlockEnumEnd - 1; i++)
+            foreach(ID.Block blockId in ID.Block.GetValuesFromEnumHolder<ID.Block>())
             {
                 for (int j = 0; j < fitBlockMethods.Count; j++)
                 {
-                    (MethodInfo method, Type block, bool used) = fitBlockMethods[j];
-                    if ((bool)method.Invoke(null, new object[] { (ID.Block)i }))
+                    var (method, block, used) = fitBlockMethods[j];
+                    if ((bool)method.Invoke(null, new object[] { blockId })!)
                     {
                         used = true;
+                        fitBlockMethods[j] = (method, block, used);
                         break;
                     }
                 }
@@ -121,7 +123,7 @@ namespace SharpCraft.Tests.Data
             Assert.IsNull(furnace.SLit);
 
             //can copy blocks with auto id givers
-            new Blocks.BrewingStand().FullClone();
+            new Blocks.BrewingStand(ID.Block.brewing_stand).FullClone();
         }
 
         [TestMethod]
@@ -133,19 +135,19 @@ namespace SharpCraft.Tests.Data
         [TestMethod]
         public void TestGetAsDataObject()
         {
-            IConvertableToDataObject convertable = new Blocks.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            IConvertableToDataObject convertable = new Blocks.Chest(ID.Block.chest) { SFacing = ID.Facing.north, DLock = "locked" };
             Assert.AreEqual("{i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s" }).GetDataString());
             Assert.AreEqual("{\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "s", true }).GetDataString());
 
             Assert.AreEqual("{d:\"{Lock:\\\"locked\\\"}\",i:\"minecraft:chest\",s:{facing:\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
             Assert.AreEqual("{\"d\":\"{Lock:\\\"locked\\\"}\",\"i\":\"minecraft:chest\",\"s\":{\"facing\":\"north\"}}", convertable.GetAsDataObject(new object[] { "i", "g", "d", "s", true }).GetDataString());
-            Assert.AreEqual("{g:\"a:b\"}", new Blocks.Chest(new BlockType(new FileMocks.MockGroup<BlockType>(EmptyNamespace.GetNamespace("a"),"b"))).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
+            Assert.AreEqual("{g:\"a:b\"}", new Blocks.Chest(new FileMocks.MockGroup<IBlockType>(EmptyNamespace.GetNamespace("a"),"b")).GetAsDataObject(new object[] { "i", "g", "d", "s", false }).GetDataString());
         }
 
         [TestMethod]
         public void TestGetStateData()
         {
-            Block block = new Blocks.Chest() { SFacing = ID.Facing.north, DLock = "locked" };
+            Block block = new Blocks.Chest(ID.Block.chest) { SFacing = ID.Facing.north, DLock = "locked" };
             Assert.AreEqual("{facing:\"north\"}", block.GetStateData(false).GetDataString());
             Assert.AreEqual("{\"facing\":\"north\"}", block.GetStateData(true).GetDataString());
         }

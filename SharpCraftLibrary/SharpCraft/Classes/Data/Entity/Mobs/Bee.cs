@@ -12,7 +12,12 @@ namespace SharpCraft.Entities
         /// Creates a new bee
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Bee(ID.Entity? type = ID.Entity.bee) : base(type) { }
+        public Bee(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Bee() : base(SharpCraft.ID.Entity.bee) { }
 
         /// <summary>
         /// The location of the bee's hive

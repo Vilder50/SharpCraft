@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new chest minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartChest(ID.Entity? type = ID.Entity.chest_minecart) : base(type) { }
+        public MinecartChest(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartChest() : base(SharpCraft.ID.Entity.chest_minecart) { }
 
         /// <summary>
         /// The chest's loottable

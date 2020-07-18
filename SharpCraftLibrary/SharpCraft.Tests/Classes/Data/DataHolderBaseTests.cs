@@ -23,7 +23,7 @@ namespace SharpCraft.Tests.Data
             public byte? SmallNumber { get; set; }
 
             [DataTag]
-            public byte[] SmallNumberArray { get; set; }
+            public byte[]? SmallNumberArray { get; set; }
 
             [DataTag]
             public short? ShortNumber { get; set; }
@@ -32,13 +32,13 @@ namespace SharpCraft.Tests.Data
             public int? Number { get; set; }
 
             [DataTag]
-            public int[] NumberArray { get; set; }
+            public int[]? NumberArray { get; set; }
 
             [DataTag]
             public long? LongNumber { get; set; }
 
             [DataTag]
-            public long[] LongNumberArray { get; set; }
+            public long[]? LongNumberArray { get; set; }
 
             [DataTag]
             public float? FloatPointNumber { get; set; }
@@ -47,25 +47,25 @@ namespace SharpCraft.Tests.Data
             public double? PointNumber { get; set; }
 
             [DataTag]
-            public double[] PointNumberArray { get; set; }
+            public double[]? PointNumberArray { get; set; }
 
             [DataTag("Double.Tag")]
-            public string Text { get; set; }
+            public string? Text { get; set; }
 
             [DataTag]
-            public string[] TextArray { get; set; }
+            public string[]? TextArray { get; set; }
 
             [DataTag]
             public bool? Boolean { get; set; }
 
             [DataTag]
-            public BaseJsonText[] Name { get; set; }
+            public BaseJsonText[]? Name { get; set; }
 
             [DataTag("JsonTag")]
-            public BaseJsonText[] JsonTag { get; set; }
+            public BaseJsonText[]? JsonTag { get; set; }
 
             [DataTag("Fake", ForceType = ID.NBTTagType.TagCompound)]
-            public string Fake { get; set; }
+            public string? Fake { get; set; }
         }
 
         /// <summary>
@@ -74,22 +74,22 @@ namespace SharpCraft.Tests.Data
         private class DataHolderTestCompoundClass : DataHolderBase
         {
             [DataTag("Inside.String")]
-            public string String { get; set; }
+            public string? String { get; set; }
 
             [DataTag]
             public int? Number { get; set; }
 
             [DataTag("Inside")]
-            public DataHolderTestClass OtherObject { get; set; }
+            public DataHolderTestClass? OtherObject { get; set; }
         }
 
         private class JsonDataHolderTestClass : DataHolderBase
         {
             [DataTag(JsonTag = true)]
-            public double[] Array { get; set; }
+            public double[]? Array { get; set; }
 
             [DataTag(JsonTag = true)]
-            public string String { get; set; }
+            public string? String { get; set; }
 
             [DataTag(JsonTag = true)]
             public int? Int { get; set; }
@@ -104,13 +104,13 @@ namespace SharpCraft.Tests.Data
             public bool? NoJson { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-            public DataHolderTestCompoundClass Object { get; set; }
+            public DataHolderTestCompoundClass? Object { get; set; }
 
             [DataTag(JsonTag = true)]
-            public JsonDataHolderTestClass JsonObject { get; set; }
+            public JsonDataHolderTestClass? JsonObject { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-            public JsonDataHolderTestClass StringObject { get; set; }
+            public JsonDataHolderTestClass? StringObject { get; set; }
         }
 
         #region custom tag classes
@@ -118,18 +118,18 @@ namespace SharpCraft.Tests.Data
         {
             public bool Bad = false;
 
-            public DataPartTag GetAsTag(ID.NBTTagType? asType = null, object[] extraConversionData = null)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType = null, object?[]? extraConversionData = null)
             {
                 if (Bad)
                 {
                     throw new Exception();
                 }
 
-                if (asType == ID.NBTTagType.TagByte && extraConversionData.Length == 0)
+                if (asType == ID.NBTTagType.TagByte && extraConversionData!.Length == 0)
                 {
                     return new DataPartTag((sbyte)10);
                 }
-                else if (asType == ID.NBTTagType.TagDouble && (int)extraConversionData[0] == 1)
+                else if (asType == ID.NBTTagType.TagDouble && (int)extraConversionData![0]! == 1)
                 {
                     return new DataPartTag((long)10);
                 }
@@ -142,15 +142,15 @@ namespace SharpCraft.Tests.Data
 
         private class CustomDataArray : IConvertableToDataArray<double>
         {
-            public DataPartArray GetAsArray(ID.NBTTagType? asType = null, object[] extraConversionData = null)
+            public DataPartArray GetAsArray(ID.NBTTagType? asType = null, object?[]? extraConversionData = null)
             {
-                if (asType == ID.NBTTagType.TagIntArray && extraConversionData.Length == 0)
+                if (asType == ID.NBTTagType.TagIntArray && extraConversionData!.Length == 0)
                 {
-                    return new DataPartArray(new int[] { 1, 2, 3 }, null, null);
+                    return new DataPartArray(new int[] { 1, 2, 3 }, null, null!);
                 }
-                else if (asType == ID.NBTTagType.TagDoubleArray && (int)extraConversionData[0] == 2)
+                else if (asType == ID.NBTTagType.TagDoubleArray && (int)extraConversionData![0]! == 2)
                 {
-                    return new DataPartArray(new double[] { 1.1, 2.2, 3.3 }, null, null);
+                    return new DataPartArray(new double[] { 1.1, 2.2, 3.3 }, null, null!);
                 }
                 else
                 {
@@ -166,15 +166,15 @@ namespace SharpCraft.Tests.Data
 
         private class CustomDataObject : IConvertableToDataObject
         {
-            public DataPartObject GetAsDataObject(object[] conversionData = null)
+            public DataPartObject GetAsDataObject(object?[]? conversionData = null)
             {
-                if (conversionData.Length == 0)
+                if (conversionData!.Length == 0)
                 {
                     DataPartObject dataPartObject = new DataPartObject();
                     dataPartObject.AddValue(new DataPartPath("test", new DataPartTag(1)));
                     return dataPartObject;
                 }
-                else if ((int)conversionData[0] == 3)
+                else if ((int)conversionData![0]! == 3)
                 {
                     DataPartObject dataPartObject = new DataPartObject();
                     dataPartObject.AddValue(new DataPartPath("other", new DataPartTag(5)));
@@ -190,37 +190,37 @@ namespace SharpCraft.Tests.Data
         private class CustomTagTestClass : DataHolderBase
         {
             [DataTag(ForceType = ID.NBTTagType.TagByte)]
-            public CustomDataTag CustomTag { get; set; }
+            public CustomDataTag? CustomTag { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagInt)]
-            public CustomDataTag InvalidCustomTag { get; set; }
+            public CustomDataTag? InvalidCustomTag { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagDouble, ConversionParams = new object[] { 1 })]
-            public CustomDataTag OtherCustomTag { get; set; }
+            public CustomDataTag? OtherCustomTag { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagIntArray)]
-            public CustomDataArray CustomArray { get; set; }
+            public CustomDataArray? CustomArray { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagDoubleArray, ConversionParams = new object[] { 2 })]
-            public CustomDataArray OtherCustomArray { get; set; }
+            public CustomDataArray? OtherCustomArray { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagByteArray)]
-            public CustomDataArray InvalidCustomArray { get; set; }
+            public CustomDataArray? InvalidCustomArray { get; set; }
 
             [DataTag]
-            public CustomDataObject CustomObject { get; set; }
+            public CustomDataObject? CustomObject { get; set; }
 
             [DataTag(ConversionParams = new object[] { 3 })]
-            public CustomDataObject OtherCustomObject { get; set; }
+            public CustomDataObject? OtherCustomObject { get; set; }
 
             [DataTag(ConversionParams = new object[] { 2 })]
-            public CustomDataObject InvalidCustomObject { get; set; }
+            public CustomDataObject? InvalidCustomObject { get; set; }
 
             [DataTag(Merge = true)]
-            public CustomDataObject MergeObject { get; set; }
+            public CustomDataObject? MergeObject { get; set; }
 
             [DataTag(ForceType = ID.NBTTagType.TagByteArray)]
-            public CustomDataTag[] CustomTagArray { get; set; }
+            public CustomDataTag[]? CustomTagArray { get; set; }
         }
         #endregion
         #endregion
@@ -233,7 +233,7 @@ namespace SharpCraft.Tests.Data
             Assert.AreEqual(16, properties.Count);
             PropertyInfo boolProperty = properties.Single(p => p.Name == "Boolean");
             boolProperty.SetValue(testObject, true);
-            Assert.IsTrue(testObject.Boolean.Value);
+            Assert.IsTrue(testObject.Boolean!.Value);
         }
 
         [TestMethod]
@@ -251,7 +251,7 @@ namespace SharpCraft.Tests.Data
 
             DataHolderTestCompoundClass cloneObject = (DataHolderTestCompoundClass)testObject.Clone();
             Assert.AreEqual(testObject.Number, cloneObject.Number);
-            Assert.AreEqual(testObject.OtherObject.Boolean, cloneObject.OtherObject.Boolean);
+            Assert.AreEqual(testObject.OtherObject.Boolean, cloneObject.OtherObject!.Boolean);
             Assert.AreNotEqual(testObject.OtherObject.NotData, cloneObject.OtherObject.NotData);
 
             cloneObject.Number = 1;

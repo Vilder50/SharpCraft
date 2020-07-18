@@ -19,14 +19,14 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual(-670595106625664944, id.Most, "Most wasn't gotten correctly from uuid");
             Assert.AreEqual("f6b1914d-b176-4850-8a06-b50380412b85", id.UUIDString, "UUID wasn't formated correctly");
 
-            Assert.ThrowsException<ArgumentNullException>(() => new UUID(null), "UUID may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new UUID(null!), "UUID may not be null");
         }
 
         [TestMethod]
         public void TestGetAsArray()
         {
             SharpCraft.Data.IConvertableToDataArray<int> convertable = new UUID("f6b1914d-b176-4850-8a06-b50380412b85");
-            Assert.AreEqual("[I;-156135091,-1317648304,-1979271933,-2143212667]", convertable.GetAsArray(ID.NBTTagType.TagString, null).GetDataString());
+            Assert.AreEqual("[I;-156135091,-1317648304,-1979271933,-2143212667]", convertable.GetAsArray(ID.NBTTagType.TagString, null!).GetDataString());
         }
 
         [TestMethod]

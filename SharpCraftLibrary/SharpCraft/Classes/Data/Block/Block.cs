@@ -13,7 +13,7 @@ namespace SharpCraft
     /// </summary>
     public class Block : DataHolderBase, IConvertableToDataObject
     {
-        private BlockType? id;
+        private IBlockType? id;
 
         /// <summary>
         /// Intilizes a new block object
@@ -27,7 +27,7 @@ namespace SharpCraft
         /// Creates a new block which is the given type of block
         /// </summary>
         /// <param name="type">The block's ID/Type</param>
-        public Block(BlockType? type)
+        public Block(IBlockType? type)
         {
             ID = type;
         }
@@ -62,7 +62,7 @@ namespace SharpCraft
         /// The block's ID
         /// </summary>
         [CompoundPath(0)]
-        public BlockType? ID
+        public IBlockType? ID
         {
             get => id;
             set
@@ -291,7 +291,7 @@ namespace SharpCraft
         /// Converts a block id into a block
         /// </summary>
         /// <param name="type">The block id to convert</param>
-        public static implicit operator Block(BlockType type)
+        public static implicit operator Block(BlockGroup type)
         {
             return new Block(type);
         }
@@ -333,7 +333,7 @@ namespace SharpCraft
             {
                 if ((bool)method.method.Invoke(null, new object[] { type })!)
                 {
-                    return (Block)Activator.CreateInstance(method.block, (BlockType)type)!;
+                    return (Block)Activator.CreateInstance(method.block, (IBlockType)type)!;
                 }
             }
 

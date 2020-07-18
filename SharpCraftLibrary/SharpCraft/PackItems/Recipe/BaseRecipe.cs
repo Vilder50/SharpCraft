@@ -53,7 +53,7 @@ namespace SharpCraft
         /// <param name="stream">The stream to write to</param>
         protected void WriteFileStart(TextWriter stream)
         {
-            stream.Write("{\"type\":\"minecraft:"+Type+"\"");
+            stream.Write("{\"type\":\""+Type+"\"");
 
             if (!string.IsNullOrWhiteSpace(Group))
             {
@@ -75,7 +75,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="item">The item to get the string for</param>
         /// <returns>A string used for specifieng the item in the ingredient list</returns>
-        protected static string GetItemCompound(ItemType item)
+        protected static string GetItemCompound(IItemType item)
         {
             if (item.Name.Contains("#"))
             {
@@ -85,17 +85,6 @@ namespace SharpCraft
             {
                 return "{\"item\":\"" + item.Name + "\"}";
             }
-        }
-
-        /// <summary>
-        /// Converts this recipe into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
         }
 
         /// <summary>

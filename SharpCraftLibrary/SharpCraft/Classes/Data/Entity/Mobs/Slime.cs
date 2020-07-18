@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new slime or magma cube
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Slime(ID.Entity? type = ID.Entity.slime) : base(type) { }
+        public Slime(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Slime() : base(SharpCraft.ID.Entity.slime) { }
 
         /// <summary>
         /// The size of the slime

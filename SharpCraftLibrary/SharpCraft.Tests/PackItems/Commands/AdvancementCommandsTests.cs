@@ -17,7 +17,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("advancement grant @a everything", new AdvancementAllCommand(ID.Selector.a).GetCommandString());
             Assert.AreEqual("advancement revoke @a everything", new AdvancementAllCommand(ID.Selector.a, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementAllCommand(null, false));
+            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementAllCommand(null!, false));
         }
 
         [TestMethod]
@@ -30,8 +30,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("advancement grant @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), new AdvancementObjects.BredAnimalsTrigger() { Name = "test" }, true).GetCommandString());
             Assert.AreEqual("advancement revoke @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), new AdvancementObjects.BredAnimalsTrigger() { Name = "test" }, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(null, new FileMocks.MockAdvancement(packNamespace, "adv"), null, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(ID.Selector.a, null, null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(null!, new FileMocks.MockAdvancement(packNamespace, "adv"), null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSingleCommand(ID.Selector.a, null!, null, true));
         }
 
         [TestMethod]
@@ -46,8 +46,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("advancement grant @a until space:adv", new AdvancementSomeCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.until, true).GetCommandString());
             Assert.AreEqual("advancement revoke @a until space:adv", new AdvancementSomeCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.until, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSomeCommand(null, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.from, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSomeCommand(ID.Selector.a, null, ID.RelativeAdvancement.until, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSomeCommand(null!, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.from, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new AdvancementSomeCommand(ID.Selector.a, null!, ID.RelativeAdvancement.until, true));
         }
     }
 }

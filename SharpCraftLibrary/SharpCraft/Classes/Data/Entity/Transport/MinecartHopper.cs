@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new hopper minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartHopper(ID.Entity? type = ID.Entity.hopper_minecart) : base(type) { }
+        public MinecartHopper(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartHopper() : base(SharpCraft.ID.Entity.hopper_minecart) { }
 
         /// <summary>
         /// The hopper's loottable

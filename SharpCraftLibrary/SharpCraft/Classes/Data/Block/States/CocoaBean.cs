@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a cocoa bean block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public CocoaBean(BlockType? type) : base(type) { }
+        public CocoaBean(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a cocoa bean block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public CocoaBean(ID.Block type = SharpCraft.ID.Block.cocoa) : base(type) { }
+        public CocoaBean() : base(SharpCraft.ID.Block.cocoa) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

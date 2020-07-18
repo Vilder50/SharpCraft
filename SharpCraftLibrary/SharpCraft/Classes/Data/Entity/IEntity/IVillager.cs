@@ -21,13 +21,13 @@ namespace SharpCraft.Entities.Interfaces
         /// <summary>
         /// The villagers proffesion
         /// </summary>
-        [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("VillagerData.profession")]
         ID.VillagerProffession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager
         /// </summary>
-        [DataTag("VillagerData.type", ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("VillagerData.type")]
         ID.VillagerType? VillagerType { get; set; }
 
         /// <summary>

@@ -41,7 +41,7 @@ namespace SharpCraft.Tests.PackItems
 
             //test
             Predicate predicate = space.Predicate("predicate", new Conditions.RandomCondition(0.5));
-            string predicateString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/predicates/predicate.json").writer.ToString();
+            string predicateString = pack.FileCreator.GetWriters().Single(w => w.path == "datapacks/pack/data/space/predicates/predicate.json").writer.ToString()!;
             Assert.AreEqual("{\"chance\":0.5,\"condition\":\"minecraft:random_chance\"}", predicateString, "file wasn't written correctly");
             Assert.IsNull(predicate.Condition, "Condition wasn't cleared");
         }

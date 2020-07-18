@@ -30,12 +30,12 @@ namespace SharpCraft.DimensionObjects
         /// The layers to generate
         /// </summary>
         [DataTag("settings.layers", JsonTag = true)]
-        public Layer[] Layers { get => layers; set => layers = Utils.ValidateNoneNullArray(value, nameof(Layers), nameof(SuperflatGenerator)); }
+        public Layer[] Layers { get => layers; set => layers = Validators.ValidateNoneNullArray(value, nameof(Layers), nameof(SuperflatGenerator)); }
 
         /// <summary>
         /// The biome to use
         /// </summary>
-        [DataTag("settings.biome", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("settings.biome", JsonTag = true)]
         public ID.Biome Biome { get; set; }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace SharpCraft.DimensionObjects
             /// <summary>
             /// The block the layer is made out of
             /// </summary>
-            [DataTag("block", JsonTag = true)]
+            [DataTag("block", ForceType = ID.NBTTagType.TagString,  JsonTag = true)]
             public ID.Block Block { get; set; }
         }
     }

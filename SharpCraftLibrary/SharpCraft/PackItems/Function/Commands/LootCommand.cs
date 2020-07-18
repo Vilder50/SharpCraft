@@ -432,7 +432,7 @@ namespace SharpCraft.Commands
                 get => selector;
                 set
                 {
-                    selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(KillSource));
+                    selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(KillSource));
                 }
             }
 

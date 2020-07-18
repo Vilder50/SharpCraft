@@ -13,7 +13,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// Intializes a new <see cref="NetherBiomeGenerator"/>
         /// </summary>
-        public NetherBiomeGenerator() : base("multi_noise")
+        public NetherBiomeGenerator() : base("minecraft:multi_noise")
         {
             Preset = "minecraft:nether";
         }

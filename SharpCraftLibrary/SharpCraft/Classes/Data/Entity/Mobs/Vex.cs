@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new vex
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Vex(ID.Entity? type = ID.Entity.vex) : base(type) { }
+        public Vex(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Vex() : base(SharpCraft.ID.Entity.vex) { }
 
         /// <summary>
         /// The time till the vex dissapears

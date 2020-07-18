@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a daylight detector block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Target(BlockType type) : base(type) { }
+        public Target(IBlockType type) : base(type) { }
 
         /// <summary>
-        /// Creates a daylight detector block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Target(ID.Block type = SharpCraft.ID.Block.target) : base(type) { }
+        public Target() : base(SharpCraft.ID.Block.target) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

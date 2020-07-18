@@ -16,7 +16,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a clear", new TitleClearCommand(ID.Selector.a).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleClearCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleClearCommand(null!));
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a reset", new TitleResetCommand(ID.Selector.a).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleResetCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleResetCommand(null!));
         }
 
         [TestMethod]
@@ -32,8 +32,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a title {\"text\":\"Hello\"}", new TitleCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(null, new JsonText.Text("hello")));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(ID.Selector.a, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(null!, new JsonText.Text("hello")));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleCommand(ID.Selector.a, null!));
         }
 
         [TestMethod]
@@ -41,8 +41,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a subtitle {\"text\":\"Hello\"}", new TitleSubtitleCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(null, new JsonText.Text("hello")));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(ID.Selector.a, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(null!, new JsonText.Text("hello")));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleSubtitleCommand(ID.Selector.a, null!));
         }
 
         [TestMethod]
@@ -50,8 +50,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a actionbar {\"text\":\"Hello\"}", new TitleActionbarCommand(ID.Selector.a, new JsonText.Text("Hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(null, new JsonText.Text("hello")));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(ID.Selector.a, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(null!, new JsonText.Text("hello")));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleActionbarCommand(ID.Selector.a, null!));
         }
 
         [TestMethod]
@@ -59,10 +59,10 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("title @a times 20 40 60", new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(null, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, null, new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), null, new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
-            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(null!, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, null!, new NoneNegativeTime<int>(2, ID.TimeType.seconds), new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), null!, new NoneNegativeTime<int>(3, ID.TimeType.seconds)));
+            Assert.ThrowsException<ArgumentNullException>(() => new TitleTimesCommand(ID.Selector.a, new NoneNegativeTime<int>(1, ID.TimeType.seconds), new NoneNegativeTime<int>(2, ID.TimeType.seconds), null!));
         }
     }
 }

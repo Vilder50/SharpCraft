@@ -289,7 +289,7 @@ namespace SharpCraft.JsonText
                 }
                 else
                 {
-                    selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(Score));
+                    selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(Score));
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual("MyTag", tag.Name, "Constructor didn't set name correctly");
 
             Assert.ThrowsException<ArgumentException>(() => new Tag(""), "Tag name may not be empty");
-            Assert.ThrowsException<ArgumentException>(() => new Tag(null), "Tag name may not be null");
+            Assert.ThrowsException<ArgumentException>(() => new Tag(null!), "Tag name may not be null");
             Assert.ThrowsException<ArgumentException>(() => new Tag("$asd$"), "Tag name may not be invalid");
         }
 
@@ -21,8 +21,8 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestGetAsTag()
         {
             SharpCraft.Data.IConvertableToDataTag convertable = new Tag("MyTag");
-            Assert.AreEqual("\"MyTag\"", convertable.GetAsTag(ID.NBTTagType.TagString, null).GetDataString(), "Tag wasn't converted correctly");
-            Assert.ThrowsException<ArgumentException>(() => convertable.GetAsTag(ID.NBTTagType.TagInt, null), "Tag should only allow string conversion");
+            Assert.AreEqual("\"MyTag\"", convertable.GetAsTag(ID.NBTTagType.TagString, null!).GetDataString(), "Tag wasn't converted correctly");
+            Assert.ThrowsException<ArgumentException>(() => convertable.GetAsTag(ID.NBTTagType.TagInt, null!), "Tag should only allow string conversion");
         }
 
         [TestMethod]

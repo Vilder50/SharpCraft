@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// <param name="enchant">The enchant to get the level from. The level is added to extra</param>
         /// <param name="maxItems">The amount of items to drop</param>
         /// <param name="probability">The probability for an item to drop</param>
-        public BinomialDistributionCountChange(ID.Enchant enchant, int maxItems, double probability) : base("apply_bonus")
+        public BinomialDistributionCountChange(ID.Enchant enchant, int maxItems, double probability) : base("minecraft:apply_bonus")
         {
             Enchant = enchant;
             MaxItems = maxItems;
@@ -28,7 +28,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// The formula used
         /// </summary>
-        [DataTag("formula", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("formula", JsonTag = true)]
         public ID.LootBonusFormula Formula { get; private set; } = ID.LootBonusFormula.binomial_with_bonus_count;
 
         /// <summary>

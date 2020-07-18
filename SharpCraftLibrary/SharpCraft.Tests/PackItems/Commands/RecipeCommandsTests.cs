@@ -19,8 +19,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("recipe give @a space:recipe", new RecipeCommand(recipe, ID.Selector.a, true).GetCommandString());
             Assert.AreEqual("recipe take @a space:recipe", new RecipeCommand(recipe, ID.Selector.a, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new RecipeCommand(null, ID.Selector.a, true));
-            Assert.ThrowsException<ArgumentNullException>(() => new RecipeCommand(recipe, null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new RecipeCommand(null!, ID.Selector.a, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new RecipeCommand(recipe, null!, true));
         }
 
         [TestMethod]
@@ -29,7 +29,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("recipe give @a *", new RecipeAllCommand(ID.Selector.a, true).GetCommandString());
             Assert.AreEqual("recipe take @a *", new RecipeAllCommand(ID.Selector.a, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new RecipeAllCommand(null, false));
+            Assert.ThrowsException<ArgumentNullException>(() => new RecipeAllCommand(null!, false));
         }
     }
 }

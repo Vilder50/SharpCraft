@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a ladder block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Ladder(BlockType? type) : base(type) { }
+        public Ladder(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a ladder block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Ladder(ID.Block type = SharpCraft.ID.Block.ladder) : base(type) { }
+        public Ladder() : base(SharpCraft.ID.Block.ladder) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

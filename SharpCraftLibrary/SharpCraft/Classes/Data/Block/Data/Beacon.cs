@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a beacon block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Beacon(BlockType? type) : base(type) { }
+        public Beacon(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a beacon block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Beacon(ID.Block type = SharpCraft.ID.Block.beacon) : base(type) { }
+        public Beacon() : base(SharpCraft.ID.Block.beacon) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

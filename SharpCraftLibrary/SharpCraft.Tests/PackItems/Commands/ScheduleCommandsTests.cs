@@ -19,8 +19,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("schedule function space:function 100d", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days)).GetCommandString());
             Assert.AreEqual("schedule function space:function 100d append", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days), true).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(null, new NoneNegativeTime<int>(100, ID.TimeType.days)));
-            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(function, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(null!, new NoneNegativeTime<int>(100, ID.TimeType.days)));
+            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleAddCommand(function, null!));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ScheduleAddCommand(function, -10));
         }
 
@@ -31,7 +31,7 @@ namespace SharpCraft.Tests.Commands
             FileMocks.MockFunction function = new FileMocks.MockFunction(datapack.Namespace("space"), "function");
             Assert.AreEqual("schedule clear space:function", new ScheduleClearCommand(function).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleClearCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ScheduleClearCommand(null!));
         }
     }
 }

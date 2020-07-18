@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new shulker
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Shulker(ID.Entity? type = ID.Entity.shulker) : base(type) { }
+        public Shulker(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Shulker() : base(SharpCraft.ID.Entity.shulker) { }
 
         /// <summary>
         /// The direction of the block the shulker is placed on

@@ -18,9 +18,9 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 65));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(null, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(new Coords(), null, new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), null, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(null!, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(new Coords(), null!, new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemBlockCommand(new Coords(), new Slots.ContainerSlot(5), null!, 10));
         }
 
         [TestMethod]
@@ -30,9 +30,9 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemEntityCommand(ID.Selector.s, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 0));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ReplaceitemEntityCommand(ID.Selector.s, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 65));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(null, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(ID.Selector.s, null, new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
-            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(ID.Selector.s, new Slots.ContainerSlot(5), null, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(null!, new Slots.ContainerSlot(5), new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(ID.Selector.s, null!, new Item(ID.Item.dirt) { CustomModelData = 1 }, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ReplaceitemEntityCommand(ID.Selector.s, new Slots.ContainerSlot(5), null!, 10));
         }
     }
 }

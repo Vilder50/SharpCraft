@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new ender dragon
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Dragon(ID.Entity? type = ID.Entity.ender_dragon) : base(type) { }
+        public Dragon(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Dragon() : base(SharpCraft.ID.Entity.ender_dragon) { }
 
         /// <summary>
         /// The phase the ender dragon is in

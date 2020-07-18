@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// The base class used for files in a datapack
     /// </summary>
-    public abstract class BaseFile
+    public abstract class BaseFile: IConvertableToDataTag
     {
         private const string FileLocationPattern = @"^(([a-zA-Z0-9_-]+)([\\/]{1}[a-zA-Z0-9_-])*)*$";
 
@@ -289,6 +290,17 @@ namespace SharpCraft
         /// Disposes this file. If the write setting is OnDispose it will write the file
         /// </summary>
         public abstract void Dispose();
+
+        /// <summary>
+        /// Converts this predicate into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Unused</param>
+        /// <param name="extraConversionData">Unused</param>
+        /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
+        }
     }
 
     /// <summary>

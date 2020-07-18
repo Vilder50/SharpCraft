@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new item frame or painting entity
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Painting(ID.Entity? type = ID.Entity.painting) : base(type) { }
+        public Painting(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Painting() : base(SharpCraft.ID.Entity.painting) { }
 
         /// <summary>
         /// The block the entity is inside

@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new falling block
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public FallingBlock(ID.Entity? type = ID.Entity.falling_block) : base(type) { }
+        public FallingBlock(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public FallingBlock() : base(SharpCraft.ID.Entity.falling_block) { }
 
         /// <summary>
         /// The time the entity has been falling.

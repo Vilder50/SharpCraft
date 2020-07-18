@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="LimitCountChange"/>
         /// </summary>
         /// <param name="limit">The amount of items in each stack</param>
-        public LimitCountChange(MCRange limit) : base("limit_count")
+        public LimitCountChange(MCRange limit) : base("minecraft:limit_count")
         {
             Limit = limit;
         }

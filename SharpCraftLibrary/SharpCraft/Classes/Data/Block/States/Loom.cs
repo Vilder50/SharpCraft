@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a loom block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Loom(BlockType? type) : base(type) { }
+        public Loom(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a loom block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Loom(ID.Block type = SharpCraft.ID.Block.loom) : base(type) { }
+        public Loom() : base(SharpCraft.ID.Block.loom) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

@@ -13,7 +13,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// Intializes a new <see cref="EndBiomeGenerator"/>
         /// </summary>
-        public EndBiomeGenerator() : base("the_end")
+        public EndBiomeGenerator() : base("minecraft:the_end")
         {
 
         }

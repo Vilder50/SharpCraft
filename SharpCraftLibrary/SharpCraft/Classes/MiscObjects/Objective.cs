@@ -31,7 +31,7 @@ namespace SharpCraft
                 {
                     throw new System.ArgumentException("Objective name may not be null or whitespace", nameof(Name));
                 }
-                if (!Utils.ValidateName(value,true,false,16))
+                if (!Validators.ValidateName(value,true,false,16))
                 {
                     throw new System.ArgumentException("Objective name is invalid. Name may only be up to 16 chars long and only accepts letters, numbers and -._");
                 }

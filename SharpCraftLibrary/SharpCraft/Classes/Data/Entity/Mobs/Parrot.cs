@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new parrot
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Parrot(ID.Entity? type = ID.Entity.parrot) : base(type) { }
+        public Parrot(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Parrot() : base(SharpCraft.ID.Entity.parrot) { }
 
         /// <summary>
         /// How the parrot looks

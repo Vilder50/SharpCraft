@@ -24,7 +24,7 @@ namespace SharpCraft.Items
         /// <param name="ItemID">The type of the item. If null the item has no type</param>
         /// <param name="Count">The amount of the item. If null the item has no amount</param>
         /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-        public DebugStick(ItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
+        public DebugStick(IItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
         /// <summary>
         /// List of properties this debug stick last edited.
@@ -54,7 +54,7 @@ namespace SharpCraft.Items
             /// <param name="block">The block to get the remembered state for</param>
             /// <returns></returns>
             [GeneratePath(nameof(StateList.StatePathGenerator), SharpCraft.ID.SimpleNBTTagType.Compound)]
-            public string GetStatePath(BlockType block)
+            public string GetStatePath(IBlockType block)
             {
                 _ = block;
                 throw new PathGettingMethodCallException();
@@ -70,7 +70,7 @@ namespace SharpCraft.Items
             {
                 _ = caller;
                 _ = convertionInfo;
-                BlockType block = (Expression.Lambda(arguments.ToArray()[0]).Compile().DynamicInvoke() as BlockType)!;
+                IBlockType block = (Expression.Lambda(arguments.ToArray()[0]).Compile().DynamicInvoke() as IBlockType)!;
                 return block.Name;
             }
 
@@ -102,7 +102,7 @@ namespace SharpCraft.Items
         /// </summary>
         public class State : IConvertableToDataTag
         {
-            private BlockType stateOwner = null!;
+            private IBlockType stateOwner = null!;
             private PropertyInfo state = null!;
 
             private State()
@@ -117,7 +117,7 @@ namespace SharpCraft.Items
             /// <param name="stateOwner">The block id of the block holding the state</param>
             /// <param name="stateHoldingProperty">The state</param>
             /// <returns></returns>
-            public static State New<T>(BlockType stateOwner, Expression<Func<T, object?>> stateHoldingProperty) where T : Block
+            public static State New<T>(IBlockType stateOwner, Expression<Func<T, object?>> stateHoldingProperty) where T : Block
             {
                 State state = new State
                 {
@@ -130,7 +130,7 @@ namespace SharpCraft.Items
             /// <summary>
             /// The block type holding the property
             /// </summary>
-            public BlockType StateOwner { get => stateOwner; set => stateOwner = value ?? throw new ArgumentNullException(nameof(StateOwner), "StateOwner may not be null"); }
+            public IBlockType StateOwner { get => stateOwner; set => stateOwner = value ?? throw new ArgumentNullException(nameof(StateOwner), "StateOwner may not be null"); }
 
             /// <summary>
             /// Sets the state saved in the debug stick

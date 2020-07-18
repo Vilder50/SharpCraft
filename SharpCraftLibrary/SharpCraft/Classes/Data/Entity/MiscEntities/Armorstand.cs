@@ -13,7 +13,12 @@ namespace SharpCraft.Entities
         /// Creates a new armor stand entity
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Armorstand(ID.Entity? type = ID.Entity.armor_stand) : base(type) { }
+        public Armorstand(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Armorstand() : base(SharpCraft.ID.Entity.armor_stand) { }
 
         /// <summary>
         /// Choses which slots are locked

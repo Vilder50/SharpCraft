@@ -56,24 +56,24 @@ namespace SharpCraft.DimensionObjects
         /// Scales the noise on the horizontal axis
         /// </summary>
         [DataTag("xz_scale", JsonTag = true)]
-        public double XZScale { get => xZScale; set => xZScale = Utils.ValidateRange(value, 0.001, 1000, nameof(XZScale), nameof(NoiseSamplingSetting)); }
+        public double XZScale { get => xZScale; set => xZScale = Validators.ValidateRange(value, 0.001, 1000, nameof(XZScale), nameof(NoiseSamplingSetting)); }
 
         /// <summary>
         /// Smoothes the noise on the horizontal axis
         /// </summary>
         [DataTag("xz_factor", JsonTag = true)]
-        public double XZFactor { get => xZFactor; set => xZFactor = Utils.ValidateRange(value, 0.001, 1000, nameof(XZFactor), nameof(NoiseSamplingSetting)); }
+        public double XZFactor { get => xZFactor; set => xZFactor = Validators.ValidateRange(value, 0.001, 1000, nameof(XZFactor), nameof(NoiseSamplingSetting)); }
 
         /// <summary>
         /// Scales the noise on the vertical axis
         /// </summary>
         [DataTag("y_scale", JsonTag = true)]
-        public double YScale { get => yScale; set => yScale = Utils.ValidateRange(value, 0.001, 1000, nameof(YScale), nameof(NoiseSamplingSetting)); }
+        public double YScale { get => yScale; set => yScale = Validators.ValidateRange(value, 0.001, 1000, nameof(YScale), nameof(NoiseSamplingSetting)); }
 
         /// <summary>
         /// Smoothes the noise on the vertical axis
         /// </summary>
         [DataTag("y_factor", JsonTag = true)]
-        public double YFactor { get => yFactor; set => yFactor = Utils.ValidateRange(value, 0.001, 1000, nameof(YFactor), nameof(NoiseSamplingSetting)); }
+        public double YFactor { get => yFactor; set => yFactor = Validators.ValidateRange(value, 0.001, 1000, nameof(YFactor), nameof(NoiseSamplingSetting)); }
     }
 }

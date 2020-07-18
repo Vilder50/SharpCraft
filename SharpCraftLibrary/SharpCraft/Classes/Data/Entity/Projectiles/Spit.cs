@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates new llama spit
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public LlamaSpit(ID.Entity? type = ID.Entity.llama_spit) : base(type) { }
+        public LlamaSpit(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public LlamaSpit() : base(SharpCraft.ID.Entity.llama_spit) { }
 
         /// <summary>
         /// The owner of the spit

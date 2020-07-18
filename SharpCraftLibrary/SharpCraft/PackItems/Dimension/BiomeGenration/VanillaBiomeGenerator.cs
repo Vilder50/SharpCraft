@@ -13,7 +13,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// Intializes a new <see cref="VanillaBiomeGenerator"/>
         /// </summary>
-        public VanillaBiomeGenerator() : base("vanilla_layered")
+        public VanillaBiomeGenerator() : base("minecraft:vanilla_layered")
         {
 
         }

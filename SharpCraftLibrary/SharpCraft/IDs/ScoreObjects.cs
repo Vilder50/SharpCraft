@@ -46,19 +46,19 @@
             /// (As in uses the last durability)
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Broken(Item Item) { return "minecraft.broken:minecraft." + Item.FixEnum(); }
+            public static string Broken(Item Item) { return "minecraft.broken:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player crafts the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item.FixEnum(); }
+            public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one for each of the specified item the player drops
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item.FixEnum(); }
+            public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player kills an entity of the specified type
@@ -82,13 +82,13 @@
             /// Goes up by one when the player picks up the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string PickedUp(Item Item) { return "minecraft.picked_up:minecraft." + Item.FixEnum(); }
+            public static string PickedUp(Item Item) { return "minecraft.picked_up:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player uses the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Used(Item Item) { return "minecraft.used:minecraft." + Item.FixEnum(); }
+            public static string Used(Item Item) { return "minecraft.used:minecraft." + Item; }
 
             /// <summary>
             /// The number of ticks since the player last slept

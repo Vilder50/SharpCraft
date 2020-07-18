@@ -20,8 +20,8 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleNormalCommand(ID.Particle.barrier, new Coords(), new Coords(), -1, 0, true, null));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleNormalCommand(ID.Particle.barrier, new Coords(), new Coords(), 0, -1, true, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleNormalCommand(ID.Particle.barrier, null, new Coords(), 0, 0, true, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleNormalCommand(ID.Particle.barrier, new Coords(), null, 0, 0, true, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleNormalCommand(ID.Particle.barrier, null!, new Coords(), 0, 0, true, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleNormalCommand(ID.Particle.barrier, new Coords(), null!, 0, 0, true, null));
         }
 
         [TestMethod]
@@ -33,9 +33,9 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), -1, 5, false, null));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(null, 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, null, new Coords(2, 3, 4), 1.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), null, 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(null!, 3.2, new Coords(0, 0, 0), new Coords(2, 3, 4), 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, null!, new Coords(2, 3, 4), 1.2, -1, false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleColoredDustCommand(new RGBColor(255, 255, 255), 3.2, new Coords(0, 0, 0), null!, 1.2, -1, false, null));
         }
 
         [TestMethod]
@@ -48,9 +48,9 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), -1, 5, true, true, ID.Selector.s));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), new Coords(2, 2, 2), 0.2, -1, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(null, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, null, new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), null, 0.2, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(null!, new Coords(), new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, null!, new Coords(2, 2, 2), 0.2, 5, true, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleBlockCommand(new Blocks.Anvil(ID.Block.anvil) { SFacing = ID.Facing.east }, new Coords(), null!, 0.2, 5, true, true, ID.Selector.s));
         }
 
         [TestMethod]
@@ -62,9 +62,9 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, new Coords(), new Coords(2, 3, 4), -1, 10, false, null));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, new Coords(), new Coords(2, 3, 4), 0.2, -1, false, null));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(null, new Coords(), new Coords(2, 3, 4), 0.2, 10, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, null, new Coords(2, 3, 4), 0.2, 10, true, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, new Coords(), null, 0.2, 10, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(null!, new Coords(), new Coords(2, 3, 4), 0.2, 10, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, null!, new Coords(2, 3, 4), 0.2, 10, true, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new ParticleItemCommand(new Item(ID.Item.stone) { CustomModelData = 1 }, new Coords(), null!, 0.2, 10, true, ID.Selector.s));
         }
     }
 }

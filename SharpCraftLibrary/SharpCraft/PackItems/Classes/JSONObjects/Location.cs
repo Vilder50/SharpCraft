@@ -11,7 +11,7 @@ namespace SharpCraft.JsonObjects
         /// <summary>
         /// The biome to detect
         /// </summary>
-        [DataTag("biome", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("biome", JsonTag = true)]
         public ID.Biome? Biome { get; set; }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace SharpCraft.JsonObjects
         /// <summary>
         /// the structure to detect
         /// </summary>
-        [DataTag("feature", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("feature", JsonTag = true)]
         public ID.Structure? Structure { get; set; }
 
         /// <summary>

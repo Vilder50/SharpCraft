@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new item
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public DroppedItem(ID.Entity? type = ID.Entity.item) : base(type) { }
+        public DroppedItem(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public DroppedItem() : base(SharpCraft.ID.Entity.item) { }
 
         /// <summary>
         /// The age of the item in ticks. When it hits 6000 it despawns

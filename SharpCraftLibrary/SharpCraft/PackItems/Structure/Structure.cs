@@ -94,7 +94,7 @@ namespace SharpCraft
             get => blocksInStructure;
             set 
             {
-                Utils.ValidateNoneNullArray(value, nameof(BlocksInStructure), nameof(Structure));
+                Validators.ValidateNoneNullArray(value, nameof(BlocksInStructure), nameof(Structure));
                 foreach (Block block in value)
                 {
                     if (block.Location.X < 0 || block.Location.Y < 0 || block.Location.Z < 0 || block.Location.X > StructureMaxSize || block.Location.Y > StructureMaxSize || block.Location.Z > StructureMaxSize)
@@ -119,7 +119,7 @@ namespace SharpCraft
             get => entities;
             set
             {
-                Utils.ValidateNoneNullArray(value, nameof(Entities), nameof(Structure));
+                Validators.ValidateNoneNullArray(value, nameof(Entities), nameof(Structure));
                 foreach(Entities.BasicEntity entity in value)
                 {
                     if (entity.Coords is null)
@@ -224,17 +224,6 @@ namespace SharpCraft
             stream.Write((byte)0);
             stream.Write((byte)0);
             baseObject.WriteNbtToStream(stream);
-        }
-
-        /// <summary>
-        /// Converts this structure into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Unused</param>
-        /// <param name="extraConversionData">Unused</param>
-        /// <returns>This structure as a <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
         }
 
         /// <summary>

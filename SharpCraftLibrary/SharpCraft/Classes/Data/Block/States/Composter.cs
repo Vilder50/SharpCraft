@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a composter block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Composter(BlockType? type) : base(type) { }
+        public Composter(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a composter block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Composter(ID.Block type = SharpCraft.ID.Block.composter) : base(type) { }
+        public Composter() : base(SharpCraft.ID.Block.composter) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

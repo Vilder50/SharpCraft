@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new boat
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Boat(ID.Entity? type = ID.Entity.boat) : base(type) { }
+        public Boat(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Boat() : base(SharpCraft.ID.Entity.boat) { }
 
         /// <summary>
         /// The type of boat

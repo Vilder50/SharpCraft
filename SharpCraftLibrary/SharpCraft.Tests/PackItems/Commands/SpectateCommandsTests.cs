@@ -18,8 +18,8 @@ namespace SharpCraft.Tests.Commands
 
             Assert.ThrowsException<ArgumentException>(() => new SpectateCommand(ID.Selector.a, ID.Selector.s));
             Assert.ThrowsException<ArgumentException>(() => new SpectateCommand(ID.Selector.s, ID.Selector.a));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpectateCommand(null, ID.Selector.s));
-            Assert.ThrowsException<ArgumentNullException>(() => new SpectateCommand(ID.Selector.s, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpectateCommand(null!, ID.Selector.s));
+            Assert.ThrowsException<ArgumentNullException>(() => new SpectateCommand(ID.Selector.s, null!));
         }
 
         [TestMethod]

@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a conduit block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Conduit(BlockType? type) : base(type) { }
+        public Conduit(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a conduit block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Conduit(ID.Block type = SharpCraft.ID.Block.conduit) : base(type) { }
+        public Conduit() : base(SharpCraft.ID.Block.conduit) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

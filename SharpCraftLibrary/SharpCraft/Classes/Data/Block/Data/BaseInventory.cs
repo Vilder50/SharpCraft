@@ -19,7 +19,7 @@ namespace SharpCraft.Blocks
         /// Creates a new inventory block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseInventory(BlockType? type) : base(type) { }
+        public BaseInventory(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The inventory's lock.

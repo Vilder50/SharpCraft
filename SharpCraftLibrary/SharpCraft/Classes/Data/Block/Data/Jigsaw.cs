@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a jigsaw block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Jigsaw(BlockType? type) : base(type) { }
+        public Jigsaw(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a jigsaw block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Jigsaw(ID.Block type = SharpCraft.ID.Block.jigsaw) : base(type) { }
+        public Jigsaw() : base(SharpCraft.ID.Block.jigsaw) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

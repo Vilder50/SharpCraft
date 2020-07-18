@@ -15,13 +15,7 @@ namespace SharpCraft.Blocks
         /// Creates a nether vine block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public NetherVines(BlockType type) : base(type) { }
-
-        /// <summary>
-        /// Creates a nether vine block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public NetherVines(ID.Block type) : base(type) { }
+        public NetherVines(IBlockType type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

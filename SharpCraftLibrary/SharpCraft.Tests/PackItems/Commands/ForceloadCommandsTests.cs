@@ -17,7 +17,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("forceload add ~1 ~3", new ForceloadChunkCommand(new Coords(1, 2, 3), true).GetCommandString());
             Assert.AreEqual("forceload remove ^1 ^3", new ForceloadChunkCommand(new LocalCoords(1, 2, 3), false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunkCommand(null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunkCommand(null!, true));
         }
 
         [TestMethod]
@@ -26,8 +26,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("forceload add ~1 ~3 ~4 ~6", new ForceloadChunksCommand(new Coords(1, 2, 3), new Coords(4, 5, 6), true).GetCommandString());
             Assert.AreEqual("forceload remove ~1 ~3 ~4 ~6", new ForceloadChunksCommand(new Coords(1, 2, 3), new Coords(4, 5, 6), false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunksCommand(null, new Coords(), true));
-            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunksCommand(new Coords(), null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunksCommand(null!, new Coords(), true));
+            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadChunksCommand(new Coords(), null!, true));
         }
 
         [TestMethod]
@@ -47,7 +47,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("forceload query ~1 ~3", new ForceloadQueryChunkCommand(new Coords(1,2,3)).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadQueryChunkCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new ForceloadQueryChunkCommand(null!));
         }
     }
 }

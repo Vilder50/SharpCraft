@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new combified piglin
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public ZombifiedPiglin(ID.Entity? type = ID.Entity.zombified_piglin) : base(type) { }
+        public ZombifiedPiglin(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public ZombifiedPiglin() : base(SharpCraft.ID.Entity.zombified_piglin) { }
 
         /// <summary>
         /// The time till the zombie pigman stops being angry (0 or smaller if not angry)

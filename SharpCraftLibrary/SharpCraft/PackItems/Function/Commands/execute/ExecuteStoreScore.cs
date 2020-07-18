@@ -34,7 +34,7 @@ namespace SharpCraft.Commands
             get => selector;
             set
             {
-                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ExecuteStoreScore));
+                selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ExecuteStoreScore));
             }
         }
 

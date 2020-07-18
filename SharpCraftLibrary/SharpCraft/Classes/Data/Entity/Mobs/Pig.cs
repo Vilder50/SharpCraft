@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new pigs
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Pig(ID.Entity? type = ID.Entity.pig) : base(type) { }
+        public Pig(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Pig() : base(SharpCraft.ID.Entity.pig) { }
 
         /// <summary>
         /// If the pig has a saddle on

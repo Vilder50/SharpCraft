@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new snowman
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Snowman(ID.Entity? type = ID.Entity.snow_golem) : base(type) { }
+        public Snowman(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Snowman() : base(SharpCraft.ID.Entity.snow_golem) { }
 
         /// <summary>
         /// True if the snowman has a pumpkin on

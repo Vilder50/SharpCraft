@@ -42,7 +42,7 @@ namespace SharpCraft.Commands
             get => selector1;
             set
             {
-                selector1 = Utils.ValidateSingleSelectSelector(value, nameof(Selector1), nameof(ExecuteIfScoreRelative));
+                selector1 = Validators.ValidateSingleSelectSelector(value, nameof(Selector1), nameof(ExecuteIfScoreRelative));
             }
         }
 
@@ -66,7 +66,7 @@ namespace SharpCraft.Commands
             get => selector2;
             set
             {
-                selector2 = Utils.ValidateSingleSelectSelector(value, nameof(Selector2), nameof(ExecuteIfScoreRelative));
+                selector2 = Validators.ValidateSingleSelectSelector(value, nameof(Selector2), nameof(ExecuteIfScoreRelative));
             }
         }
 

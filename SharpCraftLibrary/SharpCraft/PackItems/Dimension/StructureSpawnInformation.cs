@@ -107,7 +107,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// The list of structures
         /// </summary>
-        public List<StructureSpawnInformation> Structures { get => structures; set => structures = Utils.ValidateNoneNullList(value, nameof(Structures), nameof(StructureList)); }
+        public List<StructureSpawnInformation> Structures { get => structures; set => structures = Validators.ValidateNoneNullList(value, nameof(Structures), nameof(StructureList)); }
 
         /// <summary>
         /// Returns the data from the list
@@ -119,7 +119,7 @@ namespace SharpCraft.DimensionObjects
 
             foreach (StructureSpawnInformation structure in Structures)
             {
-                baseObject.AddValue(new DataPartPath("minecraft:" + structure.StructureType.ToString().ToLower(), structure.GetDataTree(), true));
+                baseObject.AddValue(new DataPartPath(structure.StructureType.ToString(), structure.GetDataTree(), true));
             }
 
             return baseObject;

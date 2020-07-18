@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new rabbit
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Rabbit(ID.Entity? type = ID.Entity.rabbit) : base(type) { }
+        public Rabbit(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Rabbit() : base(SharpCraft.ID.Entity.rabbit) { }
 
         /// <summary>
         /// The type of rabbit

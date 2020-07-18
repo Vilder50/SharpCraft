@@ -17,7 +17,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("time set 1000t", new TimeModifyCommand(1000, ID.AddSetModifier.set).GetCommandString());
             Assert.AreEqual("time add 1s", new TimeModifyCommand(new NoneNegativeTime<int>(1, ID.TimeType.seconds), ID.AddSetModifier.add).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TimeModifyCommand(null, ID.AddSetModifier.add));
+            Assert.ThrowsException<ArgumentNullException>(() => new TimeModifyCommand(null!, ID.AddSetModifier.add));
         }
 
         [TestMethod]

@@ -20,7 +20,7 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The brewed potion
         /// </summary>
-        [DataTag("conditions.potion", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("conditions.potion", JsonTag = true)]
         public ID.Potion? Potion { get; set; }
     }
 }

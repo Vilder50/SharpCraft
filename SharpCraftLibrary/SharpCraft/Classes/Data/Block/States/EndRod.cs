@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates an end rod block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public EndRod(BlockType? type) : base(type) { }
+        public EndRod(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates an end rod block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public EndRod(ID.Block type = SharpCraft.ID.Block.end_rod) : base(type) { }
+        public EndRod() : base(SharpCraft.ID.Block.end_rod) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

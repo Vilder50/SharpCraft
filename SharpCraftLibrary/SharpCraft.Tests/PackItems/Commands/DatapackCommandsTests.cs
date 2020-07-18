@@ -21,7 +21,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("datapack disable \"file/pack\"", new DatapackDisableCommand(GetPack()).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new DatapackDisableCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new DatapackDisableCommand(null!));
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("datapack enable \"file/pack\" first", new DatapackEnableCommand(GetPack(), true).GetCommandString());
             Assert.AreEqual("datapack enable \"file/pack\" last", new DatapackEnableCommand(GetPack(), false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableCommand(null, false));
+            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableCommand(null!, false));
         }
 
         [TestMethod]
@@ -40,8 +40,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("datapack enable \"file/pack\" after \"file/other\"", new DatapackEnableAtCommand(GetPack(), true, otherPack).GetCommandString());
             Assert.AreEqual("datapack enable \"file/pack\" before \"file/other\"", new DatapackEnableAtCommand(GetPack(), false, otherPack).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableAtCommand(null, false, otherPack));
-            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableAtCommand(GetPack(), false, null));
+            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableAtCommand(null!, false, otherPack));
+            Assert.ThrowsException<ArgumentNullException>(() => new DatapackEnableAtCommand(GetPack(), false, null!));
         }
 
         [TestMethod]

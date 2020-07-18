@@ -12,13 +12,13 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class ItemEntry : BaseEntry
     {
-        private ItemType item = null!;
+        private IItemType item = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ItemEntry"/>
         /// </summary>
         /// <param name="item">The item the entry drops</param>
-        public ItemEntry(ItemType item) : base(ID.LootEntryType.item)
+        public ItemEntry(IItemType item) : base(ID.LootEntryType.item)
         {
             Item = item;
         }
@@ -27,7 +27,7 @@ namespace SharpCraft.LootObjects
         /// The item the entry drops
         /// </summary>
         [DataTag("name", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public ItemType Item { get => item; set => item = value ?? throw new ArgumentNullException(nameof(Item), "Item may not be null"); }
+        public IItemType Item { get => item; set => item = value ?? throw new ArgumentNullException(nameof(Item), "Item may not be null"); }
 
         /// <summary>
         /// Changes to make to the entry

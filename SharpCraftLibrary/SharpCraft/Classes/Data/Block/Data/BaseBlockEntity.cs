@@ -13,13 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a block entity
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseBlockEntity(ID.Block? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a block entity
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public BaseBlockEntity(BlockType? type) : base(type) { }
+        public BaseBlockEntity(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The location the block entity is at

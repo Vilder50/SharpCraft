@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a observer block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Observer(BlockType? type) : base(type) { }
+        public Observer(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a observer block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Observer(ID.Block type = SharpCraft.ID.Block.observer) : base(type) { }
+        public Observer() : base(SharpCraft.ID.Block.observer) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

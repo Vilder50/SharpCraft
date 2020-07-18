@@ -77,7 +77,7 @@ namespace SharpCraft.Commands
             get => toSelector;
             set
             {
-                toSelector = Utils.ValidateSingleSelectSelector(value, nameof(ToSelector), nameof(TeleportToEntityCommand));
+                toSelector = Validators.ValidateSingleSelectSelector(value, nameof(ToSelector), nameof(TeleportToEntityCommand));
             }
         }
 
@@ -156,7 +156,7 @@ namespace SharpCraft.Commands
             get => facingSelector;
             set
             {
-                facingSelector = Utils.ValidateSingleSelectSelector(value, nameof(FacingSelector), nameof(TeleportToFacingEntityCommand));
+                facingSelector = Validators.ValidateSingleSelectSelector(value, nameof(FacingSelector), nameof(TeleportToFacingEntityCommand));
             }
         }
 

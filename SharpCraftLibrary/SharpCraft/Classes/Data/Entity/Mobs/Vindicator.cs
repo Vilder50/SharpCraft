@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new vindicator
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Vindicator(ID.Entity? type = ID.Entity.vindicator) : base(type) { }
+        public Vindicator(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Vindicator() : base(SharpCraft.ID.Entity.vindicator) { }
 
         /// <summary>
         /// If the vindicator is a Johnny vindicator (attacks everything)

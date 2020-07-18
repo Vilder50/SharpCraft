@@ -78,7 +78,7 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestGetAsTag()
         {
             SharpCraft.Data.IConvertableToDataTag convertAble = new RGBColor(34, 123, 78);
-            Assert.AreEqual("2259790", convertAble.GetAsTag(null, null).GetDataString());
+            Assert.AreEqual("2259790", convertAble.GetAsTag(null, new object[] { }).GetDataString());
         }
 
         [TestMethod]

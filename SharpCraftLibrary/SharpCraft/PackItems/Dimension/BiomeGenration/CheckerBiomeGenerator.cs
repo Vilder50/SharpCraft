@@ -15,7 +15,7 @@ namespace SharpCraft.DimensionObjects
         /// </summary>
         /// <param name="biomes">The biomes to generate</param>
         /// <param name="scale">The scale of the biome squares</param>
-        public CheckerBiomeGenerator(ID.Biome[] biomes, int scale) : base("fixed")
+        public CheckerBiomeGenerator(ID.Biome[] biomes, int scale) : base("minecraft:fixed")
         {
             Biomes = biomes;
             Scale = scale;
@@ -24,7 +24,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// The biomes to generate
         /// </summary>
-        [DataTag("biome", ForceType = ID.NBTTagType.TagNamespacedStringArray, JsonTag = true)]
+        [DataTag("biome", JsonTag = true)]
         public ID.Biome[] Biomes { get; private set; }
 
         /// <summary>

@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new furnace minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartFurnace(ID.Entity? type = ID.Entity.furnace_minecart) : base(type) { }
+        public MinecartFurnace(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartFurnace() : base(SharpCraft.ID.Entity.furnace_minecart) { }
 
         /// <summary>
         /// Force along the x axis

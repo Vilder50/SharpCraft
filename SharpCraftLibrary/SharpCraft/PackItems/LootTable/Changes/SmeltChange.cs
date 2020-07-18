@@ -15,7 +15,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="SmeltChange"/>
         /// </summary>
-        public SmeltChange() : base("furnace_smelt")
+        public SmeltChange() : base("minecraft:furnace_smelt")
         {
             
         }

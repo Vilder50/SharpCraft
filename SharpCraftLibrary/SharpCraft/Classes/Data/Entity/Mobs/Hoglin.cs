@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new hoglin
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Hoglin(ID.Entity? type = ID.Entity.hoglin) : base(type) { }
+        public Hoglin(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Hoglin() : base(SharpCraft.ID.Entity.hoglin) { }
 
         /// <summary>
         /// True if it shouldn't turn into a <see cref="ID.Entity.zoglin"/> when in the overworld

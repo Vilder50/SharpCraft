@@ -19,7 +19,7 @@ namespace SharpCraft.Items
         /// <param name="ItemID">The type of the item. If null the item has no type</param>
         /// <param name="Count">The amount of the item. If null the item has no amount</param>
         /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-        public PlayerHead(ItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
+        public PlayerHead(IItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
         /// <summary>
         /// The name of the player whose skin to display. Tag doesn't work with other head tags.

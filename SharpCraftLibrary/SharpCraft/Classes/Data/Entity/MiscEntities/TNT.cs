@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates new primed tnt
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public TNT(ID.Entity? type = ID.Entity.tnt) : base(type) { }
+        public TNT(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public TNT() : base(SharpCraft.ID.Entity.tnt) { }
 
         /// <summary>
         /// The time in ticks before the tnt blows up

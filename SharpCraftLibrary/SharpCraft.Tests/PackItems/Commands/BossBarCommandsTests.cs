@@ -22,8 +22,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar add boss:name {\"text\":\"hello\"}", new BossBarAddCommand(GetBar(), new JsonText.Text("hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(GetBar(), null));
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(null, new JsonText.Text("hello")));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(GetBar(), null!));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarAddCommand(null!, new JsonText.Text("hello")));
         }
 
         [TestMethod]
@@ -34,7 +34,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("bossbar get boss:name value", new BossBarGetValueCommand(GetBar(), ID.BossBarValue.value).GetCommandString());
             Assert.AreEqual("bossbar get boss:name visible", new BossBarGetValueCommand(GetBar(), ID.BossBarValue.visible).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarGetValueCommand(null, ID.BossBarValue.max));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarGetValueCommand(null!, ID.BossBarValue.max));
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar remove boss:name", new BossBarRemoveCommand(GetBar()).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarRemoveCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarRemoveCommand(null!));
         }
 
         [TestMethod]
@@ -56,7 +56,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name color green", new BossBarChangeColorCommand(GetBar(), ID.BossBarColor.green).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeColorCommand(null, ID.BossBarColor.blue));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeColorCommand(null!, ID.BossBarColor.blue));
         }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name max 10", new BossBarChangeMaxValueCommand(GetBar(), 10).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeMaxValueCommand(null, 100));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeMaxValueCommand(null!, 100));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new BossBarChangeMaxValueCommand(GetBar(), 0));
         }
 
@@ -73,7 +73,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name value 10", new BossBarChangeValueCommand(GetBar(), 10).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeValueCommand(null, 100));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeValueCommand(null!, 100));
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => new BossBarChangeValueCommand(GetBar(), -1));
         }
 
@@ -82,8 +82,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name name {\"text\":\"hello\"}", new BossBarChangeNameCommand(GetBar(), new JsonText.Text("hello")).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(GetBar(), null));
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(null, new JsonText.Text("hello")));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(GetBar(), null!));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeNameCommand(null!, new JsonText.Text("hello")));
         }
 
         [TestMethod]
@@ -91,8 +91,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name players @a", new BossBarChangePlayersCommand(GetBar(), ID.Selector.a).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangePlayersCommand(GetBar(), null));
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangePlayersCommand(null, ID.Selector.a));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangePlayersCommand(GetBar(), null!));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangePlayersCommand(null!, ID.Selector.a));
         }
 
         [TestMethod]
@@ -100,7 +100,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("bossbar set boss:name style notched_6", new BossBarChangeStyleCommand(GetBar(), ID.BossBarStyle.notched_6).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeStyleCommand(null, ID.BossBarStyle.notched_12));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeStyleCommand(null!, ID.BossBarStyle.notched_12));
         }
 
         [TestMethod]
@@ -109,7 +109,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("bossbar set boss:name visible true", new BossBarChangeVisibilityCommand(GetBar(), true).GetCommandString());
             Assert.AreEqual("bossbar set boss:name visible false", new BossBarChangeVisibilityCommand(GetBar(), false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeVisibilityCommand(null, false));
+            Assert.ThrowsException<ArgumentNullException>(() => new BossBarChangeVisibilityCommand(null!, false));
         }
     }
 }

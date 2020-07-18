@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new ocelot
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Ocelot(ID.Entity? type = ID.Entity.ocelot) : base(type) { }
+        public Ocelot(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Ocelot() : base(SharpCraft.ID.Entity.ocelot) { }
 
         /// <summary>
         /// If the ocelot trusts the player

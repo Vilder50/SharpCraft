@@ -15,13 +15,7 @@ namespace SharpCraft.Blocks
         /// Creates a chest block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Chest(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a chest block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public Chest(ID.Block type = SharpCraft.ID.Block.chest) : base(type) { }
+        public Chest(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

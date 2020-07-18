@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="ContentChange"/>
         /// </summary>
         /// <param name="entries">The loot to put into the item</param>
-        public ContentChange(BaseEntry[] entries) : base("set_contents")
+        public ContentChange(BaseEntry[] entries) : base("minecraft:set_contents")
         {
             Entries = entries;
         }

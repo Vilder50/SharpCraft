@@ -88,17 +88,6 @@ namespace SharpCraft
         public List<LootPool> Pools { get => pools; set => pools = value ?? throw new System.ArgumentNullException(nameof(Pools), "Pools may not be null"); }
 
         /// <summary>
-        /// Converts this loot table into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
-
-        /// <summary>
         /// Returns the stream this file is going to use for writing it's file
         /// </summary>
         /// <returns>The stream for this file</returns>

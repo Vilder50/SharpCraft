@@ -198,7 +198,7 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CraftingRecipe Recipe(string? name, ItemType[,] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CraftingRecipe Recipe(string? name, IItemType?[,] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -226,7 +226,7 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public ShapelessRecipe Recipe(string? name, ItemType[] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public ShapelessRecipe Recipe(string? name, IItemType[] recipe, ID.Item output, int outputCount = 1, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -256,7 +256,7 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType[] ingredients, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, IItemType[] ingredients, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -286,7 +286,7 @@ namespace SharpCraft
         /// <param name="group">The string id of the group this recipe is in</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, ItemType ingredient, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmeltRecipe Recipe(string? name, SmeltRecipe.SmeltType type, IItemType ingredient, ID.Item output, double xpDrop, NoneNegativeTime<int>? cookTime = null, string? group = null, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -313,7 +313,7 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CuttingRecipe Recipe(string? name, ItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CuttingRecipe Recipe(string? name, IItemType[] ingredients, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -340,7 +340,7 @@ namespace SharpCraft
         /// <param name="outputCount">The amount of items to output</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public CuttingRecipe Recipe(string? name, ItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public CuttingRecipe Recipe(string? name, IItemType ingredient, ID.Item output, int outputCount = 1, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -367,7 +367,7 @@ namespace SharpCraft
         /// <param name="output">The item the recipe outputs (Note that it will copy nbt from <paramref name="baseItem"/>)</param>
         /// <param name="setting">The settings for how to write the file</param>
         /// <returns>The newly created recipe</returns>
-        public SmithingRecipe Recipe(string? name, ItemType baseItem, ItemType modifierItem, ID.Item output, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
+        public SmithingRecipe Recipe(string? name, IItemType baseItem, IItemType modifierItem, ID.Item output, BaseFile.WriteSetting setting = BaseFile.WriteSetting.LockedAuto)
         {
             BaseRecipe? existingFile = null;
             if (!(name is null))
@@ -633,14 +633,14 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns a <see cref="BlockGroup"/> with the given <see cref="BlockType"/>s
+        /// Returns a <see cref="BlockGroup"/> with the given <see cref="IBlockType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
-        /// <param name="blockList">The <see cref="BlockType"/>s in the group</param>
-        /// <param name="append">If the <see cref="BlockType"/>s should be appended to existing <see cref="BlockType"/>s from another datapack</param>
+        /// <param name="blockList">The <see cref="IBlockType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IBlockType"/>s should be appended to existing <see cref="IBlockType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="BlockGroup"/></returns>
-        public BlockGroup Group(string? name, List<BlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public BlockGroup Group(string? name, List<IBlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
             BlockGroup? existingFile = null;
             if (!(name is null))
@@ -661,14 +661,14 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns a <see cref="ItemGroup"/> with the given <see cref="ItemType"/>s
+        /// Returns a <see cref="ItemGroup"/> with the given <see cref="IItemType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
-        /// <param name="itemList">The <see cref="ItemType"/>s in the group</param>
-        /// <param name="append">If the <see cref="ItemType"/>s should be appended to existing <see cref="ItemType"/>s from another datapack</param>
+        /// <param name="itemList">The <see cref="IItemType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IItemType"/>s should be appended to existing <see cref="IItemType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="ItemGroup"/></returns>
-        public ItemGroup Group(string? name, List<ItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public ItemGroup Group(string? name, List<IItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
             ItemGroup? existingFile = null;
             if (!(name is null))
@@ -689,14 +689,14 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns a <see cref="EntityGroup"/> with the given <see cref="EntityType"/>s
+        /// Returns a <see cref="EntityGroup"/> with the given <see cref="IEntityType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
-        /// <param name="entityList">The <see cref="EntityType"/>s in the group</param>
-        /// <param name="append">If the <see cref="EntityType"/>s should be appended to existing <see cref="EntityType"/>s from another datapack</param>
+        /// <param name="entityList">The <see cref="IEntityType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IEntityType"/>s should be appended to existing <see cref="IEntityType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="EntityGroup"/></returns>
-        public EntityGroup Group(string? name, List<EntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public EntityGroup Group(string? name, List<IEntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
             EntityGroup? existingFile = null;
             if (!(name is null))
@@ -717,14 +717,14 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns a <see cref="LiquidGroup"/> with the given <see cref="LiquidType"/>s
+        /// Returns a <see cref="LiquidGroup"/> with the given <see cref="ILiquidType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
-        /// <param name="liquidList">The <see cref="LiquidType"/>s in the group</param>
-        /// <param name="append">If the <see cref="LiquidType"/>s should be appended to existing <see cref="LiquidType"/>s from another datapack</param>
+        /// <param name="liquidList">The <see cref="ILiquidType"/>s in the group</param>
+        /// <param name="append">If the <see cref="ILiquidType"/>s should be appended to existing <see cref="ILiquidType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
         /// <returns>The <see cref="LiquidGroup"/></returns>
-        public LiquidGroup Group(string? name, List<LiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        public LiquidGroup Group(string? name, List<ILiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
             LiquidGroup? existingFile = null;
             if (!(name is null))

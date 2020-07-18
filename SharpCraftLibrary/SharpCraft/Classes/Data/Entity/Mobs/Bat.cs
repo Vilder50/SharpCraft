@@ -11,7 +11,13 @@ namespace SharpCraft.Entities
         /// Creates a new bat
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Bat(ID.Entity? type = ID.Entity.bat) : base(type) { }
+        public Bat(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Bat() : base(SharpCraft.ID.Entity.bat) { }
+
         /// <summary>
         /// True when flying. False when hanging
         /// </summary>

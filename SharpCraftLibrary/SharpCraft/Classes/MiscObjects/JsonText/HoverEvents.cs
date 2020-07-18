@@ -150,7 +150,7 @@ namespace SharpCraft.JsonText
     /// </summary>
     public class EntityHoverEvent : BaseHoverEvent
     {
-        private EntityType type = null!;
+        private IEntityType type = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EntityHoverEvent"/>
@@ -158,7 +158,7 @@ namespace SharpCraft.JsonText
         /// <param name="type">The type of entity</param>
         /// <param name="name">The entity's name (Not really used)</param>
         /// <param name="uuid">The entity's uuid</param>
-        public EntityHoverEvent(EntityType type, BaseJsonText? name = null, UUID? uuid = null) : base("show_entity")
+        public EntityHoverEvent(IEntityType type, BaseJsonText? name = null, UUID? uuid = null) : base("show_entity")
         {
             Type = type;
             Name = name;
@@ -168,7 +168,7 @@ namespace SharpCraft.JsonText
         /// <summary>
         /// The type of entity
         /// </summary>
-        public EntityType Type { get => type; set => type = value ?? throw new ArgumentNullException(nameof(Type), "Type may not be null"); }
+        public IEntityType Type { get => type; set => type = value ?? throw new ArgumentNullException(nameof(Type), "Type may not be null"); }
 
         /// <summary>
         /// The entity's name (Not really used)

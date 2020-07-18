@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new ravager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Ravager(ID.Entity? type = ID.Entity.ravager) : base(type) { }
+        public Ravager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Ravager() : base(SharpCraft.ID.Entity.ravager) { }
 
         /// <summary>
         /// Cooldown till it can attack again

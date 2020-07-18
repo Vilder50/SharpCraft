@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new turtle
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Turtle(ID.Entity? type = ID.Entity.turtle) : base(type) { }
+        public Turtle(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Turtle() : base(SharpCraft.ID.Entity.turtle) { }
 
         /// <summary>
         /// The location of the turtles home

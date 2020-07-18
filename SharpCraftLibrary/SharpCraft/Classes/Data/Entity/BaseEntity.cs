@@ -36,7 +36,7 @@ namespace SharpCraft
         /// <summary>
         /// The type of the entity
         /// </summary>
-        [Data.DataTag("id", ForceType = ID.NBTTagType.TagNamespacedString)]
+        [Data.DataTag("id", ForceType = ID.NBTTagType.TagString)]
         public ID.Entity? EntityType { get; set; }
     }
 }

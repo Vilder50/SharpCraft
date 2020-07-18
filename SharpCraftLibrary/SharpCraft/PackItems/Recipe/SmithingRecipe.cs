@@ -12,8 +12,8 @@ namespace SharpCraft
     /// </summary>
     public class SmithingRecipe : BaseRecipe
     {
-        private ItemType baseItem = null!;
-        private ItemType modifierItem = null!;
+        private IItemType baseItem = null!;
+        private IItemType modifierItem = null!;
 
         /// <summary>
         /// Intializes a new <see cref="SmithingRecipe"/>
@@ -25,7 +25,7 @@ namespace SharpCraft
         /// <param name="modifierItem">The second item in the recipe</param>
         /// <param name="output">The item the recipe outputs (Note that it will copy nbt from <see cref="BaseItem"/>)</param>
         /// <param name="writeSetting">The settings for how to write this file</param>
-        public SmithingRecipe(bool _, BasePackNamespace packNamespace, string? fileName, ItemType baseItem, ItemType modifierItem, ID.Item output, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, null, writeSetting, "smithing")
+        public SmithingRecipe(bool _, BasePackNamespace packNamespace, string? fileName, IItemType baseItem, IItemType modifierItem, ID.Item output, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, null, writeSetting, "minecraft:smithing")
         {
             BaseItem = baseItem;
             ModifierItem = modifierItem;
@@ -41,7 +41,7 @@ namespace SharpCraft
         /// <param name="modifierItem">The second item in the recipe</param>
         /// <param name="output">The item the recipe outputs (Note that it will copy nbt from <see cref="BaseItem"/>)</param>
         /// <param name="writeSetting">The settings for how to write this file</param>
-        public SmithingRecipe(BasePackNamespace packNamespace, string? fileName, ItemType baseItem, ItemType modifierItem, ID.Item output, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, baseItem, modifierItem, output, writeSetting)
+        public SmithingRecipe(BasePackNamespace packNamespace, string? fileName, IItemType baseItem, IItemType modifierItem, ID.Item output, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, baseItem, modifierItem, output, writeSetting)
         {
             FinishedConstructing();
         }
@@ -49,12 +49,12 @@ namespace SharpCraft
         /// <summary>
         /// The first item in the recipe (NBT will be copied from this item to the output item)
         /// </summary>
-        public ItemType BaseItem { get => baseItem; set => baseItem = value ?? throw new ArgumentNullException(nameof(BaseItem), "BaseItem may not be null for smithing recipe"); }
+        public IItemType BaseItem { get => baseItem; set => baseItem = value ?? throw new ArgumentNullException(nameof(BaseItem), "BaseItem may not be null for smithing recipe"); }
 
         /// <summary>
         /// The second item in the recipe
         /// </summary>
-        public ItemType ModifierItem { get => modifierItem; set => modifierItem = value ?? throw new ArgumentNullException(nameof(modifierItem), "modifierItem may not be null for smithing recipe"); }
+        public IItemType ModifierItem { get => modifierItem; set => modifierItem = value ?? throw new ArgumentNullException(nameof(modifierItem), "modifierItem may not be null for smithing recipe"); }
 
         /// <summary>
         /// The item the recipe outputs (Note that it will copy nbt from <see cref="BaseItem"/>)

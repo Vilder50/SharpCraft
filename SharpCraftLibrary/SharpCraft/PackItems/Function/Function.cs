@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using SharpCraft.Commands;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
@@ -182,6 +183,11 @@ namespace SharpCraft
         public FunctionWriters.CustomCommands Custom { get; private set; }
 
         /// <summary>
+        /// Marks this as not being a group
+        /// </summary>
+        public bool IsAGroup => false;
+
+        /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
         /// </summary>
         /// <param name="name">The name of the new <see cref="Function"/></param>
@@ -332,14 +338,13 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// Converts this type into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
-            return new Data.DataPartTag(GetNamespacedName());
+            return (this as IFunction).GetGroupData(conversionData);
         }
     }
 }

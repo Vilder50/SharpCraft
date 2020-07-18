@@ -18,7 +18,7 @@ namespace SharpCraft
         /// <param name="packNamespace">The namespace the recipe is in</param>
         /// <param name="fileName">The name of the recipe file to invalidate</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected InvalidRecipe(bool _, BasePackNamespace packNamespace, string? fileName) : base(packNamespace, fileName, null, WriteSetting.LockedAuto, "invalid")
+        protected InvalidRecipe(bool _, BasePackNamespace packNamespace, string? fileName) : base(packNamespace, fileName, null, WriteSetting.LockedAuto, "minecraft:invalid")
         {
             
         }

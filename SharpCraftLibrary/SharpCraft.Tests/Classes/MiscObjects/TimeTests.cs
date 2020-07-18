@@ -60,9 +60,9 @@ namespace SharpCraft.Tests.MiscObjects
             SharpCraft.Data.IConvertableToDataTag convertable1 = new Time<int>(4, ID.TimeType.seconds);
             SharpCraft.Data.IConvertableToDataTag convertable2 = new Time<short>(4, ID.TimeType.seconds);
             SharpCraft.Data.IConvertableToDataTag convertable3 = new Time<long>(4, ID.TimeType.seconds);
-            Assert.AreEqual("80", convertable1.GetAsTag(null, null).GetDataString(), "Int tag conversion is wrong");
-            Assert.AreEqual("80s", convertable2.GetAsTag(null, null).GetDataString(), "Short tag conversion is wrong");
-            Assert.AreEqual("80L", convertable3.GetAsTag(null, null).GetDataString(), "Long tag conversion is wrong");
+            Assert.AreEqual("80", convertable1.GetAsTag(null, new object[] { }).GetDataString(), "Int tag conversion is wrong");
+            Assert.AreEqual("80s", convertable2.GetAsTag(null, new object[] { }).GetDataString(), "Short tag conversion is wrong");
+            Assert.AreEqual("80L", convertable3.GetAsTag(null, new object[] { }).GetDataString(), "Long tag conversion is wrong");
         }
     }
 }

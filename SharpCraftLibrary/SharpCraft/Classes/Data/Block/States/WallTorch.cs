@@ -13,13 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a torch block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public WallTorch(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a torch block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public WallTorch(ID.Block type = SharpCraft.ID.Block.wall_torch) : base(type) { }
+        public WallTorch(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

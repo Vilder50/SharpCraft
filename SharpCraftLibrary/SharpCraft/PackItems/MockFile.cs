@@ -1,4 +1,5 @@
 ﻿using SharpCraft.Conditions;
+using SharpCraft.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -49,14 +50,6 @@ namespace SharpCraft.FileMocks
         public virtual string GetNamespacedName()
         {
             return PackNamespace.Name + ":" + FileId;
-        }
-
-        /// <summary>
-        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
-        /// </summary>
-        public string Name
-        {
-            get => GetNamespacedName();
         }
 
         /// <summary>
@@ -321,6 +314,20 @@ namespace SharpCraft.FileMocks
     /// </summary>
     public class MockFunction : BaseMockFile, IFunction
     {
+        /// <summary>
+        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
+        /// </summary>
+        [CompoundPath(0)]
+        public string Name
+        {
+            get => GetNamespacedName();
+        }
+
+        /// <summary>
+        /// Marks this as not being a group
+        /// </summary>
+        public bool IsAGroup => false;
+
         private MockFunction(string fileName) : base(fileName)
         {
 
@@ -344,6 +351,16 @@ namespace SharpCraft.FileMocks
         {
             return new MockFunction(name);
         }
+
+        /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object?[] conversionData)
+        {
+            return (this as IFunction).GetGroupData(conversionData);
+        }
     }
 
     /// <summary>
@@ -351,6 +368,11 @@ namespace SharpCraft.FileMocks
     /// </summary>
     public class MockGroup<TItem> : BaseMockFile, IBlockType, IEntityType, IItemType, ILiquidType, IFunction, IGroup<TItem> where TItem : IGroupable
     {
+        /// <summary>
+        /// Marks this as being a group
+        /// </summary>
+        public bool IsAGroup => true;
+
         private MockGroup(string fileName) : base(fileName)
         {
 
@@ -367,9 +389,10 @@ namespace SharpCraft.FileMocks
         }
 
         /// <summary>
-        /// This
+        /// Returns <see cref="GetNamespacedName"/>
         /// </summary>
-        public object Value => this;
+        [CompoundPath(1)]
+        public string Name => GetNamespacedName();
 
         /// <summary>
         /// Converts a string of the format NAMESPACE:Name into an mock file
@@ -386,7 +409,17 @@ namespace SharpCraft.FileMocks
         /// <returns>The string used for refering this group</returns>
         public override string GetNamespacedName()
         {
-            return "#" + PackNamespace.Name + ":" + Name;
+            return "#" + PackNamespace.Name + ":" + FileId;
+        }
+
+        /// <summary>
+        /// Converts this type into a <see cref="DataPartObject"/>
+        /// </summary>
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object?[] conversionData)
+        {
+            return (this as IBlockType).GetGroupData(conversionData);
         }
     }
 }

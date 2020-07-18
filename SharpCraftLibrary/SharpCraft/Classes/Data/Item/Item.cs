@@ -25,7 +25,7 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ItemType? itemID, sbyte? count = null, sbyte? slot = null)
+        public Item(IItemType? itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
@@ -51,7 +51,7 @@ namespace SharpCraft
         /// If null the item isnt any item type
         /// </summary>
         [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public ItemType? ID { get; set; }
+        public IItemType? ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
@@ -61,7 +61,7 @@ namespace SharpCraft
             /// <summary>
             /// The type of the enchantment
             /// </summary>
-            [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagNamespacedString)]
+            [DataTag("id")]
             public ID.Enchant? ID { get; set; }
             /// <summary>
             /// The level of the enchantment
@@ -149,12 +149,12 @@ namespace SharpCraft
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
         [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[]? CanDestroy { get; set; }
+        public IBlockType[]? CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
         [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[]? CanPlaceOn { get; set; }
+        public IBlockType[]? CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>

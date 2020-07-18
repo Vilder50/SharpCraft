@@ -59,6 +59,6 @@ namespace SharpCraft.Entities
         /// Creates a new illager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Illager(ID.Entity? type = ID.Entity.pillager) : base(type) { }
+        public Illager(ID.Entity? type) : base(type) { }
     }
 }

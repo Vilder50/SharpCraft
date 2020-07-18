@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a comparator block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Comparator(BlockType? type) : base(type) { }
+        public Comparator(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a comparator block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Comparator(ID.Block type = SharpCraft.ID.Block.comparator) : base(type) { }
+        public Comparator() : base(SharpCraft.ID.Block.comparator) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

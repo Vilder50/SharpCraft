@@ -87,41 +87,45 @@
             squid_ink,
             nautilus,
         }
-        public enum Effect
+            
+        public class Effect : NamespacedEnumLike<string>
         {
-            speed = 1,
-            slowness,
-            haste,
-            mining_fatigue,
-            strength,
-            instant_health,
-            instant_damage,
-            jump_boost,
-            nausea,
-            regeneration,
-            resistance,
-            fire_resistance,
-            water_breathing,
-            invisibility,
-            blindness,
-            night_vision,
-            hunger,
-            weakness,
-            poison,
-            wither,
-            health_boost,
-            absorption,
-            saturation,
-            glowing,
-            levitation,
-            luck,
-            unluck,
-            slow_falling,
-            conduit_power,
-            dolphins_grace,
-            bad_omen,
-            hero_of_the_village,
-            EffectEnumEnd
+            public Effect(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            public static readonly Effect speed = new Effect("speed");
+            public static readonly Effect slowness = new Effect("slowness");
+            public static readonly Effect haste = new Effect("haste");
+            public static readonly Effect mining_fatigue = new Effect("mining_fatigue");
+            public static readonly Effect strength = new Effect("strength");
+            public static readonly Effect instant_health = new Effect("instant_health");
+            public static readonly Effect instant_damage = new Effect("instant_damage");
+            public static readonly Effect jump_boost = new Effect("jump_boost");
+            public static readonly Effect nausea = new Effect("nausea");
+            public static readonly Effect regeneration = new Effect("regeneration");
+            public static readonly Effect resistance = new Effect("resistance");
+            public static readonly Effect fire_resistance = new Effect("fire_resistance");
+            public static readonly Effect water_breathing = new Effect("water_breathing");
+            public static readonly Effect invisibility = new Effect("invisibility");
+            public static readonly Effect blindness = new Effect("blindness");
+            public static readonly Effect night_vision = new Effect("night_vision");
+            public static readonly Effect hunger = new Effect("hunger");
+            public static readonly Effect weakness = new Effect("weakness");
+            public static readonly Effect poison = new Effect("poison");
+            public static readonly Effect wither = new Effect("wither");
+            public static readonly Effect health_boost = new Effect("health_boost");
+            public static readonly Effect absorption = new Effect("absorption");
+            public static readonly Effect saturation = new Effect("saturation");
+            public static readonly Effect glowing = new Effect("glowing");
+            public static readonly Effect levitation = new Effect("levitation");
+            public static readonly Effect luck = new Effect("luck");
+            public static readonly Effect unluck = new Effect("unluck");
+            public static readonly Effect slow_falling = new Effect("slow_falling");
+            public static readonly Effect conduit_power = new Effect("conduit_power");
+            public static readonly Effect dolphins_grace = new Effect("dolphins_grace");
+            public static readonly Effect bad_omen = new Effect("bad_omen");
+            public static readonly Effect hero_of_the_village = new Effect("hero_of_the_village");
         }
         public enum Key
         {

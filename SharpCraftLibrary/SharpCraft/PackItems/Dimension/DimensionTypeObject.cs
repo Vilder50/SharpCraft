@@ -85,7 +85,7 @@ namespace SharpCraft.DimensionObjects
         /// Blocks which burns forever in the dimension
         /// </summary>
         [DataTag("infiniburn", JsonTag = true)]
-        public IGroup<BlockType>? InfiniteBurningBlocks { get; set; }
+        public IGroup<IBlockType>? InfiniteBurningBlocks { get; set; }
 
         /// <summary>
         /// Returns the data in this object as a data part object

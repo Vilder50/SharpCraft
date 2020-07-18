@@ -22,7 +22,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// The type of generator
         /// </summary>
-        [DataTag("type", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("type", JsonTag = true)]
         public string GeneratorType { get; private set; }
     }
 }

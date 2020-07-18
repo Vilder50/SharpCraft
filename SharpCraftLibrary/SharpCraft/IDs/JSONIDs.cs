@@ -29,25 +29,31 @@
             block_entity,
         }
 
-        public enum LootBonusFormula
+        public class LootBonusFormula: NamespacedEnumLike<string>
         {
-            binomial_with_bonus_count,
+            public LootBonusFormula(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
 
-            uniform_bonus_count,
-
-            ore_drops
+            public static readonly LootBonusFormula binomial_with_bonus_count = new LootBonusFormula("binomial_with_bonus_count");
+            public static readonly LootBonusFormula uniform_bonus_count = new LootBonusFormula("uniform_bonus_count");
+            public static readonly LootBonusFormula ore_drops = new LootBonusFormula("ore_drops");
         }
 
-        public enum LootEntryType
+        public class LootEntryType : NamespacedEnumLike<string>
         {
-            item,
-            tag,
-            loot_table,
-            group,
-            alternatives,
-            sequence,
-            dynamic,
-            empty
+            public LootEntryType(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            public static readonly LootEntryType item = new LootEntryType("item");
+            public static readonly LootEntryType tag = new LootEntryType("tag");
+            public static readonly LootEntryType loot_table = new LootEntryType("loot_table");
+            public static readonly LootEntryType group = new LootEntryType("group");
+            public static readonly LootEntryType alternatives = new LootEntryType("alternatives");
+            public static readonly LootEntryType sequence = new LootEntryType("sequence");
+            public static readonly LootEntryType dynamic = new LootEntryType("dynamic");
+            public static readonly LootEntryType empty = new LootEntryType("empty");
         }
 
         public enum AdvancementFrame
@@ -106,7 +112,6 @@
             TagFloat,
             TagDouble,
             TagString,
-            TagNamespacedString,
 
             TagCompound = 99,
             TagArrayArray = 100,
@@ -118,7 +123,6 @@
             TagFloatArray = 105,
             TagDoubleArray = 106,
             TagStringArray = 107,
-            TagNamespacedStringArray = 108,
             TagCompoundArray = 199,
         }
 #pragma warning restore 1591

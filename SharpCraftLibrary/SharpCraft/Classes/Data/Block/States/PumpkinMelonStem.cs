@@ -15,7 +15,7 @@ namespace SharpCraft.Blocks
         /// Creates a new stem block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public PumpkinMelonStem(BlockType? type) : base(type) { }
+        public PumpkinMelonStem(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -56,7 +56,7 @@ namespace SharpCraft.Blocks
         /// Creates a new stem block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public AttachedPumpkinMelonStem(BlockType type) : base(type) { }
+        public AttachedPumpkinMelonStem(IBlockType type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

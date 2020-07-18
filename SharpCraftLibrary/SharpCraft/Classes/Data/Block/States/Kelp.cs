@@ -5,7 +5,7 @@ using System.Text;
 namespace SharpCraft.Blocks
 {
     /// <summary>
-    /// An object for krlp blocks
+    /// An object for kelp blocks
     /// </summary>
     public class Kelp : Block, Interfaces.IAge
     {
@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a kelp block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Kelp(BlockType? type) : base(type) { }
+        public Kelp(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a kelp block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Kelp(ID.Block type = SharpCraft.ID.Block.kelp) : base(type) { }
+        public Kelp() : base(SharpCraft.ID.Block.kelp) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

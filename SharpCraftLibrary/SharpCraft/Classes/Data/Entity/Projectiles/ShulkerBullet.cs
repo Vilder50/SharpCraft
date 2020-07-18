@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new shulker bullet
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public ShulkerBullet(ID.Entity? type = ID.Entity.shulker_bullet) : base(type) { }
+        public ShulkerBullet(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public ShulkerBullet() : base(SharpCraft.ID.Entity.shulker_bullet) { }
 
         /// <summary>
         /// The owner of the bullet

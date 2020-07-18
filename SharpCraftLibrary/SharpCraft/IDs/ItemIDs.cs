@@ -1,4 +1,7 @@
-﻿namespace SharpCraft
+﻿using SharpCraft.Data;
+using System;
+
+namespace SharpCraft
 {
     /// <summary>
     /// All the different ID's/Types/States things in the game can have
@@ -6,1045 +9,1081 @@
     public static partial class ID
     {
 #pragma warning disable 1591
-        public enum Item
+        public class Item : NamespacedEnumLike<string>, IItemType
         {
-            blackstone,
-            blackstone_slab,
-            blackstone_stairs,
-            blackstone_wall,
-            gilded_blackstone,
-            polished_blackstone,
-            polished_blackstone_slab,
-            polished_blackstone_stairs,
-            polished_blackstone_wall,
-            chiseled_polished_blackstone,
-            polished_blackstone_bricks,
-            polished_blackstone_brick_slab,
-            polished_blackstone_brick_stairs,
-            polished_blackstone_brick_wall,
-            cracked_polished_blackstone_bricks,
-            chain,
-            cracked_nether_bricks,
-            chiseled_nether_bricks,
-            quartz_bricks,
-            soul_campfire,
-            piglin_banner_pattern,
-            music_disc_pigstep,
-            strider_spawn_egg,
-            zoglin_spawn_egg,
-            polished_basalt,
-            respawn_anchor,
-            lodestone,
-            warped_fungus_on_a_stick,
-            nether_gold_ore,
-            twisting_vines,
-            stripped_warped_hyphae,
-            stripped_crimson_hyphae,
-            warped_hyphae,
-            crimson_hyphae,
-            ancient_debris,
-            basalt,
-            netherite_block,
-            crimson_fungus,
-            crimson_nylium,
-            crimson_sign,
-            stripped_crimson_stem,
-            crimson_planks,
-            crimson_stem,
-            crimson_pressure_plate,
-            crimson_trapdoor,
-            crimson_stairs,
-            crimson_button,
-            crimson_slab,
-            crimson_fence_gate,
-            crimson_fence,
-            crimson_door,
-            crimson_roots,
-            warped_fungus,
-            warped_nylium,
-            warped_sign,
-            stripped_warped_stem,
-            warped_planks,
-            warped_stem,
-            warped_pressure_plate,
-            warped_trapdoor,
-            warped_stairs,
-            warped_button,
-            warped_slab,
-            warped_fence_gate,
-            warped_fence,
-            warped_door,
-            warped_roots,
-            warped_wart_block,
-            crying_obsidian,
-            nether_sprouts,
-            shroomlight,
-            soul_lantern,
-            soul_touch,
-            target,
-            weeping_vines,
-            soul_soil,
-            netherite_axe,
-            netherite_boots,
-            netherite_chestplate,
-            netherite_helmet,
-            netherite_hoe,
-            netherite_ingot,
-            netherite_leggings,
-            netherite_pickaxe,
-            netherite_scrap,
-            netherite_shovel,
-            netherite_sword,
-            zombiefied_piglin_spawn_egg,
-            hoglin_spawn_egg,
-            piglin_spawn_egg,
-            beehive,
-            bee_nest,
-            honey_block,
-            honeycomb_block,
-            honey_bottle,
-            honeycomb,
-            bee_spawn_egg,
-            red_dye,
-            green_dye,
-            fox_spawn_egg,
-            composter,
-            campfire,
-            sweet_berries,
-            barrel,
-            smoker,
-            blast_furnace,
-            cartography_table,
-            fletching_table,
-            grindstone,
-            smithing_table,
-            stonecutter,
-            bell,
-            lantern,
-            lectern,
-            jigsaw,
-            scaffolding,
-            dead_tube_coral,
-            dead_brain_coral,
-            dead_bubble_coral,
-            dead_fire_coral,
-            dead_horn_coral,
-            cat_spawn_egg,
-            ravager_spawn_egg,
-            panda_spawn_egg,
-            pillager_spawn_egg,
-            suspicious_stew,
-            crossbow,
-            blue_dye,
-            black_dye,
-            brown_dye,
-            white_dye,
-            flower_banner_pattern,
-            creeper_banner_pattern,
-            skull_banner_pattern,
-            mojang_banner_pattern,
-            polished_diorite_stairs,
-            mossy_cobblestone_stairs,
-            end_stone_brick_stairs,
-            stone_stairs,
-            smooth_sandstone_stairs,
-            smooth_quartz_stairs,
-            granite_stairs,
-            andesite_stairs,
-            red_nether_brick_stairs,
-            polished_andesite_stairs,
-            diorite_stairs,
-            mossy_stone_brick_stairs,
-            smooth_red_sandstone_stairs,
-            polished_granite_stairs,
-            polished_diorite_slab,
-            mossy_cobblestone_slab,
-            end_stone_brick_slab,
-            stone_slab,
-            smooth_sandstone_slab,
-            smooth_quartz_slab,
-            granite_slab,
-            andesite_slab,
-            red_nether_brick_slab,
-            polished_andesite_slab,
-            diorite_slab,
-            mossy_stone_brick_slab,
-            smooth_red_sandstone_slab,
-            polished_granite_slab,
-            smooth_stone_slab,
-            mossy_cobblestone_wall,
-            end_stone_brick_wall,
-            granite_wall,
-            andesite_wall,
-            red_nether_brick_wall,
-            diorite_wall,
-            mossy_stone_brick_wall,
-            prismarine_wall,
-            nether_brick_wall,
-            oak_sign,
-            spruce_sign,
-            birch_sign,
-            acacia_sign,
-            jungle_sign,
-            dark_oak_sign,
-            bamboo,
-            cornflower,
-            lily_of_the_valley,
-            wither_rose,
-            loom,
-            stripped_oak_wood,
-            stripped_spruce_wood,
-            stripped_birch_wood,
-            stripped_jungle_wood,
-            stripped_acacia_wood,
-            stripped_dark_oak_wood,
-            dead_tube_coral_fan,
-            dead_brain_coral_fan,
-            dead_bubble_coral_fan,
-            dead_fire_coral_fan,
-            dead_horn_coral_fan,
-            shulker_box,
-            phantom_membrane,
-            sea_pickle,
-            nautilus_shell,
-            heart_of_the_sea,
-            drowned_spawn_egg,
-            dolphin_spawn_egg,
-            conduit,
-            dead_tube_coral_block,
-            dead_brain_coral_block,
-            dead_bubble_coral_block,
-            dead_fire_coral_block,
-            dead_horn_coral_block,
-            tube_coral_block,
-            brain_coral_block,
-            bubble_coral_block,
-            fire_coral_block,
-            horn_coral_block,
-            tube_coral,
-            brain_coral,
-            bubble_coral,
-            fire_coral,
-            horn_coral,
-            tube_coral_fan,
-            brain_coral_fan,
-            bubble_coral_fan,
-            fire_coral_fan,
-            horn_coral_fan,
-            blue_ice,
-            kelp,
-            turtle_egg,
-            seagrass,
-            stripped_oak_log,
-            stripped_spruce_log,
-            stripped_birch_log,
-            stripped_jungle_log,
-            stripped_acacia_log,
-            stripped_dark_oak_log,
-            dried_kelp_block,
-            tropical_fish_bucket,
-            cod_bucket,
-            salmon_bucket,
-            pufferfish_bucket,
-            cod_spawn_egg,
-            salmon_spawn_egg,
-            pufferfish_spawn_egg,
-            tropical_fish_spawn_egg,
-            phantom_spawn_egg,
-            turtle_spawn_egg,
-            turtle_helmet,
-            scute,
-            trident,
-            dried_kelp,
-            air,
-            String,
-            stone,
-            granite,
-            polished_granite,
-            diorite,
-            polished_diorite,
-            andesite,
-            polished_andesite,
-            grass_block,
-            dirt,
-            coarse_dirt,
-            podzol,
-            cobblestone,
-            oak_planks,
-            spruce_planks,
-            birch_planks,
-            jungle_planks,
-            acacia_planks,
-            dark_oak_planks,
-            oak_sapling,
-            spruce_sapling,
-            birch_sapling,
-            jungle_sapling,
-            acacia_sapling,
-            dark_oak_sapling,
-            bedrock,
-            sand,
-            red_sand,
-            gravel,
-            gold_ore,
-            iron_ore,
-            coal_ore,
-            oak_log,
-            spruce_log,
-            birch_log,
-            jungle_log,
-            acacia_log,
-            dark_oak_log,
-            oak_wood,
-            spruce_wood,
-            birch_wood,
-            jungle_wood,
-            acacia_wood,
-            dark_oak_wood,
-            oak_leaves,
-            spruce_leaves,
-            birch_leaves,
-            jungle_leaves,
-            acacia_leaves,
-            dark_oak_leaves,
-            sponge,
-            wet_sponge,
-            glass,
-            lapis_ore,
-            lapis_block,
-            dispenser,
-            sandstone,
-            chiseled_sandstone,
-            cut_sandstone,
-            note_block,
-            powered_rail,
-            detector_rail,
-            sticky_piston,
-            cobweb,
-            grass,
-            fern,
-            dead_bush,
-            piston,
-            white_wool,
-            orange_wool,
-            magenta_wool,
-            light_blue_wool,
-            yellow_wool,
-            lime_wool,
-            pink_wool,
-            gray_wool,
-            light_gray_wool,
-            cyan_wool,
-            purple_wool,
-            blue_wool,
-            brown_wool,
-            green_wool,
-            red_wool,
-            black_wool,
-            dandelion,
-            poppy,
-            blue_orchid,
-            allium,
-            azure_bluet,
-            red_tulip,
-            orange_tulip,
-            white_tulip,
-            pink_tulip,
-            oxeye_daisy,
-            brown_mushroom,
-            red_mushroom,
-            gold_block,
-            iron_block,
-            oak_slab,
-            spruce_slab,
-            birch_slab,
-            jungle_slab,
-            acacia_slab,
-            dark_oak_slab,
-            sandstone_slab,
-            petrified_oak_slab,
-            cobblestone_slab,
-            brick_slab,
-            stone_brick_slab,
-            nether_brick_slab,
-            quartz_slab,
-            red_sandstone_slab,
-            purpur_slab,
-            smooth_quartz,
-            smooth_red_sandstone,
-            smooth_sandstone,
-            smooth_stone,
-            bricks,
-            tnt,
-            bookshelf,
-            mossy_cobblestone,
-            obsidian,
-            torch,
-            end_rod,
-            chorus_plant,
-            chorus_flower,
-            purpur_block,
-            purpur_pillar,
-            purpur_stairs,
-            spawner,
-            oak_stairs,
-            chest,
-            diamond_ore,
-            diamond_block,
-            crafting_table,
-            farmland,
-            furnace,
-            ladder,
-            rail,
-            cobblestone_stairs,
-            lever,
-            stone_pressure_plate,
-            oak_pressure_plate,
-            spruce_pressure_plate,
-            birch_pressure_plate,
-            jungle_pressure_plate,
-            acacia_pressure_plate,
-            dark_oak_pressure_plate,
-            redstone_ore,
-            redstone_torch,
-            stone_button,
-            snow,
-            ice,
-            snow_block,
-            cactus,
-            clay,
-            jukebox,
-            oak_fence,
-            spruce_fence,
-            birch_fence,
-            jungle_fence,
-            acacia_fence,
-            dark_oak_fence,
-            pumpkin,
-            carved_pumpkin,
-            netherrack,
-            soul_sand,
-            glowstone,
-            jack_o_lantern,
-            oak_trapdoor,
-            spruce_trapdoor,
-            birch_trapdoor,
-            jungle_trapdoor,
-            acacia_trapdoor,
-            dark_oak_trapdoor,
-            infested_stone,
-            infested_cobblestone,
-            infested_stone_bricks,
-            infested_mossy_stone_bricks,
-            infested_cracked_stone_bricks,
-            infested_chiseled_stone_bricks,
-            stone_bricks,
-            mossy_stone_bricks,
-            cracked_stone_bricks,
-            chiseled_stone_bricks,
-            brown_mushroom_block,
-            red_mushroom_block,
-            mushroom_stem,
-            iron_bars,
-            glass_pane,
-            melon,
-            vine,
-            oak_fence_gate,
-            spruce_fence_gate,
-            birch_fence_gate,
-            jungle_fence_gate,
-            acacia_fence_gate,
-            dark_oak_fence_gate,
-            brick_stairs,
-            stone_brick_stairs,
-            mycelium,
-            lily_pad,
-            nether_bricks,
-            nether_brick_fence,
-            nether_brick_stairs,
-            enchanting_table,
-            end_portal_frame,
-            end_stone,
-            end_stone_bricks,
-            dragon_egg,
-            redstone_lamp,
-            sandstone_stairs,
-            emerald_ore,
-            ender_chest,
-            tripwire_hook,
-            emerald_block,
-            spruce_stairs,
-            birch_stairs,
-            jungle_stairs,
-            command_block,
-            beacon,
-            cobblestone_wall,
-            oak_button,
-            spruce_button,
-            birch_button,
-            jungle_button,
-            acacia_button,
-            dark_oak_button,
-            anvil,
-            chipped_anvil,
-            damaged_anvil,
-            trapped_chest,
-            light_weighted_pressure_plate,
-            heavy_weighted_pressure_plate,
-            daylight_detector,
-            redstone_block,
-            nether_quartz_ore,
-            hopper,
-            chiseled_quartz_block,
-            quartz_block,
-            quartz_pillar,
-            quartz_stairs,
-            activator_rail,
-            dropper,
-            white_terracotta,
-            orange_terracotta,
-            magenta_terracotta,
-            light_blue_terracotta,
-            yellow_terracotta,
-            lime_terracotta,
-            pink_terracotta,
-            gray_terracotta,
-            light_gray_terracotta,
-            cyan_terracotta,
-            purple_terracotta,
-            blue_terracotta,
-            brown_terracotta,
-            green_terracotta,
-            red_terracotta,
-            black_terracotta,
-            barrier,
-            iron_trapdoor,
-            hay_block,
-            white_carpet,
-            orange_carpet,
-            magenta_carpet,
-            light_blue_carpet,
-            yellow_carpet,
-            lime_carpet,
-            pink_carpet,
-            gray_carpet,
-            light_gray_carpet,
-            cyan_carpet,
-            purple_carpet,
-            blue_carpet,
-            brown_carpet,
-            green_carpet,
-            red_carpet,
-            black_carpet,
-            terracotta,
-            coal_block,
-            packed_ice,
-            acacia_stairs,
-            dark_oak_stairs,
-            slime_block,
-            grass_path,
-            sunflower,
-            lilac,
-            rose_bush,
-            peony,
-            tall_grass,
-            large_fern,
-            white_stained_glass,
-            orange_stained_glass,
-            magenta_stained_glass,
-            light_blue_stained_glass,
-            yellow_stained_glass,
-            lime_stained_glass,
-            pink_stained_glass,
-            gray_stained_glass,
-            light_gray_stained_glass,
-            cyan_stained_glass,
-            purple_stained_glass,
-            blue_stained_glass,
-            brown_stained_glass,
-            green_stained_glass,
-            red_stained_glass,
-            black_stained_glass,
-            white_stained_glass_pane,
-            orange_stained_glass_pane,
-            magenta_stained_glass_pane,
-            light_blue_stained_glass_pane,
-            yellow_stained_glass_pane,
-            lime_stained_glass_pane,
-            pink_stained_glass_pane,
-            gray_stained_glass_pane,
-            light_gray_stained_glass_pane,
-            cyan_stained_glass_pane,
-            purple_stained_glass_pane,
-            blue_stained_glass_pane,
-            brown_stained_glass_pane,
-            green_stained_glass_pane,
-            red_stained_glass_pane,
-            black_stained_glass_pane,
-            prismarine,
-            prismarine_bricks,
-            dark_prismarine,
-            sea_lantern,
-            red_sandstone,
-            chiseled_red_sandstone,
-            cut_red_sandstone,
-            red_sandstone_stairs,
-            repeating_command_block,
-            chain_command_block,
-            magma_block,
-            nether_wart_block,
-            red_nether_bricks,
-            bone_block,
-            structure_void,
-            observer,
-            white_shulker_box,
-            orange_shulker_box,
-            magenta_shulker_box,
-            light_blue_shulker_box,
-            yellow_shulker_box,
-            lime_shulker_box,
-            pink_shulker_box,
-            gray_shulker_box,
-            light_gray_shulker_box,
-            cyan_shulker_box,
-            purple_shulker_box,
-            blue_shulker_box,
-            brown_shulker_box,
-            green_shulker_box,
-            red_shulker_box,
-            black_shulker_box,
-            white_glazed_terracotta,
-            orange_glazed_terracotta,
-            magenta_glazed_terracotta,
-            light_blue_glazed_terracotta,
-            yellow_glazed_terracotta,
-            lime_glazed_terracotta,
-            pink_glazed_terracotta,
-            gray_glazed_terracotta,
-            light_gray_glazed_terracotta,
-            cyan_glazed_terracotta,
-            purple_glazed_terracotta,
-            blue_glazed_terracotta,
-            brown_glazed_terracotta,
-            green_glazed_terracotta,
-            red_glazed_terracotta,
-            black_glazed_terracotta,
-            white_concrete,
-            orange_concrete,
-            magenta_concrete,
-            light_blue_concrete,
-            yellow_concrete,
-            lime_concrete,
-            pink_concrete,
-            gray_concrete,
-            light_gray_concrete,
-            cyan_concrete,
-            purple_concrete,
-            blue_concrete,
-            brown_concrete,
-            green_concrete,
-            red_concrete,
-            black_concrete,
-            white_concrete_powder,
-            orange_concrete_powder,
-            magenta_concrete_powder,
-            light_blue_concrete_powder,
-            yellow_concrete_powder,
-            lime_concrete_powder,
-            pink_concrete_powder,
-            gray_concrete_powder,
-            light_gray_concrete_powder,
-            cyan_concrete_powder,
-            purple_concrete_powder,
-            blue_concrete_powder,
-            brown_concrete_powder,
-            green_concrete_powder,
-            red_concrete_powder,
-            black_concrete_powder,
-            iron_door,
-            oak_door,
-            spruce_door,
-            birch_door,
-            jungle_door,
-            acacia_door,
-            dark_oak_door,
-            repeater,
-            comparator,
-            structure_block,
-            iron_shovel,
-            iron_pickaxe,
-            iron_axe,
-            flint_and_steel,
-            apple,
-            bow,
-            arrow,
-            coal,
-            charcoal,
-            diamond,
-            iron_ingot,
-            gold_ingot,
-            iron_sword,
-            wooden_sword,
-            wooden_shovel,
-            wooden_pickaxe,
-            wooden_axe,
-            stone_sword,
-            stone_shovel,
-            stone_pickaxe,
-            stone_axe,
-            diamond_sword,
-            diamond_shovel,
-            diamond_pickaxe,
-            diamond_axe,
-            stick,
-            bowl,
-            mushroom_stew,
-            golden_sword,
-            golden_shovel,
-            golden_pickaxe,
-            golden_axe,
-            feather,
-            gunpowder,
-            wooden_hoe,
-            stone_hoe,
-            iron_hoe,
-            diamond_hoe,
-            golden_hoe,
-            wheat_seeds,
-            wheat,
-            bread,
-            leather_helmet,
-            leather_chestplate,
-            leather_leggings,
-            leather_boots,
-            chainmail_helmet,
-            chainmail_chestplate,
-            chainmail_leggings,
-            chainmail_boots,
-            iron_helmet,
-            iron_chestplate,
-            iron_leggings,
-            iron_boots,
-            diamond_helmet,
-            diamond_chestplate,
-            diamond_leggings,
-            diamond_boots,
-            golden_helmet,
-            golden_chestplate,
-            golden_leggings,
-            golden_boots,
-            flint,
-            porkchop,
-            cooked_porkchop,
-            painting,
-            golden_apple,
-            enchanted_golden_apple,
-            bucket,
-            water_bucket,
-            lava_bucket,
-            minecart,
-            saddle,
-            redstone,
-            snowball,
-            oak_boat,
-            leather,
-            milk_bucket,
-            brick,
-            clay_ball,
-            sugar_cane,
-            paper,
-            book,
-            slime_ball,
-            chest_minecart,
-            furnace_minecart,
-            egg,
-            compass,
-            fishing_rod,
-            clock,
-            glowstone_dust,
-            cod,
-            salmon,
-            tropical_fish,
-            pufferfish,
-            cooked_cod,
-            cooked_salmon,
-            ink_sac,
-            cocoa_beans,
-            lapis_lazuli,
-            purple_dye,
-            cyan_dye,
-            light_gray_dye,
-            gray_dye,
-            pink_dye,
-            lime_dye,
-            yellow_dye,
-            light_blue_dye,
-            magenta_dye,
-            orange_dye,
-            bone_meal,
-            bone,
-            sugar,
-            cake,
-            white_bed,
-            orange_bed,
-            magenta_bed,
-            light_blue_bed,
-            yellow_bed,
-            lime_bed,
-            pink_bed,
-            gray_bed,
-            light_gray_bed,
-            cyan_bed,
-            purple_bed,
-            blue_bed,
-            brown_bed,
-            green_bed,
-            red_bed,
-            black_bed,
-            cookie,
-            filled_map,
-            shears,
-            melon_slice,
-            pumpkin_seeds,
-            melon_seeds,
-            beef,
-            cooked_beef,
-            chicken,
-            cooked_chicken,
-            rotten_flesh,
-            ender_pearl,
-            blaze_rod,
-            ghast_tear,
-            gold_nugget,
-            nether_wart,
-            potion,
-            glass_bottle,
-            spider_eye,
-            fermented_spider_eye,
-            blaze_powder,
-            magma_cream,
-            brewing_stand,
-            cauldron,
-            ender_eye,
-            glistering_melon_slice,
-            bat_spawn_egg,
-            blaze_spawn_egg,
-            cave_spider_spawn_egg,
-            chicken_spawn_egg,
-            cow_spawn_egg,
-            creeper_spawn_egg,
-            donkey_spawn_egg,
-            elder_guardian_spawn_egg,
-            enderman_spawn_egg,
-            endermite_spawn_egg,
-            evoker_spawn_egg,
-            ghast_spawn_egg,
-            guardian_spawn_egg,
-            horse_spawn_egg,
-            husk_spawn_egg,
-            llama_spawn_egg,
-            magma_cube_spawn_egg,
-            mooshroom_spawn_egg,
-            mule_spawn_egg,
-            ocelot_spawn_egg,
-            parrot_spawn_egg,
-            pig_spawn_egg,
-            polar_bear_spawn_egg,
-            rabbit_spawn_egg,
-            sheep_spawn_egg,
-            shulker_spawn_egg,
-            silverfish_spawn_egg,
-            skeleton_spawn_egg,
-            skeleton_horse_spawn_egg,
-            slime_spawn_egg,
-            spider_spawn_egg,
-            squid_spawn_egg,
-            stray_spawn_egg,
-            vex_spawn_egg,
-            villager_spawn_egg,
-            vindicator_spawn_egg,
-            witch_spawn_egg,
-            wither_skeleton_spawn_egg,
-            wolf_spawn_egg,
-            zombie_spawn_egg,
-            zombie_horse_spawn_egg,
-            zombie_villager_spawn_egg,
-            experience_bottle,
-            fire_charge,
-            writable_book,
-            written_book,
-            emerald,
-            item_frame,
-            flower_pot,
-            carrot,
-            potato,
-            baked_potato,
-            poisonous_potato,
-            map,
-            golden_carrot,
-            skeleton_skull,
-            wither_skeleton_skull,
-            player_head,
-            zombie_head,
-            creeper_head,
-            dragon_head,
-            carrot_on_a_stick,
-            nether_star,
-            pumpkin_pie,
-            firework_rocket,
-            firework_star,
-            enchanted_book,
-            nether_brick,
-            quartz,
-            tnt_minecart,
-            hopper_minecart,
-            prismarine_shard,
-            prismarine_crystals,
-            rabbit,
-            cooked_rabbit,
-            rabbit_stew,
-            rabbit_foot,
-            rabbit_hide,
-            armor_stand,
-            iron_horse_armor,
-            golden_horse_armor,
-            diamond_horse_armor,
-            lead,
-            name_tag,
-            command_block_minecart,
-            mutton,
-            cooked_mutton,
-            white_banner,
-            orange_banner,
-            magenta_banner,
-            light_blue_banner,
-            yellow_banner,
-            lime_banner,
-            pink_banner,
-            gray_banner,
-            light_gray_banner,
-            cyan_banner,
-            purple_banner,
-            blue_banner,
-            brown_banner,
-            green_banner,
-            red_banner,
-            black_banner,
-            end_crystal,
-            chorus_fruit,
-            popped_chorus_fruit,
-            beetroot,
-            beetroot_seeds,
-            beetroot_soup,
-            dragon_breath,
-            splash_potion,
-            spectral_arrow,
-            tipped_arrow,
-            lingering_potion,
-            shield,
-            elytra,
-            spruce_boat,
-            birch_boat,
-            jungle_boat,
-            acacia_boat,
-            dark_oak_boat,
-            totem_of_undying,
-            shulker_shell,
-            iron_nugget,
-            knowledge_book,
-            debug_stick,
-            music_disc_13,
-            music_disc_cat,
-            music_disc_blocks,
-            music_disc_chirp,
-            music_disc_far,
-            music_disc_mall,
-            music_disc_mellohi,
-            music_disc_stal,
-            music_disc_strad,
-            music_disc_ward,
-            music_disc_11,
-            music_disc_wait,
-            ItemEnumEnd
+            public Item(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+                
+            }
+
+            /// <summary>
+            /// Converts this item into a block type. There is no check checking if the block is valid
+            /// </summary>
+            /// <returns>The block type</returns>
+            public Block ConvertToBlock()
+            {
+                return new Block(Value, Namespace);
+            }
+
+            /// <summary>
+            /// Converts this type into a <see cref="DataPartObject"/>
+            /// </summary>
+            /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            /// <returns></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
+            {
+                return (this as IGroupable).GetGroupData(conversionData);
+            }
+
+            public string Name => ToString();
+
+            public bool IsAGroup => false;
+
+            public static readonly Item blackstone = new Item("blackstone");
+            public static readonly Item blackstone_slab = new Item("blackstone_slab");
+            public static readonly Item blackstone_stairs = new Item("blackstone_stairs");
+            public static readonly Item blackstone_wall = new Item("blackstone_wall");
+            public static readonly Item gilded_blackstone = new Item("gilded_blackstone");
+            public static readonly Item polished_blackstone = new Item("polished_blackstone");
+            public static readonly Item polished_blackstone_slab = new Item("polished_blackstone_slab");
+            public static readonly Item polished_blackstone_stairs = new Item("polished_blackstone_stairs");
+            public static readonly Item polished_blackstone_wall = new Item("polished_blackstone_wall");
+            public static readonly Item chiseled_polished_blackstone = new Item("chiseled_polished_blackstone");
+            public static readonly Item polished_blackstone_bricks = new Item("polished_blackstone_bricks");
+            public static readonly Item polished_blackstone_brick_slab = new Item("polished_blackstone_brick_slab");
+            public static readonly Item polished_blackstone_brick_stairs = new Item("polished_blackstone_brick_stairs");
+            public static readonly Item polished_blackstone_brick_wall = new Item("polished_blackstone_brick_wall");
+            public static readonly Item cracked_polished_blackstone_bricks = new Item("cracked_polished_blackstone_bricks");
+            public static readonly Item chain = new Item("chain");
+            public static readonly Item cracked_nether_bricks = new Item("cracked_nether_bricks");
+            public static readonly Item chiseled_nether_bricks = new Item("chiseled_nether_bricks");
+            public static readonly Item quartz_bricks = new Item("quartz_bricks");
+            public static readonly Item soul_campfire = new Item("soul_campfire");
+            public static readonly Item piglin_banner_pattern = new Item("piglin_banner_pattern");
+            public static readonly Item music_disc_pigstep = new Item("music_disc_pigstep");
+            public static readonly Item strider_spawn_egg = new Item("strider_spawn_egg");
+            public static readonly Item zoglin_spawn_egg = new Item("zoglin_spawn_egg");
+            public static readonly Item polished_basalt = new Item("polished_basalt");
+            public static readonly Item respawn_anchor = new Item("respawn_anchor");
+            public static readonly Item lodestone = new Item("lodestone");
+            public static readonly Item warped_fungus_on_a_stick = new Item("warped_fungus_on_a_stick");
+            public static readonly Item nether_gold_ore = new Item("nether_gold_ore");
+            public static readonly Item twisting_vines = new Item("twisting_vines");
+            public static readonly Item stripped_warped_hyphae = new Item("stripped_warped_hyphae");
+            public static readonly Item stripped_crimson_hyphae = new Item("stripped_crimson_hyphae");
+            public static readonly Item warped_hyphae = new Item("warped_hyphae");
+            public static readonly Item crimson_hyphae = new Item("crimson_hyphae");
+            public static readonly Item ancient_debris = new Item("ancient_debris");
+            public static readonly Item basalt = new Item("basalt");
+            public static readonly Item netherite_block = new Item("netherite_block");
+            public static readonly Item crimson_fungus = new Item("crimson_fungus");
+            public static readonly Item crimson_nylium = new Item("crimson_nylium");
+            public static readonly Item crimson_sign = new Item("crimson_sign");
+            public static readonly Item stripped_crimson_stem = new Item("stripped_crimson_stem");
+            public static readonly Item crimson_planks = new Item("crimson_planks");
+            public static readonly Item crimson_stem = new Item("crimson_stem");
+            public static readonly Item crimson_pressure_plate = new Item("crimson_pressure_plate");
+            public static readonly Item crimson_trapdoor = new Item("crimson_trapdoor");
+            public static readonly Item crimson_stairs = new Item("crimson_stairs");
+            public static readonly Item crimson_button = new Item("crimson_button");
+            public static readonly Item crimson_slab = new Item("crimson_slab");
+            public static readonly Item crimson_fence_gate = new Item("crimson_fence_gate");
+            public static readonly Item crimson_fence = new Item("crimson_fence");
+            public static readonly Item crimson_door = new Item("crimson_door");
+            public static readonly Item crimson_roots = new Item("crimson_roots");
+            public static readonly Item warped_fungus = new Item("warped_fungus");
+            public static readonly Item warped_nylium = new Item("warped_nylium");
+            public static readonly Item warped_sign = new Item("warped_sign");
+            public static readonly Item stripped_warped_stem = new Item("stripped_warped_stem");
+            public static readonly Item warped_planks = new Item("warped_planks");
+            public static readonly Item warped_stem = new Item("warped_stem");
+            public static readonly Item warped_pressure_plate = new Item("warped_pressure_plate");
+            public static readonly Item warped_trapdoor = new Item("warped_trapdoor");
+            public static readonly Item warped_stairs = new Item("warped_stairs");
+            public static readonly Item warped_button = new Item("warped_button");
+            public static readonly Item warped_slab = new Item("warped_slab");
+            public static readonly Item warped_fence_gate = new Item("warped_fence_gate");
+            public static readonly Item warped_fence = new Item("warped_fence");
+            public static readonly Item warped_door = new Item("warped_door");
+            public static readonly Item warped_roots = new Item("warped_roots");
+            public static readonly Item warped_wart_block = new Item("warped_wart_block");
+            public static readonly Item crying_obsidian = new Item("crying_obsidian");
+            public static readonly Item nether_sprouts = new Item("nether_sprouts");
+            public static readonly Item shroomlight = new Item("shroomlight");
+            public static readonly Item soul_lantern = new Item("soul_lantern");
+            public static readonly Item soul_touch = new Item("soul_touch");
+            public static readonly Item target = new Item("target");
+            public static readonly Item weeping_vines = new Item("weeping_vines");
+            public static readonly Item soul_soil = new Item("soul_soil");
+            public static readonly Item netherite_axe = new Item("netherite_axe");
+            public static readonly Item netherite_boots = new Item("netherite_boots");
+            public static readonly Item netherite_chestplate = new Item("netherite_chestplate");
+            public static readonly Item netherite_helmet = new Item("netherite_helmet");
+            public static readonly Item netherite_hoe = new Item("netherite_hoe");
+            public static readonly Item netherite_ingot = new Item("netherite_ingot");
+            public static readonly Item netherite_leggings = new Item("netherite_leggings");
+            public static readonly Item netherite_pickaxe = new Item("netherite_pickaxe");
+            public static readonly Item netherite_scrap = new Item("netherite_scrap");
+            public static readonly Item netherite_shovel = new Item("netherite_shovel");
+            public static readonly Item netherite_sword = new Item("netherite_sword");
+            public static readonly Item zombiefied_piglin_spawn_egg = new Item("zombiefied_piglin_spawn_egg");
+            public static readonly Item hoglin_spawn_egg = new Item("hoglin_spawn_egg");
+            public static readonly Item piglin_spawn_egg = new Item("piglin_spawn_egg");
+            public static readonly Item beehive = new Item("beehive");
+            public static readonly Item bee_nest = new Item("bee_nest");
+            public static readonly Item honey_block = new Item("honey_block");
+            public static readonly Item honeycomb_block = new Item("honeycomb_block");
+            public static readonly Item honey_bottle = new Item("honey_bottle");
+            public static readonly Item honeycomb = new Item("honeycomb");
+            public static readonly Item bee_spawn_egg = new Item("bee_spawn_egg");
+            public static readonly Item red_dye = new Item("red_dye");
+            public static readonly Item green_dye = new Item("green_dye");
+            public static readonly Item fox_spawn_egg = new Item("fox_spawn_egg");
+            public static readonly Item composter = new Item("composter");
+            public static readonly Item campfire = new Item("campfire");
+            public static readonly Item sweet_berries = new Item("sweet_berries");
+            public static readonly Item barrel = new Item("barrel");
+            public static readonly Item smoker = new Item("smoker");
+            public static readonly Item blast_furnace = new Item("blast_furnace");
+            public static readonly Item cartography_table = new Item("cartography_table");
+            public static readonly Item fletching_table = new Item("fletching_table");
+            public static readonly Item grindstone = new Item("grindstone");
+            public static readonly Item smithing_table = new Item("smithing_table");
+            public static readonly Item stonecutter = new Item("stonecutter");
+            public static readonly Item bell = new Item("bell");
+            public static readonly Item lantern = new Item("lantern");
+            public static readonly Item lectern = new Item("lectern");
+            public static readonly Item jigsaw = new Item("jigsaw");
+            public static readonly Item scaffolding = new Item("scaffolding");
+            public static readonly Item dead_tube_coral = new Item("dead_tube_coral");
+            public static readonly Item dead_brain_coral = new Item("dead_brain_coral");
+            public static readonly Item dead_bubble_coral = new Item("dead_bubble_coral");
+            public static readonly Item dead_fire_coral = new Item("dead_fire_coral");
+            public static readonly Item dead_horn_coral = new Item("dead_horn_coral");
+            public static readonly Item cat_spawn_egg = new Item("cat_spawn_egg");
+            public static readonly Item ravager_spawn_egg = new Item("ravager_spawn_egg");
+            public static readonly Item panda_spawn_egg = new Item("panda_spawn_egg");
+            public static readonly Item pillager_spawn_egg = new Item("pillager_spawn_egg");
+            public static readonly Item suspicious_stew = new Item("suspicious_stew");
+            public static readonly Item crossbow = new Item("crossbow");
+            public static readonly Item blue_dye = new Item("blue_dye");
+            public static readonly Item black_dye = new Item("black_dye");
+            public static readonly Item brown_dye = new Item("brown_dye");
+            public static readonly Item white_dye = new Item("white_dye");
+            public static readonly Item flower_banner_pattern = new Item("flower_banner_pattern");
+            public static readonly Item creeper_banner_pattern = new Item("creeper_banner_pattern");
+            public static readonly Item skull_banner_pattern = new Item("skull_banner_pattern");
+            public static readonly Item mojang_banner_pattern = new Item("mojang_banner_pattern");
+            public static readonly Item polished_diorite_stairs = new Item("polished_diorite_stairs");
+            public static readonly Item mossy_cobblestone_stairs = new Item("mossy_cobblestone_stairs");
+            public static readonly Item end_stone_brick_stairs = new Item("end_stone_brick_stairs");
+            public static readonly Item stone_stairs = new Item("stone_stairs");
+            public static readonly Item smooth_sandstone_stairs = new Item("smooth_sandstone_stairs");
+            public static readonly Item smooth_quartz_stairs = new Item("smooth_quartz_stairs");
+            public static readonly Item granite_stairs = new Item("granite_stairs");
+            public static readonly Item andesite_stairs = new Item("andesite_stairs");
+            public static readonly Item red_nether_brick_stairs = new Item("red_nether_brick_stairs");
+            public static readonly Item polished_andesite_stairs = new Item("polished_andesite_stairs");
+            public static readonly Item diorite_stairs = new Item("diorite_stairs");
+            public static readonly Item mossy_stone_brick_stairs = new Item("mossy_stone_brick_stairs");
+            public static readonly Item smooth_red_sandstone_stairs = new Item("smooth_red_sandstone_stairs");
+            public static readonly Item polished_granite_stairs = new Item("polished_granite_stairs");
+            public static readonly Item polished_diorite_slab = new Item("polished_diorite_slab");
+            public static readonly Item mossy_cobblestone_slab = new Item("mossy_cobblestone_slab");
+            public static readonly Item end_stone_brick_slab = new Item("end_stone_brick_slab");
+            public static readonly Item stone_slab = new Item("stone_slab");
+            public static readonly Item smooth_sandstone_slab = new Item("smooth_sandstone_slab");
+            public static readonly Item smooth_quartz_slab = new Item("smooth_quartz_slab");
+            public static readonly Item granite_slab = new Item("granite_slab");
+            public static readonly Item andesite_slab = new Item("andesite_slab");
+            public static readonly Item red_nether_brick_slab = new Item("red_nether_brick_slab");
+            public static readonly Item polished_andesite_slab = new Item("polished_andesite_slab");
+            public static readonly Item diorite_slab = new Item("diorite_slab");
+            public static readonly Item mossy_stone_brick_slab = new Item("mossy_stone_brick_slab");
+            public static readonly Item smooth_red_sandstone_slab = new Item("smooth_red_sandstone_slab");
+            public static readonly Item polished_granite_slab = new Item("polished_granite_slab");
+            public static readonly Item smooth_stone_slab = new Item("smooth_stone_slab");
+            public static readonly Item mossy_cobblestone_wall = new Item("mossy_cobblestone_wall");
+            public static readonly Item end_stone_brick_wall = new Item("end_stone_brick_wall");
+            public static readonly Item granite_wall = new Item("granite_wall");
+            public static readonly Item andesite_wall = new Item("andesite_wall");
+            public static readonly Item red_nether_brick_wall = new Item("red_nether_brick_wall");
+            public static readonly Item diorite_wall = new Item("diorite_wall");
+            public static readonly Item mossy_stone_brick_wall = new Item("mossy_stone_brick_wall");
+            public static readonly Item prismarine_wall = new Item("prismarine_wall");
+            public static readonly Item nether_brick_wall = new Item("nether_brick_wall");
+            public static readonly Item oak_sign = new Item("oak_sign");
+            public static readonly Item spruce_sign = new Item("spruce_sign");
+            public static readonly Item birch_sign = new Item("birch_sign");
+            public static readonly Item acacia_sign = new Item("acacia_sign");
+            public static readonly Item jungle_sign = new Item("jungle_sign");
+            public static readonly Item dark_oak_sign = new Item("dark_oak_sign");
+            public static readonly Item bamboo = new Item("bamboo");
+            public static readonly Item cornflower = new Item("cornflower");
+            public static readonly Item lily_of_the_valley = new Item("lily_of_the_valley");
+            public static readonly Item wither_rose = new Item("wither_rose");
+            public static readonly Item loom = new Item("loom");
+            public static readonly Item stripped_oak_wood = new Item("stripped_oak_wood");
+            public static readonly Item stripped_spruce_wood = new Item("stripped_spruce_wood");
+            public static readonly Item stripped_birch_wood = new Item("stripped_birch_wood");
+            public static readonly Item stripped_jungle_wood = new Item("stripped_jungle_wood");
+            public static readonly Item stripped_acacia_wood = new Item("stripped_acacia_wood");
+            public static readonly Item stripped_dark_oak_wood = new Item("stripped_dark_oak_wood");
+            public static readonly Item dead_tube_coral_fan = new Item("dead_tube_coral_fan");
+            public static readonly Item dead_brain_coral_fan = new Item("dead_brain_coral_fan");
+            public static readonly Item dead_bubble_coral_fan = new Item("dead_bubble_coral_fan");
+            public static readonly Item dead_fire_coral_fan = new Item("dead_fire_coral_fan");
+            public static readonly Item dead_horn_coral_fan = new Item("dead_horn_coral_fan");
+            public static readonly Item shulker_box = new Item("shulker_box");
+            public static readonly Item phantom_membrane = new Item("phantom_membrane");
+            public static readonly Item sea_pickle = new Item("sea_pickle");
+            public static readonly Item nautilus_shell = new Item("nautilus_shell");
+            public static readonly Item heart_of_the_sea = new Item("heart_of_the_sea");
+            public static readonly Item drowned_spawn_egg = new Item("drowned_spawn_egg");
+            public static readonly Item dolphin_spawn_egg = new Item("dolphin_spawn_egg");
+            public static readonly Item conduit = new Item("conduit");
+            public static readonly Item dead_tube_coral_block = new Item("dead_tube_coral_block");
+            public static readonly Item dead_brain_coral_block = new Item("dead_brain_coral_block");
+            public static readonly Item dead_bubble_coral_block = new Item("dead_bubble_coral_block");
+            public static readonly Item dead_fire_coral_block = new Item("dead_fire_coral_block");
+            public static readonly Item dead_horn_coral_block = new Item("dead_horn_coral_block");
+            public static readonly Item tube_coral_block = new Item("tube_coral_block");
+            public static readonly Item brain_coral_block = new Item("brain_coral_block");
+            public static readonly Item bubble_coral_block = new Item("bubble_coral_block");
+            public static readonly Item fire_coral_block = new Item("fire_coral_block");
+            public static readonly Item horn_coral_block = new Item("horn_coral_block");
+            public static readonly Item tube_coral = new Item("tube_coral");
+            public static readonly Item brain_coral = new Item("brain_coral");
+            public static readonly Item bubble_coral = new Item("bubble_coral");
+            public static readonly Item fire_coral = new Item("fire_coral");
+            public static readonly Item horn_coral = new Item("horn_coral");
+            public static readonly Item tube_coral_fan = new Item("tube_coral_fan");
+            public static readonly Item brain_coral_fan = new Item("brain_coral_fan");
+            public static readonly Item bubble_coral_fan = new Item("bubble_coral_fan");
+            public static readonly Item fire_coral_fan = new Item("fire_coral_fan");
+            public static readonly Item horn_coral_fan = new Item("horn_coral_fan");
+            public static readonly Item blue_ice = new Item("blue_ice");
+            public static readonly Item kelp = new Item("kelp");
+            public static readonly Item turtle_egg = new Item("turtle_egg");
+            public static readonly Item seagrass = new Item("seagrass");
+            public static readonly Item stripped_oak_log = new Item("stripped_oak_log");
+            public static readonly Item stripped_spruce_log = new Item("stripped_spruce_log");
+            public static readonly Item stripped_birch_log = new Item("stripped_birch_log");
+            public static readonly Item stripped_jungle_log = new Item("stripped_jungle_log");
+            public static readonly Item stripped_acacia_log = new Item("stripped_acacia_log");
+            public static readonly Item stripped_dark_oak_log = new Item("stripped_dark_oak_log");
+            public static readonly Item dried_kelp_block = new Item("dried_kelp_block");
+            public static readonly Item tropical_fish_bucket = new Item("tropical_fish_bucket");
+            public static readonly Item cod_bucket = new Item("cod_bucket");
+            public static readonly Item salmon_bucket = new Item("salmon_bucket");
+            public static readonly Item pufferfish_bucket = new Item("pufferfish_bucket");
+            public static readonly Item cod_spawn_egg = new Item("cod_spawn_egg");
+            public static readonly Item salmon_spawn_egg = new Item("salmon_spawn_egg");
+            public static readonly Item pufferfish_spawn_egg = new Item("pufferfish_spawn_egg");
+            public static readonly Item tropical_fish_spawn_egg = new Item("tropical_fish_spawn_egg");
+            public static readonly Item phantom_spawn_egg = new Item("phantom_spawn_egg");
+            public static readonly Item turtle_spawn_egg = new Item("turtle_spawn_egg");
+            public static readonly Item turtle_helmet = new Item("turtle_helmet");
+            public static readonly Item scute = new Item("scute");
+            public static readonly Item trident = new Item("trident");
+            public static readonly Item dried_kelp = new Item("dried_kelp");
+            public static readonly Item air = new Item("air");
+            public static readonly Item String = new Item("string");
+            public static readonly Item stone = new Item("stone");
+            public static readonly Item granite = new Item("granite");
+            public static readonly Item polished_granite = new Item("polished_granite");
+            public static readonly Item diorite = new Item("diorite");
+            public static readonly Item polished_diorite = new Item("polished_diorite");
+            public static readonly Item andesite = new Item("andesite");
+            public static readonly Item polished_andesite = new Item("polished_andesite");
+            public static readonly Item grass_block = new Item("grass_block");
+            public static readonly Item dirt = new Item("dirt");
+            public static readonly Item coarse_dirt = new Item("coarse_dirt");
+            public static readonly Item podzol = new Item("podzol");
+            public static readonly Item cobblestone = new Item("cobblestone");
+            public static readonly Item oak_planks = new Item("oak_planks");
+            public static readonly Item spruce_planks = new Item("spruce_planks");
+            public static readonly Item birch_planks = new Item("birch_planks");
+            public static readonly Item jungle_planks = new Item("jungle_planks");
+            public static readonly Item acacia_planks = new Item("acacia_planks");
+            public static readonly Item dark_oak_planks = new Item("dark_oak_planks");
+            public static readonly Item oak_sapling = new Item("oak_sapling");
+            public static readonly Item spruce_sapling = new Item("spruce_sapling");
+            public static readonly Item birch_sapling = new Item("birch_sapling");
+            public static readonly Item jungle_sapling = new Item("jungle_sapling");
+            public static readonly Item acacia_sapling = new Item("acacia_sapling");
+            public static readonly Item dark_oak_sapling = new Item("dark_oak_sapling");
+            public static readonly Item bedrock = new Item("bedrock");
+            public static readonly Item sand = new Item("sand");
+            public static readonly Item red_sand = new Item("red_sand");
+            public static readonly Item gravel = new Item("gravel");
+            public static readonly Item gold_ore = new Item("gold_ore");
+            public static readonly Item iron_ore = new Item("iron_ore");
+            public static readonly Item coal_ore = new Item("coal_ore");
+            public static readonly Item oak_log = new Item("oak_log");
+            public static readonly Item spruce_log = new Item("spruce_log");
+            public static readonly Item birch_log = new Item("birch_log");
+            public static readonly Item jungle_log = new Item("jungle_log");
+            public static readonly Item acacia_log = new Item("acacia_log");
+            public static readonly Item dark_oak_log = new Item("dark_oak_log");
+            public static readonly Item oak_wood = new Item("oak_wood");
+            public static readonly Item spruce_wood = new Item("spruce_wood");
+            public static readonly Item birch_wood = new Item("birch_wood");
+            public static readonly Item jungle_wood = new Item("jungle_wood");
+            public static readonly Item acacia_wood = new Item("acacia_wood");
+            public static readonly Item dark_oak_wood = new Item("dark_oak_wood");
+            public static readonly Item oak_leaves = new Item("oak_leaves");
+            public static readonly Item spruce_leaves = new Item("spruce_leaves");
+            public static readonly Item birch_leaves = new Item("birch_leaves");
+            public static readonly Item jungle_leaves = new Item("jungle_leaves");
+            public static readonly Item acacia_leaves = new Item("acacia_leaves");
+            public static readonly Item dark_oak_leaves = new Item("dark_oak_leaves");
+            public static readonly Item sponge = new Item("sponge");
+            public static readonly Item wet_sponge = new Item("wet_sponge");
+            public static readonly Item glass = new Item("glass");
+            public static readonly Item lapis_ore = new Item("lapis_ore");
+            public static readonly Item lapis_block = new Item("lapis_block");
+            public static readonly Item dispenser = new Item("dispenser");
+            public static readonly Item sandstone = new Item("sandstone");
+            public static readonly Item chiseled_sandstone = new Item("chiseled_sandstone");
+            public static readonly Item cut_sandstone = new Item("cut_sandstone");
+            public static readonly Item note_block = new Item("note_block");
+            public static readonly Item powered_rail = new Item("powered_rail");
+            public static readonly Item detector_rail = new Item("detector_rail");
+            public static readonly Item sticky_piston = new Item("sticky_piston");
+            public static readonly Item cobweb = new Item("cobweb");
+            public static readonly Item grass = new Item("grass");
+            public static readonly Item fern = new Item("fern");
+            public static readonly Item dead_bush = new Item("dead_bush");
+            public static readonly Item piston = new Item("piston");
+            public static readonly Item white_wool = new Item("white_wool");
+            public static readonly Item orange_wool = new Item("orange_wool");
+            public static readonly Item magenta_wool = new Item("magenta_wool");
+            public static readonly Item light_blue_wool = new Item("light_blue_wool");
+            public static readonly Item yellow_wool = new Item("yellow_wool");
+            public static readonly Item lime_wool = new Item("lime_wool");
+            public static readonly Item pink_wool = new Item("pink_wool");
+            public static readonly Item gray_wool = new Item("gray_wool");
+            public static readonly Item light_gray_wool = new Item("light_gray_wool");
+            public static readonly Item cyan_wool = new Item("cyan_wool");
+            public static readonly Item purple_wool = new Item("purple_wool");
+            public static readonly Item blue_wool = new Item("blue_wool");
+            public static readonly Item brown_wool = new Item("brown_wool");
+            public static readonly Item green_wool = new Item("green_wool");
+            public static readonly Item red_wool = new Item("red_wool");
+            public static readonly Item black_wool = new Item("black_wool");
+            public static readonly Item dandelion = new Item("dandelion");
+            public static readonly Item poppy = new Item("poppy");
+            public static readonly Item blue_orchid = new Item("blue_orchid");
+            public static readonly Item allium = new Item("allium");
+            public static readonly Item azure_bluet = new Item("azure_bluet");
+            public static readonly Item red_tulip = new Item("red_tulip");
+            public static readonly Item orange_tulip = new Item("orange_tulip");
+            public static readonly Item white_tulip = new Item("white_tulip");
+            public static readonly Item pink_tulip = new Item("pink_tulip");
+            public static readonly Item oxeye_daisy = new Item("oxeye_daisy");
+            public static readonly Item brown_mushroom = new Item("brown_mushroom");
+            public static readonly Item red_mushroom = new Item("red_mushroom");
+            public static readonly Item gold_block = new Item("gold_block");
+            public static readonly Item iron_block = new Item("iron_block");
+            public static readonly Item oak_slab = new Item("oak_slab");
+            public static readonly Item spruce_slab = new Item("spruce_slab");
+            public static readonly Item birch_slab = new Item("birch_slab");
+            public static readonly Item jungle_slab = new Item("jungle_slab");
+            public static readonly Item acacia_slab = new Item("acacia_slab");
+            public static readonly Item dark_oak_slab = new Item("dark_oak_slab");
+            public static readonly Item sandstone_slab = new Item("sandstone_slab");
+            public static readonly Item petrified_oak_slab = new Item("petrified_oak_slab");
+            public static readonly Item cobblestone_slab = new Item("cobblestone_slab");
+            public static readonly Item brick_slab = new Item("brick_slab");
+            public static readonly Item stone_brick_slab = new Item("stone_brick_slab");
+            public static readonly Item nether_brick_slab = new Item("nether_brick_slab");
+            public static readonly Item quartz_slab = new Item("quartz_slab");
+            public static readonly Item red_sandstone_slab = new Item("red_sandstone_slab");
+            public static readonly Item purpur_slab = new Item("purpur_slab");
+            public static readonly Item smooth_quartz = new Item("smooth_quartz");
+            public static readonly Item smooth_red_sandstone = new Item("smooth_red_sandstone");
+            public static readonly Item smooth_sandstone = new Item("smooth_sandstone");
+            public static readonly Item smooth_stone = new Item("smooth_stone");
+            public static readonly Item bricks = new Item("bricks");
+            public static readonly Item tnt = new Item("tnt");
+            public static readonly Item bookshelf = new Item("bookshelf");
+            public static readonly Item mossy_cobblestone = new Item("mossy_cobblestone");
+            public static readonly Item obsidian = new Item("obsidian");
+            public static readonly Item torch = new Item("torch");
+            public static readonly Item end_rod = new Item("end_rod");
+            public static readonly Item chorus_plant = new Item("chorus_plant");
+            public static readonly Item chorus_flower = new Item("chorus_flower");
+            public static readonly Item purpur_block = new Item("purpur_block");
+            public static readonly Item purpur_pillar = new Item("purpur_pillar");
+            public static readonly Item purpur_stairs = new Item("purpur_stairs");
+            public static readonly Item spawner = new Item("spawner");
+            public static readonly Item oak_stairs = new Item("oak_stairs");
+            public static readonly Item chest = new Item("chest");
+            public static readonly Item diamond_ore = new Item("diamond_ore");
+            public static readonly Item diamond_block = new Item("diamond_block");
+            public static readonly Item crafting_table = new Item("crafting_table");
+            public static readonly Item farmland = new Item("farmland");
+            public static readonly Item furnace = new Item("furnace");
+            public static readonly Item ladder = new Item("ladder");
+            public static readonly Item rail = new Item("rail");
+            public static readonly Item cobblestone_stairs = new Item("cobblestone_stairs");
+            public static readonly Item lever = new Item("lever");
+            public static readonly Item stone_pressure_plate = new Item("stone_pressure_plate");
+            public static readonly Item oak_pressure_plate = new Item("oak_pressure_plate");
+            public static readonly Item spruce_pressure_plate = new Item("spruce_pressure_plate");
+            public static readonly Item birch_pressure_plate = new Item("birch_pressure_plate");
+            public static readonly Item jungle_pressure_plate = new Item("jungle_pressure_plate");
+            public static readonly Item acacia_pressure_plate = new Item("acacia_pressure_plate");
+            public static readonly Item dark_oak_pressure_plate = new Item("dark_oak_pressure_plate");
+            public static readonly Item redstone_ore = new Item("redstone_ore");
+            public static readonly Item redstone_torch = new Item("redstone_torch");
+            public static readonly Item stone_button = new Item("stone_button");
+            public static readonly Item snow = new Item("snow");
+            public static readonly Item ice = new Item("ice");
+            public static readonly Item snow_block = new Item("snow_block");
+            public static readonly Item cactus = new Item("cactus");
+            public static readonly Item clay = new Item("clay");
+            public static readonly Item jukebox = new Item("jukebox");
+            public static readonly Item oak_fence = new Item("oak_fence");
+            public static readonly Item spruce_fence = new Item("spruce_fence");
+            public static readonly Item birch_fence = new Item("birch_fence");
+            public static readonly Item jungle_fence = new Item("jungle_fence");
+            public static readonly Item acacia_fence = new Item("acacia_fence");
+            public static readonly Item dark_oak_fence = new Item("dark_oak_fence");
+            public static readonly Item pumpkin = new Item("pumpkin");
+            public static readonly Item carved_pumpkin = new Item("carved_pumpkin");
+            public static readonly Item netherrack = new Item("netherrack");
+            public static readonly Item soul_sand = new Item("soul_sand");
+            public static readonly Item glowstone = new Item("glowstone");
+            public static readonly Item jack_o_lantern = new Item("jack_o_lantern");
+            public static readonly Item oak_trapdoor = new Item("oak_trapdoor");
+            public static readonly Item spruce_trapdoor = new Item("spruce_trapdoor");
+            public static readonly Item birch_trapdoor = new Item("birch_trapdoor");
+            public static readonly Item jungle_trapdoor = new Item("jungle_trapdoor");
+            public static readonly Item acacia_trapdoor = new Item("acacia_trapdoor");
+            public static readonly Item dark_oak_trapdoor = new Item("dark_oak_trapdoor");
+            public static readonly Item infested_stone = new Item("infested_stone");
+            public static readonly Item infested_cobblestone = new Item("infested_cobblestone");
+            public static readonly Item infested_stone_bricks = new Item("infested_stone_bricks");
+            public static readonly Item infested_mossy_stone_bricks = new Item("infested_mossy_stone_bricks");
+            public static readonly Item infested_cracked_stone_bricks = new Item("infested_cracked_stone_bricks");
+            public static readonly Item infested_chiseled_stone_bricks = new Item("infested_chiseled_stone_bricks");
+            public static readonly Item stone_bricks = new Item("stone_bricks");
+            public static readonly Item mossy_stone_bricks = new Item("mossy_stone_bricks");
+            public static readonly Item cracked_stone_bricks = new Item("cracked_stone_bricks");
+            public static readonly Item chiseled_stone_bricks = new Item("chiseled_stone_bricks");
+            public static readonly Item brown_mushroom_block = new Item("brown_mushroom_block");
+            public static readonly Item red_mushroom_block = new Item("red_mushroom_block");
+            public static readonly Item mushroom_stem = new Item("mushroom_stem");
+            public static readonly Item iron_bars = new Item("iron_bars");
+            public static readonly Item glass_pane = new Item("glass_pane");
+            public static readonly Item melon = new Item("melon");
+            public static readonly Item vine = new Item("vine");
+            public static readonly Item oak_fence_gate = new Item("oak_fence_gate");
+            public static readonly Item spruce_fence_gate = new Item("spruce_fence_gate");
+            public static readonly Item birch_fence_gate = new Item("birch_fence_gate");
+            public static readonly Item jungle_fence_gate = new Item("jungle_fence_gate");
+            public static readonly Item acacia_fence_gate = new Item("acacia_fence_gate");
+            public static readonly Item dark_oak_fence_gate = new Item("dark_oak_fence_gate");
+            public static readonly Item brick_stairs = new Item("brick_stairs");
+            public static readonly Item stone_brick_stairs = new Item("stone_brick_stairs");
+            public static readonly Item mycelium = new Item("mycelium");
+            public static readonly Item lily_pad = new Item("lily_pad");
+            public static readonly Item nether_bricks = new Item("nether_bricks");
+            public static readonly Item nether_brick_fence = new Item("nether_brick_fence");
+            public static readonly Item nether_brick_stairs = new Item("nether_brick_stairs");
+            public static readonly Item enchanting_table = new Item("enchanting_table");
+            public static readonly Item end_portal_frame = new Item("end_portal_frame");
+            public static readonly Item end_stone = new Item("end_stone");
+            public static readonly Item end_stone_bricks = new Item("end_stone_bricks");
+            public static readonly Item dragon_egg = new Item("dragon_egg");
+            public static readonly Item redstone_lamp = new Item("redstone_lamp");
+            public static readonly Item sandstone_stairs = new Item("sandstone_stairs");
+            public static readonly Item emerald_ore = new Item("emerald_ore");
+            public static readonly Item ender_chest = new Item("ender_chest");
+            public static readonly Item tripwire_hook = new Item("tripwire_hook");
+            public static readonly Item emerald_block = new Item("emerald_block");
+            public static readonly Item spruce_stairs = new Item("spruce_stairs");
+            public static readonly Item birch_stairs = new Item("birch_stairs");
+            public static readonly Item jungle_stairs = new Item("jungle_stairs");
+            public static readonly Item command_block = new Item("command_block");
+            public static readonly Item beacon = new Item("beacon");
+            public static readonly Item cobblestone_wall = new Item("cobblestone_wall");
+            public static readonly Item oak_button = new Item("oak_button");
+            public static readonly Item spruce_button = new Item("spruce_button");
+            public static readonly Item birch_button = new Item("birch_button");
+            public static readonly Item jungle_button = new Item("jungle_button");
+            public static readonly Item acacia_button = new Item("acacia_button");
+            public static readonly Item dark_oak_button = new Item("dark_oak_button");
+            public static readonly Item anvil = new Item("anvil");
+            public static readonly Item chipped_anvil = new Item("chipped_anvil");
+            public static readonly Item damaged_anvil = new Item("damaged_anvil");
+            public static readonly Item trapped_chest = new Item("trapped_chest");
+            public static readonly Item light_weighted_pressure_plate = new Item("light_weighted_pressure_plate");
+            public static readonly Item heavy_weighted_pressure_plate = new Item("heavy_weighted_pressure_plate");
+            public static readonly Item daylight_detector = new Item("daylight_detector");
+            public static readonly Item redstone_block = new Item("redstone_block");
+            public static readonly Item nether_quartz_ore = new Item("nether_quartz_ore");
+            public static readonly Item hopper = new Item("hopper");
+            public static readonly Item chiseled_quartz_block = new Item("chiseled_quartz_block");
+            public static readonly Item quartz_block = new Item("quartz_block");
+            public static readonly Item quartz_pillar = new Item("quartz_pillar");
+            public static readonly Item quartz_stairs = new Item("quartz_stairs");
+            public static readonly Item activator_rail = new Item("activator_rail");
+            public static readonly Item dropper = new Item("dropper");
+            public static readonly Item white_terracotta = new Item("white_terracotta");
+            public static readonly Item orange_terracotta = new Item("orange_terracotta");
+            public static readonly Item magenta_terracotta = new Item("magenta_terracotta");
+            public static readonly Item light_blue_terracotta = new Item("light_blue_terracotta");
+            public static readonly Item yellow_terracotta = new Item("yellow_terracotta");
+            public static readonly Item lime_terracotta = new Item("lime_terracotta");
+            public static readonly Item pink_terracotta = new Item("pink_terracotta");
+            public static readonly Item gray_terracotta = new Item("gray_terracotta");
+            public static readonly Item light_gray_terracotta = new Item("light_gray_terracotta");
+            public static readonly Item cyan_terracotta = new Item("cyan_terracotta");
+            public static readonly Item purple_terracotta = new Item("purple_terracotta");
+            public static readonly Item blue_terracotta = new Item("blue_terracotta");
+            public static readonly Item brown_terracotta = new Item("brown_terracotta");
+            public static readonly Item green_terracotta = new Item("green_terracotta");
+            public static readonly Item red_terracotta = new Item("red_terracotta");
+            public static readonly Item black_terracotta = new Item("black_terracotta");
+            public static readonly Item barrier = new Item("barrier");
+            public static readonly Item iron_trapdoor = new Item("iron_trapdoor");
+            public static readonly Item hay_block = new Item("hay_block");
+            public static readonly Item white_carpet = new Item("white_carpet");
+            public static readonly Item orange_carpet = new Item("orange_carpet");
+            public static readonly Item magenta_carpet = new Item("magenta_carpet");
+            public static readonly Item light_blue_carpet = new Item("light_blue_carpet");
+            public static readonly Item yellow_carpet = new Item("yellow_carpet");
+            public static readonly Item lime_carpet = new Item("lime_carpet");
+            public static readonly Item pink_carpet = new Item("pink_carpet");
+            public static readonly Item gray_carpet = new Item("gray_carpet");
+            public static readonly Item light_gray_carpet = new Item("light_gray_carpet");
+            public static readonly Item cyan_carpet = new Item("cyan_carpet");
+            public static readonly Item purple_carpet = new Item("purple_carpet");
+            public static readonly Item blue_carpet = new Item("blue_carpet");
+            public static readonly Item brown_carpet = new Item("brown_carpet");
+            public static readonly Item green_carpet = new Item("green_carpet");
+            public static readonly Item red_carpet = new Item("red_carpet");
+            public static readonly Item black_carpet = new Item("black_carpet");
+            public static readonly Item terracotta = new Item("terracotta");
+            public static readonly Item coal_block = new Item("coal_block");
+            public static readonly Item packed_ice = new Item("packed_ice");
+            public static readonly Item acacia_stairs = new Item("acacia_stairs");
+            public static readonly Item dark_oak_stairs = new Item("dark_oak_stairs");
+            public static readonly Item slime_block = new Item("slime_block");
+            public static readonly Item grass_path = new Item("grass_path");
+            public static readonly Item sunflower = new Item("sunflower");
+            public static readonly Item lilac = new Item("lilac");
+            public static readonly Item rose_bush = new Item("rose_bush");
+            public static readonly Item peony = new Item("peony");
+            public static readonly Item tall_grass = new Item("tall_grass");
+            public static readonly Item large_fern = new Item("large_fern");
+            public static readonly Item white_stained_glass = new Item("white_stained_glass");
+            public static readonly Item orange_stained_glass = new Item("orange_stained_glass");
+            public static readonly Item magenta_stained_glass = new Item("magenta_stained_glass");
+            public static readonly Item light_blue_stained_glass = new Item("light_blue_stained_glass");
+            public static readonly Item yellow_stained_glass = new Item("yellow_stained_glass");
+            public static readonly Item lime_stained_glass = new Item("lime_stained_glass");
+            public static readonly Item pink_stained_glass = new Item("pink_stained_glass");
+            public static readonly Item gray_stained_glass = new Item("gray_stained_glass");
+            public static readonly Item light_gray_stained_glass = new Item("light_gray_stained_glass");
+            public static readonly Item cyan_stained_glass = new Item("cyan_stained_glass");
+            public static readonly Item purple_stained_glass = new Item("purple_stained_glass");
+            public static readonly Item blue_stained_glass = new Item("blue_stained_glass");
+            public static readonly Item brown_stained_glass = new Item("brown_stained_glass");
+            public static readonly Item green_stained_glass = new Item("green_stained_glass");
+            public static readonly Item red_stained_glass = new Item("red_stained_glass");
+            public static readonly Item black_stained_glass = new Item("black_stained_glass");
+            public static readonly Item white_stained_glass_pane = new Item("white_stained_glass_pane");
+            public static readonly Item orange_stained_glass_pane = new Item("orange_stained_glass_pane");
+            public static readonly Item magenta_stained_glass_pane = new Item("magenta_stained_glass_pane");
+            public static readonly Item light_blue_stained_glass_pane = new Item("light_blue_stained_glass_pane");
+            public static readonly Item yellow_stained_glass_pane = new Item("yellow_stained_glass_pane");
+            public static readonly Item lime_stained_glass_pane = new Item("lime_stained_glass_pane");
+            public static readonly Item pink_stained_glass_pane = new Item("pink_stained_glass_pane");
+            public static readonly Item gray_stained_glass_pane = new Item("gray_stained_glass_pane");
+            public static readonly Item light_gray_stained_glass_pane = new Item("light_gray_stained_glass_pane");
+            public static readonly Item cyan_stained_glass_pane = new Item("cyan_stained_glass_pane");
+            public static readonly Item purple_stained_glass_pane = new Item("purple_stained_glass_pane");
+            public static readonly Item blue_stained_glass_pane = new Item("blue_stained_glass_pane");
+            public static readonly Item brown_stained_glass_pane = new Item("brown_stained_glass_pane");
+            public static readonly Item green_stained_glass_pane = new Item("green_stained_glass_pane");
+            public static readonly Item red_stained_glass_pane = new Item("red_stained_glass_pane");
+            public static readonly Item black_stained_glass_pane = new Item("black_stained_glass_pane");
+            public static readonly Item prismarine = new Item("prismarine");
+            public static readonly Item prismarine_bricks = new Item("prismarine_bricks");
+            public static readonly Item dark_prismarine = new Item("dark_prismarine");
+            public static readonly Item sea_lantern = new Item("sea_lantern");
+            public static readonly Item red_sandstone = new Item("red_sandstone");
+            public static readonly Item chiseled_red_sandstone = new Item("chiseled_red_sandstone");
+            public static readonly Item cut_red_sandstone = new Item("cut_red_sandstone");
+            public static readonly Item red_sandstone_stairs = new Item("red_sandstone_stairs");
+            public static readonly Item repeating_command_block = new Item("repeating_command_block");
+            public static readonly Item chain_command_block = new Item("chain_command_block");
+            public static readonly Item magma_block = new Item("magma_block");
+            public static readonly Item nether_wart_block = new Item("nether_wart_block");
+            public static readonly Item red_nether_bricks = new Item("red_nether_bricks");
+            public static readonly Item bone_block = new Item("bone_block");
+            public static readonly Item structure_void = new Item("structure_void");
+            public static readonly Item observer = new Item("observer");
+            public static readonly Item white_shulker_box = new Item("white_shulker_box");
+            public static readonly Item orange_shulker_box = new Item("orange_shulker_box");
+            public static readonly Item magenta_shulker_box = new Item("magenta_shulker_box");
+            public static readonly Item light_blue_shulker_box = new Item("light_blue_shulker_box");
+            public static readonly Item yellow_shulker_box = new Item("yellow_shulker_box");
+            public static readonly Item lime_shulker_box = new Item("lime_shulker_box");
+            public static readonly Item pink_shulker_box = new Item("pink_shulker_box");
+            public static readonly Item gray_shulker_box = new Item("gray_shulker_box");
+            public static readonly Item light_gray_shulker_box = new Item("light_gray_shulker_box");
+            public static readonly Item cyan_shulker_box = new Item("cyan_shulker_box");
+            public static readonly Item purple_shulker_box = new Item("purple_shulker_box");
+            public static readonly Item blue_shulker_box = new Item("blue_shulker_box");
+            public static readonly Item brown_shulker_box = new Item("brown_shulker_box");
+            public static readonly Item green_shulker_box = new Item("green_shulker_box");
+            public static readonly Item red_shulker_box = new Item("red_shulker_box");
+            public static readonly Item black_shulker_box = new Item("black_shulker_box");
+            public static readonly Item white_glazed_terracotta = new Item("white_glazed_terracotta");
+            public static readonly Item orange_glazed_terracotta = new Item("orange_glazed_terracotta");
+            public static readonly Item magenta_glazed_terracotta = new Item("magenta_glazed_terracotta");
+            public static readonly Item light_blue_glazed_terracotta = new Item("light_blue_glazed_terracotta");
+            public static readonly Item yellow_glazed_terracotta = new Item("yellow_glazed_terracotta");
+            public static readonly Item lime_glazed_terracotta = new Item("lime_glazed_terracotta");
+            public static readonly Item pink_glazed_terracotta = new Item("pink_glazed_terracotta");
+            public static readonly Item gray_glazed_terracotta = new Item("gray_glazed_terracotta");
+            public static readonly Item light_gray_glazed_terracotta = new Item("light_gray_glazed_terracotta");
+            public static readonly Item cyan_glazed_terracotta = new Item("cyan_glazed_terracotta");
+            public static readonly Item purple_glazed_terracotta = new Item("purple_glazed_terracotta");
+            public static readonly Item blue_glazed_terracotta = new Item("blue_glazed_terracotta");
+            public static readonly Item brown_glazed_terracotta = new Item("brown_glazed_terracotta");
+            public static readonly Item green_glazed_terracotta = new Item("green_glazed_terracotta");
+            public static readonly Item red_glazed_terracotta = new Item("red_glazed_terracotta");
+            public static readonly Item black_glazed_terracotta = new Item("black_glazed_terracotta");
+            public static readonly Item white_concrete = new Item("white_concrete");
+            public static readonly Item orange_concrete = new Item("orange_concrete");
+            public static readonly Item magenta_concrete = new Item("magenta_concrete");
+            public static readonly Item light_blue_concrete = new Item("light_blue_concrete");
+            public static readonly Item yellow_concrete = new Item("yellow_concrete");
+            public static readonly Item lime_concrete = new Item("lime_concrete");
+            public static readonly Item pink_concrete = new Item("pink_concrete");
+            public static readonly Item gray_concrete = new Item("gray_concrete");
+            public static readonly Item light_gray_concrete = new Item("light_gray_concrete");
+            public static readonly Item cyan_concrete = new Item("cyan_concrete");
+            public static readonly Item purple_concrete = new Item("purple_concrete");
+            public static readonly Item blue_concrete = new Item("blue_concrete");
+            public static readonly Item brown_concrete = new Item("brown_concrete");
+            public static readonly Item green_concrete = new Item("green_concrete");
+            public static readonly Item red_concrete = new Item("red_concrete");
+            public static readonly Item black_concrete = new Item("black_concrete");
+            public static readonly Item white_concrete_powder = new Item("white_concrete_powder");
+            public static readonly Item orange_concrete_powder = new Item("orange_concrete_powder");
+            public static readonly Item magenta_concrete_powder = new Item("magenta_concrete_powder");
+            public static readonly Item light_blue_concrete_powder = new Item("light_blue_concrete_powder");
+            public static readonly Item yellow_concrete_powder = new Item("yellow_concrete_powder");
+            public static readonly Item lime_concrete_powder = new Item("lime_concrete_powder");
+            public static readonly Item pink_concrete_powder = new Item("pink_concrete_powder");
+            public static readonly Item gray_concrete_powder = new Item("gray_concrete_powder");
+            public static readonly Item light_gray_concrete_powder = new Item("light_gray_concrete_powder");
+            public static readonly Item cyan_concrete_powder = new Item("cyan_concrete_powder");
+            public static readonly Item purple_concrete_powder = new Item("purple_concrete_powder");
+            public static readonly Item blue_concrete_powder = new Item("blue_concrete_powder");
+            public static readonly Item brown_concrete_powder = new Item("brown_concrete_powder");
+            public static readonly Item green_concrete_powder = new Item("green_concrete_powder");
+            public static readonly Item red_concrete_powder = new Item("red_concrete_powder");
+            public static readonly Item black_concrete_powder = new Item("black_concrete_powder");
+            public static readonly Item iron_door = new Item("iron_door");
+            public static readonly Item oak_door = new Item("oak_door");
+            public static readonly Item spruce_door = new Item("spruce_door");
+            public static readonly Item birch_door = new Item("birch_door");
+            public static readonly Item jungle_door = new Item("jungle_door");
+            public static readonly Item acacia_door = new Item("acacia_door");
+            public static readonly Item dark_oak_door = new Item("dark_oak_door");
+            public static readonly Item repeater = new Item("repeater");
+            public static readonly Item comparator = new Item("comparator");
+            public static readonly Item structure_block = new Item("structure_block");
+            public static readonly Item iron_shovel = new Item("iron_shovel");
+            public static readonly Item iron_pickaxe = new Item("iron_pickaxe");
+            public static readonly Item iron_axe = new Item("iron_axe");
+            public static readonly Item flint_and_steel = new Item("flint_and_steel");
+            public static readonly Item apple = new Item("apple");
+            public static readonly Item bow = new Item("bow");
+            public static readonly Item arrow = new Item("arrow");
+            public static readonly Item coal = new Item("coal");
+            public static readonly Item charcoal = new Item("charcoal");
+            public static readonly Item diamond = new Item("diamond");
+            public static readonly Item iron_ingot = new Item("iron_ingot");
+            public static readonly Item gold_ingot = new Item("gold_ingot");
+            public static readonly Item iron_sword = new Item("iron_sword");
+            public static readonly Item wooden_sword = new Item("wooden_sword");
+            public static readonly Item wooden_shovel = new Item("wooden_shovel");
+            public static readonly Item wooden_pickaxe = new Item("wooden_pickaxe");
+            public static readonly Item wooden_axe = new Item("wooden_axe");
+            public static readonly Item stone_sword = new Item("stone_sword");
+            public static readonly Item stone_shovel = new Item("stone_shovel");
+            public static readonly Item stone_pickaxe = new Item("stone_pickaxe");
+            public static readonly Item stone_axe = new Item("stone_axe");
+            public static readonly Item diamond_sword = new Item("diamond_sword");
+            public static readonly Item diamond_shovel = new Item("diamond_shovel");
+            public static readonly Item diamond_pickaxe = new Item("diamond_pickaxe");
+            public static readonly Item diamond_axe = new Item("diamond_axe");
+            public static readonly Item stick = new Item("stick");
+            public static readonly Item bowl = new Item("bowl");
+            public static readonly Item mushroom_stew = new Item("mushroom_stew");
+            public static readonly Item golden_sword = new Item("golden_sword");
+            public static readonly Item golden_shovel = new Item("golden_shovel");
+            public static readonly Item golden_pickaxe = new Item("golden_pickaxe");
+            public static readonly Item golden_axe = new Item("golden_axe");
+            public static readonly Item feather = new Item("feather");
+            public static readonly Item gunpowder = new Item("gunpowder");
+            public static readonly Item wooden_hoe = new Item("wooden_hoe");
+            public static readonly Item stone_hoe = new Item("stone_hoe");
+            public static readonly Item iron_hoe = new Item("iron_hoe");
+            public static readonly Item diamond_hoe = new Item("diamond_hoe");
+            public static readonly Item golden_hoe = new Item("golden_hoe");
+            public static readonly Item wheat_seeds = new Item("wheat_seeds");
+            public static readonly Item wheat = new Item("wheat");
+            public static readonly Item bread = new Item("bread");
+            public static readonly Item leather_helmet = new Item("leather_helmet");
+            public static readonly Item leather_chestplate = new Item("leather_chestplate");
+            public static readonly Item leather_leggings = new Item("leather_leggings");
+            public static readonly Item leather_boots = new Item("leather_boots");
+            public static readonly Item chainmail_helmet = new Item("chainmail_helmet");
+            public static readonly Item chainmail_chestplate = new Item("chainmail_chestplate");
+            public static readonly Item chainmail_leggings = new Item("chainmail_leggings");
+            public static readonly Item chainmail_boots = new Item("chainmail_boots");
+            public static readonly Item iron_helmet = new Item("iron_helmet");
+            public static readonly Item iron_chestplate = new Item("iron_chestplate");
+            public static readonly Item iron_leggings = new Item("iron_leggings");
+            public static readonly Item iron_boots = new Item("iron_boots");
+            public static readonly Item diamond_helmet = new Item("diamond_helmet");
+            public static readonly Item diamond_chestplate = new Item("diamond_chestplate");
+            public static readonly Item diamond_leggings = new Item("diamond_leggings");
+            public static readonly Item diamond_boots = new Item("diamond_boots");
+            public static readonly Item golden_helmet = new Item("golden_helmet");
+            public static readonly Item golden_chestplate = new Item("golden_chestplate");
+            public static readonly Item golden_leggings = new Item("golden_leggings");
+            public static readonly Item golden_boots = new Item("golden_boots");
+            public static readonly Item flint = new Item("flint");
+            public static readonly Item porkchop = new Item("porkchop");
+            public static readonly Item cooked_porkchop = new Item("cooked_porkchop");
+            public static readonly Item painting = new Item("painting");
+            public static readonly Item golden_apple = new Item("golden_apple");
+            public static readonly Item enchanted_golden_apple = new Item("enchanted_golden_apple");
+            public static readonly Item bucket = new Item("bucket");
+            public static readonly Item water_bucket = new Item("water_bucket");
+            public static readonly Item lava_bucket = new Item("lava_bucket");
+            public static readonly Item minecart = new Item("minecart");
+            public static readonly Item saddle = new Item("saddle");
+            public static readonly Item redstone = new Item("redstone");
+            public static readonly Item snowball = new Item("snowball");
+            public static readonly Item oak_boat = new Item("oak_boat");
+            public static readonly Item leather = new Item("leather");
+            public static readonly Item milk_bucket = new Item("milk_bucket");
+            public static readonly Item brick = new Item("brick");
+            public static readonly Item clay_ball = new Item("clay_ball");
+            public static readonly Item sugar_cane = new Item("sugar_cane");
+            public static readonly Item paper = new Item("paper");
+            public static readonly Item book = new Item("book");
+            public static readonly Item slime_ball = new Item("slime_ball");
+            public static readonly Item chest_minecart = new Item("chest_minecart");
+            public static readonly Item furnace_minecart = new Item("furnace_minecart");
+            public static readonly Item egg = new Item("egg");
+            public static readonly Item compass = new Item("compass");
+            public static readonly Item fishing_rod = new Item("fishing_rod");
+            public static readonly Item clock = new Item("clock");
+            public static readonly Item glowstone_dust = new Item("glowstone_dust");
+            public static readonly Item cod = new Item("cod");
+            public static readonly Item salmon = new Item("salmon");
+            public static readonly Item tropical_fish = new Item("tropical_fish");
+            public static readonly Item pufferfish = new Item("pufferfish");
+            public static readonly Item cooked_cod = new Item("cooked_cod");
+            public static readonly Item cooked_salmon = new Item("cooked_salmon");
+            public static readonly Item ink_sac = new Item("ink_sac");
+            public static readonly Item cocoa_beans = new Item("cocoa_beans");
+            public static readonly Item lapis_lazuli = new Item("lapis_lazuli");
+            public static readonly Item purple_dye = new Item("purple_dye");
+            public static readonly Item cyan_dye = new Item("cyan_dye");
+            public static readonly Item light_gray_dye = new Item("light_gray_dye");
+            public static readonly Item gray_dye = new Item("gray_dye");
+            public static readonly Item pink_dye = new Item("pink_dye");
+            public static readonly Item lime_dye = new Item("lime_dye");
+            public static readonly Item yellow_dye = new Item("yellow_dye");
+            public static readonly Item light_blue_dye = new Item("light_blue_dye");
+            public static readonly Item magenta_dye = new Item("magenta_dye");
+            public static readonly Item orange_dye = new Item("orange_dye");
+            public static readonly Item bone_meal = new Item("bone_meal");
+            public static readonly Item bone = new Item("bone");
+            public static readonly Item sugar = new Item("sugar");
+            public static readonly Item cake = new Item("cake");
+            public static readonly Item white_bed = new Item("white_bed");
+            public static readonly Item orange_bed = new Item("orange_bed");
+            public static readonly Item magenta_bed = new Item("magenta_bed");
+            public static readonly Item light_blue_bed = new Item("light_blue_bed");
+            public static readonly Item yellow_bed = new Item("yellow_bed");
+            public static readonly Item lime_bed = new Item("lime_bed");
+            public static readonly Item pink_bed = new Item("pink_bed");
+            public static readonly Item gray_bed = new Item("gray_bed");
+            public static readonly Item light_gray_bed = new Item("light_gray_bed");
+            public static readonly Item cyan_bed = new Item("cyan_bed");
+            public static readonly Item purple_bed = new Item("purple_bed");
+            public static readonly Item blue_bed = new Item("blue_bed");
+            public static readonly Item brown_bed = new Item("brown_bed");
+            public static readonly Item green_bed = new Item("green_bed");
+            public static readonly Item red_bed = new Item("red_bed");
+            public static readonly Item black_bed = new Item("black_bed");
+            public static readonly Item cookie = new Item("cookie");
+            public static readonly Item filled_map = new Item("filled_map");
+            public static readonly Item shears = new Item("shears");
+            public static readonly Item melon_slice = new Item("melon_slice");
+            public static readonly Item pumpkin_seeds = new Item("pumpkin_seeds");
+            public static readonly Item melon_seeds = new Item("melon_seeds");
+            public static readonly Item beef = new Item("beef");
+            public static readonly Item cooked_beef = new Item("cooked_beef");
+            public static readonly Item chicken = new Item("chicken");
+            public static readonly Item cooked_chicken = new Item("cooked_chicken");
+            public static readonly Item rotten_flesh = new Item("rotten_flesh");
+            public static readonly Item ender_pearl = new Item("ender_pearl");
+            public static readonly Item blaze_rod = new Item("blaze_rod");
+            public static readonly Item ghast_tear = new Item("ghast_tear");
+            public static readonly Item gold_nugget = new Item("gold_nugget");
+            public static readonly Item nether_wart = new Item("nether_wart");
+            public static readonly Item potion = new Item("potion");
+            public static readonly Item glass_bottle = new Item("glass_bottle");
+            public static readonly Item spider_eye = new Item("spider_eye");
+            public static readonly Item fermented_spider_eye = new Item("fermented_spider_eye");
+            public static readonly Item blaze_powder = new Item("blaze_powder");
+            public static readonly Item magma_cream = new Item("magma_cream");
+            public static readonly Item brewing_stand = new Item("brewing_stand");
+            public static readonly Item cauldron = new Item("cauldron");
+            public static readonly Item ender_eye = new Item("ender_eye");
+            public static readonly Item glistering_melon_slice = new Item("glistering_melon_slice");
+            public static readonly Item bat_spawn_egg = new Item("bat_spawn_egg");
+            public static readonly Item blaze_spawn_egg = new Item("blaze_spawn_egg");
+            public static readonly Item cave_spider_spawn_egg = new Item("cave_spider_spawn_egg");
+            public static readonly Item chicken_spawn_egg = new Item("chicken_spawn_egg");
+            public static readonly Item cow_spawn_egg = new Item("cow_spawn_egg");
+            public static readonly Item creeper_spawn_egg = new Item("creeper_spawn_egg");
+            public static readonly Item donkey_spawn_egg = new Item("donkey_spawn_egg");
+            public static readonly Item elder_guardian_spawn_egg = new Item("elder_guardian_spawn_egg");
+            public static readonly Item enderman_spawn_egg = new Item("enderman_spawn_egg");
+            public static readonly Item endermite_spawn_egg = new Item("endermite_spawn_egg");
+            public static readonly Item evoker_spawn_egg = new Item("evoker_spawn_egg");
+            public static readonly Item ghast_spawn_egg = new Item("ghast_spawn_egg");
+            public static readonly Item guardian_spawn_egg = new Item("guardian_spawn_egg");
+            public static readonly Item horse_spawn_egg = new Item("horse_spawn_egg");
+            public static readonly Item husk_spawn_egg = new Item("husk_spawn_egg");
+            public static readonly Item llama_spawn_egg = new Item("llama_spawn_egg");
+            public static readonly Item magma_cube_spawn_egg = new Item("magma_cube_spawn_egg");
+            public static readonly Item mooshroom_spawn_egg = new Item("mooshroom_spawn_egg");
+            public static readonly Item mule_spawn_egg = new Item("mule_spawn_egg");
+            public static readonly Item ocelot_spawn_egg = new Item("ocelot_spawn_egg");
+            public static readonly Item parrot_spawn_egg = new Item("parrot_spawn_egg");
+            public static readonly Item pig_spawn_egg = new Item("pig_spawn_egg");
+            public static readonly Item polar_bear_spawn_egg = new Item("polar_bear_spawn_egg");
+            public static readonly Item rabbit_spawn_egg = new Item("rabbit_spawn_egg");
+            public static readonly Item sheep_spawn_egg = new Item("sheep_spawn_egg");
+            public static readonly Item shulker_spawn_egg = new Item("shulker_spawn_egg");
+            public static readonly Item silverfish_spawn_egg = new Item("silverfish_spawn_egg");
+            public static readonly Item skeleton_spawn_egg = new Item("skeleton_spawn_egg");
+            public static readonly Item skeleton_horse_spawn_egg = new Item("skeleton_horse_spawn_egg");
+            public static readonly Item slime_spawn_egg = new Item("slime_spawn_egg");
+            public static readonly Item spider_spawn_egg = new Item("spider_spawn_egg");
+            public static readonly Item squid_spawn_egg = new Item("squid_spawn_egg");
+            public static readonly Item stray_spawn_egg = new Item("stray_spawn_egg");
+            public static readonly Item vex_spawn_egg = new Item("vex_spawn_egg");
+            public static readonly Item villager_spawn_egg = new Item("villager_spawn_egg");
+            public static readonly Item vindicator_spawn_egg = new Item("vindicator_spawn_egg");
+            public static readonly Item witch_spawn_egg = new Item("witch_spawn_egg");
+            public static readonly Item wither_skeleton_spawn_egg = new Item("wither_skeleton_spawn_egg");
+            public static readonly Item wolf_spawn_egg = new Item("wolf_spawn_egg");
+            public static readonly Item zombie_spawn_egg = new Item("zombie_spawn_egg");
+            public static readonly Item zombie_horse_spawn_egg = new Item("zombie_horse_spawn_egg");
+            public static readonly Item zombie_villager_spawn_egg = new Item("zombie_villager_spawn_egg");
+            public static readonly Item experience_bottle = new Item("experience_bottle");
+            public static readonly Item fire_charge = new Item("fire_charge");
+            public static readonly Item writable_book = new Item("writable_book");
+            public static readonly Item written_book = new Item("written_book");
+            public static readonly Item emerald = new Item("emerald");
+            public static readonly Item item_frame = new Item("item_frame");
+            public static readonly Item flower_pot = new Item("flower_pot");
+            public static readonly Item carrot = new Item("carrot");
+            public static readonly Item potato = new Item("potato");
+            public static readonly Item baked_potato = new Item("baked_potato");
+            public static readonly Item poisonous_potato = new Item("poisonous_potato");
+            public static readonly Item map = new Item("map");
+            public static readonly Item golden_carrot = new Item("golden_carrot");
+            public static readonly Item skeleton_skull = new Item("skeleton_skull");
+            public static readonly Item wither_skeleton_skull = new Item("wither_skeleton_skull");
+            public static readonly Item player_head = new Item("player_head");
+            public static readonly Item zombie_head = new Item("zombie_head");
+            public static readonly Item creeper_head = new Item("creeper_head");
+            public static readonly Item dragon_head = new Item("dragon_head");
+            public static readonly Item carrot_on_a_stick = new Item("carrot_on_a_stick");
+            public static readonly Item nether_star = new Item("nether_star");
+            public static readonly Item pumpkin_pie = new Item("pumpkin_pie");
+            public static readonly Item firework_rocket = new Item("firework_rocket");
+            public static readonly Item firework_star = new Item("firework_star");
+            public static readonly Item enchanted_book = new Item("enchanted_book");
+            public static readonly Item nether_brick = new Item("nether_brick");
+            public static readonly Item quartz = new Item("quartz");
+            public static readonly Item tnt_minecart = new Item("tnt_minecart");
+            public static readonly Item hopper_minecart = new Item("hopper_minecart");
+            public static readonly Item prismarine_shard = new Item("prismarine_shard");
+            public static readonly Item prismarine_crystals = new Item("prismarine_crystals");
+            public static readonly Item rabbit = new Item("rabbit");
+            public static readonly Item cooked_rabbit = new Item("cooked_rabbit");
+            public static readonly Item rabbit_stew = new Item("rabbit_stew");
+            public static readonly Item rabbit_foot = new Item("rabbit_foot");
+            public static readonly Item rabbit_hide = new Item("rabbit_hide");
+            public static readonly Item armor_stand = new Item("armor_stand");
+            public static readonly Item iron_horse_armor = new Item("iron_horse_armor");
+            public static readonly Item golden_horse_armor = new Item("golden_horse_armor");
+            public static readonly Item diamond_horse_armor = new Item("diamond_horse_armor");
+            public static readonly Item lead = new Item("lead");
+            public static readonly Item name_tag = new Item("name_tag");
+            public static readonly Item command_block_minecart = new Item("command_block_minecart");
+            public static readonly Item mutton = new Item("mutton");
+            public static readonly Item cooked_mutton = new Item("cooked_mutton");
+            public static readonly Item white_banner = new Item("white_banner");
+            public static readonly Item orange_banner = new Item("orange_banner");
+            public static readonly Item magenta_banner = new Item("magenta_banner");
+            public static readonly Item light_blue_banner = new Item("light_blue_banner");
+            public static readonly Item yellow_banner = new Item("yellow_banner");
+            public static readonly Item lime_banner = new Item("lime_banner");
+            public static readonly Item pink_banner = new Item("pink_banner");
+            public static readonly Item gray_banner = new Item("gray_banner");
+            public static readonly Item light_gray_banner = new Item("light_gray_banner");
+            public static readonly Item cyan_banner = new Item("cyan_banner");
+            public static readonly Item purple_banner = new Item("purple_banner");
+            public static readonly Item blue_banner = new Item("blue_banner");
+            public static readonly Item brown_banner = new Item("brown_banner");
+            public static readonly Item green_banner = new Item("green_banner");
+            public static readonly Item red_banner = new Item("red_banner");
+            public static readonly Item black_banner = new Item("black_banner");
+            public static readonly Item end_crystal = new Item("end_crystal");
+            public static readonly Item chorus_fruit = new Item("chorus_fruit");
+            public static readonly Item popped_chorus_fruit = new Item("popped_chorus_fruit");
+            public static readonly Item beetroot = new Item("beetroot");
+            public static readonly Item beetroot_seeds = new Item("beetroot_seeds");
+            public static readonly Item beetroot_soup = new Item("beetroot_soup");
+            public static readonly Item dragon_breath = new Item("dragon_breath");
+            public static readonly Item splash_potion = new Item("splash_potion");
+            public static readonly Item spectral_arrow = new Item("spectral_arrow");
+            public static readonly Item tipped_arrow = new Item("tipped_arrow");
+            public static readonly Item lingering_potion = new Item("lingering_potion");
+            public static readonly Item shield = new Item("shield");
+            public static readonly Item elytra = new Item("elytra");
+            public static readonly Item spruce_boat = new Item("spruce_boat");
+            public static readonly Item birch_boat = new Item("birch_boat");
+            public static readonly Item jungle_boat = new Item("jungle_boat");
+            public static readonly Item acacia_boat = new Item("acacia_boat");
+            public static readonly Item dark_oak_boat = new Item("dark_oak_boat");
+            public static readonly Item totem_of_undying = new Item("totem_of_undying");
+            public static readonly Item shulker_shell = new Item("shulker_shell");
+            public static readonly Item iron_nugget = new Item("iron_nugget");
+            public static readonly Item knowledge_book = new Item("knowledge_book");
+            public static readonly Item debug_stick = new Item("debug_stick");
+            public static readonly Item music_disc_13 = new Item("music_disc_13");
+            public static readonly Item music_disc_cat = new Item("music_disc_cat");
+            public static readonly Item music_disc_blocks = new Item("music_disc_blocks");
+            public static readonly Item music_disc_chirp = new Item("music_disc_chirp");
+            public static readonly Item music_disc_far = new Item("music_disc_far");
+            public static readonly Item music_disc_mall = new Item("music_disc_mall");
+            public static readonly Item music_disc_mellohi = new Item("music_disc_mellohi");
+            public static readonly Item music_disc_stal = new Item("music_disc_stal");
+            public static readonly Item music_disc_strad = new Item("music_disc_strad");
+            public static readonly Item music_disc_ward = new Item("music_disc_ward");
+            public static readonly Item music_disc_11 = new Item("music_disc_11");
+            public static readonly Item music_disc_wait = new Item("music_disc_wait");
         }
-        public enum Enchant
+
+        public class Enchant: NamespacedEnumLike<string>
         {
-            protection = 0,
-            fire_protection = 1,
-            feather_falling = 2,
-            blast_protection = 3,
-            projectile_protection = 4,
-            respiration = 5,
-            aqua_infinity = 6,
-            thorns = 7,
-            depth_strider = 8,
-            frost_walker = 9,
-            binding_curse = 10,
-            sharpness = 16,
-            smite = 17,
-            bane_of_arthropods = 18,
-            knockback = 19,
-            fire_aspect = 20,
-            looting = 21,
-            sweeping = 22,
-            efficiency = 32,
-            silk_touch = 33,
-            unbreaking = 34,
-            fortune = 35,
-            power = 48,
-            punch = 49,
-            flame = 50,
-            infinity = 51,
-            multishot = 52,
-            quick_charge = 53,
-            piercing = 54,
-            luck_of_the_sea = 61,
-            lure = 62,
-            mending = 70,
-            vanishing_curse = 71,
-            channeling = 68,
-            impaling = 66,
-            loyalty = 65,
-            riptide = 67,
-            soul_speed,
+            public Enchant(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            public static readonly Enchant protection = new Enchant("protection");
+            public static readonly Enchant fire_protection = new Enchant("fire_protection");
+            public static readonly Enchant feather_falling = new Enchant("feather_falling");
+            public static readonly Enchant blast_protection = new Enchant("blast_protection");
+            public static readonly Enchant projectile_protection = new Enchant("projectile_protection");
+            public static readonly Enchant respiration = new Enchant("respiration");
+            public static readonly Enchant aqua_infinity = new Enchant("aqua_infinity");
+            public static readonly Enchant thorns = new Enchant("thorns");
+            public static readonly Enchant depth_strider = new Enchant("depth_strider");
+            public static readonly Enchant frost_walker = new Enchant("frost_walker");
+            public static readonly Enchant binding_curse = new Enchant("binding_curse");
+            public static readonly Enchant sharpness = new Enchant("sharpness");
+            public static readonly Enchant smite = new Enchant("smite");
+            public static readonly Enchant bane_of_arthropods = new Enchant("bane_of_arthropods");
+            public static readonly Enchant knockback = new Enchant("knockback");
+            public static readonly Enchant fire_aspect = new Enchant("fire_aspect");
+            public static readonly Enchant looting = new Enchant("looting");
+            public static readonly Enchant sweeping = new Enchant("sweeping");
+            public static readonly Enchant efficiency = new Enchant("efficiency");
+            public static readonly Enchant silk_touch = new Enchant("silk_touch");
+            public static readonly Enchant unbreaking = new Enchant("unbreaking");
+            public static readonly Enchant fortune = new Enchant("fortune");
+            public static readonly Enchant power = new Enchant("power");
+            public static readonly Enchant punch = new Enchant("punch");
+            public static readonly Enchant flame = new Enchant("flame");
+            public static readonly Enchant infinity = new Enchant("infinity");
+            public static readonly Enchant multishot = new Enchant("multishot");
+            public static readonly Enchant quick_charge = new Enchant("quick_charge");
+            public static readonly Enchant piercing = new Enchant("piercing");
+            public static readonly Enchant luck_of_the_sea = new Enchant("luck_of_the_sea");
+            public static readonly Enchant lure = new Enchant("lure");
+            public static readonly Enchant mending = new Enchant("mending");
+            public static readonly Enchant vanishing_curse = new Enchant("vanishing_curse");
+            public static readonly Enchant channeling = new Enchant("channeling");
+            public static readonly Enchant impaling = new Enchant("impaling");
+            public static readonly Enchant loyalty = new Enchant("loyalty");
+            public static readonly Enchant riptide = new Enchant("riptide");
+            public static readonly Enchant soul_speed = new Enchant("soul_speed");
         }
-        public enum Potion
+        public class Potion : NamespacedEnumLike<string>
         {
-            empty,
-            water,
-            mundane,
-            thick,
-            awkward,
-            night_vision,
-            long_night_vision,
-            invisibility,
-            long_invisibility,
-            leaping,
-            strong_leaping,
-            long_leaping,
-            fire_resistance,
-            long_fire_resistance,
-            swiftness,
-            strong_swiftness,
-            long_swiftness,
-            water_breathing,
-            long_water_breathing,
-            healing,
-            strong_healing,
-            harming,
-            strong_harming,
-            poison,
-            strong_poison,
-            long_poison,
-            regeneration,
-            strong_regeneration,
-            long_regeneration,
-            strength,
-            strong_strength,
-            long_strength,
-            weakness,
-            long_weakness,
-            luck
+            public Potion(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            public static readonly Potion empty = new Potion("empty");
+            public static readonly Potion water = new Potion("water");
+            public static readonly Potion mundane = new Potion("mundane");
+            public static readonly Potion thick = new Potion("thick");
+            public static readonly Potion awkward = new Potion("awkward");
+            public static readonly Potion night_vision = new Potion("night_vision");
+            public static readonly Potion long_night_vision = new Potion("long_night_vision");
+            public static readonly Potion invisibility = new Potion("invisibility");
+            public static readonly Potion long_invisibility = new Potion("long_invisibility");
+            public static readonly Potion leaping = new Potion("leaping");
+            public static readonly Potion strong_leaping = new Potion("strong_leaping");
+            public static readonly Potion long_leaping = new Potion("long_leaping");
+            public static readonly Potion fire_resistance = new Potion("fire_resistance");
+            public static readonly Potion long_fire_resistance = new Potion("long_fire_resistance");
+            public static readonly Potion swiftness = new Potion("swiftness");
+            public static readonly Potion strong_swiftness = new Potion("strong_swiftness");
+            public static readonly Potion long_swiftness = new Potion("long_swiftness");
+            public static readonly Potion water_breathing = new Potion("water_breathing");
+            public static readonly Potion long_water_breathing = new Potion("long_water_breathing");
+            public static readonly Potion healing = new Potion("healing");
+            public static readonly Potion strong_healing = new Potion("strong_healing");
+            public static readonly Potion harming = new Potion("harming");
+            public static readonly Potion strong_harming = new Potion("strong_harming");
+            public static readonly Potion poison = new Potion("poison");
+            public static readonly Potion strong_poison = new Potion("strong_poison");
+            public static readonly Potion long_poison = new Potion("long_poison");
+            public static readonly Potion regeneration = new Potion("regeneration");
+            public static readonly Potion strong_regeneration = new Potion("strong_regeneration");
+            public static readonly Potion long_regeneration = new Potion("long_regeneration");
+            public static readonly Potion strength = new Potion("strength");
+            public static readonly Potion strong_strength = new Potion("strong_strength");
+            public static readonly Potion long_strength = new Potion("long_strength");
+            public static readonly Potion weakness = new Potion("weakness");
+            public static readonly Potion long_weakness = new Potion("long_weakness");
+            public static readonly Potion luck = new Potion("luck");
         }
         public enum Firework { Small, Large, Star, Creeper, Burst }
         public enum BookGeneration { Original, Copy, CopyCopy, Tattered }

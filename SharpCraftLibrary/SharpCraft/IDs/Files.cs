@@ -20,9 +20,9 @@ namespace SharpCraft
                 /// </summary>
                 /// <param name="block">The block to get the file name of</param>
                 /// <returns>A loot table file name</returns>
-                public static string Block(Block block)
+                public static string Block(ID.Block block)
                 {
-                    return "blocks/" + block;
+                    return "blocks/" + block.Value;
                 }
 
                 /// <summary>
@@ -30,9 +30,9 @@ namespace SharpCraft
                 /// </summary>
                 /// <param name="entity">The entity to get the file name of</param>
                 /// <returns>A loot table file name</returns>
-                public static string Entity(Entity entity)
+                public static string Entity(ID.Entity entity)
                 {
-                    return "entities/" + entity;
+                    return "entities/" + entity.Value;
                 }
 
                 /// <summary>

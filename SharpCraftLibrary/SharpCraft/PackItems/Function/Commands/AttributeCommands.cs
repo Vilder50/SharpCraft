@@ -58,11 +58,11 @@ namespace SharpCraft.Commands
         {
             if (Scale == 1)
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} get";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} get";
             } 
             else
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} get {Scale.ToMinecraftDouble()}";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} get {Scale.ToMinecraftDouble()}";
             }
         }
     }
@@ -121,11 +121,11 @@ namespace SharpCraft.Commands
         {
             if (Scale == 1)
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} base get";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} base get";
             }
             else
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} base get {Scale.ToMinecraftDouble()}";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} base get {Scale.ToMinecraftDouble()}";
             }
         }
     }
@@ -182,7 +182,7 @@ namespace SharpCraft.Commands
         /// <returns>attribute [Selector] [Attribute] base set [Value]</returns>
         public override string GetCommandString()
         {
-            return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} base set {Value.ToMinecraftDouble()}";
+            return $"attribute {Selector.GetSelectorString()} {Attribute} base set {Value.ToMinecraftDouble()}";
         }
     }
 
@@ -248,7 +248,7 @@ namespace SharpCraft.Commands
             get => name;
             set 
             {
-                if (!Utils.ValidateName(value, true, false, null))
+                if (!Validators.ValidateName(value, true, false, null))
                 {
                     throw new ArgumentException("Name contains invalid characters. Only allows letters, numbers and .-_", nameof(Name));
                 }
@@ -275,11 +275,11 @@ namespace SharpCraft.Commands
         {
             if (Operation == ID.AttributeOperation.multiply_total)
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} modifier add {UUID.UUIDString} {Name} {Value.ToMinecraftDouble()} multiply";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} modifier add {UUID.UUIDString} {Name} {Value.ToMinecraftDouble()} multiply";
             } 
             else
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} modifier add {UUID.UUIDString} {Name} {Value.ToMinecraftDouble()} {Operation}";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} modifier add {UUID.UUIDString} {Name} {Value.ToMinecraftDouble()} {Operation}";
             }
         }
     }
@@ -338,7 +338,7 @@ namespace SharpCraft.Commands
         /// <returns>attribute [Selector] [Attribute] modifier remove [UUID]</returns>
         public override string GetCommandString()
         {
-            return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} modifier remove {UUID.UUIDString}";
+            return $"attribute {Selector.GetSelectorString()} {Attribute} modifier remove {UUID.UUIDString}";
         }
     }
 
@@ -405,11 +405,11 @@ namespace SharpCraft.Commands
         {
             if (Scale == 1)
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} modifier value get {UUID.UUIDString}";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} modifier value get {UUID.UUIDString}";
             }
             else
             {
-                return $"attribute {Selector.GetSelectorString()} {Attribute.FixEnum()} modifier value get {UUID.UUIDString} {Scale.ToMinecraftDouble()}";
+                return $"attribute {Selector.GetSelectorString()} {Attribute} modifier value get {UUID.UUIDString} {Scale.ToMinecraftDouble()}";
             }
         }
     }

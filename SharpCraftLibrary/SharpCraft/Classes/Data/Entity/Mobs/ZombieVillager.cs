@@ -13,7 +13,12 @@ namespace SharpCraft.Entities
         /// Creates a new zombie villager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public ZombieVillager(ID.Entity? type = ID.Entity.zombie_villager) : base(type) { }
+        public ZombieVillager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public ZombieVillager() : base(SharpCraft.ID.Entity.zombie_villager) { }
 
         /// <summary>
         /// The villager's level (~Amount of trades)

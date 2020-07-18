@@ -11,7 +11,7 @@ namespace SharpCraft.Entities
         /// Creates a new evoker or illusioner
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MagicIllager(ID.Entity? type = ID.Entity.evoker) : base(type) { }
+        public MagicIllager(ID.Entity? type) : base(type) { }
 
         /// <summary>
         /// The time till the next spell is casted

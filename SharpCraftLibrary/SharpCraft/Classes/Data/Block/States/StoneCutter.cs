@@ -14,13 +14,12 @@ namespace SharpCraft.Blocks
         /// Creates a stonecutter block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Stonecutter(BlockType? type) : base(type) { }
+        public Stonecutter(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a stonecutter block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Stonecutter(ID.Block type = SharpCraft.ID.Block.stonecutter) : base(type) { }
+        public Stonecutter() : base(SharpCraft.ID.Block.stonecutter) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

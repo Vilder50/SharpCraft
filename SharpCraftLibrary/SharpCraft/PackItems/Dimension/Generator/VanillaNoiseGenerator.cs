@@ -34,7 +34,7 @@ namespace SharpCraft.DimensionObjects
         /// <summary>
         /// The generator to use
         /// </summary>
-        [DataTag("settings", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("settings", JsonTag = true)]
         public ID.NoiseGeneratorSetting Generator { get; set; }
 
         /// <summary>

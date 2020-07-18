@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new panda
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Panda(ID.Entity? type = ID.Entity.panda) : base(type) { }
+        public Panda(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Panda() : base(SharpCraft.ID.Entity.panda) { }
 
         /// <summary>
         /// The type of the panda

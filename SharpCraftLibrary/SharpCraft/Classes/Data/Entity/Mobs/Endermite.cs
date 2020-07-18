@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new endermite
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Endermite(ID.Entity? type = ID.Entity.endermite) : base(type) { }
+        public Endermite(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Endermite() : base(SharpCraft.ID.Entity.endermite) { }
 
         /// <summary>
         /// The time the endermite has existed. When hitting 24000 it despawns

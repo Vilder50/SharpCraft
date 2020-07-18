@@ -219,7 +219,7 @@ namespace SharpCraft.Data
         /// <param name="conversionParams">extra parameters used for converting the thing in the array correctly</param>
         /// <param name="forceType">a type used for converting the thing in the array correctly</param>
         /// <param name="isJson">If the datatags in the array should be in json format</param>
-        public DataPartArray(object data, ID.NBTTagType? forceType, object?[] conversionParams, bool isJson = false)
+        public DataPartArray(object? data, ID.NBTTagType? forceType, object?[] conversionParams, bool isJson = false)
         {
             IsJson = isJson;
             items = new List<IDataPartPathEnding>();
@@ -482,7 +482,6 @@ namespace SharpCraft.Data
                     stream.Write((byte)12);
                     break;
                 case ID.NBTTagType.TagStringArray:
-                case ID.NBTTagType.TagNamespacedStringArray:
                     stream.Write((byte)9);
                     break;
                 default:
@@ -536,7 +535,6 @@ namespace SharpCraft.Data
                     }
                     break;
                 case ID.NBTTagType.TagStringArray:
-                case ID.NBTTagType.TagNamespacedStringArray:
                     stream.Write((byte)8);
                     break;
                 case ID.NBTTagType.TagArrayArray:
@@ -595,7 +593,7 @@ namespace SharpCraft.Data
                     {
                         throw new ArgumentNullException("The enum cannot be converted into a null type.", nameof(TagType));
                     }
-                    if (!(TagType == ID.NBTTagType.TagByte || TagType == ID.NBTTagType.TagInt || TagType == ID.NBTTagType.TagShort || TagType == ID.NBTTagType.TagLong || TagType == ID.NBTTagType.TagString || TagType == ID.NBTTagType.TagNamespacedString))
+                    if (!(TagType == ID.NBTTagType.TagByte || TagType == ID.NBTTagType.TagInt || TagType == ID.NBTTagType.TagShort || TagType == ID.NBTTagType.TagLong || TagType == ID.NBTTagType.TagString))
                     {
                         throw new ArgumentException("The enum cannot be converted into the given type.", nameof(TagType));
                     }
@@ -626,7 +624,7 @@ namespace SharpCraft.Data
                 }
                 else if (value is string)
                 {
-                    if (TagType != ID.NBTTagType.TagCompound && TagType != ID.NBTTagType.TagNamespacedString)
+                    if (TagType != ID.NBTTagType.TagCompound)
                     {
                         TagType = ID.NBTTagType.TagString;
                     }
@@ -713,10 +711,6 @@ namespace SharpCraft.Data
                 {
                     return (string)Value;
                 }
-                else if (TagType == ID.NBTTagType.TagNamespacedString)
-                {
-                    return "\"minecraft:" + ((string)Value).Escape() + "\"";
-                }
                 else
                 {
                     return "\"" + ((string)Value).Escape() + "\"";
@@ -746,20 +740,11 @@ namespace SharpCraft.Data
                     case ID.NBTTagType.TagString:
                         if (IsJson)
                         {
-                            return "\"" + Value.ToString()!.ToLower() + "\"";
+                            return "\"" + Value.ToString() + "\"";
                         }
                         else
                         {
                             return "\"" + Value + "\"";
-                        }
-                    case ID.NBTTagType.TagNamespacedString:
-                        if (IsJson)
-                        {
-                            return "\"minecraft:" + Value.ToString()!.ToLower() + "\"";
-                        }
-                        else
-                        {
-                            return "\"minecraft:" + Value + "\"";
                         }
                 }
             }
@@ -828,7 +813,6 @@ namespace SharpCraft.Data
                     stream.Write((byte)6);
                     break;
                 case ID.NBTTagType.TagString:
-                case ID.NBTTagType.TagNamespacedString:
                     stream.Write((byte)8);
                     break;
             }
@@ -869,9 +853,6 @@ namespace SharpCraft.Data
                     break;
                 case ID.NBTTagType.TagString:
                     DataPartPath.WriteStringToStream((string)value!, stream);
-                    break;
-                case ID.NBTTagType.TagNamespacedString:
-                    DataPartPath.WriteStringToStream("minecraft:" + value!.ToString(), stream);
                     break;
             }
         }

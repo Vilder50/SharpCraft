@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a bamboo block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Bamboo(BlockType? type) : base(type) { }
+        public Bamboo(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a barrel block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Bamboo(ID.Block type = SharpCraft.ID.Block.bamboo) : base(type) { }
+        public Bamboo() : base(SharpCraft.ID.Block.bamboo) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -68,24 +67,25 @@ namespace SharpCraft.Blocks
         private int? _sStage;
 
         /// <summary>
-        /// Intilizes a new block object
+        /// Creates a bamboo sapling block
         /// </summary>
-        public BambooSapling()
+        /// <param name="type">The type of block</param>
+        public BambooSapling(IBlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new block
+        /// </summary>
+        public BambooSapling() : base(SharpCraft.ID.Block.bamboo_sapling) { }
+
+        /// <summary>
+        /// Tests if the given block type fits this type of block object
+        /// </summary>
+        /// <param name="block">The block to test</param>
+        /// <returns>true if the block fits</returns>
+        public new static bool FitsBlock(ID.Block block)
         {
-            ID = null;
+            return block == SharpCraft.ID.Block.bamboo_sapling;
         }
-
-        /// <summary>
-        /// Creates a bamboo sapling block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public BambooSapling(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a bamboo sapling block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public BambooSapling(ID.Block type = SharpCraft.ID.Block.bamboo_sapling) : base(type) { }
 
         /// <summary>
         /// The stage of the bamboo

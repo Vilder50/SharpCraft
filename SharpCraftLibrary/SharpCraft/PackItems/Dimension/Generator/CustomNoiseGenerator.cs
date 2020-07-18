@@ -87,13 +87,13 @@ namespace SharpCraft.DimensionObjects
         /// Changes the x/z scale of the landmass
         /// </summary>
         [DataTag("settings.noise.size_horizontal", JsonTag = true)]
-        public int SizeHorizontal { get => sizeHorizontal; set => sizeHorizontal = Utils.ValidateRange(value, 1, 4, nameof(sizeHorizontal), nameof(CustomNoiseGenerator)); }
+        public int SizeHorizontal { get => sizeHorizontal; set => sizeHorizontal = Validators.ValidateRange(value, 1, 4, nameof(sizeHorizontal), nameof(CustomNoiseGenerator)); }
 
         /// <summary>
         /// The y scale of the landmass.
         /// </summary>
         [DataTag("settings.noise.size_vertical", JsonTag = true)]
-        public int SizeVertical { get => sizeVertical; set => sizeVertical = Utils.ValidateRange(value, 1, 4, nameof(SizeVertical), nameof(CustomNoiseGenerator)); }
+        public int SizeVertical { get => sizeVertical; set => sizeVertical = Validators.ValidateRange(value, 1, 4, nameof(SizeVertical), nameof(CustomNoiseGenerator)); }
 
         /// <summary>
         /// Squashes the world so it fits a specific height. (eg a world which normally is 64 blocks high with a SquashHeight of 128 makes the world 32 blocks high)
@@ -108,7 +108,7 @@ namespace SharpCraft.DimensionObjects
         /// Changes the average of land level. (-1 to 1)
         /// </summary>
         [DataTag("settings.noise.density_offset", JsonTag = true)]
-        public double DensityOffset { get => densityOffset; set => densityOffset = Utils.ValidateRange(value, -1, 1, nameof(DensityFactor), nameof(CustomNoiseGenerator)); }
+        public double DensityOffset { get => densityOffset; set => densityOffset = Validators.ValidateRange(value, -1, 1, nameof(DensityFactor), nameof(CustomNoiseGenerator)); }
 
         [DataTag("settings.noise.random_density_offset", JsonTag = true)]
         public bool? RandomDensityOffset { get; set; }

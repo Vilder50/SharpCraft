@@ -13,13 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a lantern block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Lantern(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a lantern block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public Lantern(ID.Block type = SharpCraft.ID.Block.lantern) : base(type) { }
+        public Lantern(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

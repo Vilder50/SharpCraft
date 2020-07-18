@@ -51,7 +51,7 @@ namespace SharpCraft.Tests.PackItems
                 },
                 Conditions = new RandomCondition(0.3) & !new RandomCondition(0.3)
             }, new MCRange(1, 3)), LootTable.TableType.block, BaseFile.WriteSetting.Auto);
-            TextWriter writer = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/loot_tables/mytable.json").writer as TextWriter;
+            TextWriter writer = (pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/loot_tables/mytable.json").writer as TextWriter)!;
 
             Assert.AreEqual("{\"type\":\"block\",\"pools\":[" +
                     "{\"entries\":[" +

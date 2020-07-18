@@ -17,7 +17,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         /// <param name="enchant">The enchant to get the level from.</param>
         /// <param name="multiplier">The number to multiple the enchant level with.</param>
-        public UniformDistributionCountChange(ID.Enchant enchant, double multiplier) : base("apply_bonus")
+        public UniformDistributionCountChange(ID.Enchant enchant, double multiplier) : base("minecraft:apply_bonus")
         {
             Enchant = enchant;
             Multiplier = multiplier;
@@ -26,7 +26,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// The formula used
         /// </summary>
-        [DataTag("formula", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("formula", JsonTag = true)]
         public ID.LootBonusFormula Formula { get; private set; } = ID.LootBonusFormula.uniform_bonus_count;
 
         /// <summary>

@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a repeater block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public RedstoneRepeater(BlockType? type) : base(type) { }
+        public RedstoneRepeater(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a repeater block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public RedstoneRepeater(ID.Block type = SharpCraft.ID.Block.repeater) : base(type) { }
+        public RedstoneRepeater() : base(SharpCraft.ID.Block.repeater) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

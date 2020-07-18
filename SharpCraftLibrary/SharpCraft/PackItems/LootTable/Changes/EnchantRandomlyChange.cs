@@ -17,7 +17,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="EnchantRandomlyChange"/>
         /// </summary>
-        public EnchantRandomlyChange(MCRange levels, bool treasure) : base("enchant_with_levels")
+        public EnchantRandomlyChange(MCRange levels, bool treasure) : base("minecraft:enchant_with_levels")
         {
             Treasure = treasure;
             Levels = levels;

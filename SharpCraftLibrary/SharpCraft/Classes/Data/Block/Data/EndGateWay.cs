@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates an end gateway block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public EndGateWay(BlockType? type) : base(type) { }
+        public EndGateWay(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates an end gateway block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public EndGateWay(ID.Block type = SharpCraft.ID.Block.end_gateway) : base(type) { }
+        public EndGateWay() : base(SharpCraft.ID.Block.end_gateway) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

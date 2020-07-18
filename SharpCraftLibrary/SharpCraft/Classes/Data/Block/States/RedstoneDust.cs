@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a redstone dust block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public RedstoneDust(BlockType? type) : base(type) { }
+        public RedstoneDust(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a redstone dust block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public RedstoneDust(ID.Block type = SharpCraft.ID.Block.redstone_wire) : base(type) { }
+        public RedstoneDust() : base(SharpCraft.ID.Block.redstone_wire) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

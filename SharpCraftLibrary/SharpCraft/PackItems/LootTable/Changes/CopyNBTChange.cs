@@ -19,7 +19,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         /// <param name="operations">The copy operations to run</param>
         /// <param name="target">The target to copy from</param>
-        public CopyNBTChange(ID.LootTarget target, CopyOperation[] operations) : base("copy_nbt")
+        public CopyNBTChange(ID.LootTarget target, CopyOperation[] operations) : base("minecraft:copy_nbt")
         {
             Target = target;
             Operations = operations;

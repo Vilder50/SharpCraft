@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new evoker fangs
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public EvokerFangs(ID.Entity? type = ID.Entity.evoker_fangs) : base(type) { }
+        public EvokerFangs(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public EvokerFangs() : base(SharpCraft.ID.Entity.evoker_fangs) { }
 
         /// <summary>
         /// The amount of time before the fangs appear

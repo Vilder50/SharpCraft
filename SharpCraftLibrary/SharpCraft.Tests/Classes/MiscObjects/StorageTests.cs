@@ -15,7 +15,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual("storage", storage.Name, "Namespace constructor didn't set name");
             Assert.AreSame(space, storage.PackNamespace, "Namespace constructor should have set namespace to null");
 
-            Assert.ThrowsException<ArgumentNullException>(() => new Storage(null, "name"), "Namespace may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new Storage(null!, "name"), "Namespace may not be null");
             Assert.ThrowsException<ArgumentException>(() => new Storage(space, "Inval:d"), "Name should be validated");
         }
 

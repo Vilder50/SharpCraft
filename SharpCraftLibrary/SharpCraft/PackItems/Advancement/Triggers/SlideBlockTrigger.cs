@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The block the player slid down of
         /// </summary>
         [DataTag("conditions.block", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public BlockType? Block { get; set; }
+        public IBlockType? Block { get; set; }
     }
 }

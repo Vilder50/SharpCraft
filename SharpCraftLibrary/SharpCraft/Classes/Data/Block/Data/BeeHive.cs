@@ -16,7 +16,7 @@ namespace SharpCraft.Blocks
         /// Creates a new bee hive/nest block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BeeHive(BlockType? type) : base(type) { }
+        public BeeHive(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

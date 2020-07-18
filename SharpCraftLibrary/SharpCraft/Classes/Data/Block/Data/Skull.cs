@@ -13,7 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseSkull(BlockType? type) : base(type) { }
+        public BaseSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The name of the player whose skin to display
@@ -40,7 +40,7 @@ namespace SharpCraft.Blocks
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public GroundSkull(BlockType? type) : base(type) { }
+        public GroundSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -83,7 +83,7 @@ namespace SharpCraft.Blocks
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public WallSkull(BlockType? type) : base(type) { }
+        public WallSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

@@ -15,7 +15,7 @@ namespace SharpCraft.Blocks
         /// Creates a banner block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Banner(BlockType? type) : base(type) { }
+        public Banner(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

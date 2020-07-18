@@ -15,7 +15,7 @@ namespace SharpCraft.Blocks
         /// Creates a new leave block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Leaves(BlockType? type) : base(type) { }
+        public Leaves(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

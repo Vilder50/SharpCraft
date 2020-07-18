@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a lectern block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Lectern(BlockType? type) : base(type) { }
+        public Lectern(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a lectern block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Lectern(ID.Block type = SharpCraft.ID.Block.lectern) : base(type) { }
+        public Lectern() : base(SharpCraft.ID.Block.lectern) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

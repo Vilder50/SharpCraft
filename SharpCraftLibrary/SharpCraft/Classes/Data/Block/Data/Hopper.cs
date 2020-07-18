@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a hopper block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Hopper(BlockType? type) : base(type) { }
+        public Hopper(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a hopper block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Hopper(ID.Block type = SharpCraft.ID.Block.hopper) : base(type) { }
+        public Hopper() : base(SharpCraft.ID.Block.hopper) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

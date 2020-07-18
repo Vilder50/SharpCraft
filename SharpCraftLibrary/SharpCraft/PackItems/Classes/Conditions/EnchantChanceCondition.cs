@@ -28,7 +28,7 @@ namespace SharpCraft.Conditions
         /// <summary>
         /// The enchant to check for
         /// </summary>
-        [DataTag("enchantment", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("enchantment", JsonTag = true)]
         public ID.Enchant Enchant { get; set; }
 
         /// <summary>

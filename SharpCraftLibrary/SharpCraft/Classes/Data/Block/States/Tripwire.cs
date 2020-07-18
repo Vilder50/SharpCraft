@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a tripwire block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Tripwire(BlockType? type) : base(type) { }
+        public Tripwire(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a tripwire block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Tripwire(ID.Block type = SharpCraft.ID.Block.tripwire) : base(type) { }
+        public Tripwire() : base(SharpCraft.ID.Block.tripwire) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

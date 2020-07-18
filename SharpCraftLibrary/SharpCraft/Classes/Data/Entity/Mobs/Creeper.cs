@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new creeper
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Creeper(ID.Entity? type = ID.Entity.creeper) : base(type) { }
+        public Creeper(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Creeper() : base(SharpCraft.ID.Entity.creeper) { }
 
         /// <summary>
         /// If the creeper is charged (was hit by lightning)

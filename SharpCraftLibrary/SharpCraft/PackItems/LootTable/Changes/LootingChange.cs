@@ -19,7 +19,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         /// <param name="count">The amount of items in each stack</param>
         /// <param name="limit">The maximum amount of items this change can make. Setting to 0 = no limit.</param>
-        public LootingChange(MCRange count, int limit = 0) : base("limit_count")
+        public LootingChange(MCRange count, int limit = 0) : base("minecraft:limit_count")
         {
             Count = count;
             Limit = limit;

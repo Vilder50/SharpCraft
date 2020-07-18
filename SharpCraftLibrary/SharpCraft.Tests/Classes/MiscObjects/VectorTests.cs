@@ -83,8 +83,8 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestConvertToArray()
         {
-            Assert.AreEqual("[1.1d,2.2d,3.3d]", new Vector(1.1,2.2,3.3).GetAsArray(null,null).GetDataString(), "VectorDouble.GetAsDataArray didn't return correct object");
-            Assert.AreEqual("[I;1,2,3]", new IntVector(1,2,3).GetAsArray(null, null).GetDataString(), "VectorInt.GetAsDataArray didn't return correct object");
+            Assert.AreEqual("[1.1d,2.2d,3.3d]", new Vector(1.1,2.2,3.3).GetAsArray(null,null!).GetDataString(), "VectorDouble.GetAsDataArray didn't return correct object");
+            Assert.AreEqual("[I;1,2,3]", new IntVector(1,2,3).GetAsArray(null, null!).GetDataString(), "VectorInt.GetAsDataArray didn't return correct object");
         }
 
         [TestMethod]

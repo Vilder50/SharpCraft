@@ -11,7 +11,12 @@ namespace SharpCraft.Entities
         /// Creates a new command block minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartCommand(ID.Entity? type = ID.Entity.command_block_minecart) : base(type) { }
+        public MinecartCommand(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartCommand() : base(SharpCraft.ID.Entity.command_block_minecart) { }
 
         /// <summary>
         /// The command to run

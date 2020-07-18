@@ -17,7 +17,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         /// <param name="itemGroup">The item group to drop</param>
         /// <param name="onlyDropOne">If true drops a random item from the tag. If false drops all items in the item tag.</param>
-        public ItemGroupEntry(IGroup<ItemType> itemGroup, bool onlyDropOne) : base(ID.LootEntryType.tag)
+        public ItemGroupEntry(IGroup<IItemType> itemGroup, bool onlyDropOne) : base(ID.LootEntryType.tag)
         {
             ItemGroup = itemGroup;
             OnlyDropOne = onlyDropOne;
@@ -27,7 +27,7 @@ namespace SharpCraft.LootObjects
         /// The item group to drop
         /// </summary>
         [DataTag("name", true, ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public IGroup<ItemType> ItemGroup { get; set; }
+        public IGroup<IItemType> ItemGroup { get; set; }
 
         /// <summary>
         /// If true drops a random item from the tag. If false drops all items in the item tag.

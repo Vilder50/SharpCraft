@@ -25,7 +25,7 @@ namespace SharpCraft.Tests.Data
             dataObject.AddValue(new DataPartPath("AnotherPath", new DataPartObject()));
 
             //test exceptions
-            Assert.ThrowsException<ArgumentNullException>(() => { dataObject.AddValue(null); });
+            Assert.ThrowsException<ArgumentNullException>(() => { dataObject.AddValue(null!); });
             Assert.ThrowsException<ArgumentException>(() => { dataObject.AddValue(new DataPartPath("path", new DataPartObject())); });
         }
 
@@ -66,10 +66,10 @@ namespace SharpCraft.Tests.Data
             //test
             dataObjectOne.MergeDataPartObject(dataObjectTwo);
             Assert.AreEqual(3, dataObjectOne.GetValues().Count);
-            Assert.AreEqual(10, (int)((DataPartTag)((DataPartObject)((DataPartObject)dataObjectOne.GetValues().Single(v => v.PathName == "AnotherPath").PathValue).GetValues().Single(v => v.PathName == "AnotherPath").PathValue).GetValues().Single(v => v.PathName == "path").PathValue).Value);
+            Assert.AreEqual(10, (int)((DataPartTag)((DataPartObject)((DataPartObject)dataObjectOne.GetValues().Single(v => v.PathName == "AnotherPath").PathValue).GetValues().Single(v => v.PathName == "AnotherPath")!.PathValue).GetValues().Single(v => v.PathName == "path").PathValue).Value!);
 
             //test exceptions
-            Assert.ThrowsException<ArgumentNullException>(() => { dataObjectOne.MergeDataPartObject(null); });
+            Assert.ThrowsException<ArgumentNullException>(() => { dataObjectOne.MergeDataPartObject(null!); });
             Assert.ThrowsException<ArgumentException>(() => { dataObjectTwo.MergeDataPartObject(dataObjectTwo); });
         }
 
@@ -77,7 +77,7 @@ namespace SharpCraft.Tests.Data
         public void TestIsEmpty()
         {
             DataPartObject dataObject = new DataPartObject();
-            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[][] { null, null }, null, null)));
+            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[]?[] { null, null }, null, null!)));
             dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10)));
             Assert.IsFalse(dataObject.IsEmpty());
 
@@ -90,12 +90,12 @@ namespace SharpCraft.Tests.Data
         public void TestGetDataString()
         {
             DataPartObject dataObject = new DataPartObject();
-            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[][] { null, null }, null, null)));
+            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(new long[]?[] { null, null }, null, null!)));
             dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10.5)));
             Assert.AreEqual("{PathOne:[],PathTwo:10.5d}", dataObject.GetDataString());
 
             dataObject = new DataPartObject();
-            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(null, null, null)));
+            dataObject.AddValue(new DataPartPath("PathOne", new DataPartArray(null, null, null!)));
             dataObject.AddValue(new DataPartPath("PathTwo", new DataPartTag(10.5)));
             Assert.AreEqual("{PathTwo:10.5d}", dataObject.GetDataString());
         }
@@ -112,9 +112,9 @@ namespace SharpCraft.Tests.Data
                 Value = value;
             }
 
-            public DataPartTag GetAsTag(ID.NBTTagType? asType = null, object[] extraConversionData = null)
+            public DataPartTag GetAsTag(ID.NBTTagType? asType = null, object?[]? extraConversionData = null)
             {
-                if (asType == ID.NBTTagType.TagString && (string)extraConversionData[0] == "hello")
+                if (asType == ID.NBTTagType.TagString && (string)extraConversionData![0]! == "hello")
                 {
                     return new DataPartTag(Value);
                 }
@@ -137,8 +137,8 @@ namespace SharpCraft.Tests.Data
             Assert.AreEqual(2, ((DataPartTag)((DataPartArray)array.GetItems()[0]).GetItems()[1]).Value);
 
             //test exceptions
-            Assert.ThrowsException<ArgumentException>(() => new DataPartArray(10, null, null));
-            Assert.ThrowsException<ArgumentException>(() => new DataPartArray(new DateTime[] { new DateTime() }, null, null));
+            Assert.ThrowsException<ArgumentException>(() => new DataPartArray(10, null, new object[] { }));
+            Assert.ThrowsException<ArgumentException>(() => new DataPartArray(new DateTime[] { new DateTime() }, null, new object[] { }));
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace SharpCraft.Tests.Data
             DataPartArray array = new DataPartArray(new int[]
             {
                 1,2,3,4,5
-            }, null, null);
+            }, null, new object[] { });
             int oldAmount = array.GetItems().Count;
             array.AddItem(new DataPartTag(10));
             Assert.AreEqual(oldAmount + 1, array.GetItems().Count);
@@ -163,13 +163,13 @@ namespace SharpCraft.Tests.Data
             {
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(null) },
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(10) }
-            }, null, null);
+            }, null, new object[] { });
             Assert.IsFalse(array.IsEmpty());
             array = new DataPartArray(new DataPartTag[][]
             {
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(null) },
                 new DataPartTag[] { new DataPartTag(null), new DataPartTag(null) }
-            }, null, null);
+            }, null, new object[] { });
             Assert.IsFalse(array.IsEmpty());
         }
 
@@ -179,18 +179,18 @@ namespace SharpCraft.Tests.Data
             DataPartArray array = new DataPartArray(new int[]
             {
                 1,2,3
-            }, null, null);
+            }, null, new object[] { });
             Assert.AreEqual("[I;1,2,3]", array.GetDataString());
-            array = new DataPartArray(new long[][]
+            array = new DataPartArray(new long[]?[]
             {
                 new long[] { 1,2,3 },
                 null,
                 new long[] { 4,5,6 }
-            }, null, null);
+            }, null, new object[] { });
             Assert.AreEqual("[[1L,2L,3L],[4L,5L,6L]]", array.GetDataString());
             array = new DataPartArray(new int[]
             {
-            }, null, null);
+            }, null, new object[] { });
             Assert.AreEqual("[]", array.GetDataString());
         }
     }
@@ -282,10 +282,6 @@ namespace SharpCraft.Tests.Data
             Assert.AreEqual("\"ValueEight\"", dataTag.GetDataString());
             dataTag = new DataPartTag("{test:\"1\"}", ID.NBTTagType.TagCompound);
             Assert.AreEqual("{test:\"1\"}", dataTag.GetDataString());
-            dataTag = new DataPartTag(TestEnum.ValueEight, ID.NBTTagType.TagNamespacedString);
-            Assert.AreEqual("\"minecraft:ValueEight\"", dataTag.GetDataString());
-            dataTag = new DataPartTag("stone", ID.NBTTagType.TagNamespacedString);
-            Assert.AreEqual("\"minecraft:stone\"", dataTag.GetDataString());
 
             //null
             dataTag = new DataPartTag(null);

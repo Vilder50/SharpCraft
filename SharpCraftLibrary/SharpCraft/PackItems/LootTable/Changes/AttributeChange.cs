@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="DecayChange"/>
         /// </summary>
         /// <param name="attributes">An array of attributes the item should get</param>
-        public AttributeChange(Attribute[] attributes) : base("set_attributes")
+        public AttributeChange(Attribute[] attributes) : base("minecraft:set_attributes")
         {
             Attributes = attributes;
         }

@@ -13,7 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a new coral plant (not block)
         /// </summary>
         /// <param name="type">The type of plant</param>
-        public Coral(BlockType? type) : base(type) { }
+        public Coral(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -42,7 +42,7 @@ namespace SharpCraft.Blocks
         /// Creates a new coral wall plant
         /// </summary>
         /// <param name="type">The type of plant</param>
-        public CoralFan(BlockType? type) : base(type) { }
+        public CoralFan(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

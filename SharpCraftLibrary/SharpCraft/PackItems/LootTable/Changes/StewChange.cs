@@ -17,7 +17,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="StewChange"/>
         /// </summary>
-        public StewChange(StewEffect[] effects) : base("set_stew_effect")
+        public StewChange(StewEffect[] effects) : base("minecraft:set_stew_effect")
         {
             Effects = effects;
         }
@@ -34,9 +34,20 @@ namespace SharpCraft.LootObjects
         public class StewEffect : DataHolderBase
         {
             /// <summary>
+            /// Intializes a new stew effect
+            /// </summary>
+            /// <param name="effect">The effect</param>
+            /// <param name="duration">The duration of the effect</param>
+            public StewEffect(ID.Effect effect, int duration)
+            {
+                Effect = effect;
+                Duration = duration;
+            }
+
+            /// <summary>
             /// The effect
             /// </summary>
-            [DataTag("effects", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+            [DataTag("effects", JsonTag = true)]
             public ID.Effect Effect { get; set; }
 
             /// <summary>
