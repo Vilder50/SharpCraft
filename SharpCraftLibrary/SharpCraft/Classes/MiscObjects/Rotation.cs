@@ -42,13 +42,13 @@ namespace SharpCraft
         /// <summary>
         /// The vertical rotation
         /// </summary>
-        [ArrayPath(0)]
+        [ArrayPath(1)]
         public double X { get => x; set => x = value; }
 
         /// <summary>
         /// The horizontal rotation
         /// </summary>
-        [ArrayPath(1)]
+        [ArrayPath(0)]
         public double Y { get => y; set => y = value; }
 
         /// <summary>

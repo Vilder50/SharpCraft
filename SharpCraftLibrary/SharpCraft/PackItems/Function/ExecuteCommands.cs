@@ -284,6 +284,121 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
+        /// Executes at the location specified by the score values. Note that some precision is lost when doing relative coords. Especially when size is higher than 1.
+        /// </summary>
+        /// <param name="x">The x coord</param>
+        /// <param name="y">The y coord</param>
+        /// <param name="z">The z coord</param>
+        /// <param name="relativeX">If the x coord should be relative to the executed location</param>
+        /// <param name="relativeY">If the y coord should be relative to the executed location</param>
+        /// <param name="relativeZ">If the z coord should be relative to the executed location</param>
+        /// <param name="sizeX">How many blocks 1 score is equal to in the x direction</param>
+        /// <param name="sizeY">How many blocks 1 score is equal to in the y direction</param>
+        /// <param name="sizeZ">How many blocks 1 score is equal to in the z direction</param>
+        /// <returns>The function running the command</returns>
+        public Function Positioned(ValueParameter x, ValueParameter y, ValueParameter z, bool relativeX = false, bool relativeY = false, bool relativeZ = false, double sizeX = 1, double sizeY = 1, double sizeZ = 1)
+        {
+            if (x.IsInt() && y.IsInt() && z.IsInt())
+            {
+                throw new ArgumentException("You called positioned command using only ints. You might want to call positioned using a Vector object instead. (This is for executing at score values)");
+            }
+
+            Selector positionSelector = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector();
+            Storage tempStorage = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetTempStorage();
+            ScoreValue tempScore = new ScoreValue("temp", ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject());
+            ForFunction.Custom.GroupCommands(group =>
+            {
+                group.Execute.As(positionSelector).World.Function(setup => 
+                {
+                    bool hasRelative = relativeX || relativeY || relativeZ;
+                    if (hasRelative)
+                    {
+                        setup.World.Function(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummyTeleportGetCoords());
+                    }
+                    else
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords), ID.EntityDataModifierType.set, new Vector(x.IsInt() ? sizeX * x.IntValue!.Value : 0, y.IsInt() ? sizeY * y.IntValue!.Value : 0, z.IsInt() ? sizeZ * z.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagDoubleArray, new object[] { }).GetDataString());
+                    }
+                    if (relativeX)
+                    {
+                        if (!x.IsInt() || x.IntValue!.Value != 0)
+                        {
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X), 1 / sizeX);
+                            if (x.IsInt())
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, x.IntValue!.Value);
+                            }
+                            else
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, x.ScoreValue!);
+                            }
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(tempScore);
+                        }
+                    }
+                    else if (x.IsScore())
+                    {
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(x.ScoreValue!);
+                    }
+                    else if (!hasRelative)
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X), ID.EntityDataModifierType.set, (sizeX * x.IntValue!.Value).ToString());
+                    }
+                    if (relativeY)
+                    {
+                        if (!y.IsInt() || y.IntValue!.Value != 0)
+                        {
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y), 1 / sizeY);
+                            if (y.IsInt())
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, y.IntValue!.Value);
+                            }
+                            else
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, y.ScoreValue!);
+                            }
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(tempScore);
+                        }
+                    }
+                    else if (y.IsScore())
+                    {
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(y.ScoreValue!);
+                    }
+                    else if (!hasRelative)
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y), ID.EntityDataModifierType.set, (sizeY * y.IntValue!.Value).ToString());
+                    }
+                    if (relativeZ)
+                    {
+                        if (!z.IsInt() || z.IntValue!.Value != 0)
+                        {
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z), 1 / sizeZ);
+                            if (z.IsInt())
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, z.IntValue!.Value);
+                            }
+                            else
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, z.ScoreValue!);
+                            }
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(tempScore);
+                        }
+                    }
+                    else if (z.IsScore())
+                    {
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(z.ScoreValue!);
+                    }
+                    else if (!hasRelative)
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z), ID.EntityDataModifierType.set, (sizeZ * z.IntValue!.Value).ToString());
+                    }
+                    setup.Entity.Data.Copy(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords)));
+                });
+                group.Execute.At(positionSelector);
+            }, forceExecute: true);
+            return ForFunction;
+        }
+
+        /// <summary>
         /// Stores the command's success output inside the <see cref="Entity"/>
         /// </summary>
         /// <param name="dataLocation">the location to store the result at</param>
@@ -380,6 +495,94 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
+        /// Executes at the rotation specified by the score values. Note that some precision is lost when doing relative rotation. Especially when size is higher than 1.
+        /// </summary>
+        /// <param name="horizontal">The horizontal rotation</param>
+        /// <param name="vertical">The vertical rotation</param>
+        /// <param name="relativeHorizontal">If the horizontal rotation should be relative to the executed rotation</param>
+        /// <param name="relativeVertical">If the vertical rotation should be relative to the executed rotation</param>
+        /// <param name="sizeHorizontal">How many degress 1 score is equal to in horizontal rotation</param>
+        /// <param name="sizeVertical">How many degress 1 score is equal to in vertical rotation</param>
+        /// <returns>The function running the command</returns>
+        public Function Rotated(ValueParameter horizontal, ValueParameter vertical, bool relativeHorizontal = false, bool relativeVertical = false, double sizeHorizontal = 1, double sizeVertical = 1)
+        {
+            if (horizontal.IsInt() && vertical.IsInt())
+            {
+                throw new ArgumentException("You called rotated command using only ints. You might want to call rotated using a rotation object instead. (This is for executing rotated as score values)");
+            }
+
+            Selector positionSelector = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector();
+            Storage tempStorage = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetTempStorage();
+            ScoreValue tempScore = new ScoreValue("temp", ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetMathScoreObject());
+            ForFunction.Custom.GroupCommands(group =>
+            {
+                group.Execute.As(positionSelector).World.Function(setup =>
+                {
+                    bool hasRelative = relativeHorizontal || relativeVertical;
+                    if (hasRelative)
+                    {
+                        setup.World.Function(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummyTeleportGetRotation());
+                    }
+                    else
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation), ID.EntityDataModifierType.set, new Rotation(horizontal.IsInt() ? sizeHorizontal * horizontal.IntValue!.Value : 0, vertical.IsInt() ? sizeVertical * vertical.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagFloatArray, new object[] { }).GetDataString());
+                    }
+                    if (relativeHorizontal)
+                    {
+                        if (!horizontal.IsInt() || horizontal.IntValue!.Value != 0)
+                        {
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y), 1 / sizeHorizontal);
+                            if (horizontal.IsInt())
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, horizontal.IntValue!.Value);
+                            }
+                            else
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, horizontal.ScoreValue!);
+                            }
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(tempScore);
+                        }
+                    }
+                    else if (horizontal.IsScore())
+                    {
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(horizontal.ScoreValue!);
+                    }
+                    else if (!hasRelative)
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y), ID.EntityDataModifierType.set, (sizeHorizontal * horizontal.IntValue!.Value).ToString());
+                    }
+                    if (relativeVertical)
+                    {
+                        if (!vertical.IsInt() || vertical.IntValue!.Value != 0)
+                        {
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X), 1 / sizeVertical);
+                            if (vertical.IsInt())
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, vertical.IntValue!.Value);
+                            }
+                            else
+                            {
+                                setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, vertical.ScoreValue!);
+                            }
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(tempScore);
+                        }
+                    }
+                    else if (vertical.IsScore())
+                    {
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(vertical.ScoreValue!);
+                    }
+                    else if (!hasRelative)
+                    {
+                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X), ID.EntityDataModifierType.set, (sizeVertical * vertical.IntValue!.Value).ToString());
+                    }
+                    setup.Entity.Data.Copy(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation)));
+                });
+                group.Execute.Rotated(positionSelector);
+            }, forceExecute: true);
+            return ForFunction;
+        }
+
+        /// <summary>
         /// Executes in the given dimension
         /// </summary>
         /// <param name="dimension">The dimension</param>
@@ -398,6 +601,22 @@ namespace SharpCraft.FunctionWriters
         public Function Anchored(ID.FacingAnchor anchor)
         {
             ForFunction.AddCommand(new ExecuteAnchored(anchor));
+            return ForFunction;
+        }
+
+        /// <summary>
+        /// Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
+        /// </summary>
+        /// <param name="chance">The chance for the command to execute</param>
+        /// <param name="want">false if it should execute when it's false</param>
+        /// <returns>The function running the command</returns>
+        public Function IfRandom(double chance, bool want = true)
+        {
+            if (chance < 0 || chance > 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
+            }
+            ForFunction.Execute.IfPredicate(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomPredicate(chance), want);
             return ForFunction;
         }
     }

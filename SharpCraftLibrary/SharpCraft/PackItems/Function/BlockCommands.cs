@@ -176,7 +176,7 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
-            /// Saves blocks into a structure
+            /// Saves blocks into a structure. Note that the save will be "deleted" once the world closes
             /// </summary>
             /// <param name="name">The name of the structure</param>
             /// <param name="structureLocation">The location of the blocks to save</param>
@@ -213,7 +213,7 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
-            /// Saves blocks into a structure
+            /// Saves blocks into a structure. Note that the save will be "deleted" once the world closes
             /// </summary>
             /// <param name="name">The name of the structure</param>
             /// <param name="structureLocation">The location of the blocks to save</param>

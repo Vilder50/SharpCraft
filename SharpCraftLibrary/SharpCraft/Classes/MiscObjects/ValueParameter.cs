@@ -5,7 +5,7 @@ using System.Text;
 namespace SharpCraft
 {
     /// <summary>
-    /// Struct for holding making parameters which accepts scores and ints
+    /// Struct for making parameters which accepts scores and ints. (Ints and scorevalues can implicit be converted to this)
     /// </summary>
     public struct ValueParameter
     {

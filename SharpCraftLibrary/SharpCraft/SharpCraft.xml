@@ -10989,7 +10989,7 @@
         </member>
         <member name="T:SharpCraft.ValueParameter">
             <summary>
-            Struct for holding making parameters which accepts scores and ints
+            Struct for making parameters which accepts scores and ints. (Ints and scorevalues can implicit be converted to this)
             </summary>
         </member>
         <member name="M:SharpCraft.ValueParameter.#ctor(SharpCraft.ScoreValue)">
@@ -17140,7 +17140,7 @@
         </member>
         <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Save(System.String,SharpCraft.Vector,SharpCraft.IntVector,SharpCraft.Vector,SharpCraft.ID.FacingFull)">
             <summary>
-            Saves blocks into a structure
+            Saves blocks into a structure. Note that the save will be "deleted" once the world closes
             </summary>
             <param name="name">The name of the structure</param>
             <param name="structureLocation">The location of the blocks to save</param>
@@ -17151,7 +17151,7 @@
         </member>
         <member name="M:SharpCraft.FunctionWriters.BlockCommands.ClassStructure.Save(System.String,SharpCraft.Vector,SharpCraft.IntVector,SharpCraft.Vector,SharpCraft.Block,SharpCraft.Block,SharpCraft.ID.FacingFull)">
             <summary>
-            Saves blocks into a structure
+            Saves blocks into a structure. Note that the save will be "deleted" once the world closes
             </summary>
             <param name="name">The name of the structure</param>
             <param name="structureLocation">The location of the blocks to save</param>
@@ -17303,6 +17303,28 @@
             <summary>
             All custom commands
             </summary>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.GetLocation(System.Boolean,SharpCraft.ScoreValue,SharpCraft.ScoreValue,SharpCraft.ScoreValue,System.Double,System.Double,System.Double)">
+            <summary>
+            Gets the location of either the executed location or of the executor
+            </summary>
+            <param name="getX">The score to put the x coord into</param>
+            <param name="getY">The score to put the y coord into</param>
+            <param name="getZ">The score to put the z coord into</param>
+            <param name="getExecutorsLocation">True if it should get the coords of the executor. False if it should get the coords at the executed location</param>
+            <param name="multiplyX">A number to multiply the x coord with before putting it into the score</param>
+            <param name="multiplyY">A number to multiply the y coord with before putting it into the score</param>
+            <param name="multiplyZ">A number to multiply the z coord with before putting it into the score</param>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.CustomCommands.GetRotation(System.Boolean,SharpCraft.ScoreValue,SharpCraft.ScoreValue,System.Double,System.Double)">
+            <summary>
+            Gets the rotation of either the executed location or of the executor
+            </summary>
+            <param name="getHorizontalRotation">The score to put the horizontal rotation into</param>
+            <param name="getVerticalRotation">The score to put the vertical rotation into</param>
+            <param name="getExecutorsRotation">True if it should get the coords of the executor. False if it should get the coords at the executed location</param>
+            <param name="multiplyHorizontalRotation">A number to multiply the horizontal rotation with before putting it into the score</param>
+            <param name="multiplyVerticalRotation">A number to multiply the vertical rotation with before putting it into the score</param>
         </member>
         <member name="T:SharpCraft.FunctionWriters.CustomCommands.TreeSearchCommand">
             <summary>
@@ -17483,14 +17505,6 @@
             <summary>
             Commands for randomness
             </summary>
-        </member>
-        <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.ExecuteIfRandom(System.Double,System.Boolean)">
-            <summary>
-            Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
-            </summary>
-            <param name="chance">The chance for the command to execute</param>
-            <param name="want">false if it should execute when it's false</param>
-            <returns>The function running the command</returns>
         </member>
         <member name="M:SharpCraft.FunctionWriters.CustomCommands.ClassRandom.NextRandom(System.Int32,System.Int32)">
             <summary>
@@ -18159,6 +18173,21 @@
             <param name="entity">The <see cref="T:SharpCraft.BaseSelector"/> to execute at</param>
             <returns>The function running the command</returns>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Positioned(SharpCraft.ValueParameter,SharpCraft.ValueParameter,SharpCraft.ValueParameter,System.Boolean,System.Boolean,System.Boolean,System.Double,System.Double,System.Double)">
+            <summary>
+            Executes at the location specified by the score values. Note that some precision is lost when doing relative coords. Especially when size is higher than 1.
+            </summary>
+            <param name="x">The x coord</param>
+            <param name="y">The y coord</param>
+            <param name="z">The z coord</param>
+            <param name="relativeX">If the x coord should be relative to the executed location</param>
+            <param name="relativeY">If the y coord should be relative to the executed location</param>
+            <param name="relativeZ">If the z coord should be relative to the executed location</param>
+            <param name="sizeX">How many blocks 1 score is equal to in the x direction</param>
+            <param name="sizeY">How many blocks 1 score is equal to in the y direction</param>
+            <param name="sizeZ">How many blocks 1 score is equal to in the z direction</param>
+            <returns>The function running the command</returns>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Store(SharpCraft.IDataLocation,SharpCraft.ID.StoreTypes,System.Double,System.Boolean)">
             <summary>
             Stores the command's success output inside the <see cref="T:SharpCraft.Entity"/>
@@ -18224,6 +18253,18 @@
             <param name="entity">the <see cref="T:SharpCraft.Entity"/> to execute rotated as</param>
             <returns>The function running the command</returns>
         </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Rotated(SharpCraft.ValueParameter,SharpCraft.ValueParameter,System.Boolean,System.Boolean,System.Double,System.Double)">
+            <summary>
+            Executes at the rotation specified by the score values. Note that some precision is lost when doing relative rotation. Especially when size is higher than 1.
+            </summary>
+            <param name="horizontal">The horizontal rotation</param>
+            <param name="vertical">The vertical rotation</param>
+            <param name="relativeHorizontal">If the horizontal rotation should be relative to the executed rotation</param>
+            <param name="relativeVertical">If the vertical rotation should be relative to the executed rotation</param>
+            <param name="sizeHorizontal">How many degress 1 score is equal to in horizontal rotation</param>
+            <param name="sizeVertical">How many degress 1 score is equal to in vertical rotation</param>
+            <returns>The function running the command</returns>
+        </member>
         <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.Dimension(SharpCraft.DimensionObjects.IDimension)">
             <summary>
             Executes in the given dimension
@@ -18236,6 +18277,14 @@
             Changes where the origin used by coordinates are at
             </summary>
             <param name="anchor">The origin</param>
+            <returns>The function running the command</returns>
+        </member>
+        <member name="M:SharpCraft.FunctionWriters.ExecuteCommands.IfRandom(System.Double,System.Boolean)">
+            <summary>
+            Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
+            </summary>
+            <param name="chance">The chance for the command to execute</param>
+            <param name="want">false if it should execute when it's false</param>
             <returns>The function running the command</returns>
         </member>
         <member name="T:SharpCraft.FunctionWriters.PlayerCommands">

@@ -106,6 +106,13 @@ namespace SharpCraft
 
             return mathObjective;
         }
+        public Storage GetTempStorage()
+        {
+            return itemGetter.GetItem("temp stroage", () =>
+            {
+                return new Storage(EmptyNamespace.GetNamespace(Datapack.GetDatapackSetting<SharpCraftNamespaceNameSetting>()?.Name ?? "sharpcraft"), "tempstorage");
+            });
+        }
         #endregion
 
         #region ray cast
@@ -211,6 +218,42 @@ namespace SharpCraft
             }
 
             return dummyEntitySelector;
+        }
+
+        public IFunction GetDummyTeleportGetCoords()
+        {
+            _ = GetDummySelector();
+            return itemGetter.GetItem<IFunction>(nameof(GetDummyTeleportGetCoords), () =>
+            {
+                if (IsChild())
+                {
+                    return new FileMocks.MockFunction(SharpCraftNamespace!, "getdummycoords");
+                }
+                return SharpCraftNamespace!.Function("getdummycoords", get =>
+                {
+                    get.Entity.Teleport(ID.Selector.s, new Coords());
+                    get.World.Data.Copy(GetTempStorage(), Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords)));
+                    get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
+                });
+            });
+        }
+
+        public IFunction GetDummyTeleportGetRotation()
+        {
+            _ = GetDummySelector();
+            return itemGetter.GetItem<IFunction>(nameof(GetDummyTeleportGetRotation), () =>
+            {
+                if (IsChild())
+                {
+                    return new FileMocks.MockFunction(SharpCraftNamespace!, "getdummyrotation");
+                }
+                return SharpCraftNamespace!.Function("getdummyrotation", get =>
+                {
+                    get.Entity.Teleport(ID.Selector.s, new Coords());
+                    get.World.Data.Copy(GetTempStorage(), Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation)));
+                    get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
+                });
+            });
         }
         #endregion
 
@@ -335,7 +378,7 @@ namespace SharpCraft
         }
         #endregion
 
-        #region
+        #region shulker loot giver
         class ShulkerItemTag : Data.DataHolderBase
         {
             [Data.DataTag("SharpCraft.ShulkerLooter")]
