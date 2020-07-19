@@ -162,7 +162,7 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyAdvancement()
         {
-            Assert.AreEqual("name:adv",new FileMocks.MockAdvancement(EmptyDatapack.GetPack().Namespace("name"),"adv").GetNamespacedName(), "EmptyAdvancement doesn't reutrn correct string");
+            Assert.AreEqual("name:adv",new FileMocks.MockAdvancement(MockDatapack.GetPack().Namespace("name"),"adv").GetNamespacedName(), "EmptyAdvancement doesn't reutrn correct string");
             Assert.AreEqual("space:name", ((FileMocks.MockAdvancement)"space:name").GetNamespacedName(), "Implicit string to advancement conversion converts incorrectly");
         }
     }

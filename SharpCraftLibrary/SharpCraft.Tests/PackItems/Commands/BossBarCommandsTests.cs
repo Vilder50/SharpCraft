@@ -13,7 +13,7 @@ namespace SharpCraft.Tests.Commands
     {
         private BossBar GetBar()
         {
-            EmptyNamespace space = EmptyNamespace.GetNamespace("boss");
+            MockNamespace space = MockNamespace.GetNamespace("boss");
             return new BossBar(space, "name");
         }
 

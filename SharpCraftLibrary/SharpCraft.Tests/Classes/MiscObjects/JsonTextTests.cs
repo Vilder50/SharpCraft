@@ -84,7 +84,7 @@ namespace SharpCraft.Tests.MiscObjects
             //data
             Assert.AreEqual("{\"nbt\":\"test.t{a:\\\"hello\\\"}\",\"interpret\":true,\"entity\":\"@s[name=\\\"Name\\\"]\"}", new JsonText.Data(new EntityDataLocation(new Selector(ID.Selector.s) { SingleName = "Name" }, "test.t{a:\"hello\"}"), true).GetJsonString(), "Data entity doesn't return correct string");
             Assert.AreEqual("{\"nbt\":\"path\",\"interpret\":false,\"block\":\"~1 ~2 ~3\"}", new JsonText.Data(new BlockDataLocation(new Coords(1, 2, 3), "path"), false).GetJsonString(), "Data block doesn't return correct string");
-            Assert.AreEqual("{\"nbt\":\"path\",\"interpret\":false,\"storage\":\"space:stor\"}", new JsonText.Data(new StorageDataLocation(new Storage(EmptyNamespace.GetNamespace("space"),"stor"), "path"), false).GetJsonString(), "Data storage doesn't return correct string");
+            Assert.AreEqual("{\"nbt\":\"path\",\"interpret\":false,\"storage\":\"space:stor\"}", new JsonText.Data(new StorageDataLocation(new Storage(MockNamespace.GetNamespace("space"),"stor"), "path"), false).GetJsonString(), "Data storage doesn't return correct string");
             Assert.ThrowsException<ArgumentNullException>(() => new JsonText.Data(null!, true), "Data should throw exception if location is null");
 
             //score

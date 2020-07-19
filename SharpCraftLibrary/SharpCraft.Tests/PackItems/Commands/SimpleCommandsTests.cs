@@ -110,7 +110,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void RunFunctionCommandTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            using MockDatapack datapack = new MockDatapack("pack");
             FileMocks.MockFunction function = new FileMocks.MockFunction(datapack.Namespace("space"), "function");
             Assert.AreEqual("function space:function", new RunFunctionCommand(function).GetCommandString());
 

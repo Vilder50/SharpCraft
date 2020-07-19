@@ -195,10 +195,10 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyNamespace()
         {
-            Assert.AreEqual(EmptyNamespace.GetMinecraftNamespace(), EmptyNamespace.GetMinecraftNamespace(), "Getting minecraft namespace doesn't return the same object every time");
-            Assert.AreEqual("minecraft", EmptyNamespace.GetMinecraftNamespace().Name, "Getting minecraft namespace returns wrong namespace");
-            Assert.AreEqual(EmptyNamespace.GetNamespace("space"), EmptyNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
-            Assert.AreEqual("space", EmptyNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
+            Assert.AreEqual(MockNamespace.GetMinecraftNamespace(), MockNamespace.GetMinecraftNamespace(), "Getting minecraft namespace doesn't return the same object every time");
+            Assert.AreEqual("minecraft", MockNamespace.GetMinecraftNamespace().Name, "Getting minecraft namespace returns wrong namespace");
+            Assert.AreEqual(MockNamespace.GetNamespace("space"), MockNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
+            Assert.AreEqual("space", MockNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
         }
 
         [TestMethod]

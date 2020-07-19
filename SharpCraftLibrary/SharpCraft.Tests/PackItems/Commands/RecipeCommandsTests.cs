@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void RecipeCommandTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            using MockDatapack datapack = new MockDatapack("pack");
             FileMocks.MockRecipe recipe = new FileMocks.MockRecipe(datapack.Namespace("space"), "recipe");
             Assert.AreEqual("recipe give @a space:recipe", new RecipeCommand(recipe, ID.Selector.a, true).GetCommandString());
             Assert.AreEqual("recipe take @a space:recipe", new RecipeCommand(recipe, ID.Selector.a, false).GetCommandString());

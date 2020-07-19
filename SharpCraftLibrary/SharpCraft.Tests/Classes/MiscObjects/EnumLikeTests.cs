@@ -27,8 +27,8 @@ namespace SharpCraft.Tests.MiscObjects
             }
 
             public static readonly NamespacedTestEnum Value1 = new NamespacedTestEnum("v1");
-            public static readonly NamespacedTestEnum Value2 = new NamespacedTestEnum("v2", EmptyNamespace.GetNamespace("test"));
-            public static readonly NamespacedTestEnum Value3 = new NamespacedTestEnum("v3", EmptyNamespace.GetNamespace("other"));
+            public static readonly NamespacedTestEnum Value2 = new NamespacedTestEnum("v2", MockNamespace.GetNamespace("test"));
+            public static readonly NamespacedTestEnum Value3 = new NamespacedTestEnum("v3", MockNamespace.GetNamespace("other"));
         }
 
         [TestMethod]

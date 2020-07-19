@@ -64,7 +64,7 @@ namespace SharpCraft.FileMocks
             {
                 throw new InvalidCastException("String for creating mock file has to contain a single :");
             }
-            return (EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
+            return (MockDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
 
         /// <summary>

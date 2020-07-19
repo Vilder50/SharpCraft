@@ -23,8 +23,8 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void AdvancementSingleCommandTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("name");
-            EmptyNamespace packNamespace = datapack.Namespace("space");
+            using MockDatapack datapack = new MockDatapack("name");
+            MockNamespace packNamespace = datapack.Namespace("space");
             Assert.AreEqual("advancement grant @a only space:adv", new AdvancementSingleCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), null, true).GetCommandString());
             Assert.AreEqual("advancement revoke @a only space:adv", new AdvancementSingleCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), null, false).GetCommandString());
             Assert.AreEqual("advancement grant @a only space:adv test", new AdvancementSingleCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), new AdvancementObjects.BredAnimalsTrigger() { Name = "test" }, true).GetCommandString());
@@ -37,8 +37,8 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void AdvancementSomeCommandTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("name");
-            EmptyNamespace packNamespace = datapack.Namespace("space");
+            using MockDatapack datapack = new MockDatapack("name");
+            MockNamespace packNamespace = datapack.Namespace("space");
             Assert.AreEqual("advancement grant @a from space:adv", new AdvancementSomeCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.from, true).GetCommandString());
             Assert.AreEqual("advancement revoke @a from space:adv", new AdvancementSomeCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.from, false).GetCommandString());
             Assert.AreEqual("advancement grant @a through space:adv", new AdvancementSomeCommand(ID.Selector.a, new FileMocks.MockAdvancement(packNamespace, "adv"), ID.RelativeAdvancement.through, true).GetCommandString());

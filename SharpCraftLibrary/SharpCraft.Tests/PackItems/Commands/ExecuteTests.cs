@@ -45,7 +45,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute store result bossbar minecraft:test max", new ExecuteStoreBossbar(new BossBar("test"), false, true).GetCommandString(), "ExecuteStoreBossbar does not return correct GetCommandString");
             Assert.AreEqual("execute store result entity @s cake long 10", new ExecuteStoreData(new EntityDataLocation(new Selector(), "cake"), ID.StoreTypes.Long, 10).GetCommandString(), "ExecuteStoreEntity does not return correct GetCommandString");
             Assert.AreEqual("execute store result score @s test", new ExecuteStoreScore(new SharpCraft.Selector(), new Objective("test")).GetCommandString(), "ExecuteStoreScore does not return correct GetCommandString");
-            Assert.AreEqual("execute if predicate space:name", new ExecuteIfPredicate(new FileMocks.MockPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name")).GetCommandString(), "ExecuteIfPredicate does not return correct GetCommandString");
+            Assert.AreEqual("execute if predicate space:name", new ExecuteIfPredicate(new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name")).GetCommandString(), "ExecuteIfPredicate does not return correct GetCommandString");
             Assert.IsNull(new StopExecuteCommand().GetCommandString());
         }
 

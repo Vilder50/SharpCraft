@@ -22,7 +22,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void DataMergeStorageCommandTest()
         {
-            Storage storage = new Storage(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "storage");
+            Storage storage = new Storage(new MockNamespace(new MockDatapack("mypack"), "space"), "storage");
             Assert.AreEqual("data merge storage space:storage {test:1}", new DataMergeStorageCommand(storage, "{test:1}").GetCommandString());
 
             Assert.ThrowsException<ArgumentNullException>(() => new DataMergeStorageCommand(null!, "{test:1}"));

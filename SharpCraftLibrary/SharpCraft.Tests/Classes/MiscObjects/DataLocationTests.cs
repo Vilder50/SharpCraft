@@ -42,7 +42,7 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestStorageDataLocation()
         {
             //test
-            Storage storage = new Storage(EmptyNamespace.GetNamespace("space"), "stor");
+            Storage storage = new Storage(MockNamespace.GetNamespace("space"), "stor");
             StorageDataLocation location = new StorageDataLocation(storage, "test1.test2");
             Assert.AreEqual("space:stor", location.Storage.GetNamespacedName(), "Constructor didn't set storage correctly");
             Assert.AreEqual("test1.test2", location.DataPath, "Constructor didn't set DataPath correctly");

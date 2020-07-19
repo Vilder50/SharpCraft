@@ -49,7 +49,7 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyPredicate()
         {
-            Assert.AreEqual("name:predicate", new FileMocks.MockPredicate(EmptyDatapack.GetPack().Namespace("name"), "predicate").GetNamespacedName(), "EmptyPredicate doesn't reutrn correct string");
+            Assert.AreEqual("name:predicate", new FileMocks.MockPredicate(MockDatapack.GetPack().Namespace("name"), "predicate").GetNamespacedName(), "EmptyPredicate doesn't reutrn correct string");
             Assert.AreEqual("space:name", ((FileMocks.MockPredicate)"space:name").GetNamespacedName(), "Implicit string to predicate conversion converts incorrectly");
         }
 

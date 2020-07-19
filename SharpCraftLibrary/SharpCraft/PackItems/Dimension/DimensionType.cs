@@ -14,17 +14,17 @@ namespace SharpCraft
         /// <summary>
         /// The vanilla overworld dimension
         /// </summary>
-        public static readonly IDimensionTypeFile Overworld = new FileMocks.MockDimensionType(EmptyNamespace.GetMinecraftNamespace(), "overworld");
+        public static readonly IDimensionTypeFile Overworld = new FileMocks.MockDimensionType(MockNamespace.GetMinecraftNamespace(), "overworld");
 
         /// <summary>
         /// The vanilla nether dimension
         /// </summary>
-        public static readonly IDimensionTypeFile Nether = new FileMocks.MockDimensionType(EmptyNamespace.GetMinecraftNamespace(), "the_nether");
+        public static readonly IDimensionTypeFile Nether = new FileMocks.MockDimensionType(MockNamespace.GetMinecraftNamespace(), "the_nether");
 
         /// <summary>
         /// The vanilla end dimension
         /// </summary>
-        public static readonly IDimensionTypeFile End = new FileMocks.MockDimensionType(EmptyNamespace.GetMinecraftNamespace(), "the_end");
+        public static readonly IDimensionTypeFile End = new FileMocks.MockDimensionType(MockNamespace.GetMinecraftNamespace(), "the_end");
 
         private DimensionTypeObject dimensionTypeObject = null!;
 
@@ -64,7 +64,7 @@ namespace SharpCraft
         /// <returns>The stream for this file</returns>
         protected override TextWriter GetStream()
         {
-            string minecraftNamespacePath = new EmptyNamespace(PackNamespace.Datapack, "minecraft").GetPath();
+            string minecraftNamespacePath = new MockNamespace(PackNamespace.Datapack, "minecraft").GetPath();
             if (WritePath.Contains("/"))
             {
                 PackNamespace.Datapack.FileCreator.CreateDirectory(minecraftNamespacePath + "dimension_type/" + PackNamespace.Name + "/" + WritePath.Substring(0, WritePath.LastIndexOf("/")) + "/");

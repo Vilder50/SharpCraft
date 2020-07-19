@@ -129,7 +129,7 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyGroup()
         {
-            Assert.AreEqual("#space:file", new FileMocks.MockGroup<IBlockType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "EmptyGroup doesn't return correct string");
+            Assert.AreEqual("#space:file", new FileMocks.MockGroup<IBlockType>(MockDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "EmptyGroup doesn't return correct string");
         }
 
         [TestMethod]

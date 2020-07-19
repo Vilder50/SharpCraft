@@ -110,7 +110,7 @@ namespace SharpCraft
         {
             return itemGetter.GetItem("temp stroage", () =>
             {
-                return new Storage(EmptyNamespace.GetNamespace(Datapack.GetDatapackSetting<SharpCraftNamespaceNameSetting>()?.Name ?? "sharpcraft"), "tempstorage");
+                return new Storage(MockNamespace.GetNamespace(Datapack.GetDatapackSetting<SharpCraftNamespaceNameSetting>()?.Name ?? "sharpcraft"), "tempstorage");
             });
         }
         #endregion

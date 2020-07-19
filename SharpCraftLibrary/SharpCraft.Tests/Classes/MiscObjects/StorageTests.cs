@@ -10,7 +10,7 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestStorage()
         {
-            EmptyNamespace space = EmptyNamespace.GetNamespace("myspace");
+            MockNamespace space = MockNamespace.GetNamespace("myspace");
             Storage storage = new Storage(space, "storage");
             Assert.AreEqual("storage", storage.Name, "Namespace constructor didn't set name");
             Assert.AreSame(space, storage.PackNamespace, "Namespace constructor should have set namespace to null");
@@ -22,7 +22,7 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestGetFullName()
         {
-            EmptyNamespace space = EmptyNamespace.GetNamespace("myspace");
+            MockNamespace space = MockNamespace.GetNamespace("myspace");
             Storage storage = new Storage(space, "storage");
             Assert.AreEqual("myspace:storage", storage.GetNamespacedName(), "GetNamespacedName with namespace returns wrong value");
         }

@@ -61,7 +61,7 @@ namespace SharpCraft.Tests.MiscObjects
                 SingleName = "test",
                 SingleType = ID.Entity.creeper,
                 SingleTag = "tagtag",
-                SinglePredicate = new FileMocks.MockPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name"),
+                SinglePredicate = new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name"),
                 SingleMode = ID.Gamemode.creative,
                 SingleScore = new SharpCraft.Selector.EntityScore(new Objective("objective"), new MCRange(1,2)),
                 SingleTeam = new Team("myteam")
@@ -126,7 +126,7 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestPredicateSelectorClass()
         {
-            IPredicate predicate = new FileMocks.MockPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name");
+            IPredicate predicate = new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name");
 
             Assert.AreEqual("predicate=space:name", new SharpCraft.Selector.EntityPredicate(predicate, true).GetSelectionString(), "EntityPredicate doesn't return correct string");
             Assert.AreEqual("predicate=!space:name", new SharpCraft.Selector.EntityPredicate(predicate, false).GetSelectionString(), "Not EntityPredicate doesn't return correct string");

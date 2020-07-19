@@ -16047,41 +16047,6 @@
             <param name="packNamespace">The namespace the namespace has</param>
             <returns>A new <see cref="T:SharpCraft.PackNamespace"/> with the given namespace</returns>
         </member>
-        <member name="T:SharpCraft.EmptyDatapack">
-            <summary>
-            A datapack used for disabling/enabling datapacks.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDatapack.GetPack">
-            <summary>
-            Returns an empty datapack
-            </summary>
-            <returns>An empty datapack</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyDatapack.#ctor(System.String,System.Boolean)">
-            <summary>
-            Intializes a new <see cref="T:SharpCraft.EmptyDatapack"/>
-            </summary>
-            <param name="name">The name of the datapack</param>
-            <param name="fileDatapack">True this <see cref="T:SharpCraft.EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
-        </member>
-        <member name="P:SharpCraft.EmptyDatapack.IngameName">
-            <summary>
-            The name of the datapack used for refering to the datapack in game
-            </summary>
-        </member>
-        <member name="P:SharpCraft.EmptyDatapack.FileDatapack">
-            <summary>
-            True if this <see cref="T:SharpCraft.EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyDatapack.Namespace(System.String)">
-            <summary>
-            Returns a new empty namespace
-            </summary>
-            <param name="packNamespace">The name of the namespace</param>
-            <returns>A new empty namespace</returns>
-        </member>
         <member name="T:SharpCraft.IDatapackItems">
             <summary>
             Interface for classes holding items for datapacks
@@ -16186,6 +16151,41 @@
             </summary>
             <param name="isChild">True if the datapack is a child of another datapack which generates all the SharpCraft items</param>
             <returns>The setting</returns>
+        </member>
+        <member name="T:SharpCraft.MockDatapack">
+            <summary>
+            A datapack used for disabling/enabling datapacks.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MockDatapack.GetPack">
+            <summary>
+            Returns an empty datapack
+            </summary>
+            <returns>An empty datapack</returns>
+        </member>
+        <member name="M:SharpCraft.MockDatapack.#ctor(System.String,System.Boolean)">
+            <summary>
+            Intializes a new <see cref="T:SharpCraft.MockDatapack"/>
+            </summary>
+            <param name="name">The name of the datapack</param>
+            <param name="fileDatapack">True this <see cref="T:SharpCraft.MockDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
+        </member>
+        <member name="P:SharpCraft.MockDatapack.IngameName">
+            <summary>
+            The name of the datapack used for refering to the datapack in game
+            </summary>
+        </member>
+        <member name="P:SharpCraft.MockDatapack.FileDatapack">
+            <summary>
+            True if this <see cref="T:SharpCraft.MockDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MockDatapack.Namespace(System.String)">
+            <summary>
+            Returns a new empty namespace
+            </summary>
+            <param name="packNamespace">The name of the namespace</param>
+            <returns>A new empty namespace</returns>
         </member>
         <member name="T:SharpCraft.DimensionObjects.BaseBiomeGenerator">
             <summary>
@@ -26123,43 +26123,6 @@
             <param name="getIdFor">The object to id</param>
             <returns>The id for the object</returns>
         </member>
-        <member name="T:SharpCraft.EmptyNamespace">
-            <summary>
-            A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetMinecraftNamespace">
-            <summary>
-            Returns a reference to the minecraft namespace
-            </summary>
-            <returns>A reference to the minecraft namespace</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)">
-            <summary>
-            Returns a reference to the namespace
-            </summary>
-            <param name="namespace">The namespace to get</param>
-            <returns>The namespace</returns>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.#ctor">
-            <summary>
-            Intializes a new empty namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead.
-            </summary>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
-            <summary>
-            Creates a new namespace in a datapack. Suggested to use <see cref="M:SharpCraft.EmptyNamespace.GetNamespace(System.String)"/> instead
-            </summary>
-            <param name="datapack">The datapack to add the namespace to</param>
-            <param name="namespaceName">the name of the namespace</param>
-        </member>
-        <member name="M:SharpCraft.EmptyNamespace.GetID(System.Object)">
-            <summary>
-            Not used. Makes no sense to generate names for empty namespace.
-            </summary>
-            <param name="getIdFor">Not used</param>
-            <returns>Not used</returns>
-        </member>
         <member name="T:SharpCraft.INamespaceSetting">
             <summary>
             Interface for settings a <see cref="T:SharpCraft.BasePackNamespace"/> can have
@@ -26193,6 +26156,43 @@
             Forces all files made by this namespace to be written when they are disposed instead of being auto files.
             </summary>
             <returns>The setting</returns>
+        </member>
+        <member name="T:SharpCraft.MockNamespace">
+            <summary>
+            A namespace used for refering functions and such which isn't in a datapack made with SharpCraft
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MockNamespace.GetMinecraftNamespace">
+            <summary>
+            Returns a reference to the minecraft namespace
+            </summary>
+            <returns>A reference to the minecraft namespace</returns>
+        </member>
+        <member name="M:SharpCraft.MockNamespace.GetNamespace(System.String)">
+            <summary>
+            Returns a reference to the namespace
+            </summary>
+            <param name="namespace">The namespace to get</param>
+            <returns>The namespace</returns>
+        </member>
+        <member name="M:SharpCraft.MockNamespace.#ctor">
+            <summary>
+            Intializes a new empty namespace. Make sure to call <see cref="M:SharpCraft.BasePackNamespace.Setup(SharpCraft.BaseDatapack,System.String)"/> after using this. Suggested to use <see cref="M:SharpCraft.MockNamespace.GetNamespace(System.String)"/> instead.
+            </summary>
+        </member>
+        <member name="M:SharpCraft.MockNamespace.#ctor(SharpCraft.BaseDatapack,System.String)">
+            <summary>
+            Creates a new namespace in a datapack. Suggested to use <see cref="M:SharpCraft.MockNamespace.GetNamespace(System.String)"/> instead
+            </summary>
+            <param name="datapack">The datapack to add the namespace to</param>
+            <param name="namespaceName">the name of the namespace</param>
+        </member>
+        <member name="M:SharpCraft.MockNamespace.GetID(System.Object)">
+            <summary>
+            Not used. Makes no sense to generate names for empty namespace.
+            </summary>
+            <param name="getIdFor">Not used</param>
+            <returns>Not used</returns>
         </member>
         <member name="T:SharpCraft.PackNamespace">
             <summary>

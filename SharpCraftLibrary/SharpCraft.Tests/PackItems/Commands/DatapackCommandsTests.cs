@@ -13,7 +13,7 @@ namespace SharpCraft.Tests.Commands
     {
         private BaseDatapack GetPack()
         {
-            return new EmptyDatapack("pack");
+            return new MockDatapack("pack");
         }
 
         [TestMethod]
@@ -36,7 +36,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void DatapackEnableAtCommandTest()
         {
-            BaseDatapack otherPack = new EmptyDatapack("other");
+            BaseDatapack otherPack = new MockDatapack("other");
             Assert.AreEqual("datapack enable \"file/pack\" after \"file/other\"", new DatapackEnableAtCommand(GetPack(), true, otherPack).GetCommandString());
             Assert.AreEqual("datapack enable \"file/pack\" before \"file/other\"", new DatapackEnableAtCommand(GetPack(), false, otherPack).GetCommandString());
 

@@ -14,7 +14,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ScheduleAddTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            using MockDatapack datapack = new MockDatapack("pack");
             FileMocks.MockFunction function = new FileMocks.MockFunction(datapack.Namespace("space"), "function");
             Assert.AreEqual("schedule function space:function 100d", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days)).GetCommandString());
             Assert.AreEqual("schedule function space:function 100d append", new ScheduleAddCommand(function, new NoneNegativeTime<int>(100, ID.TimeType.days), true).GetCommandString());
@@ -27,7 +27,7 @@ namespace SharpCraft.Tests.Commands
         [TestMethod]
         public void ScheduleClearTest()
         {
-            using EmptyDatapack datapack = new EmptyDatapack("pack");
+            using MockDatapack datapack = new MockDatapack("pack");
             FileMocks.MockFunction function = new FileMocks.MockFunction(datapack.Namespace("space"), "function");
             Assert.AreEqual("schedule clear space:function", new ScheduleClearCommand(function).GetCommandString());
 
