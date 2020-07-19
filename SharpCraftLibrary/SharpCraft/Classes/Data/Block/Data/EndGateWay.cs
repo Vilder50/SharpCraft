@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public class EndGateWay : BaseBlockEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<EndGateWay> PathCreator => new Data.DataPathCreator<EndGateWay>();
+
+        /// <summary>
         /// Creates an end gateway block
         /// </summary>
         /// <param name="type">The type of block</param>

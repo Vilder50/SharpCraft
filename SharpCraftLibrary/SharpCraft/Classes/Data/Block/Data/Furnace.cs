@@ -12,6 +12,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Furnace : BaseInventory, Interfaces.IFacing, Interfaces.ILit
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Furnace> PathCreator => new Data.DataPathCreator<Furnace>();
+
         private Item[]? _dItems;
 
         /// <summary>

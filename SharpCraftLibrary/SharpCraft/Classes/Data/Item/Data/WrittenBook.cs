@@ -8,6 +8,12 @@ namespace SharpCraft.Items
     public class WrittenBook : Item
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<WrittenBook> PathCreator => new Data.DataPathCreator<WrittenBook>();
+
+        /// <summary>
         /// Creates an item without an id or anything but which can have data
         /// This is used to test for item with data
         /// </summary>

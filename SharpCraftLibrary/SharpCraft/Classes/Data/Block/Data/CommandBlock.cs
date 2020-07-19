@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public class CommandBlock : BaseBlockEntity, Interfaces.IFacingFull
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<CommandBlock> PathCreator => new Data.DataPathCreator<CommandBlock>();
+
+        /// <summary>
         /// Creates a new chest block
         /// </summary>
         /// <param name="type">The type of block</param>

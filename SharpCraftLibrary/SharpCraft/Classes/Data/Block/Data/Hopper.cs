@@ -9,6 +9,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Hopper : BaseContainer
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Hopper> PathCreator => new Data.DataPathCreator<Hopper>();
+
         private Item[]? _dItems;
 
         /// <summary>

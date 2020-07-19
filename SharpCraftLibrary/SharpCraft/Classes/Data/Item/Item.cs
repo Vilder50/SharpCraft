@@ -14,6 +14,12 @@ namespace SharpCraft
     public class Item : DataHolderBase
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Item> PathCreator => new Data.DataPathCreator<Item>();
+
+        /// <summary>
         /// Creates an item without an id or anything but which can have data
         /// This is used to test for item with data
         /// </summary>
@@ -346,7 +352,7 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator"/>.
+            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator{Item}"/>.
             /// </summary>
             /// <typeparam name="T">The type of <see cref="DataHolderBase"/> to get the path for</typeparam>
             [GeneratePath("ContinuePathGenerator", SharpCraft.ID.SimpleNBTTagType.Compound)]

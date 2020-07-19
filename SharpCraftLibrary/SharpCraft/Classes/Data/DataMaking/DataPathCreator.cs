@@ -8,10 +8,40 @@ using System.Linq.Expressions;
 namespace SharpCraft.Data
 {
     /// <summary>
-    /// Static class containing a method for getting datapaths
+    /// Static class containing things for getting datapaths
     /// </summary>
-    public static class DataPathCreator
+    public class DataPathCreator<T> where T : DataHolderBase
     {
+        /// <summary>
+        /// Class containing tools for data paths
+        /// </summary>
+        public class PathTools
+        {
+            /// <summary>
+            /// Used for adding a compound check to a datapath. Wrap this method around the path to add a check to it.
+            /// </summary>
+            /// <typeparam name="TPath">The return type of path</typeparam>
+            /// <param name="addTo">The path to the the compound check to</param>
+            /// <param name="check">The thing to check for</param>
+            /// <returns>The path the compund check was added to</returns>
+            public TPath CompoundCheck<TPath>(TPath addTo, SimpleDataHolder check)
+            {
+                _ = check;
+                return addTo;
+            }
+
+            /// <summary>
+            /// Used for adding a filter to arrays in datapaths. Put this into an indexer to filter it.
+            /// </summary>
+            /// <param name="filter">The thing to filter for. Leave null to get all items.</param>
+            /// <returns>0 (So it can be used in indexers)</returns>
+            public int ArrayFilter(SimpleDataHolder? filter)
+            {
+                _ = filter;
+                return 0;
+            }
+        }
+
         private enum PathPart
         {
             Nothing,
@@ -23,10 +53,29 @@ namespace SharpCraft.Data
         /// <summary>
         /// Gets the datapath for the given location
         /// </summary>
-        /// <typeparam name="T">The type of object to get data for</typeparam>
         /// <param name="pathExpression">The datapath to get</param>
         /// <returns>The datapath string</returns>
-        public static string GetPath<T>(Expression<Func<T,object?>> pathExpression) where T : DataHolderBase
+        public string Make(Expression<Func<T,object?>> pathExpression)
+        {
+            return GetPath(pathExpression);
+        }
+
+        /// <summary>
+        /// Gets the datapath for the given location
+        /// </summary>
+        /// <param name="pathExpression">The datapath to get</param>
+        /// <returns>The datapath string</returns>
+        public string Make(Expression<Func<T, PathTools, object?>> pathExpression)
+        {
+            return GetPath(pathExpression);
+        }
+
+        /// <summary>
+        /// Gets the datapath for the given location
+        /// </summary>
+        /// <param name="pathExpression">The datapath to get</param>
+        /// <returns>The datapath string</returns>
+        public static string GetPath(Expression<Func<T, object?>> pathExpression)
         {
             string path = "";
             CreatePath(pathExpression.Body, PathPart.Nothing, ref path);
@@ -38,27 +87,19 @@ namespace SharpCraft.Data
         }
 
         /// <summary>
-        /// Used for adding a compound check to a datapath. Wrap this method around the path to add a check to it.
+        /// Gets the datapath for the given location
         /// </summary>
-        /// <typeparam name="T">The return type of path</typeparam>
-        /// <param name="addTo">The path to the the compund check to</param>
-        /// <param name="check">The thing to check for</param>
-        /// <returns>The path the compund check was added to</returns>
-        public static T AddCompoundCheck<T>(T addTo, SimpleDataHolder check)
+        /// <param name="pathExpression">The datapath to get</param>
+        /// <returns>The datapath string</returns>
+        public static string GetPath(Expression<Func<T, PathTools, object?>> pathExpression)
         {
-            _ = check;
-            return addTo;
-        }
-
-        /// <summary>
-        /// Used for adding a filter to arrays in datapaths. Put this into an indexer to filter it.
-        /// </summary>
-        /// <param name="filter">The thing to filter for. Leave null to get all items.</param>
-        /// <returns>0 (So it can be used in indexers)</returns>
-        public static int AddArrayFilter(SimpleDataHolder? filter)
-        {
-            _ = filter;
-            return 0;
+            string path = "";
+            CreatePath(pathExpression.Body, PathPart.Nothing, ref path);
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new PathCreatorException("Failed to get path for the given location");
+            }
+            return path.Trim('.');
         }
 
         private static void CreatePath(Expression expression, PathPart lastPart, ref string path)
@@ -228,11 +269,11 @@ namespace SharpCraft.Data
         {
             if (compoundCheckerInfo is null)
             {
-                compoundCheckerInfo = typeof(DataPathCreator).GetMethod(nameof(AddCompoundCheck))!;
+                compoundCheckerInfo = typeof(PathTools).GetMethod("CompoundCheck")!;
             }
             if (method.GetType() != compoundCheckerInfo.GetType())
             {
-                throw new PathCreatorException("Methods are not supported (Only "+nameof(AddCompoundCheck)+" is supported)");
+                throw new PathCreatorException("Methods are not supported (Only "+"CompoundCheck"+" is supported)");
             }
             if (Expression.Lambda(check).Compile().DynamicInvoke() is SimpleDataHolder dataHolder)
             {
@@ -249,7 +290,7 @@ namespace SharpCraft.Data
         {
             if (arrayFilterInfo is null)
             {
-                arrayFilterInfo = typeof(DataPathCreator).GetMethod(nameof(AddArrayFilter));
+                arrayFilterInfo = typeof(PathTools).GetMethod("ArrayFilter");
             }
             if (filter is MethodCallExpression methodExpression)
             {

@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public class StructureBlock : BaseBlockEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<StructureBlock> PathCreator => new Data.DataPathCreator<StructureBlock>();
+
+        /// <summary>
         /// Creates a structure block
         /// </summary>
         /// <param name="type">The type of block</param>

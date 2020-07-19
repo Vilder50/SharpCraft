@@ -10,6 +10,12 @@ namespace SharpCraft.Entities
     public class Armorstand : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Armorstand> PathCreator => new Data.DataPathCreator<Armorstand>();
+
+        /// <summary>
         /// Creates a new armor stand entity
         /// </summary>
         /// <param name="type">the type of entity</param>

@@ -11,7 +11,7 @@ namespace SharpCraft.Data
         /// <summary>
         /// Intializes a new <see cref="PathGettingMethodCallException"/>
         /// </summary>
-        public PathGettingMethodCallException() : base("This method is used for generating datapaths. Do not call this method. Use " + nameof(DataPathCreator) + " to use this method.")
+        public PathGettingMethodCallException() : base("This method is used for generating datapaths. Do not call this method. Use " + nameof(DataPathCreator<DataHolderBase>) + " to use this method.")
         {
         }
     }

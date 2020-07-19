@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Pig : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Pig> PathCreator => new Data.DataPathCreator<Pig>();
+
+        /// <summary>
         /// Creates a new pigs
         /// </summary>
         /// <param name="type">the type of entity</param>

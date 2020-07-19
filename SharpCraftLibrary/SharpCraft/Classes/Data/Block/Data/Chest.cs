@@ -9,6 +9,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Chest : BaseContainer, Interfaces.IFacing, Interfaces.IWaterLogged
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Chest> PathCreator => new Data.DataPathCreator<Chest>();
+
         private Item[]? _dItems;
 
         /// <summary>

@@ -9,6 +9,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Banner : BaseBlockEntity, Interfaces.IRotation, Interfaces.IFacing
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Banner> PathCreator => new Data.DataPathCreator<Banner>();
+
         private int? _sRotation;
 
         /// <summary>

@@ -182,6 +182,12 @@
             An object for banner blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Banner.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Banner.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a banner block
@@ -246,6 +252,12 @@
             An object for shulker box and barral blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Barrel.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Barrel.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a barrel block
@@ -285,6 +297,12 @@
             Base object for block entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.BaseBlockEntity.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.BaseBlockEntity.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a block entity
@@ -305,6 +323,12 @@
             <summary>
             A base class ofr blocks with inventories
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.BaseContainer.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.BaseContainer.#ctor(SharpCraft.ID.Block)">
             <summary>
@@ -332,6 +356,12 @@
             <summary>
             A base class ofr blocks with inventories
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.BaseInventory.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.BaseInventory.#ctor(SharpCraft.ID.Block)">
             <summary>
@@ -365,6 +395,12 @@
             <summary>
             An object for beacon blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Beacon.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Beacon.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -409,6 +445,12 @@
             <summary>
             An object for bee hive/nest blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.BeeHive.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.BeeHive.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -470,6 +512,12 @@
             (Blocks like bone blocks and purpur pillars)
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.BrewingStand.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.BrewingStand.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a brewingstand block
@@ -525,6 +573,12 @@
             <summary>
             An object for campfire blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Campfire.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Campfire.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -583,6 +637,12 @@
             An object for chest blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Chest.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Chest.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a chest block
@@ -621,6 +681,12 @@
             <summary>
             An object for chest blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.CommandBlock.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.CommandBlock.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -700,6 +766,12 @@
             An object for comparator blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Comparator.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Comparator.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a comparator block
@@ -743,6 +815,12 @@
             An object for dispensers / dropper blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.DropperDispenser.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.DropperDispenser.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a dispenser/dropper block
@@ -776,6 +854,12 @@
             <summary>
             An object for end gateway blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.EndGateWay.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.EndGateWay.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -815,6 +899,12 @@
             <summary>
             An object for furnace blocks.
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Furnace.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Furnace.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -947,6 +1037,12 @@
             An object for hopper blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Hopper.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Hopper.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a hopper block
@@ -990,6 +1086,12 @@
             <summary>
             An object for jigsaw blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Jigsaw.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Jigsaw.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1044,6 +1146,12 @@
             An object for jukebox blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.Jukebox.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.Jukebox.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a jukebox block
@@ -1076,6 +1184,12 @@
             <summary>
             An object for lectern blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Lectern.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Lectern.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1124,6 +1238,12 @@
             <summary>
             An object for blocks being moved by a piston
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.MovedByPiston.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.MovedByPiston.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1184,6 +1304,12 @@
             An object for shulker box and barral blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.ShulkerBox.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.ShulkerBox.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a new shulker box
@@ -1212,6 +1338,12 @@
             <summary>
             An object for sign blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Sign.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Sign.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1274,6 +1406,12 @@
             An object for skull / head blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.BaseSkull.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.BaseSkull.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a new skull / head block
@@ -1295,6 +1433,12 @@
             <summary>
             An object for skull / head blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.GroundSkull.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.GroundSkull.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1321,6 +1465,12 @@
             An object for skull / head blocks
             </summary>
         </member>
+        <member name="P:SharpCraft.Blocks.WallSkull.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Blocks.WallSkull.#ctor(SharpCraft.IBlockType)">
             <summary>
             Creates a new skull / head block
@@ -1343,6 +1493,12 @@
             <summary>
             An object for end spawner blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.Spawner.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.Spawner.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -1408,6 +1564,12 @@
             <summary>
             An object for structure blocks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Blocks.StructureBlock.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Blocks.StructureBlock.#ctor(SharpCraft.IBlockType)">
             <summary>
@@ -4278,6 +4440,12 @@
             </summary>
             <returns>the bottom of the tree</returns>
         </member>
+        <member name="P:SharpCraft.Data.DataHolderBase.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="T:SharpCraft.Data.DataHoldingString">
             <summary>
             Used for converting from a data holding string to a data holding object
@@ -4295,34 +4463,59 @@
             </summary>
             <returns>The data in this object</returns>
         </member>
-        <member name="T:SharpCraft.Data.DataPathCreator">
+        <member name="T:SharpCraft.Data.DataPathCreator`1">
             <summary>
-            Static class containing a method for getting datapaths
+            Static class containing things for getting datapaths
             </summary>
         </member>
-        <member name="M:SharpCraft.Data.DataPathCreator.GetPath``1(System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+        <member name="T:SharpCraft.Data.DataPathCreator`1.PathTools">
             <summary>
-            Gets the datapath for the given location
+            Class containing tools for data paths
             </summary>
-            <typeparam name="T">The type of object to get data for</typeparam>
-            <param name="pathExpression">The datapath to get</param>
-            <returns>The datapath string</returns>
         </member>
-        <member name="M:SharpCraft.Data.DataPathCreator.AddCompoundCheck``1(``0,SharpCraft.Data.SimpleDataHolder)">
+        <member name="M:SharpCraft.Data.DataPathCreator`1.PathTools.CompoundCheck``1(``0,SharpCraft.Data.SimpleDataHolder)">
             <summary>
             Used for adding a compound check to a datapath. Wrap this method around the path to add a check to it.
             </summary>
-            <typeparam name="T">The return type of path</typeparam>
-            <param name="addTo">The path to the the compund check to</param>
+            <typeparam name="TPath">The return type of path</typeparam>
+            <param name="addTo">The path to the the compound check to</param>
             <param name="check">The thing to check for</param>
             <returns>The path the compund check was added to</returns>
         </member>
-        <member name="M:SharpCraft.Data.DataPathCreator.AddArrayFilter(SharpCraft.Data.SimpleDataHolder)">
+        <member name="M:SharpCraft.Data.DataPathCreator`1.PathTools.ArrayFilter(SharpCraft.Data.SimpleDataHolder)">
             <summary>
             Used for adding a filter to arrays in datapaths. Put this into an indexer to filter it.
             </summary>
             <param name="filter">The thing to filter for. Leave null to get all items.</param>
             <returns>0 (So it can be used in indexers)</returns>
+        </member>
+        <member name="M:SharpCraft.Data.DataPathCreator`1.Make(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Gets the datapath for the given location
+            </summary>
+            <param name="pathExpression">The datapath to get</param>
+            <returns>The datapath string</returns>
+        </member>
+        <member name="M:SharpCraft.Data.DataPathCreator`1.Make(System.Linq.Expressions.Expression{System.Func{`0,SharpCraft.Data.DataPathCreator{`0}.PathTools,System.Object}})">
+            <summary>
+            Gets the datapath for the given location
+            </summary>
+            <param name="pathExpression">The datapath to get</param>
+            <returns>The datapath string</returns>
+        </member>
+        <member name="M:SharpCraft.Data.DataPathCreator`1.GetPath(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Gets the datapath for the given location
+            </summary>
+            <param name="pathExpression">The datapath to get</param>
+            <returns>The datapath string</returns>
+        </member>
+        <member name="M:SharpCraft.Data.DataPathCreator`1.GetPath(System.Linq.Expressions.Expression{System.Func{`0,SharpCraft.Data.DataPathCreator{`0}.PathTools,System.Object}})">
+            <summary>
+            Gets the datapath for the given location
+            </summary>
+            <param name="pathExpression">The datapath to get</param>
+            <returns>The datapath string</returns>
         </member>
         <member name="T:SharpCraft.Data.IDataPartPathEnding">
             <summary>
@@ -4636,7 +4829,7 @@
         </member>
         <member name="T:SharpCraft.Data.PathCreatorException">
             <summary>
-            Exception for when <see cref="T:SharpCraft.Data.DataPathCreator"/> fails to create a path
+            Exception for when <see cref="T:SharpCraft.Data.DataPathCreator`1"/> fails to create a path
             </summary>
         </member>
         <member name="M:SharpCraft.Data.PathCreatorException.#ctor">
@@ -4672,6 +4865,12 @@
             The base class for all entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entity.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entity.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new entity
@@ -4693,6 +4892,12 @@
             <summary>
             The basic entity data
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.BasicEntity.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.BasicEntity.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -4889,6 +5094,12 @@
             An object for area effect cloud entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.AreaCloud.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.AreaCloud.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new area effect cloud
@@ -4971,6 +5182,12 @@
             <summary>
             An object for armor stand entities
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Armorstand.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Armorstand.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5202,6 +5419,12 @@
             An object for end crystal entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.EndCrystal.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.EndCrystal.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new end crystal
@@ -5227,6 +5450,12 @@
             <summary>
             An object for item entities
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.DroppedItem.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.DroppedItem.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5286,6 +5515,12 @@
             An object for falling block entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.FallingBlock.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.FallingBlock.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new falling block
@@ -5333,6 +5568,12 @@
             An object for evoker fangs entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.EvokerFangs.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.EvokerFangs.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new evoker fangs
@@ -5364,6 +5605,12 @@
             <summary>
             An object for firework entities
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Firework.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Firework.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5419,6 +5666,12 @@
             An object for item frames and painting entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.ItemFrame.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.ItemFrame.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new item frame or painting entity
@@ -5472,6 +5725,12 @@
             An object for item frames and painting entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Painting.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Painting.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new item frame or painting entity
@@ -5503,6 +5762,12 @@
             An object for primed tnt entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.TNT.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.TNT.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates new primed tnt
@@ -5523,6 +5788,12 @@
             <summary>
             An object for xp orb entities
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.XP.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.XP.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5561,6 +5832,12 @@
             The basic entity data for breedable mobs
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.BreedableMob.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.BreedableMob.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new entity
@@ -5592,6 +5869,12 @@
             <summary>
             The basic entity data for illagers
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.BaseIllager.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.BaseIllager.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5644,6 +5927,12 @@
             <summary>
             The basic entity data for mobs
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Mob.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Mob.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5761,6 +6050,12 @@
             The basic entity data for tameable
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.TameableMob.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.TameableMob.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new entity
@@ -5782,6 +6077,12 @@
             Entity data for bats
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Bat.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Bat.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new bat
@@ -5802,6 +6103,12 @@
             <summary>
             Entity data for Bees
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Bee.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Bee.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5864,6 +6171,12 @@
             Entity data for cats
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Cat.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Cat.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new cat
@@ -5890,6 +6203,12 @@
             Entity data for chickens
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Chicken.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Chicken.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new chicken
@@ -5915,6 +6234,12 @@
             <summary>
             Entity data for creepers
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Creeper.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Creeper.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -5952,6 +6277,12 @@
             Entity data for dolphins
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Dolphin.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Dolphin.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new dolphin
@@ -5983,6 +6314,12 @@
             Entity data for ender dragons
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Dragon.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Dragon.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new ender dragon
@@ -6003,6 +6340,12 @@
             <summary>
             Entity data for endermen
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Enderman.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Enderman.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6025,6 +6368,12 @@
             <summary>
             Entity data for endermites
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Endermite.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Endermite.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6051,6 +6400,12 @@
             <summary>
             Entity data for fishs
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Fish.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Fish.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6119,6 +6474,12 @@
             Entity data for foxes
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Fox.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Fox.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new fox
@@ -6150,6 +6511,12 @@
             Entity data for ghasts
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Ghast.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Ghast.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new ghast
@@ -6170,6 +6537,12 @@
             <summary>
             Entity data for hoglins
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Hoglin.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Hoglin.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6201,6 +6574,12 @@
             <summary>
             Entity data for horses, llamas, donkeys and mules
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Horse.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Horse.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6315,6 +6694,12 @@
             Entity data for iron golems
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.IronGolem.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.IronGolem.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new iron golem
@@ -6336,6 +6721,12 @@
             Entity data for evokers and illusioners
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.MagicIllager.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.MagicIllager.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new evoker or illusioner
@@ -6351,6 +6742,12 @@
             <summary>
             Entity data for ocelots
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Ocelot.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Ocelot.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6372,6 +6769,12 @@
             <summary>
             Entity data for pandas
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Panda.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Panda.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6399,6 +6802,12 @@
             Entity data for parrots
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Parrot.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Parrot.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new parrot
@@ -6419,6 +6828,12 @@
             <summary>
             Entity data for phantoms
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Phantom.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Phantom.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6447,6 +6862,12 @@
             Entity data for pigs
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Pig.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Pig.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new pigs
@@ -6467,6 +6888,12 @@
             <summary>
             Entity data for piglins
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Piglin.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Piglin.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6508,6 +6935,12 @@
             <summary>
             Entity data for players
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Player.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Player.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6673,6 +7106,12 @@
             Entity data for rabbits
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Rabbit.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Rabbit.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new rabbit
@@ -6699,6 +7138,12 @@
             <summary>
             Entity data for ravagers
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Ravager.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Ravager.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6731,6 +7176,12 @@
             Entity data for sheeps
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Sheep.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Sheep.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new sheep
@@ -6756,6 +7207,12 @@
             <summary>
             Entity data for shulker
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Shulker.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Shulker.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6794,6 +7251,12 @@
             Entity data for slimes and magma cubes
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Slime.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Slime.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new slime or magma cube
@@ -6820,6 +7283,12 @@
             Entity data for snowmen
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Snowman.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Snowman.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new snowman
@@ -6841,6 +7310,12 @@
             Entity data for striders
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Strider.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Strider.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new strider
@@ -6861,6 +7336,12 @@
             <summary>
             Entity data for turtles
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Turtle.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Turtle.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6893,6 +7374,12 @@
             Entity data for vexes
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Vex.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Vex.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new vex
@@ -6919,6 +7406,12 @@
             <summary>
             Entity data for villagers
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Villager.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Villager.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -6991,6 +7484,12 @@
             Entity data for vindicators
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Vindicator.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Vindicator.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new vindicator
@@ -7012,6 +7511,12 @@
             Entity data for withers
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Wither.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Wither.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new wither
@@ -7032,6 +7537,12 @@
             <summary>
             Entity data for wolves
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Wolf.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Wolf.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7058,6 +7569,12 @@
             <summary>
             Entity data for zombies and drowned
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Zombie.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Zombie.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7094,6 +7611,12 @@
             <summary>
             Entity data for zombie villagers
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.ZombieVillager.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.ZombieVillager.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7146,6 +7669,12 @@
             Entity data for zombie pigmen
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.ZombifiedPiglin.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.ZombifiedPiglin.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new combified piglin
@@ -7171,6 +7700,12 @@
             <summary>
             Entity data for arrows
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Arrow.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Arrow.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7243,6 +7778,12 @@
             The base of all projectile entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.BaseProjectile.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.BaseProjectile.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new entity
@@ -7263,6 +7804,12 @@
             <summary>
             Entity data for <see cref="F:SharpCraft.ID.Entity.dragon_fireball"/>s, <see cref="F:SharpCraft.ID.Entity.fireball"/>s, <see cref="F:SharpCraft.ID.Entity.small_fireball"/> and <see cref="F:SharpCraft.ID.Entity.wither_skull"/>s
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.MobProjectile.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.MobProjectile.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7294,6 +7841,12 @@
             <summary>
             An object for shulker bullets
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.ShulkerBullet.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.ShulkerBullet.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7341,6 +7894,12 @@
             An object for llama spit entities
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.LlamaSpit.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.LlamaSpit.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates new llama spit
@@ -7361,6 +7920,12 @@
             <summary>
             Entity data for <see cref="F:SharpCraft.ID.Entity.egg"/>s, <see cref="F:SharpCraft.ID.Entity.ender_pearl"/>s, <see cref="F:SharpCraft.ID.Entity.experience_bottle"/>s, <see cref="F:SharpCraft.ID.Entity.potion"/>s and <see cref="F:SharpCraft.ID.Entity.snowball"/>s
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.Throwable.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.Throwable.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7394,6 +7959,12 @@
             The basic entity data for minecarts
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Minecart.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Minecart.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new entity
@@ -7421,6 +7992,12 @@
             Entity data for boats
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.Boat.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.Boat.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new boat
@@ -7441,6 +8018,12 @@
             <summary>
             Entity data for chest minecarts
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.MinecartChest.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.MinecartChest.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7472,6 +8055,12 @@
             <summary>
             Entity data for command block minecarts
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.MinecartCommand.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.MinecartCommand.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7509,6 +8098,12 @@
             Entity data for furnace minecarts
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.MinecartFurnace.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.MinecartFurnace.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new furnace minecart
@@ -7539,6 +8134,12 @@
             <summary>
             Entity data for hopper minecarts
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.MinecartHopper.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.MinecartHopper.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7580,6 +8181,12 @@
             <summary>
             Entity data for spawner minecarts
             </summary>
+        </member>
+        <member name="P:SharpCraft.Entities.MinecartSpawner.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Entities.MinecartSpawner.#ctor(SharpCraft.ID.Entity)">
             <summary>
@@ -7633,6 +8240,12 @@
             Entity data for tnt minecarts
             </summary>
         </member>
+        <member name="P:SharpCraft.Entities.MinecartTNT.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Entities.MinecartTNT.#ctor(SharpCraft.ID.Entity)">
             <summary>
             Creates a new tnt minecart
@@ -7654,6 +8267,12 @@
             <summary>
             An object for fish in a bucket
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.BucketFish.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.BucketFish.#ctor">
             <summary>
@@ -7678,6 +8297,12 @@
             <summary>
             An object for compass items
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.Compass.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.Compass.#ctor">
             <summary>
@@ -7713,6 +8338,12 @@
             An object for crossbow
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.Crossbow.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.Crossbow.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -7741,6 +8372,12 @@
             <summary>
             An object for debug sticks
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.DebugStick.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.DebugStick.#ctor">
             <summary>
@@ -7843,6 +8480,12 @@
             An object for enchanted book items
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.EnchantedBook.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.EnchantedBook.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -7866,6 +8509,12 @@
             <summary>
             An object for firework rocket items
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.FireworkRocket.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.FireworkRocket.#ctor">
             <summary>
@@ -7896,6 +8545,12 @@
             An object for firework star items
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.FireworkStar.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.FireworkStar.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -7920,6 +8575,12 @@
             An object for colorable leather items
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.Leather.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.Leather.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -7943,6 +8604,12 @@
             <summary>
             An object for map items
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.Map.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.Map.#ctor">
             <summary>
@@ -8014,6 +8681,12 @@
             An object for player heads
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.PlayerHead.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.PlayerHead.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -8053,6 +8726,12 @@
             The data for potions
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.Potion.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.Potion.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -8087,6 +8766,12 @@
             An object for recipe book items
             </summary>
         </member>
+        <member name="P:SharpCraft.Items.RecipeBook.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
+        </member>
         <member name="M:SharpCraft.Items.RecipeBook.#ctor">
             <summary>
             Creates an item without an id or anything but which can have data
@@ -8110,6 +8795,12 @@
             <summary>
             An object for suspicious stew
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.SuspiciousStew.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.SuspiciousStew.#ctor">
             <summary>
@@ -8139,6 +8830,12 @@
             <summary>
             An object for written book items
             </summary>
+        </member>
+        <member name="P:SharpCraft.Items.WrittenBook.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Items.WrittenBook.#ctor">
             <summary>
@@ -8180,6 +8877,12 @@
             <summary>
             Class for items
             </summary>
+        </member>
+        <member name="P:SharpCraft.Item.PathCreator">
+            <summary>
+            Returns a object which can be used for creating data paths
+            </summary>
+            <returns>Object used for making data paths</returns>
         </member>
         <member name="M:SharpCraft.Item.#ctor">
             <summary>
@@ -8433,7 +9136,7 @@
         </member>
         <member name="M:SharpCraft.Item.ExtraDataList.ContinuePath``1">
             <summary>
-            Used for getting the paths for a <see cref="T:SharpCraft.Data.DataHolderBase"/>. Do not call this method without using <see cref="T:SharpCraft.Data.DataPathCreator"/>.
+            Used for getting the paths for a <see cref="T:SharpCraft.Data.DataHolderBase"/>. Do not call this method without using <see cref="T:SharpCraft.Data.DataPathCreator`1"/>.
             </summary>
             <typeparam name="T">The type of <see cref="T:SharpCraft.Data.DataHolderBase"/> to get the path for</typeparam>
         </member>

@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Firework : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Firework> PathCreator => new Data.DataPathCreator<Firework>();
+
+        /// <summary>
         /// Creates a new firework rocket
         /// </summary>
         /// <param name="type">the type of entity</param>

@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public abstract class BaseInventory : BaseBlockEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BaseInventory> PathCreator => new Data.DataPathCreator<BaseInventory>();
+
+        /// <summary>
         /// Creates a new inventory block
         /// </summary>
         /// <param name="type">The type of block</param>

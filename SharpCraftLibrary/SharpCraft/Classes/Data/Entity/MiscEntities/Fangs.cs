@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class EvokerFangs : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<EvokerFangs> PathCreator => new Data.DataPathCreator<EvokerFangs>();
+
+        /// <summary>
         /// Creates a new evoker fangs
         /// </summary>
         /// <param name="type">the type of entity</param>

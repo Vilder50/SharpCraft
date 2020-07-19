@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace SharpCraft.Data
 {
     /// <summary>
-    /// Exception for when <see cref="DataPathCreator"/> fails to create a path
+    /// Exception for when <see cref="DataPathCreator{T}"/> fails to create a path
     /// </summary>
     public class PathCreatorException : Exception
     {

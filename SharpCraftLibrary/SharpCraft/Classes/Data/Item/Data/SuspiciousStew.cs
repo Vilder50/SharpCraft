@@ -8,6 +8,12 @@ namespace SharpCraft.Items
     public class SuspiciousStew : Item
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<SuspiciousStew> PathCreator => new Data.DataPathCreator<SuspiciousStew>();
+
+        /// <summary>
         /// Creates an item without an id or anything but which can have data
         /// This is used to test for item with data
         /// </summary>

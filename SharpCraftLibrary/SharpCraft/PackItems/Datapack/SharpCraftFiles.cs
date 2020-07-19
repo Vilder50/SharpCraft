@@ -232,7 +232,7 @@ namespace SharpCraft
                 return SharpCraftNamespace!.Function("getdummycoords", get =>
                 {
                     get.Entity.Teleport(ID.Selector.s, new Coords());
-                    get.World.Data.Copy(GetTempStorage(), Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords)));
+                    get.World.Data.Copy(GetTempStorage(), Entities.BasicEntity.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Coords)));
                     get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
                 });
             });
@@ -250,7 +250,7 @@ namespace SharpCraft
                 return SharpCraftNamespace!.Function("getdummyrotation", get =>
                 {
                     get.Entity.Teleport(ID.Selector.s, new Coords());
-                    get.World.Data.Copy(GetTempStorage(), Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation)));
+                    get.World.Data.Copy(GetTempStorage(), Entities.BasicEntity.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Rotation)));
                     get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
                 });
             });
@@ -367,7 +367,7 @@ namespace SharpCraft
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
 
                 h.Execute.Store(GetRandomHolder(), GetRandomHolder());
-                h.Block.Data.Get(hashBlockLocation, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DItems![0]!.Attributes![0]!.Amount));
+                h.Block.Data.Get(hashBlockLocation, Blocks.ShulkerBox.PathCreator.Make(b => b.DItems![0]!.Attributes![0]!.Amount));
 
                 h.Block.Add(hashBlockLocation, ID.Block.air);
                 h.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
@@ -408,9 +408,9 @@ namespace SharpCraft
                             new LootObjects.CopyNameChange(),
                             new LootObjects.CopyNBTChange(ID.LootTarget.block_entity, new LootObjects.CopyNBTChange.CopyOperation[] 
                             {
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLock), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLock), ID.LootDataModifierType.replace),
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTable), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTable), ID.LootDataModifierType.replace),
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTableSeed), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTableSeed), ID.LootDataModifierType.replace)
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLock), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLock), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLootTable), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTable), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLootTableSeed), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTableSeed), ID.LootDataModifierType.replace)
                             }),
                             new LootObjects.ContentChange(new LootObjects.DynamicEntry(LootObjects.DynamicEntry.DynamicType.contents))
                         }

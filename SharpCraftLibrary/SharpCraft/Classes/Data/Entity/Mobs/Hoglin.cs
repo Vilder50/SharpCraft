@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Hoglin : Entities.BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Hoglin> PathCreator => new Data.DataPathCreator<Hoglin>();
+
+        /// <summary>
         /// Creates a new hoglin
         /// </summary>
         /// <param name="type">the type of entity</param>

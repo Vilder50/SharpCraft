@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Fox : TameableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Fox> PathCreator => new Data.DataPathCreator<Fox>();
+
+        /// <summary>
         /// Creates a new fox
         /// </summary>
         /// <param name="type">the type of entity</param>

@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class MinecartFurnace : Minecart
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<MinecartFurnace> PathCreator => new Data.DataPathCreator<MinecartFurnace>();
+
+        /// <summary>
         /// Creates a new furnace minecart
         /// </summary>
         /// <param name="type">the type of entity</param>

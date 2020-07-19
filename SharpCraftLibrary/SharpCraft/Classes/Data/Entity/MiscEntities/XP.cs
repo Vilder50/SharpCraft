@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class XP : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<XP> PathCreator => new Data.DataPathCreator<XP>();
+
+        /// <summary>
         /// Creates a new xp orb
         /// </summary>
         /// <param name="type">the type of entity</param>

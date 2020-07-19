@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Campfire : BaseBlockEntity, Interfaces.IWaterLogged, Interfaces.ILit
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Campfire> PathCreator => new Data.DataPathCreator<Campfire>();
+
         private Item[]? _dItems;
         private Time<int>[]? _dCookingTimes;
         private Time<int>[]? _dTotalCookingTimes;

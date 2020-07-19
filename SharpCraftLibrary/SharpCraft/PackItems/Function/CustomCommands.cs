@@ -42,20 +42,20 @@ namespace SharpCraft.FunctionWriters
                 {
                     if (!(getX is null) || !(getX is null) || !(getZ is null))
                     {
-                        get.World.Data.Copy(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords)));
+                        get.World.Data.Copy(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Coords)));
                     }
                 }
                 if (!(getX is null))
                 {
-                    get.Execute.Store(getX).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords!.X), multiplyX);
+                    get.Execute.Store(getX).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.X), multiplyX);
                 }
                 if (!(getY is null))
                 {
-                    get.Execute.Store(getY).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords!.Y), multiplyY);
+                    get.Execute.Store(getY).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.Y), multiplyY);
                 }
                 if (!(getZ is null))
                 {
-                    get.Execute.Store(getZ).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Coords!.Z), multiplyZ);
+                    get.Execute.Store(getZ).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.Z), multiplyZ);
                 }
             });
         }
@@ -80,15 +80,15 @@ namespace SharpCraft.FunctionWriters
                 }
                 else
                 {
-                    get.World.Data.Copy(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation)));
+                    get.World.Data.Copy(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Rotation)));
                 }
                 if (!(getVerticalRotation is null))
                 {
-                    get.Execute.Store(getVerticalRotation).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation!.X), multiplyVerticalRotation);
+                    get.Execute.Store(getVerticalRotation).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation!.X), multiplyVerticalRotation);
                 }
                 if (!(getHorizontalRotation is null))
                 {
-                    get.Execute.Store(getHorizontalRotation).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.BasicEntity>(d => d.Rotation!.Y), multiplyHorizontalRotation);
+                    get.Execute.Store(getHorizontalRotation).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation!.Y), multiplyHorizontalRotation);
                 }
             });
         }
@@ -1025,7 +1025,7 @@ namespace SharpCraft.FunctionWriters
                 var (function, location) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetHashFunction();
                 ForFunction.Custom.GroupCommands(g =>
                 {
-                    g.Execute.Store(new BlockDataLocation(location, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DLootTableSeed)), ID.StoreTypes.Int);
+                    g.Execute.Store(new BlockDataLocation(location, Blocks.ShulkerBox.PathCreator.Make(b => b.DLootTableSeed)), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
                     g.World.Function(function);
                     g.Execute.IfScore(value, value, 0);

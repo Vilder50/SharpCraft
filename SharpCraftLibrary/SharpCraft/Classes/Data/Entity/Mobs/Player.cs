@@ -9,6 +9,12 @@ namespace SharpCraft.Entities
     public class Player : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Player> PathCreator => new Data.DataPathCreator<Player>();
+
+        /// <summary>
         /// Creates a new player
         /// </summary>
         /// <param name="type">the type of entity</param>

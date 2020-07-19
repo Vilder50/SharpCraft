@@ -9,6 +9,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Beacon : BaseBlockEntity
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Beacon> PathCreator => new Data.DataPathCreator<Beacon>();
+
         private int? _dLevels;
 
         /// <summary>

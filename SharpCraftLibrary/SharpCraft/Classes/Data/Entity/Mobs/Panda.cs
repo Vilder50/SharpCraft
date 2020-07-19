@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Panda : TameableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Panda> PathCreator => new Data.DataPathCreator<Panda>();
+
+        /// <summary>
         /// Creates a new panda
         /// </summary>
         /// <param name="type">the type of entity</param>

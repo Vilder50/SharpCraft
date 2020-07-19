@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class BrewingStand : BaseInventory
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BrewingStand> PathCreator => new Data.DataPathCreator<BrewingStand>();
+
         private Item[]? _dItems;
 
         /// <summary>

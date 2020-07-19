@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public class Jukebox : BaseBlockEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Jukebox> PathCreator => new Data.DataPathCreator<Jukebox>();
+
+        /// <summary>
         /// Creates a jukebox block
         /// </summary>
         /// <param name="type">The type of block</param>

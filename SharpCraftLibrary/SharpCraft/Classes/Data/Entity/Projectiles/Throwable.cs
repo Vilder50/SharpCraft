@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Throwable : BaseProjectile
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Throwable> PathCreator => new Data.DataPathCreator<Throwable>();
+
+        /// <summary>
         /// Creates a new <see cref="ID.Entity.egg"/>, <see cref="ID.Entity.ender_pearl"/>, <see cref="ID.Entity.experience_bottle"/>, <see cref="ID.Entity.potion"/> or <see cref="ID.Entity.snowball"/>
         /// </summary>
         /// <param name="type">the type of entity</param>

@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class DroppedItem : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<DroppedItem> PathCreator => new Data.DataPathCreator<DroppedItem>();
+
+        /// <summary>
         /// Creates a new item
         /// </summary>
         /// <param name="type">the type of entity</param>

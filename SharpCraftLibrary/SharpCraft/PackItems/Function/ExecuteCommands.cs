@@ -317,13 +317,13 @@ namespace SharpCraft.FunctionWriters
                     }
                     else
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords), ID.EntityDataModifierType.set, new Vector(x.IsInt() ? sizeX * x.IntValue!.Value : 0, y.IsInt() ? sizeY * y.IntValue!.Value : 0, z.IsInt() ? sizeZ * z.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagDoubleArray, new object[] { }).GetDataString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new Vector(x.IsInt() ? sizeX * x.IntValue!.Value : 0, y.IsInt() ? sizeY * y.IntValue!.Value : 0, z.IsInt() ? sizeZ * z.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagDoubleArray, new object[] { }).GetDataString());
                     }
                     if (relativeX)
                     {
                         if (!x.IsInt() || x.IntValue!.Value != 0)
                         {
-                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X), 1 / sizeX);
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.X), 1 / sizeX);
                             if (x.IsInt())
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, x.IntValue!.Value);
@@ -332,22 +332,22 @@ namespace SharpCraft.FunctionWriters
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, x.ScoreValue!);
                             }
-                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(tempScore);
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(tempScore);
                         }
                     }
                     else if (x.IsScore())
                     {
-                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(x.ScoreValue!);
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.X)), ID.StoreTypes.Double, sizeX).Entity.Score.Get(x.ScoreValue!);
                     }
                     else if (!hasRelative)
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.X), ID.EntityDataModifierType.set, (sizeX * x.IntValue!.Value).ToString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.X), ID.EntityDataModifierType.set, (sizeX * x.IntValue!.Value).ToString());
                     }
                     if (relativeY)
                     {
                         if (!y.IsInt() || y.IntValue!.Value != 0)
                         {
-                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y), 1 / sizeY);
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Y), 1 / sizeY);
                             if (y.IsInt())
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, y.IntValue!.Value);
@@ -356,22 +356,22 @@ namespace SharpCraft.FunctionWriters
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, y.ScoreValue!);
                             }
-                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(tempScore);
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(tempScore);
                         }
                     }
                     else if (y.IsScore())
                     {
-                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(y.ScoreValue!);
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Y)), ID.StoreTypes.Double, sizeY).Entity.Score.Get(y.ScoreValue!);
                     }
                     else if (!hasRelative)
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Y), ID.EntityDataModifierType.set, (sizeY * y.IntValue!.Value).ToString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Y), ID.EntityDataModifierType.set, (sizeY * y.IntValue!.Value).ToString());
                     }
                     if (relativeZ)
                     {
                         if (!z.IsInt() || z.IntValue!.Value != 0)
                         {
-                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z), 1 / sizeZ);
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Z), 1 / sizeZ);
                             if (z.IsInt())
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, z.IntValue!.Value);
@@ -380,18 +380,18 @@ namespace SharpCraft.FunctionWriters
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, z.ScoreValue!);
                             }
-                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(tempScore);
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(tempScore);
                         }
                     }
                     else if (z.IsScore())
                     {
-                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(z.ScoreValue!);
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Z)), ID.StoreTypes.Double, sizeZ).Entity.Score.Get(z.ScoreValue!);
                     }
                     else if (!hasRelative)
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords!.Z), ID.EntityDataModifierType.set, (sizeZ * z.IntValue!.Value).ToString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords!.Z), ID.EntityDataModifierType.set, (sizeZ * z.IntValue!.Value).ToString());
                     }
-                    setup.Entity.Data.Copy(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Coords)));
+                    setup.Entity.Data.Copy(ID.Selector.s, Entities.AreaCloud.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Coords)));
                 });
                 group.Execute.At(positionSelector);
             }, forceExecute: true);
@@ -525,13 +525,13 @@ namespace SharpCraft.FunctionWriters
                     }
                     else
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation), ID.EntityDataModifierType.set, new Rotation(horizontal.IsInt() ? sizeHorizontal * horizontal.IntValue!.Value : 0, vertical.IsInt() ? sizeVertical * vertical.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagFloatArray, new object[] { }).GetDataString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new Rotation(horizontal.IsInt() ? sizeHorizontal * horizontal.IntValue!.Value : 0, vertical.IsInt() ? sizeVertical * vertical.IntValue!.Value : 0).GetAsArray(ID.NBTTagType.TagFloatArray, new object[] { }).GetDataString());
                     }
                     if (relativeHorizontal)
                     {
                         if (!horizontal.IsInt() || horizontal.IntValue!.Value != 0)
                         {
-                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y), 1 / sizeHorizontal);
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.Y), 1 / sizeHorizontal);
                             if (horizontal.IsInt())
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, horizontal.IntValue!.Value);
@@ -540,22 +540,22 @@ namespace SharpCraft.FunctionWriters
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, horizontal.ScoreValue!);
                             }
-                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(tempScore);
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(tempScore);
                         }
                     }
                     else if (horizontal.IsScore())
                     {
-                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(horizontal.ScoreValue!);
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.Y)), ID.StoreTypes.Float, sizeHorizontal).Entity.Score.Get(horizontal.ScoreValue!);
                     }
                     else if (!hasRelative)
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.Y), ID.EntityDataModifierType.set, (sizeHorizontal * horizontal.IntValue!.Value).ToString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.Y), ID.EntityDataModifierType.set, (sizeHorizontal * horizontal.IntValue!.Value).ToString());
                     }
                     if (relativeVertical)
                     {
                         if (!vertical.IsInt() || vertical.IntValue!.Value != 0)
                         {
-                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X), 1 / sizeVertical);
+                            setup.Execute.Store(tempScore).World.Data.Get(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.X), 1 / sizeVertical);
                             if (vertical.IsInt())
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, vertical.IntValue!.Value);
@@ -564,18 +564,18 @@ namespace SharpCraft.FunctionWriters
                             {
                                 setup.Entity.Score.Operation(tempScore, tempScore, ID.Operation.Add, vertical.ScoreValue!);
                             }
-                            setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(tempScore);
+                            setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(tempScore);
                         }
                     }
                     else if (vertical.IsScore())
                     {
-                        setup.Execute.Store(new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(vertical.ScoreValue!);
+                        setup.Execute.Store(new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.X)), ID.StoreTypes.Float, sizeVertical).Entity.Score.Get(vertical.ScoreValue!);
                     }
                     else if (!hasRelative)
                     {
-                        setup.World.Data.Change(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation!.X), ID.EntityDataModifierType.set, (sizeVertical * vertical.IntValue!.Value).ToString());
+                        setup.World.Data.Change(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation!.X), ID.EntityDataModifierType.set, (sizeVertical * vertical.IntValue!.Value).ToString());
                     }
-                    setup.Entity.Data.Copy(ID.Selector.s, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Data.DataPathCreator.GetPath<Entities.AreaCloud>(d => d.Rotation)));
+                    setup.Entity.Data.Copy(ID.Selector.s, Entities.AreaCloud.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new StorageDataLocation(tempStorage, Entities.AreaCloud.PathCreator.Make(d => d.Rotation)));
                 });
                 group.Execute.Rotated(positionSelector);
             }, forceExecute: true);

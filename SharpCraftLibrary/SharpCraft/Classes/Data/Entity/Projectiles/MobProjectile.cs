@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class MobProjectile : BaseProjectile
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<MobProjectile> PathCreator => new Data.DataPathCreator<MobProjectile>();
+
+        /// <summary>
         /// Creates a new <see cref="ID.Entity.dragon_fireball"/>, <see cref="ID.Entity.fireball"/>, <see cref="ID.Entity.small_fireball"/> or <see cref="ID.Entity.wither_skull"/>
         /// </summary>
         /// <param name="type">the type of entity</param>

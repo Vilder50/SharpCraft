@@ -320,6 +320,12 @@ namespace SharpCraft.Data
 
             return rootObject;
         }
+
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public static Data.DataPathCreator<DataHolderBase> PathCreator => new Data.DataPathCreator<DataHolderBase>();
     }
 
     /// <summary>

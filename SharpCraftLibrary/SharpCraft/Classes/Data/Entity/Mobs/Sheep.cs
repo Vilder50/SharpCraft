@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Sheep : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Sheep> PathCreator => new Data.DataPathCreator<Sheep>();
+
+        /// <summary>
         /// Creates a new sheep
         /// </summary>
         /// <param name="type">the type of entity</param>
