@@ -22,7 +22,7 @@ namespace SharpCraft.Blocks
         /// <returns>true if the block fits</returns>
         public new static bool FitsBlock(ID.Block block)
         {
-            return block == SharpCraft.ID.Block.wall_torch || block == SharpCraft.ID.Block.soul_wall_touch;
+            return block == SharpCraft.ID.Block.wall_torch || block == SharpCraft.ID.Block.soul_wall_torch;
         }
 
         /// <summary>

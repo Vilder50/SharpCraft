@@ -36,7 +36,7 @@ namespace SharpCraft.Entities
         /// The villagers proffesion
         /// </summary>
         [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagString)]
-        public ID.VillagerProffession? VillagerProfession { get; set; }
+        public ID.VillagerProfession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager

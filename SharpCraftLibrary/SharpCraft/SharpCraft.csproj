@@ -12,5 +12,8 @@
     <DocumentationFile>C:\Users\Morten\source\repos\git\SharpCraft\SharpCraftLibrary\SharpCraft\SharpCraft.xml</DocumentationFile>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="IDs\Generated\" />
+  </ItemGroup>
 
 </Project>

@@ -102,8 +102,8 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("enchant @a minecraft:sharpness 5", new EnchantCommand(ID.Selector.a, 5, ID.Enchant.sharpness).GetCommandString());
 
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new EnchantCommand(ID.Selector.a, 0, ID.Enchant.aqua_infinity));
-            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new EnchantCommand(ID.Selector.a, 6, ID.Enchant.aqua_infinity));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new EnchantCommand(ID.Selector.a, 0, ID.Enchant.aqua_affinity));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => new EnchantCommand(ID.Selector.a, 6, ID.Enchant.aqua_affinity));
             Assert.ThrowsException<ArgumentNullException>(() => new EnchantCommand(null!, 2, ID.Enchant.bane_of_arthropods));
         }
 

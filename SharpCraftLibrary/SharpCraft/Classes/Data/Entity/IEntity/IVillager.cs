@@ -22,7 +22,7 @@ namespace SharpCraft.Entities.Interfaces
         /// The villagers proffesion
         /// </summary>
         [DataTag("VillagerData.profession")]
-        ID.VillagerProffession? VillagerProfession { get; set; }
+        ID.VillagerProfession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager
