@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SharpCraft.Data;
+#pragma warning disable 1591
+
 namespace SharpCraft
 {
     public partial class ID
@@ -8,7 +8,7 @@ namespace SharpCraft
         /// <summary>
         /// File names used by Minecraft
         /// </summary>
-        public static class Files
+        public static partial class Files
         {
             /// <summary>
             /// Loot table file names used by Minecraft which then can be used in / as a <see cref="LootTable"/>
@@ -103,7 +103,6 @@ namespace SharpCraft
                 /// </summary>
                 public static class VillagerGifts
                 {
-#pragma warning disable 1591
                     public static string ArmorerGift { get { return "gameplay/hero_of_the_village/armorer_gift"; } }
                     public static string ButcherGift { get { return "gameplay/hero_of_the_village/butcher_gift"; } }
                     public static string CartographerGift { get { return "gameplay/hero_of_the_village/cartographer_gift"; } }
@@ -117,7 +116,6 @@ namespace SharpCraft
                     public static string ShepherdGift { get { return "gameplay/hero_of_the_village/shepherd_gift"; } }
                     public static string ToolSmithGift { get { return "gameplay/hero_of_the_village/toolsmith_gift"; } }
                     public static string WeaponsmithGift { get { return "gameplay/hero_of_the_village/weaponsmith_gift"; } }
-#pragma warning restore 1591
                 }
 
                 /// <summary>
@@ -195,444 +193,65 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// These groups are called tags in Minecraft. But let's face it. It's a bad name!
+            /// Names of the different types of groups in the game (Normally called "tags" in the game)
             /// </summary>
-            public static class Groups
+            public static partial class Groups
             {
                 /// <summary>
                 /// Function groups
                 /// </summary>
-                public enum Function
+                /// <summary>
+				/// Item groups
+				/// </summary>
+				public class Function : NamespacedEnumLike<string>, IFunction
                 {
+                    #pragma warning disable 1591
+                    public Function(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+                    {
+                    }
+
+                    /// <summary>
+                    /// Converts this type into a <see cref="DataPartObject"/>
+                    /// </summary>
+                    /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+                    /// <returns></returns>
+                    public DataPartObject GetAsDataObject(object?[] conversionData)
+                    {
+                        return (this as IGroupable).GetGroupData(conversionData);
+                    }
+
+                    /// <summary>
+                    /// Returns a string that represents the current object
+                    /// </summary>
+                    /// <returns>A string that represents the current object</returns>
+                    public override string ToString()
+                    {
+                        return "#" + base.ToString();
+                    }
+
+                    public string GetNamespacedName()
+                    {
+                        return ToString();
+                    }
+
+                    public string Name => ToString();
+
+                    public bool IsAGroup => true;
+
+                    public string FileId => Value;
+
+                    public BasePackNamespace PackNamespace => PackNamespace ?? MockNamespace.GetMinecraftNamespace();
+
                     /// <summary>
                     /// Functions inside this group gets evoked everytime the world loads or someone uses /reload
                     /// (They are run when the datapack containing the group loads)
                     /// </summary>
-                    load,
+                    public static readonly Function load = new Function("load");
 
                     /// <summary>
                     /// Functions inside this groups runs 20 times a second
                     /// </summary>
-                    tick
-                }
-                
-                /// <summary>
-                /// Block groups
-                /// </summary>
-                public enum Blocks
-                {
-                    #pragma warning disable 1591
-                    acacia_logs,
-                    birch_logs,
-                    buttons,
-                    carpets,
-                    coral_blocks,
-                    corals,
-                    dark_oak_logs,
-                    doors,
-                    flower_pots,
-                    ice,
-                    leaves,
-                    oak_logs,
-                    planks,
-                    sand,
-                    saplings,
-                    slabs,
-                    spruce_logs,
-                    stairs,
-                    stone_bricks,
-                    wall_corals,
-                    wooden_buttons,
-                    wooden_doors,
-                    wooden_pressure_plates,
-                    wooden_slabs,
-                    wooden_stairs,
-                    small_flowers,
-                    crops,
-                    tall_flowers,
-                    standing_signs,
-                    wall_signs,
-                    walls,
-                    #pragma warning restore 1591
-
-                    /// <summary>
-                    /// Endermen can only pick up blocks in this group
-                    /// </summary>
-                    enderman_holdable,
-
-                    /// <summary>
-                    /// This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
-                    /// Changes the death message caused by the block as a falling block landing on and killing a player
-                    /// </summary>
-                    anvil,
-
-                    /// <summary>
-                    /// Right clicking these blocks with a map marks it on the map
-                    /// </summary>
-                    banners,
-
-                    /// <summary>
-                    /// Blocks cats can sit on.
-                    /// Blocks which can be slept in
-                    /// </summary>
-                    beds,
-
-                    /// <summary>
-                    /// Blocks in this groups does not allow water and honey to drip through them
-                    /// </summary>
-                    impermeable,
-
-                    /// <summary>
-                    /// Blocks leads can attach to
-                    /// Blocks which mobs see as fences while pathfinding
-                    /// </summary>
-                    fences,
-
-                    /// <summary>
-                    /// Leaves wont decay around these blocks
-                    /// Trees can grow into blocks with this tag
-                    /// </summary>
-                    logs,
-
-                    /// <summary>
-                    /// When one of these blocks are bonemealed under water in a warm water biome the block duplicates
-                    /// </summary>
-                    underwater_bonemeals,
-
-                    /// <summary>
-                    /// Blocks in this group allows players to spawn on them
-                    /// </summary>
-                    valid_spawn,
-
-                    /// <summary>
-                    /// Blocks in this group can be broken using shears
-                    /// If a block in this group is under a note block it will sound like a guitar
-                    /// </summary>
-                    wool,
-
-                    /// <summary>
-                    /// Blocks in this group allows bamboo to be planted ontop
-                    /// </summary>
-                    bamboo_plantable,
-
-                    /// <summary>
-                    /// Blocks the wither wont have easy to break
-                    /// </summary>
-                    wither_immune,
-
-                    /// <summary>
-                    /// Blocks the enderdragon wont destroy
-                    /// </summary>
-                    dragon_immune,
-
-                    /// <summary>
-                    /// Blocks bees can make grow
-                    /// </summary>
-                    bee_growables,
-
-                    /// <summary>
-                    /// Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
-                    /// </summary>
-                    beehives,
-
-                    /// <summary>
-                    /// Blocks bees can pollinate and remember
-                    /// </summary>
-                    flowers,
-
-                    /// <summary>
-                    /// Blocks fences doesn't connect to
-                    /// </summary>
-                    shulker_boxes,
-
-                    /// <summary>
-                    /// Blocks cocoa beans can be placed on
-                    /// </summary>
-                    jungle_logs,
-
-                    /// <summary>
-                    /// Blocks mobs can't spawn on.
-                    /// Blocks minecarts can be dispenced on to.
-                    /// Blocks tnt minecarts doesn't destroy.
-                    /// </summary>
-                    rails,
-
-                    /// <summary>
-                    /// Water doesn't break these blocks
-                    /// </summary>
-                    signs,
-
-                    /// <summary>
-                    /// Blocks for building a beacon pyramid
-                    /// </summary>
-                    beacon_base_blocks,
-
-                    /// <summary>
-                    /// Make blocks climbable
-                    /// </summary>
-                    climbable,
-
-                    /// <summary>
-                    /// Blocks which can be broken with water bottle water. Falling blocks will try to fall through these blocks. 
-                    /// </summary>
-                    fire,
-
-                    /// <summary>
-                    /// Blocks nether fungus, roots and sprouts can be placed on. Netherrack can be bonemealed if around of these blocks (netherrack only converts into nylium).
-                    /// </summary>
-                    nylium,
-
-                    /// <summary>
-                    /// none solid blocks which still makes walls connect upwards.
-                    /// </summary>
-                    wall_post_override,
-
-                    /// <summary>
-                    /// Blocks used for making the T part of the wither summon build.
-                    /// </summary>
-                    wither_summon_base_blocks,
-
-                    /// <summary>
-                    /// Blocks hoglins tries to stay away from
-                    /// </summary>
-                    hoglin_repellents,
-
-                    /// <summary>
-                    /// Blocks piglins tries to stay away from
-                    /// </summary>
-                    piglin_repellents,
-
-                    /// <summary>
-                    /// Blocks the <see cref="ID.Enchant.soul_speed"/> enchant works on
-                    /// </summary>
-                    soul_speed_blocks,
-
-                    /// <summary>
-                    /// Shriders in this block will shake
-                    /// </summary>
-                    strider_warm_blocks,
-
-                    /// <summary>
-                    /// Can be lit with flint and steel
-                    /// </summary>
-                    campfires,
-
-                    /// <summary>
-                    /// Piglins will be angry if any of these blocks are broken
-                    /// </summary>
-                    guarded_by_piglins,
-
-                    /// <summary>
-                    /// Mobs cannot spawn in these blocks
-                    /// </summary>
-                    prevent_mob_spawning_inside
-                }
-
-                /// <summary>
-                /// fluid groups used by Minecraft
-                /// </summary>
-                public enum Fluid
-                {
-                    /// <summary>
-                    /// Cactus breaks beside these.
-                    /// Used to make a fluid look like lava.
-                    /// Used to make smoke particles when rain hits these.
-                    /// Items and experience orbs burns inside these.
-                    /// used when creating cobblestone/stone/obsidian.
-                    /// </summary>
-                    lava,
-
-                    /// <summary>
-                    /// Corals must be beside one of these.
-                    /// Farmland stays hydrated around these.
-                    /// Sugar canes can stay around these.
-                    /// Sponges absorb these.
-                    /// some particles can only survive in these.
-                    /// Entities in these moves like in water.
-                    /// concrete gets solid in these.
-                    /// items float in these.
-                    /// glass bottles can be filled with these.
-                    /// </summary>
-                    water
-                }
-
-                /// <summary>
-                /// Item groups
-                /// </summary>
-                public enum Items
-                {
-#pragma warning disable 1591
-                    acacia_logs,
-                    anvil,
-                    birch_logs,
-                    buttons,
-                    dark_oak_logs,
-                    doors,
-                    jungle_logs,
-                    leaves,
-                    oak_logs,
-                    rails,
-                    sand,
-                    slabs,
-                    spruce_logs,
-                    stairs,
-                    stone_bricks,
-                    tall_flowers,
-                    fence_gates,
-#pragma warning restore 1591
-
-                    /// <summary>
-                    /// Items in this group can be used to repeair wooden tools and shields.
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    planks,
-
-                    /// <summary>
-                    /// Dolphins swims to players with this item
-                    /// Can be feet to dolphins
-                    /// </summary>
-                    fishes,
-
-                    /// <summary>
-                    /// Items which can be used to breed bees
-                    /// </summary>
-                    flowers,
-
-                    /// <summary>
-                    /// Items which can be placed on a lectern (only accepts <see cref="ID.Item.writable_book"/> and <see cref="ID.Item.written_book"/>)
-                    /// </summary>
-                    lectern_books,
-
-                    /// <summary>
-                    /// Items which can be shot from a bow/crossbow
-                    /// </summary>
-                    arrows,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    banners,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 1200 ticks
-                    /// </summary>
-                    boats,
-
-                    /// <summary>
-                    /// Items which can be placed on llamas.
-                    /// Items which burns in a furnace for 67 ticks
-                    /// </summary>
-                    carpets,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    logs,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 100 ticks
-                    /// </summary>
-                    saplings,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 200 ticks
-                    /// </summary>
-                    signs,
-
-                    /// <summary>
-                    /// Items used for crafting suspicious stew.
-                    /// Items which can be fed to brown mushrooms.
-                    /// Items which bees follows
-                    /// </summary>
-                    small_flowers,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 100 ticks
-                    /// </summary>
-                    wooden_buttons,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 200 ticks
-                    /// </summary>
-                    wooden_doors,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    wooden_pressure_plates,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 150 ticks
-                    /// </summary>
-                    wooden_slabs,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    wooden_stairs,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 300 ticks
-                    /// </summary>
-                    wooden_trapdoors,
-
-                    /// <summary>
-                    /// Items which burns in a furnace for 100 ticks
-                    /// </summary>
-                    wool,
-
-                    /// <summary>
-                    /// Items which can be used for activating beacons.
-                    /// </summary>
-                    beacon_payment_items,
-
-                    /// <summary>
-                    /// Items piglins wont pickup
-                    /// </summary>
-                    piglin_repellents,
-
-                    /// <summary>
-                    /// Won't be able to be used as furnace fuel
-                    /// </summary>
-                    non_flammable_wood,
-
-                    /// <summary>
-                    /// Items piglins pickup.
-                    /// </summary>
-                    piglin_loved,
-
-                    /// <summary>
-                    /// Bells and lanterns cannot be placed on the bottom of these blocks
-                    /// </summary>
-                    unstable_bottom_center,
-                }
-
-                /// <summary>
-                /// entity groups
-                /// </summary>
-                public enum Entities
-                {
-                    
-#pragma warning disable 1591
-                    skeletons,
-                    arrows,
-#pragma warning restore 1591
-
-                    /// <summary>
-                    /// entities which can be in beehives
-                    /// </summary>
-                    beehive_inhabitors,
-
-                    /// <summary>
-                    /// Entities which glows when the bell rings.
-                    /// Entities which don't override ravager AI when riding on one
-                    /// </summary>
-                    raiders,
-
-                    /// <summary>
-                    /// Entities which can break chorus fruit.
-                    /// </summary>
-                    impact_projectiles,
+                    public static readonly Function tick = new Function("tick");
                 }
             }
         }

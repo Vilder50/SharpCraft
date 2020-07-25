@@ -36,8 +36,8 @@ namespace SharpCraft
                 {
                     MinecraftNamespace = Datapack.Namespace<PackNamespace>("minecraft");
                     #pragma warning disable IDE0067
-                    FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-                    FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
+                    FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load, new List<IFunction>(), true);
+                    FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick, new List<IFunction>(), true);
                     #pragma warning restore IDE0067
 
                     SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);

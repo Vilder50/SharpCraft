@@ -13,9 +13,9 @@ namespace SharpCraft
     public static partial class ID
     {
 		#pragma warning disable 1591
-        public class Liquid : NamespacedEnumLike<string>, ILiquidType
+        public class Fluid : NamespacedEnumLike<string>, IFluidType
         {
-            public Liquid(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            public Fluid(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
             {
             }
 
@@ -33,11 +33,11 @@ namespace SharpCraft
 
             public bool IsAGroup => false;
 
-            public static readonly Liquid empty = new Liquid("empty");
-            public static readonly Liquid flowing_water = new Liquid("flowing_water");
-            public static readonly Liquid water = new Liquid("water");
-            public static readonly Liquid flowing_lava = new Liquid("flowing_lava");
-            public static readonly Liquid lava = new Liquid("lava");
+            public static readonly Fluid empty = new Fluid("empty");
+            public static readonly Fluid flowing_water = new Fluid("flowing_water");
+            public static readonly Fluid water = new Fluid("water");
+            public static readonly Fluid flowing_lava = new Fluid("flowing_lava");
+            public static readonly Fluid lava = new Fluid("lava");
 
         }
     }

@@ -32,9 +32,9 @@ namespace SharpCraft
     }
 
     /// <summary>
-    /// Interface for liquid types
+    /// Interface for fluid types
     /// </summary>
-    public interface ILiquidType : IGroupable, IConvertableToDataTag, IConvertableToDataObject
+    public interface IFluidType : IGroupable, IConvertableToDataTag, IConvertableToDataObject
     {
 
     }

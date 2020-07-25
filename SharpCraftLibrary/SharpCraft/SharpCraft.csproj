@@ -13,7 +13,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="IDs\Generated\" />
+    <Folder Include="IDs\Generated\Files\" />
   </ItemGroup>
 
 </Project>

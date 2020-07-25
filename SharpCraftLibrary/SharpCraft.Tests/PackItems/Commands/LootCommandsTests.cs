@@ -11,8 +11,6 @@ namespace SharpCraft.Tests.Commands
     [TestClass]
     public class LootCommandsTests
     {
-        //TODO add tests for the parts of the loot command
-
         [TestMethod]
         public void LootCommandTest()
         {

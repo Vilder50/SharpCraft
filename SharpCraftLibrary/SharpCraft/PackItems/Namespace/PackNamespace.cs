@@ -633,6 +633,19 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Returns a <see cref="FunctionGroup"/> with the given functions
+        /// </summary>
+        /// <param name="group">The group</param>
+        /// <param name="functionList">The functions in the group</param>
+        /// <param name="append">If the functions should be appended to existing functions from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="FunctionGroup"/></returns>
+        public FunctionGroup Group(ID.Files.Groups.Function group, List<IFunction> functionList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        {
+            return Group(group.Value, functionList, append, writeSetting);
+        }
+
+        /// <summary>
         /// Returns a <see cref="BlockGroup"/> with the given <see cref="IBlockType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
@@ -658,6 +671,19 @@ namespace SharpCraft
             {
                 return new BlockGroup(this, name, blockList, append, writeSetting);
             }
+        }
+
+        /// <summary>
+        /// Returns a <see cref="BlockGroup"/> with the given <see cref="IBlockType"/>s
+        /// </summary>
+        /// <param name="group">The group</param>
+        /// <param name="blockList">The <see cref="IBlockType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IBlockType"/>s should be appended to existing <see cref="IBlockType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="BlockGroup"/></returns>
+        public BlockGroup Group(ID.Files.Groups.Block group, List<IBlockType> blockList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        {
+            return Group(group.Value, blockList, append, writeSetting);
         }
 
         /// <summary>
@@ -689,6 +715,19 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Returns a <see cref="ItemGroup"/> with the given <see cref="IItemType"/>s
+        /// </summary>
+        /// <param name="group">The group</param>
+        /// <param name="itemList">The <see cref="IItemType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IItemType"/>s should be appended to existing <see cref="IItemType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="ItemGroup"/></returns>
+        public ItemGroup Group(ID.Files.Groups.Item group, List<IItemType> itemList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        {
+            return Group(group.Value, itemList, append, writeSetting);
+        }
+
+        /// <summary>
         /// Returns a <see cref="EntityGroup"/> with the given <see cref="IEntityType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
@@ -717,31 +756,57 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns a <see cref="LiquidGroup"/> with the given <see cref="ILiquidType"/>s
+        /// Returns a <see cref="EntityGroup"/> with the given <see cref="IEntityType"/>s
+        /// </summary>
+        /// <param name="group">The group</param>
+        /// <param name="entityList">The <see cref="IEntityType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IEntityType"/>s should be appended to existing <see cref="IEntityType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="EntityGroup"/></returns>
+        public EntityGroup Group(ID.Files.Groups.Entity group, List<IEntityType> entityList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        {
+            return Group(group.Value, entityList, append, writeSetting);
+        }
+
+        /// <summary>
+        /// Returns a <see cref="FluidGroup"/> with the given <see cref="IFluidType"/>s
         /// </summary>
         /// <param name="name">The name of the group</param>
-        /// <param name="liquidList">The <see cref="ILiquidType"/>s in the group</param>
-        /// <param name="append">If the <see cref="ILiquidType"/>s should be appended to existing <see cref="ILiquidType"/>s from another datapack</param>
+        /// <param name="fluidList">The <see cref="IFluidType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IFluidType"/>s should be appended to existing <see cref="IFluidType"/>s from another datapack</param>
         /// <param name="writeSetting">The settings for how to write the file</param>
-        /// <returns>The <see cref="LiquidGroup"/></returns>
-        public LiquidGroup Group(string? name, List<ILiquidType> liquidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        /// <returns>The <see cref="FluidGroup"/></returns>
+        public FluidGroup Group(string? name, List<IFluidType> fluidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
         {
-            LiquidGroup? existingFile = null;
+            FluidGroup? existingFile = null;
             if (!(name is null))
             {
-                existingFile = (LiquidGroup?)GetFile("group_liquid", name);
+                existingFile = (FluidGroup?)GetFile("group_liquid", name);
             }
             if (!(existingFile is null))
             {
                 ThrowExceptionOnGroupStacking(existingFile, append, writeSetting);
 
-                existingFile.Items.AddRange(liquidList);
+                existingFile.Items.AddRange(fluidList);
                 return existingFile;
             }
             else
             {
-                return new LiquidGroup(this, name, liquidList, append, writeSetting);
+                return new FluidGroup(this, name, fluidList, append, writeSetting);
             }
+        }
+
+        /// <summary>
+        /// Returns a <see cref="FluidGroup"/> with the given <see cref="IFluidType"/>s
+        /// </summary>
+        /// <param name="group">The group</param>
+        /// <param name="fluidList">The <see cref="IFluidType"/>s in the group</param>
+        /// <param name="append">If the <see cref="IFluidType"/>s should be appended to existing <see cref="IFluidType"/>s from another datapack</param>
+        /// <param name="writeSetting">The settings for how to write the file</param>
+        /// <returns>The <see cref="FluidGroup"/></returns>
+        public FluidGroup Group(ID.Files.Groups.Fluid group, List<IFluidType> fluidList, bool append = true, BaseFile.WriteSetting writeSetting = BaseFile.WriteSetting.OnDispose)
+        {
+            return Group(group.Value, fluidList, append, writeSetting);
         }
 
         /// <summary>

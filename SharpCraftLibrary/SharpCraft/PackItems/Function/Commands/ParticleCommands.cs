@@ -239,16 +239,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle minecraft:dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle minecraft:dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle minecraft:dust {colorString} {ParticleSize.ToMinecraftDouble()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }
@@ -355,7 +355,7 @@ namespace SharpCraft.Commands
         /// <returns>particle [AsBlockDust] [Block] [DisplayCoords] [Size] [Speed] [Count] [Force] [Selector]</returns>
         public override string GetCommandString()
         {
-            string particleType = AsBlockDust ? "falling_dust" : "block";
+            string particleType = "minecraft:" + (AsBlockDust ? "falling_dust" : "block");
             if (Selector is null)
             {
                 if (!Force)
@@ -473,16 +473,16 @@ namespace SharpCraft.Commands
             {
                 if (!Force)
                 {
-                    return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
+                    return $"particle minecraft:item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count}";
                 }
                 else
                 {
-                    return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
+                    return $"particle minecraft:item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")}";
                 }
             }
             else
             {
-                return $"particle item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
+                return $"particle minecraft:item {item.GetIDDataString()} {DisplayCoords.GetVectorString()} {Size.X.ToMinecraftDouble()} {Size.Y.ToMinecraftDouble()} {Size.Z.ToMinecraftDouble()} {Speed.ToMinecraftDouble()} {Count} {(Force ? "force" : "normal")} {Selector.GetSelectorString()}";
             }
         }
     }

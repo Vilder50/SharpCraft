@@ -34,7 +34,7 @@ namespace SharpCraft.Tests.Data
         {
             Assert.AreEqual("tag.Enchantments", Item.PathCreator.Make(i => i.Enchants));
             Assert.AreEqual("tag.Enchantments[10].lvl", Item.PathCreator.Make(i => i.Enchants![10]!.LVL));
-            Assert.AreEqual("tag.Enchantments[{id:\"minecraft:aqua_infinity\"}].lvl", Item.PathCreator.Make((i, t) => i.Enchants![t.ArrayFilter(new Item.Enchantment(ID.Enchant.aqua_affinity, null))]!.LVL));
+            Assert.AreEqual("tag.Enchantments[{id:\"minecraft:aqua_affinity\"}].lvl", Item.PathCreator.Make((i, t) => i.Enchants![t.ArrayFilter(new Item.Enchantment(ID.Enchant.aqua_affinity, null))]!.LVL));
             Assert.AreEqual("tag.Enchantments[].lvl", Item.PathCreator.Make((i, t) => i.Enchants![t.ArrayFilter(null)]!.LVL));
 
             Assert.ThrowsException<PathCreatorException>(() => Item.PathCreator.Make((i, t) => t.CompoundCheck(i.Enchants![t.ArrayFilter(null)], new Item.Enchantment(ID.Enchant.aqua_affinity, null))!.LVL));

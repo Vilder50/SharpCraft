@@ -13105,6 +13105,18 @@
             <summary>
             File names used by Minecraft
             </summary>
+            <summary>
+            File names used by Minecraft
+            </summary>
+            <summary>
+            File names used by Minecraft
+            </summary>
+            <summary>
+            File names used by Minecraft
+            </summary>
+            <summary>
+            File names used by Minecraft
+            </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.LootTables">
             <summary>
@@ -13192,13 +13204,41 @@
         </member>
         <member name="T:SharpCraft.ID.Files.Groups">
             <summary>
-            These groups are called tags in Minecraft. But let's face it. It's a bad name!
+            Names of the different types of groups in the game (Normally called "tags" in the game)
+            </summary>
+            <summary>
+            Names of the different types of groups in the game (Normally called "tags" in the game)
+            </summary>
+            <summary>
+            Names of the different types of groups in the game (Normally called "tags" in the game)
+            </summary>
+            <summary>
+            Names of the different types of groups in the game (Normally called "tags" in the game)
+            </summary>
+            <summary>
+            Names of the different types of groups in the game (Normally called "tags" in the game)
             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Function">
             <summary>
             Function groups
             </summary>
+            <summary>
+            Item groups
+            </summary>
+        </member>
+        <member name="M:SharpCraft.ID.Files.Groups.Function.GetAsDataObject(System.Object[])">
+            <summary>
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpCraft.ID.Files.Groups.Function.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns>A string that represents the current object</returns>
         </member>
         <member name="F:SharpCraft.ID.Files.Groups.Function.load">
             <summary>
@@ -13211,360 +13251,397 @@
             Functions inside this groups runs 20 times a second
             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Blocks">
+        <member name="T:SharpCraft.ID.Files.Groups.Block">
             <summary>
             Block groups
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.enderman_holdable">
+        <member name="M:SharpCraft.ID.Files.Groups.Block.GetAsDataObject(System.Object[])">
             <summary>
-            Endermen can only pick up blocks in this group
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.anvil">
+        <member name="M:SharpCraft.ID.Files.Groups.Block.ToString">
             <summary>
-            This group makes anvils in it show their gui when clicked (Only works for anvil blocks)
-            Changes the death message caused by the block as a falling block landing on and killing a player
+            Returns a string that represents the current object
             </summary>
+            <returns>A string that represents the current object</returns>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.banners">
-            <summary>
-            Right clicking these blocks with a map marks it on the map
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.anvil">
+             <summary>
+            This group makes anvils in it show their gui when clicked (Only works for anvil blocks). Changes the death message caused by the block as a falling block landing on and killing a player
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.beds">
-            <summary>
-            Blocks cats can sit on.
-            Blocks which can be slept in
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.impermeable">
-            <summary>
-            Blocks in this groups does not allow water and honey to drip through them
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.fences">
-            <summary>
-            Blocks leads can attach to
-            Blocks which mobs see as fences while pathfinding
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.logs">
-            <summary>
-            Leaves wont decay around these blocks
-            Trees can grow into blocks with this tag
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.underwater_bonemeals">
-            <summary>
-            When one of these blocks are bonemealed under water in a warm water biome the block duplicates
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.valid_spawn">
-            <summary>
-            Blocks in this group allows players to spawn on them
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wool">
-            <summary>
-            Blocks in this group can be broken using shears
-            If a block in this group is under a note block it will sound like a guitar
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.bamboo_plantable">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.bamboo_plantable_on">
+             <summary>
             Blocks in this group allows bamboo to be planted ontop
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wither_immune">
-            <summary>
-            Blocks the wither wont have easy to break
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.banners">
+             <summary>
+            Right clicking these blocks with a map marks it on the map
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.dragon_immune">
-            <summary>
-            Blocks the enderdragon wont destroy
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.bee_growables">
-            <summary>
-            Blocks bees can make grow
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.beehives">
-            <summary>
-            Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.flowers">
-            <summary>
-            Blocks bees can pollinate and remember
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.shulker_boxes">
-            <summary>
-            Blocks fences doesn't connect to
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.jungle_logs">
-            <summary>
-            Blocks cocoa beans can be placed on
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.rails">
-            <summary>
-            Blocks mobs can't spawn on.
-            Blocks minecarts can be dispenced on to.
-            Blocks tnt minecarts doesn't destroy.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.signs">
-            <summary>
-            Water doesn't break these blocks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.beacon_base_blocks">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.beacon_base_blocks">
+             <summary>
             Blocks for building a beacon pyramid
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.climbable">
-            <summary>
-            Make blocks climbable
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.beds">
+             <summary>
+            Blocks cats can sit on. Blocks which can be slept in
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.fire">
-            <summary>
-            Blocks which can be broken with water bottle water. Falling blocks will try to fall through these blocks. 
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.beehives">
+             <summary>
+            Blocks bees can fill with pollen and blocks dispensers can use a shear or a glass bottle on
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.nylium">
-            <summary>
-            Blocks nether fungus, roots and sprouts can be placed on. Netherrack can be bonemealed if around of these blocks (netherrack only converts into nylium).
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.bee_growables">
+             <summary>
+            Blocks bees can make grow
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wall_post_override">
-            <summary>
-            none solid blocks which still makes walls connect upwards.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.wither_summon_base_blocks">
-            <summary>
-            Blocks used for making the T part of the wither summon build.
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.hoglin_repellents">
-            <summary>
-            Blocks hoglins tries to stay away from
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.piglin_repellents">
-            <summary>
-            Blocks piglins tries to stay away from
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.soul_speed_blocks">
-            <summary>
-            Blocks the <see cref="F:SharpCraft.ID.Enchant.soul_speed"/> enchant works on
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.strider_warm_blocks">
-            <summary>
-            Shriders in this block will shake
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.campfires">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.campfires">
+             <summary>
             Can be lit with flint and steel
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.guarded_by_piglins">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.climbable">
+             <summary>
+            Make blocks climbable
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.dragon_immune">
+             <summary>
+            Blocks the enderdragon wont destroy
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.enderman_holdable">
+             <summary>
+            Endermen can only pick up blocks in this group
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.fences">
+             <summary>
+            Blocks leads can attach to. Blocks which mobs see as fences while pathfinding
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.fire">
+             <summary>
+            Blocks which can be broken with water bottle water. Falling blocks will try to fall through these blocks. 
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.flowers">
+             <summary>
+            Blocks bees can pollinate and remember
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.guarded_by_piglins">
+             <summary>
             Piglins will be angry if any of these blocks are broken
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.hoglin_repellents">
+             <summary>
+            Blocks hoglins tries to stay away from
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.impermeable">
+             <summary>
+            Blocks in this groups does not allow water and honey to drip through them
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.infiniburn_end">
+             <summary>
+            Blocks which burns for forever in the end
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.infiniburn_nether">
+             <summary>
+            Blocks which burns for forever in the nether
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.infiniburn_overworld">
+             <summary>
+            Blocks which burns for forever in the overworld
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.jungle_logs">
+             <summary>
+            Blocks cocoa beans can be placed on
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.logs">
+             <summary>
+            Leaves wont decay around these blocks. Trees can grow into blocks with this tag
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.nylium">
+             <summary>
+            Blocks nether fungus, roots and sprouts can be placed on. Netherrack can be bonemealed if around of these blocks (netherrack only converts into nylium).
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.piglin_repellents">
+             <summary>
+            Blocks piglins tries to stay away from
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.prevent_mob_spawning_inside">
+             <summary>
+            Mobs cannot spawn in these blocks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.rails">
+             <summary>
+            Blocks mobs can't spawn on. Blocks minecarts can be dispenced on to. Blocks tnt minecarts doesn't destroy.
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.shulker_boxes">
+             <summary>
+            Blocks fences doesn't connect to
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.signs">
+             <summary>
+            Water doesn't break these blocks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.soul_speed_blocks">
+             <summary>
+            Blocks the soul speed enchant works on
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.strider_warm_blocks">
+             <summary>
+            Shriders in this block will shake
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.underwater_bonemeals">
+             <summary>
+            When one of these blocks are bonemealed under water in a warm water biome the block duplicates
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.valid_spawn">
+             <summary>
+            Blocks in this group allows players to spawn on them
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.wall_post_override">
+             <summary>
+            none solid blocks which still makes walls connect upwards.
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.wither_immune">
+             <summary>
+            Blocks the wither wont have easy to break
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.wither_summon_base_blocks">
+             <summary>
+            Blocks used for making the T part of the wither summon build.
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Block.wool">
+             <summary>
+            Blocks in this group can be broken using shears. If a block in this group is under a note block it will sound like a guitar
+             </summary>
+        </member>
+        <member name="T:SharpCraft.ID.Files.Groups.Entity">
+            <summary>
+            Entity groups
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Blocks.prevent_mob_spawning_inside">
+        <member name="M:SharpCraft.ID.Files.Groups.Entity.GetAsDataObject(System.Object[])">
             <summary>
-            Mobs cannot spawn in these blocks
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpCraft.ID.Files.Groups.Entity.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns>A string that represents the current object</returns>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Entity.beehive_inhabitors">
+             <summary>
+            entities which can be in beehives
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Entity.impact_projectiles">
+             <summary>
+            Entities which can break chorus fruit.
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Entity.raiders">
+             <summary>
+            Entities which glows when the bell rings. Entities which don't override ravager AI when riding on one
+             </summary>
         </member>
         <member name="T:SharpCraft.ID.Files.Groups.Fluid">
             <summary>
-            fluid groups used by Minecraft
+            Fluid groups
             </summary>
+        </member>
+        <member name="M:SharpCraft.ID.Files.Groups.Fluid.GetAsDataObject(System.Object[])">
+            <summary>
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
+        </member>
+        <member name="M:SharpCraft.ID.Files.Groups.Fluid.ToString">
+            <summary>
+            Returns a string that represents the current object
+            </summary>
+            <returns>A string that represents the current object</returns>
         </member>
         <member name="F:SharpCraft.ID.Files.Groups.Fluid.lava">
-            <summary>
-            Cactus breaks beside these.
-            Used to make a fluid look like lava.
-            Used to make smoke particles when rain hits these.
-            Items and experience orbs burns inside these.
-            used when creating cobblestone/stone/obsidian.
-            </summary>
+             <summary>
+            Cactus breaks beside these. Used to make a fluid look like lava. Used to make smoke particles when rain hits these. Items and experience orbs burns inside these. used when creating cobblestone/stone/obsidian.
+             </summary>
         </member>
         <member name="F:SharpCraft.ID.Files.Groups.Fluid.water">
-            <summary>
-            Corals must be beside one of these.
-            Farmland stays hydrated around these.
-            Sugar canes can stay around these.
-            Sponges absorb these.
-            some particles can only survive in these.
-            Entities in these moves like in water.
-            concrete gets solid in these.
-            items float in these.
-            glass bottles can be filled with these.
-            </summary>
+             <summary>
+            Corals must be beside one of these. Farmland stays hydrated around these. Sugar canes can stay around these. Sponges absorb these. some particles can only survive in these. Entities in these moves like in water. concrete gets solid in these. items float in these. glass bottles can be filled with these.
+             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Items">
+        <member name="T:SharpCraft.ID.Files.Groups.Item">
             <summary>
             Item groups
             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.planks">
+        <member name="M:SharpCraft.ID.Files.Groups.Item.GetAsDataObject(System.Object[])">
             <summary>
-            Items in this group can be used to repeair wooden tools and shields.
-            Items which burns in a furnace for 300 ticks
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.fishes">
+        <member name="M:SharpCraft.ID.Files.Groups.Item.ToString">
             <summary>
-            Dolphins swims to players with this item
-            Can be feet to dolphins
+            Returns a string that represents the current object
             </summary>
+            <returns>A string that represents the current object</returns>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.flowers">
-            <summary>
-            Items which can be used to breed bees
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.lectern_books">
-            <summary>
-            Items which can be placed on a lectern (only accepts <see cref="F:SharpCraft.ID.Item.writable_book"/> and <see cref="F:SharpCraft.ID.Item.written_book"/>)
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.arrows">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.arrows">
+             <summary>
             Items which can be shot from a bow/crossbow
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.banners">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.banners">
+             <summary>
             Items which burns in a furnace for 300 ticks
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.boats">
-            <summary>
-            Items which burns in a furnace for 1200 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.carpets">
-            <summary>
-            Items which can be placed on llamas.
-            Items which burns in a furnace for 67 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.logs">
-            <summary>
-            Items which burns in a furnace for 300 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.saplings">
-            <summary>
-            Items which burns in a furnace for 100 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.signs">
-            <summary>
-            Items which burns in a furnace for 200 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.small_flowers">
-            <summary>
-            Items used for crafting suspicious stew.
-            Items which can be fed to brown mushrooms.
-            Items which bees follows
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_buttons">
-            <summary>
-            Items which burns in a furnace for 100 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_doors">
-            <summary>
-            Items which burns in a furnace for 200 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_pressure_plates">
-            <summary>
-            Items which burns in a furnace for 300 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_slabs">
-            <summary>
-            Items which burns in a furnace for 150 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_stairs">
-            <summary>
-            Items which burns in a furnace for 300 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wooden_trapdoors">
-            <summary>
-            Items which burns in a furnace for 300 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.wool">
-            <summary>
-            Items which burns in a furnace for 100 ticks
-            </summary>
-        </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.beacon_payment_items">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.beacon_payment_items">
+             <summary>
             Items which can be used for activating beacons.
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.piglin_repellents">
-            <summary>
-            Items piglins wont pickup
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.boats">
+             <summary>
+            Items which burns in a furnace for 1200 ticks
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.non_flammable_wood">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.carpets">
+             <summary>
+            Items which can be placed on llamas. Items which burns in a furnace for 67 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.fishes">
+             <summary>
+            Dolphins swims to players with this item. Can be feet to dolphins
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.flowers">
+             <summary>
+            Items which can be used to breed bees
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.lectern_books">
+             <summary>
+            Items which can be placed on a lectern writable_book and written_book
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.logs">
+             <summary>
+            Items which burns in a furnace for 300 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.non_flammable_wood">
+             <summary>
             Won't be able to be used as furnace fuel
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.piglin_loved">
-            <summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.piglin_loved">
+             <summary>
             Items piglins pickup.
-            </summary>
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Items.unstable_bottom_center">
-            <summary>
-            Bells and lanterns cannot be placed on the bottom of these blocks
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.piglin_repellents">
+             <summary>
+            Items piglins wont pickup
+             </summary>
         </member>
-        <member name="T:SharpCraft.ID.Files.Groups.Entities">
-            <summary>
-            entity groups
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.planks">
+             <summary>
+            Items in this group can be used to repeair wooden tools and shields. Items which burns in a furnace for 300 ticks
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Entities.beehive_inhabitors">
-            <summary>
-            entities which can be in beehives
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.saplings">
+             <summary>
+            Items which burns in a furnace for 100 ticks
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Entities.raiders">
-            <summary>
-            Entities which glows when the bell rings.
-            Entities which don't override ravager AI when riding on one
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.signs">
+             <summary>
+            Items which burns in a furnace for 200 ticks
+             </summary>
         </member>
-        <member name="F:SharpCraft.ID.Files.Groups.Entities.impact_projectiles">
-            <summary>
-            Entities which can break chorus fruit.
-            </summary>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.small_flowers">
+             <summary>
+            Items used for crafting suspicious stew. Items which can be fed to brown mushrooms. Items which bees follows
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_buttons">
+             <summary>
+            Items which burns in a furnace for 100 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_doors">
+             <summary>
+            Items which burns in a furnace for 200 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_pressure_plates">
+             <summary>
+            Items which burns in a furnace for 300 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_slabs">
+             <summary>
+            Items which burns in a furnace for 150 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_stairs">
+             <summary>
+            Items which burns in a furnace for 300 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wooden_trapdoors">
+             <summary>
+            Items which burns in a furnace for 300 ticks
+             </summary>
+        </member>
+        <member name="F:SharpCraft.ID.Files.Groups.Item.wool">
+             <summary>
+            Items which burns in a furnace for 100 ticks
+             </summary>
         </member>
         <member name="M:SharpCraft.ID.Block.ConvertToItem">
             <summary>
@@ -13586,6 +13663,13 @@
             <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
             <returns></returns>
         </member>
+        <member name="M:SharpCraft.ID.Fluid.GetAsDataObject(System.Object[])">
+            <summary>
+            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
+            </summary>
+            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            <returns></returns>
+        </member>
         <member name="M:SharpCraft.ID.Item.ConvertToBlock">
             <summary>
             Converts this item into a block type. There is no check checking if the block is valid
@@ -13593,13 +13677,6 @@
             <returns>The block type</returns>
         </member>
         <member name="M:SharpCraft.ID.Item.GetAsDataObject(System.Object[])">
-            <summary>
-            Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
-            </summary>
-            <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
-            <returns></returns>
-        </member>
-        <member name="M:SharpCraft.ID.Liquid.GetAsDataObject(System.Object[])">
             <summary>
             Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>
             </summary>
@@ -14191,9 +14268,9 @@
             Interface for entity types
             </summary>
         </member>
-        <member name="T:SharpCraft.ILiquidType">
+        <member name="T:SharpCraft.IFluidType">
             <summary>
-            Interface for liquid types
+            Interface for fluid types
             </summary>
         </member>
         <member name="T:SharpCraft.AdvancementObjects.BaseAdvancement">
@@ -25510,6 +25587,38 @@
             </summary>
             <returns>The stream for this file</returns>
         </member>
+        <member name="T:SharpCraft.FluidGroup">
+            <summary>
+            Class for <see cref="T:SharpCraft.IFluidType"/> groups files
+            </summary>
+        </member>
+        <member name="M:SharpCraft.FluidGroup.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,System.Collections.Generic.List{SharpCraft.IFluidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new Group with the given parameters. Inherite from this constructor.
+            </summary>
+            <param name="packNamespace">The namespace the group is in</param>
+            <param name="fileName">The name of the group file</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+            <param name="items">The items in this group</param>
+            <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
+            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
+        </member>
+        <member name="M:SharpCraft.FluidGroup.#ctor(SharpCraft.BasePackNamespace,System.String,System.Collections.Generic.List{SharpCraft.IFluidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Intializes a new Group with the given parameters
+            </summary>
+            <param name="packNamespace">The namespace the group is in</param>
+            <param name="fileName">The name of the group file</param>
+            <param name="writeSetting">The settings for how to write this file</param>
+            <param name="items">The items in this group</param>
+            <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
+        </member>
+        <member name="M:SharpCraft.FluidGroup.GetStream">
+            <summary>
+            Returns the stream this file is going to use for writing it's file
+            </summary>
+            <returns>The stream for this file</returns>
+        </member>
         <member name="T:SharpCraft.FunctionGroup">
             <summary>
             Class for <see cref="T:SharpCraft.IFunction"/> groups files
@@ -25569,38 +25678,6 @@
             <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         </member>
         <member name="M:SharpCraft.ItemGroup.GetStream">
-            <summary>
-            Returns the stream this file is going to use for writing it's file
-            </summary>
-            <returns>The stream for this file</returns>
-        </member>
-        <member name="T:SharpCraft.LiquidGroup">
-            <summary>
-            Class for <see cref="T:SharpCraft.ILiquidType"/> groups files
-            </summary>
-        </member>
-        <member name="M:SharpCraft.LiquidGroup.#ctor(System.Boolean,SharpCraft.BasePackNamespace,System.String,System.Collections.Generic.List{SharpCraft.ILiquidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
-            <summary>
-            Intializes a new Group with the given parameters. Inherite from this constructor.
-            </summary>
-            <param name="packNamespace">The namespace the group is in</param>
-            <param name="fileName">The name of the group file</param>
-            <param name="writeSetting">The settings for how to write this file</param>
-            <param name="items">The items in this group</param>
-            <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-            <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        </member>
-        <member name="M:SharpCraft.LiquidGroup.#ctor(SharpCraft.BasePackNamespace,System.String,System.Collections.Generic.List{SharpCraft.ILiquidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
-            <summary>
-            Intializes a new Group with the given parameters
-            </summary>
-            <param name="packNamespace">The namespace the group is in</param>
-            <param name="fileName">The name of the group file</param>
-            <param name="writeSetting">The settings for how to write this file</param>
-            <param name="items">The items in this group</param>
-            <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        </member>
-        <member name="M:SharpCraft.LiquidGroup.GetStream">
             <summary>
             Returns the stream this file is going to use for writing it's file
             </summary>
@@ -27215,11 +27292,31 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The <see cref="T:SharpCraft.FunctionGroup"/></returns>
         </member>
+        <member name="M:SharpCraft.PackNamespace.Group(SharpCraft.ID.Files.Groups.Function,System.Collections.Generic.List{SharpCraft.IFunction},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Returns a <see cref="T:SharpCraft.FunctionGroup"/> with the given functions
+            </summary>
+            <param name="group">The group</param>
+            <param name="functionList">The functions in the group</param>
+            <param name="append">If the functions should be appended to existing functions from another datapack</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The <see cref="T:SharpCraft.FunctionGroup"/></returns>
+        </member>
         <member name="M:SharpCraft.PackNamespace.Group(System.String,System.Collections.Generic.List{SharpCraft.IBlockType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Returns a <see cref="T:SharpCraft.BlockGroup"/> with the given <see cref="T:SharpCraft.IBlockType"/>s
             </summary>
             <param name="name">The name of the group</param>
+            <param name="blockList">The <see cref="T:SharpCraft.IBlockType"/>s in the group</param>
+            <param name="append">If the <see cref="T:SharpCraft.IBlockType"/>s should be appended to existing <see cref="T:SharpCraft.IBlockType"/>s from another datapack</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The <see cref="T:SharpCraft.BlockGroup"/></returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.Group(SharpCraft.ID.Files.Groups.Block,System.Collections.Generic.List{SharpCraft.IBlockType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Returns a <see cref="T:SharpCraft.BlockGroup"/> with the given <see cref="T:SharpCraft.IBlockType"/>s
+            </summary>
+            <param name="group">The group</param>
             <param name="blockList">The <see cref="T:SharpCraft.IBlockType"/>s in the group</param>
             <param name="append">If the <see cref="T:SharpCraft.IBlockType"/>s should be appended to existing <see cref="T:SharpCraft.IBlockType"/>s from another datapack</param>
             <param name="writeSetting">The settings for how to write the file</param>
@@ -27235,6 +27332,16 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The <see cref="T:SharpCraft.ItemGroup"/></returns>
         </member>
+        <member name="M:SharpCraft.PackNamespace.Group(SharpCraft.ID.Files.Groups.Item,System.Collections.Generic.List{SharpCraft.IItemType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Returns a <see cref="T:SharpCraft.ItemGroup"/> with the given <see cref="T:SharpCraft.IItemType"/>s
+            </summary>
+            <param name="group">The group</param>
+            <param name="itemList">The <see cref="T:SharpCraft.IItemType"/>s in the group</param>
+            <param name="append">If the <see cref="T:SharpCraft.IItemType"/>s should be appended to existing <see cref="T:SharpCraft.IItemType"/>s from another datapack</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The <see cref="T:SharpCraft.ItemGroup"/></returns>
+        </member>
         <member name="M:SharpCraft.PackNamespace.Group(System.String,System.Collections.Generic.List{SharpCraft.IEntityType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
             Returns a <see cref="T:SharpCraft.EntityGroup"/> with the given <see cref="T:SharpCraft.IEntityType"/>s
@@ -27245,15 +27352,35 @@
             <param name="writeSetting">The settings for how to write the file</param>
             <returns>The <see cref="T:SharpCraft.EntityGroup"/></returns>
         </member>
-        <member name="M:SharpCraft.PackNamespace.Group(System.String,System.Collections.Generic.List{SharpCraft.ILiquidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+        <member name="M:SharpCraft.PackNamespace.Group(SharpCraft.ID.Files.Groups.Entity,System.Collections.Generic.List{SharpCraft.IEntityType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
             <summary>
-            Returns a <see cref="T:SharpCraft.LiquidGroup"/> with the given <see cref="T:SharpCraft.ILiquidType"/>s
+            Returns a <see cref="T:SharpCraft.EntityGroup"/> with the given <see cref="T:SharpCraft.IEntityType"/>s
+            </summary>
+            <param name="group">The group</param>
+            <param name="entityList">The <see cref="T:SharpCraft.IEntityType"/>s in the group</param>
+            <param name="append">If the <see cref="T:SharpCraft.IEntityType"/>s should be appended to existing <see cref="T:SharpCraft.IEntityType"/>s from another datapack</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The <see cref="T:SharpCraft.EntityGroup"/></returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.Group(System.String,System.Collections.Generic.List{SharpCraft.IFluidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Returns a <see cref="T:SharpCraft.FluidGroup"/> with the given <see cref="T:SharpCraft.IFluidType"/>s
             </summary>
             <param name="name">The name of the group</param>
-            <param name="liquidList">The <see cref="T:SharpCraft.ILiquidType"/>s in the group</param>
-            <param name="append">If the <see cref="T:SharpCraft.ILiquidType"/>s should be appended to existing <see cref="T:SharpCraft.ILiquidType"/>s from another datapack</param>
+            <param name="fluidList">The <see cref="T:SharpCraft.IFluidType"/>s in the group</param>
+            <param name="append">If the <see cref="T:SharpCraft.IFluidType"/>s should be appended to existing <see cref="T:SharpCraft.IFluidType"/>s from another datapack</param>
             <param name="writeSetting">The settings for how to write the file</param>
-            <returns>The <see cref="T:SharpCraft.LiquidGroup"/></returns>
+            <returns>The <see cref="T:SharpCraft.FluidGroup"/></returns>
+        </member>
+        <member name="M:SharpCraft.PackNamespace.Group(SharpCraft.ID.Files.Groups.Fluid,System.Collections.Generic.List{SharpCraft.IFluidType},System.Boolean,SharpCraft.BaseFile.WriteSetting)">
+            <summary>
+            Returns a <see cref="T:SharpCraft.FluidGroup"/> with the given <see cref="T:SharpCraft.IFluidType"/>s
+            </summary>
+            <param name="group">The group</param>
+            <param name="fluidList">The <see cref="T:SharpCraft.IFluidType"/>s in the group</param>
+            <param name="append">If the <see cref="T:SharpCraft.IFluidType"/>s should be appended to existing <see cref="T:SharpCraft.IFluidType"/>s from another datapack</param>
+            <param name="writeSetting">The settings for how to write the file</param>
+            <returns>The <see cref="T:SharpCraft.FluidGroup"/></returns>
         </member>
         <member name="M:SharpCraft.PackNamespace.Structure(System.String,SharpCraft.Block[][],SharpCraft.Structure.Block[],SharpCraft.Entities.BasicEntity[],SharpCraft.BaseFile.WriteSetting)">
             <summary>

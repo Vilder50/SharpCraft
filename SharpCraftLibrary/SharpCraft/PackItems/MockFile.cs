@@ -366,7 +366,7 @@ namespace SharpCraft.FileMocks
     /// <summary>
     /// Class for empty/none existing files (Usefull for refering files outside of the datapack)
     /// </summary>
-    public class MockGroup<TItem> : BaseMockFile, IBlockType, IEntityType, IItemType, ILiquidType, IFunction, IGroup<TItem> where TItem : IGroupable
+    public class MockGroup<TItem> : BaseMockFile, IBlockType, IEntityType, IItemType, IFluidType, IFunction, IGroup<TItem> where TItem : IGroupable
     {
         /// <summary>
         /// Marks this as being a group

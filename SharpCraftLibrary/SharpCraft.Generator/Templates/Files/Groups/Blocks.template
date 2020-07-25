@@ -1,0 +1,55 @@
+﻿using SharpCraft.Data;
+
+namespace SharpCraft
+{
+    public partial class ID
+    {
+        /// <summary>
+        /// File names used by Minecraft
+        /// </summary>
+        public static partial class Files
+        {
+		    /// <summary>
+            /// Names of the different types of groups in the game (Normally called "tags" in the game)
+            /// </summary>
+			public static partial class Groups
+			{
+				#pragma warning disable 1591
+				/// <summary>
+				/// Block groups
+				/// </summary>
+				public class Block : NamespacedEnumLike<string>, IBlockType
+				{
+				    public Block(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+				    {
+				    }
+
+				    /// <summary>
+				    /// Converts this type into a <see cref="DataPartObject"/>
+				    /// </summary>
+				    /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+				    /// <returns></returns>
+				    public DataPartObject GetAsDataObject(object?[] conversionData)
+				    {
+				        return (this as IGroupable).GetGroupData(conversionData);
+				    }
+
+					/// <summary>
+					/// Returns a string that represents the current object
+					/// </summary>
+					/// <returns>A string that represents the current object</returns>
+					public override string ToString()
+					{
+					    return "#" + base.ToString();
+					}
+
+				    public string Name => ToString();
+
+				    public bool IsAGroup => true;
+
+<%				    public static readonly Block %name% = new Block("%value%");%>
+				}
+			}
+		}
+	}
+}
