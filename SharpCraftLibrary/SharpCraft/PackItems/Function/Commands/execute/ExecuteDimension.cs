@@ -15,7 +15,7 @@ namespace SharpCraft.Commands
         /// Intializes a new <see cref="ExecuteDimension"/> command
         /// </summary>
         /// <param name="dimension">The dimension the command should be executed in</param>
-        public ExecuteDimension(ID.Dimension dimension)
+        public ExecuteDimension(DimensionObjects.IDimension dimension)
         {
             Dimension = dimension;
         }
@@ -23,7 +23,7 @@ namespace SharpCraft.Commands
         /// <summary>
         /// The dimension the command should be executed in
         /// </summary>
-        public ID.Dimension Dimension { get; set; }
+        public DimensionObjects.IDimension Dimension { get; set; }
 
         /// <summary>
         /// Returns the part of the execute command there is special for this command
@@ -31,7 +31,7 @@ namespace SharpCraft.Commands
         /// <returns>in [Dimension]</returns>
         protected override string GetExecutePart()
         {
-            return "in " + Dimension.ToString();
+            return "in " + Dimension.GetNamespacedName();
         }
     }
 }

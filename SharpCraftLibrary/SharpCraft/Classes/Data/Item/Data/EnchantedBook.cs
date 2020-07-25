@@ -8,6 +8,12 @@ namespace SharpCraft.Items
     public class EnchantedBook : Item
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<EnchantedBook> PathCreator => new Data.DataPathCreator<EnchantedBook>();
+
+        /// <summary>
         /// Creates an item without an id or anything but which can have data
         /// This is used to test for item with data
         /// </summary>
@@ -19,7 +25,7 @@ namespace SharpCraft.Items
         /// <param name="ItemID">The type of the item. If null the item has no type</param>
         /// <param name="Count">The amount of the item. If null the item has no amount</param>
         /// <param name="Slot">The slot the item is in. If null the item isn't in a slot</param>
-        public EnchantedBook(ItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
+        public EnchantedBook(IItemType? ItemID, sbyte? Count = null, sbyte? Slot = null) : base(ItemID, Count, Slot) { }
 
         /// <summary>
         /// The stored enchantments the item has. These enchants does not effect anything. but can be extracted from the book with an anvil.

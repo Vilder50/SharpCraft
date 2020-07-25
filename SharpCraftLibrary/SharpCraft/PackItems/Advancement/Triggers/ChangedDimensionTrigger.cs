@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player switches dimension
     /// </summary>
-    public class ChangedDimensionTrigger : BaseTrigger
+    public class ChangedDimensionTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ChangedDimensionTrigger"/>
@@ -20,13 +20,13 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The dimension the player is coming from
         /// </summary>
-        [DataTag("conditions.from", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public ID.Dimension? From { get; set; }
+        [DataTag("conditions.from", JsonTag = true)]
+        public DimensionObjects.IDimension? From { get; set; }
 
         /// <summary>
         /// The dimension the player is going to
         /// </summary>
-        [DataTag("conditions.to", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public ID.Dimension? To { get; set; }
+        [DataTag("conditions.to", JsonTag = true)]
+        public DimensionObjects.IDimension? To { get; set; }
     }
 }

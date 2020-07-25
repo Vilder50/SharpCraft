@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="NBTChange"/>
         /// </summary>
         /// <param name="data">The NBT to use</param>
-        public NBTChange(SimpleDataHolder data) : base("set_nbt")
+        public NBTChange(SimpleDataHolder data) : base("minecraft:set_nbt")
         {
             Data = data;
         }

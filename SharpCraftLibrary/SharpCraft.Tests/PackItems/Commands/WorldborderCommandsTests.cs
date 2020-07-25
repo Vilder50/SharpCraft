@@ -26,7 +26,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("worldborder center ~1 ~3", new WorldborderCenterCommand(new Coords(1,2,3)).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new WorldborderCenterCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new WorldborderCenterCommand(null!));
         }
 
         [TestMethod]

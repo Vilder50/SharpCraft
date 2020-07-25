@@ -40,14 +40,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
-        /// </summary>
-        public string Name
-        {
-            get => GetNamespacedName();
-        }
-
-        /// <summary>
         /// Returns the stream this file is going to use for writing it's file
         /// </summary>
         /// <returns>The stream for this file</returns>
@@ -55,17 +47,6 @@ namespace SharpCraft
         {
             CreateDirectory("tags/functions");
             return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags/functions/" + WritePath + ".json");
-        }
-
-        /// <summary>
-        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new Data.DataPartTag(GetNamespacedName());
         }
     }
 }

@@ -12,9 +12,9 @@ namespace SharpCraft
     /// </summary>
     public class ShapelessRecipe : BaseRecipe
     {
-        private ID.Item result;
+        private ID.Item result = null!;
         private int count;
-        private ItemType[] ingredients = null!;
+        private IItemType[] ingredients = null!;
 
         /// <summary>
         /// Intializes a new <see cref="ShapelessRecipe"/>. Inherite from this constructor.
@@ -27,7 +27,7 @@ namespace SharpCraft
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected ShapelessRecipe(bool _, BasePackNamespace packNamespace, string? fileName, ItemType[] ingredients, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shapeless")
+        protected ShapelessRecipe(bool _, BasePackNamespace packNamespace, string? fileName, IItemType[] ingredients, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "minecraft:crafting_shapeless")
         {
             Ingredients = ingredients;
             Result = result;
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <param name="ingredients">The items used in the recipe</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public ShapelessRecipe(BasePackNamespace packNamespace, string? fileName, ItemType[] ingredients, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, ingredients, result, count, group, writeSetting)
+        public ShapelessRecipe(BasePackNamespace packNamespace, string? fileName, IItemType[] ingredients, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, ingredients, result, count, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -52,7 +52,7 @@ namespace SharpCraft
         /// <summary>
         /// The items used in the recipe
         /// </summary>
-        public ItemType[] Ingredients
+        public IItemType[] Ingredients
         {
             get => ingredients;
             set
@@ -125,7 +125,7 @@ namespace SharpCraft
             stream.Write(",\"ingredients\":["+string.Join(",",Ingredients.Select(i => GetItemCompound(i)))+"]");
 
             //write output item
-            stream.Write(",\"result\":{\"item\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":{\"item\":\"" + Result + "\"");
             if (Count != 1)
             {
                 stream.Write(",\"count\":" + Count);

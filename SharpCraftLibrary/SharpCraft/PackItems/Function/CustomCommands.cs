@@ -17,6 +17,83 @@ namespace SharpCraft.FunctionWriters
             Random = new ClassRandom(ForFunction);
         }
 
+        #region get data
+        /// <summary>
+        /// Gets the location of either the executed location or of the executor
+        /// </summary>
+        /// <param name="getX">The score to put the x coord into</param>
+        /// <param name="getY">The score to put the y coord into</param>
+        /// <param name="getZ">The score to put the z coord into</param>
+        /// <param name="getExecutorsLocation">True if it should get the coords of the executor. False if it should get the coords at the executed location</param>
+        /// <param name="multiplyX">A number to multiply the x coord with before putting it into the score</param>
+        /// <param name="multiplyY">A number to multiply the y coord with before putting it into the score</param>
+        /// <param name="multiplyZ">A number to multiply the z coord with before putting it into the score</param>
+        public void GetLocation(bool getExecutorsLocation, ScoreValue? getX = null, ScoreValue? getY = null, ScoreValue? getZ = null, double multiplyX = 1, double multiplyY = 1, double multiplyZ = 1)
+        {
+            ForFunction.World.Function(get =>
+            {
+                Storage tempStorage = get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetTempStorage();
+                if (getExecutorsLocation)
+                {
+                    get.Execute.As(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
+                    get.World.Function(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummyTeleportGetCoords());
+                }
+                else
+                {
+                    if (!(getX is null) || !(getX is null) || !(getZ is null))
+                    {
+                        get.World.Data.Copy(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Coords)));
+                    }
+                }
+                if (!(getX is null))
+                {
+                    get.Execute.Store(getX).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.X), multiplyX);
+                }
+                if (!(getY is null))
+                {
+                    get.Execute.Store(getY).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.Y), multiplyY);
+                }
+                if (!(getZ is null))
+                {
+                    get.Execute.Store(getZ).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Coords!.Z), multiplyZ);
+                }
+            });
+        }
+
+        /// <summary>
+        /// Gets the rotation of either the executed location or of the executor
+        /// </summary>
+        /// <param name="getHorizontalRotation">The score to put the horizontal rotation into</param>
+        /// <param name="getVerticalRotation">The score to put the vertical rotation into</param>
+        /// <param name="getExecutorsRotation">True if it should get the coords of the executor. False if it should get the coords at the executed location</param>
+        /// <param name="multiplyHorizontalRotation">A number to multiply the horizontal rotation with before putting it into the score</param>
+        /// <param name="multiplyVerticalRotation">A number to multiply the vertical rotation with before putting it into the score</param>
+        public void GetRotation(bool getExecutorsRotation, ScoreValue? getHorizontalRotation = null, ScoreValue? getVerticalRotation = null, double multiplyHorizontalRotation = 1, double multiplyVerticalRotation = 1)
+        {
+            ForFunction.World.Function(get =>
+            {
+                Storage tempStorage = get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetTempStorage();
+                if (getExecutorsRotation)
+                {
+                    get.Execute.As(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
+                    get.World.Function(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummyTeleportGetRotation());
+                }
+                else
+                {
+                    get.World.Data.Copy(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Rotation)));
+                }
+                if (!(getVerticalRotation is null))
+                {
+                    get.Execute.Store(getVerticalRotation).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation!.X), multiplyVerticalRotation);
+                }
+                if (!(getHorizontalRotation is null))
+                {
+                    get.Execute.Store(getHorizontalRotation).World.Data.Get(tempStorage, Entities.BasicEntity.PathCreator.Make(d => d.Rotation!.Y), multiplyHorizontalRotation);
+                }
+            });
+        }
+        #endregion
+
         #region tree search
         /// <summary>
         /// Used by binary search. The command to run when the number is found
@@ -906,22 +983,6 @@ namespace SharpCraft.FunctionWriters
             }
 
             /// <summary>
-            /// Generates a random number from 0 to 1 and only executes if the number is less than <paramref name="chance"/>
-            /// </summary>
-            /// <param name="chance">The chance for the command to execute</param>
-            /// <param name="want">false if it should execute when it's false</param>
-            /// <returns>The function running the command</returns>
-            public Function ExecuteIfRandom(double chance, bool want = true)
-            {
-                if (chance < 0 || chance > 1)
-                {
-                    throw new ArgumentOutOfRangeException(nameof(chance), "Random chance has to be between 0 and 1");
-                }
-                ForFunction.Execute.IfPredicate(ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetRandomPredicate(chance), want);
-                return ForFunction;
-            }
-
-            /// <summary>
             /// Generates a random number from <paramref name="from"/> to <paramref name="to"/>
             /// </summary>
             /// <param name="from">The smallest the number can be</param>
@@ -964,7 +1025,7 @@ namespace SharpCraft.FunctionWriters
                 var (function, location) = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetHashFunction();
                 ForFunction.Custom.GroupCommands(g =>
                 {
-                    g.Execute.Store(new BlockDataLocation(location, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DLootTableSeed)), ID.StoreTypes.Int);
+                    g.Execute.Store(new BlockDataLocation(location, Blocks.ShulkerBox.PathCreator.Make(b => b.DLootTableSeed)), ID.StoreTypes.Int);
                     g.Entity.Score.Get(value, value);
                     g.World.Function(function);
                     g.Execute.IfScore(value, value, 0);

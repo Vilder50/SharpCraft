@@ -16,7 +16,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="EnchantChange"/>
         /// </summary>
         /// <param name="possibleEnchants">Enchants which the item randomly can get</param>
-        public EnchantChange(ID.Enchant[] possibleEnchants) : base("enchant_randomly")
+        public EnchantChange(ID.Enchant[] possibleEnchants) : base("minecraft:enchant_randomly")
         {
             PossibleEnchants = possibleEnchants;
         }
@@ -24,7 +24,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Enchants which the item randomly can get
         /// </summary>
-        [DataTag("enchantments", ForceType = ID.NBTTagType.TagNamespacedStringArray, JsonTag = true)]
+        [DataTag("enchantments", JsonTag = true)]
         public ID.Enchant[] PossibleEnchants { get; set; }
     }
 }

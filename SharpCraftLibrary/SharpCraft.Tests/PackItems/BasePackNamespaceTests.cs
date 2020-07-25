@@ -52,7 +52,7 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass1 : BaseFile
+        class BaseFileTestClass1 : BaseFile<TextWriter>
         {
             public BaseFileTestClass1(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test1")
             {
@@ -75,7 +75,7 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass2 : BaseFile
+        class BaseFileTestClass2 : BaseFile<TextWriter>
         {
             public BaseFileTestClass2(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "test2")
             {
@@ -133,10 +133,10 @@ namespace SharpCraft.Tests.PackItems
             //setup
             BasePackNamespace pack = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
             //test
-            Assert.AreEqual("file1", pack.GetFile("test1", "file1").FileId, "GetFile failed to get the file with the correct name");
-            Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1").Setting, "GetFile failed to get the file of the correct type");
-            Assert.AreEqual("file2", pack.GetFile("test1", "file2").FileId, "GetFile failed to get the other file with the other name");
-            Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1").Setting, "GetFile failed to get the file of the other type");
+            Assert.AreEqual("file1", pack.GetFile("test1", "file1")!.FileId, "GetFile failed to get the file with the correct name");
+            Assert.AreEqual(BaseFile.WriteSetting.OnDispose, pack.GetFile("test1", "file1")!.Setting, "GetFile failed to get the file of the correct type");
+            Assert.AreEqual("file2", pack.GetFile("test1", "file2")!.FileId, "GetFile failed to get the other file with the other name");
+            Assert.AreEqual(BaseFile.WriteSetting.Auto, pack.GetFile("test2", "file1")!.Setting, "GetFile failed to get the file of the other type");
 
             //test exception on extra file with same name and same type
             Assert.ThrowsException<ArgumentException>(() => new BaseFileTestClass1(pack, "file1", BaseFile.WriteSetting.Auto), "Adding 2 files with the same name and same type should cast an exception");
@@ -183,11 +183,11 @@ namespace SharpCraft.Tests.PackItems
             BasePackNamespace space = new NamespaceTestClass(new DatapackTestClass("a folder path", "pack"), "namespace");
 
             Assert.IsFalse(space.Disposed, "namespace shouldn't have been disposed yet");
-            Assert.IsFalse(space.GetFile("test2", "file1").Disposed, "namespace isn't disposed yet and the file shouldn't be disposed yet");
+            Assert.IsFalse(space.GetFile("test2", "file1")!.Disposed, "namespace isn't disposed yet and the file shouldn't be disposed yet");
             space.Dispose();
             Assert.IsTrue(((NamespaceTestClass)space).RandomValue, "AfterDispose didn't run");
             Assert.IsTrue(space.Disposed, "namespace should have been disposed");
-            Assert.IsTrue(space.GetFile("test2", "file1").Disposed, "namespace is disposed and the file should be disposed");
+            Assert.IsTrue(space.GetFile("test2", "file1")!.Disposed, "namespace is disposed and the file should be disposed");
 
             Assert.ThrowsException<InvalidOperationException>(() => new BaseFileTestClass1(space, "afile", BaseFile.WriteSetting.Auto), "Shouldn't be able to add more files since namespace is disposed");
         }
@@ -195,10 +195,10 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyNamespace()
         {
-            Assert.AreEqual(EmptyNamespace.GetMinecraftNamespace(), EmptyNamespace.GetMinecraftNamespace(), "Getting minecraft namespace doesn't return the same object every time");
-            Assert.AreEqual("minecraft", EmptyNamespace.GetMinecraftNamespace().Name, "Getting minecraft namespace returns wrong namespace");
-            Assert.AreEqual(EmptyNamespace.GetNamespace("space"), EmptyNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
-            Assert.AreEqual("space", EmptyNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
+            Assert.AreEqual(MockNamespace.GetMinecraftNamespace(), MockNamespace.GetMinecraftNamespace(), "Getting minecraft namespace doesn't return the same object every time");
+            Assert.AreEqual("minecraft", MockNamespace.GetMinecraftNamespace().Name, "Getting minecraft namespace returns wrong namespace");
+            Assert.AreEqual(MockNamespace.GetNamespace("space"), MockNamespace.GetNamespace("space"), "Getting defined namespace doesn't return the same object every time");
+            Assert.AreEqual("space", MockNamespace.GetNamespace("space").Name, "Getting defined namespace returns wrong namespace");
         }
 
         [TestMethod]
@@ -244,7 +244,7 @@ namespace SharpCraft.Tests.PackItems
 
             space.AddSetting(new OtherSetting(15));
             space.AddSetting(new TestSetting(10));
-            TestSetting setting = space.GetSetting<TestSetting>() as TestSetting;
+            TestSetting setting = (space.GetSetting<TestSetting>() as TestSetting)!;
             Assert.IsNotNull(space.GetSetting<TestSetting>(), "A setting should have been returned since there is one");
             Assert.AreEqual(10, setting.ANumber, "The wrong setting returned");
         }

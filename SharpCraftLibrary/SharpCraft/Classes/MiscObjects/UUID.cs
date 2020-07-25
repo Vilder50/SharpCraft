@@ -6,7 +6,7 @@ namespace SharpCraft
     /// <summary>
     /// An object used for UUID's
     /// </summary>
-    public class UUID : IConvertableToDataObject, IConvertableToDataTag
+    public class UUID :  IConvertableToDataArray<int>
     {
         #region random
         private static Random random = new Random(0);
@@ -65,15 +65,27 @@ namespace SharpCraft
         }
 
         /// <summary>
+        /// Intializes a new <see cref="UUID"/> from 4 ints
+        /// </summary>
+        /// <param name="a">int part</param>
+        /// <param name="b">int part</param>
+        /// <param name="c">int part</param>
+        /// <param name="d">int part</param>
+        public UUID(int a, int b, int c, int d)
+        {
+            Most = a << 32 & b;
+            Least = c << 32 & d;
+            UUIDString = CreateUUIDString(Most, Least);
+        }
+
+        /// <summary>
         /// the UUIDLeast
         /// </summary>
-        [CompoundPath(1)]
         public long Least { get; protected set; }
 
         /// <summary>
         /// the UUIDMost
         /// </summary>
-        [CompoundPath(0)]
         public long Most { get; protected set; }
 
         /// <summary>
@@ -93,53 +105,39 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts this UUID into a <see cref="DataPartObject"/>
+        /// Returns this uuid as an array
         /// </summary>
-        /// <param name="conversionData">0: UUIDMost path, 1: UUIDLeast path</param>
-        /// <returns>the made <see cref="DataPartObject"/></returns>
-        public DataPartObject GetAsDataObject(object?[] conversionData)
+        /// <returns>This uuid as an array</returns>
+        public int[] GetUUIDAsInts()
         {
-            if (conversionData is null)
+            return new int[]
             {
-                throw new ArgumentNullException(nameof(conversionData), "ConversionData may not be null");
-            }
-
-            if (conversionData.Length != 2)
-            {
-                throw new ArgumentException("There has to be exacly 2 conversion params to convert a UUID to a data object.");
-            }
-
-            if (conversionData[0] is string most && conversionData[1] is string least)
-            {
-                DataPartObject dataObject = new DataPartObject();
-                dataObject.AddValue(new DataPartPath(most, new DataPartTag(Most)));
-                dataObject.AddValue(new DataPartPath(least, new DataPartTag(Least)));
-
-
-                return dataObject;
-            }
-            else
-            {
-                throw new ArgumentException("The 2 conversion params has be strings to convert a UUID to a data object.");
-            }
+                (int)(Most >> 32),
+                (int)(Most),
+                (int)(Least >> 32),
+                (int)(Least)
+            };
         }
 
         /// <summary>
-        /// Converts this UUID into a <see cref="DataPartTag"/>
+        /// Used for getting the datapath for this array. Method throws an exception if called.
         /// </summary>
-        /// <param name="asType">The type to convert the uuid into</param>
-        /// <param name="extraConversionData">Not used</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        /// <returns>An object to continue the datapath on</returns>
+        [PathArrayGetter]
+        public int[] PathArray()
         {
-            if (asType == ID.NBTTagType.TagString)
-            {
-                return new DataPartTag(UUIDString);
-            }
-            else
-            {
-                throw new ArgumentException("Cannot convert the UUID into " + asType);
-            }
+            throw new PathGettingMethodCallException();
+        }
+
+        /// <summary>
+        /// Converts this uuid into a <see cref="DataPartArray"/>
+        /// </summary>
+        /// <param name="asType">Not used</param>
+        /// <param name="extraConversionData">Not used</param>
+        /// <returns>This uuid as an int array</returns>
+        public DataPartArray GetAsArray(ID.NBTTagType? asType, object?[] extraConversionData)
+        {
+            return new DataPartArray(GetUUIDAsInts(), null, extraConversionData);
         }
     }
 }

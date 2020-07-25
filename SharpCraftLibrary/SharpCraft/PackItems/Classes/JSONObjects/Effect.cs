@@ -79,7 +79,11 @@ namespace SharpCraft.JsonObjects
                 DataPartObject dataObject = new DataPartObject();
                 for (int i = 0; i < Effects.Count; i++)
                 {
-                    dataObject.AddValue(new DataPartPath(Effects[i].EffectName.ToString()!, Effects[i].GetDataTree(), true));
+                    if (Effects[i].EffectName is null)
+                    {
+                        throw new System.ArgumentNullException("Effect has to have a name to be converted into a data object");
+                    }
+                    dataObject.AddValue(new DataPartPath(Effects[i].EffectName!.ToString()!, Effects[i].GetDataTree(), true));
                 }
                 return dataObject;
             }

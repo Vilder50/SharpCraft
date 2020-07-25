@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player has the levitation effect
     /// </summary>
-    public class LevitationTrigger : BaseTrigger
+    public class LevitationTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="LevitationTrigger"/>

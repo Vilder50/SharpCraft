@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player throws an eye of ender
     /// </summary>
-    public class UsedEnderEyeTriggerTrigger : BaseTrigger
+    public class UsedEnderEyeTriggerTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="UsedEnderEyeTriggerTrigger"/>

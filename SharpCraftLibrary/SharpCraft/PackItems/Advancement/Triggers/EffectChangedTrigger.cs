@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player gets a new effect or when an effect runs out
     /// </summary>
-    public class EffectChangedTrigger : BaseTrigger
+    public class EffectChangedTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="EffectChangedTrigger"/>

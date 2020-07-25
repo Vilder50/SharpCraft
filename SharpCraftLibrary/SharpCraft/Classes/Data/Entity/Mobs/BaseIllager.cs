@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public abstract class BaseIllager : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Illager> PathCreator => new Data.DataPathCreator<Illager>();
+
+        /// <summary>
         /// Creates a new entity
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -59,6 +65,6 @@ namespace SharpCraft.Entities
         /// Creates a new illager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Illager(ID.Entity? type = ID.Entity.pillager) : base(type) { }
+        public Illager(ID.Entity? type) : base(type) { }
     }
 }

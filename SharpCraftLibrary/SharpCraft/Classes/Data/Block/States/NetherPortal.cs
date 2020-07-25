@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a nether portal block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public NetherPortal(BlockType? type) : base(type) { }
+        public NetherPortal(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a nether portal block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public NetherPortal(ID.Block type = SharpCraft.ID.Block.nether_portal) : base(type) { }
+        public NetherPortal() : base(SharpCraft.ID.Block.nether_portal) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

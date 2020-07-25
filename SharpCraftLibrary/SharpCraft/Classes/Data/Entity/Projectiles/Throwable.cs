@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Throwable : BaseProjectile
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Throwable> PathCreator => new Data.DataPathCreator<Throwable>();
+
+        /// <summary>
         /// Creates a new <see cref="ID.Entity.egg"/>, <see cref="ID.Entity.ender_pearl"/>, <see cref="ID.Entity.experience_bottle"/>, <see cref="ID.Entity.potion"/> or <see cref="ID.Entity.snowball"/>
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -18,16 +24,19 @@ namespace SharpCraft.Entities
         /// </summary>
         [Data.DataTag("shake")]
         public byte? Shake { get; set; }
+
         /// <summary>
         /// The owner of the projectile
         /// </summary>
-        [Data.DataTag("owner", "M", "L")]
-        public UUID? Owner { get; set; }
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
+        public UUID? OwnerUUID { get; set; }
+
         /// <summary>
         /// The type of thrown potion
         /// </summary>
         [Data.DataTag]
         public Item? Potion { get; set; }
+
         /// <summary>
         /// The item the entity is displayed as
         /// (Potions do not support use this)

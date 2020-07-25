@@ -26,7 +26,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// The type of loot entry
         /// </summary>
-        [DataTag("type", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("type", JsonTag = true)]
         public ID.LootEntryType EntryType { get; private set; }
 
         /// <summary>

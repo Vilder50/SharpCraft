@@ -35,9 +35,9 @@ namespace SharpCraft.Tests.MiscObjects
         public void TestGetAsArray()
         {
             SharpCraft.Data.IConvertableToDataArrayBase convertable = new Rotation(1.4, 10.999);
-            Assert.AreEqual("[1.4d,10.999d]",convertable.GetAsArray(ID.NBTTagType.TagDoubleArray, null).GetDataString());
+            Assert.AreEqual("[1.4d,10.999d]",convertable.GetAsArray(ID.NBTTagType.TagDoubleArray, new object[] { }).GetDataString());
 
-            Assert.ThrowsException<ArgumentException>(() => convertable.GetAsArray(ID.NBTTagType.TagDouble, null));
+            Assert.ThrowsException<ArgumentException>(() => convertable.GetAsArray(ID.NBTTagType.TagDouble, new object[] { }));
         }
     }
 }

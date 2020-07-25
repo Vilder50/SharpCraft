@@ -13,7 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a new fence block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Fence(BlockType? type) : base(type) { }
+        public Fence(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

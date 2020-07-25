@@ -209,7 +209,17 @@
             /// <summary>
             /// If players should take fire damage
             /// </summary>
-            fireDamage
+            fireDamage,
+
+            /// <summary>
+            /// If angered neutral mobs should stop being angry when the player dies
+            /// </summary>
+            forgiveDeadPlayers,
+
+            /// <summary>
+            /// If angered neutral mobs should attack everyone
+            /// </summary>
+            universalAnger,
         }
         public enum IntGamerule
         {

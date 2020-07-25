@@ -10,10 +10,16 @@ namespace SharpCraft.Blocks
     public abstract class BaseSkull : BaseBlockEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BaseSkull> PathCreator => new Data.DataPathCreator<BaseSkull>();
+
+        /// <summary>
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseSkull(BlockType? type) : base(type) { }
+        public BaseSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The name of the player whose skin to display
@@ -34,13 +40,19 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class GroundSkull : BaseSkull, Interfaces.IRotation
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<GroundSkull> PathCreator => new Data.DataPathCreator<GroundSkull>();
+
         private int? _sRotation;
 
         /// <summary>
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public GroundSkull(BlockType? type) : base(type) { }
+        public GroundSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -80,10 +92,16 @@ namespace SharpCraft.Blocks
     public class WallSkull : BaseSkull, Interfaces.IFacing
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<WallSkull> PathCreator => new Data.DataPathCreator<WallSkull>();
+
+        /// <summary>
         /// Creates a new skull / head block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public WallSkull(BlockType? type) : base(type) { }
+        public WallSkull(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

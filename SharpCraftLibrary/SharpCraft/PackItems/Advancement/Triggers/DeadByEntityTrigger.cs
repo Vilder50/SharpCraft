@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player gets killed by an entity
     /// </summary>
-    public class DeadByEntityTrigger : BaseTrigger
+    public class DeadByEntityTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="DeadByEntityTrigger"/>
@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The entity who did the last hit
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JsonObjects.Entity? Entity { get; set; }
+        public Conditions.EntityCondition[]? Entity { get; set; }
     }
 }

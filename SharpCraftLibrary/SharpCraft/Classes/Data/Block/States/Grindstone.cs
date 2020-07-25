@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a grindstone block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Grindstone(BlockType? type) : base(type) { }
+        public Grindstone(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a grindstone block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Grindstone(ID.Block type = SharpCraft.ID.Block.grindstone) : base(type) { }
+        public Grindstone() : base(SharpCraft.ID.Block.grindstone) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

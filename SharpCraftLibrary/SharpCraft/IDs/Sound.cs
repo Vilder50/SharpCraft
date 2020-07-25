@@ -29,6 +29,29 @@ namespace SharpCraft
                     public static string ExtraLoop2 { get; } = "ambient.underwater.loop.additions.rare";
                     public static string ExtraLoop3 { get; } = "ambient.underwater.loop.additions.ultra_rare";
                 }
+
+                public static class Nether
+                {
+                    public class NetherSounds
+                    {
+                        private readonly string biome;
+
+                        public NetherSounds(string biome)
+                        {
+                            this.biome = biome;
+                        }
+
+                        public string Additions { get => "ambient." + biome + ".additions"; }
+                        public string Loop { get => "ambient." + biome + ".loop"; }
+                        public string Mood { get => "ambient." + biome + ".mood"; }
+                    }
+
+                    public static NetherSounds BasaltDeltas { get; } = new NetherSounds("basalt_deltas");
+                    public static NetherSounds SoulSandValley { get; } = new NetherSounds("soul_sand_valley");
+                    public static NetherSounds CrimsonForst { get; } = new NetherSounds("crimson_forest");
+                    public static NetherSounds NetherWastes { get; } = new NetherSounds("nether_wastes");
+                    public static NetherSounds WarpedForest { get; } = new NetherSounds("warped_forest");
+                }
             }
 
             /// <summary>
@@ -72,6 +95,36 @@ namespace SharpCraft
                     public string Close { get => "block." + blockName + ".close"; }
                     public string Open { get => "block." + blockName + ".open"; }
                 }
+
+                public static readonly BlockSound Chain = new BlockSound("chain");
+
+                public static class RespawnAnchor
+                {
+                    public static string Ambient { get; } = "block.respawn_anchor.ambient";
+                    public static string Charge { get; } = "block.respawn_anchor.charge";
+                    public static string Deplete { get; } = "block.respawn_anchor.deplete";
+                    public static string SetSpawn { get; } = "block.respawn_anchor.set_spawn";
+                }
+                public static string VineClimb { get; } = "block.vine.step";
+                public static string SmithingTableUse { get; } = "block.smithing_table.use";
+
+                public static readonly BlockSound Lodestone = new BlockSound("lodestone");
+                public static readonly BlockSound WeepingVine = new BlockSound("weeping_vines");
+                public static readonly BlockSound Stem = new BlockSound("stem");
+                public static readonly BlockSound SoulSoil = new BlockSound("soul_soil");
+                public static readonly BlockSound SoulSand = new BlockSound("soul_sand");
+                public static readonly BlockSound Shroomlight = new BlockSound("shroomlight");
+                public static readonly BlockSound Roots = new BlockSound("roots");
+                public static readonly BlockSound Nylium = new BlockSound("nylium");
+                public static readonly BlockSound WartBlock = new BlockSound("wart_block");
+                public static readonly BlockSound Netherrack = new BlockSound("netherrack");
+                public static readonly BlockSound Netherite = new BlockSound("netherite");
+                public static readonly BlockSound NetherOre = new BlockSound("nether_ore");
+                public static readonly BlockSound NetherBricks = new BlockSound("nether_brick");
+                public static readonly BlockSound Fungus = new BlockSound("fungus");
+                public static readonly BlockSound BoneBlock = new BlockSound("bone_block");
+                public static readonly BlockSound Basalt = new BlockSound("basalt");
+                public static readonly BlockSound AncientDebris = new BlockSound("ancient_debris");
                 public static class BeeHive
                 {
                     public static string Drip { get; } = "block.beehive.drip";
@@ -258,6 +311,40 @@ namespace SharpCraft
                     public string Hurt { get => "entity." + entityName + ".hurt"; }
                     public string Step { get => "entity." + entityName + ".step"; }
                 }
+
+                public static class Piglin
+                {
+                    public static string Admire { get; } = "entity.piglin.admiring_item";
+                    public static string Ambient { get; } = "entity.piglin.ambient";
+                    public static string Angry { get; } = "entity.piglin.angry";
+                    public static string Celebrate { get; } = "entity.piglin.celebrate";
+                    public static string ZombifiedConvert { get; } = "entity.piglin.converted_to_zombified";
+                    public static string Death { get; } = "entity.piglin.death";
+                    public static string Hurt { get; } = "entity.piglin.hurt";
+                    public static string Jealous { get; } = "entity.piglin.jealous";
+                    public static string Retreat { get; } = "entity.piglin.retreat";
+                    public static string Step { get; } = "entity.piglin.step";
+                }
+                public static class Zoglin
+                {
+                    public static string Death { get; } = "entity.zoglin.death";
+                    public static string Hurt { get; } = "entity.zoglin.hurt";
+                    public static string Ambient { get; } = "entity.zoglin.ambient";
+                    public static string Angry { get; } = "entity.zoglin.angry";
+                    public static string Attack { get; } = "entity.zoglin.attack";
+                    public static string Step { get; } = "entity.zoglin.step";
+                }
+                public static class Hoglin
+                {
+                    public static string Death { get; } = "entity.hoglin.death";
+                    public static string Hurt { get; } = "entity.hoglin.hurt";
+                    public static string Ambient { get; } = "entity.hoglin.ambient";
+                    public static string Angry { get; } = "entity.hoglin.angry";
+                    public static string Attack { get; } = "entity.hoglin.attack";
+                    public static string Retreat { get; } = "entity.hoglin.retreat";
+                    public static string Convert { get; } = "entity.hoglin.converted_to_zombified";
+                    public static string Step { get; } = "entity.hoglin.step";
+                }
                 public static class Bee
                 {
                     public static string Death { get; } = "entity.bee.death";
@@ -387,6 +474,7 @@ namespace SharpCraft
                     public static string Sleep { get; } = "entity.fox.sleep";
                     public static string Spit { get; } = "entity.fox.spit";
                     public static string Sniff { get; } = "entity.fox.sniff";
+                    public static string Teleport { get; } = "entity.fox.teleport";
                 }
                 public static class Chicken
                 {
@@ -687,7 +775,7 @@ namespace SharpCraft
                         public static string WitherSkeleton { get; } = "entity.parrot.imitate.wither_skeleton";
                         public static string Wolf { get; } = "entity.parrot.imitate.wolf";
                         public static string Zombie { get; } = "entity.parrot.imitate.zombie";
-                        public static string ZombiePigman { get; } = "entity.parrot.imitate.zombie_pigman";
+                        public static string ZombifiedPiglin { get; } = "entity.parrot.imitate.zombified_piglin";
                         public static string ZombieVillager { get; } = "entity.parrot.imitate.zombie_villager";
                     }
                 }
@@ -903,12 +991,12 @@ namespace SharpCraft
                     public static string Death { get; } = "entity.zombie_horse.death";
                     public static string Hurt { get; } = "entity.zombie_horse.hurt";
                 }
-                public static class ZombiePigman
+                public static class ZombifiedPiglin
                 {
-                    public static string Ambient { get; } = "entity.zombie_pigman.ambient";
-                    public static string Death { get; } = "entity.zombie_pigman.death";
-                    public static string Hurt { get; } = "entity.zombie_pigman.hurt";
-                    public static string Angry { get; } = "entity.zombie_pigman.angry";
+                    public static string Ambient { get; } = "entity.zombified_piglin.ambient";
+                    public static string Death { get; } = "entity.zombified_piglin.death";
+                    public static string Hurt { get; } = "entity.zombified_piglin.hurt";
+                    public static string Angry { get; } = "entity.zombified_piglin.angry";
                 }
                 public static class ZombieVillager
                 {
@@ -929,6 +1017,7 @@ namespace SharpCraft
                 public static string DrinkHoneyBottle { get; } = "item.honey_bottle.drink";
                 public static class Armor
                 {
+                    public static string Netherite { get; } = "item.armor.equip_netherite";
                     public static string Chain { get; } = "item.armor.equip_chain";
                     public static string Diamond { get; } = "item.armor.equip_diamond";
                     public static string Elytra { get; } = "item.armor.equip_elytra";
@@ -980,8 +1069,16 @@ namespace SharpCraft
                 public static string End { get; } = "music.end";
                 public static string Game { get; } = "music.game";
                 public static string Menu { get; } = "music.menu";
-                public static string Nether { get; } = "music.nether";
                 public static string UnderWater { get; } = "music.under_water";
+
+                public static class Nether
+                {
+                    public static string BasaltDeltas { get; } = "music.nether.basalt_deltas";
+                    public static string CrimsonForest { get; } = "music.nether.crimson_forest";
+                    public static string NetherWastes { get; } = "music.nether.nether_wastes";
+                    public static string SoulSandValley { get; } = "music.nether.soul_sand_valley";
+                    public static string WarpedForest { get; } = "music.nether.warped_forest";
+                }
             }
 
             /// <summary>

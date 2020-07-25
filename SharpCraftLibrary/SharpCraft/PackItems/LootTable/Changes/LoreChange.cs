@@ -20,7 +20,7 @@ namespace SharpCraft.LootObjects
         /// <param name="lore">The lore</param>
         /// <param name="replace">True replaces the old lore. False appends the lore.</param>
         /// <param name="target">The entity @s referes to in the lore</param>
-        public LoreChange(BaseJsonText[] lore, ID.LootTarget? target = null, bool replace = true) : base("set_lore")
+        public LoreChange(BaseJsonText[] lore, ID.LootTarget? target = null, bool replace = true) : base("minecraft:set_lore")
         {
             Lore = lore;
             Target = target;

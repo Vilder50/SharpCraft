@@ -1,0 +1,34 @@
+﻿using SharpCraft.Data;
+
+namespace SharpCraft
+{
+    /// <summary>
+    /// All the different ID's/Types/States things in the game can have
+    /// </summary>
+    public static partial class ID
+    {
+		#pragma warning disable 1591
+        public class Fluid : NamespacedEnumLike<string>, IFluidType
+        {
+            public Fluid(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            /// <summary>
+            /// Converts this type into a <see cref="DataPartObject"/>
+            /// </summary>
+            /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+            /// <returns></returns>
+            public DataPartObject GetAsDataObject(object?[] conversionData)
+            {
+                return (this as IGroupable).GetGroupData(conversionData);
+            }
+
+            public string Name => ToString();
+
+            public bool IsAGroup => false;
+
+<%            public static readonly Fluid %name% = new Fluid("%value%");%>
+        }
+    }
+}

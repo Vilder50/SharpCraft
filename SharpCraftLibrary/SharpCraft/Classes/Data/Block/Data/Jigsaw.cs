@@ -7,19 +7,24 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for jigsaw blocks
     /// </summary>
-    public class Jigsaw : BaseBlockEntity, Interfaces.IFacingFull
+    public class Jigsaw : BaseBlockEntity
     {
         /// <summary>
-        /// Creates a jigsaw block
+        /// Returns a object which can be used for creating data paths
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Jigsaw(BlockType? type) : base(type) { }
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Jigsaw> PathCreator => new Data.DataPathCreator<Jigsaw>();
 
         /// <summary>
         /// Creates a jigsaw block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Jigsaw(ID.Block type = SharpCraft.ID.Block.jigsaw) : base(type) { }
+        public Jigsaw(IBlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new block
+        /// </summary>
+        public Jigsaw() : base(SharpCraft.ID.Block.jigsaw) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -34,13 +39,13 @@ namespace SharpCraft.Blocks
         /// <summary>
         /// The way the jigsaw is facing
         /// </summary>
-        [BlockState("facing")]
-        public ID.FacingFull? SFacing { get; set; }
+        [BlockState("orientation")]
+        public ID.JigsawOrientation? SOrientation { get; set; }
 
         /// <summary>
         /// The name of the structure pool to use
         /// </summary>
-        [Data.DataTag("target_pool")]
+        [Data.DataTag("pool")]
         public string? DPool { get; set; }
         /// <summary>
         /// The block the jigsaw should transform into when done
@@ -51,9 +56,20 @@ namespace SharpCraft.Blocks
 
         /// <summary>
         /// The name of the jigsaw block.
-        /// (Jigsaws only connects to other jigsaws with the same name)
         /// </summary>
-        [Data.DataTag("attachment_type")]
+        [Data.DataTag("name")]
         public string? DName { get; set; }
+
+        /// <summary>
+        /// The name of the jigsaw blocks this jigsaw connects to.
+        /// </summary>
+        [Data.DataTag("target")]
+        public string? DTarget { get; set; }
+
+        /// <summary>
+        /// The type of connection the jigsaw makes
+        /// </summary>
+        [Data.DataTag("joint")]
+        public ID.JigsawJoint? DJoint { get; set; }
     }
 }

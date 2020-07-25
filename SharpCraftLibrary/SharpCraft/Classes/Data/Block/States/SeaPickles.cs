@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a sea picle block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public SeaPicles(BlockType? type) : base(type) { }
+        public SeaPicles(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a sea picle block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public SeaPicles(ID.Block type = SharpCraft.ID.Block.sea_pickle) : base(type) { }
+        public SeaPicles() : base(SharpCraft.ID.Block.sea_pickle) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

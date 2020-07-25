@@ -10,17 +10,11 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Triggers once every second
     /// </summary>
-    public class LocationTrigger : BaseTrigger
+    public class LocationTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="LocationTrigger"/>
         /// </summary>
         public LocationTrigger() : base("location") { }
-
-        /// <summary>
-        /// The location of the player
-        /// </summary>
-        [DataTag("conditions", JsonTag = true)]
-        public JsonObjects.Location? Location { get; set; }
     }
 }

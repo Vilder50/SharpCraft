@@ -12,8 +12,8 @@ namespace SharpCraft
     /// </summary>
     public class CraftingRecipe : BaseRecipe
     {
-        private ItemType[,] recipe = null!;
-        private ID.Item result;
+        private IItemType?[,] recipe = null!;
+        private ID.Item result = null!;
         private int count;
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SharpCraft
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected CraftingRecipe(bool _, BasePackNamespace packNamespace, string? fileName, ItemType[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_shaped")
+        protected CraftingRecipe(bool _, BasePackNamespace packNamespace, string? fileName, IItemType?[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "minecraft:crafting_shaped")
         {
             Recipe = recipe;
             Result = result;
@@ -44,7 +44,7 @@ namespace SharpCraft
         /// <param name="recipe">The recipe for crafting the item. Use <see cref="ID.Item.air"/> or null for empty slots</param>
         /// <param name="count">The amount of the result item the recipe should output</param>
         /// <param name="result">The item to craft</param>
-        public CraftingRecipe(BasePackNamespace packNamespace, string? fileName, ItemType[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipe, result, count, group, writeSetting)
+        public CraftingRecipe(BasePackNamespace packNamespace, string? fileName, IItemType?[,] recipe, ID.Item result, int count = 1, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipe, result, count, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -52,7 +52,7 @@ namespace SharpCraft
         /// <summary>
         /// The recipe for crafting the item. Use <see cref="ID.Item.air"/> or null for empty slots
         /// </summary>
-        public ItemType[,] Recipe
+        public IItemType?[,] Recipe
         {
             get => recipe;
             set
@@ -69,7 +69,7 @@ namespace SharpCraft
                 {
                     throw new ArgumentOutOfRangeException(nameof(Recipe), "Recipe may not be smaller than 1x1");
                 }
-                if ((from ItemType item in value select item).All(i => i is null || i.Name == "minecraft:air"))
+                if ((from IItemType item in value select item).All(i => i is null || i.Name == "minecraft:air"))
                 {
                     throw new ArgumentException(nameof(Recipe), "Recipe may not only contain empty slots");
                 }
@@ -124,7 +124,7 @@ namespace SharpCraft
 
             //get keys and Write pattern
             stream.Write(",\"pattern\":");
-            Dictionary<string, (int key, ItemType item)> keys = new Dictionary<string, (int key, ItemType item)>();
+            Dictionary<string, (int key, IItemType item)> keys = new Dictionary<string, (int key, IItemType item)>();
             List<string> recipeLines = new List<string>();
 
             for (int y = 0; y < Recipe.GetLength(0); y++)
@@ -133,7 +133,7 @@ namespace SharpCraft
                 for (int x = 0; x < Recipe.GetLength(1); x++)
                 {
                     string useKey;
-                    ItemType item = Recipe[y, x];
+                    IItemType? item = Recipe[y, x];
                     if (item is null || item.Name == "minecraft:air")
                     {
                         useKey = " ";
@@ -155,14 +155,14 @@ namespace SharpCraft
 
             //Write keys
             List<string> keyLines = new List<string>();
-            foreach (KeyValuePair<string, (int key, ItemType item)> key in keys)
+            foreach (KeyValuePair<string, (int key, IItemType item)> key in keys)
             {
                 keyLines.Add("\"" + key.Value.key + "\":" + GetItemCompound(key.Value.item));
             }
             stream.Write(",\"key\":{" + string.Join(",", keyLines) + "}");
 
             //write output item
-            stream.Write(",\"result\":{\"item\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":{\"item\":\"" + Result + "\"");
             if (Count != 1)
             {
                 stream.Write(",\"count\":" + Count);

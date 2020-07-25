@@ -2,13 +2,14 @@
 using System;
 using System.Collections.Generic;
 using SharpCraft.Commands;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// Class for function files
     /// </summary>
-    public class Function : BaseFile, IFunction
+    public class Function : BaseFile<TextWriter>, IFunction
     {
         /// <summary>
         /// Used to add commands to the given function
@@ -26,6 +27,8 @@ namespace SharpCraft
         private List<ICommand> commands = null!;
 
         private CommandWriteListener? writeCommandListener;
+
+        private int siblings = 0;
 
         /// <summary>
         /// Intializes a new <see cref="Function"/> with the given values. Inherite from this constructor.
@@ -180,6 +183,11 @@ namespace SharpCraft
         public FunctionWriters.CustomCommands Custom { get; private set; }
 
         /// <summary>
+        /// Marks this as not being a group
+        /// </summary>
+        public bool IsAGroup => false;
+
+        /// <summary>
         /// Creates a folder with this function's name and creates a new <see cref="Function"/> inside of it with the specified name
         /// </summary>
         /// <param name="name">The name of the new <see cref="Function"/></param>
@@ -268,7 +276,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            Function function = NewSibling((string?)null, writeSetting);
+            Function function = NewSibling(this.FileId + "-" + (siblings++), writeSetting);
             creater(function);
             return function;
         }
@@ -330,83 +338,13 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
+        /// Converts this type into a <see cref="DataPartObject"/>
         /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        /// <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
+        /// <returns></returns>
+        public DataPartObject GetAsDataObject(object?[] conversionData)
         {
-            return new Data.DataPartTag(GetNamespacedName());
-        }
-    }
-
-    /// <summary>
-    /// Class for functions which should be callable.
-    /// </summary>
-    public class EmptyFunction : IFunction
-    {
-        /// <summary>
-        /// Intializes a new <see cref="EmptyFunction"/>
-        /// </summary>
-        /// <param name="packNamespace">The namespace the function is in</param>
-        /// <param name="name">The name of the function</param>
-        public EmptyFunction(BasePackNamespace packNamespace, string name)
-        {
-            FileId = name;
-            PackNamespace = packNamespace;
-        }
-
-        /// <summary>
-        /// The name of the function
-        /// </summary>
-        public string FileId { get; private set; }
-
-        /// <summary>
-        /// The namespace the function is in
-        /// </summary>
-        public BasePackNamespace PackNamespace { get; private set; }
-
-        /// <summary>
-        /// Returns the string used for running this function
-        /// </summary>
-        /// <returns>The string used for running this function</returns>
-        public string GetNamespacedName()
-        {
-            return PackNamespace.Name + ":" + FileId;
-        }
-
-        /// <summary>
-        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
-        /// </summary>
-        public string Name
-        {
-            get => GetNamespacedName();
-        }
-
-        /// <summary>
-        /// Converts a string of the format NAMESPACE:FUNCTION into an <see cref="EmptyFunction"/>
-        /// </summary>
-        /// <param name="function">The string to convert</param>
-        public static implicit operator EmptyFunction(string function)
-        {
-            string[] parts = function.Split(':');
-            if (parts.Length != 2)
-            {
-                throw new InvalidCastException("String for creating empty function has to contain a single :");
-            }
-            return new EmptyFunction(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
-        }
-
-        /// <summary>
-        /// Converts this recipe into a <see cref="Data.DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="Data.DataPartTag"/></returns>
-        public Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new Data.DataPartTag(GetNamespacedName());
+            return (this as IFunction).GetGroupData(conversionData);
         }
     }
 }

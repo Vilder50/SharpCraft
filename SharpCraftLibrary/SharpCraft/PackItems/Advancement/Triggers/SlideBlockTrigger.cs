@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player slides down a block
     /// </summary>
-    public class SlideBlockTrigger : BaseTrigger
+    public class SlideBlockTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="SlideBlockTrigger"/>
@@ -21,6 +21,6 @@ namespace SharpCraft.AdvancementObjects
         /// The block the player slid down of
         /// </summary>
         [DataTag("conditions.block", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public BlockType? Block { get; set; }
+        public IBlockType? Block { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute anchored feet", new ExecuteAnchored(ID.FacingAnchor.feet).GetCommandString(), "ExecuteAnchored does not return correct GetCommandString");
             Assert.AreEqual("execute as @s[level=1..2]", new ExecuteAs(new SharpCraft.Selector() { Level = new MCRange(1, 2) }).GetCommandString(), "ExecuteAs does not return correct GetCommandString");
             Assert.AreEqual("execute at @s[level=1..2]", new ExecuteAt(new SharpCraft.Selector() { Level = new MCRange(1, 2) }).GetCommandString(), "ExecuteAt does not return correct GetCommandString");
-            Assert.AreEqual("execute in the_end", new ExecuteDimension(ID.Dimension.the_end).GetCommandString(), "ExecuteDimension does not return correct GetCommandString");
+            Assert.AreEqual("execute in minecraft:the_end", new ExecuteDimension(Dimension.End).GetCommandString(), "ExecuteDimension does not return correct GetCommandString");
             Assert.AreEqual("execute facing ~3 ~4 ~5", new ExecuteFacingCoord(new Coords(3,4,5)).GetCommandString(), "ExecuteFacingCoord does not return correct GetCommandString");
             Assert.AreEqual("execute facing entity @s[level=1..2] feet", new ExecuteFacingEntity(new SharpCraft.Selector() { Level = new MCRange(1, 2) }, ID.FacingAnchor.feet).GetCommandString(), "ExecuteFacingEntity does not return correct GetCommandString");
             Assert.AreEqual("execute if block ~ ~ ~ minecraft:anvil[facing=north]", new ExecuteIfBlock(new Coords(), new Blocks.Anvil(ID.Block.anvil) {SFacing = ID.Facing.north }).GetCommandString(), "ExecuteIfBlock does not return correct GetCommandString");
@@ -45,7 +45,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("execute store result bossbar minecraft:test max", new ExecuteStoreBossbar(new BossBar("test"), false, true).GetCommandString(), "ExecuteStoreBossbar does not return correct GetCommandString");
             Assert.AreEqual("execute store result entity @s cake long 10", new ExecuteStoreData(new EntityDataLocation(new Selector(), "cake"), ID.StoreTypes.Long, 10).GetCommandString(), "ExecuteStoreEntity does not return correct GetCommandString");
             Assert.AreEqual("execute store result score @s test", new ExecuteStoreScore(new SharpCraft.Selector(), new Objective("test")).GetCommandString(), "ExecuteStoreScore does not return correct GetCommandString");
-            Assert.AreEqual("execute if predicate space:name", new ExecuteIfPredicate(new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name")).GetCommandString(), "ExecuteIfPredicate does not return correct GetCommandString");
+            Assert.AreEqual("execute if predicate space:name", new ExecuteIfPredicate(new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name")).GetCommandString(), "ExecuteIfPredicate does not return correct GetCommandString");
             Assert.IsNull(new StopExecuteCommand().GetCommandString());
         }
 

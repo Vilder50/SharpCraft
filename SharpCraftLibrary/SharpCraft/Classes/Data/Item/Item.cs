@@ -14,6 +14,12 @@ namespace SharpCraft
     public class Item : DataHolderBase
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Item> PathCreator => new Data.DataPathCreator<Item>();
+
+        /// <summary>
         /// Creates an item without an id or anything but which can have data
         /// This is used to test for item with data
         /// </summary>
@@ -25,7 +31,7 @@ namespace SharpCraft
         /// <param name="itemID">The type of the item. If null the item has no type</param>
         /// <param name="count">The amount of the item. If null the item has no amount</param>
         /// <param name="slot">The slot the item is in. If null the item isn't in a slot</param>
-        public Item(ItemType? itemID, sbyte? count = null, sbyte? slot = null)
+        public Item(IItemType? itemID, sbyte? count = null, sbyte? slot = null)
         {
             ID = itemID;
             Slot = slot;
@@ -51,7 +57,7 @@ namespace SharpCraft
         /// If null the item isnt any item type
         /// </summary>
         [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagString)]
-        public ItemType? ID { get; set; }
+        public IItemType? ID { get; set; }
 
         /// <summary>
         /// An object used to define item enchantments
@@ -61,7 +67,7 @@ namespace SharpCraft
             /// <summary>
             /// The type of the enchantment
             /// </summary>
-            [DataTag("id", ForceType = SharpCraft.ID.NBTTagType.TagNamespacedString)]
+            [DataTag("id")]
             public ID.Enchant? ID { get; set; }
             /// <summary>
             /// The level of the enchantment
@@ -149,12 +155,12 @@ namespace SharpCraft
         /// A list of blocks the item can destroy in adventure mode
         /// </summary>
         [DataTag("tag.CanDestroy",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[]? CanDestroy { get; set; }
+        public IBlockType[]? CanDestroy { get; set; }
         /// <summary>
         /// A list of blocks the item can be placed on in adventure mode
         /// </summary>
         [DataTag("tag.CanPlaceOn",ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
-        public BlockType[]? CanPlaceOn { get; set; }
+        public IBlockType[]? CanPlaceOn { get; set; }
         /// <summary>
         /// How much damage the item has taken
         /// </summary>
@@ -346,7 +352,7 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator"/>.
+            /// Used for getting the paths for a <see cref="DataHolderBase"/>. Do not call this method without using <see cref="DataPathCreator{Item}"/>.
             /// </summary>
             /// <typeparam name="T">The type of <see cref="DataHolderBase"/> to get the path for</typeparam>
             [GeneratePath("ContinuePathGenerator", SharpCraft.ID.SimpleNBTTagType.Compound)]

@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class MinecartHopper : Minecart
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<MinecartHopper> PathCreator => new Data.DataPathCreator<MinecartHopper>();
+
+        /// <summary>
         /// Creates a new hopper minecart
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MinecartHopper(ID.Entity? type = ID.Entity.hopper_minecart) : base(type) { }
+        public MinecartHopper(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public MinecartHopper() : base(SharpCraft.ID.Entity.hopper_minecart) { }
 
         /// <summary>
         /// The hopper's loottable

@@ -44,7 +44,7 @@ namespace SharpCraft
                     throw new ArgumentException(nameof(Name), "Name may not be null or whitespace");
                 }
                 string loweredString = value.ToLower();
-                if (!Utils.ValidateName(loweredString,false,true, null))
+                if (!Validators.ValidateName(loweredString,false,true, null))
                 {
                     throw new ArgumentException("Storage name is invalid. Only accepts letters, numbers and /-._");
                 }

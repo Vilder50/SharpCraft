@@ -9,13 +9,19 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class DropperDispenser : BaseContainer, Interfaces.IPowered, Interfaces.IFacingFull
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<DropperDispenser> PathCreator => new Data.DataPathCreator<DropperDispenser>();
+
         private Item[]? _dItems;
 
         /// <summary>
         /// Creates a dispenser/dropper block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public DropperDispenser(BlockType? type) : base(type) { }
+        public DropperDispenser(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

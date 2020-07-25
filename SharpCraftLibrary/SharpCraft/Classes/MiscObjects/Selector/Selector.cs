@@ -232,14 +232,14 @@ namespace SharpCraft
         /// </summary>
         public class EntityType : ISelectorArgument
         {
-            private SharpCraft.EntityType id = null!;
+            private IEntityType id = null!;
 
             /// <summary>
             /// Creates the object with the given parameters
             /// </summary>
             /// <param name="id">The type of entity the entity has / has not to be</param>
             /// <param name="wanted">If the entity should be the type or not</param>
-            public EntityType(SharpCraft.EntityType id, bool wanted = true)
+            public EntityType(IEntityType id, bool wanted = true)
             {
                 Wanted = wanted;
                 ID = id;
@@ -253,7 +253,7 @@ namespace SharpCraft
             /// <summary>
             /// The type of entity the entity has / has not to be
             /// </summary>
-            public SharpCraft.EntityType ID { get => id; set => id = value ?? throw new ArgumentNullException(nameof(ID), "ID may not be null or empty"); }
+            public IEntityType ID { get => id; set => id = value ?? throw new ArgumentNullException(nameof(ID), "ID may not be null or empty"); }
 
             /// <summary>
             /// The <see cref="SelectorType"/>'s raw data
@@ -276,10 +276,10 @@ namespace SharpCraft
             }
 
             /// <summary>
-            /// Converts a <see cref="SharpCraft.EntityType"/> into a <see cref="EntityTag"/>
+            /// Converts a <see cref="EntityGroup"/> into a <see cref="EntityTag"/>
             /// </summary>
-            /// <param name="type">the <see cref="SharpCraft.EntityType"/> to convert</param>
-            public static implicit operator EntityType(SharpCraft.EntityType type)
+            /// <param name="type">the <see cref="EntityGroup"/> to convert</param>
+            public static implicit operator EntityType(EntityGroup type)
             {
                 return new EntityType(type);
             }

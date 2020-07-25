@@ -12,7 +12,7 @@ namespace SharpCraft.JsonObjects
         /// the <see cref="SharpCraft.Item"/>'s id
         /// </summary>
         [DataTag((object)"item", "tag", true, JsonTag = true, ForceType = ID.NBTTagType.TagCompound, Merge = true)]
-        public ItemType? Id { get; set; }
+        public IItemType? Id { get; set; }
 
         /// <summary>
         /// the <see cref="SharpCraft.Item"/>'s durability
@@ -58,7 +58,7 @@ namespace SharpCraft.JsonObjects
             /// <summary>
             /// the enchantment id
             /// </summary>
-            [DataTag("enchantment", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+            [DataTag("enchantment", JsonTag = true)]
             public ID.Enchant? Enchant { get; set; }
 
             /// <summary>

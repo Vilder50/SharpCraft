@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a grass block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Grass(BlockType? type) : base(type) { }
+        public Grass(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a grass block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Grass(ID.Block type = SharpCraft.ID.Block.grass_block) : base(type) { }
+        public Grass() : base(SharpCraft.ID.Block.grass) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

@@ -46,19 +46,19 @@
             /// (As in uses the last durability)
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Broken(Item Item) { return "minecraft.broken:minecraft." + Item.MinecraftValue(); }
+            public static string Broken(Item Item) { return "minecraft.broken:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player crafts the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item.MinecraftValue(); }
+            public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one for each of the specified item the player drops
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item.MinecraftValue(); }
+            public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player kills an entity of the specified type
@@ -82,13 +82,13 @@
             /// Goes up by one when the player picks up the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string PickedUp(Item Item) { return "minecraft.picked_up:minecraft." + Item.MinecraftValue(); }
+            public static string PickedUp(Item Item) { return "minecraft.picked_up:minecraft." + Item; }
 
             /// <summary>
             /// Goes up by one when the player uses the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Used(Item Item) { return "minecraft.used:minecraft." + Item.MinecraftValue(); }
+            public static string Used(Item Item) { return "minecraft.used:minecraft." + Item; }
 
             /// <summary>
             /// The number of ticks since the player last slept
@@ -127,50 +127,67 @@
                 /// Distance flown with Elytra
                 /// </summary>
                 public static string Aviate { get; } = "minecraft.custom:minecraft.aviate_one_cm";
+
                 /// <summary>
                 /// Distance ridden in boats
                 /// </summary>
                 public static string RideBoat { get; } = "minecraft.custom:minecraft.boat_one_cm";
+
                 /// <summary>
                 /// Distance climbed on ladders/leaves
                 /// </summary>
                 public static string Climb { get; } = "minecraft.custom:minecraft.climb_one_cm";
+
                 /// <summary>
                 /// Distance crouched / shifted / sneaking
                 /// </summary>
                 public static string Crouch { get; } = "minecraft.custom:minecraft.crouch_one_cm";
+
                 /// <summary>
                 /// Distance walked under water (not swum)
                 /// </summary>
                 public static string Dive { get; } = "minecraft.custom:minecraft.dive_one_cm";
+
                 /// <summary>
                 /// Distance falled
                 /// </summary>
                 public static string Fall { get; } = "minecraft.custom:minecraft.fall_one_cm";
+
                 /// <summary>
                 /// Distance flown in creative/spectator mode
                 /// </summary>
                 public static string Fly { get; } = "minecraft.custom:minecraft.fly_one_cm";
+
                 /// <summary>
                 /// Distance ridden on horses
                 /// </summary>
                 public static string RideHorse { get; } = "minecraft.custom:minecraft.horse_one_cm";
+
+                /// <summary>
+                /// Distance ridden on striders
+                /// </summary>
+                public static string RideStrider { get; } = "minecraft.custom:minecraft.strider_one_cm";
+
                 /// <summary>
                 /// Distance ridden minecarts
                 /// </summary>
                 public static string RideMinecart { get; } = "minecraft.custom:minecraft.minecart_one_cm";
+
                 /// <summary>
                 /// Distance ridden on pigs
                 /// </summary>
                 public static string RidePig { get; } = "minecraft.custom:minecraft.pig_one_cm";
+
                 /// <summary>
                 /// Distance sprinted/ran
                 /// </summary>
                 public static string Sprint { get; } = "minecraft.custom:minecraft.sprint_one_cm";
+
                 /// <summary>
                 /// Distance swum
                 /// </summary>
                 public static string Swim { get; } = "minecraft.custom:minecraft.swim_one_cm";
+
                 /// <summary>
                 /// Distance walked
                 /// </summary>

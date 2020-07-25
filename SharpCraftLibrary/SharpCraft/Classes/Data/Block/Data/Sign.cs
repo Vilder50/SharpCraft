@@ -9,13 +9,19 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Sign : BaseBlockEntity, Interfaces.IRotation, Interfaces.IWaterLogged
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Sign> PathCreator => new Data.DataPathCreator<Sign>();
+
         private int? _sRotation;
 
         /// <summary>
         /// Creates a new sign block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Sign(BlockType? type) : base(type) { }
+        public Sign(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

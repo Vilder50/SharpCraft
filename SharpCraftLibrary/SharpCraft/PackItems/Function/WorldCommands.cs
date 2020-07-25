@@ -189,6 +189,33 @@ namespace SharpCraft.FunctionWriters
         }
 
         /// <summary>
+        /// Runs the given commands as a function (The function is made as a sibling function)
+        /// </summary>
+        /// <param name="writer">the commands to run</param>
+        /// <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
+        /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
+        /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
+        /// <returns>The function</returns>
+        public Function Function(Function.FunctionWriter writer, NoneNegativeTime<int>? delay = null, bool append = true)
+        {
+            return (Function)Function(ForFunction.NewSibling(writer), delay, append);
+        }
+
+        /// <summary>
+        /// Runs the given commands as a function (The function is made as a sibling function)
+        /// </summary>
+        /// <param name="name">The name of the sibling function</param>
+        /// <param name="writer">the commands to run</param>
+        /// <param name="delay">the amount of time to function execution should be delayed. null doesnt delay it. 
+        /// (If value is other than null the function will ignore the arguments send in the execute command which executed it)</param>
+        /// <param name="append">If the function is being scheduled: if false replace the last time the function was scheduled</param>
+        /// <returns>The function</returns>
+        public Function Function(string name, Function.FunctionWriter writer, NoneNegativeTime<int>? delay = null, bool append = true)
+        {
+            return (Function)Function(ForFunction.NewSibling(name, writer), delay, append);
+        }
+
+        /// <summary>
         /// Clears the schedule for the given function
         /// </summary>
         /// <param name="function">The function to clear the schedule for</param>

@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player makes lightning using a trident
     /// </summary>
-    public class ChanneledLightningTrigger : BaseTrigger
+    public class ChanneledLightningTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ChanneledLightningTrigger"/>
@@ -18,9 +18,9 @@ namespace SharpCraft.AdvancementObjects
         public ChanneledLightningTrigger() : base("channeled_lightning") { }
 
         /// <summary>
-        /// The dimension the player is coming from
+        /// The entities hit by the lightning
         /// </summary>
         [DataTag("conditions.victims", JsonTag = true)]
-        public JsonObjects.Entity[]? HitEntities { get; set; }
+        public Conditions.EntityCondition[][]? HitEntities { get; set; }
     }
 }

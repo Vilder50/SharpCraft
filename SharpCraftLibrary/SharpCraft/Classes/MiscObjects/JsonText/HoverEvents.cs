@@ -34,7 +34,7 @@ namespace SharpCraft.JsonText
         /// <returns>The string used in <see cref="BaseJsonText"/></returns>
         public string GetEventString()
         {
-            return $"\"hoverEvent\":{{\"action\":\"{eventType}\",\"value\":{GetEventValue()}}}";
+            return $"\"hoverEvent\":{{\"action\":\"{eventType}\",\"contents\":{GetEventValue()}}}";
         }
 
         /// <summary>
@@ -131,7 +131,17 @@ namespace SharpCraft.JsonText
         /// <returns>The value of the event</returns>
         public override string GetEventValue()
         {
-            return "\"" + Item.GetDataString().Escape() + "\"";
+            string output = "\"id\":\"" + Item.ID!.Name+ "\"";
+            string tagString = Item.GetItemTagString()!;
+            if (tagString != "{}")
+            {
+                output += ",\"tag\":\"" + tagString.Escape() + "\"";
+            }
+            if (!(item.Count is null))
+            {
+                output += ",\"count\":" + item.Count;
+            }
+            return "{" + output + "}";
         }
     }
 
@@ -140,7 +150,7 @@ namespace SharpCraft.JsonText
     /// </summary>
     public class EntityHoverEvent : BaseHoverEvent
     {
-        private EntityType type = null!;
+        private IEntityType type = null!;
 
         /// <summary>
         /// Intializes a new <see cref="EntityHoverEvent"/>
@@ -148,7 +158,7 @@ namespace SharpCraft.JsonText
         /// <param name="type">The type of entity</param>
         /// <param name="name">The entity's name (Not really used)</param>
         /// <param name="uuid">The entity's uuid</param>
-        public EntityHoverEvent(EntityType type, BaseJsonText? name = null, UUID? uuid = null) : base("show_entity")
+        public EntityHoverEvent(IEntityType type, BaseJsonText? name = null, UUID? uuid = null) : base("show_entity")
         {
             Type = type;
             Name = name;
@@ -158,7 +168,7 @@ namespace SharpCraft.JsonText
         /// <summary>
         /// The type of entity
         /// </summary>
-        public EntityType Type { get => type; set => type = value ?? throw new ArgumentNullException(nameof(Type), "Type may not be null"); }
+        public IEntityType Type { get => type; set => type = value ?? throw new ArgumentNullException(nameof(Type), "Type may not be null"); }
 
         /// <summary>
         /// The entity's name (Not really used)
@@ -176,17 +186,17 @@ namespace SharpCraft.JsonText
         /// <returns>The value of the event</returns>
         public override string GetEventValue()
         {
-            string output = $"type:\"{Type.Name}\"";
+            string output = $"\"type\":\"{Type.Name}\"";
             if (!(Name is null))
             {
-                output += ",name:" + Name.GetJsonString();
+                output += ",\"name\":" + Name.GetJsonString();
             }
             if (!(UUID is null))
             {
-                output += ",id:\"" + UUID.UUIDString + "\"";
+                output += ",\"id\":\"" + UUID.UUIDString + "\"";
             }
 
-            return "\"{" + output.Escape() + "}\"";
+            return "{" + output + "}";
         }
     }
 }

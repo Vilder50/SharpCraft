@@ -43,7 +43,7 @@ namespace SharpCraft.Tests.Writer
 
     class Writer3 : ISharpWriterNamespace
     {
-        public PackNamespace Namespace { get; set; }
+        public PackNamespace Namespace { get; set; } = null!;
 
         public string NamespaceName => "namespace";
 

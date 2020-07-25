@@ -48,7 +48,7 @@ namespace SharpCraft
             get => selector;
             protected set
             {
-                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreValue));
+                selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(ScoreValue));
             }
         }
 

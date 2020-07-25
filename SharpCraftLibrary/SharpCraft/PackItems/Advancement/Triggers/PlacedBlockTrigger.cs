@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player places a block
     /// </summary>
-    public class PlacedBlockTrigger : BaseTrigger
+    public class PlacedBlockTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="PlacedBlockTrigger"/>

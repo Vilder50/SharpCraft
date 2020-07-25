@@ -25,7 +25,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="bossBarName">The name of the bossbar</param>
         /// <param name="namespace">The namespace the bossbar is in. Null = minecraft namespace.</param>
-        public BossBar(BasePackNamespace @namespace, string bossBarName) : this(bossBarName)
+        public BossBar(BasePackNamespace? @namespace, string bossBarName) : this(bossBarName)
         {
             Namespace = @namespace;
         }
@@ -43,7 +43,7 @@ namespace SharpCraft
                     throw new System.ArgumentException("BossBar name may not be null or whitespace", nameof(Name));
                 }
                 string loweredString = value.ToLower();
-                if (!Utils.ValidateName(loweredString,false,true, null))
+                if (!Validators.ValidateName(loweredString,false,true, null))
                 {
                     throw new System.ArgumentException("BossBar name is invalid. Name only accepts letters, numbers and /-._");
                 }

@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Parrot : TameableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Parrot> PathCreator => new Data.DataPathCreator<Parrot>();
+
+        /// <summary>
         /// Creates a new parrot
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Parrot(ID.Entity? type = ID.Entity.parrot) : base(type) { }
+        public Parrot(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Parrot() : base(SharpCraft.ID.Entity.parrot) { }
 
         /// <summary>
         /// How the parrot looks

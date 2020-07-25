@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player's inventory is changed
     /// </summary>
-    public class InventoryChangedTrigger : BaseTrigger
+    public class InventoryChangedTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="InventoryChangedTrigger"/>

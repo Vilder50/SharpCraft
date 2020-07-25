@@ -9,19 +9,24 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Barrel : BaseContainer, Interfaces.IOpen, Interfaces.IFacingFull
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Barrel> PathCreator => new Data.DataPathCreator<Barrel>();
+
         private Item[]? _dItems;
 
         /// <summary>
         /// Creates a barrel block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Barrel(BlockType? type) : base(type) { }
+        public Barrel(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a barrel block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Barrel(ID.Block type = SharpCraft.ID.Block.barrel) : base(type) { }
+        public Barrel() : base(SharpCraft.ID.Block.barrel) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

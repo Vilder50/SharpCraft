@@ -13,13 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a lantern block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Lantern(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a lantern block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public Lantern(ID.Block type = SharpCraft.ID.Block.lantern) : base(type) { }
+        public Lantern(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -28,7 +22,7 @@ namespace SharpCraft.Blocks
         /// <returns>true if the block fits</returns>
         public new static bool FitsBlock(ID.Block block)
         {
-            return block == SharpCraft.ID.Block.lantern;
+            return block == SharpCraft.ID.Block.lantern || block == SharpCraft.ID.Block.soul_lantern;
         }
 
         /// <summary>

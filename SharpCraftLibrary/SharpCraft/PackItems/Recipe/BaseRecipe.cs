@@ -11,7 +11,7 @@ namespace SharpCraft
     /// <summary>
     /// Base class for recipe files
     /// </summary>
-    public abstract class BaseRecipe : BaseFile, IRecipe, IConvertableToDataTag
+    public abstract class BaseRecipe : BaseFile<TextWriter>, IRecipe, IConvertableToDataTag
     {
         /// <summary>
         /// Intializes a new <see cref="BaseRecipe"/>
@@ -53,7 +53,7 @@ namespace SharpCraft
         /// <param name="stream">The stream to write to</param>
         protected void WriteFileStart(TextWriter stream)
         {
-            stream.Write("{\"type\":\"minecraft:"+Type+"\"");
+            stream.Write("{\"type\":\""+Type+"\"");
 
             if (!string.IsNullOrWhiteSpace(Group))
             {
@@ -75,7 +75,7 @@ namespace SharpCraft
         /// </summary>
         /// <param name="item">The item to get the string for</param>
         /// <returns>A string used for specifieng the item in the ingredient list</returns>
-        protected static string GetItemCompound(ItemType item)
+        protected static string GetItemCompound(IItemType item)
         {
             if (item.Name.Contains("#"))
             {
@@ -88,84 +88,12 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Converts this recipe into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
-
-        /// <summary>
         /// Clears the things in the file.
         /// </summary>
         protected override void AfterDispose()
         {
             Type = null!;
             Group = null;
-        }
-    }
-
-    /// <summary>
-    /// Used for giving recipes outside this program
-    /// </summary>
-    public class EmptyRecipe : IRecipe, IConvertableToDataTag
-    {
-        /// <summary>
-        /// Intializes a new <see cref="EmptyRecipe"/>
-        /// </summary>
-        /// <param name="packNamespace">The namespace the recipe is in</param>
-        /// <param name="fileName">The name of the recipe</param>
-        public EmptyRecipe(BasePackNamespace packNamespace, string fileName)
-        {
-            PackNamespace = packNamespace;
-            FileId = fileName;
-        }
-
-        /// <summary>
-        /// The name of the recipe
-        /// </summary>
-        public string FileId { get; private set; }
-
-        /// <summary>
-        /// The namespace the recipe is in
-        /// </summary>
-        public BasePackNamespace PackNamespace { get; private set; }
-
-        /// <summary>
-        /// Returns the string used for evoking this recipe
-        /// </summary>
-        /// <returns>The string used for evoking this recipe</returns>
-        public string GetNamespacedName()
-        {
-            return PackNamespace.Name + ":" + FileId;
-        }
-
-        /// <summary>
-        /// Converts this recipe into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
-
-        /// <summary>
-        /// Converts a string of the format NAMESPACE:RECIPE into an <see cref="EmptyRecipe"/>
-        /// </summary>
-        /// <param name="recipe">The string to convert</param>
-        public static implicit operator EmptyRecipe(string recipe)
-        {
-            string[] parts = recipe.Split(':');
-            if (parts.Length != 2)
-            {
-                throw new InvalidCastException("String for creating empty recipe has to contain a single :");
-            }
-            return new EmptyRecipe(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
     }
 }

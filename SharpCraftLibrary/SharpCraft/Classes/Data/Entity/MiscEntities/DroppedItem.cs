@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class DroppedItem : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<DroppedItem> PathCreator => new Data.DataPathCreator<DroppedItem>();
+
+        /// <summary>
         /// Creates a new item
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public DroppedItem(ID.Entity? type = ID.Entity.item) : base(type) { }
+        public DroppedItem(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public DroppedItem() : base(SharpCraft.ID.Entity.item) { }
 
         /// <summary>
         /// The age of the item in ticks. When it hits 6000 it despawns
@@ -34,13 +45,13 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the entity who can pick up the item
         /// </summary>
-        [Data.DataTag((object)"M", "L")]
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? Owner { get; set; }
 
         /// <summary>
         /// The <see cref="UUID"/> of the entity who threw the item
         /// </summary>
-        [Data.DataTag((object)"M", "L")]
+        [Data.DataTag("Thrower", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? Thrower { get; set; }
 
         /// <summary>

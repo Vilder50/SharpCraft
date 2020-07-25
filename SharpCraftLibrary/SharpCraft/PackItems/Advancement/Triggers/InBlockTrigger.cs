@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player is in a block (Triggers for each block the player is in)
     /// </summary>
-    public class InBlockTrigger : BaseTrigger
+    public class InBlockTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="InBlockTrigger"/>

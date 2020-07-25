@@ -10,19 +10,24 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class BrewingStand : BaseInventory
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BrewingStand> PathCreator => new Data.DataPathCreator<BrewingStand>();
+
         private Item[]? _dItems;
 
         /// <summary>
         /// Creates a brewingstand block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BrewingStand(BlockType? type) : base(type) { }
+        public BrewingStand(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a brewingstand block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public BrewingStand(ID.Block type = SharpCraft.ID.Block.brewing_stand) : base(type) { }
+        public BrewingStand() : base(SharpCraft.ID.Block.brewing_stand) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

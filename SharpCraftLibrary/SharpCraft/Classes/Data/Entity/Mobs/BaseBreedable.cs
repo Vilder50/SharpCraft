@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class BreedableMob : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BreedableMob> PathCreator => new Data.DataPathCreator<BreedableMob>();
+
+        /// <summary>
         /// Creates a new entity
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -35,7 +41,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the entity who fed the mob
         /// </summary>
-        [Data.DataTag((object)"LoveCauseMost", "LoveCauseLeast", Merge = true)]
+        [Data.DataTag("LoveCause", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? LoveCause { get; set; }
+
     }
 }

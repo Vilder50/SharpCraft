@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <param name="group">The name of the recipe group the recipe is in. Leave null for no group.</param>
         /// <param name="recipeType">The type of special recipe</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected SpecialRecipe(bool _, BasePackNamespace packNamespace, string? fileName, SpecialType recipeType, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "crafting_special_" + recipeType.ToString())
+        protected SpecialRecipe(bool _, BasePackNamespace packNamespace, string? fileName, SpecialType recipeType, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "minecraft:crafting_special_" + recipeType.ToString())
         {
             
         }

@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="DamageChange"/>
         /// </summary>
         /// <param name="damage">The amount of damage on the item. (0 = no durability, 1 = full)</param>
-        public DamageChange(MCRange damage) : base("set_damage")
+        public DamageChange(MCRange damage) : base("minecraft:set_damage")
         {
             Damage = damage;
         }

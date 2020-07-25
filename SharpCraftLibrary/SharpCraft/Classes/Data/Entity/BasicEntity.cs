@@ -9,6 +9,12 @@ namespace SharpCraft.Entities
     public class BasicEntity : Entity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BasicEntity> PathCreator => new Data.DataPathCreator<BasicEntity>();
+
+        /// <summary>
         /// Creates a new entity
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -70,8 +76,8 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The dimension the entity is in
         /// </summary>
-        [Data.DataTag(ForceType = ID.NBTTagType.TagInt)]
-        public ID.Dimension? Dimension { get; set; }
+        [Data.DataTag]
+        public DimensionObjects.IDimension? Dimension { get; set; }
 
         /// <summary>
         /// If the entity is Invulnerable.
@@ -89,7 +95,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The entity's UUID
         /// </summary>
-        [Data.DataTag((object)"UUIDMost", "UUIDLeast")]
+        [Data.DataTag(ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? UUID { get; set; }
 
         /// <summary>

@@ -14,6 +14,7 @@ namespace SharpCraft
 
         private const string setupFunctionName = "setup";
         private const string tickFunctionName = "tick";
+        private readonly ItemGetter itemGetter = new ItemGetter();
 
         public PackNamespace? MinecraftNamespace { get; private set; }
         public PackNamespace? SharpCraftNamespace { get; private set; }
@@ -35,8 +36,8 @@ namespace SharpCraft
                 {
                     MinecraftNamespace = Datapack.Namespace<PackNamespace>("minecraft");
                     #pragma warning disable IDE0067
-                    FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load.ToString(), new List<IFunction>(), true);
-                    FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick.ToString(), new List<IFunction>(), true);
+                    FunctionGroup loadGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.load, new List<IFunction>(), true);
+                    FunctionGroup tickGroup = MinecraftNamespace.Group(ID.Files.Groups.Function.tick, new List<IFunction>(), true);
                     #pragma warning restore IDE0067
 
                     SetupFunction = SharpCraftNamespace.Function(setupFunctionName, BaseFile.WriteSetting.OnDispose);
@@ -105,6 +106,13 @@ namespace SharpCraft
 
             return mathObjective;
         }
+        public Storage GetTempStorage()
+        {
+            return itemGetter.GetItem("temp stroage", () =>
+            {
+                return new Storage(MockNamespace.GetNamespace(Datapack.GetDatapackSetting<SharpCraftNamespaceNameSetting>()?.Name ?? "sharpcraft"), "tempstorage");
+            });
+        }
         #endregion
 
         #region ray cast
@@ -121,23 +129,23 @@ namespace SharpCraft
             ScoreValue rayState = new ScoreValue(new NameSelector("#rayState"), GetMathScoreObject());
             if (IsChild())
             {
-                rayFiles = (new EmptyFunction(SharpCraftNamespace!, "raycast/block/setup"), new Objective("x" + rotationObjectiveString), new Objective("y" + rotationObjectiveString), rayState, new IPredicate[] 
+                rayFiles = (new FileMocks.MockFunction(SharpCraftNamespace!, "raycast/block/setup"), new Objective("x" + rotationObjectiveString), new Objective("y" + rotationObjectiveString), rayState, new IPredicate[] 
                 {
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/py"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/ny"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/py"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/ny"),
                                                                          
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cnz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpx"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cnx"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cny"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/cpy"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cnz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpx"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cnx"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cny"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/cpy"),
                                                                           
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/xyz"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d0"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d1"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d2"),
-                    new EmptyPredicate(SharpCraftNamespace!, "raycast/block/d3"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/xyz"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d0"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d1"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d2"),
+                    new FileMocks.MockPredicate(SharpCraftNamespace!, "raycast/block/d3"),
                 });
                 return rayFiles!;
             }
@@ -211,6 +219,42 @@ namespace SharpCraft
 
             return dummyEntitySelector;
         }
+
+        public IFunction GetDummyTeleportGetCoords()
+        {
+            _ = GetDummySelector();
+            return itemGetter.GetItem<IFunction>(nameof(GetDummyTeleportGetCoords), () =>
+            {
+                if (IsChild())
+                {
+                    return new FileMocks.MockFunction(SharpCraftNamespace!, "getdummycoords");
+                }
+                return SharpCraftNamespace!.Function("getdummycoords", get =>
+                {
+                    get.Entity.Teleport(ID.Selector.s, new Coords());
+                    get.World.Data.Copy(GetTempStorage(), Entities.BasicEntity.PathCreator.Make(d => d.Coords), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Coords)));
+                    get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
+                });
+            });
+        }
+
+        public IFunction GetDummyTeleportGetRotation()
+        {
+            _ = GetDummySelector();
+            return itemGetter.GetItem<IFunction>(nameof(GetDummyTeleportGetRotation), () =>
+            {
+                if (IsChild())
+                {
+                    return new FileMocks.MockFunction(SharpCraftNamespace!, "getdummyrotation");
+                }
+                return SharpCraftNamespace!.Function("getdummyrotation", get =>
+                {
+                    get.Entity.Teleport(ID.Selector.s, new Coords());
+                    get.World.Data.Copy(GetTempStorage(), Entities.BasicEntity.PathCreator.Make(d => d.Rotation), ID.EntityDataModifierType.set, new EntityDataLocation(ID.Selector.s, Entities.BasicEntity.PathCreator.Make(d => d.Rotation)));
+                    get.Entity.Teleport(ID.Selector.s, Datapack.GetDatapackSetting<LoadedChunkSetting>()!.CornerBlock);
+                });
+            });
+        }
         #endregion
 
         #region random
@@ -249,7 +293,7 @@ namespace SharpCraft
 
             if (IsChild())
             {
-                randomNumberFunction = new EmptyFunction(SharpCraftNamespace!, "random/generate");
+                randomNumberFunction = new FileMocks.MockFunction(SharpCraftNamespace!, "random/generate");
                 return randomNumberFunction;
             }
 
@@ -277,7 +321,7 @@ namespace SharpCraft
 
             if (IsChild())
             {
-                hashLoottable = new EmptyLoottable(SharpCraftNamespace!, "random/hashing");
+                hashLoottable = new FileMocks.MockLootTable(SharpCraftNamespace!, "random/hashing");
             }
 
             hashLoottable = SharpCraftNamespace!.Loottable("random/hashing", new LootObjects.LootPool(new LootObjects.ItemEntry(ID.Item.dirt)
@@ -323,7 +367,7 @@ namespace SharpCraft
                 h.AddCommand(new Commands.LootCommand(new Commands.LootTargets.BlockTarget(hashBlockLocation, new Slots.ContainerSlot(28)), new Commands.LootSources.MineHandSource(hashBlockLocation, true)));
 
                 h.Execute.Store(GetRandomHolder(), GetRandomHolder());
-                h.Block.Data.Get(hashBlockLocation, Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(b => b.DItems![0]!.Attributes![0]!.Amount));
+                h.Block.Data.Get(hashBlockLocation, Blocks.ShulkerBox.PathCreator.Make(b => b.DItems![0]!.Attributes![0]!.Amount));
 
                 h.Block.Add(hashBlockLocation, ID.Block.air);
                 h.Block.Add(hashBlockLocation, new Blocks.ShulkerBox(ID.Block.shulker_box) { DLootTable = hashLoottable });
@@ -334,7 +378,7 @@ namespace SharpCraft
         }
         #endregion
 
-        #region
+        #region shulker loot giver
         class ShulkerItemTag : Data.DataHolderBase
         {
             [Data.DataTag("SharpCraft.ShulkerLooter")]
@@ -364,9 +408,9 @@ namespace SharpCraft
                             new LootObjects.CopyNameChange(),
                             new LootObjects.CopyNBTChange(ID.LootTarget.block_entity, new LootObjects.CopyNBTChange.CopyOperation[] 
                             {
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLock), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLock), ID.LootDataModifierType.replace),
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTable), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTable), ID.LootDataModifierType.replace),
-                                new LootObjects.CopyNBTChange.CopyOperation(Data.DataPathCreator.GetPath<Blocks.ShulkerBox>(s => s.DLootTableSeed), Data.DataPathCreator.GetPath<Item>(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTableSeed), ID.LootDataModifierType.replace)
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLock), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLock), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLootTable), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTable), ID.LootDataModifierType.replace),
+                                new LootObjects.CopyNBTChange.CopyOperation(Blocks.ShulkerBox.PathCreator.Make(s => s.DLootTableSeed), Item.PathCreator.Make(i => (i.BlockData as Blocks.ShulkerBox)!.DLootTableSeed), ID.LootDataModifierType.replace)
                             }),
                             new LootObjects.ContentChange(new LootObjects.DynamicEntry(LootObjects.DynamicEntry.DynamicType.contents))
                         }
@@ -449,6 +493,16 @@ namespace SharpCraft
             playerObjectiveEventChecker.Items.Add(shouldRunEventCheck);
             objectiveEventFunctions.Add(objective, eventGroup);
 #pragma warning restore IDE0068
+        }
+        #endregion
+
+        #region structures
+        public Vector GetStructureBlocksLocation()
+        {
+            return itemGetter.GetItem("structure blocks location", () =>
+            {
+                return (Vector?)Datapack.GetItems<LoadedBlockItems>().ClaimLoadedCoordsSquare(new IntVector(2, 1, 1)) ?? throw new Exception("Not able to claim blocks for holding blocks");
+            });
         }
         #endregion
     }

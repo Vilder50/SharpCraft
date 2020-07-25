@@ -10,10 +10,21 @@ namespace SharpCraft.Entities
     public class ZombieVillager : Zombie, IVillager
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<ZombieVillager> PathCreator => new Data.DataPathCreator<ZombieVillager>();
+
+        /// <summary>
         /// Creates a new zombie villager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public ZombieVillager(ID.Entity? type = ID.Entity.zombie_villager) : base(type) { }
+        public ZombieVillager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public ZombieVillager() : base(SharpCraft.ID.Entity.zombie_villager) { }
 
         /// <summary>
         /// The villager's level (~Amount of trades)
@@ -25,7 +36,7 @@ namespace SharpCraft.Entities
         /// The villagers proffesion
         /// </summary>
         [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagString)]
-        public ID.VillagerProffession? VillagerProfession { get; set; }
+        public ID.VillagerProfession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager
@@ -54,7 +65,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the player who is converting this zombie villager
         /// </summary>
-        [DataTag((object)"ConversionPlayerMost", "ConversionPlayerLeast", Merge = true)]
+        [Data.DataTag("ConverterUUID", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? ConverterUUID { get; set; }
     }
 }

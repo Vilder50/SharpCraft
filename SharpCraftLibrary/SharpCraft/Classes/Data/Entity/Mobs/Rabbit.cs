@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Rabbit : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Rabbit> PathCreator => new Data.DataPathCreator<Rabbit>();
+
+        /// <summary>
         /// Creates a new rabbit
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Rabbit(ID.Entity? type = ID.Entity.rabbit) : base(type) { }
+        public Rabbit(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Rabbit() : base(SharpCraft.ID.Entity.rabbit) { }
 
         /// <summary>
         /// The type of rabbit

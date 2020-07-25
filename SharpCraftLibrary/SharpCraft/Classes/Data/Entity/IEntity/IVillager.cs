@@ -21,13 +21,13 @@ namespace SharpCraft.Entities.Interfaces
         /// <summary>
         /// The villagers proffesion
         /// </summary>
-        [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagNamespacedString)]
-        ID.VillagerProffession? VillagerProfession { get; set; }
+        [DataTag("VillagerData.profession")]
+        ID.VillagerProfession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager
         /// </summary>
-        [DataTag("VillagerData.type", ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("VillagerData.type")]
         ID.VillagerType? VillagerType { get; set; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace SharpCraft.Entities.Interfaces
         /// The UUID of the player who made this gossip.
         /// (If its a <see cref="ID.GossipType.golem"/> then its the villager who started the gossip)
         /// </summary>
-        [DataTag((object)"TargetMost","TargetLeast")]
+        [Data.DataTag("Target",ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? TartgetUUID { get; set; }
     }
 

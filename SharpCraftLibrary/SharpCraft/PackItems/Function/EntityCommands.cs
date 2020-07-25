@@ -16,6 +16,7 @@ namespace SharpCraft.FunctionWriters
             Score = new ClassScore(function);
             Effect = new ClassEffect(function);
             Item = new ClassItem(function);
+            Attribute = new ClassAttribute(function);
         }
 
         /// <summary>
@@ -45,9 +46,10 @@ namespace SharpCraft.FunctionWriters
         /// <param name="minDistance">the minimum distance the player can be spreaded away from each other</param>
         /// <param name="spreadDistanceMax">the maximum distance the player can be spreaded from the <paramref name="center"/></param>
         /// <param name="spreadTeams">If teams should be placed close to each other</param>
-        public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false)
+        /// <param name="underHeight">The height the players will be spread under. Leave null to use maximum height.</param>
+        public void Spread(BaseSelector selector, Vector center, int minDistance, int spreadDistanceMax, bool spreadTeams = false, int? underHeight = null)
         {
-            ForFunction.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams));
+            ForFunction.AddCommand(new SpreadPlayersCommand(center, selector, minDistance, spreadDistanceMax, spreadTeams, underHeight));
         }
 
         /// <summary>
@@ -583,6 +585,102 @@ namespace SharpCraft.FunctionWriters
                 {
                     ForFunction.AddCommand(new ReplaceitemEntityCommand(selector, new Slots.HorseSlot(ID.HorseSlot.chest), giveItem, giveItem.Count ?? 1));
                 }
+            }
+        }
+
+        /// <summary>
+        /// All commands for attributes
+        /// </summary>
+        public ClassAttribute Attribute;
+
+        /// <summary>
+        /// All commands for attributes
+        /// </summary>
+        public class ClassAttribute
+        {
+            /// <summary>
+            /// The function to write onto
+            /// </summary>
+            public Function Function { get; private set; }
+            internal ClassAttribute(Function function)
+            {
+                this.Function = function;
+            }
+
+            /// <summary>
+            /// Gets the value of an attribute
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to get the attribute for</param>
+            /// <param name="attribute">The attribute to get</param>
+            /// <param name="scale">A value to multiply the attribute with before outputting</param>
+            public void GetValue(BaseSelector selector, ID.AttributeType attribute, double scale = 1)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeGetCommand(selector, attribute, scale));
+            }
+
+            /// <summary>
+            /// Gets the base value of an attribute
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to get the attribute base for</param>
+            /// <param name="attribute">The attribute base to get</param>
+            /// <param name="scale">A value to multiply the attribute base with before outputting</param>
+            public void GetBase(BaseSelector selector, ID.AttributeType attribute, double scale = 1)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeGetBaseCommand(selector, attribute, scale));
+            }
+
+            /// <summary>
+            /// Sets the base value of an attribute
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to set the attribute base for</param>
+            /// <param name="attribute">The attribute base to set</param>
+            /// <param name="value">The value to set the base to</param>
+            public void SetBase(BaseSelector selector, ID.AttributeType attribute, double value)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeSetBaseCommand(selector, attribute, value));
+            }
+
+            /// <summary>
+            /// Adds an attribute modifer to an entity
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to add the modifier to</param>
+            /// <param name="attribute">The attribute to add the modifier to</param>
+            /// <param name="uuid">The UUID of the modifier</param>
+            /// <param name="name">The name of the modifier</param>
+            /// <param name="value">The value of the modifier</param>
+            /// <param name="operation">The modifier's operation</param>
+            public void AddModifier(BaseSelector selector, ID.AttributeType attribute, UUID uuid, string name, double value, ID.AttributeOperation operation)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeAddModifierCommand(selector, attribute, uuid, name, value, operation));
+            }
+
+            /// <summary>
+            /// Removes an attribute modifer from an entity
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to remove the modifier from</param>
+            /// <param name="attribute">The attribute to remove the modifier from</param>
+            /// <param name="uuid">The UUID of the modifier</param>
+            public void RemoveModifier(BaseSelector selector, ID.AttributeType attribute, UUID uuid)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeRemoveModifierCommand(selector, attribute, uuid));
+            }
+
+            /// <summary>
+            /// Gets an attribute modifer from an entity
+            /// </summary>
+            /// <param name="selector">Selector which selects the entity to get the modifier from</param>
+            /// <param name="attribute">The attribute to get the modifier from</param>
+            /// <param name="uuid">The UUID of the modifier</param>
+            /// <param name="scale">A value to multiply the attribute modifier with before outputting</param>
+            public void GetModifier(BaseSelector selector, ID.AttributeType attribute, UUID uuid, double scale)
+            {
+                selector.LimitSelector();
+                Function.AddCommand(new AttributeGetModifierCommand(selector, attribute, uuid, scale));
             }
         }
     }

@@ -33,7 +33,7 @@ namespace SharpCraft.Commands
             get => spectate;
             set
             {
-                spectate = Utils.ValidateSingleSelectSelector(value, nameof(Spectate), nameof(SpectateCommand));
+                spectate = Validators.ValidateSingleSelectSelector(value, nameof(Spectate), nameof(SpectateCommand));
             }
         }
 
@@ -45,7 +45,7 @@ namespace SharpCraft.Commands
             get => spectator;
             set
             {
-                spectator = Utils.ValidateSingleSelectSelector(value, nameof(Spectator), nameof(SpectateCommand));
+                spectator = Validators.ValidateSingleSelectSelector(value, nameof(Spectator), nameof(SpectateCommand));
             }
         }
 

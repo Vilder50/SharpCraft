@@ -8,6 +8,12 @@ namespace SharpCraft.Entities
     public class Mob : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Mob> PathCreator => new Data.DataPathCreator<Mob>();
+
+        /// <summary>
         /// Creates a new entity
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -82,7 +88,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the leash
         /// </summary>
-        [Data.DataTag("Least", "UUIDMost", "UUIDLeast")]
+        [Data.DataTag("Leash.UUID", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? LeashUUID { get; set; }
         /// <summary>
         /// The items there is in the mob's hands.

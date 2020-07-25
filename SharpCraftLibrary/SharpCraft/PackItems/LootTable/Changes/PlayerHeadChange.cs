@@ -15,7 +15,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="PlayerHeadChange"/>
         /// </summary>
-        public PlayerHeadChange() : base("copy_name")
+        public PlayerHeadChange() : base("minecraft:copy_name")
         {
             
         }

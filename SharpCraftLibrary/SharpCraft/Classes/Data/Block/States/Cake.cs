@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a cake block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Cake(BlockType? type) : base(type) { }
+        public Cake(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a cake block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Cake(ID.Block type = SharpCraft.ID.Block.cake) : base(type) { }
+        public Cake() : base(SharpCraft.ID.Block.cake) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

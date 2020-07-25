@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     public abstract class BaseContainer : BaseInventory
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<BaseContainer> PathCreator => new Data.DataPathCreator<BaseContainer>();
+
+        /// <summary>
         /// Creates a new inventory block
         /// </summary>
         /// <param name="type">The type of block</param>
@@ -19,7 +25,7 @@ namespace SharpCraft.Blocks
         /// Creates a new inventory block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseContainer(BlockType? type) : base(type) { }
+        public BaseContainer(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The loot table with items to put into the chest when opened

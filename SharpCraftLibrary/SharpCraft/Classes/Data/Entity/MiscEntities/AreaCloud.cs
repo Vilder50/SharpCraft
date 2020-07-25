@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class AreaCloud : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<AreaCloud> PathCreator => new Data.DataPathCreator<AreaCloud>();
+
+        /// <summary>
         /// Creates a new area effect cloud
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public AreaCloud(ID.Entity? type = ID.Entity.area_effect_cloud) : base(type) { }
+        public AreaCloud(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public AreaCloud() : base(SharpCraft.ID.Entity.area_effect_cloud) { }
 
         /// <summary>
         /// The amount of time before the cloud disapears after the <see cref="WaitTime"/> is over
@@ -47,7 +58,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The UUID of the entity who made the cloud
         /// </summary>
-        [Data.DataTag((object)"OwnerUUIDMost", "OwnerUUIDLeast")]
+        [Data.DataTag("Owner",ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? OwnerUUID { get; set; }
 
         /// <summary>

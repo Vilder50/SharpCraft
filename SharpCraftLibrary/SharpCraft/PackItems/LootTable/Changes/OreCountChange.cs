@@ -16,7 +16,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="OreCountChange"/>
         /// </summary>
         /// <param name="enchant">The enchant to get the level from (An enchant on the item which activated this loot table)</param>
-        public OreCountChange(ID.Enchant enchant) : base("apply_bonus")
+        public OreCountChange(ID.Enchant enchant) : base("minecraft:apply_bonus")
         {
             Enchant = enchant;
         }
@@ -24,7 +24,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// The formula used
         /// </summary>
-        [DataTag("formula", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("formula", JsonTag = true)]
         public ID.LootBonusFormula Formula { get; private set; } = ID.LootBonusFormula.ore_drops;
 
         /// <summary>

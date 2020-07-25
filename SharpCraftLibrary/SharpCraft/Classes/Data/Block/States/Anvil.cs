@@ -13,7 +13,7 @@ namespace SharpCraft.Blocks
         /// Creates a new anvil block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Anvil(BlockType? type) : base(type) { }
+        public Anvil(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -22,7 +22,7 @@ namespace SharpCraft.Blocks
         /// <returns>true if the block fits</returns>
         public new static bool FitsBlock(ID.Block block)
         {
-            return block == SharpCraft.ID.Block.anvil || block == SharpCraft.ID.Block.anvil || block == SharpCraft.ID.Block.anvil;
+            return block == SharpCraft.ID.Block.anvil || block == SharpCraft.ID.Block.chipped_anvil || block == SharpCraft.ID.Block.damaged_anvil;
         }
 
         /// <summary>

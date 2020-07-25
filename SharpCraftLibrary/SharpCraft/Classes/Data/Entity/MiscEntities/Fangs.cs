@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class EvokerFangs : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<EvokerFangs> PathCreator => new Data.DataPathCreator<EvokerFangs>();
+
+        /// <summary>
         /// Creates a new evoker fangs
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public EvokerFangs(ID.Entity? type = ID.Entity.evoker_fangs) : base(type) { }
+        public EvokerFangs(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public EvokerFangs() : base(SharpCraft.ID.Entity.evoker_fangs) { }
 
         /// <summary>
         /// The amount of time before the fangs appear
@@ -22,7 +33,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the entity who summoned the fangs
         /// </summary>
-        [Data.DataTag("Owner", "OwnerUUIDMost", "OwnerUUIDLeast")]
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? OwnerUUID { get; set; }
 
         /// <summary>

@@ -10,16 +10,21 @@ namespace SharpCraft.Blocks
     public class Lectern : BaseBlockEntity, Interfaces.IFacing, Interfaces.IPowered
     {
         /// <summary>
-        /// Creates a lectern block
+        /// Returns a object which can be used for creating data paths
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Lectern(BlockType? type) : base(type) { }
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Lectern> PathCreator => new Data.DataPathCreator<Lectern>();
 
         /// <summary>
         /// Creates a lectern block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Lectern(ID.Block type = SharpCraft.ID.Block.lectern) : base(type) { }
+        public Lectern(IBlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new block
+        /// </summary>
+        public Lectern() : base(SharpCraft.ID.Block.lectern) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

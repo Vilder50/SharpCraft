@@ -1,0 +1,18 @@
+﻿namespace SharpCraft
+{
+    /// <summary>
+    /// All the different ID's/Types/States things in the game can have
+    /// </summary>
+    public static partial class ID
+    {
+		#pragma warning disable 1591
+        public class Particle: NamespacedEnumLike<string>
+        {
+            public Particle(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+<%            public static readonly Particle %name% = new Particle("%value%");%>
+        }
+    }
+}

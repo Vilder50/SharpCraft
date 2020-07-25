@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when a potion is taken out of a brewing stand
     /// </summary>
-    public class BrewedPotionTrigger : BaseTrigger
+    public class BrewedPotionTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="BrewedPotionTrigger"/>
@@ -20,7 +20,7 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The brewed potion
         /// </summary>
-        [DataTag("conditions.potion", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("conditions.potion", JsonTag = true)]
         public ID.Potion? Potion { get; set; }
     }
 }

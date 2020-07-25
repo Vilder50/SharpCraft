@@ -6,102 +6,64 @@
     public static partial class ID
     {
 #pragma warning disable 1591
-        public enum Biome
+        public class Structure: NamespacedEnumLike<string>
         {
-            ocean,
-            deep_ocean,
-            frozen_ocean,
-            deep_frozen_ocean,
-            cold_ocean,
-            deep_cold_ocean,
-            lukewarm_ocean,
-            deep_lukewarm_ocean,
-            warm_ocean,
-            deep_warm_ocean,
-            river,
-            frozen_river,
-            beach,
-            stone_shore,
-            snowy_beach,
-            forest,
-            wooded_hills,
-            flower_forest,
-            birch_forest,
-            birch_forest_hills,
-            tall_birch_forest,
-            tall_birch_hills,
-            dark_forest,
-            dark_forest_hills,
-            jungle,
-            jungle_hills,
-            modified_jungle,
-            jungle_edge,
-            modified_jungle_edge,
-            bamboo_jungle,
-            bamboo_jungle_hills,
-            taiga,
-            taiga_hills,
-            taiga_mountains,
-            snowy_taiga,
-            snowy_taiga_hills,
-            snowy_taiga_mountains,
-            giant_tree_taiga,
-            giant_tree_taiga_hills,
-            giant_spruce_taiga,
-            giant_spruce_taiga_hills,
-            mushroom_fields,
-            mushroom_field_shore,
-            swamp,
-            swamp_hills,
-            savanna,
-            savanna_plateau,
-            shattered_savanna,
-            shattered_savanna_plateau,
-            plains,
-            sunflower_plains,
-            desert,
-            desert_hills,
-            desert_lakes,
-            snowy_tundra,
-            snowy_mountains,
-            ice_spikes,
-            mountains,
-            wooded_mountains,
-            gravelly_mountains,
-            modified_gravelly_mountains,
-            mountain_edge,
-            badlands,
-            badlands_plateau,
-            modified_badlands_plateau,
-            wooded_badlands_plateau,
-            modified_wooded_badlands_plateau,
-            eroded_badlands,
-            nether,
-            the_end,
-            small_end_islands,
-            end_midlands,
-            end_highlands,
-            end_barrens,
-            the_void,
-            BiomeEnumEnd
+            public Structure(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            public static readonly Structure Desert_pyramid = new Structure("desert_pyramid");
+            public static readonly Structure EndCity = new Structure("endcity");
+            public static readonly Structure Fortress = new Structure("fortress");
+            public static readonly Structure Igloo = new Structure("igloo");
+            public static readonly Structure Jungle_Pyramid = new Structure("jungle_pyramid");
+            public static readonly Structure Mansion = new Structure("mansion");
+            public static readonly Structure Mineshaft = new Structure("mineshaft");
+            public static readonly Structure Monument = new Structure("monument");
+            public static readonly Structure Stronghold = new Structure("stronghold");
+            public static readonly Structure Swamp_Hut = new Structure("swamp_Hut");
+            public static readonly Structure Village = new Structure("village");
+            public static readonly Structure Buried_Treasure = new Structure("buried_Treasure");
+            public static readonly Structure Ocean_Ruin = new Structure("ocean_Ruin");
+            public static readonly Structure Shipwreck = new Structure("shipwreck");
+            public static readonly Structure Nether_Fossil = new Structure("nether_Fossil");
+            public static readonly Structure Bastion_Remnant = new Structure("bastion_Remnant");
+            public static readonly Structure Ruined_Portal = new Structure("ruined_Portal");
         }
-        public enum Dimension { overworld, the_end, the_nether = -1 }
-        public enum Structure
+
+        /// <summary>
+        /// Options for <see cref="DimensionObjects.VanillaNoiseGenerator"/>
+        /// </summary>
+        public class NoiseGeneratorSetting : NamespacedEnumLike<string>
         {
-            Desert_pyramid,
-            EndCity,
-            Fortress,
-            Igloo,
-            Jungle_Pyramid,
-            Mansion,
-            Mineshaft,
-            Monument,
-            Stronghold,
-            Swamp_Hut,
-            Village,
-            Buried_Treasure,
-            Ocean_Ruin,
-            Shipwreck
+            public NoiseGeneratorSetting(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+            /// <summary>
+            /// Normal overworld generation
+            /// </summary>
+            public static readonly NoiseGeneratorSetting overworld = new NoiseGeneratorSetting("overworld");
+            /// <summary>
+            /// Amplified generation
+            /// </summary>
+            public static readonly NoiseGeneratorSetting amplified = new NoiseGeneratorSetting("amplified");
+            /// <summary>
+            /// Normal nether generation
+            /// </summary>
+            public static readonly NoiseGeneratorSetting nether = new NoiseGeneratorSetting("nether");
+            /// <summary>
+            /// Nether generation but with overworld features
+            /// </summary>
+            public static readonly NoiseGeneratorSetting caves = new NoiseGeneratorSetting("caves");
+            /// <summary>
+            /// Generation used for generating the end island
+            /// </summary>
+            public static readonly NoiseGeneratorSetting end = new NoiseGeneratorSetting("end");
+            /// <summary>
+            /// End floating island generation
+            /// </summary>
+            public static readonly NoiseGeneratorSetting floating_islands = new NoiseGeneratorSetting("floating_islands");
         }
 #pragma warning restore 1591
     }

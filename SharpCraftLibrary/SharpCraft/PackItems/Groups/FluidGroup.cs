@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace SharpCraft
 {
     /// <summary>
-    /// Class for <see cref="LiquidType"/> groups files
+    /// Class for <see cref="IFluidType"/> groups files
     /// </summary>
-    public class LiquidGroup : BaseGroup<LiquidType>, ILiquidType
+    public class FluidGroup : BaseGroup<IFluidType>, IFluidType
     {
         /// <summary>
         /// Intializes a new Group with the given parameters. Inherite from this constructor.
@@ -21,7 +21,7 @@ namespace SharpCraft
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        public LiquidGroup(bool _, BasePackNamespace packNamespace, string? fileName, List<LiquidType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "liquid")
+        public FluidGroup(bool _, BasePackNamespace packNamespace, string? fileName, List<IFluidType> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "liquid")
         {
             
         }
@@ -34,22 +34,9 @@ namespace SharpCraft
         /// <param name="writeSetting">The settings for how to write this file</param>
         /// <param name="items">The items in this group</param>
         /// <param name="appendGroup">If this group should append other groups of the same type and same name from other datapacks</param>
-        public LiquidGroup(BasePackNamespace packNamespace, string? fileName, List<LiquidType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
+        public FluidGroup(BasePackNamespace packNamespace, string? fileName, List<IFluidType> items, bool appendGroup, WriteSetting writeSetting) : this(true, packNamespace, fileName, items, appendGroup, writeSetting)
         {
             FinishedConstructing();
-        }
-
-        /// <summary>
-        /// The value (Used for when converted into a liquid type)
-        /// </summary>
-        public object Value => this;
-
-        /// <summary>
-        /// Returns <see cref="BaseFile.GetNamespacedName()"/>
-        /// </summary>
-        public string Name
-        {
-            get => GetNamespacedName();
         }
 
         /// <summary>
@@ -60,15 +47,6 @@ namespace SharpCraft
         {
             CreateDirectory("tags/fluids");
             return PackNamespace.Datapack.FileCreator.CreateWriter(PackNamespace.GetPath() + "tags/fluids/" + WritePath + ".json");
-        }
-
-        /// <summary>
-        /// implicit converts a <see cref="LiquidGroup"/> into a <see cref="LiquidType"/> object
-        /// </summary>
-        /// <param name="group">The group to convert</param>
-        public static implicit operator LiquidType(LiquidGroup group)
-        {
-            return new LiquidType(group);
         }
     }
 }

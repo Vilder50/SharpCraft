@@ -10,16 +10,21 @@ namespace SharpCraft.Blocks
     public class Comparator : BaseBlockEntity, Interfaces.IPowered, Interfaces.IFacing
     {
         /// <summary>
-        /// Creates a comparator block
+        /// Returns a object which can be used for creating data paths
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Comparator(BlockType? type) : base(type) { }
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Comparator> PathCreator => new Data.DataPathCreator<Comparator>();
 
         /// <summary>
         /// Creates a comparator block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Comparator(ID.Block type = SharpCraft.ID.Block.comparator) : base(type) { }
+        public Comparator(IBlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new block
+        /// </summary>
+        public Comparator() : base(SharpCraft.ID.Block.comparator) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

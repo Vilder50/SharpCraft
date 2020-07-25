@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a fire block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Fire(BlockType? type) : base(type) { }
+        public Fire(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a fire block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Fire(ID.Block type = SharpCraft.ID.Block.fire) : base(type) { }
+        public Fire() : base(SharpCraft.ID.Block.fire) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

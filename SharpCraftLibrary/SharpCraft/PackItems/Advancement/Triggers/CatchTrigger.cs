@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player catches something using a fishing rod
     /// </summary>
-    public class CatchTrigger : BaseTrigger
+    public class CatchTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="CatchTrigger"/>

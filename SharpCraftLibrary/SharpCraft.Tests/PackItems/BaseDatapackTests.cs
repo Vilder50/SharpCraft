@@ -112,10 +112,10 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyDatapack()
         {
-            Assert.AreEqual(EmptyDatapack.GetPack(), EmptyDatapack.GetPack(), "Empty Datapack doesn't return the same datapack");
-            using BaseDatapack pack = new EmptyDatapack("pack");
+            Assert.AreEqual(MockDatapack.GetPack(), MockDatapack.GetPack(), "Empty Datapack doesn't return the same datapack");
+            using BaseDatapack pack = new MockDatapack("pack");
             Assert.AreEqual("\"file/pack\"", pack.IngameName, "Empty datapack doesn't return correct name");
-            ((EmptyDatapack)pack).FileDatapack = false;
+            ((MockDatapack)pack).FileDatapack = false;
             Assert.AreEqual("pack", pack.IngameName, "Empty datapack doesn't return correct name");
         }
 

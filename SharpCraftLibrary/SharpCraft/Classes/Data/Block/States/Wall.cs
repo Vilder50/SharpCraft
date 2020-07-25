@@ -7,13 +7,13 @@ namespace SharpCraft.Blocks
     /// <summary>
     /// An object for wall blocks
     /// </summary>
-    public class Wall : Block, Interfaces.IConnectedCardinal, Interfaces.IWaterLogged
+    public class Wall : Block, Interfaces.IWaterLogged
     {
         /// <summary>
         /// Creates a new wall block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Wall(BlockType? type) : base(type) { }
+        public Wall(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -30,25 +30,25 @@ namespace SharpCraft.Blocks
         /// If the block is connected in this direction
         /// </summary>
         [BlockState("east")]
-        public bool? SEast { get; set; }
+        public ID.StateWallConnection? SEast { get; set; }
 
         /// <summary>
         /// If the block is connected in this direction
         /// </summary>
         [BlockState("north")]
-        public bool? SNorth { get; set; }
+        public ID.StateWallConnection? SNorth { get; set; }
 
         /// <summary>
         /// If the block is connected in this direction
         /// </summary>
         [BlockState("south")]
-        public bool? SSouth { get; set; }
+        public ID.StateWallConnection? SSouth { get; set; }
 
         /// <summary>
         /// If the block is connected in this direction
         /// </summary>
         [BlockState("west")]
-        public bool? SWest { get; set; }
+        public ID.StateWallConnection? SWest { get; set; }
 
         /// <summary>
         /// If the block is water logged
@@ -60,6 +60,6 @@ namespace SharpCraft.Blocks
         /// If the block is connected in this direction
         /// </summary>
         [BlockState("up")]
-        public bool? SUp { get; set; }
+        public ID.StateWallConnection? SUp { get; set; }
     }
 }

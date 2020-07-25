@@ -24,7 +24,7 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// The name of the change
         /// </summary>
-        [DataTag("function", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("function", JsonTag = true)]
         public string ChangeName { get; private set; }
 
         /// <summary>

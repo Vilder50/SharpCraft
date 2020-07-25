@@ -14,7 +14,7 @@ namespace SharpCraft.JsonObjects
         /// The <see cref="SharpCraft.Entity"/> type
         /// </summary>
         [DataTag("type", JsonTag = true, ForceType = ID.NBTTagType.TagString)]
-        public EntityType? Type { get; set; }
+        public IEntityType? Type { get; set; }
 
         /// <summary>
         /// the <see cref="Distance"/> to the <see cref="SharpCraft.Entity"/>
@@ -33,6 +33,24 @@ namespace SharpCraft.JsonObjects
         /// </summary>
         [DataTag("effects", JsonTag = true)]
         public Effects? Effects { get; set; }
+
+        /// <summary>
+        /// the vehicle the entity is riding
+        /// </summary>
+        [DataTag("vehicle", JsonTag = true)]
+        public Entity[]? Vehicle { get; set; }
+
+        /// <summary>
+        /// the entity this entity is targeting
+        /// </summary>
+        [DataTag("targetedEntity", JsonTag = true)]
+        public Entity[]? TargetedEntity { get; set; }
+
+        /// <summary>
+        /// If the fishing hook is in "open water"
+        /// </summary>
+        [DataTag("fishing_hook.in_open_water", JsonTag = true)]
+        public bool FishingHookInOpenWater { get; set; }
 
         /// <summary>
         /// the nbt the <see cref="SharpCraft.Entity"/> should have
@@ -243,10 +261,10 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Implicit converts <see cref="EntityType"/> into an <see cref="Entity"/> object
+        /// Implicit converts <see cref="EntityGroup"/> into an <see cref="Entity"/> object
         /// </summary>
-        /// <param name="type">the <see cref="EntityType"/> to convert</param>
-        public static implicit operator Entity(EntityType type)
+        /// <param name="type">the <see cref="EntityGroup"/> to convert</param>
+        public static implicit operator Entity(EntityGroup type)
         {
             return new Entity() { Type = type };
         }
@@ -267,6 +285,18 @@ namespace SharpCraft.JsonObjects
         public static implicit operator Entity(SharpCraft.Entity entity)
         {
             return new Entity() { Type = entity.EntityType, NBT = entity };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="Entity"/> to an array of <see cref="Conditions.EntityCondition"/>
+        /// </summary>
+        /// <param name="entity">The entity to convert</param>
+        public static implicit operator Conditions.EntityCondition[](Entity entity)
+        {
+            return new Conditions.EntityCondition[]
+            {
+                new Conditions.EntityCondition(ID.LootTarget.This, entity)
+            };
         }
     }
 }

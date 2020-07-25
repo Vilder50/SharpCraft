@@ -3,26 +3,26 @@
     /// <summary>
     /// A datapack used for disabling/enabling datapacks.
     /// </summary>
-    public class EmptyDatapack : BaseDatapack
+    public class MockDatapack : BaseDatapack
     {
-        private static EmptyDatapack? emptyPack;
+        private static MockDatapack? emptyPack;
 
         /// <summary>
         /// Returns an empty datapack
         /// </summary>
         /// <returns>An empty datapack</returns>
-        public static EmptyDatapack GetPack()
+        public static MockDatapack GetPack()
         {
-            emptyPack ??= new EmptyDatapack("vanilla", false);
+            emptyPack ??= new MockDatapack("vanilla", false);
             return emptyPack;
         }
 
         /// <summary>
-        /// Intializes a new <see cref="EmptyDatapack"/>
+        /// Intializes a new <see cref="MockDatapack"/>
         /// </summary>
         /// <param name="name">The name of the datapack</param>
-        /// <param name="fileDatapack">True this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
-        public EmptyDatapack(string name, bool fileDatapack = true) : base("NoneExistingPath", name)
+        /// <param name="fileDatapack">True this <see cref="MockDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack</param>
+        public MockDatapack(string name, bool fileDatapack = true) : base("NoneExistingPath", name)
         {
             FileDatapack = fileDatapack;
         }
@@ -46,7 +46,7 @@
         }
 
         /// <summary>
-        /// True if this <see cref="EmptyDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
+        /// True if this <see cref="MockDatapack"/> is refering to an installed datapack. False if its an inbuilt datapack
         /// </summary>
         public bool FileDatapack { get; set; }
 
@@ -55,9 +55,9 @@
         /// </summary>
         /// <param name="packNamespace">The name of the namespace</param>
         /// <returns>A new empty namespace</returns>
-        public EmptyNamespace Namespace(string packNamespace)
+        public MockNamespace Namespace(string packNamespace)
         {
-            return Namespace<EmptyNamespace>(packNamespace);
+            return Namespace<MockNamespace>(packNamespace);
         }
     }
 }

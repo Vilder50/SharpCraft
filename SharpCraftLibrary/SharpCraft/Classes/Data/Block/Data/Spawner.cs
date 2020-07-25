@@ -10,23 +10,27 @@ namespace SharpCraft.Blocks
     public class Spawner : BaseBlockEntity
     {
         /// <summary>
-        /// Creates a spawner block
+        /// Returns a object which can be used for creating data paths
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Spawner(BlockType? type) : base(type) { }
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Spawner> PathCreator => new Data.DataPathCreator<Spawner>();
 
         /// <summary>
         /// Creates a spawner block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Spawner(ID.Block type = SharpCraft.ID.Block.spawner) : base(type) { }
+        public Spawner(IBlockType? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new block
+        /// </summary>
+        public Spawner() : base(SharpCraft.ID.Block.spawner) { }
 
         /// <summary>
         /// Creates a spawner with the specified entity inside. The entity wont move and the spawner wont spawn the entity
         /// </summary>
         /// <param name="display">The entity to display</param>
-        /// <param name="type">The type of block</param>
-        public Spawner(Entity display, ID.Block? type = SharpCraft.ID.Block.spawner) : base(type)
+        public Spawner(Entity display) : base(SharpCraft.ID.Block.spawner)
         {
             DPotentials = new SpawnerPotential[]
             {

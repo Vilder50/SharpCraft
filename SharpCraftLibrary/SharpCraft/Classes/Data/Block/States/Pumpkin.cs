@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a pumpkin block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Pumpkin(BlockType? type) : base(type) { }
+        public Pumpkin(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a pumpkin block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Pumpkin(ID.Block type = SharpCraft.ID.Block.carved_pumpkin) : base(type) { }
+        public Pumpkin() : base(SharpCraft.ID.Block.carved_pumpkin) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

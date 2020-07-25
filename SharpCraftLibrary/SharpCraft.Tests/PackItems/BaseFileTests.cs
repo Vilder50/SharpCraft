@@ -41,9 +41,9 @@ namespace SharpCraft.Tests.PackItems
             }
         }
 
-        class BaseFileTestClass : BaseFile
+        class BaseFileTestClass : BaseFile<TextWriter>
         {
-            public static TextWriter WriterToUse;
+            public static TextWriter WriterToUse = null!;
             public bool RandomValue = false;
 
             public BaseFileTestClass(BasePackNamespace packNamespace, string fileName, WriteSetting setting) : base(packNamespace, fileName, setting, "filetest")
@@ -86,7 +86,7 @@ namespace SharpCraft.Tests.PackItems
             Assert.AreEqual(file, packNamespace.GetFile("filetest", file.FileId), "Constructor is not adding the file to the namespace");
             file.Dispose();
 
-            file = new BaseFileTestClass(packNamespace, null, BaseFile.WriteSetting.Auto);
+            file = new BaseFileTestClass(packNamespace, null!, BaseFile.WriteSetting.Auto);
             Assert.AreEqual("1", file.FileId, "file name wasn't generated correctly");
             file.Dispose();
 
@@ -149,7 +149,7 @@ namespace SharpCraft.Tests.PackItems
             Assert.IsTrue(disposed, "Dispose listener wasn't called when the file got disposed");
 
             //test exception
-            Assert.ThrowsException<ArgumentNullException>(() => onDispose.AddDisposeListener(null));
+            Assert.ThrowsException<ArgumentNullException>(() => onDispose.AddDisposeListener(null!));
         }
     }
 }

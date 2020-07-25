@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player damages another entity
     /// </summary>
-    public class DidDamageTrigger : BaseTrigger
+    public class DidDamageTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="DidDamageTrigger"/>
@@ -27,6 +27,6 @@ namespace SharpCraft.AdvancementObjects
         /// The entity which got damaged
         /// </summary>
         [DataTag("conditions.entity", JsonTag = true)]
-        public JsonObjects.Entity? Entity { get; set; }
+        public Conditions.EntityCondition[]? Entity { get; set; }
     }
 }

@@ -15,21 +15,21 @@ namespace SharpCraft.LootObjects
         /// <summary>
         /// Intializes a new <see cref="MapChange"/>
         /// </summary>
-        public MapChange() : base("exploration_map")
+        public MapChange(ID.Structure structure) : base("minecraft:exploration_map")
         {
-            
+            Structure = structure;
         }
 
         /// <summary>
         /// The destination of the map
         /// </summary>
-        [DataTag("destination", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("destination", JsonTag = true)]
         public ID.Structure Structure { get; set; }
 
         /// <summary>
         /// The icon used for marking the destination on the map
         /// </summary>
-        [DataTag("destination", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+        [DataTag("decoration", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
         public ID.MapMarker Marker { get; set; }
 
         /// <summary>

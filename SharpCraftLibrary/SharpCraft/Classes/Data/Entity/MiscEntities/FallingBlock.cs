@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class FallingBlock : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<FallingBlock> PathCreator => new Data.DataPathCreator<FallingBlock>();
+
+        /// <summary>
         /// Creates a new falling block
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public FallingBlock(ID.Entity? type = ID.Entity.falling_block) : base(type) { }
+        public FallingBlock(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public FallingBlock() : base(SharpCraft.ID.Entity.falling_block) { }
 
         /// <summary>
         /// The time the entity has been falling.

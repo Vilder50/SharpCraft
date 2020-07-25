@@ -51,7 +51,7 @@ namespace SharpCraft.Tests.PackItems
                 },
                 Conditions = new RandomCondition(0.3) & !new RandomCondition(0.3)
             }, new MCRange(1, 3)), LootTable.TableType.block, BaseFile.WriteSetting.Auto);
-            TextWriter writer = pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/loot_tables/mytable.json").writer;
+            TextWriter writer = (pack.FileCreator.GetWriters().First(w => w.path == "datapacks/pack/data/space/loot_tables/mytable.json").writer as TextWriter)!;
 
             Assert.AreEqual("{\"type\":\"block\",\"pools\":[" +
                     "{\"entries\":[" +
@@ -70,8 +70,8 @@ namespace SharpCraft.Tests.PackItems
         [TestMethod]
         public void TestEmptyLoottable()
         {
-            Assert.AreEqual("name:loot", new EmptyLoottable(EmptyDatapack.GetPack().Namespace("name"), "loot").GetNamespacedName(), "EmptyLoottable doesn't reutrn correct string");
-            Assert.AreEqual("space:name", ((EmptyLoottable)"space:name").GetNamespacedName(), "Implicit string to loottable conversion converts incorrectly");
+            Assert.AreEqual("name:loot", new FileMocks.MockLootTable(MockDatapack.GetPack().Namespace("name"), "loot").GetNamespacedName(), "EmptyLoottable doesn't reutrn correct string");
+            Assert.AreEqual("space:name", ((FileMocks.MockLootTable)"space:name").GetNamespacedName(), "Implicit string to loottable conversion converts incorrectly");
         }
     }
 }

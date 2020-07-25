@@ -10,16 +10,16 @@ namespace SharpCraft.Blocks
     public abstract class BaseBlockEntity : Block
     {
         /// <summary>
-        /// Creates a block entity
+        /// Returns a object which can be used for creating data paths
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public BaseBlockEntity(ID.Block? type) : base(type) { }
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Entity> PathCreator => new Data.DataPathCreator<Entity>();
 
         /// <summary>
         /// Creates a block entity
         /// </summary>
         /// <param name="type">The type of block</param>
-        public BaseBlockEntity(BlockType? type) : base(type) { }
+        public BaseBlockEntity(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// The location the block entity is at

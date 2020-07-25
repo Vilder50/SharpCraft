@@ -12,7 +12,7 @@ namespace SharpCraft
     public abstract class BaseJsonText : IConvertableToDataTag
     {
         /// <summary>
-        /// The color of the text
+        /// The color of the text. (Cannot exist together with <see cref="RGBColor"/>)
         /// </summary>
         public ID.MinecraftColor? Color { get; set; }
 
@@ -67,14 +67,29 @@ namespace SharpCraft
         public BaseJsonText[]? Extra { get; set; }
 
         /// <summary>
+        /// The font. (minecraft:default is the normal font)
+        /// </summary>
+        public string? Font { get; set; }
+
+        /// <summary>
+        /// The exact color of the text. (Cannot exist together with <see cref="Color"/>)
+        /// </summary>
+        public RGBColor? RGBColor { get; set; }
+
+        /// <summary>
         /// Gets the raw JSON string
         /// </summary>
         /// <returns>the raw JSON string used by the game</returns>
-        public string GetJsonString()
+        public virtual string GetJsonString()
         {
             List<string> outString = new List<string>();
 
+            if (!(Color is null) && !(RGBColor is null))
+            {
+                throw new InvalidOperationException("Cannot get json string since both " + nameof(Color) + " and" + nameof(RGBColor) + " is set.");
+            }
             if (!(Color is null)) { outString.Add("\"color\":\"" + Color + "\""); }
+            if (!(RGBColor is null)) { outString.Add("\"color\":\"" + RGBColor.GetHexColor() + "\""); }
             if (!(Obfuscated is null)) { outString.Add("\"obfuscated\":" + Obfuscated.ToMinecraftBool()); }
             if (!(Bold is null)) { outString.Add("\"bold\":" + Bold.ToMinecraftBool()); }
             if (!(Italic is null)) { outString.Add("\"italic\":" + Italic.ToMinecraftBool()); }
@@ -82,6 +97,7 @@ namespace SharpCraft
             if (!(Underline is null)) { outString.Add("\"underlined\":" + Underline.ToMinecraftBool()); }
             if (!(Reset is null)) { outString.Add("\"reset\":" + Reset.ToMinecraftBool()); }
             if (!(ShiftClickInsertion is null)) { outString.Add("\"insertion\":\"" + ShiftClickInsertion.Escape() + "\""); }
+            if (!(Font is null)) { outString.Add("\"font\":\"" + Font.Escape() + "\""); }
             if (!(ClickEvent is null)) { outString.Add(ClickEvent.GetEventString()); }
             if (!(HoverEvent is null)) { outString.Add(HoverEvent.GetEventString()); }
             if (!(Extra is null) && Extra.Length != 0)  { outString.Add("\"extra\":[" + string.Join(",",Extra.Select(j => j.GetJsonString())) + "]"); }
@@ -191,6 +207,33 @@ namespace SharpCraft
         public static implicit operator BaseJsonText(ID.Key key)
         {
             return new KeyBind(key);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(BlockDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(EntityDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
+        }
+
+        /// <summary>
+        /// Converts a data location into a <see cref="BaseJsonText"/> object
+        /// </summary>
+        /// <param name="dataLocation">the <see cref="ID.Key"/> to convert</param>
+        public static implicit operator BaseJsonText(StorageDataLocation dataLocation)
+        {
+            return new JsonText.Data(dataLocation, true);
         }
     }
 }

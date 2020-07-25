@@ -10,7 +10,7 @@ namespace SharpCraft
     /// <summary>
     /// Class for loot table files
     /// </summary>
-    public class LootTable : BaseFile, ILootTable, IConvertableToDataTag
+    public class LootTable : BaseFile<TextWriter>, ILootTable
     {
         /// <summary>
         /// Loot table types
@@ -88,17 +88,6 @@ namespace SharpCraft
         public List<LootPool> Pools { get => pools; set => pools = value ?? throw new System.ArgumentNullException(nameof(Pools), "Pools may not be null"); }
 
         /// <summary>
-        /// Converts this loot table into a <see cref="DataPartTag"/>
-        /// </summary>
-        /// <param name="asType">Not in use</param>
-        /// <param name="extraConversionData">Not in use</param>
-        /// <returns>the made <see cref="DataPartTag"/></returns>
-        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
-        {
-            return new DataPartTag(GetNamespacedName());
-        }
-
-        /// <summary>
         /// Returns the stream this file is going to use for writing it's file
         /// </summary>
         /// <returns>The stream for this file</returns>
@@ -136,56 +125,6 @@ namespace SharpCraft
         protected override void AfterDispose()
         {
             pools = null!;
-        }
-    }
-
-    /// <summary>
-    /// Used for calling loot tables outside this program
-    /// </summary>
-    public class EmptyLoottable : ILootTable
-    {
-        /// <summary>
-        /// Intializes a new <see cref="EmptyLoottable"/>
-        /// </summary>
-        /// <param name="packNamespace">The namespace the loot table is in</param>
-        /// <param name="fileName">The name of the loot table</param>
-        public EmptyLoottable(BasePackNamespace packNamespace, string fileName)
-        {
-            PackNamespace = packNamespace;
-            FileId = fileName;
-        }
-
-        /// <summary>
-        /// The name of the loot table
-        /// </summary>
-        public string FileId { get; private set; }
-
-        /// <summary>
-        /// The namespace the loot table is in
-        /// </summary>
-        public BasePackNamespace PackNamespace { get; private set; }
-
-        /// <summary>
-        /// Returns the string used for evoking this loot table
-        /// </summary>
-        /// <returns>The string used for evoking this loot table</returns>
-        public string GetNamespacedName()
-        {
-            return PackNamespace.Name + ":" + FileId;
-        }
-
-        /// <summary>
-        /// Converts a string of the format NAMESPACE:LOOTTABLE into an <see cref="EmptyLoottable"/>
-        /// </summary>
-        /// <param name="loottable">The string to convert</param>
-        public static implicit operator EmptyLoottable(string loottable)
-        {
-            string[] parts = loottable.Split(':');
-            if (parts.Length != 2)
-            {
-                throw new System.InvalidCastException("String for creating empty loottable has to contain a single :");
-            }
-            return new EmptyLoottable(EmptyDatapack.GetPack().Namespace(parts[0]), parts[1]);
         }
     }
 }

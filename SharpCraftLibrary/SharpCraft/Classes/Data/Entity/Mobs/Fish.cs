@@ -10,6 +10,12 @@ namespace SharpCraft.Entities
     public class Fish : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Fish> PathCreator => new Data.DataPathCreator<Fish>();
+
+        /// <summary>
         /// Creates a new fish
         /// </summary>
         /// <param name="type">the type of entity</param>

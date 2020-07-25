@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a rail block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Rail(BlockType? type) : base(type) { }
+        public Rail(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a rail block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Rail(ID.Block type = SharpCraft.ID.Block.rail) : base(type) { }
+        public Rail() : base(SharpCraft.ID.Block.rail) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

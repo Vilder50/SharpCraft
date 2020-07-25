@@ -8,10 +8,16 @@ namespace SharpCraft.Entities
     public class MagicIllager : BaseIllager
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<MagicIllager> PathCreator => new Data.DataPathCreator<MagicIllager>();
+
+        /// <summary>
         /// Creates a new evoker or illusioner
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public MagicIllager(ID.Entity? type = ID.Entity.evoker) : base(type) { }
+        public MagicIllager(ID.Entity? type) : base(type) { }
 
         /// <summary>
         /// The time till the next spell is casted

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using SharpCraft.Data;
 
 namespace SharpCraft.Tests.PackItems
 {
@@ -38,11 +39,18 @@ namespace SharpCraft.Tests.PackItems
         }
 
         public string Name { get; private set; }
+
+        public bool IsAGroup => true;
+
+        public DataPartObject GetAsDataObject(object?[] conversionData)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     class TestGroupClass : BaseGroup<GroupItemClass>
     {
-        public static TextWriter WriterToUse;
+        public static TextWriter WriterToUse = null!;
         public TestGroupClass(BasePackNamespace packNamespace, string fileName, List<GroupItemClass> items, bool appendGroup, WriteSetting writeSetting) : base(packNamespace, fileName, items, appendGroup, writeSetting, "test")
         {
             FinishedConstructing();
@@ -88,7 +96,7 @@ namespace SharpCraft.Tests.PackItems
             //test
             TestGroupClass.WriterToUse = new StringWriter();
             TestGroupClass group = new TestGroupClass(packNamespace, "name1", new List<GroupItemClass> { new GroupItemClass("test") }, false, BaseFile.WriteSetting.LockedOnDispose);
-            Assert.ThrowsException<ArgumentNullException>(() => group.Items = null, "Items should not be able to be null");
+            Assert.ThrowsException<ArgumentNullException>(() => group.Items = null!, "Items should not be able to be null");
             group.Items = new List<GroupItemClass>() { };
             group.Dispose();
 
@@ -119,6 +127,12 @@ namespace SharpCraft.Tests.PackItems
         }
 
         [TestMethod]
+        public void TestEmptyGroup()
+        {
+            Assert.AreEqual("#space:file", new FileMocks.MockGroup<IBlockType>(MockDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "EmptyGroup doesn't return correct string");
+        }
+
+        [TestMethod]
         public void TestWriting()
         {
             //setup
@@ -139,12 +153,6 @@ namespace SharpCraft.Tests.PackItems
             Assert.IsTrue(group.Disposed);
             Assert.AreEqual("{\"replace\":true,\"values\":[\"test\"]}", ((StringWriter)TestGroupClass.WriterToUse).GetStringBuilder().ToString(), "Group didn't write AppendFile correctly");
             Assert.IsNull(group.Items, "Items wasn't cleared");
-        }
-
-        [TestMethod]
-        public void TestEmptyGroup()
-        {
-            Assert.AreEqual("#space:file", new EmptyGroup<BlockType>(EmptyDatapack.GetPack().Namespace("space"), "file").GetNamespacedName(), "EmptyGroup doesn't return correct string");
         }
     }
 }

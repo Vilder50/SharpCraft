@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="DecayChange"/>
         /// </summary>
         /// <param name="attributes">An array of attributes the item should get</param>
-        public AttributeChange(Attribute[] attributes) : base("set_attributes")
+        public AttributeChange(Attribute[] attributes) : base("minecraft:set_attributes")
         {
             Attributes = attributes;
         }
@@ -93,7 +93,7 @@ namespace SharpCraft.LootObjects
             /// <summary>
             /// The UUID of the attribute. Leave empty to generate random one
             /// </summary>
-            [DataTag("id", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
+            [Data.DataTag("UUID", ForceType = ID.NBTTagType.TagIntArray)]
             public UUID? UUID { get; set; }
 
             /// <summary>

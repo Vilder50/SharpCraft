@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player kills an entity with using a crossbow
     /// </summary>
-    public class CrossbowKillTrigger : BaseTrigger
+    public class CrossbowKillTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="CrossbowKillTrigger"/>
@@ -21,7 +21,7 @@ namespace SharpCraft.AdvancementObjects
         /// The entities killed
         /// </summary>
         [DataTag("victims", JsonTag = true)]
-        public JsonObjects.Entity[]? Victims { get; set; }
+        public Conditions.EntityCondition[][]? Victims { get; set; }
 
         /// <summary>
         /// The amount of entities killed

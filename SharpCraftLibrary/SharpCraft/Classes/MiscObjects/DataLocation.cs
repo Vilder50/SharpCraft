@@ -107,7 +107,7 @@ namespace SharpCraft
             get => selector;
             set
             {
-                selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(EntityDataLocation));
+                selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(EntityDataLocation));
             }
         }
 

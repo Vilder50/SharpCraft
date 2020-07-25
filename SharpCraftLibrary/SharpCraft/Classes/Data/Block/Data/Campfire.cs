@@ -10,6 +10,12 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Campfire : BaseBlockEntity, Interfaces.IWaterLogged, Interfaces.ILit
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Campfire> PathCreator => new Data.DataPathCreator<Campfire>();
+
         private Item[]? _dItems;
         private Time<int>[]? _dCookingTimes;
         private Time<int>[]? _dTotalCookingTimes;
@@ -18,13 +24,7 @@ namespace SharpCraft.Blocks
         /// Creates a campfire block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Campfire(BlockType? type) : base(type) { }
-
-        /// <summary>
-        /// Creates a campfire block
-        /// </summary>
-        /// <param name="type">The type of block</param>
-        public Campfire(ID.Block type = SharpCraft.ID.Block.campfire) : base(type) { }
+        public Campfire(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object
@@ -33,7 +33,7 @@ namespace SharpCraft.Blocks
         /// <returns>true if the block fits</returns>
         public new static bool FitsBlock(ID.Block block)
         {
-            return block == SharpCraft.ID.Block.campfire;
+            return block == SharpCraft.ID.Block.campfire || block == SharpCraft.ID.Block.soul_campfire;
         }
 
         /// <summary>

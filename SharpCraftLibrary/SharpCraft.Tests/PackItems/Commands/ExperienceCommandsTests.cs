@@ -18,7 +18,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("xp set @s 10 levels", new ExperienceModifyCommand(ID.Selector.s, true, ID.AddSetModifier.set, 10).GetCommandString());
             Assert.AreEqual("xp add @s 10 points", new ExperienceModifyCommand(ID.Selector.s, false, ID.AddSetModifier.add, 10).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ExperienceModifyCommand(null, true, ID.AddSetModifier.add, 10));
+            Assert.ThrowsException<ArgumentNullException>(() => new ExperienceModifyCommand(null!, true, ID.AddSetModifier.add, 10));
         }
 
         [TestMethod]
@@ -27,7 +27,7 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("xp query @s levels", new ExperienceGetCommand(ID.Selector.s, true).GetCommandString());
             Assert.AreEqual("xp query @s points", new ExperienceGetCommand(ID.Selector.s, false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ExperienceGetCommand(null, false));
+            Assert.ThrowsException<ArgumentNullException>(() => new ExperienceGetCommand(null!, false));
         }
     }
 }

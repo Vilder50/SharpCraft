@@ -9,10 +9,21 @@ namespace SharpCraft.Entities
     public class Bee : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Bee> PathCreator => new Data.DataPathCreator<Bee>();
+
+        /// <summary>
         /// Creates a new bee
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Bee(ID.Entity? type = ID.Entity.bee) : base(type) { }
+        public Bee(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Bee() : base(SharpCraft.ID.Entity.bee) { }
 
         /// <summary>
         /// The location of the bee's hive
@@ -65,7 +76,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the entity this bee is angry on
         /// </summary>
-        [DataTag("HurtBy", ForceType = ID.NBTTagType.TagString)]
+        [Data.DataTag("HurtBy", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? AngryOn { get; set; }
     }
 }

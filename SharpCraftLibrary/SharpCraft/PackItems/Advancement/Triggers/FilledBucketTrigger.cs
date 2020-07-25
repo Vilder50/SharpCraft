@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player fills a bucket
     /// </summary>
-    public class FilledBucketTrigger : BaseTrigger
+    public class FilledBucketTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="FilledBucketTrigger"/>

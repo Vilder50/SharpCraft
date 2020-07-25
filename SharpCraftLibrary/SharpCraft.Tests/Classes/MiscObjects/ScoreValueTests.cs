@@ -13,8 +13,8 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.AreEqual("@s", scoreValue.Selector.GetSelectorString(), "Constructor didn't set selector correctly");
             Assert.AreEqual("scores", scoreValue.ScoreObject.Name, "Constructor didn't set objective correctly");
 
-            Assert.ThrowsException<ArgumentNullException>(() => new ScoreValue(ID.Selector.s, null), "Objective may not be null");
-            Assert.ThrowsException<ArgumentNullException>(() => new ScoreValue(null, new Objective("scores")), "Selector may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new ScoreValue(ID.Selector.s, null!), "Objective may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new ScoreValue(null!, new Objective("scores")), "Selector may not be null");
             Assert.ThrowsException<ArgumentException>(() => new ScoreValue(ID.Selector.e, new Objective("scores")), "Selector may not select multiple entities");
         }
 

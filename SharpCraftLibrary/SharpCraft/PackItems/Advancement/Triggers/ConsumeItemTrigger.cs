@@ -10,7 +10,7 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player consumes an item
     /// </summary>
-    public class ConsumeItemTrigger : BaseTrigger
+    public class ConsumeItemTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="ConsumeItemTrigger"/>

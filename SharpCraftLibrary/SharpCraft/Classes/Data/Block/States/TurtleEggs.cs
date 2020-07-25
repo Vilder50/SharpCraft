@@ -16,13 +16,12 @@ namespace SharpCraft.Blocks
         /// Creates a turtle egg block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public TurtleEgg(BlockType? type) : base(type) { }
+        public TurtleEgg(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a turtle egg block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public TurtleEgg(ID.Block type = SharpCraft.ID.Block.turtle_egg) : base(type) { }
+        public TurtleEgg() : base(SharpCraft.ID.Block.turtle_egg) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

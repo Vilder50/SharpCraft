@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.IO;
+using SharpCraft.Data;
 
 namespace SharpCraft
 {
     /// <summary>
     /// The base class used for files in a datapack
     /// </summary>
-    public abstract class BaseFile
+    public abstract class BaseFile: IConvertableToDataTag
     {
         private const string FileLocationPattern = @"^(([a-zA-Z0-9_-]+)([\\/]{1}[a-zA-Z0-9_-])*)*$";
 
@@ -108,20 +109,6 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Call when constructors are done
-        /// </summary>
-        protected virtual void FinishedConstructing()
-        {
-            PackNamespace.AddFile(this);
-            if (IsAuto())
-            {
-                StreamWriter = GetStream();
-                WriteFile(StreamWriter);
-                Dispose();
-            }
-        }
-
-        /// <summary>
         /// The namespace this file is for
         /// </summary>
         public BasePackNamespace PackNamespace
@@ -207,11 +194,6 @@ namespace SharpCraft
         public bool Disposed { get; protected set; }
 
         /// <summary>
-        /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
-        /// </summary>
-        protected TextWriter? StreamWriter { get; set; }
-
-        /// <summary>
         /// States if the file has been written and shouldn't be able to be written again.
         /// </summary>
         protected bool FileIsWritten { get; set; }
@@ -240,46 +222,12 @@ namespace SharpCraft
         }
 
         /// <summary>
-        /// Returns the stream this file is going to use for writing it's file
-        /// </summary>
-        /// <returns>The stream for this file</returns>
-        protected abstract TextWriter GetStream();
-
-        /// <summary>
-        /// Disposes this file. If the write setting is OnDispose it will write the file
-        /// </summary>
-        public virtual void Dispose()
-        {
-            if (!Disposed)
-            {
-                disposeListener?.Invoke(this);
-                if (IsAuto())
-                {
-                    StreamWriter?.Dispose();
-                }
-                else
-                {
-                    using TextWriter writer = GetStream();
-                    WriteFile(writer);
-                }
-                AfterDispose();
-                Disposed = true;
-            }
-        }
-
-        /// <summary>
         /// Extra things to do after dispose was ran. (Clear the file for none needed things)
         /// </summary>
         protected virtual void AfterDispose()
         {
 
         }
-
-        /// <summary>
-        /// Writes the file
-        /// </summary>
-        /// <param name="stream">The stream used for writing the file</param>
-        protected abstract void WriteFile(TextWriter stream);
 
         /// <summary>
         /// Finalizer which makes sure dispose was ran
@@ -335,6 +283,94 @@ namespace SharpCraft
             else
             {
                 PackNamespace.Datapack.FileCreator.CreateDirectory(PackNamespace.GetPath() + folderPath + "/");
+            }
+        }
+
+        /// <summary>
+        /// Disposes this file. If the write setting is OnDispose it will write the file
+        /// </summary>
+        public abstract void Dispose();
+
+        /// <summary>
+        /// Converts this predicate into a <see cref="DataPartTag"/>
+        /// </summary>
+        /// <param name="asType">Unused</param>
+        /// <param name="extraConversionData">Unused</param>
+        /// <returns>This predicate into a <see cref="DataPartTag"/></returns>
+        public DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+        {
+            return new DataPartTag(GetNamespacedName());
+        }
+    }
+
+    /// <summary>
+    /// The base class used for files in a datapack
+    /// </summary>
+    /// <typeparam name="T">A stream used for writing the file</typeparam>
+    public abstract class BaseFile<T>: BaseFile where T: class, IDisposable
+    {
+        /// <summary>
+        /// Intializes a new <see cref="BaseFile"/> with the given values
+        /// </summary>
+        /// <param name="packNamespace">The namespace this file is for</param>
+        /// <param name="fileName">The name of the file</param>
+        /// <param name="writeSetting">The setting for the file</param>
+        /// <param name="fileType">The type of file</param>
+        protected BaseFile(BasePackNamespace packNamespace, string? fileName, WriteSetting writeSetting, string fileType) : base(packNamespace, fileName, writeSetting, fileType)
+        {
+
+        }
+
+        /// <summary>
+        /// The stream writer used for writing the file. Is null if the writeSetting isn't Auto. Might be null if it is auto
+        /// </summary>
+        protected T? StreamWriter { get; set; }
+
+        /// <summary>
+        /// Disposes this file. If the write setting is OnDispose it will write the file
+        /// </summary>
+        public override void Dispose()
+        {
+            if (!Disposed)
+            {
+                disposeListener?.Invoke(this);
+                if (IsAuto())
+                {
+                    StreamWriter?.Dispose();
+                }
+                else
+                {
+                    using T writer = GetStream();
+                    WriteFile(writer);
+                }
+                AfterDispose();
+                Disposed = true;
+            }
+        }
+
+        /// <summary>
+        /// Writes the file
+        /// </summary>
+        /// <param name="stream">The stream used for writing the file</param>
+        protected abstract void WriteFile(T stream);
+
+        /// <summary>
+        /// Returns the stream this file is going to use for writing it's file
+        /// </summary>
+        /// <returns>The stream for this file</returns>
+        protected abstract T GetStream();
+
+        /// <summary>
+        /// Call when constructors are done
+        /// </summary>
+        protected virtual void FinishedConstructing()
+        {
+            PackNamespace.AddFile(this);
+            if (IsAuto())
+            {
+                StreamWriter = GetStream();
+                WriteFile(StreamWriter);
+                Dispose();
             }
         }
     }

@@ -18,7 +18,7 @@ namespace SharpCraft.LootObjects
         /// Intializes a new <see cref="CountChange"/>
         /// </summary>
         /// <param name="count">The amount of items</param>
-        public CountChange(MCRange count) : base("set_count")
+        public CountChange(MCRange count) : base("minecraft:set_count")
         {
             Count = count;
         }

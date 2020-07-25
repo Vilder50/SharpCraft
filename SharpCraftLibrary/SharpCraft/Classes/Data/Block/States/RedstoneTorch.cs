@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a redstone torch block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public RedstoneWallTorch(BlockType? type) : base(type) { }
+        public RedstoneWallTorch(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a redstone torch block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public RedstoneWallTorch(ID.Block type = SharpCraft.ID.Block.redstone_wall_torch) : base(type) { }
+        public RedstoneWallTorch() : base(SharpCraft.ID.Block.redstone_wall_torch) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

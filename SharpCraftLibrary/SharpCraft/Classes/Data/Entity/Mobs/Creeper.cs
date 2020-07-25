@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Creeper : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Creeper> PathCreator => new Data.DataPathCreator<Creeper>();
+
+        /// <summary>
         /// Creates a new creeper
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Creeper(ID.Entity? type = ID.Entity.creeper) : base(type) { }
+        public Creeper(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Creeper() : base(SharpCraft.ID.Entity.creeper) { }
 
         /// <summary>
         /// If the creeper is charged (was hit by lightning)

@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class XP : BasicEntity
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<XP> PathCreator => new Data.DataPathCreator<XP>();
+
+        /// <summary>
         /// Creates a new xp orb
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public XP(ID.Entity? type = ID.Entity.experience_orb) : base(type) { }
+        public XP(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public XP() : base(SharpCraft.ID.Entity.experience_orb) { }
 
         /// <summary>
         /// The age of the item in ticks. When it hits 6000 it despawns

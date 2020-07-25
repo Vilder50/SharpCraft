@@ -12,8 +12,8 @@ namespace SharpCraft
     /// </summary>
     public class SmeltRecipe : BaseRecipe
     {
-        private ItemType[] ingredients = null!;
-        private ID.Item result;
+        private IItemType[] ingredients = null!;
+        private ID.Item result = null!;
         private double experience;
         private NoneNegativeTime<int>? cookingTime;
 
@@ -56,7 +56,7 @@ namespace SharpCraft
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time it takes to cook the item</param>
         /// <param name="_">Unused parameter used for specifing you want to use this constructor</param>
-        protected SmeltRecipe(bool _, BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, recipeType.ToString())
+        protected SmeltRecipe(bool _, BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, IItemType[] ingredients, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : base(packNamespace, fileName, group, writeSetting, "minecraft:" + recipeType.ToString())
         {
             Ingredients = ingredients;
             Result = result;
@@ -76,7 +76,7 @@ namespace SharpCraft
         /// <param name="result">The result from the recipe</param>
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time it takes to cook the item</param>
-        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType[] ingredients, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, ingredients, result, experience, cookingTime, group, writeSetting)
+        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, IItemType[] ingredients, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, ingredients, result, experience, cookingTime, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -93,7 +93,7 @@ namespace SharpCraft
         /// <param name="result">The result from the recipe</param>
         /// <param name="experience">The amount of experience to get for smelting the item</param>
         /// <param name="cookingTime">The amount of time in ticks it takes to cook the item</param>
-        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, ItemType ingredient, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, new ItemType[] { ingredient }, result, experience, cookingTime, group, writeSetting)
+        public SmeltRecipe(BasePackNamespace packNamespace, string? fileName, SmeltType recipeType, IItemType ingredient, ID.Item result, double experience, NoneNegativeTime<int>? cookingTime = null, string? group = null, WriteSetting writeSetting = WriteSetting.LockedAuto) : this(true, packNamespace, fileName, recipeType, new IItemType[] { ingredient }, result, experience, cookingTime, group, writeSetting)
         {
             FinishedConstructing();
         }
@@ -101,7 +101,7 @@ namespace SharpCraft
         /// <summary>
         /// The different types of items which can be used in the recipe
         /// </summary>
-        public ItemType[] Ingredients
+        public IItemType[] Ingredients
         {
             get => ingredients;
             set
@@ -192,7 +192,7 @@ namespace SharpCraft
                 stream.Write("[" + string.Join(",", Ingredients.Select(i => GetItemCompound(i))) + "]");
             }
 
-            stream.Write(",\"result\":\"minecraft:" + Result.MinecraftValue() + "\"");
+            stream.Write(",\"result\":\"" + Result + "\"");
             stream.Write(",\"experience\":" + Experience.ToMinecraftDouble());
             if (!(CookingTime is null))
             {

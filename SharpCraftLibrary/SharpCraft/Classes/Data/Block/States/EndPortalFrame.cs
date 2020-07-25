@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates an end portal frame block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public EndPortalFrame(BlockType? type) : base(type) { }
+        public EndPortalFrame(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates an end portal frame block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public EndPortalFrame(ID.Block type = SharpCraft.ID.Block.end_portal_frame) : base(type) { }
+        public EndPortalFrame() : base(SharpCraft.ID.Block.end_portal_frame) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

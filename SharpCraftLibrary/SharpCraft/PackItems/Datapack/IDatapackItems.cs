@@ -16,6 +16,48 @@ namespace SharpCraft
     }
 
     /// <summary>
+    /// For making it easier to make items. (Returns the item if it already exists. Creates one if it doesn't)
+    /// </summary>
+    public class ItemGetter
+    {
+        readonly Dictionary<string, object> items;
+
+        /// <summary>
+        /// Intializes a new item getter
+        /// </summary>
+        public ItemGetter()
+        {
+            items = new Dictionary<string, object>();
+        }
+
+        /// <summary>
+        /// Creates a new item if it doesn't exist already
+        /// </summary>
+        /// <typeparam name="T">The type of item to get/create</typeparam>
+        /// <param name="name">The unique name of the item</param>
+        /// <param name="itemMaker">A function for creating the item if it doesn't exist</param>
+        /// <returns>The item</returns>
+        public T GetItem<T>(string name, Func<T> itemMaker)where T : class
+        {
+            if (items.ContainsKey(name))
+            {
+                if (items[name] is T asType)
+                {
+                    return asType;
+                }
+                else
+                {
+                    throw new ArgumentException("The given name \"" + name + "\" is already used for something which outputs a different type of object");
+                }
+            }
+
+            T newObject = itemMaker();
+            items.Add(name, newObject);
+            return newObject;
+        }
+    }
+
+    /// <summary>
     /// Used for getting locations which a force loaded. (Use a datapack to get this item)
     /// </summary>
     public class LoadedBlockItems : IDatapackItems

@@ -18,7 +18,7 @@ namespace SharpCraft.AdvancementObjects
         /// <param name="type"></param>
         protected BaseTrigger(string type)
         {
-            Type = type;
+            Type = "minecraft:" + type;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace SharpCraft.AdvancementObjects
         /// <summary>
         /// The type of trigger
         /// </summary>
-        [DataTag("trigger", ForceType = ID.NBTTagType.TagNamespacedString, JsonTag = true)]
+        [DataTag("trigger", JsonTag = true)]
         public string Type { get; private set; }
 
         /// <summary>

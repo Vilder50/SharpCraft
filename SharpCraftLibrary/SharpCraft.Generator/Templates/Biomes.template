@@ -1,0 +1,18 @@
+﻿namespace SharpCraft
+{
+    /// <summary>
+    /// All the different ID's/Types/States things in the game can have
+    /// </summary>
+    public static partial class ID
+    {
+		#pragma warning disable 1591
+        public class Biome: NamespacedEnumLike<string>
+        {
+            public Biome(string value, BasePackNamespace? @namespace = null) : base(value, @namespace)
+            {
+            }
+
+<%            public static readonly Biome %name% = new Biome("%value%");%>
+        }
+    }
+}

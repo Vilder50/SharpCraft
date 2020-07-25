@@ -9,6 +9,12 @@ namespace SharpCraft
     public abstract class Entity : Data.DataHolderBase
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Entity> PathCreator => new Data.DataPathCreator<Entity>();
+
+        /// <summary>
         /// Creates a new entity
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -36,7 +42,7 @@ namespace SharpCraft
         /// <summary>
         /// The type of the entity
         /// </summary>
-        [Data.DataTag("id", ForceType = ID.NBTTagType.TagNamespacedString)]
+        [Data.DataTag("id", ForceType = ID.NBTTagType.TagString)]
         public ID.Entity? EntityType { get; set; }
     }
 }

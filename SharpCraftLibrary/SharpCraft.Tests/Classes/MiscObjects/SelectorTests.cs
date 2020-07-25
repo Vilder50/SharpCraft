@@ -30,7 +30,7 @@ namespace SharpCraft.Tests.MiscObjects
             Assert.IsTrue(new NameSelector("#My-Selector").IsHidden, "Name with # doesn't set IsHidden to true");
             Assert.AreEqual("#stringT0Selector", ((NameSelector)"#stringT0Selector").GetSelectorString(), "String doesn't convert to selector correctly");
             Assert.ThrowsException<ArgumentException>(() => new NameSelector("    "), "Empty name should throw exception");
-            Assert.ThrowsException<ArgumentException>(() => new NameSelector(null), "Null name should throw exception");
+            Assert.ThrowsException<ArgumentException>(() => new NameSelector(null!), "Null name should throw exception");
             Assert.ThrowsException<ArgumentException>(() => new NameSelector("asda asdasd"), "Name with space should throw exception");
             Assert.ThrowsException<ArgumentException>(() => new NameSelector("asda\nasdasd"), "Name with whitespace should throw exception");
             Assert.ThrowsException<ArgumentException>(() => new NameSelector("asda*asdasd"), "Name with * should throw exception");
@@ -61,7 +61,7 @@ namespace SharpCraft.Tests.MiscObjects
                 SingleName = "test",
                 SingleType = ID.Entity.creeper,
                 SingleTag = "tagtag",
-                SinglePredicate = new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name"),
+                SinglePredicate = new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name"),
                 SingleMode = ID.Gamemode.creative,
                 SingleScore = new SharpCraft.Selector.EntityScore(new Objective("objective"), new MCRange(1,2)),
                 SingleTeam = new Team("myteam")
@@ -81,7 +81,7 @@ namespace SharpCraft.Tests.MiscObjects
         {
             Assert.AreEqual("type=minecraft:creeper", new SharpCraft.Selector.EntityType(ID.Entity.creeper, true).GetSelectionString(), "EntityType doesn't return correct string");
             Assert.AreEqual("type=!minecraft:player", new SharpCraft.Selector.EntityType(ID.Entity.player, false).GetSelectionString(), "Not EntityType doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityType(null, false), "Type may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityType(null!, false), "Type may not be null");
         }
 
         [TestMethod]
@@ -97,15 +97,15 @@ namespace SharpCraft.Tests.MiscObjects
         {
             Assert.AreEqual("tag=mytag", new SharpCraft.Selector.EntityTag("mytag", true).GetSelectionString(), "EntityTag doesn't return correct string");
             Assert.AreEqual("tag=!tagtag", new SharpCraft.Selector.EntityTag("tagtag", false).GetSelectionString(), "Not EntityTag doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityTag(null, false), "Tag may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityTag(null!, false), "Tag may not be null");
         }
 
         [TestMethod]
         public void TestScoreSelectorClass()
         {
             Assert.AreEqual("objective=1..2", new SharpCraft.Selector.EntityScore(new Objective("objective"), new MCRange(1, 2)).GetSelectionString(), "EntityScore doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(new Objective("objective"), null), "Score may not be null");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(null, new MCRange(1, 2)), "Objective may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(new Objective("objective"), null!), "Score may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityScore(null!, new MCRange(1, 2)), "Objective may not be null");
         }
 
         [TestMethod]
@@ -113,7 +113,7 @@ namespace SharpCraft.Tests.MiscObjects
         {
             Assert.AreEqual("team=team", new SharpCraft.Selector.EntityTeam(new Team("team"), true).GetSelectionString(), "EntityTeam doesn't return correct string");
             Assert.AreEqual("team=!myteam", new SharpCraft.Selector.EntityTeam(new Team("myteam"), false).GetSelectionString(), "Not EntityTeam doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityTeam(null, false), "Team may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityTeam(null!, false), "Team may not be null");
         }
 
         [TestMethod]
@@ -126,11 +126,11 @@ namespace SharpCraft.Tests.MiscObjects
         [TestMethod]
         public void TestPredicateSelectorClass()
         {
-            IPredicate predicate = new EmptyPredicate(new EmptyNamespace(new EmptyDatapack("mypack"), "space"), "name");
+            IPredicate predicate = new FileMocks.MockPredicate(new MockNamespace(new MockDatapack("mypack"), "space"), "name");
 
             Assert.AreEqual("predicate=space:name", new SharpCraft.Selector.EntityPredicate(predicate, true).GetSelectionString(), "EntityPredicate doesn't return correct string");
             Assert.AreEqual("predicate=!space:name", new SharpCraft.Selector.EntityPredicate(predicate, false).GetSelectionString(), "Not EntityPredicate doesn't return correct string");
-            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityPredicate(null, false), "Predicate may not be null");
+            Assert.ThrowsException<ArgumentNullException>(() => new SharpCraft.Selector.EntityPredicate(null!, false), "Predicate may not be null");
         }
     }
 }

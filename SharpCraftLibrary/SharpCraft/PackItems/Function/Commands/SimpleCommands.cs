@@ -238,13 +238,13 @@ namespace SharpCraft.Commands
     /// <summary>
     /// Command which locates where the closest structure of the given type is at
     /// </summary>
-    public class LocateCommand : BaseCommand
+    public class LocateStructureCommand : BaseCommand
     {
         /// <summary>
-        /// Intializes a new <see cref="LocateCommand"/>
+        /// Intializes a new <see cref="LocateStructureCommand"/>
         /// </summary>
         /// <param name="structure">The structure to locate</param>
-        public LocateCommand(ID.Structure structure)
+        public LocateStructureCommand(ID.Structure structure)
         {
             Structure = structure;
         }
@@ -260,7 +260,36 @@ namespace SharpCraft.Commands
         /// <returns>locate [Structure]</returns>
         public override string GetCommandString()
         {
-            return $"locate {Structure}";
+            return $"locate {Structure.ToString().ToLower()}";
+        }
+    }
+
+    /// <summary>
+    /// Command which locates where the closest biome of the given type is at
+    /// </summary>
+    public class LocateBiomeCommand : BaseCommand
+    {
+        /// <summary>
+        /// Intializes a new <see cref="LocateBiomeCommand"/>
+        /// </summary>
+        /// <param name="biome">The biome to locate</param>
+        public LocateBiomeCommand(ID.Biome biome)
+        {
+            Biome = biome;
+        }
+
+        /// <summary>
+        /// The structure to locate
+        /// </summary>
+        public ID.Biome Biome { get; set; }
+
+        /// <summary>
+        /// Returns the command as a string
+        /// </summary>
+        /// <returns>locatebiome [Biome]</returns>
+        public override string GetCommandString()
+        {
+            return $"locatebiome {Biome}";
         }
     }
 
@@ -685,6 +714,7 @@ namespace SharpCraft.Commands
         private double distance;
         private double maxRange;
         private bool doTogetherCheck;
+        private int? underHeight;
 
         /// <summary>
         /// Intializes a new <see cref="SpreadPlayersCommand"/>
@@ -694,12 +724,14 @@ namespace SharpCraft.Commands
         /// <param name="distance">The minimum distance between spreaded entities</param>
         /// <param name="maxRange">The max distance the entities can be spread</param>
         /// <param name="respectTeams">True if teams should be grouped together. False if they shouldn't</param>
-        public SpreadPlayersCommand(Vector coordinates, BaseSelector selector, double distance, double maxRange, bool respectTeams)
+        /// <param name="underHeight">The height the players will be spread under. Leave null to use maximum height.</param>
+        public SpreadPlayersCommand(Vector coordinates, BaseSelector selector, double distance, double maxRange, bool respectTeams, int? underHeight)
         {
             Coordinates = coordinates;
             Selector = selector;
             ChangeRanges(distance, maxRange);
             RespectTeams = respectTeams;
+            UnderHeight = underHeight;
         }
 
         /// <summary>
@@ -794,12 +826,35 @@ namespace SharpCraft.Commands
         public bool RespectTeams { get; set; }
 
         /// <summary>
+        /// The height the players will be spread under. Leave null to use maximum height.
+        /// </summary>
+        public int? UnderHeight 
+        { 
+            get => underHeight;
+            set 
+            {
+                if (value is null)
+                {
+                    underHeight = null;
+                }
+                else
+                {
+                    if (value < 0 || value > 255)
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(UnderHeight), "UnderHeight cannot be smaller than 0 or higher than 255");
+                    }
+                    underHeight = value;
+                }
+            }
+        }
+
+        /// <summary>
         /// Returns the command as a string
         /// </summary>
         /// <returns>spreadplayers [Coordinates] [Distance] [MaxRange] [RespectTeams] [Selector]</returns>
         public override string GetCommandString()
         {
-            return $"spreadplayers {Coordinates.GetXString()} {Coordinates.GetZString()} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()} {RespectTeams.ToMinecraftBool()} {Selector.GetSelectorString()}";
+            return $"spreadplayers {Coordinates.GetXString()} {Coordinates.GetZString()} {Distance.ToMinecraftDouble()} {MaxRange.ToMinecraftDouble()}{(UnderHeight is null ? "" : " under " + UnderHeight)} {RespectTeams.ToMinecraftBool()} {Selector.GetSelectorString()}";
         }
     }
 

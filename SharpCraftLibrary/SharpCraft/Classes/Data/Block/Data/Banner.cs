@@ -9,13 +9,19 @@ namespace SharpCraft.Blocks
     /// </summary>
     public class Banner : BaseBlockEntity, Interfaces.IRotation, Interfaces.IFacing
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Banner> PathCreator => new Data.DataPathCreator<Banner>();
+
         private int? _sRotation;
 
         /// <summary>
         /// Creates a banner block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Banner(BlockType? type) : base(type) { }
+        public Banner(IBlockType? type) : base(type) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

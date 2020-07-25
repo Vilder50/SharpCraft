@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a scaffolding block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Scaffolding(BlockType? type) : base(type) { }
+        public Scaffolding(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a scaffolding block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Scaffolding(ID.Block type = SharpCraft.ID.Block.scaffolding) : base(type) { }
+        public Scaffolding() : base(SharpCraft.ID.Block.scaffolding) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

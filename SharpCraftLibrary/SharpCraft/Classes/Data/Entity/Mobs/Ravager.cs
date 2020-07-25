@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Ravager : BaseIllager
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Ravager> PathCreator => new Data.DataPathCreator<Ravager>();
+
+        /// <summary>
         /// Creates a new ravager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Ravager(ID.Entity? type = ID.Entity.ravager) : base(type) { }
+        public Ravager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Ravager() : base(SharpCraft.ID.Entity.ravager) { }
 
         /// <summary>
         /// Cooldown till it can attack again

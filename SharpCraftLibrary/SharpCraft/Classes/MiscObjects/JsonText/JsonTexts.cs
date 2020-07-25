@@ -7,6 +7,46 @@ using System.Threading.Tasks;
 namespace SharpCraft.JsonText
 {
     /// <summary>
+    /// Class for displaying unformatted json text. Note that this cannot be formatted or contain extra json text.
+    /// </summary>
+    public class UnformattedText : BaseJsonText
+    {
+        private string displayText = null!;
+
+        /// <summary>
+        /// Intializes a new <see cref="UnformattedText"/>
+        /// </summary>
+        /// <param name="displayText">The text to display</param>
+        public UnformattedText(string displayText)
+        {
+            DisplayText = displayText;
+        }
+
+        /// <summary>
+        /// The text to display
+        /// </summary>
+        public string DisplayText { get => displayText; set => displayText = value ?? throw new ArgumentNullException(nameof(displayText), "Json text to display may not be null"); }
+
+        /// <summary>
+        /// returns the raw string specific for this class
+        /// </summary>
+        /// <returns>The raw string specific for this class</returns>
+        protected override string GetSpecificJsonString()
+        {
+            return DisplayText;
+        }
+
+        /// <summary>
+        /// Gets the raw JSON string
+        /// </summary>
+        /// <returns>the raw JSON string used by the game</returns>
+        public override string GetJsonString()
+        {
+            return "\"" + GetSpecificJsonString() + "\"";
+        }
+    }
+
+    /// <summary>
     /// Class for displaying json text
     /// </summary>
     public class Text : BaseJsonText
@@ -86,7 +126,7 @@ namespace SharpCraft.JsonText
             if (!(Insert is null))
             {
                 IEnumerable<string> array = Insert.Select(k => k.GetJsonString()).ToArray();
-                outText += ",with:[" + string.Join(",", array) + "]";
+                outText += ",\"with\":[" + string.Join(",", array) + "]";
             }
 
             return outText;
@@ -249,7 +289,7 @@ namespace SharpCraft.JsonText
                 }
                 else
                 {
-                    selector = Utils.ValidateSingleSelectSelector(value, nameof(Selector), nameof(Score));
+                    selector = Validators.ValidateSingleSelectSelector(value, nameof(Selector), nameof(Score));
                 }
             }
         }

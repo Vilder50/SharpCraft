@@ -12,7 +12,7 @@ namespace SharpCraft.LootObjects
     /// </summary>
     public class CopyStateChange : BaseChange
     {
-        private BlockType id = null!;
+        private IBlockType id = null!;
         private string[] states = null!;
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace SharpCraft.LootObjects
         /// </summary>
         /// <param name="id">The block to copy the state from</param>
         /// <param name="states">The states to copy</param>
-        public CopyStateChange(BlockType id, string[] states) : base("copy_state")
+        public CopyStateChange(IBlockType id, string[] states) : base("minecraft:copy_state")
         {
             Id = id;
             States = states;
@@ -30,7 +30,7 @@ namespace SharpCraft.LootObjects
         /// The block to copy the state from
         /// </summary>
         [DataTag("block", ForceType = ID.NBTTagType.TagString, JsonTag = true)]
-        public BlockType Id { get => id; set => id = value ?? throw new ArgumentNullException(nameof(Id), "Id may not be null"); }
+        public IBlockType Id { get => id; set => id = value ?? throw new ArgumentNullException(nameof(Id), "Id may not be null"); }
 
         /// <summary>
         /// The states to copy

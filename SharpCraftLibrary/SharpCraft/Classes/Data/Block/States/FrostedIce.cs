@@ -15,13 +15,12 @@ namespace SharpCraft.Blocks
         /// Creates a frosted ice block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public FrostedIce(BlockType? type) : base(type) { }
+        public FrostedIce(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a frosted ice block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public FrostedIce(ID.Block type = SharpCraft.ID.Block.frosted_ice) : base(type) { }
+        public FrostedIce() : base(SharpCraft.ID.Block.frosted_ice) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

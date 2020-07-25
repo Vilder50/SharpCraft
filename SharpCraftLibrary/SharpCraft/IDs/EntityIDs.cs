@@ -1,4 +1,6 @@
-﻿namespace SharpCraft
+﻿using SharpCraft.Data;
+
+namespace SharpCraft
 {
     /// <summary>
     /// All the different ID's/Types/States things in the game can have
@@ -6,111 +8,6 @@
     public static partial class ID
     {
 #pragma warning disable 1591
-        public enum Entity
-        {
-            bee,
-            fox,
-            trader_llama,
-            wandering_trader,
-            cat,
-            ravager,
-            panda,
-            pillager,
-            lightning_bolt,
-            dolphin,
-            drowned,
-            cod,
-            turtle,
-            phantom,
-            salmon,
-            pufferfish,
-            tropical_fish,
-            player,
-            area_effect_cloud,
-            armor_stand,
-            arrow,
-            bat,
-            blaze,
-            boat,
-            cave_spider,
-            chest_minecart,
-            chicken,
-            command_block_minecart,
-            cow,
-            creeper,
-            donkey,
-            dragon_fireball,
-            egg,
-            elder_guardian,
-            end_crystal,
-            ender_dragon,
-            ender_pearl,
-            enderman,
-            endermite,
-            evoker_fangs,
-            evoker,
-            eye_of_ender,
-            falling_block,
-            fireball,
-            firework_rocket,
-            furnace_minecart,
-            ghast,
-            giant,
-            guardian,
-            hopper_minecart,
-            horse,
-            husk,
-            illusioner,
-            item,
-            item_frame,
-            leash_knot,
-            llama,
-            llama_spit,
-            magma_cube,
-            minecart,
-            mooshroom,
-            mule,
-            ocelot,
-            painting,
-            parrot,
-            pig,
-            polar_bear,
-            potion,
-            rabbit,
-            sheep,
-            shulker,
-            shulker_bullet,
-            silverfish,
-            skeleton,
-            skeleton_horse,
-            slime,
-            small_fireball,
-            snowball,
-            snow_golem,
-            spawner_minecart,
-            spectral_arrow,
-            spider,
-            squid,
-            stray,
-            tnt,
-            tnt_minecart,
-            vex,
-            villager,
-            iron_golem,
-            vindicator,
-            witch,
-            wither,
-            wither_skeleton,
-            wither_skull,
-            wolf,
-            experience_bottle,
-            experience_orb,
-            zombie,
-            zombie_horse,
-            zombie_pigman,
-            zombie_villager,
-            EntityEnumEnd
-        }
         public enum HorseMarkings
         {
             Normal,
@@ -192,35 +89,6 @@
             /// </summary>
             NoAI
         }
-
-        public enum VillagerProffession
-        {
-            none,
-            armorer,
-            butcher,
-            cartographer,
-            cleric,
-            farmer,
-            fisherman,
-            fletcher,
-            leatherworker,
-            librarian,
-            mason,
-            nitwit,
-            shepherd,
-            toolsmith,
-            weaponsmith
-        }
-        public enum VillagerType
-        {
-            desert,
-            jungle,
-            plains,
-            savanna,
-            snow,
-            swamp,
-            tiaga
-        }
         public enum GossipType
         {
             major_negative,
@@ -279,21 +147,6 @@
             /// Players in creative mode can pick the arrow
             /// </summary>
             CreativePickUp
-        }
-        public enum AttributeType
-        {
-            generic_maxHealth,
-            generic_followRange,
-            generic_knockbackResistance,
-            generic_movementSpeed,
-            generic_attackDamage,
-            generic_armor,
-            generic_armorToughness,
-            generic_attackSpeed,
-            generic_luck,
-            horse_jumpStrenght,
-            generic_flyingSpeed,
-            zombie_spawnReinforcements
         }
         public enum AttributeSlot
         {

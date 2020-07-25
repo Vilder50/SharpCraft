@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Turtle : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Turtle> PathCreator => new Data.DataPathCreator<Turtle>();
+
+        /// <summary>
         /// Creates a new turtle
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Turtle(ID.Entity? type = ID.Entity.turtle) : base(type) { }
+        public Turtle(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Turtle() : base(SharpCraft.ID.Entity.turtle) { }
 
         /// <summary>
         /// The location of the turtles home

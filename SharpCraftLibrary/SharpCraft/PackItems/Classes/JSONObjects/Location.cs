@@ -11,20 +11,26 @@ namespace SharpCraft.JsonObjects
         /// <summary>
         /// The biome to detect
         /// </summary>
-        [DataTag("biome", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("biome", JsonTag = true)]
         public ID.Biome? Biome { get; set; }
 
         /// <summary>
         /// the dimension to detect
         /// </summary>
-        [DataTag("dimension", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
-        public ID.Dimension? Dimension { get; set; }
+        [DataTag("dimension", JsonTag = true)]
+        public DimensionObjects.IDimension? Dimension { get; set; }
 
         /// <summary>
         /// the structure to detect
         /// </summary>
-        [DataTag("feature", JsonTag = true, ForceType = ID.NBTTagType.TagNamespacedString)]
+        [DataTag("feature", JsonTag = true)]
         public ID.Structure? Structure { get; set; }
+
+        /// <summary>
+        /// If the location should be smokey from a fireplace
+        /// </summary>
+        [DataTag("smokey", JsonTag = true)]
+        public bool? Smokey { get; set; }
 
         /// <summary>
         /// the x coordinate to detect
@@ -81,10 +87,19 @@ namespace SharpCraft.JsonObjects
         }
 
         /// <summary>
-        /// Converts a <see cref="ID.Dimension"/> into a <see cref="Location"/>
+        /// Converts a <see cref="SharpCraft.Dimension"/> into a <see cref="Location"/>
         /// </summary>
-        /// <param name="dimension">The <see cref="ID.Dimension"/> to convert</param>
-        public static implicit operator Location(ID.Dimension dimension)
+        /// <param name="dimension">The <see cref="SharpCraft.Dimension"/> to convert</param>
+        public static implicit operator Location(Dimension dimension)
+        {
+            return new Location() { Dimension = dimension };
+        }
+
+        /// <summary>
+        /// Converts a <see cref="FileMocks.MockDimension"/> into a <see cref="Location"/>
+        /// </summary>
+        /// <param name="dimension">The <see cref="FileMocks.MockDimension"/> to convert</param>
+        public static implicit operator Location(FileMocks.MockDimension dimension)
         {
             return new Location() { Dimension = dimension };
         }

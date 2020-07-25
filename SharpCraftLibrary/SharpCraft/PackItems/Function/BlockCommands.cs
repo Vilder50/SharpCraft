@@ -10,6 +10,7 @@ namespace SharpCraft.FunctionWriters
         internal BlockCommands(Function function) : base(function)
         {
             Data = new ClassData(function);
+            Structure = new ClassStructure(function);
         }
 
         /// <summary>
@@ -21,6 +22,235 @@ namespace SharpCraft.FunctionWriters
         public void Add(Vector blockCoords, Block addBlock, ID.BlockAdd type = ID.BlockAdd.replace)
         {
             ForFunction.AddCommand(new SetblockCommand(blockCoords, addBlock, type));
+        }
+
+        /// <summary>
+        /// Commands for working with structures
+        /// </summary>
+        public ClassStructure Structure;
+        /// <summary>
+        /// Commands for working with structures
+        /// </summary>
+        public class ClassStructure : CommandList
+        {
+            internal ClassStructure(Function function) : base(function)
+            {
+
+            }
+
+            private (Vector? structureOffset, Vector blockLocation, Vector redstoneLocation) GetStructureCoords(Vector structureLocation, Vector? structureBlockLocation, ID.FacingFull redstoneBlockDirection)
+            {
+                Vector structureBlockRealLocation = structureBlockLocation ?? structureLocation;
+                Vector? structureOffset = structureBlockLocation is null ? null : structureLocation - structureBlockLocation;
+                if (structureBlockLocation is LocalCoords)
+                {
+                    throw new System.ArgumentException("StructureBlockLocation may not be of type LocalCoords", nameof(structureBlockLocation));
+                }
+                if (!(structureBlockLocation is null))
+                {
+                    if (structureLocation is LocalCoords)
+                    {
+                        throw new System.ArgumentException("StructureLocation may not be of type LocalCoords if StructureBlockLocation is specified", nameof(structureLocation));
+                    }
+                    if (structureLocation is Coords ^ structureBlockLocation is Coords)
+                    {
+                        throw new System.ArgumentException("StructureLocation may not be of a different type than StructureBlockLocation", nameof(structureLocation));
+                    }
+                }
+                if (!(structureOffset is null))
+                {
+                    if (System.Math.Abs(structureOffset.X) > SharpCraft.Structure.StructureMaxSize || System.Math.Abs(structureOffset.Y) > SharpCraft.Structure.StructureMaxSize || System.Math.Abs(structureOffset.Z) > SharpCraft.Structure.StructureMaxSize)
+                    {
+                        throw new System.ArgumentException("The difference between structureLocation and structureBlockLocation may not be bigger than " + SharpCraft.Structure.StructureMaxSize, nameof(structureLocation));
+                    }
+                }
+
+                Vector redstoneBlockRelativeLocation;
+                switch (redstoneBlockDirection)
+                {
+                    case ID.FacingFull.down:
+                        redstoneBlockRelativeLocation = Vector.NegativeY;
+                        break;
+                    case ID.FacingFull.east:
+                        redstoneBlockRelativeLocation = Vector.PositiveX;
+                        break;
+                    case ID.FacingFull.north:
+                        redstoneBlockRelativeLocation = Vector.NegativeZ;
+                        break;
+                    case ID.FacingFull.south:
+                        redstoneBlockRelativeLocation = Vector.PositiveZ;
+                        break;
+                    case ID.FacingFull.west:
+                        redstoneBlockRelativeLocation = Vector.NegativeX;
+                        break;
+                    case ID.FacingFull.up:
+                    default:
+                        redstoneBlockRelativeLocation = Vector.PositiveY;
+                        break;
+                }
+
+                return (structureOffset, structureBlockRealLocation, structureBlockRealLocation is Coords ? (Coords)structureBlockRealLocation + redstoneBlockRelativeLocation : structureBlockRealLocation + redstoneBlockRelativeLocation);
+            }
+
+            /// <summary>
+            /// Places a structure in the world and replaces the placed structure block with the block which was there before the structure block was placed
+            /// </summary>
+            /// <param name="structureLocation">The location to place the structure at</param>
+            /// <param name="structure">The structure to place</param>
+            /// <param name="structureBlockLocation">The location of the structure block which places the structure</param>
+            /// <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            /// <param name="structurePlaceInformation">Extra information on how the structure should be placed</param>
+            /// <returns>The placed structure</returns>
+            public IStructure Place(Vector structureLocation, IStructure structure, Vector? structureBlockLocation = null, ID.FacingFull redstoneBlockDirection = ID.FacingFull.down, Blocks.StructureBlock? structurePlaceInformation = null)
+            {
+                var (structureOffset, blockLocation, redstoneLocation) = GetStructureCoords(structureLocation, structureBlockLocation, redstoneBlockDirection);
+
+                ForFunction.Custom.GroupCommands(group =>
+                {
+                    Vector structureBlockHoldingLocation = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetStructureBlocksLocation();
+                    Vector redstoneBlockHoldingLocation = structureBlockHoldingLocation + Vector.PositiveX;
+
+                    group.Block.Clone(blockLocation, blockLocation, structureBlockHoldingLocation);
+                    group.Block.Clone(redstoneLocation, redstoneLocation, redstoneBlockHoldingLocation);
+                    group.Block.Add(blockLocation, new Blocks.StructureBlock()
+                    {
+                        DIntegrity = structurePlaceInformation?.DIntegrity,
+                        DIgnoreEntities = structurePlaceInformation?.DIgnoreEntities ?? false,
+                        DMirror = structurePlaceInformation?.DMirror,
+                        DRotation = structurePlaceInformation?.DRotation,
+                        DCoords = structureOffset is null ? null : new IntVector((int)structureOffset.X, (int)structureOffset.Y, (int)structureOffset.Z),
+                        DStructure = structure,
+                        DMode = ID.StructureDataMode.LOAD,
+                        SMode = ID.StructureMode.load
+                    });
+                    group.Block.Add(redstoneLocation, ID.Block.redstone_block);
+                    group.Execute.IfBlock(blockLocation, ID.Block.structure_block).Block.Clone(structureBlockHoldingLocation, structureBlockHoldingLocation, blockLocation);
+                    group.Execute.IfBlock(redstoneLocation, ID.Block.redstone_block).Block.Clone(redstoneBlockHoldingLocation, redstoneBlockHoldingLocation, redstoneLocation);
+                });
+
+                return structure;
+            }
+
+            /// <summary>
+            /// Places a structure in the world
+            /// </summary>
+            /// <param name="structureLocation">The location to place the structure at</param>
+            /// <param name="structure">The structure to place</param>
+            /// <param name="structureBlockLocation">The location of the structure block which places the structure</param>
+            /// <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            /// <param name="replaceStructureBlock">A block to replace the structure block with once the structure is placed</param>
+            /// <param name="replaceRedstoneBlock">A block to replace the redstone block with once the structure is placed</param>
+            /// <param name="structurePlaceInformation">Extra information on how the structure should be placed</param>
+            /// <returns>The placed structure</returns>
+            public IStructure Place(Vector structureLocation, IStructure structure, Vector? structureBlockLocation, Block? replaceStructureBlock, Block? replaceRedstoneBlock, ID.FacingFull redstoneBlockDirection = ID.FacingFull.down, Blocks.StructureBlock? structurePlaceInformation = null)
+            {
+                (Vector? structureOffset, Vector blockLocation, Vector redstoneLocation) = GetStructureCoords(structureLocation, structureBlockLocation, redstoneBlockDirection);
+
+                ForFunction.Custom.GroupCommands(group =>
+                {
+                    Vector structureBlockHoldingLocation = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetStructureBlocksLocation();
+                    Vector redstoneBlockHoldingLocation = structureBlockHoldingLocation + Vector.PositiveX;
+                    group.Block.Add(blockLocation, new Blocks.StructureBlock()
+                    {
+                        DIntegrity = structurePlaceInformation?.DIntegrity,
+                        DIgnoreEntities = structurePlaceInformation?.DIgnoreEntities ?? false,
+                        DMirror = structurePlaceInformation?.DMirror,
+                        DRotation = structurePlaceInformation?.DRotation,
+                        DCoords = structureOffset is null ? null : new IntVector((int)structureOffset.X, (int)structureOffset.Y, (int)structureOffset.Z),
+                        DStructure = structure,
+                        DMode = ID.StructureDataMode.LOAD,
+                        SMode = ID.StructureMode.load
+                    });
+                    group.Block.Add(redstoneLocation, ID.Block.redstone_block);
+                    if (!(replaceRedstoneBlock is null))
+                    {
+                        group.Block.Add(redstoneLocation, replaceRedstoneBlock);
+                    }
+                    if (!(replaceStructureBlock is null))
+                    {
+                        group.Block.Add(blockLocation, replaceStructureBlock);
+                    }
+                });
+
+                return structure;
+            }
+
+            /// <summary>
+            /// Saves blocks into a structure. Note that the save will be "deleted" once the world closes
+            /// </summary>
+            /// <param name="name">The name of the structure</param>
+            /// <param name="structureLocation">The location of the blocks to save</param>
+            /// <param name="size">The size of the structure to save</param>
+            /// <param name="structureBlockLocation">The location of the structure block which saves the structure</param>
+            /// <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            /// <returns>A reference to the saved structure</returns>
+            public IStructure Save(string name, Vector structureLocation, IntVector size, Vector? structureBlockLocation = null, ID.FacingFull redstoneBlockDirection = ID.FacingFull.down)
+            {
+                var (structureOffset, blockLocation, redstoneLocation) = GetStructureCoords(structureLocation, structureBlockLocation, redstoneBlockDirection);
+                FileMocks.MockStructure structure = "minecraft:temp/" + ForFunction.PackNamespace.Name + "/" + name;
+
+                ForFunction.Custom.GroupCommands(group =>
+                {
+                    Vector structureBlockHoldingLocation = ForFunction.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetStructureBlocksLocation();
+                    Vector redstoneBlockHoldingLocation = structureBlockHoldingLocation + Vector.PositiveX;
+
+                    group.Block.Clone(blockLocation, blockLocation, structureBlockHoldingLocation);
+                    group.Block.Clone(redstoneLocation, redstoneLocation, redstoneBlockHoldingLocation);
+                    group.Block.Add(blockLocation, new Blocks.StructureBlock()
+                    {
+                        DCoords = structureOffset is null ? null : new IntVector((int)structureOffset.X, (int)structureOffset.Y, (int)structureOffset.Z),
+                        DSize = size,
+                        DStructure = structure,
+                        DMode = ID.StructureDataMode.SAVE,
+                        SMode = ID.StructureMode.save
+                    });
+                    group.Block.Add(redstoneLocation, ID.Block.redstone_block);
+                    group.Execute.IfBlock(blockLocation, ID.Block.structure_block).Block.Clone(structureBlockHoldingLocation, structureBlockHoldingLocation, blockLocation);
+                    group.Execute.IfBlock(redstoneLocation, ID.Block.redstone_block).Block.Clone(redstoneBlockHoldingLocation, redstoneBlockHoldingLocation, redstoneLocation);
+                });
+
+                return structure;
+            }
+
+            /// <summary>
+            /// Saves blocks into a structure. Note that the save will be "deleted" once the world closes
+            /// </summary>
+            /// <param name="name">The name of the structure</param>
+            /// <param name="structureLocation">The location of the blocks to save</param>
+            /// <param name="size">The size of the structure to save</param>
+            /// <param name="structureBlockLocation">The location of the structure block which saves the structure</param>
+            /// <param name="redstoneBlockDirection">The side of the structure block the redstoneblock is placed on</param>
+            /// <param name="replaceStructureBlock">A block to replace the structure block with once the structure is placed</param>
+            /// <param name="replaceRedstoneBlock">A block to replace the redstone block with once the structure is placed</param>
+            /// <returns>A reference to the saved structure</returns>
+            public IStructure Save(string name, Vector structureLocation, IntVector size, Vector? structureBlockLocation, Block? replaceStructureBlock, Block? replaceRedstoneBlock, ID.FacingFull redstoneBlockDirection = ID.FacingFull.down)
+            {
+                var (structureOffset, blockLocation, redstoneLocation) = GetStructureCoords(structureLocation, structureBlockLocation, redstoneBlockDirection);
+                FileMocks.MockStructure structure = "minecraft:temp/" + ForFunction.PackNamespace.Name + "/" + name;
+
+                ForFunction.Custom.GroupCommands(group =>
+                {
+                    group.Block.Add(blockLocation, new Blocks.StructureBlock()
+                    {
+                        DCoords = structureOffset is null ? null : new IntVector((int)structureOffset.X, (int)structureOffset.Y, (int)structureOffset.Z),
+                        DSize = size,
+                        DStructure = structure,
+                        DMode = ID.StructureDataMode.SAVE,
+                        SMode = ID.StructureMode.save
+                    });
+                    group.Block.Add(redstoneLocation, ID.Block.redstone_block);
+                    if (!(replaceRedstoneBlock is null))
+                    {
+                        group.Block.Add(redstoneLocation, replaceRedstoneBlock);
+                    }
+                    if (!(replaceStructureBlock is null))
+                    {
+                        group.Block.Add(blockLocation, replaceStructureBlock);
+                    }
+                });
+
+                return structure;
+            }
         }
 
         /// <summary>

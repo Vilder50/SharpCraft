@@ -9,7 +9,7 @@ namespace SharpCraft
     /// <summary>
     /// Interface for loot tables
     /// </summary>
-    public interface ILootTable
+    public interface ILootTable : Data.IConvertableToDataTag
     {
         /// <summary>
         /// The file name of the loot table

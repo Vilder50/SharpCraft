@@ -13,13 +13,12 @@ namespace SharpCraft.Blocks
         /// Creates a lever block
         /// </summary>
         /// <param name="type">The type of block</param>
-        public Lever(BlockType? type) : base(type) { }
+        public Lever(IBlockType? type) : base(type) { }
 
         /// <summary>
-        /// Creates a lever block
+        /// Creates a new block
         /// </summary>
-        /// <param name="type">The type of block</param>
-        public Lever(ID.Block type = SharpCraft.ID.Block.lever) : base(type) { }
+        public Lever() : base(SharpCraft.ID.Block.lever) { }
 
         /// <summary>
         /// Tests if the given block type fits this type of block object

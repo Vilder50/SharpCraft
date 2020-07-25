@@ -10,17 +10,11 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player activates a raid
     /// </summary>
-    public class CausedRaidTrigger : BaseTrigger
+    public class CausedRaidTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="CausedRaidTrigger"/>
         /// </summary>
         public CausedRaidTrigger() : base("voluntary_exile") { }
-
-        /// <summary>
-        /// The location the player triggered the raid
-        /// </summary>
-        [DataTag("conditions", JsonTag = true)]
-        public JsonObjects.Location? Location { get; set; }
     }
 }

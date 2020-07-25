@@ -9,13 +9,24 @@ namespace SharpCraft.Entities
     /// </summary>
     public class Villager : BreedableMob, IVillager
     {
+        /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Villager> PathCreator => new Data.DataPathCreator<Villager>();
+
         Item[]? inventory;
 
         /// <summary>
         /// Creates a new villager
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Villager(ID.Entity? type = ID.Entity.villager) : base(type) { }
+        public Villager(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Villager() : base(SharpCraft.ID.Entity.villager) { }
 
         /// <summary>
         /// The villager's level (~Amount of trades)
@@ -27,7 +38,7 @@ namespace SharpCraft.Entities
         /// The villagers proffesion
         /// </summary>
         [DataTag("VillagerData.profession", ForceType = ID.NBTTagType.TagString)]
-        public ID.VillagerProffession? VillagerProfession { get; set; }
+        public ID.VillagerProfession? VillagerProfession { get; set; }
 
         /// <summary>
         /// The type of villager

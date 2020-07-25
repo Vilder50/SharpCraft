@@ -9,6 +9,12 @@ namespace SharpCraft.Entities
     public class Horse : BreedableMob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Horse> PathCreator => new Data.DataPathCreator<Horse>();
+
+        /// <summary>
         /// Creates a new horse, llama, donkeys or mule
         /// </summary>
         /// <param name="type">the type of entity</param>
@@ -34,7 +40,7 @@ namespace SharpCraft.Entities
         /// <summary>
         /// The <see cref="UUID"/> of the owner of the horse
         /// </summary>
-        [DataTag(ForceType = ID.NBTTagType.TagString)]
+        [Data.DataTag("Owner", ForceType = ID.NBTTagType.TagIntArray)]
         public UUID? OwnerUUID { get; set; }
         /// <summary>
         /// The item the horse has as it's saddle

@@ -17,8 +17,8 @@ namespace SharpCraft.Tests.Commands
             Assert.AreEqual("tag @a add test", new TagCommand(ID.Selector.a, new Tag("test"), true).GetCommandString());
             Assert.AreEqual("tag @a remove test", new TagCommand(ID.Selector.a, new Tag("test"), false).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TagCommand(null, new Tag("test"), true));
-            Assert.ThrowsException<ArgumentNullException>(() => new TagCommand(ID.Selector.a, null, true));
+            Assert.ThrowsException<ArgumentNullException>(() => new TagCommand(null!, new Tag("test"), true));
+            Assert.ThrowsException<ArgumentNullException>(() => new TagCommand(ID.Selector.a, null!, true));
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace SharpCraft.Tests.Commands
         {
             Assert.AreEqual("tag @a list", new TagListCommand(ID.Selector.a).GetCommandString());
 
-            Assert.ThrowsException<ArgumentNullException>(() => new TagListCommand(null));
+            Assert.ThrowsException<ArgumentNullException>(() => new TagListCommand(null!));
         }
     }
 }

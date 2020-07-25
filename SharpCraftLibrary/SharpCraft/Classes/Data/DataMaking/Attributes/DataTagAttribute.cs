@@ -37,9 +37,14 @@ namespace SharpCraft.Data
         public string? DataTagName { get; private set; }
 
         /// <summary>
-        /// True if the path name should be encapsulated in "'s. (Default) False if it shouldn't
+        /// True if the path name should be encapsulated in "'s. False if it shouldn't (Default).
         /// </summary>
         public bool JsonTag { get; set; }
+
+        /// <summary>
+        /// Forces a compound tag to still be written even though its empty
+        /// </summary>
+        public bool ForceWriteEmptyCompoundTag { get; set; }
 
         /// <summary>
         /// Clones all properties with a <see cref="DataTagAttribute"/> from one object to another

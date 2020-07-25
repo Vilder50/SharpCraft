@@ -10,17 +10,11 @@ namespace SharpCraft.AdvancementObjects
     /// <summary>
     /// Gets triggered when the player defeats a raid
     /// </summary>
-    public class VillageHeroTrigger : BaseTrigger
+    public class VillageHeroTrigger : BasePlayerTrigger
     {
         /// <summary>
         /// Intializes a new <see cref="VillageHeroTrigger"/>
         /// </summary>
         public VillageHeroTrigger() : base("hero_of_the_village") { }
-
-        /// <summary>
-        /// The location the player defeated the raid at
-        /// </summary>
-        [DataTag("conditions", JsonTag = true)]
-        public JsonObjects.Location? Location { get; set; }
     }
 }

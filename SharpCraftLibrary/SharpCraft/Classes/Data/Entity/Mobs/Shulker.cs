@@ -8,10 +8,21 @@ namespace SharpCraft.Entities
     public class Shulker : Mob
     {
         /// <summary>
+        /// Returns a object which can be used for creating data paths
+        /// </summary>
+        /// <returns>Object used for making data paths</returns>
+        public new static Data.DataPathCreator<Shulker> PathCreator => new Data.DataPathCreator<Shulker>();
+
+        /// <summary>
         /// Creates a new shulker
         /// </summary>
         /// <param name="type">the type of entity</param>
-        public Shulker(ID.Entity? type = ID.Entity.shulker) : base(type) { }
+        public Shulker(ID.Entity? type) : base(type) { }
+
+        /// <summary>
+        /// Creates a new entity
+        /// </summary>
+        public Shulker() : base(SharpCraft.ID.Entity.shulker) { }
 
         /// <summary>
         /// The direction of the block the shulker is placed on
