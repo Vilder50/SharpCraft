@@ -2,7 +2,7 @@
 SharpCraft is a C# class library used for generating Minecraft datapacks. SharpCraft is made for making it easier to abstract things. SharpCraft in itself doesn't come with much abstraction, but allows people to make their own abstraction libraries which they then can reuse.
 
 ### Different way of writing
-Generating a datapack in SharpCraft is not 100% the same as writing a normal datapack since all the syntax is a little different.
+Generating a datapack in SharpCraft is not 100% the same as writing a normal datapack since all the syntax is different.
 Example:
 
 ```mcfunction
@@ -21,7 +21,7 @@ MyFunction.Entity.Score.Set(ID.Selector.a, testScores, 1);
 MyFunction.Entity.Teleport(new Selector(ID.Selector.p, "test") { Distance = new MCRange(null, 4) }, new Coords(1, 3, 5, true, true, false));
 MyFunction.Entity.Add(new LocalCoords(0, 0, 5), new Entities.Creeper() { ExplosionRadius = 10, PersistenceRequired = true });
 ```
-The SharpCraft syntax is a little longer than the Minecraft Syntax. And that is a little bit of a problem, but with a good IDE autocompletion is a thing which helps a lot. Also tried to make the syntax shorter in some places eg: strings can implicit be converted into tags (Happens in the tp command).
+The SharpCraft syntax is a little longer than the Minecraft Syntax. And that is a little bit of a problem, but with a good IDE you can use auto completion which helps a lot. Also tried to make the syntax shorter in some places eg: strings can implicit be converted into tags (Happens in the example tp command).
 But why use SharpCraft if things takes a little longer to type sometimes? Well because you can mix it with C# to generate things like this:
 ```c#
 //SharpCraft is used for generating
@@ -35,11 +35,17 @@ Not sold yet? Take a look at the abstraction library example.
 
 ### Documentation
 Hello world example (Coming at some point)
+
 Abstraction library example (Coming at some point)
+
 Working with none SharpCraft datapacks (Coming at some point)
+
 Data Documentation (Coming at some point)
+
 Command Documentation (Coming at some point)
+
 Files Documentation (Coming at some point)
+
 Writers/Generators Documentation (Coming at some point)
 
 ### Why use SharpCraft?
@@ -61,3 +67,4 @@ I know not everyone will like the idea of using this. I do actually think there 
 ####The negatives:
 * Writing simple things takes longer.
 * Syntax is different meaning it takes some time to get used to.
+* Chance of things not being generated in the right way. Minecraft contains a lot of different nbt tags and such and there is a chance that some of them aren't added correctly to SharpCraft.
