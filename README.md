@@ -21,7 +21,7 @@ MyFunction.Entity.Score.Set(ID.Selector.a, testScores, 1);
 MyFunction.Entity.Teleport(new Selector(ID.Selector.p, "test") { Distance = new MCRange(null, 4) }, new Coords(1, 3, 5, true, true, false));
 MyFunction.Entity.Add(new LocalCoords(0, 0, 5), new Entities.Creeper() { ExplosionRadius = 10, PersistenceRequired = true });
 ```
-The SharpCraft syntax is a little longer than the Minecraft Syntax. And that is a little bit of a problem, but with a good IDE you can use auto completion which helps a lot. Also tried to make the syntax shorter in some places eg: strings can implicit be converted into tags (Happens in the example tp command).
+The SharpCraft syntax is a quite a bit longer than the Minecraft Syntax. And that is a little bit of a problem, but with a good IDE you can use auto completion which helps a lot. Also tried to make the syntax shorter in some places eg: strings can implicit be converted into tags (Happens in the example tp command).
 But why use SharpCraft if things takes a little longer to type sometimes? Well because you can mix it with C# to generate things like this:
 ```c#
 //SharpCraft is used for generating
@@ -51,7 +51,7 @@ Writers/Generators Documentation (Coming at some point)
 ### Why use SharpCraft?
 I know not everyone will like the idea of using this. I do actually think there could be made a better alternative to SharpCraft. Something which would build ontop of the normal Minecraft syntax and allow everything SharpCraft allows people to do. [Trident](https://energyxxer.com/trident/#home) pretty much does this, but I still wanted to release this.
 
-####The positives:
+#### The positives:
 * SharpCraft contains a good amount of information. Meaning you won't have to look at the wiki over and over to figure out things like what the syntax is for loot table function which sets the attribute on an item or which number is what dragon phase.
 
 * SharpCraft allows you to generate files. Meaning you won't have to write your 30 nearly identical level selection functions + if you ever want to make a change to the functions then it's super simple since you just have to change how the files are generated.
@@ -64,7 +64,7 @@ I know not everyone will like the idea of using this. I do actually think there 
 
 * SharpCraft has a few abstraction things inbuilt like: Math operations with constants, easy to make search trees, easy way of placing structures, simple loops, random number generation and more. 
 
-####The negatives:
+#### The negatives:
 * Writing simple things takes longer.
 * Syntax is different meaning it takes some time to get used to.
 * Chance of things not being generated in the right way. Minecraft contains a lot of different nbt tags and such and there is a chance that some of them aren't added correctly to SharpCraft.
