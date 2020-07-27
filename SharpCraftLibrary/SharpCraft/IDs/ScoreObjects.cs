@@ -46,49 +46,49 @@
             /// (As in uses the last durability)
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Broken(Item Item) { return "minecraft.broken:minecraft." + Item; }
+            public static string Broken(Item Item) { return "minecraft.broken:" + Item.ToString().Replace(":","."); }
 
             /// <summary>
             /// Goes up by one when the player crafts the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Crafted(Item Item) { return "minecraft.crafted:minecraft." + Item; }
+            public static string Crafted(Item Item) { return "minecraft.crafted:" + Item.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one for each of the specified item the player drops
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Dropped(Item Item) { return "minecraft.dropped:minecraft." + Item; }
+            public static string Dropped(Item Item) { return "minecraft.dropped:" + Item.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one when the player kills an entity of the specified type
             /// </summary>
             /// <param name="Entity">the entity to check for</param>
-            public static string Killed(Entity Entity) { return "minecraft.killed:minecraft." + Entity; }
+            public static string Killed(Entity Entity) { return "minecraft.killed:" + Entity.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one when the player gets killed by an entity of the specified type
             /// </summary>
             /// <param name="Entity">the entity to check for</param>
-            public static string KilledBy(Entity Entity) { return "minecraft.killed_by:minecraft." + Entity; }
+            public static string KilledBy(Entity Entity) { return "minecraft.killed_by:" + Entity.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one when the player breaks the specified block
             /// </summary>
             /// <param name="Block">the block to check for</param>
-            public static string Mined(Block Block) { return "minecraft.mined:minecraft." + Block; }
+            public static string Mined(Block Block) { return "minecraft.mined:" + Block.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one when the player picks up the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string PickedUp(Item Item) { return "minecraft.picked_up:minecraft." + Item; }
+            public static string PickedUp(Item Item) { return "minecraft.picked_up:" + Item.ToString().Replace(":", "."); }
 
             /// <summary>
             /// Goes up by one when the player uses the specified item
             /// </summary>
             /// <param name="Item">the item to check for</param>
-            public static string Used(Item Item) { return "minecraft.used:minecraft." + Item; }
+            public static string Used(Item Item) { return "minecraft.used:" + Item.ToString().Replace(":", "."); }
 
             /// <summary>
             /// The number of ticks since the player last slept

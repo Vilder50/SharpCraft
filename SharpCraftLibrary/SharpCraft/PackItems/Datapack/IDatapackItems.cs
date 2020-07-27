@@ -37,7 +37,7 @@ namespace SharpCraft
         /// <param name="name">The unique name of the item</param>
         /// <param name="itemMaker">A function for creating the item if it doesn't exist</param>
         /// <returns>The item</returns>
-        public T GetItem<T>(string name, Func<T> itemMaker)where T : class
+        public T GetItem<T>(string name, Func<T> itemMaker)
         {
             if (items.ContainsKey(name))
             {
@@ -52,7 +52,7 @@ namespace SharpCraft
             }
 
             T newObject = itemMaker();
-            items.Add(name, newObject);
+            items.Add(name, newObject!);
             return newObject;
         }
     }
