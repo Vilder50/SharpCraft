@@ -34,9 +34,9 @@ for (int i = 0; i < words.length; i++)
 Not sold yet? Take a look at the abstraction library example.
 
 ### Documentation
-[Hello world example]([Hello world example](https://github.com/Vilder50/SharpCraft/wiki/Hello-world-example))
+[Hello world example](https://github.com/Vilder50/SharpCraft/wiki/Hello-world-example)
 
-Abstraction library example (Coming at some point)
+[Abstraction library example](https://github.com/Vilder50/SharpCraft/wiki/Abstraction-pack-example)
 
 Working with none SharpCraft datapacks (Coming at some point)
 
