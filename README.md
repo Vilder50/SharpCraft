@@ -38,15 +38,13 @@ Not sold yet? Take a look at the abstraction library example.
 
 [Abstraction library example](https://github.com/Vilder50/SharpCraft/wiki/Abstraction-pack-example)
 
-Working with none SharpCraft datapacks (Coming at some point)
+[Working with none SharpCraft datapacks](https://github.com/Vilder50/SharpCraft/wiki/Working-with-none-SharpCraft-datapacks)
 
-Data Documentation (Coming at some point)
+[Data Documentation](https://github.com/Vilder50/SharpCraft/wiki/Data-documentation)
 
 Command Documentation (Coming at some point)
 
 Files Documentation (Coming at some point)
-
-Writers/Generators Documentation (Coming at some point)
 
 ### Why use SharpCraft?
 I know not everyone will like the idea of using this. I do actually think there could be made a better alternative to SharpCraft. Something which would build ontop of the normal Minecraft syntax and allow everything SharpCraft allows people to do. [Trident](https://energyxxer.com/trident/#home) pretty much does this, but I still wanted to release this.
