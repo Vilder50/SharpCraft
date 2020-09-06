@@ -38,7 +38,7 @@ namespace SharpCraft.Commands
         {
             string part = GetExecutePart();
 
-            if (ExecuteCommand is null)
+            if (ExecuteCommand is null || ExecuteCommand is StopExecuteCommand)
             {
                 return part;
             }

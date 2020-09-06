@@ -11487,11 +11487,6 @@
             </summary>
             <param name="ticks">The amount of ticks the time should be</param>
         </member>
-        <member name="T:SharpCraft.Utils">
-            <summary>
-            A class containing helpful method extensions
-            </summary>
-        </member>
         <member name="T:SharpCraft.Extensions">
             <summary>
             Static class containing extension methods for inbuilt data types

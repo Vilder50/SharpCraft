@@ -276,7 +276,7 @@ namespace SharpCraft
         /// <returns>The new <see cref="Function"/></returns>
         public Function NewSibling(FunctionWriter creater, WriteSetting writeSetting = WriteSetting.LockedAuto)
         {
-            Function function = NewSibling(this.FileId + "-" + (siblings++), writeSetting);
+            Function function = new Function(PackNamespace, FileId + "-" + (siblings++), writeSetting);
             creater(function);
             return function;
         }

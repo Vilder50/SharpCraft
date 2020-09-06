@@ -50,7 +50,7 @@ namespace SharpCraft.Items
         /// The book's pages.
         /// Each index in the first array means a new page.
         /// </summary>
-        [Data.DataTag("tag.Pages", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
+        [Data.DataTag("tag.pages", ForceType = SharpCraft.ID.NBTTagType.TagStringArray)]
         public BaseJsonText[]? Pages { get; set; }
     }
 }
