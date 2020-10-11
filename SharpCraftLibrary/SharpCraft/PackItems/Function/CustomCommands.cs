@@ -73,7 +73,7 @@ namespace SharpCraft.FunctionWriters
             ForFunction.World.Function(get =>
             {
                 Storage tempStorage = get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetTempStorage();
-                if (getExecutorsRotation)
+                if (!getExecutorsRotation)
                 {
                     get.Execute.As(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummySelector());
                     get.World.Function(get.PackNamespace.Datapack.GetItems<SharpCraftFiles>().GetDummyTeleportGetRotation());

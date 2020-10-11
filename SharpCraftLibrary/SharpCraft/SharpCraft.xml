@@ -13651,6 +13651,20 @@
             <param name="conversionData">0: tag name if id. 1: tag name if group. 2: if json</param>
             <returns></returns>
         </member>
+        <member name="M:SharpCraft.ID.Effect.GetAsTag(System.Nullable{SharpCraft.ID.NBTTagType},System.Object[])">
+            <summary>
+            Converts the enum object into a data tag
+            </summary>
+            <param name="asType">The type to convert to</param>
+            <param name="extraConversionData">Extra information on how to convert</param>
+            <returns>The enum object as a data tag</returns>
+        </member>
+        <member name="M:SharpCraft.ID.Effect.GetEffectId">
+            <summary>
+            Gets the id of the effect
+            </summary>
+            <returns>The id of the effect</returns>
+        </member>
         <member name="M:SharpCraft.ID.Entity.GetAsDataObject(System.Object[])">
             <summary>
             Converts this type into a <see cref="T:SharpCraft.Data.DataPartObject"/>

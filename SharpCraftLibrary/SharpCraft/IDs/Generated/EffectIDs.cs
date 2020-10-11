@@ -17,6 +17,47 @@ namespace SharpCraft
             {
             }
 
+            /// <summary>
+            /// Converts the enum object into a data tag
+            /// </summary>
+            /// <param name="asType">The type to convert to</param>
+            /// <param name="extraConversionData">Extra information on how to convert</param>
+            /// <returns>The enum object as a data tag</returns>
+            public override Data.DataPartTag GetAsTag(ID.NBTTagType? asType, object?[] extraConversionData)
+            {
+                if (asType == ID.NBTTagType.TagString || asType is null)
+                {
+                    return new Data.DataPartTag(ToString());
+                }
+                else if (asType == ID.NBTTagType.TagByte || asType is null)
+                {
+
+                    return new Data.DataPartTag((byte)GetEffectId());
+                }
+                else
+                {
+                    throw new System.ArgumentException("Cannot convert " + GetType() + " into a data tag of type " + asType.ToString() + ".");
+                }
+            }
+
+            /// <summary>
+            /// Gets the id of the effect
+            /// </summary>
+            /// <returns>The id of the effect</returns>
+            public int GetEffectId()
+            {
+                int index = 0;
+                foreach(Effect effect in GetValuesFromEnumHolder<Effect>())
+                {
+                    index++;
+                    if (effect == this)
+                    {
+                        return index;
+                    }
+                }
+                return index;
+            }
+
             public static readonly Effect speed = new Effect("speed");
             public static readonly Effect slowness = new Effect("slowness");
             public static readonly Effect haste = new Effect("haste");
